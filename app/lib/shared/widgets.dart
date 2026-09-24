@@ -453,7 +453,17 @@ class BarreAction extends StatelessWidget {
           color: Colors.white,
           border: Border(top: BorderSide(color: Colors.grey.shade200)),
         ),
-        child: child,
+        // Sur grand écran, les actions restent compactes et alignées à droite
+        // au lieu de s'étirer sur toute la largeur.
+        child: MediaQuery.sizeOf(context).width >= 840
+            ? Align(
+                alignment: Alignment.centerRight,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 440),
+                  child: child,
+                ),
+              )
+            : child,
       ),
     );
   }

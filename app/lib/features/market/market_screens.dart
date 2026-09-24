@@ -18,6 +18,27 @@ class EcranProduit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final p = produitParId(id);
+    final entete = <Widget>[
+      const SizedBox(height: 12),
+      Text(
+        p.titre,
+        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+      ),
+      Row(
+        children: [
+          Text(
+            fcfa(p.prix),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+          ),
+          const SizedBox(width: 10),
+          if (p.negociable) const Chip(label: Text('négociable')),
+        ],
+      ),
+      Text(
+        '${p.quartier} · ${p.etat}',
+        style: const TextStyle(color: LiveColors.gris),
+      ),
+    ];
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -36,28 +57,7 @@ class EcranProduit extends StatelessWidget {
               video: true,
             ),
           ),
-          const SizedBox(height: 12),
-          Text(
-            p.titre,
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          Row(
-            children: [
-              Text(
-                fcfa(p.prix),
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              const SizedBox(width: 10),
-              if (p.negociable) const Chip(label: Text('négociable')),
-            ],
-          ),
-          Text(
-            '${p.quartier} · ${p.etat}',
-            style: const TextStyle(color: LiveColors.gris),
-          ),
+          if (!context.grandEcran) ...entete,
           const Divider(height: 28),
           for (final e in p.details.entries)
             LigneMontant(e.key, 0, brut: e.value),
@@ -70,7 +70,8 @@ class EcranProduit extends StatelessWidget {
           Text(p.description),
         ],
         secondaire: [
-          const Divider(height: 28),
+          if (context.grandEcran) ...entete else const Divider(height: 28),
+          if (context.grandEcran) const Divider(height: 28),
           ListTile(
             contentPadding: EdgeInsets.zero,
             leading: const CircleAvatar(child: Icon(Icons.store)),
@@ -542,28 +543,29 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
         children: [
-          GrilleAdaptative(
-            largeurMax: 320,
-            enfants: [
+          _BandeauChiffres(
+            chiffres: [
               _Chiffre(
                 libelle: 'Vendu ce mois',
                 valeur: ceMois,
-                format: fcfa,
+                format: (n) => fcfa(n, devise: false),
+                unite: 'FCFA',
                 icone: Icons.trending_up,
               ),
               _Chiffre(
                 libelle: 'En attente',
                 valeur: 96000,
-                format: fcfa,
+                format: (n) => fcfa(n, devise: false),
+                unite: 'FCFA',
                 icone: Icons.lock_clock_outlined,
               ),
               _Chiffre(
-                libelle: 'Note des clients',
+                libelle: 'Note clients',
                 valeur: 48,
-                format: (n) =>
-                    '${(n / 10).toStringAsFixed(1).replaceAll('.', ',')}/5',
+                format: (n) => (n / 10).toStringAsFixed(1).replaceAll('.', ','),
+                unite: 'sur 5',
                 icone: Icons.star_rounded,
-                couleurIcone: LiveColors.ambre,
+                couleurIcone: LiveColors.cuivre,
               ),
             ],
           ),
@@ -578,7 +580,13 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
                   'En cours',
                   'Terminées',
                 ].indexed)
-                  ButtonSegment(value: i, label: Text('$t (${nombre[i]})')),
+                  ButtonSegment(
+                    value: i,
+                    label: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text('$t · ${nombre[i]}', maxLines: 1),
+                    ),
+                  ),
               ],
               selected: {_onglet},
               onSelectionChanged: (s) => setState(() => _onglet = s.first),
@@ -631,53 +639,84 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
   }
 }
 
+/// Les chiffres clés du vendeur, en une seule bande à 3 colonnes.
+class _BandeauChiffres extends StatelessWidget {
+  const _BandeauChiffres({required this.chiffres});
+  final List<_Chiffre> chiffres;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF3F5F8),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            for (final (i, c) in chiffres.indexed) ...[
+              if (i > 0)
+                const VerticalDivider(width: 1, color: LiveColors.brume),
+              Expanded(child: c),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _Chiffre extends StatelessWidget {
   const _Chiffre({
     required this.libelle,
     required this.valeur,
     required this.format,
+    required this.unite,
     required this.icone,
     this.couleurIcone = LiveColors.bleu,
   });
   final String libelle;
   final int valeur;
   final String Function(int) format;
+  final String unite;
   final IconData icone;
   final Color couleurIcone;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF3F5F8),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icone, color: couleurIcone),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
+          Row(
+            children: [
+              Icon(icone, size: 16, color: couleurIcone),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Text(
                   libelle,
-                  style: const TextStyle(
-                    color: LiveColors.gris,
-                    fontSize: 12.5,
-                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: LiveColors.gris, fontSize: 12),
                 ),
-                ChiffreAnime(
-                  valeur: valeur,
-                  format: format,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: ChiffreAnime(
+              valeur: valeur,
+              format: format,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
             ),
+          ),
+          Text(
+            unite,
+            style: const TextStyle(color: LiveColors.gris, fontSize: 11.5),
           ),
         ],
       ),
