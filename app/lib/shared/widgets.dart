@@ -458,6 +458,7 @@ class BarreAction extends StatelessWidget {
         child: MediaQuery.sizeOf(context).width >= 840
             ? Align(
                 alignment: Alignment.centerRight,
+                heightFactor: 1,
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 440),
                   child: child,
