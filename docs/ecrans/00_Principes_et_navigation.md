@@ -227,7 +227,69 @@ Les maquettes sont dessinées au format téléphone, mais l'application **occupe
 
 ---
 
-## 7. Révision du 24/09/2026 : défauts corrigés avant le prototype
+## 9. Charte visuelle (révision du 24/09/2026)
+
+### 9.1 Palette officielle
+
+| Rôle | Couleur | Code | Usage |
+|------|---------|------|-------|
+| **Principale** | Bleu Live | `#13385C` | Boutons principaux, liens, navigation active, frises |
+| Texte fort | Bleu nuit | `#041936` | Titres, montants, texte posé sur l'orange ou l'ambre |
+| Accent | Orange | `#FB9618` | Symbole des Crédits Live, mises en avant ponctuelles — **jamais en texte sur blanc** |
+| Signal | Orange vif | `#FF8000` | Pastilles de notification, « Nouvelle » commande |
+| Étoiles | Ambre | `#FCAF20` | Notes (étoiles) uniquement |
+| Fonds chauds | Ambre clair `#FBCC6A`, crème `#FBE2AC` | | Alertes et encarts d'information, avec parcimonie |
+| Texte chaud | Cuivre | `#C27A25` | Icônes d'alerte, texte en **grands caractères** seulement |
+| Neutre | Brume | `#D7DCE4` | Bordures, séparateurs, surfaces neutres |
+| États (hors marque) | Succès `#1E7B4F`, erreur `#C62828` | | Réussite d'un paiement, erreurs : jamais confondus avec la marque |
+| Texte secondaire | Gris ardoise | `#5B6573` | Informations secondaires (contraste 5,9 : 1) |
+
+**Contrastes vérifiés (norme WCAG AA : 4,5 : 1 pour le texte courant)**
+
+| Combinaison | Contraste | Verdict |
+|-------------|-----------|---------|
+| Blanc sur bleu `#13385C` | 12,0 : 1 | ✅ |
+| Bleu nuit sur blanc | 17,5 : 1 | ✅ |
+| Bleu nuit sur orange | 7,9 : 1 | ✅ |
+| Blanc sur orange | 2,2 : 1 | ❌ interdit |
+| Orange sur blanc | 2,2 : 1 | ❌ interdit (texte) |
+| Cuivre sur blanc | 3,4 : 1 | ⚠️ grands caractères seulement |
+
+**Règle de dosage** : le bleu et le blanc dominent ; l'orange et l'ambre restent des **touches** (moins de 5 % de la surface d'un écran). Pas de grands aplats jaunes.
+
+### 9.2 Formes
+
+| Élément | Arrondi | Hauteur |
+|---------|---------|---------|
+| **Boutons** (tous) | **8 px** | 48 px (principal), 46 px (secondaire), 40 px (bouton dans une carte) |
+| **Champs de saisie** | **8 px** | environ 48 px, fond `#F3F5F8`, bordure discrète, bleu au focus |
+| Puces, onglets segmentés, éléments de navigation | 8 px | |
+| Cartes | 12 px | bordure `#E4E8EE`, sans ombre (ombre légère réservée aux éléments flottants : QR, boîtes de dialogue) |
+
+### 9.3 Hiérarchie des boutons
+
+1. **Plein bleu** : l'action principale de l'écran, **une seule** par écran.
+2. **Tonal** (fond bleu très léger, texte bleu) : action secondaire importante (« J'ai reçu le produit », « Laisser un avis »).
+3. **Contour** : alternative (« Écrire »).
+4. **Texte (transparent)** : actions tertiaires (« Refuser », « Signaler un problème »).
+5. Pas de bouton géant inutile : largeur pleine uniquement pour l'action principale en bas d'écran sur téléphone ; ailleurs, le bouton prend la largeur de son libellé.
+
+### 9.4 Mouvement
+
+| Animation | Où | Durée |
+|-----------|----|-------|
+| Transition de page glissée (style iOS, avec parallaxe) | Toutes les navigations | Système |
+| Image qui s'envole de la liste vers la fiche (« hero ») | Produits, logements | Système |
+| Enfoncement léger au toucher (échelle 0,97) | Cartes tapables | 140 ms |
+| Apparition en cascade (fondu + montée de 14 px) | Grilles et listes | 420 ms + 45 ms par élément |
+| Chiffres qui défilent jusqu'à leur valeur | Soldes, gains, statistiques | 700 à 900 ms |
+| Coche de réussite avec rebond | Paiement, remise, visite, retrait | 700 ms |
+
+Courbe de référence : démarrage vif, arrivée amortie (`cubic(0.2, 0.8, 0.2, 1)`). Les animations restent **courtes** et ne retardent jamais une action ; elles respectent le réglage « réduire les animations » du téléphone.
+
+---
+
+## 7. Journal des révisions : défauts corrigés avant le prototype (24/09/2026)
 
 | # | Défaut relevé | Correction |
 |---|---------------|------------|

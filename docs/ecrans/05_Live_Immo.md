@@ -45,25 +45,21 @@ Parcours logement et agences (document 11). Promesse : **« Visite payée = visi
 
 ```text
 ┌──────────────────────────────────────────┐
-│ ◀  Location · Moungali, Plateau          │
+│ Immo                          🔔 ✉       │
 ├──────────────────────────────────────────┤
-│ [Filtres (4)] [Trier ▼] [Carte]          │
-│ 42 logements       (Créer une alerte)    │
-├──────────────────────────────────────────┤
-│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   │
-│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ ▶ Vidéo réelle  │
-│ Appartement 2 ch. · Moungali             │
-│ 90 000 FCFA / mois                       │
-│ Entrée : 450 000 FCFA (3+1 mois+com.)    │
-│ Forage · Compteur · Parking              │
-│ ✓ Agence Les Palmiers ★4,7 · 5 j         │
-├──────────────────────────────────────────┤
-│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   │
-│ Studio · Plateau                         │
-│ 45 000 FCFA / mois                       │
-│ Entrée : 180 000 FCFA                    │
-│ Réseau SNDE · Compteur prépayé           │
-│ ✓ Particulier vérifié ★4,9 · 2 j         │
+│ [•Tous les prix][< 50 000][< 100 000] ▶  │
+│ [Bacongo][Moungali][Plateau]…         ▶  │
+│ 8 logements vérifiés · Brazzaville       │
+│ ┌────────────────┐ ┌────────────────┐    │
+│ │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│ │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│    │
+│ │▒✓Agence ▒▒▒▒ ♡ │ │▒✓Vérifié▒▒▒▒ ♡ │    │
+│ │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│ │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│    │
+│ │▒▒▒▒▒▒▒▒▒▒▒▒▒ ▶ │ │▒▒▒▒▒▒▒▒▒▒▒▒▒ ▶ │    │
+│ └────────────────┘ └────────────────┘    │
+│ Appart. 2 ch.      Studio · Plateau      │
+│ Moungali           45 000 /mois          │
+│ 90 000 /mois       Entrée 180 000        │
+│ Entrée 450 000                           │
 ├──────────────────────────────────────────┤
 │ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
@@ -71,6 +67,8 @@ Parcours logement et agences (document 11). Promesse : **« Visite payée = visi
 
 | Élément | Détail |
 |---------|--------|
+| Grille | **2 colonnes sur téléphone, 3 sur tablette, 4 et plus sur ordinateur** ; chaque rangée prend la hauteur de ses cartes (pas de vide) ; apparition en cascade ; l'image s'envole vers la fiche |
+| Filtres rapides | Budget et quartiers en puces défilantes ; filtres détaillés dans E-EXP-04 |
 | « Entrée » | **Coût total d'entrée** calculé automatiquement (avance + caution + commission) (F-IMMO-PUB-04) |
 | « 5 j » | Disponibilité confirmée il y a 5 jours (F-IMMO-FICHE-03) |
 | Carte | Points **floutés** (environ 200 m) (DI-03) |

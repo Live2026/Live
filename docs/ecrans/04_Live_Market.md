@@ -187,6 +187,7 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 
 | Règle | Détail |
 |-------|--------|
+| Présentation (révision) | Carte produit (image animée depuis la liste), **frise chronologique** horodatée (étapes faites en bleu, étape en cours soulignée), QR dans une carte blanche flottante ; « J'ai reçu le produit » en bouton tonal, « Signaler un problème » en bouton texte ; sur grand écran : frise à gauche, QR et actions à droite |
 | QR de confirmation | Le vendeur le **scanne** avec son application (E-MKT-08) ; le code `LV-` n'est dicté qu'en secours ; c'est la preuve de remise (principe 10) |
 | Confirmation automatique | 48 h après la remise déclarée, sans réclamation (F-MKT-CONF-01) ; un compte à rebours s'affiche |
 | Signaler un problème | Ouvre la réclamation (E-CONF-03) |
@@ -235,22 +236,23 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 
 ```text
 ┌──────────────────────────────────────────┐
-│ ◀  Mes ventes                            │
+│ ◀  Mes ventes                      ⤴     │
 ├──────────────────────────────────────────┤
-│ [À traiter 3] [En cours 5] [Terminées]   │
-├──────────────────────────────────────────┤
-│ NOUVELLE · il y a 10 min                 │
-│ ▒▒ Robe wax longue ×2   30 000 FCFA      │
-│    Acheteur : Merveille ★4,9             │
-│    Payée - argent bloqué · Livraison     │
-│    Répondre avant : 23 h 50              │
-│ (Refuser)            [ Accepter ]        │
-├──────────────────────────────────────────┤
-│ NOUVELLE · il y a 1 h                    │
-│ ▒▒ Pagne 6 yards        18 000 FCFA      │
-│    Acheteur : Jordy (nouveau)            │
-│    Payer à la remise · Main propre       │
-│ (Refuser)            [ Accepter ]        │
+│ ┌─────────────┐┌─────────────┐           │
+│ │↗ Vendu ce   ││⏱ En attente │           │
+│ │  mois       ││  96 000     │           │
+│ │  48 000     │└─────────────┘           │
+│ └─────────────┘┌─────────────┐           │
+│                │★ Note 4,8/5 │           │
+│                └─────────────┘           │
+│ [•À traiter (1)][En cours][Terminées]    │
+│ ┌──────────────────────────────────────┐ │
+│ │▒▒ [Nouvelle] LV-00483     30 000 FCFA│ │
+│ │▒▒ Samsung A10          net 28 200    │ │
+│ │   Merveille K. (4,9/5) · Payée       │ │
+│ │ ──────────────────────────────────── │ │
+│ │              (Refuser)  [ Accepter ] │ │
+│ └──────────────────────────────────────┘ │
 ├──────────────────────────────────────────┤
 │ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
@@ -258,6 +260,9 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 
 | Règle | Détail |
 |-------|--------|
+| Chiffres clés | Vendu ce mois, en attente, note des clients ; les chiffres défilent jusqu'à leur valeur |
+| Onglets | À traiter, En cours, Terminées, avec le nombre de commandes ; **après « Accepter », l'écran bascule sur « En cours »** pour suivre la commande |
+| Carte | Statut coloré (Nouvelle, À remettre, Terminée), montant brut et **net**, acheteur et sa note ; actions discrètes : « Refuser » en texte, « Accepter » ou « Remettre le produit » en bouton compact |
 | Délai | 24 h pour accepter ; sinon annulation et remboursement automatiques (F-MKT-CMD-06) |
 | Refus | Motif obligatoire (rupture de stock, zone non desservie, autre) ; l'acheteur est remboursé immédiatement |
 
