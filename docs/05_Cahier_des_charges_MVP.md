@@ -42,7 +42,7 @@ Priorités : **M** = indispensable, **S** = souhaité dans le MVP si possible, *
 | F-CPT-04 | Vérification d'identité N2 : photo de la pièce d'identité + selfie, validation manuelle dans le back-office (automatisation en P2). | M |
 | F-CPT-05 | Vérification professionnelle N3 : RCCM, NIU, justificatif d'adresse, pour les agences et les entreprises. | M |
 | F-CPT-06 | Création d'espaces : boutique, agence, prestataire. | M |
-| F-CPT-07 | Ajout de membres à un espace avec rôles internes (propriétaire, gestionnaire, agent). | S |
+| F-CPT-07 | Ajout de membres à un espace avec rôles internes (propriétaire, gestionnaire, agent), jusqu'à 5 membres au MVP. | M |
 | F-CPT-08 | Suivre un utilisateur ou un espace. | M |
 | F-CPT-09 | Parrainage avec lien et bonus après la première transaction du filleul. | S |
 | F-CPT-10 | Suppression du compte à la demande de l'utilisateur. | M |
@@ -103,8 +103,9 @@ Priorités : **M** = indispensable, **S** = souhaité dans le MVP si possible, *
 | F-IMMO-05 | **Réservation séquestrée** d'un bien (acompte), avec des conditions d'annulation affichées. | S |
 | F-IMMO-06 | Bouton « Déjà loué » ou « Annonce fausse » ; une annonce signalée plusieurs fois passe en revue. | M |
 | F-IMMO-07 | Mise à jour obligatoire : une annonce non confirmée depuis 30 jours est masquée. | M |
-| F-IMMO-08 | Espace agence : plusieurs agents, tableau des demandes et des visites. | S |
+| F-IMMO-08 | Espace agence : plusieurs agents, tableau des demandes et des visites. | M |
 | F-IMMO-09 | Détection de photos déjà utilisées dans une autre annonce. | S |
+| F-IMMO-10 | Absence du visiteur au rendez-vous : les frais de visite sont versés à l'annonceur. Absence de l'annonceur : remboursement intégral du visiteur et pénalité de réputation pour l'annonceur. | M |
 
 ### 3.7 Live Services — prestataires (SRV)
 

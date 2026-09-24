@@ -64,10 +64,10 @@ Le badge affiché publiquement reflète le niveau : c'est l'un des **principaux 
 | C-ACHETER | Acheter et payer | Inscription | N1 |
 | C-PUBLIER-SOCIAL | Publier des vidéos et des photos dans le fil | Inscription | N1 |
 | C-VENDRE | Publier des produits à vendre | Activation | N1 (limité) / N2 |
-| C-ENCAISSER | Recevoir des paiements séquestrés | Vérification | N2 |
+| C-ENCAISSER | Recevoir des paiements séquestrés | Inscription (plafonné à 100 000 FCFA/mois en N1, sans retrait) ; vérification au-delà | N1 (limité) / N2 |
 | C-RETIRER | Retirer vers Mobile Money | Vérification | N2 |
 | C-IMMO-PARTICULIER | Publier une annonce immobilière de particulier | Vérification + preuve de lien avec le bien | N2 |
-| C-IMMO-AGENCE | Espace agence, plusieurs agents, gestion des visites | Vérification professionnelle + abonnement Pro Agence | N3 |
+| C-IMMO-AGENCE | Espace agence, plusieurs agents, gestion des visites | Vérification professionnelle ; **gratuit au MVP**, puis abonnement Pro Agence à partir de P2 (D-26) | N3 |
 | C-COMMISSIONNAIRE | Percevoir des frais de visite | Vérification + charte signée | N2 |
 | C-SERVICES | Proposer des prestations et prendre des réservations | Activation + vérification | N2 |
 | C-CREATEUR | Recevoir des cadeaux et des abonnements de fans | Seuil d'audience (ex. 500 abonnés) + vérification | N2 |
@@ -75,7 +75,7 @@ Le badge affiché publiquement reflète le niveau : c'est l'un des **principaux 
 | C-DIRECT-VENTE | Vendre pendant un direct (live shopping) | C-DIRECT + C-VENDRE | N2 |
 | C-BOOSTER | Acheter de la visibilité | Inscription | N1 |
 | C-STATS-AVANCEES | Statistiques détaillées | Abonnement Pro | N2 |
-| C-EQUIPE | Ajouter des membres à un espace | Abonnement Pro / Entreprise | N3 |
+| C-EQUIPE | Ajouter des membres à un espace | Vérification professionnelle (jusqu'à 5 membres gratuits au MVP) ; au-delà, abonnement Pro / Entreprise | N3 |
 | C-ANNONCEUR | Créer des campagnes publicitaires | Vérification professionnelle | N3 |
 | C-API | Accès API | Contrat partenaire | N4 |
 

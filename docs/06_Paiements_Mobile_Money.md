@@ -39,7 +39,24 @@ En zone CEMAC, les services de paiement et l'émission de monnaie électronique 
 
 **Architecture exigée dès le MVP** : une **couche d'abstraction « fournisseur de paiement »** dans le code, pour pouvoir changer d'agrégateur ou ajouter une API directe **sans toucher aux modules métier**. C'est la **stratégie de réversibilité** évoquée dans la v1.
 
-**Sélection de l'agrégateur (D-11)** : établir une liste courte des agrégateurs opérant réellement en République du Congo, puis comparer :
+**Décision D-11 — choix de l'agrégateur**
+
+Candidats identifiés (recherche de septembre 2026, **à confirmer par écrit auprès de chaque prestataire**) :
+
+| Candidat | Ce qui est connu | Limite |
+|----------|------------------|--------|
+| **CinetPay** | Agrégateur très répandu en Afrique francophone, présent au Congo ; regroupe Mobile Money et cartes. | Couverture Visa **au Congo** et décaissements vers MTN et Airtel à confirmer. |
+| **pawaPay** (filiale Kerry Payments Brazzaville) | Autorisation d'agrégateur de paiement accordée par l'**ARPCE** en juin 2026 ; API unique vers les opérateurs Mobile Money du Congo. | Mobile Money seulement : Visa via un autre prestataire. |
+| **API directes MTN MoMo et Airtel Money** | Frais les plus bas, contrôle total. | Contrats et homologation plus longs ; Visa séparé. |
+
+**Décision retenue :**
+1. **Consulter CinetPay et pawaPay en parallèle** (devis, contrat type, environnement de test) dès la création de la société.
+2. **Choix par défaut : CinetPay**, s'il confirme **MTN + Airtel + Visa au Congo, avec décaissements** : c'est la seule option qui couvre tout avec une seule intégration.
+3. **Sinon : pawaPay pour MTN et Airtel** (agrément ARPCE local) **+ un prestataire carte pour Visa**, rendu possible par la couche d'abstraction.
+4. **Passage aux API directes MTN et Airtel** lorsque le volume dépasse environ 100 transactions par jour (réduction des frais).
+5. ⚠️ Une autorisation ARPCE d'agrégateur **technique** ne remplace pas le cadre BEAC/COBAC pour la **détention des fonds** : le compte séquestre reste ouvert chez une **banque partenaire agréée**.
+
+Critères de comparaison :
 - couverture effective de MTN, d'Airtel **et** de Visa au Congo ;
 - agrément et solidité financière ;
 - frais d'encaissement **et** de décaissement (payouts vers MoMo et Airtel) ;

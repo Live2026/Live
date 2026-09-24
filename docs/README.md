@@ -36,16 +36,16 @@ La version 1 contenait de très bonnes idées, mais elle souffrait de cinq probl
 
 | N° | Document | Statut |
 |----|----------|--------|
-| 00 | [Architecture documentaire](00_Architecture_documentaire.md) | Proposé |
-| 01 | [Vision, identité et positionnement](01_Vision_identite_positionnement.md) | Proposé |
-| 02 | [Modèle économique](02_Modele_economique.md) | Proposé |
-| 03 | [Identité utilisateur, boutiques et capacités](03_Identite_utilisateur_capacites.md) | Proposé |
-| 04 | [Cartographie fonctionnelle](04_Cartographie_fonctionnelle.md) | Proposé |
-| 05 | [Cahier des charges fonctionnel — MVP](05_Cahier_des_charges_MVP.md) | Proposé |
-| 06 | [Paiements : Mobile Money, Visa et séquestre](06_Paiements_Mobile_Money.md) | Proposé |
-| 07 | [Registre des décisions à valider](07_Decisions_a_valider.md) | **À trancher** |
+| 00 | [Architecture documentaire](00_Architecture_documentaire.md) | Arrêté (v2.0) |
+| 01 | [Vision, identité et positionnement](01_Vision_identite_positionnement.md) | Arrêté (v2.0) |
+| 02 | [Modèle économique](02_Modele_economique.md) | Arrêté (v2.0) |
+| 03 | [Identité utilisateur, boutiques et capacités](03_Identite_utilisateur_capacites.md) | Arrêté (v2.0) |
+| 04 | [Cartographie fonctionnelle](04_Cartographie_fonctionnelle.md) | Arrêté (v2.0) |
+| 05 | [Cahier des charges fonctionnel — MVP](05_Cahier_des_charges_MVP.md) | Arrêté (v2.0) |
+| 06 | [Paiements : Mobile Money, Visa et séquestre](06_Paiements_Mobile_Money.md) | Arrêté (v2.0) |
+| 07 | [Registre des décisions](07_Decisions_a_valider.md) | **Arrêté** (4 points sous réserve externe) |
 
-Statuts possibles : *Proposé* → *En relecture* → *Validé* → *Révisé*.
+Statuts possibles : *Proposé* → *Arrêté* → *Validé* (après les vérifications externes du document 07, section 7) → *Révisé*.
 
 ---
 

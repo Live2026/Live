@@ -40,15 +40,17 @@ Le revenu principal de Live est un **pourcentage des transactions** qu'il sécur
 
 Un pourcentage prélevé sur chaque paiement réalisé dans l'application.
 
-| Transaction | Hypothèse de commission | Payée par |
-|-------------|------------------------|-----------|
-| Vente de produits | 5 % à 8 % | Le vendeur |
-| Réservation de service | 8 % à 10 % | Le prestataire |
-| Frais de visite immobilière | 10 % à 20 % des frais | Le bénéficiaire des frais |
-| Réservation / avance de loyer séquestrée | 2 % à 3 % (plafonné) | À décider (bailleur, locataire ou partage) |
-| Revenus des créateurs (cadeaux, abonnements) | 20 % à 30 % | Déduits des revenus du créateur |
+| Transaction | Commission retenue (D-09) | Payée par |
+|-------------|---------------------------|-----------|
+| Vente de produits | **6 %** (minimum 100 FCFA) | Le vendeur |
+| Réservation de service | **8 %** | Le prestataire |
+| Frais de visite immobilière | **15 %** des frais | L'annonceur (bénéficiaire des frais) |
+| Réservation / avance de loyer séquestrée | **2 %**, plafonnée à 10 000 FCFA | L'annonceur (bailleur ou agence) (D-24) |
+| Revenus des créateurs (cadeaux, abonnements) — P2 | **25 %** | Déduits des revenus du créateur |
 
-> Le tarif doit rester **inférieur au coût réel des arnaques et des impayés** pour le vendeur, sinon il retournera sur Facebook. Au lancement, une **commission réduite (voire nulle) pendant 3 mois** pour les premiers vendeurs est recommandée (D-10).
+L'acheteur ne paie **aucune commission** : il paie le prix affiché. C'est un argument décisif face au paiement direct en Mobile Money.
+
+> Le tarif doit rester **inférieur au coût réel des arnaques et des impayés** pour le vendeur, sinon il retournera sur Facebook. Au lancement, une offre de lancement pour les premiers vendeurs est décidée : **0 % pendant 3 mois** (D-10).
 
 ### 4.2 Boosts et visibilité (dès le MVP)
 
@@ -129,6 +131,8 @@ Un pourcentage prélevé sur chaque paiement réalisé dans l'application.
 | Montant crédité au vendeur | 18 800 FCFA |
 
 **Conséquence** : pour couvrir 10 millions de FCFA de charges mensuelles, Live doit sécuriser environ **12 500 ventes de ce type par mois**, hors boosts et abonnements. Ce calcul doit guider les objectifs du pilote (document 30).
+
+**Point de cohérence assumé (D-27)** : le pilote de 6 mois **n'est pas rentable**. L'offre de lancement à 0 % de commission (D-10) oblige Live à absorber les frais Mobile Money pendant 3 mois, et la cible de 10 000 transactions par mois au 6e mois reste inférieure au point mort. Le pilote sert à **prouver l'usage** ; son déficit doit être financé et budgété dans le document 31.
 
 ---
 
