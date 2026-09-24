@@ -105,7 +105,7 @@ Le paiement à la livraison en espèces est ancré dans les habitudes. Live ne l
 
 | Mode | Déroulement | Pour qui | Prio |
 |------|-------------|----------|------|
-| **A. Payer maintenant (séquestre)** | L'acheteur paie à la commande ; l'argent est bloqué ; le vendeur remet le produit ; l'acheteur donne son **code à 4 chiffres** (ou confirme dans l'application) ; l'argent est versé au vendeur. | Acheteur qui fait confiance à Live | M |
+| **A. Payer maintenant (séquestre)** | L'acheteur paie à la commande ; l'argent est bloqué ; le vendeur remet le produit ; le vendeur scanne le **QR de confirmation** de l'acheteur (ou l'acheteur confirme dans l'application) ; l'argent est versé au vendeur. | Acheteur qui fait confiance à Live | M |
 | **B. Payer à la remise** | La commande est réservée sans paiement. Au moment de la remise, le vendeur appuie sur « Encaisser » ; l'acheteur reçoit la **demande MoMo ou Airtel sur son téléphone** et valide ; le paiement est confirmé en quelques secondes ; le produit est remis. | Acheteur méfiant ; remplace les espèces | M |
 
 **Règles du mode B**
@@ -120,8 +120,8 @@ Le paiement à la livraison en espèces est ancré dans les habitudes. Live ne l
 
 | ID | Fonctionnalité | Prio |
 |----|----------------|------|
-| F-MKT-LIV-01 | **Remise en main propre** : lieu de rendez-vous proposé dans la conversation, **code à 4 chiffres** donné à la remise. Suggestion de lieux publics (marchés, stations, centres commerciaux). | M |
-| F-MKT-LIV-02 | **Livraison par le vendeur** : frais fixés par le vendeur par zone ; le livreur du vendeur recueille le code. | M |
+| F-MKT-LIV-01 | **Remise en main propre** : lieu de rendez-vous proposé dans la conversation, **QR de confirmation** de l'acheteur scanné à la remise. Suggestion de lieux publics (marchés, stations, centres commerciaux). | M |
+| F-MKT-LIV-02 | **Livraison par le vendeur** : frais fixés par le vendeur par zone ; le livreur du vendeur scanne le QR de confirmation. | M |
 | F-MKT-LIV-03 | Délai de remise annoncé par le vendeur ; relances automatiques ; en l'absence de remise dans ce délai + 48 h, l'acheteur peut annuler avec remboursement. | M |
 | F-MKT-LIV-04 | **Envoi dans une autre ville** (Brazzaville ↔ Pointe-Noire) : le vendeur saisit la référence de l'expédition (bus, messagerie) et une photo du bordereau ; la confirmation intervient à la réception. | S (P2) |
 | F-MKT-LIV-05 | **Live Livraison** : le vendeur commande un livreur vérifié depuis la commande (prix selon la distance, suivi, code). | P2 |
@@ -130,7 +130,7 @@ Le paiement à la livraison en espèces est ancré dans les habitudes. Live ne l
 
 | ID | Fonctionnalité | Prio |
 |----|----------------|------|
-| F-MKT-CONF-01 | Confirmation par **code à la remise** ou par bouton « J'ai reçu » ; confirmation automatique **48 h** après la remise déclarée, sans litige. | M |
+| F-MKT-CONF-01 | Confirmation par **QR scanné à la remise** (code `LV-` en secours) ou par bouton « J'ai reçu » ; confirmation automatique **48 h** après la remise déclarée, sans litige. | M |
 | F-MKT-CONF-02 | **Réclamation** pendant le délai : « Non reçu », « Non conforme à l'annonce », « Défectueux », « Contrefaçon » ; preuves photo et vidéo. | M |
 | F-MKT-CONF-03 | **Résolution amiable** proposée d'abord (remboursement partiel, échange, retour) dans la conversation, puis médiation Live en l'absence d'accord sous 48 h. | M |
 | F-MKT-CONF-04 | **Retour** : l'acheteur rend le produit au vendeur (code de retour) ; remboursement après confirmation du vendeur ou décision de Live. | S |
@@ -203,7 +203,7 @@ Les listes exactes doivent être **validées par le juriste** (D-16).
 
 ```
 MODE A (payer maintenant)
-PAYÉE (séquestre) ─► ACCEPTÉE ─► REMISE_DÉCLARÉE ─► CONFIRMÉE (code / bouton / 48 h) ─► VERSÉE
+PAYÉE (séquestre) ─► ACCEPTÉE ─► REMISE_DÉCLARÉE ─► CONFIRMÉE (QR / bouton / 48 h) ─► VERSÉE
      │                   │               │
      ▼                   ▼               ▼
  NON ACCEPTÉE 24 h    ANNULÉE        RÉCLAMATION ─► ACCORD / MÉDIATION ─► REMBOURSÉE (totalement ou en partie) / VERSÉE
@@ -236,7 +236,7 @@ BROUILLON ─► EN_MODÉRATION ─► PUBLIÉE ─► ÉPUISÉE / VENDUE ─►
 | `media_produit` | type, url, empreinte perceptuelle, ordre |
 | `mode_remise` | produit_id ou espace_id, type (main propre, livraison vendeur, envoi), zones et prix |
 | `offre_prix` | produit_id, acheteur_id, montant, statut, expiration |
-| `commande` | acheteur_id, espace_id, lignes, mode de paiement (A ou B), mode de remise, adresse ou repère, total, code (haché), statut, horodatages |
+| `commande` | acheteur_id, espace_id, lignes, mode de paiement (A ou B), mode de remise, adresse ou repère, total, jeton de confirmation (haché), statut, horodatages |
 | `ligne_commande` | commande_id, produit_id, variante_id, quantité, prix unitaire |
 | `reclamation` | commande_id, motif, preuves, statut, décision |
 | `avis` | commande_id, auteur, cible, note, texte, photo, réponse |
@@ -275,8 +275,8 @@ Les paiements, séquestres et versements relèvent de **Live Pay** (document 06)
 | Risque | Probabilité | Impact | Réponse |
 |--------|-------------|--------|---------|
 | Les vendeurs continuent à encaisser en espèces. | Élevée | Élevé | Mode B « payer à la remise » + avis uniquement pour les ventes payées via Live + offre à 0 % (D-10). |
-| Le vendeur déclare une remise fictive. | Moyenne | Moyen | Code à la remise ; confirmation automatique seulement 48 h après la remise déclarée ; litige possible. |
-| Acheteurs de mauvaise foi (faux « non reçu »). | Moyenne | Moyen | Preuve du code, historique de l'acheteur, réputation, sanctions. |
+| Le vendeur déclare une remise fictive. | Moyenne | Moyen | QR de confirmation à la remise ; confirmation automatique seulement 48 h après la remise déclarée ; litige possible. |
+| Acheteurs de mauvaise foi (faux « non reçu »). | Moyenne | Moyen | Preuve du scan du QR, historique de l'acheteur, réputation, sanctions. |
 | Contrefaçons et produits dangereux. | Élevée | Élevé | Liste des interdits, modération, retrait rapide, coopération avec les autorités. |
 | Coût vidéo élevé par rapport à la valeur des ventes. | Moyenne | Moyen | Vidéos de 60 s maximum, compression, qualité adaptative (D-05, D-20). |
 | Concurrence de Facebook Marketplace (gratuit). | Certaine | Élevé | Live gagne sur le paiement, la confiance et le local, pas sur le prix. |

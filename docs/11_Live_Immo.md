@@ -98,7 +98,7 @@ Faire de Live **l'endroit où l'on trouve un logement ou un local au Congo sans 
 | F-IMMO-VIS-02 | Le chercheur choisit un créneau et **paie les frais de visite** (MoMo, Airtel ou Visa) : les fonds sont **séquestrés**. Frais nuls possibles : la visite est alors réservée sans paiement. | M |
 | F-IMMO-VIS-03 | Après le paiement, l'**adresse précise** et le **numéro de l'annonceur** sont révélés au chercheur. | M |
 | F-IMMO-VIS-04 | Rappels automatiques (veille et 2 h avant) aux deux parties. | M |
-| F-IMMO-VIS-05 | Sur place, le chercheur communique son **code de visite à 4 chiffres** ; l'annonceur le saisit : la visite est confirmée et les frais lui sont versés (moins la commission de 15 %). | M |
+| F-IMMO-VIS-05 | Sur place, l'annonceur **scanne le QR de visite** du chercheur (code `LV-` en secours) : la visite est confirmée et les frais lui sont versés (moins la commission de 15 %). | M |
 | F-IMMO-VIS-06 | **Absences** (D-25) : visiteur absent, frais versés à l'annonceur après déclaration et délai de contestation de 24 h ; annonceur absent ou bien indisponible, remboursement intégral et pénalité de réputation. | M |
 | F-IMMO-VIS-07 | **« Le bien ne correspond pas à l'annonce »** : le chercheur peut le déclarer dans les 2 h suivant le créneau, avec photos ; les frais sont bloqués et un litige est ouvert. | M |
 | F-IMMO-VIS-08 | Frais de visite **multi-biens** : un seul paiement pour visiter 3 biens du même annonceur le même jour. | S |
@@ -184,7 +184,7 @@ BROUILLON ─► EN_MODÉRATION ─► PUBLIÉE ─► RÉSERVÉE ─► LOUÉE 
 
 ### 5.2 Visite
 ```
-DEMANDÉE ─► PAYÉE (séquestre) ─► CONFIRMÉE (code) ─► FRAIS VERSÉS
+DEMANDÉE ─► PAYÉE (séquestre) ─► CONFIRMÉE (QR) ─► FRAIS VERSÉS
     │             │
     │             ├─► ANNULÉE PAR L'ANNONCEUR ─► REMBOURSÉE
     │             ├─► VISITEUR ABSENT (24 h de contestation) ─► FRAIS VERSÉS
@@ -214,7 +214,7 @@ OFFRE_ENVOYÉE ─► ACOMPTE_PAYÉ (séquestre) ─► SIGNATURE_CONFIRMÉE ─
 | `media_bien` | type, url, empreinte perceptuelle, date de prise de vue, ordre |
 | `lien_bien` | nature (propriétaire, mandataire, commissionnaire), contact du propriétaire (chiffré), preuve |
 | `creneau_visite` | bien_id, début, fin, capacité |
-| `visite` | bien_id, chercheur_id, créneau, transaction_id, code (haché), statut, horodatages |
+| `visite` | bien_id, chercheur_id, créneau, transaction_id, jeton de confirmation (haché), statut, horodatages |
 | `reservation` | bien_id, chercheur_id, montant, date limite, conditions d'annulation, transaction_id, statut |
 | `alerte_immo` | utilisateur_id, critères (JSON), fréquence |
 | `signalement_immo` | bien_id, auteur, motif, preuves, statut |
@@ -271,7 +271,7 @@ Les transactions financières (paiements, séquestres, reversements) sont géré
 | Commissionnaires et particuliers vérifiés | 1 000 |
 | Annonces actives (confirmées depuis moins de 30 jours) | 5 000 |
 | Visites payées par mois | 3 000 |
-| Taux de visites confirmées par code | > 80 % |
+| Taux de visites confirmées par QR | > 80 % |
 | Taux de litige sur les visites | < 3 % |
 | Délai médian entre publication et location | À mesurer (référence de départ) |
 | Part des annonces avec vidéo | > 50 % |

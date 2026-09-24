@@ -152,26 +152,24 @@ Parcours prestataires (document 12). Promesse : **« Un prestataire vérifié, u
 │ ◀  Devis de Serge ✓ ★4,9                 │
 ├──────────────────────────────────────────┤
 │ Réparation fuite évier cuisine           │
-│ Intervention : aujourd'hui 16:00         │
-│ Durée estimée : 1 h 30                   │
+│ Aujourd'hui 16:00 · environ 1 h 30       │
 │                                          │
 │ Main-d'œuvre           17 000 FCFA       │
-│ Matériel (siphon, joints) 8 000 FCFA     │
+│ Matériel                8 000 FCFA       │
 │ TOTAL                  25 000 FCFA       │
 │                                          │
-│ Paiement                                 │
-│ Acompte à payer maintenant 10 000        │
-│ Solde après les travaux    15 000        │
+│ Maintenant (acompte)   10 000 FCFA       │
+│ Après les travaux      15 000 FCFA       │
 │                                          │
-│ Annulation : gratuite jusqu'à 2 h        │
-│ avant. Garantie : 72 h après la fin.     │
+│ Garantie 72 h · annulation gratuite      │
+│ jusqu'à 2 h avant.                       │
+│                                          │
+│ ▶ Écouter l'explication                  │
 ├──────────────────────────────────────────┤
-│ [Protégé par Live] L'acompte est         │
-│ bloqué. La part matériel est versée      │
-│ au démarrage (avec votre code), le       │
-│ reste à la fin des travaux.              │
+│ [Protégé par Live] Matériel payé au      │
+│ démarrage, le reste à la fin.            │
 ├──────────────────────────────────────────┤
-│ (Écrire)     [ Accepter et payer ]       │
+│ (Écrire)      [ Accepter et payer ]      │
 └──────────────────────────────────────────┘
 ```
 
@@ -229,26 +227,27 @@ Parcours prestataires (document 12). Promesse : **« Un prestataire vérifié, u
 │  ○ Travaux démarrés                      │
 │  ○ Travaux terminés                      │
 │  ○ Garantie 72 h                         │
-│  ○ Terminé                               │
 │                                          │
 │ ┌──────────────────────────────────┐     │
-│ │ Code de démarrage :  6 0 4 2     │     │
-│ │ À donner quand Serge commence.   │     │
-│ │ Il débloque la part matériel     │     │
-│ │ (8 000 FCFA).                    │     │
+│ │ DÉMARRER LES TRAVAUX             │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │        ▓▓▓  QR  ▓▓▓              │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │ Code de secours : LV-D6042       │     │
+│ │ À montrer quand Serge commence : │     │
+│ │ il reçoit 8 000 FCFA (matériel). │     │
+│ │ Ce n'est PAS votre code MoMo.    │     │
 │ └──────────────────────────────────┘     │
 │                                          │
 │ (Partager avec un proche)                │
 │ (Appeler)  (Écrire)  (Signaler)          │
-├──────────────────────────────────────────┤
-│ [Protégé par Live]                       │
 └──────────────────────────────────────────┘
 ```
 
 | Étape | Écran |
 |-------|-------|
-| Démarrage | Le client donne le **code de démarrage** ; la part matériel est versée (F-SRV-PAY-04) |
-| Fin | Le prestataire déclare la fin avec des photos ; s'il reste un solde, le client reçoit la demande de paiement MoMo ou Airtel ; puis un **code de fin** ou le bouton « Travaux conformes » s'affiche |
+| Démarrage | Le prestataire **scanne le QR de démarrage** du client ; la part matériel est versée (F-SRV-PAY-04) |
+| Fin | Le prestataire déclare la fin avec des photos ; s'il reste un solde, le client reçoit la demande de paiement MoMo ou Airtel ; puis le client affiche le **QR de fin** (ou appuie sur « Travaux conformes ») |
 | Garantie | Compte à rebours de 72 h (ou 24 h selon le métier) avec le bouton « Signaler un problème » (E-CONF-03) |
 | Partage | Envoie le nom, la photo, l'heure et le quartier du prestataire à un proche (F-SRV-EXEC-04) |
 
@@ -315,4 +314,4 @@ Parcours prestataires (document 12). Promesse : **« Un prestataire vérifié, u
 | Bouton | Suite |
 |--------|-------|
 | Je suis en route | Le client est prévenu (statut « En route ») |
-| Sur place | « Saisir le code de démarrage » puis, à la fin, « Déclarer la fin des travaux » avec des photos avant/après et, le cas échéant, « Encaisser le solde » |
+| Sur place | « Scanner le QR de démarrage » puis, à la fin, « Déclarer la fin des travaux » avec des photos avant/après et, le cas échéant, « Encaisser le solde » |

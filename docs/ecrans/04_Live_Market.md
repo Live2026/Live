@@ -122,37 +122,31 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 ┌──────────────────────────────────────────┐
 │ ◀  Votre commande                        │
 ├──────────────────────────────────────────┤
-│ ▒▒ iPhone 11 64 Go                       │
-│ ▒▒ Quantité : 1        85 000 FCFA       │
+│ ▒▒ iPhone 11 64 Go      85 000 FCFA      │
 │                                          │
 │ Remise                                   │
-│ (•) En main propre - Moungali            │
-│     Lieu à convenir avec le vendeur      │
-│ ( ) Livraison à domicile  2 000 FCFA     │
-│     [ Adresse ou repère...       ]       │
+│ (•) En main propre · Moungali            │
+│ ( ) Livraison          + 2 000 FCFA      │
 │                                          │
 │ Paiement                                 │
 │ (•) Payer maintenant                     │
-│     Votre argent est bloqué par Live     │
-│     jusqu'à ce que vous confirmiez       │
-│     la réception.                        │
+│     Argent bloqué jusqu'à réception.     │
 │ ( ) Payer à la remise                    │
-│     Vous payez par MoMo ou Airtel        │
-│     au moment où vous recevez le         │
-│     produit.                             │
+│     MoMo ou Airtel, produit en main.     │
+│                                          │
+│ ▶ Écouter l'explication                  │
 ├──────────────────────────────────────────┤
-│ Produit                85 000 FCFA       │
-│ Livraison                   0 FCFA       │
 │ Total à payer          85 000 FCFA       │
 │ Aucun frais supplémentaire.              │
 ├──────────────────────────────────────────┤
-│ [        Continuer               ]       │
+│ [            Continuer             ]     │
 └──────────────────────────────────────────┘
 ```
 
 | Règle | Détail |
 |-------|--------|
 | Payer maintenant | Continuer ouvre le choix du moyen de paiement (E-PAY-01) |
+| Livraison | Si elle est choisie, un champ « Adresse ou repère » apparaît sous l'option |
 | Payer à la remise | Continuer **réserve** la commande sans paiement ; masqué si le vendeur exige le paiement d'avance (R-MKT-B1) ou si l'acheteur a perdu ce droit (R-MKT-B3) |
 | Total | Le prix affiché est le prix payé ; la commission Live est payée par le vendeur (R-MKT-03) |
 
@@ -167,21 +161,20 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 │ ▒▒ iPhone 11 64 Go      85 000 FCFA      │
 │    Grâce Mode ✓       (Écrire)           │
 │                                          │
-│  ✓ Payée - argent bloqué par Live        │
+│  ✓ Payée · argent bloqué par Live        │
 │  ✓ Acceptée par le vendeur               │
 │  ● Remise prévue aujourd'hui             │
 │  ○ Réception confirmée                   │
-│  ○ Terminée                              │
 │                                          │
 │ ┌──────────────────────────────────┐     │
-│ │  Votre code de remise            │     │
-│ │                                  │     │
-│ │         4   8   2   7            │     │
-│ │                                  │     │
-│ │  Donnez ce code au vendeur       │     │
-│ │  UNIQUEMENT quand vous avez le   │     │
-│ │  produit en main et l'avez       │     │
-│ │  vérifié.                        │     │
+│ │ CONFIRMER LA REMISE              │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │        ▓▓▓  QR  ▓▓▓              │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │ Code de secours : LV-K4827       │     │
+│ │ Montrez-le au vendeur quand vous │     │
+│ │ avez vérifié le produit.         │     │
+│ │ Ce n'est PAS votre code MoMo.    │     │
 │ └──────────────────────────────────┘     │
 │                                          │
 │ (J'ai reçu le produit)                   │
@@ -194,11 +187,11 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 
 | Règle | Détail |
 |-------|--------|
-| Code | Donné oralement au vendeur, qui le saisit (E-MKT-08) ; c'est la preuve de remise |
+| QR de confirmation | Le vendeur le **scanne** avec son application (E-MKT-08) ; le code `LV-` n'est dicté qu'en secours ; c'est la preuve de remise (principe 10) |
 | Confirmation automatique | 48 h après la remise déclarée, sans réclamation (F-MKT-CONF-01) ; un compte à rebours s'affiche |
 | Signaler un problème | Ouvre la réclamation (E-CONF-03) |
 | Après la confirmation | Proposition de laisser un avis (E-CONF-01) |
-| Mode « payer à la remise » | Pas de code ; l'écran indique : « Le vendeur vous enverra une demande de paiement MoMo ou Airtel au moment de la remise. Vérifiez le produit avant de valider. » |
+| Mode « payer à la remise » | Pas de QR de confirmation ; l'écran affiche « Vérifiez le produit, puis payez » et un bouton **[ Payer maintenant 85 000 FCFA ]** que l'acheteur peut utiliser lui-même sur place (secours si la demande du vendeur n'arrive pas, E-MKT-09) |
 
 ---
 
@@ -278,21 +271,17 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 ├──────────────────────────────────────────┤
 │ ▒▒ iPhone 11 64 Go      85 000 FCFA      │
 │    Acheteur : Merveille  (Écrire)        │
-│    Remise : en main propre               │
 │                                          │
-│ Au moment de la remise :                 │
+│ COMMANDE PAYÉE D'AVANCE                  │
+│ [   Scanner le QR de l'acheteur    ]     │
+│ (Saisir le code LV- à la place)          │
 │                                          │
-│ MODE PAYÉ D'AVANCE                       │
-│ Demandez son code à l'acheteur.          │
-│       [ _ ] [ _ ] [ _ ] [ _ ]            │
-│ [     Valider la remise          ]       │
+│ ─────────────── ou ───────────────       │
 │                                          │
-│ ────────── ou ──────────                 │
-│                                          │
-│ MODE PAYER À LA REMISE                   │
-│ [  Encaisser 85 000 FCFA         ]       │
-│ L'acheteur reçoit la demande MoMo ou     │
-│ Airtel sur son téléphone.                │
+│ PAYER À LA REMISE                        │
+│ [   Encaisser 85 000 FCFA          ]     │
+│ La demande n'arrive pas ?                │
+│ (Afficher mon QR de paiement)            │
 ├──────────────────────────────────────────┤
 │ Vous recevrez 79 900 FCFA                │
 │ (85 000 - 6 % de commission Live)        │
@@ -302,7 +291,41 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 | Règle | Détail |
 |-------|--------|
 | Affichage | Seul le bloc correspondant au mode de la commande est affiché (les deux sont montrés ici pour la maquette) |
-| Code juste | Remise confirmée ; argent disponible dans « Mes gains » (E-PAY-04) |
+| QR scanné ou code juste | Remise confirmée ; argent disponible dans « Mes gains » (E-PAY-04) |
 | Code faux | 5 essais maximum, puis blocage et alerte à l'acheteur |
+| QR de paiement | Secours du mode « payer à la remise » : voir E-MKT-09 |
 | Encaisser | Écran d'attente identique à E-PAY-02 côté vendeur : « En attente de la validation de l'acheteur » ; succès : « Payé ✓ Vous pouvez remettre le produit » |
 | Montant net | Toujours affiché au vendeur avant la remise (transparence, F-PAY-07) |
+
+---
+
+## E-MKT-09 — QR de paiement (secours du « payer à la remise »)
+
+Affiché par le vendeur quand la demande MoMo ou Airtel n'arrive pas sur le téléphone de l'acheteur.
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀  Faire payer l'acheteur                │
+├──────────────────────────────────────────┤
+│ Demandez à l'acheteur de scanner ce      │
+│ QR avec son application Live.            │
+│                                          │
+│         ▓▓▓▓▓▓▓▓▓▓▓▓▓▓                   │
+│         ▓▓▓   QR   ▓▓▓                   │
+│         ▓▓▓▓▓▓▓▓▓▓▓▓▓▓                   │
+│                                          │
+│       Commande LV-00482                  │
+│       85 000 FCFA                        │
+│                                          │
+│ Il paiera depuis son téléphone,          │
+│ avec MoMo, Airtel ou Visa.               │
+├──────────────────────────────────────────┤
+│ En attente du paiement...   ◐            │
+└──────────────────────────────────────────┘
+```
+
+| Règle | Détail |
+|-------|--------|
+| Scan | L'acheteur scanne depuis l'onglet ⌕ ou sa commande ; E-PAY-01 s'ouvre, pré-rempli avec la commande |
+| Sans internet chez l'acheteur | Solution à étudier avec l'agrégateur : **code marchand USSD** propre à la commande (à confirmer, D-11) |
+| Sécurité | Le QR contient seulement la référence de la commande, jamais un montant modifiable ni une donnée personnelle |

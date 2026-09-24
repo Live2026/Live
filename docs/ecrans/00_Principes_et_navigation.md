@@ -43,6 +43,9 @@
 7. **Langage simple** : phrases courtes, pas de jargon (« Mes gains » plutôt que « solde créditeur »). **Vouvoiement** dans toute l'application (argent et confiance).
 8. **Montants** toujours écrits `25 000 FCFA` (espace comme séparateur des milliers).
 9. **Accessibilité** : contrastes suffisants, icônes toujours accompagnées d'un libellé, tailles de texte système respectées.
+10. **Codes de confirmation Live : un QR, jamais un code à dicter** (révision du 24/09/2026, voir section 7).
+11. **Peu de texte** : 3 lignes d'explication au maximum par bloc ; une icône devant chaque option ; sur les écrans d'argent, un bouton **« ▶ Écouter »** lit l'explication à voix haute (français, puis lingala et kituba en P2).
+12. **Consentement explicite** : cases à cocher non pré-cochées pour les conditions, la confidentialité et le traitement des pièces d'identité (à valider par le juriste, D-16).
 
 ---
 
@@ -156,6 +159,39 @@ Présent sur les fiches et les écrans de paiement.
 └──────────────────────────────────────────┘
 ```
 
+### 5.6 Carte de confirmation Live (QR)
+
+Remplace tous les « codes à 4 chiffres » (remise, visite, démarrage et fin de prestation).
+```text
+┌──────────────────────────────────────────┐
+│ ┌──────────────────────────────────┐     │
+│ │ CONFIRMER LA REMISE              │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │        ▓▓▓  QR  ▓▓▓              │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │ Code de secours : LV-K4827       │     │
+│ │ Montrez-le au vendeur quand vous │     │
+│ │ avez vérifié le produit.         │     │
+│ │ Ce n'est PAS votre code MoMo.    │     │
+│ └──────────────────────────────────┘     │
+└──────────────────────────────────────────┘
+```
+
+Côté vendeur, annonceur ou prestataire :
+```text
+┌──────────────────────────────────────────┐
+│ [   Scanner le QR de l'acheteur    ]     │
+│ (Saisir le code LV- à la place)          │
+└──────────────────────────────────────────┘
+```
+
+### 5.7 Bouton « Écouter »
+```text
+┌──────────────────────────────────────────┐
+│ ▶ Écouter l'explication                  │
+└──────────────────────────────────────────┘
+```
+
 ---
 
 ## 6. États communs à tous les écrans
@@ -167,3 +203,17 @@ Présent sur les fiches et les écrans de paiement.
 | **Erreur réseau** | Message clair + `( Réessayer )` ; contenu en cache affiché si disponible |
 | **Hors connexion** | Bandeau 5.4 ; les écrans déjà consultés restent lisibles |
 | **Action refusée (capacité manquante)** | Explication + bouton vers la vérification (ex. « Vérifiez votre identité pour retirer vos gains ») |
+
+---
+
+## 7. Révision du 24/09/2026 : défauts corrigés avant le prototype
+
+| # | Défaut relevé | Correction |
+|---|---------------|------------|
+| 1 | **Trop de codes secrets à 4 chiffres** (PIN de l'application, PIN de paiement, code MoMo, codes de remise, de visite, de démarrage, de fin) : un escroc peut obtenir le code MoMo en réclamant « le code ». | Les codes de confirmation deviennent une **carte QR** que l'autre partie **scanne** (5.6). Le code de secours a une forme différente, `LV-` + 1 lettre + 4 chiffres (ex. `LV-K4827`), et la carte rappelle « Ce n'est PAS votre code MoMo ». Les PIN restent des points `● ● ○ ○`, jamais affichés. |
+| 2 | **Trop de texte** sur les écrans d'argent. | Textes raccourcis, icônes, bouton « ▶ Écouter » (principe 11). Écrans revus : E-MKT-04, E-IMMO-06, E-SRV-05, E-PAY-02. |
+| 3 | **Fil surchargé** : la carte produit cachait la vidéo sur un petit écran. | Carte réduite à une **pastille** d'une ligne, qui s'agrandit au toucher (E-FEED-01, E-FEED-02). |
+| 4 | **Payer à la remise sans solution de secours** si la demande MoMo n'arrive pas. | Le vendeur affiche un **QR de paiement** ; l'acheteur paie depuis sa propre application (E-MKT-08, E-MKT-09). Code marchand USSD à étudier avec l'agrégateur. |
+| 5 | **Inscription trop longue** pour tenir en 60 s. | Prénom, nom et ville seulement ; case « J'ai 18 ans ou plus » à la place de la date de naissance (vérifiée au KYC) ; centres d'intérêt facultatifs ; quartier et photo demandés plus tard (E-AUTH-02 à 05). |
+| 6 | **Consentement trop implicite** aux données personnelles. | Cases explicites à l'inscription (E-AUTH-02) et avant l'envoi des pièces d'identité (E-MOI-03). |
+| 7 | Les dessins en texte ne valident ni le visuel ni l'usage réel. | **Prototype cliquable Flutter** (`app/`) et test terrain avec 15 à 20 utilisateurs avant la construction complète. |

@@ -21,13 +21,11 @@ Le fil est l'écran d'ouverture de l'application : il **divertit** et il **vend*
 │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ↗      │
 │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ Part.   │
 │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ⚑      │
+│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         │
+│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         │
 │ @grace.mode ✓ · Moungali                 │
 │ Nouvel arrivage de robes en wax !        │
-│ #mode #brazzaville                       │
-│ ┌──────────────────────────────────┐     │
-│ │▒▒ Robe wax longue    15 000 FCFA │     │
-│ │   Livraison possible  [ Acheter ]│     │
-│ └──────────────────────────────────┘     │
+│ ( ▒ Robe wax · 15 000 FCFA  Acheter › )  │
 ├──────────────────────────────────────────┤
 │ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
 └──────────────────────────────────────────┘
@@ -38,7 +36,7 @@ Le fil est l'écran d'ouverture de l'application : il **divertit** et il **vend*
 | Onglets du haut | **Pour toi** (recommandé), **Près de moi** (E-FEED-02), **Abonnements** (comptes suivis) |
 | Geste | Glisser vers le haut : vidéo suivante ; appui : pause ; double appui : « J'aime » |
 | Colonne droite | Photo de l'auteur (+ suivre), J'aime, Commentaires (E-FEED-03), Partager (E-FEED-04), Signaler |
-| **Carte d'annonce** | Présente si la publication est liée à un produit, un bien ou un service. Bouton selon la verticale : **Acheter** (Market), **Visiter** (Immo), **Réserver** (Services). Un appui sur la carte ouvre la fiche. |
+| **Pastille d'annonce** | Une seule ligne, en bas, pour laisser la vidéo visible. Présente si la publication est liée à un produit, un bien ou un service. Libellé selon la verticale : **Acheter** (Market), **Visiter** (Immo), **Réserver** (Services). Premier appui : la pastille s'agrandit en carte (photo, prix, livraison, bouton) ; second appui : ouverture de la fiche. |
 | Mention « Sponsorisé » | Affichée sous le nom de l'auteur pour les publications boostées (F-FEED-07) |
 | Données | 360p par défaut sur données mobiles ; seules les premières secondes de la vidéo suivante sont préchargées (document 20, section 6.4) |
 | Publication photo | Même écran, avec un carrousel horizontal de photos à la place de la vidéo |
@@ -60,13 +58,10 @@ Même présentation que E-FEED-01, avec :
 │ ▒▒▒▒▒▒▒▒▒▒▒▒ VIDÉO ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ♡   │
 │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ✉      │
 │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ↗      │
+│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         │
 │ @agence.palmiers ✓ · à 1,2 km            │
-│ Appartement 2 chambres, forage,          │
-│ parking. Disponible de suite.            │
-│ ┌──────────────────────────────────┐     │
-│ │▒▒ 2 ch. Moungali 90 000 FCFA/mois│     │
-│ │   Entrée : 450 000    [ Visiter ]│     │
-│ └──────────────────────────────────┘     │
+│ Appartement 2 chambres, forage.          │
+│ ( ▒ 2 ch. · 90 000/mois  Visiter › )     │
 ├──────────────────────────────────────────┤
 │ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
 └──────────────────────────────────────────┘
@@ -76,7 +71,7 @@ Même présentation que E-FEED-01, avec :
 |-------|--------|
 | Position | Quartier du profil par défaut ; la géolocalisation n'est demandée que si l'utilisateur choisit « Autour de moi » |
 | Distance | Affichée de façon approximative (jamais l'adresse exacte, DI-03) |
-| Carte Immo | Affiche aussi le **coût d'entrée** (F-IMMO-PUB-04) |
+| Pastille Immo | Une fois agrandie, affiche aussi le **coût d'entrée** (F-IMMO-PUB-04) |
 
 ---
 

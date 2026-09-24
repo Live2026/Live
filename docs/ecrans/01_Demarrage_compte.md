@@ -2,6 +2,15 @@
 
 Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'application et le fil (document 03, section 3). Exigences : F-CPT-01 à F-CPT-03.
 
+| Étape | Temps visé |
+|-------|-----------|
+| Numéro + cases de consentement | 10 s |
+| Code SMS (lecture automatique sur Android) | 10 s |
+| Prénom, nom, ville, âge | 20 s |
+| Intérêts (facultatif) | 0 à 10 s |
+| Code secret (ou empreinte) | 10 s |
+| **Total** | **50 à 60 s** |
+
 ---
 
 ## E-AUTH-01 — Bienvenue
@@ -10,12 +19,11 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 
 ```text
 ┌──────────────────────────────────────────┐
-│                                          │
 │             L I V E                      │
 │                                          │
 │    Achetez, vendez, louez, réservez.     │
-│    Payez en toute sécurité avec          │
-│    MTN MoMo, Airtel Money ou Visa.       │
+│    Payez avec MTN MoMo, Airtel Money     │
+│    ou Visa.                              │
 │                                          │
 │         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒             │
 │         ▒  vidéo de présentation ▒       │
@@ -26,10 +34,8 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 │    ✓ Près de chez vous                   │
 │                                          │
 ├──────────────────────────────────────────┤
-│ [        Commencer               ]       │
-│ ( Découvrir sans compte )                │
-│ En continuant, vous acceptez les         │
-│ Conditions et la Confidentialité.        │
+│ [          Commencer               ]     │
+│ (    Découvrir sans compte    )          │
 └──────────────────────────────────────────┘
 ```
 
@@ -48,15 +54,18 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 ├──────────────────────────────────────────┤
 │ Votre numéro de téléphone                │
 │                                          │
-│ Il servira à vous connecter et à         │
-│ recevoir vos paiements Mobile Money.     │
+│ Pour vous connecter et recevoir          │
+│ vos paiements Mobile Money.              │
 │                                          │
-│ [▼ +242 ] [ 06 123 45 67        ]        │
-│                                          │
+│ [▼ +242 ] [ 06 123 45 67          ]      │
 │ Opérateur détecté : MTN                  │
 │                                          │
+│ [ ] J'accepte les Conditions             │
+│     d'utilisation (Lire)                 │
+│ [ ] J'accepte la Politique de            │
+│     confidentialité (Lire)               │
 ├──────────────────────────────────────────┤
-│ [   Recevoir le code par SMS     ]       │
+│ [   Recevoir le code par SMS       ]     │
 └──────────────────────────────────────────┘
 ```
 
@@ -65,6 +74,7 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 | Format | Numéros congolais au MVP (+242), validation locale avant l'envoi |
 | Opérateur | Détecté selon le préfixe (MTN ou Airtel), affiché pour rassurer ; il pré-remplit le moyen de paiement plus tard |
 | Protection | Limite d'envois de SMS par numéro et par appareil (anti-abus) |
+| Consentement | Les deux cases sont **obligatoires et non pré-cochées** ; le bouton reste inactif tant qu'elles ne sont pas cochées (principe 12) |
 
 ---
 
@@ -99,29 +109,28 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 
 ```text
 ┌──────────────────────────────────────────┐
-│ ◀                               1/3      │
+│ ◀                                 1/2    │
 ├──────────────────────────────────────────┤
 │ Faisons connaissance                     │
 │                                          │
-│         ( ▒▒ )  Ajouter une photo        │
+│ Prénom [ Grâce                      ]    │
+│ Nom    [ Mabiala                    ]    │
+│ Ville  [▼ Brazzaville               ]    │
 │                                          │
-│ Prénom  [ Grâce                     ]    │
-│ Nom     [ Mabiala                   ]    │
-│ Ville   [▼ Brazzaville              ]    │
-│ Quartier[▼ Moungali                 ]    │
-│ Date de naissance                        │
-│         [ 12 / 03 / 2001           ]     │
+│ [x] J'ai 18 ans ou plus                  │
 │                                          │
+│ Photo et quartier : plus tard, dans      │
+│ votre profil.                            │
 ├──────────────────────────────────────────┤
-│ [          Continuer             ]       │
+│ [            Continuer             ]     │
 └──────────────────────────────────────────┘
 ```
 
 | Règle | Détail |
 |-------|--------|
-| Âge | Moins de 13 ans : inscription refusée. 13 à 17 ans : compte en consultation seule (D-06). |
+| Âge | Case décochée : l'application demande « Avez-vous au moins 13 ans ? » ; non : inscription refusée ; oui : compte en consultation seule (D-06). La date de naissance exacte est vérifiée au KYC (pièce d'identité). |
 | Ville | Brazzaville ou Pointe-Noire au lancement ; les autres villes sont inscrites sur une **liste d'attente** |
-| Photo | Facultative ; compressée sur le téléphone |
+| Quartier et photo | Demandés plus tard (au premier usage de « Près de moi », à la première annonce) : l'inscription reste courte |
 
 ---
 
@@ -129,10 +138,10 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 
 ```text
 ┌──────────────────────────────────────────┐
-│ ◀                               2/3      │
+│ ◀                        2/2  (Passer)   │
 ├──────────────────────────────────────────┤
 │ Qu'est-ce qui vous intéresse ?           │
-│ Choisissez-en au moins 3.                │
+│ (facultatif)                             │
 │                                          │
 │ [x] Téléphones    [ ] Informatique       │
 │ [x] Mode femme    [ ] Mode homme         │
@@ -144,9 +153,15 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 │ [ ] Humour        [ ] Bonnes affaires    │
 │                                          │
 ├──────────────────────────────────────────┤
-│ [      Continuer (3 choisis)     ]       │
+│ [      Continuer (3 choisis)       ]     │
 └──────────────────────────────────────────┘
 ```
+
+---
+
+| Règle | Détail |
+|-------|--------|
+| Passer | Le fil démarre avec les contenus les plus populaires de la ville ; il s'ajuste ensuite au comportement |
 
 ---
 
@@ -154,7 +169,7 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 
 ```text
 ┌──────────────────────────────────────────┐
-│ ◀                               3/3      │
+│ ◀                                        │
 ├──────────────────────────────────────────┤
 │ Créez votre code secret                  │
 │                                          │

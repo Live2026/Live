@@ -8,8 +8,10 @@ Dans un fichier .md, un bloc
 
 contient le contenu brut de l'écran. Le script ajoute le cadre, complète
 chaque ligne à la bonne largeur et remplace l'étiquette par ```text.
-Les blocs déjà encadrés (```text) ne sont pas modifiés : le script peut
-être relancé sans risque. Il échoue si une ligne dépasse la largeur.
+Les blocs déjà encadrés (```text dont la première ligne est ┌) sont
+d'abord « désencadrés » puis retracés : on peut donc modifier une ligne
+dans un cadre sans se soucier du bord droit, puis relancer le script.
+Il échoue si une ligne dépasse la largeur.
 """
 import pathlib
 import re
@@ -18,6 +20,20 @@ import unicodedata
 
 LARGEURS = {"ecran": 40, "ecran-large": 86}
 BLOC = re.compile(r"```(ecran(?:-large)?)\n(.*?)```", re.S)
+ENCADRE = re.compile(r"```text\n(┌─+┐\n.*?└─+┘)\n```", re.S)
+
+
+def desencadrer(m: re.Match) -> str:
+    """Retrouve le contenu brut et le type d'un bloc déjà encadré."""
+    lignes = m.group(1).split("\n")
+    genre = "ecran" if len(lignes[0]) - 4 <= LARGEURS["ecran"] else "ecran-large"
+    brut = []
+    for ligne in lignes[1:-1]:
+        if ligne.startswith("├"):
+            brut.append("---")
+        else:
+            brut.append(ligne[2:-1].rstrip())
+    return f"```{genre}\n" + "\n".join(brut) + "\n```"
 
 
 def largeur(texte: str) -> int:
@@ -44,7 +60,8 @@ def main() -> None:
     racine = pathlib.Path(__file__).resolve().parent.parent / "docs" / "ecrans"
     for fichier in sorted(racine.glob("*.md")):
         texte = fichier.read_text(encoding="utf-8")
-        nouveau = BLOC.sub(lambda m: encadrer(fichier, m.group(1), m.group(2)), texte)
+        brut = ENCADRE.sub(desencadrer, texte)
+        nouveau = BLOC.sub(lambda m: encadrer(fichier, m.group(1), m.group(2)), brut)
         if nouveau != texte:
             fichier.write_text(nouveau, encoding="utf-8")
             print(f"encadré : {fichier.name}")

@@ -129,22 +129,25 @@ L'onglet **Moi** rassemble le compte, les activités, les gains et, surtout, le 
 │ numéro. Il doit être à votre nom.        │
 │                                          │
 │ [▼ MTN ] [ 06 123 45 67           ]      │
-│                                          │
-│ Nom enregistré chez l'opérateur :        │
+│ Nom chez l'opérateur :                   │
 │ GRACE MABIALA ✓ correspond               │
+│                                          │
+│ [ ] J'accepte que Live traite ma         │
+│     pièce d'identité et mon selfie       │
+│     pour vérifier mon identité           │
+│     (En savoir plus)                     │
 ├──────────────────────────────────────────┤
-│ Vos documents sont chiffrés et           │
-│ utilisés uniquement pour vérifier        │
-│ votre identité (loi congolaise sur       │
-│ les données personnelles).               │
+│ Documents chiffrés, utilisés             │
+│ uniquement pour la vérification.         │
 ├──────────────────────────────────────────┤
-│ [    Envoyer pour vérification   ]       │
+│ [    Envoyer pour vérification     ]     │
 └──────────────────────────────────────────┘
 ```
 
 | Règle | Détail |
 |-------|--------|
 | Contrôle du nom | Le nom du titulaire Mobile Money est comparé au nom de la pièce, si l'API de l'opérateur ou de l'agrégateur le permet (document 03, section 4) |
+| Consentement | Case obligatoire, non pré-cochée ; « En savoir plus » explique la durée de conservation et les droits d'accès et de suppression (principe 12) |
 | Délai | Réponse en moins de 24 h (validation manuelle dans le back-office au MVP, F-CPT-04) |
 | Statuts | En cours → Vérifié ✓ (badge) ou Refusé (motif + bouton « Recommencer ») |
 

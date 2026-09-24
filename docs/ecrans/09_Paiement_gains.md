@@ -46,21 +46,18 @@ Les écrans où circule l'argent. Ils doivent être **les plus clairs et les plu
 
 ```text
 ┌──────────────────────────────────────────┐
-├──────────────────────────────────────────┤
-│                                          │
-│                                          │
 │       Validez sur votre téléphone        │
 │                                          │
-│    Une demande de paiement de            │
-│    80 000 FCFA a été envoyée au          │
-│    06 123 45 67 (MTN MoMo).              │
+│    80 000 FCFA · MTN MoMo                │
+│    06 123 45 67                          │
 │                                          │
-│    1. Ouvrez la notification ou          │
-│       le menu MoMo (*105#)               │
+│    1. Ouvrez la demande MoMo             │
+│       (ou tapez *105#)                   │
 │    2. Tapez votre code secret MoMo       │
-│    3. Revenez sur Live                   │
 │                                          │
 │             ◐  2:47                      │
+│                                          │
+│    ▶ Écouter l'explication               │
 │                                          │
 │    Live ne vous demandera JAMAIS         │
 │    votre code secret MoMo.               │

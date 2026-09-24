@@ -127,7 +127,7 @@ Trois schémas couvrent l'essentiel des situations :
 
 Beaucoup de prestataires ne peuvent pas avancer le prix du matériel. Live l'autorise **de façon encadrée** :
 - le devis distingue une ligne **« Matériel »** ;
-- au **démarrage de l'intervention**, le client saisit un **code de démarrage** (ou confirme dans l'application) : la part « matériel » de l'acompte est **libérée immédiatement** au prestataire ;
+- au **démarrage de l'intervention**, le prestataire scanne le **QR de démarrage** du client (code `LV-` en secours) : la part « matériel » de l'acompte est **libérée immédiatement** au prestataire ;
 - ce déblocage anticipé est réservé aux prestataires **N2 ayant au moins 3 prestations réussies** (ou N3), plafonné (hypothèse : 150 000 FCFA ou 50 % du devis) ;
 - le reste (main-d'œuvre) reste séquestré jusqu'à la fin.
 
@@ -135,9 +135,9 @@ Beaucoup de prestataires ne peuvent pas avancer le prix du matériel. Live l'aut
 
 | ID | Fonctionnalité | Prio |
 |----|----------------|------|
-| F-SRV-EXEC-01 | Statuts de l'intervention : confirmée → en route → **démarrée** (code de démarrage) → **terminée** (déclarée par le prestataire) → confirmée par le client. | M |
+| F-SRV-EXEC-01 | Statuts de l'intervention : confirmée → en route → **démarrée** (QR de démarrage) → **terminée** (déclarée par le prestataire) → confirmée par le client. | M |
 | F-SRV-EXEC-02 | Photos « avant / après » jointes par le prestataire à la déclaration de fin (recommandées ; obligatoires pour les chantiers de plus de 100 000 FCFA). | M |
-| F-SRV-EXEC-03 | Le client confirme par un **code de fin** ou un bouton ; **confirmation automatique** si aucune réclamation n'est ouverte dans le délai de garantie (24 h pour la beauté, le ménage et l'événementiel ; **72 h** pour le bâtiment et la réparation). | M |
+| F-SRV-EXEC-03 | Le client confirme par le **QR de fin** (scanné par le prestataire) ou un bouton ; **confirmation automatique** si aucune réclamation n'est ouverte dans le délai de garantie (24 h pour la beauté, le ménage et l'événementiel ; **72 h** pour le bâtiment et la réparation). | M |
 | F-SRV-EXEC-04 | **Partage de sécurité** : le client ou le prestataire peut partager les détails de l'intervention (nom, photo, heure, adresse) avec un proche, en un clic. | S |
 | F-SRV-EXEC-05 | Chantiers en **plusieurs étapes (jalons)**, chacune payée et confirmée séparément. | P2 |
 
@@ -179,7 +179,7 @@ Beaucoup de prestataires ne peuvent pas avancer le prix du matériel. Live l'aut
 | R-SRV-01 | Proposer des services exige le niveau **N2** (identité vérifiée) : il n'y a pas de prestataire anonyme, puisque le prestataire entre chez les gens. |
 | R-SRV-02 | Les coordonnées (téléphone, adresse exacte du client) ne sont échangées **qu'après une réservation confirmée** ou un devis accepté. |
 | R-SRV-03 | La commission Live est de **8 %** (D-09), prélevée sur le montant versé au prestataire (main-d'œuvre + matériel + déplacement). Le client paie le prix du devis. |
-| R-SRV-04 | Le déblocage anticipé de la part « matériel » exige le code de démarrage, un prestataire éligible (4.6) et respecte le plafond. |
+| R-SRV-04 | Le déblocage anticipé de la part « matériel » exige le scan du QR de démarrage, un prestataire éligible (4.6) et respecte le plafond. |
 | R-SRV-05 | Un prestataire ne peut pas réserver ses propres services, ni recevoir de devis d'un compte lié (même appareil ou même numéro Mobile Money). |
 | R-SRV-06 | Délai de garantie : 24 h (beauté, ménage, événementiel, numérique) ; 72 h (bâtiment, réparation). Aucun versement définitif de la main-d'œuvre avant son expiration, sauf confirmation explicite du client. |
 | R-SRV-07 | Un prestataire dont le taux de réclamations fondées dépasse 5 % sur 30 jours (au moins 10 prestations) passe en revue ; C-SERVICES peut être suspendue. |
@@ -195,13 +195,13 @@ Beaucoup de prestataires ne peuvent pas avancer le prix du matériel. Live l'aut
 DEMANDE ─► DEVIS_ENVOYÉ ─► DEVIS_ACCEPTÉ + ACOMPTE_PAYÉ (séquestre)
                 │                         │
                 ▼                         ▼
-             EXPIRÉ                   CONFIRMÉE ─► EN_ROUTE ─► DÉMARRÉE (code ; déblocage éventuel du matériel)
+             EXPIRÉ                   CONFIRMÉE ─► EN_ROUTE ─► DÉMARRÉE (QR ; déblocage éventuel du matériel)
                                           │                         │
                                           ▼                         ▼
                         ANNULÉE (client ou prestataire)    TERMINÉE_DÉCLARÉE (+ encaissement du solde)
                         ─► remboursement selon les règles           │
                                                                     ▼
-                                                  CONFIRMÉE_CLIENT (code / bouton / fin de garantie) ─► VERSÉE
+                                                  CONFIRMÉE_CLIENT (QR / bouton / fin de garantie) ─► VERSÉE
                                                                     │
                                                                     ▼
                                                   RÉCLAMATION ─► REPRISE / ACCORD / MÉDIATION
@@ -221,7 +221,7 @@ Réservation à prix fixe : CRÉNEAU_RÉSERVÉ (payé ou non selon le schéma) �
 | `disponibilite` | prestataire_id, créneaux habituels, exceptions, réservations |
 | `demande_publique` | client_id, catégorie, description, médias, quartier, date souhaitée, budget, statut, expiration |
 | `devis` | demande_id ou conversation_id, prestataire_id, lignes (type : main-d'œuvre, matériel, déplacement), total, acompte, date, conditions, validité, statut |
-| `prestation` | devis_id ou service_id, client_id, prestataire_id, technicien_id, schéma de paiement (A, B, C), codes de démarrage et de fin (hachés), photos avant/après, statut, horodatages |
+| `prestation` | devis_id ou service_id, client_id, prestataire_id, technicien_id, schéma de paiement (A, B, C), jetons de démarrage et de fin (hachés), photos avant/après, statut, horodatages |
 | `reclamation_srv` | prestation_id, motif, preuves, solution proposée, décision |
 | `avis_srv` | prestation_id, notes par critère, texte, réponse |
 | Référentiels | catégories, familles, délais de garantie par famille, catégories exclues |
@@ -258,7 +258,7 @@ Les paiements, séquestres, déblocages partiels et versements relèvent de **Li
 |--------|-------------|--------|---------|
 | Les prestataires préfèrent l'espèce et le contact direct après la première mise en relation. | Élevée | Élevé | Schéma C (payer à la fin via MoMo), avis et badges réservés aux prestations payées via Live, garantie visible pour le client, offre à 0 % (D-10). |
 | Litiges sur la qualité des travaux, difficiles à trancher à distance. | Élevée | Moyen | Photos avant/après, devis détaillé, reprise des travaux proposée en premier, médiation. |
-| Acomptes « matériel » détournés. | Moyenne | Élevé | Éligibilité, plafond, code de démarrage, suspension. |
+| Acomptes « matériel » détournés. | Moyenne | Élevé | Éligibilité, plafond, QR de démarrage, suspension. |
 | Incident de sécurité au domicile d'un client. | Faible | Très élevé | Vérification N2, partage de sécurité, signalement prioritaire, coopération avec les autorités. |
 | Offre trop dispersée (trop de catégories, pas assez de prestataires par catégorie). | Moyenne | Moyen | Lancement ciblé sur 10 métiers prioritaires (section 12, DS-02). |
 

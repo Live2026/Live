@@ -88,7 +88,7 @@ Priorités : **M** = indispensable, **S** = souhaité dans le MVP si possible, *
 | F-MKT-02 | Boutique : page publique, catalogue, avis, abonnés, bouton de contact. | M |
 | F-MKT-03 | Commande avec séquestre (payer maintenant) **ou** payer à la remise via Mobile Money (voir 3.8 et document 10). | M |
 | F-MKT-04 | Suivi de commande : payée, en préparation, remise ou expédiée, reçue, terminée, en litige. | M |
-| F-MKT-05 | Remise en main propre confirmée par un **code à 4 chiffres** donné par l'acheteur. | M |
+| F-MKT-05 | Remise en main propre confirmée par le **QR de confirmation** scanné par l'autre partie (code de secours `LV-` + lettre + 4 chiffres, voir ecrans/00, principe 10) de l'acheteur. | M |
 | F-MKT-06 | Variantes (taille, couleur) et stock simple. | S |
 | F-MKT-07 | Liste de catégories interdites appliquée à la publication (armes, médicaments, faux documents…). | M |
 

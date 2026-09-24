@@ -182,18 +182,17 @@ Parcours logement et agences (document 11). Promesse : **« Visite payée = visi
 │ 06 555 44 33   (Appeler) (Écrire)        │
 │                                          │
 │ ┌──────────────────────────────────┐     │
-│ │   Votre code de visite           │     │
-│ │                                  │     │
-│ │          3   9   1   5           │     │
-│ │                                  │     │
-│ │   Donnez-le à l'agent une fois   │     │
-│ │   sur place.                     │     │
+│ │ CONFIRMER LA VISITE              │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │        ▓▓▓  QR  ▓▓▓              │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │ Code de secours : LV-V3915       │     │
+│ │ Montrez-le à l'agent sur place.  │     │
+│ │ Ce n'est PAS votre code MoMo.    │     │
 │ └──────────────────────────────────┘     │
 │                                          │
 │ (Le bien ne correspond pas)              │
 │ (Annuler la visite)                      │
-├──────────────────────────────────────────┤
-│ Rappel envoyé la veille et 2 h avant.    │
 └──────────────────────────────────────────┘
 ```
 
@@ -213,23 +212,21 @@ Reçue dans la conversation après la visite.
 ┌──────────────────────────────────────────┐
 │ ◀  Offre de réservation                  │
 ├──────────────────────────────────────────┤
-│ Appartement 2 ch. · Moungali             │
-│ Proposée par Agence Les Palmiers ✓       │
+│ 2 ch. Moungali · Agence Les Palmiers ✓   │
 │                                          │
-│ Acompte de réservation   90 000 FCFA     │
-│ À signer avant le       5 octobre        │
-│ Le bien est retiré des recherches        │
-│ dès votre paiement.                      │
+│ Acompte              90 000 FCFA         │
+│ Signer le bail avant le 5 octobre        │
 │                                          │
-│ Conditions d'annulation                  │
-│ • Par l'agence : remboursement total     │
-│ • Par vous avant le 2 oct. : total       │
-│ • Par vous après : 50 % remboursés       │
+│ Si l'agence annule   → tout remboursé    │
+│ Si vous annulez                          │
+│   avant le 2 oct.    → tout remboursé    │
+│   après le 2 oct.    → 50 % remboursé    │
+│                                          │
+│ ▶ Écouter l'explication                  │
 ├──────────────────────────────────────────┤
-│ [Protégé par Live] L'acompte est         │
-│ versé à l'agence seulement quand         │
-│ vous confirmez tous les deux la          │
-│ signature du bail.                       │
+│ [Protégé par Live] L'agence est payée    │
+│ quand vous confirmez tous les deux       │
+│ la signature.                            │
 ├──────────────────────────────────────────┤
 │ (Refuser)     [ Payer 90 000 FCFA ]      │
 └──────────────────────────────────────────┘
@@ -258,11 +255,11 @@ Reçue dans la conversation après la visite.
 │ 10:30  2 ch. Moungali                    │
 │        Merveille ★4,9 · payé             │
 │        Agent : Christian                 │
-│        [ Saisir le code ]                │
+│        [ Scanner le QR ]                 │
 │ 14:00  Studio Plateau                    │
 │        Jordy · payé                      │
 │        Agent : Nadège                    │
-│        [ Saisir le code ]                │
+│        [ Scanner le QR ]                 │
 ├──────────────────────────────────────────┤
 │ ( Biens à reconfirmer : 3 )  ▶           │
 ├──────────────────────────────────────────┤
@@ -272,7 +269,7 @@ Reçue dans la conversation après la visite.
 
 | Onglet | Contenu |
 |--------|---------|
-| Visites | Visites du jour et à venir, par agent ; saisie du code (E-IMMO-08) |
+| Visites | Visites du jour et à venir, par agent ; scan du QR du visiteur (E-IMMO-08) |
 | Demandes | Messages et demandes de visite non traités |
 | Biens | Liste des biens avec statut (publié, réservé, loué, masqué), statistiques par bien, bouton de reconfirmation |
 | Équipe | Agents (jusqu'à 5 au MVP), affectation des biens (F-IMMO-AG-02) |
@@ -287,13 +284,10 @@ Reçue dans la conversation après la visite.
 ├──────────────────────────────────────────┤
 │ 2 ch. Moungali                           │
 │                                          │
-│ Demandez son code au visiteur :          │
+│ [   Scanner le QR du visiteur      ]     │
+│ (Saisir le code LV- à la place)          │
 │                                          │
-│       [ _ ] [ _ ] [ _ ] [ _ ]            │
-│                                          │
-│ [      Valider la visite         ]       │
-│                                          │
-│ ────────── ou ──────────                 │
+│ ─────────────── ou ───────────────       │
 │ ( Le visiteur n'est pas venu )           │
 │ ( Le bien n'est plus disponible )        │
 ├──────────────────────────────────────────┤
