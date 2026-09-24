@@ -50,7 +50,7 @@ Un pourcentage prélevé sur chaque paiement réalisé dans l'application.
 
 L'acheteur ne paie **aucune commission** : il paie le prix affiché. C'est un argument décisif face au paiement direct en Mobile Money.
 
-> Le tarif doit rester **inférieur au coût réel des arnaques et des impayés** pour le vendeur, sinon il retournera sur Facebook. Au lancement, une offre de lancement pour les premiers vendeurs est décidée : **0 % pendant 3 mois** (D-10).
+> Le tarif doit rester **inférieur au coût réel des arnaques et des impayés** pour le vendeur, sinon il retournera sur Facebook. Une offre de lancement pour les premiers vendeurs est décidée : **0 % pendant 3 mois** (D-10).
 
 ### 4.2 Boosts et visibilité (dès le MVP)
 
