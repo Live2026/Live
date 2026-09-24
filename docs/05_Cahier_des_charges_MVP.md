@@ -86,7 +86,7 @@ Priorités : **M** = indispensable, **S** = souhaité dans le MVP si possible, *
 |----|----------|------|
 | F-MKT-01 | Création d'une annonce : titre, catégorie, photos (≤ 10), vidéo, prix, état, quantité, lieu, options de remise (en main propre ou livraison par le vendeur, avec son prix). | M |
 | F-MKT-02 | Boutique : page publique, catalogue, avis, abonnés, bouton de contact. | M |
-| F-MKT-03 | Commande avec séquestre (voir 3.8). | M |
+| F-MKT-03 | Commande avec séquestre (payer maintenant) **ou** payer à la remise via Mobile Money (voir 3.8 et document 10). | M |
 | F-MKT-04 | Suivi de commande : payée, en préparation, remise ou expédiée, reçue, terminée, en litige. | M |
 | F-MKT-05 | Remise en main propre confirmée par un **code à 4 chiffres** donné par l'acheteur. | M |
 | F-MKT-06 | Variantes (taille, couleur) et stock simple. | S |
@@ -133,6 +133,7 @@ Priorités : **M** = indispensable, **S** = souhaité dans le MVP si possible, *
 | F-PAY-09 | Paiement des **boosts** directement par Mobile Money. | M |
 | F-PAY-10 | Gestion des échecs : délai d'expiration, nouvelle tentative, statut « en attente de confirmation de l'opérateur », **aucun double débit**. | M |
 | F-PAY-11 | Réconciliation quotidienne automatique avec les relevés de l'agrégateur ou des opérateurs. | M |
+| F-PAY-12 | **Payer à la remise** : le vendeur déclenche depuis la commande une demande de paiement MoMo ou Airtel sur le téléphone de l'acheteur, au moment de la remise ; versement dès la confirmation, avec une réclamation possible sous 24 h (document 10, section 3.6). | M |
 
 \* *Visa : obligatoire au MVP si l'agrégateur retenu la couvre au Congo ; sinon, livrée en P2 sans bloquer le lancement (voir D-12).*
 

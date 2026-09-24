@@ -44,6 +44,7 @@ La version 1 contenait de très bonnes idées, mais elle souffrait de cinq probl
 | 05 | [Cahier des charges fonctionnel — MVP](05_Cahier_des_charges_MVP.md) | Arrêté (v2.0) |
 | 06 | [Paiements : Mobile Money, Visa et séquestre](06_Paiements_Mobile_Money.md) | Arrêté (v2.0) |
 | 07 | [Registre des décisions](07_Decisions_a_valider.md) | **Arrêté** (4 points sous réserve externe) |
+| 10 | [Live Market : produits et boutiques](10_Live_Market.md) | Proposé |
 | 11 | [Live Immo : immobilier et agences](11_Live_Immo.md) | Proposé |
 
 Statuts possibles : *Proposé* → *Arrêté* → *Validé* (après les vérifications externes du document 07, section 7) → *Révisé*.

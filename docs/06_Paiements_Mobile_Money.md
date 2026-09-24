@@ -99,6 +99,8 @@ CRÉÉE ─► PAIEMENT_EN_COURS ─► PAYÉE_SÉQUESTRÉE ─► REMISE_DÉCLA
                                                           └──────► LIBÉRÉE AU VENDEUR
 ```
 
+**Variante « payer à la remise »** (Live Market, document 10, section 3.6) : `CRÉÉE ─► RÉSERVÉE ─► ENCAISSEMENT_DEMANDÉ ─► PAYÉE ─► FONDS_DISPONIBLES`, avec une fenêtre de réclamation de 24 h pendant laquelle une **réserve** équivalente peut être retenue sur le solde du vendeur si une réclamation est ouverte.
+
 **Règles**
 - R-PAY-01 : sans litige, la confirmation est **automatique** après le délai propre à la verticale (produit : 48 h après la remise déclarée ; service : 24 h ; visite : immédiate par code).
 - R-PAY-02 : la commission Live n'est **définitivement acquise** qu'au passage à CONFIRMÉE ou LIBÉRÉE.

@@ -59,6 +59,13 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | D-20 | Vidéo | Service géré d'encodage et de diffusion (Mux, Cloudflare Stream ou équivalent), choisi sur le **coût par minute diffusée** et la **qualité en 3G**. | ✅ |
 | D-21 | Hébergement | Région cloud la plus proche de l'Afrique centrale + CDN ; **mesure de la latence réelle depuis Brazzaville et Pointe-Noire** avant le choix définitif. | ✅ |
 
+## 5 bis. Décisions des spécifications de module
+
+| Réf. | Document | Résumé |
+|------|----------|--------|
+| DI-01 à DI-06 | [11 — Live Immo](11_Live_Immo.md) | Frais de visite et acompte seuls au MVP, coordonnées révélées après engagement, carte floutée, aucun prix de vente via Live avant la P3 |
+| DM-01 à DM-06 | [10 — Live Market](10_Live_Market.md) | Payer maintenant **et** payer à la remise via Mobile Money, livraison par le vendeur au MVP, avis réservés aux ventes payées, commission sur le total livraison comprise |
+
 ## 6. Organisation
 
 | N° | Sujet | Décision | Statut |
