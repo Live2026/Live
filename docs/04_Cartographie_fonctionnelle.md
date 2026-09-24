@@ -108,8 +108,8 @@ Reprise des ambitions de la v1 : formations vendues par les créateurs, cours, P
 #### Live Emploi et opportunités — P3
 Offres d'emploi, stages, bourses et concours, profils de candidats, alertes, lutte contre les fausses offres.
 
-#### Live AI — P2 (fonctions simples) / P3 (avancées)
-Rédaction automatique d'une annonce à partir de photos, suggestion de prix, traduction français–lingala–kituba, résumé des avis, assistance aux vendeurs, détection de fraude.
+#### Live IA et Crédits Live — P1 (produit propre, payant)
+Services vendus par Live en **Crédits Live** : CV, lettres de motivation, business plans (express et complet), aide aux exercices par photo (mode apprentissage ou solution), résumé de documents ; tuteur vocal, traduction, courriers et présentations en P2. Services **gratuits** pour les vendeurs : rédaction d'annonce à partir des photos. *Voir le document 19.*
 
 ### 4.4 Économie
 
@@ -131,8 +131,8 @@ Campagnes publicitaires en libre-service pour les marques, ciblage par ville et 
 
 | Phase | Modules | Objectif business |
 |-------|---------|-------------------|
-| **P1 — MVP** (Brazzaville + Pointe-Noire) | Compte et capacités, Live Confiance, Notifications, Back-office, Feed, Recherche, Chat, **Market, Immo, Services**, **Live Pay (MoMo + Airtel + Visa)**, Boosts | Prouver que les vendeurs vendent **plus et en sécurité** sur Live. |
-| **P2 — Croissance** | Live Direct (live shopping), Live Créateurs, Abonnements Pro, Livraison, Groupes, Live AI simple, Ads (bêta), location courte durée | Faire rester les gens : divertissement + créateurs payés. |
+| **P1 — MVP** (Brazzaville + Pointe-Noire) | Compte et capacités, Live Confiance, Notifications, Back-office, Feed, Recherche, Chat, **Market, Immo, Services**, **Live Pay (MoMo + Airtel + Visa)**, Boosts, **Live IA (Crédits Live)** | Prouver que les vendeurs vendent **plus et en sécurité** sur Live, et **générer un revenu immédiat** avec Live IA. |
+| **P2 — Croissance** | Live Direct (live shopping), Live Créateurs, Abonnements Pro, Livraison, Groupes, Live IA vocal et Live Plus, Ads (bêta), location courte durée | Faire rester les gens : divertissement + créateurs payés. |
 | **P3 — Expansion** | Live Savoir, Live Emploi, Ads complet, Fonds Créateurs, API partenaires, services financiers en partenariat, extension CEMAC | Devenir la super-app de la région. |
 
 ---

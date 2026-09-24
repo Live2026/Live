@@ -1,6 +1,6 @@
 # Écrans — 08. Messages
 
-La messagerie remplace WhatsApp pour les échanges commerciaux : chaque conversation est **rattachée à une annonce**, et l'on peut **négocier et payer** sans la quitter. Exigences : F-CHAT-01 à F-CHAT-07.
+Accès : icône **✉** en haut à droite de l'Accueil, d'Explorer et de Live IA (avec le nombre de messages non lus), et depuis chaque annonce. La messagerie remplace WhatsApp pour les échanges commerciaux : chaque conversation est **rattachée à une annonce**, et l'on peut **négocier et payer** sans la quitter. Exigences : F-CHAT-01 à F-CHAT-07.
 
 ---
 
@@ -28,7 +28,7 @@ La messagerie remplace WhatsApp pour les échanges commerciaux : chaque conversa
 │      ▒ Pagne 6 yards (vous vendez)       │
 │      Il est encore disponible ?          │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 

@@ -13,6 +13,7 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | D-00c | Mécanismes de gain | Vente directe, créateurs, prestataires ✅ ; affiliation reportée en P3 |
 | D-00d | Moyens de paiement | **MTN MoMo, Airtel Money, Visa** ✅ |
 | D-00e | Format du dossier | Markdown versionné dans le dépôt ✅ |
+| D-00f | Produits propres | **Live IA** payé en **Crédits Live** achetés en Mobile Money ; Live paie les fournisseurs d'IA (précision du promoteur du 24/09/2026) ✅ |
 
 ## 2. Produit
 
@@ -23,7 +24,7 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | D-03 | Langues | Interface en français au MVP ; **lingala et kituba** en P2. Les contenus des utilisateurs peuvent être dans toutes les langues dès le départ. | ✅ |
 | D-04 | Verticales du MVP | **Immobilier + Produits + Services.** Ordre de recrutement terrain : immobilier d'abord (c'est là que les arnaques sont les plus graves et que le séquestre démontre le mieux sa valeur), puis boutiques, puis prestataires. Si le budget impose une coupe, **Services passe en P2**. | ✅ |
 | D-05 | Durée des vidéos | **60 s** au MVP, 3 min en P2. | ✅ |
-| D-06 | Âge minimal | 13 ans pour consulter, **18 ans** pour acheter, vendre ou être payé. | ✅ |
+| D-06 | Âge minimal | 13 ans pour consulter et utiliser Live IA avec des crédits offerts ; **18 ans** pour acheter (y compris des crédits), vendre ou être payé. *(Révisé le 24/09/2026 pour Live IA.)* | ✅ |
 | D-07 | Contact hors application | Numéro masqué par défaut. Paiement hors application possible mais **non protégé** (avertissement). | ✅ |
 | D-08 | Plateformes | **Android + web** au lancement ; iOS dans les 2 mois. | ✅ |
 
@@ -64,6 +65,7 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | Réf. | Document | Résumé |
 |------|----------|--------|
 | DT-01 à DT-11 | [20 — Architecture technique](20_Architecture_technique.md) | Flutter (mobile + back-office web), Supabase, grand livre en PostgreSQL, Cloudflare Stream, recherche PostgreSQL, SMS local, dépôt unique avec CI |
+| DI-A-01 à DI-A-06 | [19 — Live IA et Crédits Live](19_Live_IA_et_credits.md) | Live IA au MVP, 1 crédit = 10 FCFA, pack minimum 500 FCFA, prix fixe par service, recrédit en cas d'échec, crédits non convertibles en argent, onglet « IA » dans la navigation |
 | DI-01 à DI-06 | [11 — Live Immo](11_Live_Immo.md) | Frais de visite et acompte seuls au MVP, coordonnées révélées après engagement, carte floutée, aucun prix de vente via Live avant la P3 |
 | DS-01 à DS-06 | [12 — Live Services](12_Live_Services.md) | Trois schémas de paiement, 10 métiers prioritaires, demande publique de devis, déblocage encadré du matériel, garantie de 24 h ou 72 h, santé, juridique et garde d'enfants exclus |
 | DM-01 à DM-06 | [10 — Live Market](10_Live_Market.md) | Payer maintenant **et** payer à la remise via Mobile Money, livraison par le vendeur au MVP, avis réservés aux ventes payées, commission sur le total livraison comprise |

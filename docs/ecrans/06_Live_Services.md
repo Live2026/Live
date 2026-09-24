@@ -31,7 +31,7 @@ Parcours prestataires (document 12). Promesse : **« Un prestataire vérifié, u
 │ Mes demandes en cours            ▶       │
 │ Fuite d'eau cuisine · 3 devis reçus      │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 
@@ -307,7 +307,7 @@ Parcours prestataires (document 12). Promesse : **« Un prestataire vérifié, u
 │ Talangaï · dès que possible              │
 │ ( Ignorer )     [ Faire un devis ]       │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 

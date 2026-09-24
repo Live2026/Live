@@ -94,9 +94,9 @@ Le bouton central **(+)** est le point de départ de toute création. Objectif :
 │ Paiement   [ ] Exiger le paiement        │
 │                d'avance                  │
 ├──────────────────────────────────────────┤
-│ Vous recevrez 79 900 FCFA par vente      │
-│ (6 % de commission Live, 0 % pendant     │
-│ votre offre de lancement)                │
+│ Vous recevrez 85 000 FCFA par vente      │
+│ pendant votre offre de lancement (0 %),  │
+│ puis 79 900 FCFA (6 % de commission)     │
 ├──────────────────────────────────────────┤
 │ [           Publier              ]       │
 └──────────────────────────────────────────┘

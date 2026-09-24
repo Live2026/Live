@@ -29,6 +29,7 @@ Permettre à **chaque personne et à chaque entreprise** de :
 4. **créer du contenu** et être rémunérée pour son audience ;
 5. **être payée** immédiatement et en sécurité par MTN Mobile Money, Airtel Money ou carte Visa ;
 6. **acheter sans crainte**, grâce à la vérification des vendeurs et au paiement séquestré.
+7. **se faire aider par l'intelligence artificielle** pour réussir : exercices, CV, lettres, business plans (Live IA, payable en Crédits Live).
 
 ---
 
@@ -107,9 +108,10 @@ Personne ne quitte un réseau social parce qu'un autre est « mieux ». On le qu
   Live Feed            Live Chat                  Live Pay (MoMo, Airtel, Visa, séquestre)
   Live Direct          Avis et communauté         Live Créateurs (cadeaux, abonnements)
                                                   Live Pro et Live Ads
+                                                  Live IA (Crédits Live)
   ───────────────────────── VERTICALES ─────────────────────────
   Live Market (produits)   Live Immo (immobilier)   Live Services (prestataires)
-  Plus tard : Live Livraison, Live Savoir (éducation, examens), Live Emploi, Live AI
+  Plus tard : Live Livraison, Live Savoir (éducation, examens), Live Emploi
   ───────────────────────────── SOCLE ─────────────────────────────
   Compte unique · Capacités · Live Confiance (vérification, litiges, modération)
   Notifications · Administration · Statistiques
@@ -123,6 +125,7 @@ Personne ne quitte un réseau social parce qu'un autre est « mieux ». On le qu
 - Vendeurs particuliers et petits commerçants (Facebook, marchés, boutiques de quartier)
 - Agences immobilières, bailleurs, commissionnaires (démarcheurs)
 - Prestataires : artisans, réparateurs, coiffeurs, traiteurs, photographes, décorateurs…
+- Élèves, étudiants, chercheurs d'emploi et porteurs de projets (Live IA : exercices, CV, lettres, business plans)
 - Acheteurs et locataires de Brazzaville et de Pointe-Noire
 
 **Priorité 2**

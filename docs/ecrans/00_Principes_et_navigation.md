@@ -21,6 +21,7 @@
 | [11 — Confiance](11_Confiance.md) | Avis, signalement, réclamation, suivi de litige |
 | [12 — Notifications](12_Notifications.md) | Centre de notifications |
 | [13 — Back-office](13_Back_office.md) | Outil web des agents Live |
+| [14 — Live IA et Crédits Live](14_Live_IA.md) | Services IA payants, achat de crédits, documents |
 
 ---
 
@@ -64,7 +65,9 @@
 | `▒▒▒▒` | Image, vignette ou vidéo |
 | `★ 4,8` | Note |
 | `✓ Vérifié` | Badge de vérification |
-| `⌂ ⌕ (+) ✉ ☺` | Onglets : Accueil, Explorer, Publier, Messages, Moi |
+| `⌂ ⌕ (+) ✦ ☺` | Onglets : Accueil, Explorer, Publier, **IA**, Moi |
+| `✉` | Messages : icône en haut à droite de l'Accueil, d'Explorer et de Live IA |
+| `✦` | Crédits Live |
 | `[Protégé par Live]` | Bandeau de protection des paiements |
 | Ligne `├───┤` | Séparation de zones (en-tête, contenu, barre du bas) |
 
@@ -78,11 +81,11 @@
                          └──────┬───────┘
                                 ▼
 ┌─────────────────── BARRE D'ONGLETS (toujours visible) ───────────────────┐
-│  ⌂ Accueil     ⌕ Explorer     (+) Publier     ✉ Messages     ☺ Moi       │
+│  ⌂ Accueil     ⌕ Explorer     (+) Publier     ✦ IA           ☺ Moi       │
 └────┬──────────────┬──────────────┬──────────────┬──────────────┬─────────┘
      ▼              ▼              ▼              ▼              ▼
-  Fil vidéo      Hub Market     Choisir quoi   Conversations  Profil
-  E-FEED-01/02   Immo/Services  publier        E-CHAT-01      E-MOI-01
+  Fil vidéo      Hub Market     Choisir quoi   Live IA        Profil
+  E-FEED-01/02   Immo/Services  publier        E-IA-01        E-MOI-01
      │           E-EXP-01       E-PUB-01          │              │
      │              │              │              ▼              ├─► Mes gains E-PAY-04
      ▼              ▼              ▼           Conversation      ├─► Gagner de l'argent E-MOI-02
@@ -118,7 +121,7 @@
 ```text
 ┌──────────────────────────────────────────┐
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 
@@ -203,6 +206,24 @@ Côté vendeur, annonceur ou prestataire :
 | **Erreur réseau** | Message clair + `( Réessayer )` ; contenu en cache affiché si disponible |
 | **Hors connexion** | Bandeau 5.4 ; les écrans déjà consultés restent lisibles |
 | **Action refusée (capacité manquante)** | Explication + bouton vers la vérification (ex. « Vérifiez votre identité pour retirer vos gains ») |
+
+---
+
+## 8. Mise en page adaptative : tout l'écran est utilisé (révision du 24/09/2026)
+
+Les maquettes sont dessinées au format téléphone, mais l'application **occupe toute la largeur de l'écran**, sans marges latérales imposées, et **réorganise son contenu** selon la largeur disponible. Les seuils suivent les classes de taille de fenêtre de Material Design 3.
+
+| Largeur | Classe | Navigation | Contenu |
+|---------|--------|-----------|---------|
+| < 600 px | Compacte (téléphone) | Barre d'onglets en bas | Une colonne ; listes pleine largeur ; marges intérieures de 16 px |
+| 600 à 839 px | Moyenne (grand téléphone à l'horizontale, petite tablette) | **Rail de navigation** à gauche | Grilles de 2 à 3 colonnes ; fiches sur deux colonnes |
+| ≥ 840 px | Étendue (tablette, ordinateur) | Rail de navigation **étendu** (avec libellés) | Grilles de 3 à 6 colonnes selon la largeur ; fiches et formulaires sur deux colonnes (médias ou formulaire à gauche, informations ou aperçu à droite) ; fil vidéo au centre avec le détail de l'annonce à droite |
+
+**Règles**
+1. **Pas de colonne étroite centrée** : les grilles (produits, logements, services, Live IA) utilisent une **largeur de carte maximale** (environ 240 à 420 px selon le contenu) et remplissent la ligne avec autant de colonnes que possible.
+2. **Textes longs** (descriptions, conditions) : largeur de ligne limitée à environ 80 caractères **dans leur colonne**, pour rester lisibles ; la page, elle, reste pleine largeur.
+3. **Bouton principal** : en bas de l'écran sur téléphone ; dans la colonne d'action (à droite) sur grand écran.
+4. **Même contenu, même ordre** sur toutes les tailles : seule la disposition change (aucune fonctionnalité réservée à une taille d'écran).
 
 ---
 

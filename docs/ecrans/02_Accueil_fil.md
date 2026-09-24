@@ -8,7 +8,7 @@ Le fil est l'écran d'ouverture de l'application : il **divertit** et il **vend*
 
 ```text
 ┌──────────────────────────────────────────┐
-│ Abonnements  [Pour toi]  Près de moi     │
+│ Abonnements  [Pour toi]  Près de moi   ✉ │
 ├──────────────────────────────────────────┤
 │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   │
 │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ ( ▒▒)   │
@@ -27,7 +27,7 @@ Le fil est l'écran d'ouverture de l'application : il **divertit** et il **vend*
 │ Nouvel arrivage de robes en wax !        │
 │ ( ▒ Robe wax · 15 000 FCFA  Acheter › )  │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 
@@ -49,7 +49,7 @@ Même présentation que E-FEED-01, avec :
 
 ```text
 ┌──────────────────────────────────────────┐
-│ Abonnements  Pour toi  [Près de moi]     │
+│ Abonnements  Pour toi  [Près de moi]   ✉ │
 ├──────────────────────────────────────────┤
 │ Autour de : Moungali (▼ Changer)         │
 │ Rayon : [ 2 km ][ 5 km ][•Ville]         │
@@ -63,7 +63,7 @@ Même présentation que E-FEED-01, avec :
 │ Appartement 2 chambres, forage.          │
 │ ( ▒ 2 ch. · 90 000/mois  Visiter › )     │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 

@@ -160,7 +160,7 @@ Les écrans où circule l'argent. Ils doivent être **les plus clairs et les plu
 │           effectué · reçu ▶              │
 │ + 23 000  Prestation (attente) 72 h      │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 

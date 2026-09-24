@@ -223,8 +223,25 @@ Priorités : **M** = indispensable, **S** = souhaité dans le MVP si possible, *
 
 ---
 
+### 3.13 Live IA et Crédits Live (IA)
+
+| ID | Exigence | Prio |
+|----|----------|------|
+| F-IA-01 | Espace **Live IA** accessible depuis la barre de navigation : solde de crédits, catalogue des services avec leur prix en crédits, « Mes documents ». | M |
+| F-IA-02 | **Achat de packs de crédits** (500, 1 000, 2 500, 5 000 FCFA) en MTN MoMo, Airtel Money ou Visa, via les écrans de paiement communs ; crédits disponibles immédiatement. | M |
+| F-IA-03 | **Confirmation du prix** avant chaque génération (« Ce service coûte 20 crédits, il vous en restera 30 ») ; débit après succès ; **recrédit automatique** en cas d'échec. | M |
+| F-IA-04 | **CV complet**, **amélioration de CV**, **lettre de motivation**, **pack candidature** : formulaire guidé ou pré-rempli depuis le profil, aperçu, une révision gratuite, export PDF et Word. | M |
+| F-IA-05 | **Exercice par photo** : prise de vue avec contrôle de netteté, choix du niveau, **mode apprentissage (par défaut)** ou solution complète, affichage étape par étape. | M |
+| F-IA-06 | **Business plan express et complet** : assistant en 6 étapes, dossier par sections, prévisionnel en FCFA, avertissement sur les chiffres, export. | M |
+| F-IA-07 | **Résumé de document** (photo ou PDF). | S |
+| F-IA-08 | **Rédiger mon annonce** (vendeurs) : titre, description et catégorie proposés à partir des photos ; gratuit, 3 par jour. | S |
+| F-IA-09 | **Mes documents** : historique privé, re-téléchargement, suppression. | M |
+| F-IA-10 | **Crédits offerts** (20 à l'inscription, 10 par mois) et **crédits offerts par un tiers** (parent, école) ; achat réservé aux 18 ans et plus. | M |
+| F-IA-11 | **Back-office** : suivi du coût réel par service (part du coût dans le prix), limites d'usage, remboursements en crédits, modération des demandes. | M |
+| F-IA-12 | **Tuteur vocal** (conversation orale facturée à la minute). | P2 |
+
 ## 7. Hors périmètre du MVP (déjà planifié)
 
-Directs et live shopping, cadeaux et abonnements de créateurs, livraison intégrée, groupes, publicité en libre-service, Live AI, Live Savoir (cours, examens), Live Emploi, location courte durée, application iOS complète (si elle n'est pas prête), langues locales, extension hors du Congo.
+Directs et live shopping, cadeaux et abonnements de créateurs, livraison intégrée, groupes, publicité en libre-service, tuteur vocal et Live Plus, Live Savoir (cours, examens), Live Emploi, location courte durée, application iOS complète (si elle n'est pas prête), langues locales, extension hors du Congo.
 
 **Fin du Document 05**

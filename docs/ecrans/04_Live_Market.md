@@ -29,7 +29,7 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 │ ( ▒) Grâce Mode ✓   ★4,8  (Suivre)       │
 │ ( ▒) ÉlectroPlus ✓  ★4,6  (Suivre)       │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 
@@ -218,7 +218,7 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 │ Ensemble  Robe      Pagne                │
 │ 22 000    12 000    9 000                │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 
@@ -252,7 +252,7 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 │    Payer à la remise · Main propre       │
 │ (Refuser)            [ Accepter ]        │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 

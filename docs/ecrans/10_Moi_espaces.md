@@ -36,7 +36,7 @@ L'onglet **Moi** rassemble le compte, les activités, les gains et, surtout, le 
 │ Inviter des amis (parrainage)     ▶      │
 │ Aide et contact                   ▶      │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 

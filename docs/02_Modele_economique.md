@@ -28,6 +28,7 @@ Le revenu principal de Live est un **pourcentage des transactions** qu'il sécur
 | **Vendeur** (particulier ou boutique) | L'offre de produits | Le prix de vente | Une commission sur les ventes, des boosts optionnels, l'abonnement Pro optionnel |
 | **Agence immobilière / bailleur / commissionnaire** | L'offre de biens | Frais de visite, commissions de location ou de vente | L'abonnement Agence, des boosts, une commission sur les paiements séquestrés |
 | **Prestataire de services** | Son savoir-faire | Le prix de la prestation | Une commission sur les réservations payées |
+| **Utilisateur de Live IA** (élève, étudiant, chercheur d'emploi, porteur de projet) | Sa demande de services | CV, lettres, business plans, aide aux exercices | Des **Crédits Live** achetés en Mobile Money |
 | **Créateur de contenu** | L'audience et le divertissement | Cadeaux, abonnements de fans, ventes, partenariats | Une commission sur ses revenus |
 | **Annonceur / marque** | Un budget marketing | Visibilité, ventes | Campagnes publicitaires |
 | **Live** | Plateforme, paiement, confiance, audience | Commissions, abonnements, publicité | Infrastructure, frais de paiement, équipes, conformité |
@@ -51,6 +52,12 @@ Un pourcentage prélevé sur chaque paiement réalisé dans l'application.
 L'acheteur ne paie **aucune commission** : il paie le prix affiché. C'est un argument décisif face au paiement direct en Mobile Money.
 
 > Le tarif doit rester **inférieur au coût réel des arnaques et des impayés** pour le vendeur, sinon il retournera sur Facebook. Une offre de lancement pour les premiers vendeurs est décidée : **0 % pendant 3 mois** (D-10).
+
+### 4.1 bis Crédits Live IA (moteur n°2, dès le MVP)
+
+Live **vend lui-même** des services d'intelligence artificielle (CV, lettres de motivation, business plans, aide aux exercices par photo, tuteur vocal), payés en **Crédits Live** : 1 crédit = 10 FCFA, pack minimum 500 FCFA. Live paie les fournisseurs d'IA ; le coût visé est **inférieur à 30 % du prix**.
+
+C'est le seul revenu qui **ne dépend pas du décollage de la place de marché** : il rapporte dès le premier utilisateur. Projection prudente au 6e mois : **≈ 3 millions de FCFA de chiffre d'affaires par mois**, **≈ 2,2 millions de marge brute**. *Détail : [document 19](19_Live_IA_et_credits.md).*
 
 ### 4.2 Boosts et visibilité (dès le MVP)
 
@@ -84,7 +91,7 @@ L'acheteur ne paie **aucune commission** : il paie le prix affiché. C'est un ar
 - **Live Livraison** : commission sur les courses.
 - **Live Savoir** : commission sur les formations vendues et services aux institutions (publication officielle des résultats d'examens).
 - **Live Emploi** : offres d'emploi sponsorisées, abonnements recruteurs.
-- **Live AI** : crédits pour les fonctions avancées (rédaction d'annonces, traduction, visuels).
+- **Live Plus** : abonnement mensuel incluant des Crédits Live (P2, document 19).
 - **Services financiers en partenariat** (paiement fractionné, épargne, micro-crédit vendeur) avec des établissements agréés uniquement.
 
 ---

@@ -77,6 +77,8 @@ Le badge affiché publiquement reflète le niveau : c'est l'un des **principaux 
 | C-STATS-AVANCEES | Statistiques détaillées | Abonnement Pro | N2 |
 | C-EQUIPE | Ajouter des membres à un espace | Vérification professionnelle (jusqu'à 5 membres gratuits au MVP) ; au-delà, abonnement Pro / Entreprise | N3 |
 | C-ANNONCEUR | Créer des campagnes publicitaires | Vérification professionnelle | N3 |
+| C-IA | Utiliser les services Live IA avec des crédits | Inscription (13 ans et plus) | N1 |
+| C-IA-ACHAT | Acheter des Crédits Live (pour soi ou pour offrir) | Inscription, 18 ans et plus | N1 |
 | C-API | Accès API | Contrat partenaire | N4 |
 
 **Modes d'obtention** : activation libre, vérification, abonnement, seuil de réputation, validation manuelle par l'administration, contrat de partenariat.

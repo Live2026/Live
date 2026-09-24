@@ -39,7 +39,8 @@ Le dossier est organisé en **quatre blocs**. On ne rédige pas un bloc tant que
 | 16 | Live Confiance : vérification, avis, litiges, modération, anti-fraude |
 | 17 | Live Pro et Live Ads : abonnements professionnels et publicité |
 | 18 | Live Livraison |
-| 19 | Verticales futures : Live Savoir (éducation, examens), Live Emploi et opportunités, Live AI |
+| 19 | **Live IA et Crédits Live** : produits propres de la plateforme (CV, lettres, business plans, exercices par photo, tuteur vocal) |
+| 25 | Verticales futures : Live Savoir (éducation, examens), Live Emploi et opportunités |
 
 ### Bloc C — Technique et conformité (à rédiger)
 
@@ -74,7 +75,7 @@ Rien n'est perdu : chaque document de la v1 trouve sa place.
 | 09 Live Direct | 13 — Live Feed et Live Direct (orienté live shopping) |
 | 10 Live Wallet | 06 — Paiements (+ 21, 22) |
 | 11 Rémunération des créateurs | 15 — Live Créateurs |
-| 12 Live AI | 19 — Live AI (outil transversal : rédaction d'annonces, traduction) |
+| 12 Live AI | 19 — Live IA et Crédits Live (produit payant du MVP) |
 | 13 Réseau social | 13 + 14 |
 | 14 Institutions | 03 (organisations) + 17 (Live Pro) |
 | 15 Administration et sécurité | 16 + 22 + 23 |

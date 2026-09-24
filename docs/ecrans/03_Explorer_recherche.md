@@ -8,7 +8,7 @@ L'onglet **Explorer** est la porte d'entrée des trois verticales et de la reche
 
 ```text
 ┌──────────────────────────────────────────┐
-│ [⌕ Rechercher sur Live...         ]      │
+│ [⌕ Rechercher sur Live...         ]   ✉  │
 ├──────────────────────────────────────────┤
 │ ┌──────────┐┌──────────┐┌──────────┐     │
 │ │  MARKET  ││   IMMO   ││ SERVICES │     │
@@ -32,7 +32,7 @@ L'onglet **Explorer** est la porte d'entrée des trois verticales et de la reche
 │ Boutiques recommandées          Tout ▶   │
 │ ( ▒) ( ▒) ( ▒) ( ▒)                      │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 
@@ -92,7 +92,7 @@ L'onglet **Explorer** est la porte d'entrée des trois verticales et de la reche
 │ ──── Services liés ────                  │
 │ ( ▒) Frigoriste Bruno ★4,8  Devis ▶      │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 

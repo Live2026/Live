@@ -117,6 +117,7 @@ Chaque fonctionnalité suit la même structure : `data/` (dépôts, sources), `d
 | `trust` | avis, signalements, réclamations, décisions, modération | Partiellement |
 | `pay` | intentions de paiement, transactions, **grand livre**, soldes, retraits, webhooks reçus | **Non** : accès uniquement par fonctions serveur |
 | `admin` | agents, permissions du back-office, **journal d'audit** | **Non** : accès par fonctions dédiées |
+| `ia` | demandes Live IA, **grand livre des crédits**, soldes de crédits, documents générés, coût réel par demande | Partiellement (documents et solde en lecture ; écritures uniquement par fonctions serveur) |
 
 ### 4.2 Authentification
 
@@ -164,6 +165,12 @@ Chaque fonctionnalité suit la même structure : `data/` (dépôts, sources), `d
 - Diversité imposée : pas plus de 2 publications consécutives d'un même vendeur ; mélange des verticales.
 
 ---
+
+### 4.8 Live IA (document 19)
+
+- Edge Function **`ia-demande`** : vérification des droits et des limites, **réservation** des crédits, modération, appel du fournisseur via l'interface **`IaFournisseur`** (modèle choisi par service, consignes système mises en cache, plafond de jetons), génération PDF/Word, **confirmation** du débit ou **recrédit** en cas d'échec, enregistrement du coût réel.
+- Résultats diffusés **au fil de l'eau** (streaming) vers l'application pour réduire l'attente perçue.
+- Tableau de bord des marges par service dans le back-office ; alerte si le coût dépasse 35 % du prix.
 
 ## 5. Paiement et grand livre (document 06)
 

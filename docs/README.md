@@ -47,6 +47,7 @@ La version 1 contenait de très bonnes idées, mais elle souffrait de cinq probl
 | 10 | [Live Market : produits et boutiques](10_Live_Market.md) | Proposé |
 | 11 | [Live Immo : immobilier et agences](11_Live_Immo.md) | Proposé |
 | 12 | [Live Services : prestataires et réservations](12_Live_Services.md) | Proposé |
+| 19 | [Live IA et Crédits Live (produits propres)](19_Live_IA_et_credits.md) | Proposé |
 | 20 | [Architecture technique (Flutter + Supabase, vidéo)](20_Architecture_technique.md) | Proposé |
 | — | [Maquettes des écrans (80 écrans, application et back-office)](ecrans/00_Principes_et_navigation.md) | Proposé |
 
@@ -61,6 +62,7 @@ Statuts possibles : *Proposé* → *Arrêté* → *Validé* (après les vérific
 | Cœur du produit | Super-app **commerce + social** ; l'éducation devient une verticale |
 | Pays de lancement | **République du Congo (Brazzaville)** : FCFA (XAF), zone CEMAC / BEAC |
 | Mécanismes de gain | **Vente directe**, **créateurs de contenu**, **prestataires de services** |
+| Produits propres de Live | **Live IA** (CV, lettres, business plans, exercices par photo, tuteur vocal), payé en **Crédits Live** achetés en Mobile Money |
 | Paiements | **MTN Mobile Money**, **Airtel Money**, puis **Visa** |
 | Format du dossier | Markdown versionné dans ce dépôt |
 | Affiliation / revendeurs | **Non retenue** pour le moment (peut revenir en phase 3) |

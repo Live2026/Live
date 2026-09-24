@@ -25,6 +25,8 @@ En zone CEMAC, les services de paiement et l'émission de monnaie électronique 
 | Dépôts libres | **Non** au MVP : chaque encaissement correspond à un achat précis |
 | Évolution (phase 3) | Portefeuille complet (dépôts, transferts entre utilisateurs, paiements en magasin) **uniquement** avec un partenaire émetteur agréé, ou après obtention d'un agrément propre |
 
+**Crédits Live (Live IA)** : l'achat d'un pack de crédits est une **vente de services de Live**, encaissée comme toute vente. Les crédits obtenus ne sont ni remboursables en argent, ni transférables, ni utilisables hors de Live IA : ils restent un prépaiement de services et non de la monnaie électronique (à confirmer par le juriste). Ils ont leur propre grand livre (document 19, R-CR-08).
+
 **Conséquence sur le vocabulaire** : dans l'application, on parle de **« Mes gains »** ou de **« Solde vendeur »**, et non de « compte » ni de « dépôt ».
 
 ---

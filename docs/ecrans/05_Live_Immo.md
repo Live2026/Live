@@ -31,7 +31,7 @@ Parcours logement et agences (document 11). Promesse : **« Visite payée = visi
 │                                          │
 │ (Je cherche : publier ma demande)        │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 
@@ -65,7 +65,7 @@ Parcours logement et agences (document 11). Promesse : **« Visite payée = visi
 │ Réseau SNDE · Compteur prépayé           │
 │ ✓ Particulier vérifié ★4,9 · 2 j         │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 
@@ -263,7 +263,7 @@ Reçue dans la conversation après la visite.
 ├──────────────────────────────────────────┤
 │ ( Biens à reconfirmer : 3 )  ▶           │
 ├──────────────────────────────────────────┤
-│ ⌂Accueil ⌕Explorer (+) ✉Messages ☺Moi    │
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
 
