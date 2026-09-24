@@ -142,7 +142,7 @@ L'acheteur ne paie **aucune commission** : il paie le prix affiché. C'est un ar
 2. Un gain est **en attente** tant que la transaction est séquestrée, puis **disponible** une fois celle-ci confirmée.
 3. **Retrait** vers un numéro Mobile Money au nom du titulaire vérifié.
 4. **Seuil minimal** de retrait (hypothèse : 1 000 FCFA) et **plafonds** selon le niveau de vérification (KYC).
-5. **Délai de confirmation** automatique en l'absence de litige (hypothèse : 48 h après la livraison déclarée pour un produit, 24 h après une prestation).
+5. **Délai de confirmation** automatique en l'absence de litige (hypothèse : 48 h après la livraison déclarée pour un produit, 24 h ou 72 h après une prestation selon la famille de service, document 12, R-SRV-06).
 6. Une **réserve temporaire** peut être appliquée aux nouveaux vendeurs ou aux comptes à risque.
 
 ---

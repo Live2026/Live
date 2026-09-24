@@ -64,6 +64,7 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | Réf. | Document | Résumé |
 |------|----------|--------|
 | DI-01 à DI-06 | [11 — Live Immo](11_Live_Immo.md) | Frais de visite et acompte seuls au MVP, coordonnées révélées après engagement, carte floutée, aucun prix de vente via Live avant la P3 |
+| DS-01 à DS-06 | [12 — Live Services](12_Live_Services.md) | Trois schémas de paiement, 10 métiers prioritaires, demande publique de devis, déblocage encadré du matériel, garantie de 24 h ou 72 h, santé, juridique et garde d'enfants exclus |
 | DM-01 à DM-06 | [10 — Live Market](10_Live_Market.md) | Payer maintenant **et** payer à la remise via Mobile Money, livraison par le vendeur au MVP, avis réservés aux ventes payées, commission sur le total livraison comprise |
 
 ## 6. Organisation

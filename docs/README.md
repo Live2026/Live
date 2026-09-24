@@ -46,6 +46,7 @@ La version 1 contenait de très bonnes idées, mais elle souffrait de cinq probl
 | 07 | [Registre des décisions](07_Decisions_a_valider.md) | **Arrêté** (4 points sous réserve externe) |
 | 10 | [Live Market : produits et boutiques](10_Live_Market.md) | Proposé |
 | 11 | [Live Immo : immobilier et agences](11_Live_Immo.md) | Proposé |
+| 12 | [Live Services : prestataires et réservations](12_Live_Services.md) | Proposé |
 
 Statuts possibles : *Proposé* → *Arrêté* → *Validé* (après les vérifications externes du document 07, section 7) → *Révisé*.
 

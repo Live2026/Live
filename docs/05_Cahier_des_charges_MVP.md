@@ -116,7 +116,9 @@ Priorités : **M** = indispensable, **S** = souhaité dans le MVP si possible, *
 | F-SRV-03 | Réservation d'un créneau avec **acompte séquestré** (pourcentage choisi par le prestataire). | M |
 | F-SRV-04 | Confirmation de fin de prestation par le client (code ou bouton), puis versement. | M |
 | F-SRV-05 | Avis après la prestation. | M |
-| F-SRV-06 | Agenda de disponibilités. | S |
+| F-SRV-06 | Agenda de disponibilités, avec réservation directe d'un créneau pour les services à prix fixe. | M |
+| F-SRV-07 | **Demande publique de devis** : le client décrit son besoin, les prestataires vérifiés de la zone répondent par des devis comparables (document 12, section 4.3). | M |
+| F-SRV-08 | Trois schémas de paiement : tout d'avance, acompte + solde, payer à la fin via Mobile Money ; déblocage anticipé encadré de la part « matériel » (document 12, section 4.6). | M |
 
 ### 3.8 Live Pay — paiement (PAY)
 
