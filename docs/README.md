@@ -47,6 +47,7 @@ La version 1 contenait de très bonnes idées, mais elle souffrait de cinq probl
 | 10 | [Live Market : produits et boutiques](10_Live_Market.md) | Proposé |
 | 11 | [Live Immo : immobilier et agences](11_Live_Immo.md) | Proposé |
 | 12 | [Live Services : prestataires et réservations](12_Live_Services.md) | Proposé |
+| 20 | [Architecture technique (Flutter + Supabase, vidéo)](20_Architecture_technique.md) | Proposé |
 
 Statuts possibles : *Proposé* → *Arrêté* → *Validé* (après les vérifications externes du document 07, section 7) → *Révisé*.
 

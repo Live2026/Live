@@ -7,7 +7,7 @@ Ce document décrit **exactement** ce que la première version publique de Live 
 - **Zone** : Brazzaville et Pointe-Noire (République du Congo)
 - **Langue de l'interface** : français (lingala et kituba en P2)
 - **Monnaie** : FCFA (XAF)
-- **Plateformes** : application **Android** (prioritaire), application web responsive (consultation, publication et back-office), **iOS** juste après
+- **Plateformes** : application **Flutter** pour **Android** (prioritaire) puis **iOS** ; **back-office en Flutter Web** ; pages de partage web pour les liens envoyés sur WhatsApp et Facebook (document 20)
 - **Paiements** : MTN Mobile Money, Airtel Money, carte Visa
 
 **Objectif du MVP** : démontrer qu'**un vendeur, une agence ou un prestataire gagne plus, et plus sûrement, sur Live que sur Facebook**, et qu'un acheteur préfère payer via Live.

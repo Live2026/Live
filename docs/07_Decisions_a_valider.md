@@ -53,16 +53,17 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 
 | N° | Sujet | Décision | Statut |
 |----|-------|----------|--------|
-| D-17 | Application mobile | **React Native (Expo) + TypeScript** : un seul code pour Android et iOS, et le même langage que le web et le backend. | ✅ |
-| D-18 | Web et back-office | **Next.js (TypeScript)**. | ✅ |
-| D-19 | Backend et base de données | **PostgreSQL** via **Supabase** au démarrage (authentification, stockage, temps réel) + un **service TypeScript dédié** pour le paiement et le grand livre, qui ne s'exécute jamais côté client. **Monolithe modulaire**, pas de micro-services au MVP. | ✅ |
-| D-20 | Vidéo | Service géré d'encodage et de diffusion (Mux, Cloudflare Stream ou équivalent), choisi sur le **coût par minute diffusée** et la **qualité en 3G**. | ✅ |
+| D-17 | Application mobile | **Flutter** (Android puis iOS), choix du promoteur du 24/09/2026 ; remplace React Native. Voir DT-01. | ✅ |
+| D-18 | Web et back-office | Back-office en **Flutter Web** ; pages de partage publiques générées par une Edge Function ; site web public consultable à décider en P2. Voir DT-01 et DT-03. | ✅ |
+| D-19 | Backend et base de données | **PostgreSQL** via **Supabase** au démarrage (authentification, stockage, temps réel) + logique financière dans des **fonctions PostgreSQL** (schéma `pay` non exposé) et des **Edge Functions** pour les webhooks, jamais côté client (DT-02, DT-04). **Monolithe modulaire**, pas de micro-services au MVP. | ✅ |
+| D-20 | Vidéo | **Cloudflare Stream** au MVP, derrière une interface interne ; compression sur l'appareil, 360p par défaut sur données mobiles ; réévaluation à 1 million de minutes diffusées par mois (DT-05, DT-06). | ✅ |
 | D-21 | Hébergement | Région cloud la plus proche de l'Afrique centrale + CDN ; **mesure de la latence réelle depuis Brazzaville et Pointe-Noire** avant le choix définitif. | ✅ |
 
 ## 5 bis. Décisions des spécifications de module
 
 | Réf. | Document | Résumé |
 |------|----------|--------|
+| DT-01 à DT-11 | [20 — Architecture technique](20_Architecture_technique.md) | Flutter (mobile + back-office web), Supabase, grand livre en PostgreSQL, Cloudflare Stream, recherche PostgreSQL, SMS local, dépôt unique avec CI |
 | DI-01 à DI-06 | [11 — Live Immo](11_Live_Immo.md) | Frais de visite et acompte seuls au MVP, coordonnées révélées après engagement, carte floutée, aucun prix de vente via Live avant la P3 |
 | DS-01 à DS-06 | [12 — Live Services](12_Live_Services.md) | Trois schémas de paiement, 10 métiers prioritaires, demande publique de devis, déblocage encadré du matériel, garantie de 24 h ou 72 h, santé, juridique et garde d'enfants exclus |
 | DM-01 à DM-06 | [10 — Live Market](10_Live_Market.md) | Payer maintenant **et** payer à la remise via Mobile Money, livraison par le vendeur au MVP, avis réservés aux ventes payées, commission sur le total livraison comprise |
