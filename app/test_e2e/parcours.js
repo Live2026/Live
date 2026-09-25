@@ -94,7 +94,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     // 1. Acheter (depuis la pastille du fil puis la fiche)
     if (LARGEUR < 600) await bouton('Acheter ›'); await ecran('fil_annonce');
     await onglet('Explorer'); await ecran('explorer');
-    await bouton('iPhone 11 64 Go'); await ecran('fiche_produit');
+    await bouton('Galaxy A14 128 Go'); await ecran('fiche_produit');
     await bouton('Acheter', { exact: true }); await ecran('commande');
     await bouton('Continuer'); await ecran('paiement');
     await pin(); await ecran('attente_momo');
@@ -182,12 +182,19 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['alertes', 'alertes'],
       ['notifications', 'notifications'],
       ['market', 'market_accueil'],
+      ['market', 'market_bas_de_page', async () => { await defiler(14); }],
+      ['market/liste?categorie=T%C3%A9l%C3%A9phones', 'market_liste'],
+      ['commandes', 'mes_commandes'],
+      ['produit/p1', 'produit_a_la_remise'],
+      ['commande/p1', 'commande_a_la_remise'],
+      ['paiements', 'guide_paiements'],
       ['produit/p9', 'produit_alimentation'],
       ['produit/p1', 'produit_offre', async () => { await bouton('Négocier'); }],
       ['boutique/grace', 'boutique'],
       ['vente/LV-00466/qr', 'qr_paiement_vendeur'],
       ['immo', 'immo_filtres', async () => { await bouton('Filtres'); }],
       ['bien/b9', 'bien_a_vendre'],
+      ['bien/b1', 'bien_reglement', async () => { await defiler(7); }],
       ['bien/b1', 'bien_signaler', async () => { await defiler(12); await bouton('Déjà loué ou annonce fausse ?'); }],
       ['boutique/palmiers', 'agence_page'],
       ['agence', 'agence_tableau'],
@@ -205,6 +212,12 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['messages', 'messages'],
       ['conversation', 'conversation'],
       ['conversation', 'conversation_lieu', async () => { await bouton('Joindre'); }],
+      ['messages/demandes', 'messages_demandes'],
+      ['messages/archives', 'messages_archives'],
+      ['messages/parametres', 'messages_reglages'],
+      ['abonnes/moi', 'abonnes'],
+      ['suivis', 'suivis_activite'],
+      ['enregistres', 'enregistres'],
       ['avis/commande/LV-00482', 'avis'],
       ['probleme/commande/LV-00482', 'probleme'],
       ['reclamation/RC-00001', 'reclamation'],
@@ -235,6 +248,21 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['admin/utilisateurs/u2', 'admin_fiche_utilisateur'],
       ['admin/configuration', 'admin_configuration'],
       ['scenarios', 'scenarios_test'],
+      ['explorer', 'explorer_bientot', async () => { await defiler(2); }],
+      ['apprendre', 'savoir_accueil'],
+      ['contenu/n1', 'savoir_fiche'],
+      ['panier', 'savoir_panier', async () => { await p.goto(BASE + '#/contenu/n5'); await p.waitForTimeout(1500); await sem(); await bouton('Au panier'); await bouton('Voir le panier'); }],
+      ['mes-achats', 'savoir_mes_achats'],
+      ['lecteur/n1', 'savoir_lecteur'],
+      ['apprendre/vendre', 'savoir_vendre'],
+      ['apprendre/boutique', 'savoir_boutique'],
+      ['opportunites', 'emploi_accueil'],
+      ['opportunite/o2', 'emploi_fiche'],
+      ['opportunite/o1/postuler', 'emploi_postuler'],
+      ['mes-candidatures', 'emploi_candidatures'],
+      ['publier/opportunite', 'emploi_publier'],
+      ['groupe/g1', 'groupe'],
+      ['groupe/g2', 'canal'],
     ];
     for (const [route, nom, action] of TOUR) {
       etape = 'écran ' + nom;

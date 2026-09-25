@@ -23,6 +23,8 @@ Tout écran se construit avec la bibliothèque `app/lib/shared/` (importer `widg
 | `elements.dart` | `BarreAction`, `LigneMontant`, `LigneMenu`, `Bloc`, `BoutonVerre`, `BoutonMessages`, `BoutonEcouter`, `BoutonSimulation` |
 | `confiance.dart` | `BandeauProtection`, `CarteQr`, `BadgeVerifie`, `simulerScan` |
 | `feuilles.dart` | panneaux du bas : `signaler`, `partager`, `optionsPublication`, `ouvrirFiltresImmo`, `pouvoirRequis` |
+| `reglement.dart` | `BlocReglement`, `PastilleReglement` (Payé dans Live / À la remise / En direct), `EtapesAssistant`, `BoutonsAssistant` |
+| `cartes_savoirs.dart`, `panier.dart`, `apercu.dart` | `CarteContenu`, `CarteOpportunite`, `BoutonPanier`, `BandeauApercu` (modules hors MVP) |
 | `saisie.dart`, `frise.dart`, `medias.dart`, `animations.dart` | choix, clavier de code, frise, vignettes, animations |
 
 ## Règles de design
@@ -31,6 +33,8 @@ Tout écran se construit avec la bibliothèque `app/lib/shared/` (importer `widg
 - **Arrondi de 8 px** pour les boutons et les champs de saisie ; palette et contrastes dans `docs/ecrans/00`, section 9.
 - **Pleine largeur** : pas de cadre de téléphone sur ordinateur ; grilles adaptatives et deux colonnes sur grand écran.
 - **Animations** douces (`courbeDouce`) et coupées quand l'utilisateur demande de réduire les animations.
+- **Où se paie chaque somme** : toute somme affichée porte son étiquette de règlement (docs/06, §4.4).
+- **Périmètre** : la navigation et les parcours suivent les cahiers des charges ; un module hors MVP n'apparaît qu'en aperçu étiqueté (`BandeauApercu`).
 - **Super-pouvoirs** : tout le monde est utilisateur ; une fonction réservée affiche comment la débloquer (`pouvoirRequis`), jamais une erreur.
 
 ## Vérifier avant de pousser

@@ -6,32 +6,67 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 
 ## E-MKT-01 — Accueil Market
 
+Disposition revue le 25/09/2026 (inspirée des places de marché modernes, aux couleurs de Live). La logique ne change pas : pas de panier multi-vendeurs, une commande par vendeur avec son mode de remise.
+
 ```text
 ┌──────────────────────────────────────────┐
-│ ◀  Market          [⌕ Rechercher   ]     │
+│ Market                    ⌕   ⊕   ✉1     │
+│ Achetez et vendez près de chez vous      │
 ├──────────────────────────────────────────┤
-│ [Téléphones][Mode][Beauté][Maison] ▶     │
-│                                          │
-│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   │
-│ ▒  À la une : soldes de rentrée     ▒    │
-│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   │
-│                                          │
-│ Nouveautés près de vous         Tout ▶   │
-│ ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒             │
-│ Robe wax  Galaxy A14 Chaise              │
-│ 15 000    75 000    12 000               │
-│                                          │
-│ Bonnes affaires                 Tout ▶   │
-│ ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒             │
-│ -30 %     -20 %     -15 %                │
-│                                          │
-│ Boutiques recommandées          Tout ▶   │
-│ ( ▒) Grâce Mode ✓   ★4,8  (Suivre)       │
-│ ( ▒) ÉlectroPlus ✓  ★4,6  (Suivre)       │
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   │
+│ ▓ 0 % de commission          🏷       ▓   │  carrousel automatique
+│ ▓ Vendez 3 mois sans rien payer      ▓   │  (arrêté si « réduire
+│ ▓ [Découvrir]                        ▓   │   les animations »)
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   │
+│                 ━ ● ●                    │
+│ Catégories populaires       Voir tout ▶  │
+│ [📱]  [👗]  [🍳]  [❄]  [🍲]  ▶           │  → liste de la catégorie
+│ Recommandé pour vous        Voir tout ▶  │
+│ ▒▒▒▒▒▒  ▒▒▒▒▒▒  ▒▒▒▒▒▒                   │
+│ Robe…   Saka…   iPhone…                  │
+│ 15 000 ★4,8                              │
+│ Vendeurs à la une                        │
+│ ┌────┐ ┌────┐ ┌────┐                     │
+│ │ GM✓│ │ É ✓│ │ MN✓│                     │
+│ │★4,8│ │★4,6│ │★4,9│                     │
+│ └────┘ └────┘ └────┘                     │
+│ Nouveautés près de vous     Voir tout ▶  │
+│ (grille d'annonces)                      │
+│ ┌ Vos commandes ────────── Voir tout ┐   │  si achats en cours
+│ ┌ Vendre sur Live ───────────────────┐   │
+│ ┌ Paiements sécurisés ───────────────┐   │  Solde Live · MoMo/Airtel
+│ │ Visa · À la remise · protection    │   │  · Visa · À la remise
+│ ┌ Besoin d'aide ? ───────────────────┐   │
 ├──────────────────────────────────────────┤
 │ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
 └──────────────────────────────────────────┘
 ```
+
+- La recherche est une **icône** en haut (pas de barre dès l'ouverture) ; elle ouvre E-EXP-02.
+- Toutes les cartes d'une rangée ont la même taille (règle 9.5 du document 00).
+
+---
+
+## E-MKT-10 — Liste d'une catégorie
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀  Téléphones                       ⌕    │
+│    3 résultats à Brazzaville             │
+├──────────────────────────────────────────┤
+│ Pertinence  Nouveautés  Prix ↑  Prix ↓   │  onglet actif souligné orange
+│ ┌──────┐ Galaxy A14 128 Go          ♡    │
+│ │ ▒▒▒▒ │ Neuf · Bacongo                  │  lignes de hauteur fixe
+│ │ ▒▒▒▒ │ Par ÉlectroPlus                 │
+│ └──────┘ ★4,6              75 000 FCFA   │
+│ ┌──────┐ iPhone 11 64 Go            ♡    │
+│ │ ▒▒▒▒ │ Très bon état · payé à la remise│
+└──────────────────────────────────────────┘
+```
+
+## E-MKT-11 — Mes commandes
+
+Liste des achats (numéro, produit, état : « Payée · argent bloqué par Live », « Réservée · à payer à la remise », « Terminée », montant). Toucher une commande ouvre son suivi (E-MKT-05).
 
 ---
 
@@ -84,6 +119,10 @@ Parcours d'achat et de vente de produits (document 10). Deux façons de payer : 
 | Acheter | E-MKT-04 |
 | Mon annonce | Si l'utilisateur est le vendeur : les boutons deviennent `(Modifier) (Booster) [Statistiques]` |
 | Plus bas dans l'écran | « Autres produits de la boutique », « Produits similaires » (F-MKT-FICHE-05) |
+
+---
+
+**Complément du 25/09/2026** : sous le titre, le vendeur (avatar, badge, note, ventes) ; badge « Meilleure vente » pour les annonces très vues ; quatre tuiles de même taille (état, remise, paiement, protection) ; bloc « Comment ça se paie » (étiquette « Payé dans Live » ou « À la remise », document 06 §4.4). Pour un objet à voir avant d'acheter, le bouton principal devient **« Voir sur place »** et mène à la réservation sans paiement (mode B).
 
 ---
 

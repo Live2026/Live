@@ -91,6 +91,18 @@ Critères de comparaison :
 
 ---
 
+### 4.4 Où se paie chaque somme (étiquettes visibles)
+
+Chaque somme affichée dans Live porte une étiquette qui dit **où** elle se paie. L'utilisateur n'a jamais à deviner, et un message qui demande de payer ailleurs une somme marquée « Payé dans Live » est une arnaque (F-CHAT-05).
+
+| Étiquette | Sommes concernées au MVP | Règle |
+|-----------|--------------------------|-------|
+| **Payé dans Live** | Achat payé d'avance (mode A), frais de visite, acompte de réservation, service à prix fixe, acompte de devis, crédits Live IA, boosts, Live Pro | Argent séquestré puis versé à la confirmation (QR, réception, fin du service) ; remboursé sinon. |
+| **À la remise** | Objets à voir avant d'acheter (téléphones, motos, électroménager d'occasion) | Mode B du document 10 : commande réservée sans paiement, rendez-vous dans un lieu public, paiement MoMo ou Airtel **via Live** au moment de la remise. Pas d'avance, pas d'espèces. |
+| **En direct** | Loyers, avance, caution, commission d'agence, prix d'un bien immobilier | Réglés au propriétaire, à l'agence ou chez le notaire contre reçu ; Live affiche les montants à l'avance. Encaissement de l'entrée complète par Live : P2 (document 11, section 8). |
+
+Écran de référence : « Ce qui se paie dans Live » (Moi, et lien « Comprendre les paiements » sous chaque bloc de règlement).
+
 ## 5. Cycle de vie d'une transaction séquestrée
 
 ```

@@ -99,4 +99,13 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | 6 | D-04 et D-17 laissaient deux options ouvertes. | Une seule option retenue. |
 | 7 | D-11 renvoyait à une recherche à faire. | Liste courte et règle de choix (doc 06 §3). |
 
+## 9. Revue du 25/09/2026 : ajouts au prototype
+
+| # | Point | Traitement |
+|---|-------|------------|
+| 1 | Distinguer ce qui se paie dans Live de ce qui se paie ailleurs (loyers, caution, prix d'un bien). | Étiquettes « Payé dans Live », « À la remise », « En direct » (doc 06 §4.4). Aucune nouvelle règle : mode B du doc 10, entrée complète en P2 (doc 11). |
+| 2 | Objets à voir avant d'acheter (téléphone d'occasion…). | Mode B « payer à la remise » : réservation sans paiement, paiement MoMo via Live au rendez-vous. **Pas d'option espèces** (doc 10 §3.6 : Live numérise les espèces). |
+| 3 | Live Savoir, Live Emploi (P3), groupes et canaux (P2) montrés au prototype. | Écrans d'**aperçu**, étiquetés « phase 2 » ou « phase 3 », accessibles depuis Explorer ; hors du périmètre du MVP (doc 05 §7). |
+| 4 | Commission sur les contenus numériques (aperçu Live Savoir). | **Hypothèse à valider** : 15 % (le créateur garde 85 %). À trancher avec D-09 avant la phase 3. |
+
 **Fin du Document 07**
