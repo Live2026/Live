@@ -22,6 +22,58 @@ class EcranIa extends ConsumerWidget {
           vertical: 8,
         ),
         children: [
+          Apparition(
+            child: Material(
+              borderRadius: BorderRadius.circular(16),
+              clipBehavior: Clip.antiAlias,
+              child: Ink(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [LiveColors.orangeVif, Color(0xFFDB2777)],
+                  ),
+                ),
+                child: InkWell(
+                  onTap: () => context.push('/ia/assistant'),
+                  child: const Padding(
+                    padding: EdgeInsets.all(18),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.record_voice_over_rounded,
+                          color: Colors.white,
+                          size: 34,
+                        ),
+                        SizedBox(width: 14),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Assistant Live',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                              Text(
+                                'Il cherche, réserve et paie pour vous. À '
+                                'l’écrit ou à la voix : français, lingala, '
+                                'kituba. Gratuit.',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(Icons.chevron_right_rounded, color: Colors.white),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 14),
           // Carte « Mes crédits » : dégradé bleu, façon carte de portefeuille.
           Apparition(
             child: Container(

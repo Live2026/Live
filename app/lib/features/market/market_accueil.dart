@@ -13,10 +13,10 @@ class EcranMarket extends ConsumerWidget {
     final tendances = [...produits]..sort((a, b) => b.vues.compareTo(a.vues));
     final nouveautes = produits.reversed.toList();
     return Scaffold(
-      appBar: AppBar(
+      appBar: EnTeteRecherche(
         titleSpacing: marge,
         toolbarHeight: 64,
-        title: const Column(
+        titre: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Market'),
@@ -30,12 +30,9 @@ class EcranMarket extends ConsumerWidget {
             ),
           ],
         ),
+        indice: 'Rechercher un produit, une boutique…',
+        onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: [
-          IconButton(
-            tooltip: 'Rechercher',
-            onPressed: () => context.push('/recherche'),
-            icon: const Icon(Icons.search_rounded),
-          ),
           const BoutonCommandes(),
           const BoutonNotifications(),
           const BoutonMessages(),

@@ -108,6 +108,16 @@ extension _EtapesVente on _EcranVendreState {
             suffixText: 'FCFA',
           ),
         ),
+        if (prix > 0) ...[
+          const SizedBox(height: 12),
+          JustePrix(
+            prix: prix,
+            bas: 28000,
+            haut: 34000,
+            base:
+                '38 ventes de ce modèle ces 3 derniers mois, dans votre ville',
+          ),
+        ],
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           value: _negociable,

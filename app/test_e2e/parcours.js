@@ -89,7 +89,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await saisir('Code à 6 chiffres', '123456'); await p.waitForTimeout(800);
     await saisir('Prénom', 'Grâce'); await ecran('inscription_profil');
     await bouton('Continuer'); await ecran('code_secret');
-    await pin(); await p.waitForTimeout(1200); await ecran('interets');
+    await pin(); await p.waitForTimeout(700); await ecran('code_secret_confirmer'); await pin(); await p.waitForTimeout(1200); await ecran('interets');
     await bouton('Continuer'); await p.waitForTimeout(1200); await ecran('fil');
 
     // 1. Acheter (depuis la pastille du fil puis la fiche)
@@ -271,6 +271,12 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['admin/utilisateurs', 'admin_utilisateurs'],
       ['admin/utilisateurs/u2', 'admin_fiche_utilisateur'],
       ['admin/configuration', 'admin_configuration'],
+      ['admin/validations', 'admin_validations'],
+      ['admin/journal', 'admin_journal'],
+      ['admin/equipe', 'admin_equipe'],
+      ['admin/equipe', 'admin_inviter', async () => { await bouton('Inviter un administrateur'); }],
+      ['admin/connexion', 'admin_connexion'],
+      ['admin/connexion', 'admin_2fa', async () => { await bouton('Continuer'); }],
       ['scenarios', 'scenarios_test'],
       ['explorer', 'explorer_directs', async () => { await defiler(3); }],
       ['explorer', 'explorer_savoir', async () => { await defiler(12); }],
@@ -306,6 +312,21 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['fonds-createurs', 'fonds_createurs'],
       ['finance', 'finance'],
       ['partenaires', 'partenaires'],
+      ['vendre', 'vendre_photo_ia', async () => { await bouton('Une photo, et c’est prêt'); await p.waitForTimeout(2800); }],
+      ['ia/assistant', 'ia_assistant'],
+      ['ia/assistant', 'ia_assistant_reponse', async () => { await bouton('Un 2 pièces à Moungali à moins de 100 000'); await p.waitForTimeout(1600); }],
+      ['produit/p1', 'juste_prix', async () => { await defiler(4); }],
+      ['mes-ventes', 'coach_vendeur', async () => { await defiler(10); }],
+      ['tontines', 'tontines'],
+      ['tontine/t1', 'tontine'],
+      ['achats-groupes', 'achats_groupes'],
+      ['diaspora', 'diaspora'],
+      ['transfert', 'transfert'],
+      ['factures', 'factures'],
+      ['adresse', 'adresse_live'],
+      ['points-relais', 'points_relais'],
+      ['carte', 'carte_satellite', async () => { await bouton('Vue satellite'); }],
+      ['rue?lieu=Moungali%2C%20Brazzaville', 'vue_rue'],
       // Ordinateur : barres latérales repliées puis dépliées.
       ...(LARGEUR > 700 ? [
         ['admin', 'admin_replie', async () => { await bouton('Replier le menu'); }],

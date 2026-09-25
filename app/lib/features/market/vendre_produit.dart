@@ -158,7 +158,14 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
   }
 
   Widget _contenu() => switch (_etape) {
-    0 => _etapeCategorie(),
+    0 => Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _BanniereIa(onTap: _photoVersAnnonce),
+        const SizedBox(height: 14),
+        _etapeCategorie(),
+      ],
+    ),
     1 => _etapePhotos(),
     2 => _etapeInfos(),
     3 => _etapePrix(),

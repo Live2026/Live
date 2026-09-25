@@ -10,6 +10,9 @@ import '../../shared/widgets.dart';
 part 'admin_tableau.dart';
 part 'admin_dossiers.dart';
 part 'admin_finance.dart';
+part 'admin_connexion.dart';
+part 'admin_equipe.dart';
+part 'admin_gouvernance.dart';
 
 /// Back-office de Live (E-ADM-01 à 08) : outil interne des agents, pensé pour
 /// l'ordinateur. Accès par authentification forte (2FA) et permissions par fonction.
@@ -22,6 +25,9 @@ const _sections = [
   (Icons.account_balance_outlined, 'Finance', '/admin/finance'),
   (Icons.people_outline, 'Utilisateurs', '/admin/utilisateurs'),
   (Icons.tune_rounded, 'Configuration', '/admin/configuration'),
+  (Icons.fact_check_outlined, 'À valider (4 yeux)', '/admin/validations'),
+  (Icons.history_rounded, 'Journal d’audit', '/admin/journal'),
+  (Icons.admin_panel_settings_outlined, 'Équipe Live', '/admin/equipe'),
 ];
 
 /// Coque du back-office : menu latéral (ordinateur) ou tiroir (téléphone).
@@ -58,7 +64,7 @@ class _CoqueAdmin extends StatelessWidget {
                 if (grand) ...[
                   const SizedBox(width: 6),
                   const Text(
-                    'Aïcha · Superviseure',
+                    'Direction générale · Super administrateur',
                     style: TextStyle(fontSize: 13),
                   ),
                 ],
@@ -202,6 +208,12 @@ class _MenuAdmin extends StatelessWidget {
                   false,
                   () => context.go('/moi'),
                 ),
+                entree(
+                  Icons.logout_rounded,
+                  'Se déconnecter',
+                  false,
+                  () => context.go('/admin/connexion'),
+                ),
               ],
             ),
           ),
@@ -235,7 +247,10 @@ class EcranAdmin extends StatelessWidget {
       3 => ('Litiges', const _FileLitiges()),
       4 => ('Finance et réconciliation', const _Finance()),
       5 => ('Utilisateurs', const _Utilisateurs()),
-      _ => ('Configuration', const _Configuration()),
+      6 => ('Configuration', const _Configuration()),
+      7 => ('Double validation', const _Validations()),
+      8 => ('Journal d’audit', const _JournalAudit()),
+      _ => ('Équipe Live', const _EquipeLive()),
     };
     return _CoqueAdmin(section: section, titre: titre, corps: corps);
   }

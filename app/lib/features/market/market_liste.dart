@@ -39,14 +39,14 @@ class _EcranListeMarketState extends State<EcranListeMarket> {
     }
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(
+      appBar: EnTeteRecherche(
         toolbarHeight: 64,
-        title: Column(
+        titre: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(widget.categorie ?? 'Toutes les annonces'),
-            Text(
-              '${liste.length} résultat${liste.length > 1 ? 's' : ''} à Brazzaville',
+            TexteVille(
+              '${liste.length} résultat${liste.length > 1 ? 's' : ''} à {ville}',
               style: const TextStyle(
                 fontSize: 13,
                 color: LiveColors.gris,
@@ -55,13 +55,8 @@ class _EcranListeMarketState extends State<EcranListeMarket> {
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            tooltip: 'Rechercher',
-            onPressed: () => context.push('/recherche'),
-            icon: const Icon(Icons.search_rounded),
-          ),
-        ],
+        indice: 'Rechercher dans le Market…',
+        onSubmitted: (q) => context.push('/recherche', extra: q),
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 24),

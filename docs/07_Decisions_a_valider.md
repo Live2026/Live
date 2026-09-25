@@ -45,7 +45,7 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 
 | N° | Sujet | Décision | Statut |
 |----|-------|----------|--------|
-| D-11 | Partenaire de paiement | Consulter **CinetPay** et **pawaPay** en parallèle. Choix par défaut : **CinetPay** s'il confirme MTN + Airtel + Visa + décaissements au Congo ; sinon **pawaPay** (MTN, Airtel) + un prestataire carte. Passage aux API directes MTN et Airtel au-delà d'environ 100 transactions par jour. *Voir le document 06, section 3.* | ⚖️ |
+| D-11 | Partenaire de paiement | **Révisé le 25/09/2026 : API directes MTN et Airtel dès le lancement (voir §11).** Proposition initiale : consulter **CinetPay** et **pawaPay** en parallèle. Choix par défaut : **CinetPay** s'il confirme MTN + Airtel + Visa + décaissements au Congo ; sinon **pawaPay** (MTN, Airtel) + un prestataire carte. Passage aux API directes MTN et Airtel au-delà d'environ 100 transactions par jour. *Voir le document 06, section 3.* | ⚖️ |
 | D-12 | Visa au MVP | Oui, si l'agrégateur la couvre ; sinon en P2, **sans retarder le lancement**. | ✅ |
 | D-15 | Portefeuille avec dépôts libres | **Non au MVP** ; uniquement un « solde vendeur ». Portefeuille complet en P3, avec un partenaire agréé. | ✅ |
 | D-16 | Structure juridique | Création d'une **SAS de droit congolais** (forme OHADA la plus souple pour accueillir des investisseurs) via le guichet unique de création d'entreprises (ACPCE), avec RCCM et NIU ; compte professionnel et **compte séquestre** dans une banque partenaire ; mandat à un **cabinet d'avocats** en réglementation bancaire CEMAC et en protection des données **avant tout encaissement réel**. | ⚖️ |
@@ -118,5 +118,24 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | Ajouts | API partenaires et extension CEMAC (pays et ville), les deux modules de la phase 3 qui n'avaient pas d'écran. |
 | Ce qui ne change pas | Les phases du document 04 restent l'**ordre de construction et de lancement** : on construit et on lance d'abord le socle (Market, Immo, Services, Live Pay, Live IA), le reste s'active ensuite, sans refaire la navigation. |
 | Appareils | Une seule application adaptative : le même écran se déploie sur mobile et sur ordinateur. Seul le back-office est conçu pour l'ordinateur. |
+
+## 11. Fournisseurs retenus par le promoteur (25/09/2026)
+
+| Point | Décision | Conséquence |
+|-------|----------|-------------|
+| Backend | **Supabase** (confirmé) | Auth par téléphone, Postgres avec RLS, Realtime (chat, statuts, directs), Storage (photos, pièces KYC en privé), Edge Functions (webhooks) |
+| SMS et vérification | **Twilio** (remplace l'agrégateur SMS local prévu au document 20, §4) | Twilio Verify couvre les trois canaux de l'écran du code : **SMS, appel vocal, WhatsApp**. À mesurer : délivrabilité et coût vers MTN et Airtel Congo avant le lancement |
+| Vidéo | **Mux** (retenu parmi les options du document 20) | Téléversement, encodage adaptatif, lecture du fil, **directs** (Mux Live) et statistiques de qualité |
+| Paiement Mobile Money | **API directes MTN MoMo et Airtel Money** (décision du promoteur, 25/09/2026 ; remplace D-11) | Branchées par des Edge Functions Supabase : initiation, webhooks de confirmation, décaissements, réconciliation quotidienne. Reste à choisir un prestataire pour la **carte Visa** |
+
+## 12. Décision du 25/09/2026 : les piliers « référence » (document 21)
+
+| Point | Décision | Statut |
+|-------|----------|--------|
+| Nouveaux piliers | Live IA partout, tontines et achats groupés, diaspora, quotidien (factures, crédit, Adresse Live, points relais), cartes Google Maps | ✅ |
+| Monnaie et transferts | **Pas de monnaie émise par Live.** Solde Live et Live Transfert opérés par un **établissement agréé** (COBAC ; agrément de transfert dans les pays d'envoi) tant que Live n'a pas son agrément. « Payer pour un proche » (achat) ouvre en premier | ⚖️ D-16 |
+| Frais (hypothèses) | Tontine 1 % de la cagnotte versée ; payer pour un proche 1,5 % ; Live Transfert 2 % ; factures sans frais pour l'utilisateur (commission fournisseur à négocier) | ⚖️ |
+| Cartes | Google Maps Platform (Maps SDK, Street View, Directions, Places, Geocoding) ; positions en direct par Supabase Realtime | ✅ |
+| Voix locales | Lingala et kituba : collecte de voix consentie avant le lancement ; repli sur le français | ⚖️ |
 
 **Fin du Document 07**

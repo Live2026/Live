@@ -52,14 +52,11 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
         .where((o) => _type == null || o.type == _type)
         .toList();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Opportunités'),
+      appBar: EnTeteRecherche(
+        titre: const Text('Opportunités'),
+        indice: 'Rechercher une bourse, un stage…',
+        onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: [
-          IconButton(
-            tooltip: 'Rechercher',
-            onPressed: () => context.push('/recherche'),
-            icon: const Icon(Icons.search_rounded),
-          ),
           IconButton(
             tooltip: 'Mes candidatures',
             onPressed: () => context.push('/mes-candidatures'),

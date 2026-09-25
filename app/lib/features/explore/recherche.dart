@@ -141,7 +141,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
               ),
           ],
         ),
-        const EnTeteSection('Tendances à Brazzaville'),
+        const EnTeteSection('Tendances près de chez vous'),
         for (final (i, t) in _tendances.indexed)
           ListTile(
             contentPadding: EdgeInsets.zero,

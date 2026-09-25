@@ -32,7 +32,11 @@ class EcranLivraison extends StatelessWidget {
               tween: Tween(begin: 0, end: 0.65),
               duration: Duration(seconds: reduit ? 0 : 6),
               curve: Curves.easeInOut,
-              builder: (_, t, _) => PlanVille(
+              builder: (_, t, _) => CarteInteractive(
+                margeBas: 380,
+                lieuVueRue: 'Moungali, Brazzaville',
+                maPosition: _client,
+                trajet: const [_boutique, Offset(0.52, 0.5), _client],
                 reperes: [
                   Repere(
                     position: _boutique,

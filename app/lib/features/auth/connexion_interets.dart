@@ -12,47 +12,69 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
   var _etape = 0; // 0 numéro, 1 code SMS, 2 code secret
   final _tel = TextEditingController(text: '06 123 45 67');
 
+  Future<void> _oublie() async {
+    if (await confirmer(
+      context,
+      titre: 'Code secret oublié',
+      texte:
+          'Nous envoyons un code par SMS à votre numéro. Vous pourrez '
+          'ensuite choisir un nouveau code secret.',
+      action: 'Recevoir le code',
+    )) {
+      if (mounted) informer(context, 'Code envoyé par SMS.');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final (icone, couleurs, titre, texte) = switch (_etape) {
+      0 => (
+        Icons.waving_hand_rounded,
+        const [LiveColors.ambre, LiveColors.orangeVif],
+        'Bon retour sur Live',
+        'Entrez le numéro de votre compte : nous vous envoyons un code.',
+      ),
+      1 => (
+        Icons.sms_rounded,
+        const [Color(0xFF38BDF8), Color(0xFF0369A1)],
+        'Code reçu par SMS',
+        'Envoyé au +242 ${_tel.text}. Prototype : 6 chiffres au choix.',
+      ),
+      _ => (
+        Icons.lock_rounded,
+        const [Color(0xFF34D399), Color(0xFF15803D)],
+        'Votre code secret',
+        'Pour protéger votre compte sur cet appareil.',
+      ),
+    };
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
-          Text(switch (_etape) {
-            0 => 'Bon retour sur Live',
-            1 => 'Code reçu par SMS',
-            _ => 'Votre code secret',
-          }, style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
-          const SizedBox(height: 6),
-          Text(switch (_etape) {
-            0 => 'Entrez le numéro de votre compte.',
-            1 => 'Envoyé au ${_tel.text}. Prototype : 6 chiffres au choix.',
-            _ => 'Pour protéger votre compte sur ce nouvel appareil.',
-          }, style: const TextStyle(color: LiveColors.gris)),
-          const SizedBox(height: 24),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: EnTeteDemarrage(
+              key: ValueKey(_etape),
+              icone: icone,
+              couleurs: couleurs,
+              titre: titre,
+              texte: texte,
+            ),
+          ),
           if (_etape == 0)
             TextField(
               controller: _tel,
               keyboardType: TextInputType.phone,
+              style: const TextStyle(fontSize: 17, letterSpacing: 1),
               decoration: const InputDecoration(
                 prefixText: '+242 ',
                 labelText: 'Numéro de téléphone',
               ),
             )
           else if (_etape == 1)
-            TextField(
-              autofocus: true,
-              maxLength: 6,
-              keyboardType: TextInputType.number,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 26, letterSpacing: 10),
-              decoration: const InputDecoration(counterText: ''),
-              onChanged: (v) {
-                if (v.length == 6) setState(() => _etape = 2);
-              },
-            )
-          else
+            ChampCode(onComplet: (_) => setState(() => _etape = 2))
+          else ...[
             ClavierPin(
               onComplet: (_) {
                 ref
@@ -65,24 +87,10 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
                 context.go('/accueil');
               },
             ),
-          if (_etape == 2) ...[
             const SizedBox(height: 8),
             Center(
               child: TextButton(
-                onPressed: () async {
-                  if (await confirmer(
-                    context,
-                    titre: 'Code secret oublié',
-                    texte:
-                        'Nous envoyons un code par SMS à votre numéro. Vous '
-                        'pourrez ensuite choisir un nouveau code secret.',
-                    action: 'Recevoir le code',
-                  )) {
-                    if (context.mounted) {
-                      informer(context, 'Code envoyé par SMS.');
-                    }
-                  }
-                },
+                onPressed: _oublie,
                 child: const Text('Code secret oublié ?'),
               ),
             ),
@@ -112,19 +120,20 @@ class EcranInterets extends ConsumerStatefulWidget {
 class _EcranInteretsState extends ConsumerState<EcranInterets> {
   final _choix = <String>{'Téléphones', 'Mode', 'Logement'};
 
+  /// Chaque centre d'intérêt a sa couleur.
   static const _options = [
-    (Icons.smartphone_rounded, 'Téléphones'),
-    (Icons.checkroom_rounded, 'Mode'),
-    (Icons.home_work_rounded, 'Logement'),
-    (Icons.handyman_rounded, 'Artisans'),
-    (Icons.restaurant_rounded, 'Cuisine'),
-    (Icons.spa_rounded, 'Beauté'),
-    (Icons.school_rounded, 'Études'),
-    (Icons.work_rounded, 'Emploi'),
-    (Icons.directions_car_rounded, 'Auto-moto'),
-    (Icons.music_note_rounded, 'Musique'),
-    (Icons.sports_soccer_rounded, 'Football'),
-    (Icons.child_friendly_rounded, 'Enfants'),
+    (Icons.smartphone_rounded, 'Téléphones', Color(0xFF0369A1)),
+    (Icons.checkroom_rounded, 'Mode', Color(0xFFDB2777)),
+    (Icons.home_work_rounded, 'Logement', Color(0xFF15803D)),
+    (Icons.handyman_rounded, 'Artisans', Color(0xFFC2410C)),
+    (Icons.restaurant_rounded, 'Cuisine', Color(0xFFB45309)),
+    (Icons.spa_rounded, 'Beauté', Color(0xFFBE185D)),
+    (Icons.school_rounded, 'Études', Color(0xFF6D28D9)),
+    (Icons.work_rounded, 'Emploi', Color(0xFF0F766E)),
+    (Icons.directions_car_rounded, 'Auto-moto', Color(0xFF334155)),
+    (Icons.music_note_rounded, 'Musique', Color(0xFF7C3AED)),
+    (Icons.sports_soccer_rounded, 'Football', Color(0xFF16A34A)),
+    (Icons.child_friendly_rounded, 'Enfants', Color(0xFFEA580C)),
   ];
 
   void _terminer() {
@@ -143,62 +152,32 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          const Text(
-            'Qu’est-ce qui vous intéresse ?',
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
+          const EnTeteDemarrage(
+            etape: 4,
+            icone: Icons.interests_rounded,
+            couleurs: [Color(0xFFF472B6), Color(0xFFDB2777)],
+            titre: 'Qu’est-ce qui vous intéresse ?',
+            texte:
+                'Choisissez-en au moins 3 : votre fil sera utile dès '
+                'maintenant. Vous pourrez changer plus tard.',
           ),
-          const SizedBox(height: 6),
-          const Text(
-            'Choisissez-en au moins 3 : votre fil sera utile dès maintenant.',
-            style: TextStyle(color: LiveColors.gris),
-          ),
-          const SizedBox(height: 20),
           GrilleAdaptative(
             largeurMax: 120,
             espacement: 10,
-            hauteur: 92,
+            hauteur: 96,
             enfants: [
-              for (final (icone, nom) in _options)
-                Semantics(
-                  button: true,
-                  selected: _choix.contains(nom),
-                  label: nom,
-                  excludeSemantics: true,
-                  child: GestureDetector(
+              for (final (i, (icone, nom, couleur)) in _options.indexed)
+                Apparition(
+                  rang: i,
+                  child: _TuileInteret(
+                    icone: icone,
+                    nom: nom,
+                    couleur: couleur,
+                    choisi: _choix.contains(nom),
                     onTap: () => setState(
                       () => _choix.contains(nom)
                           ? _choix.remove(nom)
                           : _choix.add(nom),
-                    ),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      decoration: BoxDecoration(
-                        color: _choix.contains(nom)
-                            ? LiveColors.bleu
-                            : const Color(0xFFF3F5F8),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            icone,
-                            color: _choix.contains(nom)
-                                ? Colors.white
-                                : LiveColors.bleu,
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            nom,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: _choix.contains(nom)
-                                  ? Colors.white
-                                  : LiveColors.nuit,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                 ),
@@ -210,6 +189,94 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
         child: FilledButton(
           onPressed: _choix.length >= 3 ? _terminer : null,
           child: Text('Continuer · ${_choix.length} choisis'),
+        ),
+      ),
+    );
+  }
+}
+
+/// Tuile d'un centre d'intérêt : teinte claire, pleine couleur une fois
+/// choisie, avec une coche qui apparaît.
+class _TuileInteret extends StatelessWidget {
+  const _TuileInteret({
+    required this.icone,
+    required this.nom,
+    required this.couleur,
+    required this.choisi,
+    required this.onTap,
+  });
+  final IconData icone;
+  final String nom;
+  final Color couleur;
+  final bool choisi;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final duree = MediaQuery.disableAnimationsOf(context)
+        ? Duration.zero
+        : const Duration(milliseconds: 220);
+    return Semantics(
+      button: true,
+      selected: choisi,
+      label: nom,
+      excludeSemantics: true,
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedScale(
+          scale: choisi ? 1 : 0.96,
+          duration: duree,
+          child: AnimatedContainer(
+            duration: duree,
+            decoration: BoxDecoration(
+              color: choisi ? couleur : couleur.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: choisi
+                  ? [
+                      BoxShadow(
+                        color: couleur.withValues(alpha: 0.35),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Stack(
+              children: [
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(icone, color: choisi ? Colors.white : couleur),
+                      const SizedBox(height: 6),
+                      Text(
+                        nom,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: choisi ? Colors.white : LiveColors.nuit,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 6,
+                  right: 6,
+                  child: AnimatedOpacity(
+                    opacity: choisi ? 1 : 0,
+                    duration: duree,
+                    child: const Icon(
+                      Icons.check_circle_rounded,
+                      size: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +15,7 @@ import '../../shared/widgets.dart';
 part 'recherche.dart';
 part 'carte.dart';
 part 'explore_espace.dart';
+part 'vue_rue.dart';
 
 /// Les espaces de Live, dans l'ordre de la barre de recherche mentale :
 /// acheter, se loger, se faire aider, se divertir, apprendre, travailler.
@@ -72,6 +75,52 @@ const _espaces = [
     'Bourses, stages, emplois',
     '/opportunites',
     Color(0xFF0F766E),
+  ),
+];
+
+/// Argent et quotidien : ce qu'on ouvre chaque semaine (docs/21).
+const _quotidien = [
+  (
+    Icons.diversity_3_rounded,
+    'Tontines',
+    'Cotiser et recevoir, sans retard',
+    '/tontines',
+    Color(0xFFDB2777),
+  ),
+  (
+    Icons.receipt_long_rounded,
+    'Factures et crédit',
+    'Électricité, eau, télé, recharge',
+    '/factures',
+    Color(0xFFCA8A04),
+  ),
+  (
+    Icons.flight_land_rounded,
+    'Diaspora',
+    'Payer pour un proche, envoyer',
+    '/diaspora',
+    Color(0xFF0369A1),
+  ),
+  (
+    Icons.groups_2_rounded,
+    'Achats groupés',
+    'À plusieurs, prix de gros',
+    '/achats-groupes',
+    Color(0xFFB45309),
+  ),
+  (
+    Icons.pin_drop_rounded,
+    'Adresse Live',
+    'Votre adresse en un code',
+    '/adresse',
+    Color(0xFF1D4ED8),
+  ),
+  (
+    Icons.storefront_rounded,
+    'Points relais',
+    'Colis, espèces en MoMo',
+    '/points-relais',
+    Color(0xFF15803D),
   ),
 ];
 
@@ -186,6 +235,11 @@ class EcranExplorer extends ConsumerWidget {
         padding: const EdgeInsets.only(bottom: 32),
         children: [
           grille(_espaces),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: marge),
+            child: const EnTeteSection('Argent et quotidien'),
+          ),
+          grille(_quotidien),
           titre('En direct maintenant', '/directs'),
           Carrousel(
             largeur: 150,

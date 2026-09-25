@@ -49,6 +49,7 @@ La version 1 contenait de très bonnes idées, mais elle souffrait de cinq probl
 | 12 | [Live Services : prestataires et réservations](12_Live_Services.md) | Proposé |
 | 19 | [Live IA et Crédits Live (produits propres)](19_Live_IA_et_credits.md) | Proposé |
 | 20 | [Architecture technique (Flutter + Supabase, vidéo)](20_Architecture_technique.md) | Proposé |
+| 21 | [Piliers « référence » : Live IA partout, tontines, diaspora, quotidien, cartes](21_Piliers_reference_Afrique_centrale.md) | Décidé le 25/09/2026 |
 | — | [Maquettes des écrans (92 écrans, application et back-office)](ecrans/00_Principes_et_navigation.md) | Proposé |
 | — | [Prototype cliquable (`app/`) et protocole du test terrain](prototype/Protocole_test_terrain.md) | Prêt pour le test terrain |
 

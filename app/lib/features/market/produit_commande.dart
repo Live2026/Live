@@ -97,6 +97,18 @@ class EcranProduit extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 14),
+      Builder(
+        builder: (context) {
+          final (bas, haut) = fourchetteMarche(p.prix, p.id.hashCode);
+          return JustePrix(
+            prix: p.prix,
+            bas: bas,
+            haut: haut,
+            base: 'Ventes récentes de « ${p.categorie} » comparables',
+          );
+        },
+      ),
+      const SizedBox(height: 14),
       _ReglementProduit(produit: p),
       const SizedBox(height: 14),
       const Text(

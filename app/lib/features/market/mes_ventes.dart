@@ -138,6 +138,7 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
                   ),
               ],
             ),
+          const _CoachIa(),
           const EnTeteSection('Mes annonces'),
           const _MesAnnonces(),
         ],

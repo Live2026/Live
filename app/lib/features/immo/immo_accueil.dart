@@ -37,14 +37,16 @@ class _EcranImmoState extends State<EcranImmo> {
     final aLaUne = biens.where((b) => b.sponsorise || b.nouveau).toList();
     final filtre = _type != null || _quartier != null || _budget != null;
     return Scaffold(
-      appBar: AppBar(
+      appBar: EnTeteRecherche(
         titleSpacing: marge,
-        title: const Column(
+        indice: 'Quartier, type de logement…',
+        onSubmitted: (q) => context.push('/recherche', extra: q),
+        titre: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Immo'),
-            Text(
-              'Brazzaville · logements vérifiés',
+            TexteVille(
+              '{ville} · logements vérifiés',
               style: TextStyle(
                 fontSize: 12.5,
                 color: LiveColors.gris,

@@ -213,3 +213,14 @@ Application **Flutter Web** réservée aux agents Live (document 20, DT-01). Con
 |-------|--------|
 | Versions | Chaque changement de commission crée une nouvelle version datée ; les transactions gardent le taux appliqué au moment du paiement |
 | Journal | Toute modification est enregistrée dans le journal d'audit (F-ADM-07) |
+
+---
+
+## Gouvernance (révision du 25/09/2026, document 03 §10)
+
+| Écran | Adresse | Contenu |
+|-------|---------|---------|
+| E-ADM-00 Connexion d'un agent | `/admin/connexion` | E-mail professionnel et mot de passe, puis **code de l'application d'authentification** (2FA, F-ADM-01) ; « faire confiance à cet ordinateur 30 jours » ; code de secours remis par la direction générale ; chaque connexion est journalisée |
+| E-ADM-09 Équipe Live | `/admin/equipe` | Réservé au **Super administrateur (direction générale)**, seul rôle permanent : liste des administrateurs délégués (fonction, 2FA active ou non, dernière activité), **invitation** avec choix de la fonction et aperçu des permissions, **matrice des permissions** par fonction (Superviseur, Agent KYC, Modérateur, Agent litiges, Support, Finance, Commercial). Le rôle de Super administrateur ne se délègue pas |
+| E-ADM-10 Double validation | `/admin/validations` | File des actions sensibles (remboursement au-delà de 50 000 FCFA, déblocage de fonds gelés, modification de commission) : un **second agent** valide ou refuse ; **l'auteur ne peut pas valider sa propre demande** (F-ADM-06) |
+| E-ADM-11 Journal d'audit | `/admin/journal` | Toutes les actions des agents (accès, KYC, modération, litiges, finance), filtrables et exportables ; les lignes sont chaînées : une modification se voit (F-ADM-07) |

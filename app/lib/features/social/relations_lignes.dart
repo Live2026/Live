@@ -279,7 +279,7 @@ class _CarteSuggestion extends ConsumerWidget {
       liveProvider.select((e) => e.suivis.contains(c.id)),
     );
     final raison = c.enCommun.isEmpty
-        ? 'Populaire à Brazzaville'
+        ? 'Populaire près de chez vous'
         : 'Suivi par ${c.enCommun.first}${c.enCommun.length > 1 ? ' et ${c.enCommun.length - 1} autre${c.enCommun.length > 2 ? 's' : ''}' : ''}';
     return Pressable(
       onTap: c.route == null ? null : () => context.push(c.route!),

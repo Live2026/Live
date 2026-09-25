@@ -73,36 +73,15 @@ class _EcranTelephoneState extends State<EcranTelephone> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Apparition(
-              child: Container(
-                width: 64,
-                height: 64,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFF1E0),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Icon(
-                  Icons.phone_iphone_rounded,
-                  color: LiveColors.orangeVif,
-                  size: 32,
-                ),
-              ),
-            ),
+          const EnTeteDemarrage(
+            etape: 0,
+            icone: Icons.phone_iphone_rounded,
+            couleurs: [LiveColors.ambre, LiveColors.orangeVif],
+            titre: 'Votre numéro de téléphone',
+            texte:
+                'Il sert à vous connecter et à recevoir vos paiements '
+                'Mobile Money. Il n’est jamais affiché sur votre profil.',
           ),
-          const SizedBox(height: 16),
-          const Text(
-            'Votre numéro de téléphone',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-          ),
-          const SizedBox(height: 6),
-          const Text(
-            'Il sert à vous connecter et à recevoir vos paiements '
-            'Mobile Money. Il n’est jamais affiché sur votre profil.',
-            style: TextStyle(color: LiveColors.gris, height: 1.4),
-          ),
-          const SizedBox(height: 22),
           Row(
             children: [
               Material(
@@ -203,7 +182,8 @@ class _EcranTelephoneState extends State<EcranTelephone> {
   }
 }
 
-/// E-AUTH-04 — Profil minimal (prénom, nom, ville, âge).
+/// E-AUTH-04 — Profil minimal : prénom, nom, ville, âge. L'avatar se
+/// dessine au fil de la saisie.
 class EcranProfil extends StatefulWidget {
   const EcranProfil({
     super.key,
@@ -223,63 +203,103 @@ class _EcranProfilState extends State<EcranProfil> {
   var _ville = 'Brazzaville';
   var _majeur = true;
 
+  static const _villes = [
+    'Brazzaville',
+    'Pointe-Noire',
+    'Dolisie',
+    'Libreville',
+    'Douala',
+    'Yaoundé',
+    'Autre ville',
+  ];
+
   @override
   Widget build(BuildContext context) {
+    final nomComplet = '${_prenom.text.trim()} ${_nom.text.trim()}'.trim();
     return Scaffold(
-      appBar: AppBar(
-        actions: const [
-          Padding(padding: EdgeInsets.all(16), child: Text('1/2')),
-        ],
-      ),
+      appBar: AppBar(),
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
-          const Text(
-            'Faisons connaissance',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          const EnTeteDemarrage(
+            etape: 2,
+            icone: Icons.badge_rounded,
+            couleurs: [Color(0xFFA78BFA), Color(0xFF6D28D9)],
+            titre: 'Faisons connaissance',
+            texte:
+                'Votre prénom s’affiche sur vos annonces et dans vos '
+                'messages. Le reste peut attendre.',
           ),
-          const SizedBox(height: 20),
+          Row(
+            children: [
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 250),
+                child: Avatar(
+                  key: ValueKey(nomComplet.isEmpty ? '?' : nomComplet[0]),
+                  nom: nomComplet.isEmpty ? '?' : nomComplet,
+                  couleur: const Color(0xFF6D28D9),
+                  taille: 64,
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      nomComplet.isEmpty ? 'Votre nom ici' : nomComplet,
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text(
+                      '$_ville · photo plus tard',
+                      style: const TextStyle(color: LiveColors.gris),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 18),
           TextField(
             controller: _prenom,
+            textCapitalization: TextCapitalization.words,
             decoration: const InputDecoration(labelText: 'Prénom'),
             onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 12),
           TextField(
             controller: _nom,
+            textCapitalization: TextCapitalization.words,
             decoration: const InputDecoration(labelText: 'Nom'),
+            onChanged: (_) => setState(() {}),
           ),
-          const SizedBox(height: 12),
-          DropdownButtonFormField<String>(
-            initialValue: _ville,
-            decoration: const InputDecoration(labelText: 'Ville'),
-            items: const [
-              DropdownMenuItem(
-                value: 'Brazzaville',
-                child: Text('Brazzaville'),
-              ),
-              DropdownMenuItem(
-                value: 'Pointe-Noire',
-                child: Text('Pointe-Noire'),
-              ),
+          const SizedBox(height: 18),
+          const Text('Ville', style: TextStyle(fontWeight: FontWeight.w700)),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final v in _villes)
+                ChoiceChip(
+                  label: Text(v),
+                  selected: _ville == v,
+                  onSelected: (_) => setState(() => _ville = v),
+                ),
             ],
-            onChanged: (v) => setState(() => _ville = v ?? _ville),
           ),
-          CheckboxListTile(
+          const SizedBox(height: 10),
+          SwitchListTile(
             value: _majeur,
-            onChanged: (v) => setState(() => _majeur = v ?? false),
-            controlAffinity: ListTileControlAffinity.leading,
+            onChanged: (v) => setState(() => _majeur = v),
             contentPadding: EdgeInsets.zero,
             title: const Text("J'ai 18 ans ou plus"),
-            subtitle: _majeur
-                ? null
-                : const Text(
-                    'Compte en consultation seulement (achat et vente à partir de 18 ans).',
-                  ),
-          ),
-          const Text(
-            'Photo et quartier : plus tard, dans votre profil.',
-            style: TextStyle(color: LiveColors.gris),
+            subtitle: Text(
+              _majeur ? 'Acheter, vendre et payer dans Live.' : 'Compte en consultation seulement (achat et vente à partir de 18 ans).',
+            ),
           ),
         ],
       ),
@@ -302,8 +322,9 @@ class _EcranProfilState extends State<EcranProfil> {
   }
 }
 
-/// E-AUTH-06 — Code secret de l'application.
-class EcranPin extends ConsumerWidget {
+/// E-AUTH-06 — Code secret de l'application : saisi deux fois, avec
+/// l'empreinte ou le visage en option.
+class EcranPin extends ConsumerStatefulWidget {
   const EcranPin({
     super.key,
     required this.prenom,
@@ -315,32 +336,89 @@ class EcranPin extends ConsumerWidget {
   final String operateur;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EcranPin> createState() => _EcranPinState();
+}
+
+class _EcranPinState extends ConsumerState<EcranPin> {
+  String? _premier;
+  var _erreur = false;
+  var _empreinte = true;
+
+  void _saisi(String code) {
+    if (_premier == null) {
+      setState(() {
+        _premier = code;
+        _erreur = false;
+      });
+      return;
+    }
+    if (code != _premier) {
+      setState(() {
+        _premier = null;
+        _erreur = true;
+      });
+      return;
+    }
+    ref
+        .read(liveProvider.notifier)
+        .connecter(
+          prenom: widget.prenom,
+          telephone: widget.telephone,
+          operateur: widget.operateur,
+        );
+    context.go('/interets');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final confirmation = _premier != null;
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
-          const Text(
-            'Créez votre code secret',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          EnTeteDemarrage(
+            etape: 3,
+            icone: confirmation
+                ? Icons.verified_user_rounded
+                : Icons.lock_rounded,
+            couleurs: const [Color(0xFF34D399), Color(0xFF15803D)],
+            titre: confirmation
+                ? 'Confirmez votre code'
+                : 'Bonjour ${widget.prenom}, créez votre code secret',
+            texte: confirmation
+                ? 'Tapez à nouveau les 4 chiffres.'
+                : 'Il protège votre compte et vos paiements. Ne le donnez '
+                      'jamais, même à un agent Live.',
           ),
-          const SizedBox(height: 8),
-          const Text(
-            'Il protège votre compte. Ne le donnez jamais, même à un agent Live.',
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            child: _erreur
+                ? const Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: Bloc(
+                      fond: Color(0xFFFDE2E2),
+                      child: Text(
+                        'Les deux codes sont différents. Recommencez.',
+                        style: TextStyle(color: LiveColors.erreur),
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
           ),
-          const SizedBox(height: 24),
-          ClavierPin(
-            onComplet: (_) {
-              ref
-                  .read(liveProvider.notifier)
-                  .connecter(
-                    prenom: prenom,
-                    telephone: telephone,
-                    operateur: operateur,
-                  );
-              context.go('/interets');
-            },
+          ClavierPin(key: ValueKey(confirmation), onComplet: _saisi),
+          const SizedBox(height: 12),
+          SwitchListTile(
+            value: _empreinte,
+            onChanged: (v) => setState(() => _empreinte = v),
+            contentPadding: EdgeInsets.zero,
+            secondary: const Icon(
+              Icons.fingerprint_rounded,
+              color: LiveColors.succes,
+              size: 30,
+            ),
+            title: const Text('Déverrouiller avec l’empreinte'),
+            subtitle: const Text('Ou le visage, selon votre téléphone'),
           ),
         ],
       ),

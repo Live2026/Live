@@ -316,7 +316,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
           children: [
             for (final (titre, auteur) in const [
               ('Son original', 'Votre voix'),
-              ('Ndombolo 2026', 'Tendance à Brazzaville'),
+              ('Ndombolo 2026', 'Tendance près de chez vous'),
               ('Rumba douce', 'Musique libre de droits'),
               ('Afro beat', 'Musique libre de droits'),
             ])

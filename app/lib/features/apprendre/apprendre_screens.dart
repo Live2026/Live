@@ -25,14 +25,11 @@ class EcranApprendre extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Apprendre'),
+      appBar: EnTeteRecherche(
+        titre: const Text('Apprendre'),
+        indice: 'Rechercher un cours, un PDF…',
+        onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: [
-          IconButton(
-            tooltip: 'Rechercher',
-            onPressed: () => context.push('/recherche'),
-            icon: const Icon(Icons.search_rounded),
-          ),
           IconButton(
             tooltip: 'Mes achats',
             onPressed: () => context.push('/mes-achats'),

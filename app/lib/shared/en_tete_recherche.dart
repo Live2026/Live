@@ -14,6 +14,7 @@ class EnTeteRecherche extends StatefulWidget implements PreferredSizeWidget {
     this.onSubmitted,
     this.actions = const [],
     this.titleSpacing,
+    this.toolbarHeight,
     this.bottom,
   });
 
@@ -25,11 +26,13 @@ class EnTeteRecherche extends StatefulWidget implements PreferredSizeWidget {
   /// Actions de l'en-tête, masquées pendant la saisie pour laisser la place.
   final List<Widget> actions;
   final double? titleSpacing;
+  final double? toolbarHeight;
   final PreferredSizeWidget? bottom;
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(kToolbarHeight + (bottom?.preferredSize.height ?? 0));
+  Size get preferredSize => Size.fromHeight(
+    (toolbarHeight ?? kToolbarHeight) + (bottom?.preferredSize.height ?? 0),
+  );
 
   @override
   State<EnTeteRecherche> createState() => _EnTeteRechercheState();
@@ -65,6 +68,7 @@ class _EnTeteRechercheState extends State<EnTeteRecherche> {
         : const Duration(milliseconds: 260);
     return AppBar(
       titleSpacing: widget.titleSpacing,
+      toolbarHeight: widget.toolbarHeight,
       bottom: widget.bottom,
       title: AnimatedSwitcher(
         duration: duree,
