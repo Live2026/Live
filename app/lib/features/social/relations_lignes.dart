@@ -116,7 +116,7 @@ class _LigneCompte extends ConsumerWidget {
                         key: const ValueKey('suivre'),
                         style: FilledButton.styleFrom(
                           minimumSize: const Size(0, 36),
-                          padding: EdgeInsets.zero,
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                         ),
                         onPressed: () => store.basculerSuivi(c.id),
                         child: FittedBox(
