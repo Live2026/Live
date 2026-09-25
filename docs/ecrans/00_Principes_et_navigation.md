@@ -224,6 +224,9 @@ Les maquettes sont dessinées au format téléphone, mais l'application **occupe
 2. **Textes longs** (descriptions, conditions) : largeur de ligne limitée à environ 80 caractères **dans leur colonne**, pour rester lisibles ; la page, elle, reste pleine largeur.
 3. **Bouton principal** : en bas de l'écran sur téléphone ; dans la colonne d'action (à droite) sur grand écran.
 4. **Même contenu, même ordre** sur toutes les tailles : seule la disposition change (aucune fonctionnalité réservée à une taille d'écran).
+5. **La barre latérale ne disparaît jamais** sur grand écran (révision du 25/09/2026) : toute page ouverte depuis un onglet (Mes ventes, Messages, relations, paiement…) garde la barre et y signale son onglet de rattachement. Seuls le back-office (qui a sa propre barre), la caméra, le lecteur de direct et le lecteur de cours occupent tout l'écran.
+6. **Démarrage sur ordinateur** : la marque et ses quatre promesses (argent protégé, vérification, Mobile Money, Live IA) à gauche, le formulaire à droite dans une colonne de 480 px au plus.
+7. **Messages sur ordinateur** : deux panneaux, façon WhatsApp Web. La liste des conversations à gauche (400 px), la conversation ouverte à droite.
 
 ---
 

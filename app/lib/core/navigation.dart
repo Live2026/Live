@@ -67,6 +67,105 @@ class NavigationPrincipale extends StatelessWidget {
   }
 }
 
+/// Adresses des cinq onglets, dans l'ordre de la barre.
+const racinesOnglets = ['/accueil', '/explorer', '/publier', '/ia', '/moi'];
+
+/// Pages rangées sous « Moi » : compte, argent, outils, créateur.
+const _pagesMoi = [
+  '/pouvoirs',
+  '/live-pro',
+  '/verifier',
+  '/espace',
+  '/profil/moi',
+  '/parametres',
+  '/donnees',
+  '/paiements',
+  '/abonnes',
+  '/suivis',
+  '/bloques',
+  '/enregistres',
+  '/alertes',
+  '/commandes',
+  '/mes-ventes',
+  '/vente/',
+  '/gains',
+  '/retirer',
+  '/recu',
+  '/studio',
+  '/live-plus',
+  '/publicite',
+  '/fonds-createurs',
+  '/finance',
+  '/partenaires',
+  '/mes-achats',
+  '/mes-candidatures',
+  '/agence',
+  '/pro/interventions',
+  '/pro/devis',
+  '/reclamation',
+  '/avis',
+  '/probleme',
+  '/suivi/',
+];
+
+/// Pages sans onglet propre (ouvertes depuis l'en-tête).
+const _pagesEnTete = [
+  '/messages',
+  '/conversation',
+  '/groupe',
+  '/notifications',
+];
+
+/// Onglet auquel se rattache une page secondaire, pour la barre latérale ;
+/// -1 si aucun.
+int ongletDe(String chemin) {
+  if (_pagesEnTete.any(chemin.startsWith) &&
+      !chemin.startsWith('/notifications/preferences')) {
+    return -1;
+  }
+  if (chemin.startsWith('/ia')) return 3;
+  if (chemin.startsWith('/publier') || chemin == '/vendre') return 2;
+  if (_pagesMoi.any(chemin.startsWith) ||
+      chemin.startsWith('/notifications/preferences')) {
+    return 4;
+  }
+  return 1;
+}
+
+/// Sur ordinateur, chaque page garde la barre latérale : on reste dans
+/// l'application, où qu'on soit. Sur téléphone, la page s'affiche seule.
+class CadreOrdinateur extends StatelessWidget {
+  const CadreOrdinateur({super.key, required this.chemin, required this.child});
+  final String chemin;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final taille = context.taille;
+    if (taille == Taille.compacte) return child;
+    return Scaffold(
+      body: Row(
+        children: [
+          _BarreLaterale(
+            etendue: taille == Taille.etendue,
+            selection: ongletDe(chemin),
+            onglets: NavigationPrincipale._onglets,
+            onTap: (i) => context.go(racinesOnglets[i]),
+          ),
+          const VerticalDivider(width: 1),
+          Expanded(
+            child: Semantics(
+              container: true,
+              explicitChildNodes: true,
+              child: child,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 /// Barre latérale des grands écrans (remplace NavigationRail, dont les éléments
 /// n'étaient pas exposés aux lecteurs d'écran sur le web).
 class _BarreLaterale extends StatelessWidget {
