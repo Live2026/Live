@@ -546,7 +546,7 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
           _BandeauChiffres(
             chiffres: [
               _Chiffre(
-                libelle: 'Vendu ce mois',
+                libelle: 'Ce mois',
                 valeur: ceMois,
                 format: (n) => fcfa(n, devise: false),
                 unite: 'FCFA',
