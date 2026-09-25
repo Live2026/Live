@@ -36,15 +36,24 @@ Les **21 exigences serveur** (réconciliation automatique, compression vidéo, c
 
 Chaque fiche porte un bloc « Comment ça se paie » (document 06, §4.4) : **Payé dans Live** (séquestre), **À la remise** (mode B : voir l'objet, puis payer MoMo via Live) ou **En direct** (loyers, caution, prix d'un bien, contre reçu). Le paiement accepte aussi le **solde Live**.
 
-## 2 ter. Aperçus des phases suivantes (hors MVP)
+## 2 ter. Phases 2 et 3 (hors MVP, étiquetées)
 
-Montrés pour la présentation, étiquetés « Aperçu · phase N » et accessibles depuis Explorer, sans toucher aux parcours du MVP :
+Chaque écran porte le bandeau « Aperçu · phase N » ; tous sont accessibles depuis Explorer (« Bientôt sur Live ») et le menu du profil, sans toucher aux parcours du MVP.
 
 | Module (document 04) | Phase | Écrans |
 |----------------------|-------|--------|
-| Live Savoir | P3 | Accueil, fiche d'un contenu, panier, paiement, mes achats (téléchargement hors connexion), lecteur, vendre en 6 étapes, ma boutique (revenus, répartition) |
-| Live Emploi et opportunités | P3 | Liste (bourses, concours, stages, emplois, formations), fiche avec coûts transparents, postuler, mes candidatures, publier en 4 étapes |
-| Groupes et canaux | P2 | Groupe (message épinglé, PDF, réactions), canal (administrateurs seuls) |
+| Live Direct (live shopping) | P2 | Directs en cours et à venir (rappel), lecteur plein écran (commentaires, cœurs, cadeaux, produit épinglé payable dans Live, visite immobilière en direct), lancer un direct (C-DIRECT) |
+| Live Créateurs | P2 | Studio (statistiques, outils, progression vers 500 abonnés), page fans (Fan 500 FCFA, Super fan 1 500 FCFA, contenus réservés) ; cadeaux à 75 % pour le créateur |
+| Groupes et canaux | P2 | Groupe (épinglé, PDF, réactions), canal |
+| Location de courte durée | P2 | Séjours meublés, réservation à la nuit payée dans Live |
+| Live Plus | P2 | Élève 1 500 FCFA (200 crédits), Pro 3 500 FCFA (500 crédits), document 19 |
+| Publicité (bêta) | P2 | Campagne : vidéo, objectif, quartiers, centres d'intérêt, budget, portée estimée |
+| Offres Pro complètes | P2 | Pro Vendeur, Pro Agence, Pro Prestataire, Entreprise |
+| Live Savoir | P3 | Accueil, fiche, panier, mes achats, lecteur, vendre, boutique de savoirs |
+| Live Emploi et opportunités | P3 | Liste, fiche aux coûts transparents, postuler, candidatures, publier |
+| Live Livraison | P3 | Suivi du livreur sur le plan de la ville, code de remise |
+| Fonds Créateurs | P3 | Fonds du mois, critères, conditions, leçon de la v1 |
+| Services financiers en partenariat | P3 | Paiement en 3 fois, tirelire, micro-crédit vendeur (établissements agréés) |
 
 ## 3. Super-pouvoirs (capacités du document 03)
 

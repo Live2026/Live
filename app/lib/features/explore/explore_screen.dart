@@ -13,6 +13,82 @@ import '../../shared/widgets.dart';
 part 'recherche.dart';
 part 'carte.dart';
 
+/// Modules des phases suivantes (document 04, section 5), en aperçu.
+const _prochainement = [
+  (
+    Icons.podcasts_rounded,
+    'Live Direct',
+    'Phase 2 · vendre en direct',
+    '/directs',
+  ),
+  (
+    Icons.insights_rounded,
+    'Studio créateur',
+    'Phase 2 · cadeaux, fans',
+    '/studio',
+  ),
+  (
+    Icons.king_bed_rounded,
+    'Séjours meublés',
+    'Phase 2 · à la nuit',
+    '/sejours',
+  ),
+  (
+    Icons.groups_rounded,
+    'Groupes et canaux',
+    'Phase 2 · quartier, classe',
+    '/groupe/g1',
+  ),
+  (
+    Icons.bolt_rounded,
+    'Live Plus',
+    'Phase 2 · crédits IA chaque mois',
+    '/live-plus',
+  ),
+  (
+    Icons.campaign_rounded,
+    'Publicité',
+    'Phase 2 · vidéo sponsorisée',
+    '/publicite',
+  ),
+  (
+    Icons.workspace_premium_rounded,
+    'Offres Pro',
+    'Phase 2 · vendeur, agence, pro',
+    '/live-pro/offres',
+  ),
+  (
+    Icons.school_rounded,
+    'Live Savoir',
+    'Phase 3 · cours, PDF, vidéos',
+    '/apprendre',
+  ),
+  (
+    Icons.work_rounded,
+    'Live Emploi',
+    'Phase 3 · bourses, stages, emplois',
+    '/opportunites',
+  ),
+  (
+    Icons.two_wheeler_rounded,
+    'Live Livraison',
+    'Phase 3 · courses à moto',
+    '/livraison/LV-00482',
+  ),
+  (
+    Icons.volunteer_activism_rounded,
+    'Fonds Créateurs',
+    'Phase 3 · financé par la pub',
+    '/fonds-createurs',
+  ),
+  (
+    Icons.account_balance_rounded,
+    'Services financiers',
+    'Phase 3 · 3 fois, épargne, crédit',
+    '/finance',
+  ),
+];
+
 /// E-EXP-01 — Explorer : les 4 espaces, puis les meilleures annonces de chacun.
 class EcranExplorer extends StatelessWidget {
   const EcranExplorer({super.key});
@@ -92,34 +168,6 @@ class EcranExplorer extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Bientôt sur Live'),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: marge),
-            child: GrilleAdaptative(
-              largeurMax: 260,
-              espacement: 10,
-              hauteur: 116,
-              enfants: [
-                _Espace(
-                  icone: Icons.school_rounded,
-                  titre: 'Live Savoir',
-                  sous: 'Aperçu phase 3 · cours, PDF, vidéos',
-                  couleur: const Color(0xFF6D28D9),
-                  onTap: () => context.push('/apprendre'),
-                ),
-                _Espace(
-                  icone: Icons.work_rounded,
-                  titre: 'Live Emploi',
-                  sous: 'Aperçu phase 3 · bourses, stages, emplois',
-                  couleur: const Color(0xFF6D28D9),
-                  onTap: () => context.push('/opportunites'),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
               'Bonnes affaires près de vous',
               onTap: () => context.push('/market'),
@@ -162,6 +210,34 @@ class EcranExplorer extends StatelessWidget {
               largeurMax: 460,
               espacement: 10,
               enfants: [for (final s in prestataires.take(4)) CartePro(pro: s)],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: marge),
+            child: const EnTeteSection('Bientôt sur Live'),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: marge),
+            child: GrilleAdaptative(
+              largeurMax: 260,
+              espacement: 10,
+              hauteur: 116,
+              enfants: [
+                for (final (i, (icone, titre, sous, route))
+                    in _prochainement.indexed)
+                  Apparition(
+                    rang: i,
+                    child: _Espace(
+                      icone: icone,
+                      titre: titre,
+                      sous: sous,
+                      couleur: sous.startsWith('Phase 2')
+                          ? const Color(0xFFDB2777)
+                          : const Color(0xFF6D28D9),
+                      onTap: () => context.push(route),
+                    ),
+                  ),
+              ],
             ),
           ),
         ],

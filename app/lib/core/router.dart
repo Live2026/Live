@@ -10,6 +10,7 @@ import '../features/confiance/confiance_screens.dart';
 import '../features/createurs/createurs_screens.dart';
 import '../features/croissance/croissance_screens.dart';
 import '../features/direct/direct_screens.dart';
+import '../features/expansion/expansion_screens.dart';
 import '../features/explore/explore_screen.dart';
 import '../features/feed/feed_screen.dart';
 import '../features/ia/ia_screens.dart';
@@ -129,6 +130,10 @@ final routeur = GoRouter(
     _route('/live-plus', (_) => const EcranLivePlus()),
     _route('/publicite', (_) => const EcranPublicite()),
     _route('/live-pro/offres', (_) => const EcranOffresPro()),
+    // Phase 3
+    _route('/livraison/:id', (s) => EcranLivraison(id: _p(s, 'id'))),
+    _route('/fonds-createurs', (_) => const EcranFondsCreateurs()),
+    _route('/finance', (_) => const EcranFinance()),
     // Apprendre (contenus numériques)
     _route('/apprendre', (_) => const EcranApprendre()),
     _route('/apprendre/vendre', (_) => const EcranVendreContenu()),

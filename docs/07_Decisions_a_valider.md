@@ -107,5 +107,6 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | 2 | Objets à voir avant d'acheter (téléphone d'occasion…). | Mode B « payer à la remise » : réservation sans paiement, paiement MoMo via Live au rendez-vous. **Pas d'option espèces** (doc 10 §3.6 : Live numérise les espèces). |
 | 3 | Live Savoir, Live Emploi (P3), groupes et canaux (P2) montrés au prototype. | Écrans d'**aperçu**, étiquetés « phase 2 » ou « phase 3 », accessibles depuis Explorer ; hors du périmètre du MVP (doc 05 §7). |
 | 4 | Commission sur les contenus numériques (aperçu Live Savoir). | **Hypothèse à valider** : 15 % (le créateur garde 85 %). À trancher avec D-09 avant la phase 3. |
+| 5 | Prix des modules des phases 2 et 3 montrés au prototype. | **Hypothèses à valider** : frais de service des séjours 5 % ; Pro Vendeur 5 000, Pro Agence 15 000, Pro Prestataire 4 000 FCFA / mois ; course Live Livraison 1 500 FCFA ; abonnements de fans 500 et 1 500 FCFA. Cadeaux et abonnements de fans : 25 % pour Live, conforme à D-09. |
 
 **Fin du Document 07**

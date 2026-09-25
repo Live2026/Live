@@ -96,6 +96,17 @@ class EcranSuiviCommande extends ConsumerWidget {
           const SizedBox(height: 20),
           Apparition(rang: 1, child: Frise(etapes: etapes)),
           const SizedBox(height: 12),
+          if (!termine)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () => context.push('/livraison/${c.id}'),
+                icon: const Icon(Icons.two_wheeler_rounded, size: 18),
+                label: const Text(
+                  'Livraison Live : suivre le livreur (aperçu phase 3)',
+                ),
+              ),
+            ),
           if (!termine && !remise)
             const Apparition(
               rang: 2,

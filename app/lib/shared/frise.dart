@@ -100,3 +100,52 @@ class Frise extends StatelessWidget {
     );
   }
 }
+
+/// Progression horizontale en étapes (livraison, candidature…) : barres
+/// colorées jusqu'à l'étape en cours, libellés dessous.
+class ProgressionEtapes extends StatelessWidget {
+  const ProgressionEtapes({
+    super.key,
+    required this.etapes,
+    required this.actuelle,
+  });
+  final List<String> etapes;
+  final int actuelle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        for (final (i, e) in etapes.indexed)
+          Expanded(
+            child: Column(
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 400),
+                  height: 5,
+                  margin: const EdgeInsets.symmetric(horizontal: 2),
+                  decoration: BoxDecoration(
+                    color: i <= actuelle
+                        ? LiveColors.succes
+                        : const Color(0xFFE4E8EE),
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  e,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: i <= actuelle ? LiveColors.nuit : LiveColors.gris,
+                    fontWeight: i == actuelle ? FontWeight.w700 : null,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+}

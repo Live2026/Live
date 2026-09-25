@@ -140,6 +140,11 @@ class _MenuProfil extends ConsumerWidget {
               '/espace/nouveau',
             ),
             ligne(Icons.insights_outlined, 'Live Pro', '/live-pro'),
+            section('Créateur et phases suivantes'),
+            ligne(Icons.insights_rounded, 'Studio créateur', '/studio'),
+            ligne(Icons.podcasts_rounded, 'Directs', '/directs'),
+            ligne(Icons.bolt_rounded, 'Live Plus', '/live-plus'),
+            ligne(Icons.campaign_outlined, 'Publicité', '/publicite'),
             section('Aide et confiance'),
             ligne(
               Icons.payments_outlined,

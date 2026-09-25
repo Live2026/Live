@@ -53,77 +53,85 @@ class _EcranCarteState extends State<EcranCarte> {
     ];
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
           Positioned.fill(child: PlanVille(reperes: reperes)),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
-              child: Row(
-                children: [
-                  BoutonVerre(
-                    icone: Icons.arrow_back_rounded,
-                    libelle: 'Retour',
-                    onTap: () => context.pop(),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                        boxShadow: const [
-                          BoxShadow(color: Color(0x22041936), blurRadius: 8),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          for (final (i, t) in const [
-                            'Logements',
-                            'Prestataires',
-                          ].indexed)
-                            Expanded(
-                              child: Semantics(
-                                button: true,
-                                selected: (i == 0) == _immo,
-                                label: t,
-                                excludeSemantics: true,
-                                child: GestureDetector(
-                                  onTap: () => setState(() {
-                                    _immo = i == 0;
-                                    _choix = 0;
-                                    if (_fiches.hasClients) {
-                                      _fiches.jumpToPage(0);
-                                    }
-                                  }),
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 220),
-                                    height: 36,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: (i == 0) == _immo
-                                          ? LiveColors.bleu
-                                          : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Text(
-                                      t,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
+                child: Row(
+                  children: [
+                    BoutonVerre(
+                      icone: Icons.arrow_back_rounded,
+                      libelle: 'Retour',
+                      onTap: () => context.pop(),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
+                          boxShadow: const [
+                            BoxShadow(color: Color(0x22041936), blurRadius: 8),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            for (final (i, t) in const [
+                              'Logements',
+                              'Prestataires',
+                            ].indexed)
+                              Expanded(
+                                child: Semantics(
+                                  button: true,
+                                  selected: (i == 0) == _immo,
+                                  label: t,
+                                  excludeSemantics: true,
+                                  child: GestureDetector(
+                                    onTap: () => setState(() {
+                                      _immo = i == 0;
+                                      _choix = 0;
+                                      if (_fiches.hasClients) {
+                                        _fiches.jumpToPage(0);
+                                      }
+                                    }),
+                                    child: AnimatedContainer(
+                                      duration: const Duration(
+                                        milliseconds: 220,
+                                      ),
+                                      height: 36,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
                                         color: (i == 0) == _immo
-                                            ? Colors.white
-                                            : LiveColors.nuit,
+                                            ? LiveColors.bleu
+                                            : Colors.transparent,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Text(
+                                        t,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: (i == 0) == _immo
+                                              ? Colors.white
+                                              : LiveColors.nuit,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

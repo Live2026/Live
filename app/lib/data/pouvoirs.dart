@@ -132,6 +132,15 @@ const pouvoirs = <Pouvoir>[
     route: '/profil/moi',
   ),
   Pouvoir(
+    id: 'C-DIRECT',
+    titre: 'Ouvrir un direct',
+    description: 'Vendre en direct, recevoir des cadeaux (phase 2).',
+    icone: Icons.podcasts_rounded,
+    condition: Condition.identite,
+    gain: '75 % des cadeaux reçus',
+    route: '/direct/lancer',
+  ),
+  Pouvoir(
     id: 'C-IMMO-AGENCE',
     titre: 'Agence ou boutique',
     description: 'Espace pro avec équipe, tableau de bord et badge vérifié.',
