@@ -122,7 +122,7 @@ Liste des achats (numéro, produit, état : « Payée · argent bloqué par Live
 
 ---
 
-**Complément du 25/09/2026** : sous le titre, le vendeur (avatar, badge, note, ventes) ; badge « Meilleure vente » pour les annonces très vues ; quatre tuiles de même taille (état, remise, paiement, protection) ; bloc « Comment ça se paie » (étiquette « Payé dans Live » ou « À la remise », document 06 §4.4). Pour un objet à voir avant d'acheter, le bouton principal devient **« Voir sur place »** et mène à la réservation sans paiement (mode B).
+**Complément du 25/09/2026** : sous le titre, le vendeur (avatar, badge, note, ventes) ; badge « Meilleure vente » pour les annonces très vues ; quatre tuiles de même taille (état, remise, paiement, protection) ; bloc « Comment ça se paie » (étiquette « Payé dans Live » ou « À la remise », document 06 §4.4). Pour un objet à voir avant d'acheter, le bouton principal devient **« Rendez-vous »** et mène à la réservation sans paiement (mode B).
 
 ---
 

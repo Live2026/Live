@@ -186,7 +186,7 @@ class EcranProduit extends StatelessWidget {
           Expanded(
             child: FilledButton(
               onPressed: () => context.push('/commande/${p.id}'),
-              child: Text(surPlace ? 'Voir sur place' : 'Acheter'),
+              child: Text(surPlace ? 'Rendez-vous' : 'Acheter'),
             ),
           ),
         ],

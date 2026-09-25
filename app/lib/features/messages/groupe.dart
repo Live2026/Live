@@ -19,7 +19,7 @@ class _MessageGroupe {
 
   /// Pièce jointe : (nom, poids et pages).
   final (String, String)? pdf;
-  final List<(String, int)> reactions;
+  final List<(IconData, int)> reactions;
 }
 
 const _messagesGroupe = [
@@ -29,14 +29,17 @@ const _messagesGroupe = [
     'Bonjour à tous. Voici les annales corrigées pour samedi.',
     '09:58',
     pdf: ('Annales_Maths_2025.pdf', '2,4 Mo · 12 pages'),
-    reactions: [('👍', 24), ('🙏', 9)],
+    reactions: [
+      (Icons.thumb_up_rounded, 24),
+      (Icons.volunteer_activism_rounded, 9),
+    ],
   ),
   _MessageGroupe(
     'Merveille K.',
     Color(0xFF7E22CE),
     'Merci Prof ! L’exercice 3 on le fait comment ?',
     '10:01',
-    reactions: [('❤️', 3)],
+    reactions: [(Icons.favorite_rounded, 3)],
   ),
   _MessageGroupe(
     'Jordy M.',
@@ -47,10 +50,10 @@ const _messagesGroupe = [
   _MessageGroupe(
     'Vous',
     LiveColors.bleu,
-    'Je serai là samedi 👍',
+    'Je serai là samedi, merci !',
     '10:05',
     moi: true,
-    reactions: [('😄', 2)],
+    reactions: [(Icons.sentiment_very_satisfied_rounded, 2)],
   ),
 ];
 
@@ -58,10 +61,13 @@ const _messagesCanal = [
   _MessageGroupe(
     'Live Opportunités',
     Color(0xFFEA580C),
-    '🎓 Bourse d’excellence 2027 : 40 places, 75 000 FCFA par mois. '
+    'Bourse d’excellence 2027 : 40 places, 75 000 FCFA par mois. '
         'Gratuit, date limite le 15 octobre.',
     '08:30',
-    reactions: [('🔥', 412), ('🙏', 96)],
+    reactions: [
+      (Icons.local_fire_department_rounded, 412),
+      (Icons.volunteer_activism_rounded, 96),
+    ],
   ),
   _MessageGroupe(
     'Live Opportunités',
@@ -69,7 +75,7 @@ const _messagesCanal = [
     'Rappel : aucune bourse ne se « débloque » en payant. Signalez ces messages.',
     '08:31',
     pdf: ('Guide_candidature_bourses.pdf', '640 Ko · 4 pages'),
-    reactions: [('👍', 230)],
+    reactions: [(Icons.thumb_up_rounded, 230)],
   ),
 ];
 
@@ -292,10 +298,17 @@ class _BulleGroupe extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: const Color(0xFFE4E8EE)),
               ),
-              child: Text(
-                [for (final (e, n) in m.reactions) '$e ${compact(n)}']
-                    .join('  '),
-                style: const TextStyle(fontSize: 12.5),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (final (icone, n) in m.reactions) ...[
+                    Icon(icone, size: 14, color: LiveColors.orangeVif),
+                    Text(
+                      ' ${compact(n)}  ',
+                      style: const TextStyle(fontSize: 12.5),
+                    ),
+                  ],
+                ],
               ),
             ),
           ),

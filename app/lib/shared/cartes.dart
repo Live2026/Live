@@ -128,7 +128,7 @@ class CarteProduit extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Etiquette(
-                          'À voir sur place',
+                          'À voir · payé à la remise',
                           icone: Icons.handshake_rounded,
                         ),
                       ),

@@ -223,7 +223,7 @@ const conversationsArchivees = <Conversation>[
     type: TypeConversation.groupe,
     membres: 9,
     nom: 'Mariage Nadège & Prince',
-    dernier: 'Nadège : Merci à tous ❤️',
+    dernier: 'Nadège : Merci à tous pour la fête !',
     quand: '2 sept.',
     couleur: Color(0xFF9D174D),
   ),

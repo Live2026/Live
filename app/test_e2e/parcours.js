@@ -94,6 +94,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     // 1. Acheter (depuis la pastille du fil puis la fiche)
     if (LARGEUR < 600) await bouton('Acheter ›'); await ecran('fil_annonce');
     await onglet('Explorer'); await ecran('explorer');
+    await p.goto(BASE + '#/market/liste?categorie=T%C3%A9l%C3%A9phones'); await p.waitForTimeout(1500); await sem();
     await bouton('Galaxy A14 128 Go'); await ecran('fiche_produit');
     await bouton('Acheter', { exact: true }); await ecran('commande');
     await bouton('Continuer'); await ecran('paiement');
@@ -182,7 +183,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['alertes', 'alertes'],
       ['notifications', 'notifications'],
       ['market', 'market_accueil'],
-      ['market', 'market_bas_de_page', async () => { await defiler(14); }],
+      ['market', 'market_bas_de_page', async () => { await defiler(40); }],
       ['market/liste?categorie=T%C3%A9l%C3%A9phones', 'market_liste'],
       ['commandes', 'mes_commandes'],
       ['produit/p1', 'produit_a_la_remise'],
