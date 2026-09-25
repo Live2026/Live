@@ -242,7 +242,8 @@ class EcranCode extends StatelessWidget {
             },
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () =>
+                informer(context, 'Nouveau code envoyé par SMS au $telephone.'),
             child: const Text('Renvoyer le code dans 0:45'),
           ),
         ],

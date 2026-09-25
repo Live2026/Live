@@ -2,8 +2,17 @@ part of 'market_screens.dart';
 
 /// E-MKT-04 — Récapitulatif de la commande.
 class EcranCommande extends ConsumerStatefulWidget {
-  const EcranCommande({super.key, required this.id});
+  const EcranCommande({
+    super.key,
+    required this.id,
+    this.variante,
+    this.quantite = 1,
+  });
   final String id;
+
+  /// Variante choisie (taille) et quantité (F-MKT-06).
+  final String? variante;
+  final int quantite;
 
   @override
   ConsumerState<EcranCommande> createState() => _EcranCommandeState();
@@ -24,7 +33,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
   Widget build(BuildContext context) {
     final p = produitParId(widget.id);
     if (p.reglement == Reglement.surPlace) return _surPlace(context, p);
-    final total = p.prix + (_livraison ? p.livraison : 0);
+    final total = p.prix * widget.quantite + (_livraison ? p.livraison : 0);
     return Scaffold(
       appBar: AppBar(title: const Text('Votre commande')),
       body: DeuxColonnes(
@@ -39,6 +48,14 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
               rayon: 8,
             ),
             title: Text(p.titre),
+            subtitle: widget.variante == null && widget.quantite == 1
+                ? null
+                : Text(
+                    [
+                      if (widget.variante != null) 'Taille ${widget.variante}',
+                      '× ${widget.quantite}',
+                    ].join(' · '),
+                  ),
             trailing: Text(
               fcfa(p.prix),
               style: const TextStyle(fontWeight: FontWeight.bold),

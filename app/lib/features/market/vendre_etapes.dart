@@ -68,6 +68,15 @@ extension _EtapesVente on _EcranVendreState {
           maxLines: 5,
           decoration: const InputDecoration(labelText: 'Description'),
         ),
+        if (_interdit != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              'Live n’accepte pas $_interdit (liste des objets interdits, '
+              'conditions d’utilisation).',
+              style: const TextStyle(color: LiveColors.erreur),
+            ),
+          ),
         if (_coordonnees)
           const Padding(
             padding: EdgeInsets.only(top: 8),

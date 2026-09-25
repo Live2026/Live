@@ -16,7 +16,15 @@ class EcranServices extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Services'),
-        actions: const [BoutonNotifications(), BoutonMessages()],
+        actions: [
+          IconButton(
+            tooltip: 'Voir sur la carte',
+            onPressed: () => context.push('/carte?espace=services'),
+            icon: const Icon(Icons.map_outlined),
+          ),
+          const BoutonNotifications(),
+          const BoutonMessages(),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 32),

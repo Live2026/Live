@@ -69,7 +69,20 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
             const SizedBox(height: 8),
             Center(
               child: TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  if (await confirmer(
+                    context,
+                    titre: 'Code secret oublié',
+                    texte:
+                        'Nous envoyons un code par SMS à votre numéro. Vous '
+                        'pourrez ensuite choisir un nouveau code secret.',
+                    action: 'Recevoir le code',
+                  )) {
+                    if (context.mounted) {
+                      informer(context, 'Code envoyé par SMS.');
+                    }
+                  }
+                },
                 child: const Text('Code secret oublié ?'),
               ),
             ),

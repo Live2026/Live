@@ -30,8 +30,54 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
 
   void _chercher(String t) => setState(() => _champ.text = t);
 
+  /// Requête effectivement cherchée (corrigée si elle ne donnait rien).
+  String? _corrigee;
+
+  /// F-RECH-01 : mot le plus proche du vocabulaire du catalogue (distance
+  /// d'édition au plus 2), pour « Vouliez-vous dire… ».
+  static String? correction(String q) {
+    final mots = {
+      for (final t in [
+        ..._tendances,
+        for (final (_, c) in categoriesMarket) c,
+        for (final p in produits) p.titre,
+        for (final p in prestataires) p.metier,
+        ...quartiersBrazzaville,
+      ])
+        for (final m in t.split(RegExp(r'[ ,·()]')))
+          if (m.length > 3) m.toLowerCase(),
+    };
+    String? meilleur;
+    var distance = 3;
+    for (final m in mots) {
+      final d = _distance(q.toLowerCase(), m);
+      if (d < distance) {
+        distance = d;
+        meilleur = m;
+      }
+    }
+    return distance == 0 ? null : meilleur;
+  }
+
+  static int _distance(String a, String b) {
+    var prec = List<int>.generate(b.length + 1, (i) => i);
+    for (var i = 1; i <= a.length; i++) {
+      final cour = [i, ...List<int>.filled(b.length, 0)];
+      for (var j = 1; j <= b.length; j++) {
+        final cout = a[i - 1] == b[j - 1] ? 0 : 1;
+        cour[j] = [
+          prec[j] + 1,
+          cour[j - 1] + 1,
+          prec[j - 1] + cout,
+        ].reduce((x, y) => x < y ? x : y);
+      }
+      prec = cour;
+    }
+    return prec[b.length];
+  }
+
   bool _correspond(String texte) {
-    final q = _champ.text.toLowerCase().trim();
+    final q = (_corrigee ?? _champ.text).toLowerCase().trim();
     // Tolérance simple aux fautes : on compare aussi sans accents.
     String sans(String s) => s
         .toLowerCase()
@@ -120,6 +166,20 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
   }
 
   Widget _resultats(double marge) {
+    _corrigee = null;
+    var prods = _chercherTout();
+    if (prods.$4 == 0) {
+      final c = correction(_champ.text.trim());
+      if (c != null) {
+        _corrigee = c;
+        prods = _chercherTout();
+        if (prods.$4 == 0) _corrigee = null;
+      }
+    }
+    return _liste(marge, prods.$1, prods.$2, prods.$3, prods.$4);
+  }
+
+  (List<Produit>, List<Bien>, List<Prestataire>, int) _chercherTout() {
     final prods = produits
         .where((p) => _correspond('${p.titre} ${p.categorie}'))
         .toList();
@@ -130,9 +190,40 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
         .where((p) => _correspond('${p.nom} ${p.metier} ${p.zone}'))
         .toList();
     final total = prods.length + logements.length + pros.length;
+    return (prods, logements, pros, total);
+  }
+
+  Widget _liste(
+    double marge,
+    List<Produit> prods,
+    List<Bien> logements,
+    List<Prestataire> pros,
+    int total,
+  ) {
     return ListView(
       padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
       children: [
+        if (_corrigee != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  const TextSpan(text: 'Résultats pour '),
+                  TextSpan(
+                    text: '« $_corrigee »',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      color: LiveColors.bleu,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '. Aucun résultat pour « ${_champ.text.trim()} ».',
+                  ),
+                ],
+              ),
+            ),
+          ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -285,3 +376,6 @@ class EcranAlertes extends ConsumerWidget {
     );
   }
 }
+
+/// Correction d'une recherche mal orthographiée (F-RECH-01), ou nul.
+String? corrigerRecherche(String q) => _EcranRechercheState.correction(q);

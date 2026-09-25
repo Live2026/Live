@@ -302,8 +302,8 @@ class EcranVisite extends ConsumerWidget {
               child: const Text('Le bien ne correspond pas'),
             ),
             TextButton(
-              onPressed: () {},
-              child: const Text('Annuler la visite'),
+              onPressed: () => _annulerOuAbsence(context, v),
+              child: const Text('Annuler ou signaler une absence'),
             ),
             const SizedBox(height: 12),
             BoutonSimulation(
@@ -414,4 +414,32 @@ class EcranOffreReservation extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Annulation ou absence de l'annonceur (F-IMMO-10) : les règles de
+/// remboursement sont dites avant de choisir.
+Future<void> _annulerOuAbsence(BuildContext context, Visite v) async {
+  final choix = await choisir<int>(
+    context,
+    titre: 'Annuler ou signaler une absence',
+    options: [
+      (
+        0,
+        'Annuler la visite',
+        'Plus de 24 h avant : ${fcfa(v.bien.fraisVisite)} remboursés. Moins de 24 h : frais versés à l’annonceur.',
+      ),
+      (
+        1,
+        'L’annonceur n’est pas venu',
+        'Remboursement intégral, et sa réputation baisse.',
+      ),
+    ],
+  );
+  if (!context.mounted || choix == null) return;
+  informer(
+    context,
+    choix == 0
+        ? 'Visite annulée : ${fcfa(v.bien.fraisVisite)} remboursés sur votre Mobile Money.'
+        : 'Absence signalée : remboursement intégral sous 24 h.',
+  );
 }

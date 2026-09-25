@@ -101,7 +101,7 @@ class _EcranConversationState extends State<EcranConversation> {
         actions: [
           IconButton(
             tooltip: 'Options',
-            onPressed: () => signaler(context, 'cette conversation'),
+            onPressed: () => _options(context),
             icon: const Icon(Icons.more_vert_rounded),
           ),
         ],
@@ -207,7 +207,11 @@ class _EcranConversationState extends State<EcranConversation> {
                             children: [
                               Expanded(
                                 child: OutlinedButton(
-                                  onPressed: () {},
+                                  onPressed: () => _envoyer(
+                                    const _Systeme(
+                                      'Vous avez refusé la contre-offre.',
+                                    ),
+                                  ),
                                   child: const Text('Refuser'),
                                 ),
                               ),
@@ -295,7 +299,9 @@ class _EcranConversationState extends State<EcranConversation> {
                           ),
                           IconButton(
                             tooltip: 'Photo',
-                            onPressed: () {},
+                            onPressed: () => _envoyer(
+                              const _Systeme('Photo envoyée (simulation).'),
+                            ),
                             icon: const Icon(
                               Icons.photo_camera_outlined,
                               color: LiveColors.gris,
@@ -354,6 +360,76 @@ class _EcranConversationState extends State<EcranConversation> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Options de la conversation (F-CHAT-06) : profil, archiver, bloquer,
+  /// signaler.
+  void _options(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: Colors.white,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.storefront_outlined),
+              title: const Text('Voir la boutique'),
+              onTap: () {
+                Navigator.pop(ctx);
+                context.push('/boutique/grace');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.archive_outlined),
+              title: const Text('Archiver la conversation'),
+              onTap: () {
+                Navigator.pop(ctx);
+                context.pop();
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.block_rounded,
+                color: LiveColors.erreur,
+              ),
+              title: const Text(
+                'Bloquer',
+                style: TextStyle(color: LiveColors.erreur),
+              ),
+              subtitle: const Text(
+                'Il ne pourra plus vous écrire ni voir vos annonces',
+              ),
+              onTap: () {
+                Navigator.pop(ctx);
+                ProviderScope.containerOf(context)
+                    .read(liveProvider.notifier)
+                    .bloquer('grace');
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Grâce Mode est bloqué.')),
+                );
+                context.pop();
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.flag_outlined,
+                color: LiveColors.erreur,
+              ),
+              title: const Text(
+                'Signaler',
+                style: TextStyle(color: LiveColors.erreur),
+              ),
+              onTap: () {
+                Navigator.pop(ctx);
+                signaler(context, 'cette conversation');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

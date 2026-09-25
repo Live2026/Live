@@ -7,6 +7,7 @@ class EcranParametres extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final etat = ref.watch(liveProvider);
+    final a = _ActionsParametres(context, ref);
     return Scaffold(
       appBar: AppBar(title: const Text('Paramètres')),
       body: ListView(
@@ -17,13 +18,13 @@ class EcranParametres extends ConsumerWidget {
             icone: Icons.person_outline,
             titre: 'Profil',
             detail: '${etat.prenom} Mabiala · Moungali',
-            onTap: () {},
+            onTap: () => context.push('/profil/moi'),
           ),
           LigneMenu(
             icone: Icons.phone_android,
             titre: 'Numéro de téléphone',
             valeur: etat.telephone,
-            onTap: () {},
+            onTap: a.numero,
           ),
           LigneMenu(
             icone: Icons.verified_user_outlined,
@@ -36,25 +37,25 @@ class EcranParametres extends ConsumerWidget {
             icone: Icons.account_balance_wallet_outlined,
             titre: 'Comptes de retrait',
             detail: 'MTN MoMo · ${etat.telephone}',
-            onTap: () {},
+            onTap: a.comptesRetrait,
           ),
           const EnTeteSection('Sécurité'),
           LigneMenu(
             icone: Icons.pin_outlined,
             titre: 'Code secret de l’application',
-            onTap: () {},
+            onTap: () => a.code('Code secret de l’application'),
           ),
           LigneMenu(
             icone: Icons.password_rounded,
             titre: 'Code secret de paiement',
             detail: 'Distinct du code de l’application',
-            onTap: () {},
+            onTap: () => a.code('Code secret de paiement'),
           ),
           LigneMenu(
             icone: Icons.devices_outlined,
             titre: 'Appareils connectés',
             valeur: '1',
-            onTap: () {},
+            onTap: a.appareils,
           ),
           const EnTeteSection('Préférences'),
           LigneMenu(
@@ -72,7 +73,7 @@ class EcranParametres extends ConsumerWidget {
             icone: Icons.translate_rounded,
             titre: 'Langue',
             valeur: 'Français',
-            onTap: () {},
+            onTap: a.langue,
           ),
           LigneMenu(
             icone: Icons.interests_outlined,
@@ -83,18 +84,18 @@ class EcranParametres extends ConsumerWidget {
           LigneMenu(
             icone: Icons.help_outline_rounded,
             titre: 'Centre d’aide',
-            onTap: () {},
+            onTap: a.aide,
           ),
           LigneMenu(
             icone: Icons.privacy_tip_outlined,
             titre: 'Mes données personnelles',
             detail: 'Télécharger ou supprimer',
-            onTap: () {},
+            onTap: a.donnees,
           ),
           LigneMenu(
             icone: Icons.description_outlined,
             titre: 'Conditions d’utilisation',
-            onTap: () {},
+            onTap: a.conditions,
           ),
           LigneMenu(
             icone: Icons.logout_rounded,
@@ -107,7 +108,7 @@ class EcranParametres extends ConsumerWidget {
             titre: 'Supprimer mon compte',
             couleur: LiveColors.erreur,
             detail: 'Vos gains doivent d’abord être retirés',
-            onTap: () {},
+            onTap: a.supprimer,
           ),
           const SizedBox(height: 16),
           const Center(

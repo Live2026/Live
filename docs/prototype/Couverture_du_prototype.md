@@ -61,7 +61,8 @@ Une fonction réservée ne montre jamais d'erreur : elle explique le pouvoir man
 
 ## 4. Ce qui reste simulé ou partiel
 
-- **Partiel** : variantes et stock (F-MKT-06) affichés dans la fiche produit (tailles, quantité) sans choix de variante à la commande ; carte des biens (F-RECH-04) remplacée par un plan de quartier stylisé.
+- **Plus aucun point partiel au MVP** (contrôle du 25/09/2026, exigence par exigence du document 05) : variantes et stock au moment d'acheter (F-MKT-06), carte des biens et des prestataires sur un plan de Brazzaville (F-RECH-04), recherche corrigée « Résultats pour… » (F-RECH-01), blocage depuis une conversation (F-CHAT-06), objets interdits refusés à la publication (F-MKT-07), absence au rendez-vous de visite des deux côtés (F-IMMO-10), « Je n'ai rien reçu » avec nouvelle demande et sans double débit (F-PAY-10), suppression du compte après retrait des gains (F-CPT-10), dupliquer une annonce (F-MKT-DASH-04).
+- **Aucun bouton inactif** : chaque action ouvre un écran, un panneau ou une confirmation (paramètres, codes, appareils, langue, aide, données, conditions).
 
 - Paiements, scans de QR, génération IA, envoi de SMS, vérification d'identité : **simulés** (boutons « Simuler » discrets, étiquetés).
 - Photos et vidéos : remplacées par des dégradés et des icônes.

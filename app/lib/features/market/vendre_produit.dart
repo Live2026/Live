@@ -65,10 +65,30 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
   bool get _coordonnees =>
       RegExp(r'(\d[\s.]?){8,}').hasMatch('${_titre.text} ${_description.text}');
 
+  /// F-MKT-07 : objets interdits (armes, médicaments, faux documents…).
+  String? get _interdit {
+    final t = '${_titre.text} ${_description.text}'.toLowerCase();
+    for (final (mots, motif) in const [
+      (['arme', 'pistolet', 'fusil', 'munition'], 'les armes'),
+      (
+        ['médicament', 'medicament', 'amoxicilline', 'comprimé'],
+        'les médicaments',
+      ),
+      (
+        ['faux diplôme', 'faux papier', 'fausse carte', 'faux document'],
+        'les faux documents',
+      ),
+      (['ivoire', 'pangolin', 'viande de brousse'], 'les espèces protégées'),
+    ]) {
+      if (mots.any(t.contains)) return motif;
+    }
+    return null;
+  }
+
   bool get _valide => switch (_etape) {
     0 => _categorie != null,
     1 => _photos > 0,
-    2 => _titre.text.trim().isNotEmpty && !_coordonnees,
+    2 => _titre.text.trim().isNotEmpty && !_coordonnees && _interdit == null,
     3 => _montant > 0,
     4 => _mainPropre || _livraison,
     _ => _certifie,

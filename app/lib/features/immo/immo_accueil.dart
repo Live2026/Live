@@ -55,9 +55,9 @@ class _EcranImmoState extends State<EcranImmo> {
         ),
         actions: [
           IconButton(
-            tooltip: 'Mes alertes',
-            onPressed: () => context.push('/alertes'),
-            icon: const Icon(Icons.notifications_none_rounded),
+            tooltip: 'Voir sur la carte',
+            onPressed: () => context.push('/carte'),
+            icon: const Icon(Icons.map_outlined),
           ),
           const BoutonNotifications(),
           const BoutonMessages(),

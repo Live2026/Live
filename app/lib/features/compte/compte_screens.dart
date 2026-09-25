@@ -20,5 +20,6 @@ part 'profil_public.dart';
 part 'boutique.dart';
 part 'enregistres.dart';
 part 'menu_profil.dart';
+part 'parametres_actions.dart';
 part 'parametres.dart';
 part 'paiements_guide.dart';

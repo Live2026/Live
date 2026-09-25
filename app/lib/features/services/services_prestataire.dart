@@ -83,7 +83,13 @@ class _EcranInterventionsState extends State<EcranInterventions> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    TextButton(onPressed: () {}, child: const Text('Ignorer')),
+                    TextButton(
+                      onPressed: () => informer(
+                        context,
+                        'Demande ignorée : le client est orienté vers d’autres pros.',
+                      ),
+                      child: const Text('Ignorer'),
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       flex: 2,

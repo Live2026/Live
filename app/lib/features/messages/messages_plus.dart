@@ -270,3 +270,66 @@ class _EcranReglagesMessagesState extends State<EcranReglagesMessages> {
     );
   }
 }
+
+/// Nouveau message : choisir un compte suivi ou une boutique.
+void _nouveauMessage(BuildContext context) {
+  showModalBottomSheet<void>(
+    context: context,
+    showDragHandle: true,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    builder: (ctx) => SafeArea(
+      child: ListView(
+        shrinkWrap: true,
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        children: [
+          const Text(
+            'Nouveau message',
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
+          ),
+          const SizedBox(height: 8),
+          const TextField(
+            decoration: InputDecoration(
+              hintText: 'Rechercher un nom',
+              prefixIcon: Icon(Icons.search_rounded),
+            ),
+          ),
+          const SizedBox(height: 8),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const CircleAvatar(
+              backgroundColor: Color(0xFFE6EBF2),
+              child: Icon(Icons.group_add_rounded, color: LiveColors.bleu),
+            ),
+            title: const Text('Nouveau groupe'),
+            subtitle: const Text('Aperçu · phase 2'),
+            onTap: () {
+              Navigator.pop(ctx);
+              context.push('/groupe/g1');
+            },
+          ),
+          for (final c in comptes.take(6))
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Avatar(
+                nom: c.nom,
+                couleur: c.couleur,
+                taille: 40,
+                verifie: c.verifie,
+              ),
+              title: Text(c.nom),
+              subtitle: Text(
+                c.bio,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              onTap: () {
+                Navigator.pop(ctx);
+                context.push('/conversation');
+              },
+            ),
+        ],
+      ),
+    ),
+  );
+}

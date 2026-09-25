@@ -96,7 +96,11 @@ const produits = <Produit>[
     negociable: false,
     vues: 3100,
     description: 'Nouvel arrivage. Tailles S à XL.',
-    details: {'Tailles': 'S, M, L, XL', 'Tissu': 'Wax 100 % coton'},
+    details: {
+      'Tailles': 'S, M, L, XL',
+      'Tissu': 'Wax 100 % coton',
+      'Stock': '7',
+    },
   ),
   Produit(
     id: 'p3',

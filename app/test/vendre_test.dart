@@ -46,7 +46,7 @@ void main() {
     expect(find.text('Félicitations !'), findsOneWidget);
   });
 
-  testWidgets('un numéro de téléphone dans le titre est refusé (R-MKT-02)', (
+  testWidgets('numéro (R-MKT-02) et objet interdit (F-MKT-07) refusés', (
     tester,
   ) async {
     tester.view.physicalSize = const Size(360, 780);
@@ -70,5 +70,8 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.textContaining('Retirez le numéro'), findsOneWidget);
+    await tester.enterText(find.byType(TextField).first, 'Pistolet à vendre');
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Live n’accepte pas les armes'), findsOneWidget);
   });
 }

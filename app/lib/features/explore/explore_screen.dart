@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/adaptatif.dart';
+import '../../core/format.dart';
 import '../../core/theme.dart';
 import '../../data/mock.dart';
 import '../../data/store.dart';
@@ -10,6 +11,7 @@ import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
 
 part 'recherche.dart';
+part 'carte.dart';
 
 /// E-EXP-01 — Explorer : les 4 espaces, puis les meilleures annonces de chacun.
 class EcranExplorer extends StatelessWidget {

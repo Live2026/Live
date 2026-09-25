@@ -175,6 +175,11 @@ class _MesAnnoncesState extends ConsumerState<_MesAnnonces> {
                               : _masquees.add(p.id);
                         case 'vendu':
                           _vendues.add(p.id);
+                        case 'dupliquer':
+                          informer(
+                            context,
+                            'Copie créée : « ${p.titre} » en brouillon.',
+                          );
                         case 'modifier':
                           context.push('/produit/${p.id}');
                       }
@@ -183,6 +188,10 @@ class _MesAnnoncesState extends ConsumerState<_MesAnnonces> {
                       const PopupMenuItem(
                         value: 'modifier',
                         child: Text('Modifier'),
+                      ),
+                      const PopupMenuItem(
+                        value: 'dupliquer',
+                        child: Text('Dupliquer'),
                       ),
                       const PopupMenuItem(
                         value: 'booster',

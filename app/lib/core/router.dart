@@ -87,6 +87,10 @@ final routeur = GoRouter(
     // Recherche
     _route('/recherche', (_) => const EcranRecherche()),
     _route('/alertes', (_) => const EcranAlertes()),
+    _route(
+      '/carte',
+      (s) => EcranCarte(espace: s.uri.queryParameters['espace'] ?? 'immo'),
+    ),
     // Market
     _route('/market', (_) => const EcranMarket()),
     _route(
@@ -98,7 +102,14 @@ final routeur = GoRouter(
     ),
     _route('/commandes', (_) => const EcranMesCommandes()),
     _route('/produit/:id', (s) => EcranProduit(id: _p(s, 'id'))),
-    _route('/commande/:id', (s) => EcranCommande(id: _p(s, 'id'))),
+    _route(
+      '/commande/:id',
+      (s) => EcranCommande(
+        id: _p(s, 'id'),
+        variante: s.uri.queryParameters['variante'],
+        quantite: int.tryParse(s.uri.queryParameters['qte'] ?? '') ?? 1,
+      ),
+    ),
     _route('/suivi/:id', (s) => EcranSuiviCommande(id: _p(s, 'id'))),
     _route('/vendre', (_) => const EcranVendre()),
     _route('/mes-ventes', (_) => const EcranMesVentes()),

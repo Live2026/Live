@@ -185,7 +185,9 @@ class EcranProduit extends StatelessWidget {
           ],
           Expanded(
             child: FilledButton(
-              onPressed: () => context.push('/commande/${p.id}'),
+              onPressed: () => p.details.containsKey('Tailles')
+                  ? ouvrirVariantes(context, p)
+                  : context.push('/commande/${p.id}'),
               child: Text(surPlace ? 'Rendez-vous' : 'Acheter'),
             ),
           ),

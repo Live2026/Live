@@ -44,6 +44,8 @@ const routes = [
   '/boutique/mbongui',
   '/recherche',
   '/alertes',
+  '/carte',
+  '/carte?espace=services',
   '/market',
   '/market/liste',
   '/market/liste?categorie=T%C3%A9l%C3%A9phones&tri=2',

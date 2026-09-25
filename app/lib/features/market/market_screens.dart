@@ -15,6 +15,7 @@ import '../../shared/widgets.dart';
 
 part 'produit_commande.dart';
 part 'commande.dart';
+part 'variantes.dart';
 part 'suivi_commande.dart';
 part 'mes_ventes.dart';
 part 'mes_ventes_blocs.dart';

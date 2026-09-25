@@ -142,7 +142,7 @@ class _EcranAgenceState extends State<EcranAgence> {
                   detail: i == 0
                       ? 'Gestionnaire · 12 visites ce mois'
                       : 'Agent · ${8 - i * 2} visites ce mois',
-                  onTap: () {},
+                  onTap: () => context.push('/espace/equipe'),
                 ),
               TextButton.icon(
                 onPressed: () => context.push('/espace/equipe'),
@@ -300,7 +300,13 @@ class _LigneBienAgence extends StatelessWidget {
               ),
             ),
             aConfirmer
-                ? TextButton(onPressed: () {}, child: const Text('Reconfirmer'))
+                ? TextButton(
+                    onPressed: () => informer(
+                      context,
+                      'Disponibilité reconfirmée : l’annonce reste en ligne 30 jours.',
+                    ),
+                    child: const Text('Reconfirmer'),
+                  )
                 : const Etiquette(
                     'En ligne',
                     fond: Color(0xFFE7F4EC),
@@ -405,12 +411,35 @@ class _EcranValiderVisiteState extends State<EcranValiderVisite> {
               label: const Text('Scanner le QR du visiteur'),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                final code = await saisirCode(
+                  context,
+                  titre: 'Code du visiteur',
+                );
+                if (code != null) setState(() => _validee = true);
+              },
               child: const Text('Saisir le code LV- à la place'),
             ),
             const SizedBox(height: 8),
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () async {
+                if (await confirmer(
+                  context,
+                  titre: 'Visiteur absent',
+                  texte:
+                      'Après 30 minutes d’attente, les frais de visite '
+                      '(${fcfa(b.fraisVisite)}) vous sont versés, moins la '
+                      'commission de 15 %. Le visiteur est prévenu.',
+                  action: 'Déclarer l’absence',
+                )) {
+                  if (context.mounted) {
+                    informer(
+                      context,
+                      'Absence enregistrée : frais versés à l’agence.',
+                    );
+                  }
+                }
+              },
               child: const Text('Le visiteur ne s’est pas présenté'),
             ),
           ],

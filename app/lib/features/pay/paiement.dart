@@ -206,7 +206,7 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
               ),
               const Spacer(),
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () => _rienRecu(context),
                 child: const Text("Je n'ai rien reçu"),
               ),
               TextButton(
@@ -322,4 +322,64 @@ class EcranPaiementReussi extends StatelessWidget {
       ),
     );
   }
+}
+
+/// F-PAY-10 — « Je n'ai rien reçu » : l'opérateur n'a pas encore confirmé.
+/// On peut renvoyer la demande ou changer de moyen, sans double débit.
+void _rienRecu(BuildContext context) {
+  showModalBottomSheet<void>(
+    context: context,
+    showDragHandle: true,
+    backgroundColor: Colors.white,
+    builder: (ctx) => SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'En attente de l’opérateur',
+              style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              'La demande peut mettre jusqu’à 2 minutes à arriver. Vérifiez que '
+              'votre téléphone a du réseau et du crédit Mobile Money.',
+            ),
+            const SizedBox(height: 10),
+            const BandeauProtection(
+              'Aucun double débit : une seule demande peut être validée.',
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  informer(
+                    context,
+                    'Nouvelle demande envoyée à votre téléphone.',
+                  );
+                },
+                icon: const Icon(Icons.refresh_rounded),
+                label: const Text('Renvoyer la demande'),
+              ),
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  context.pop();
+                },
+                child: const Text('Changer de moyen de paiement'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }

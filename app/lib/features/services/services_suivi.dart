@@ -139,7 +139,8 @@ class EcranPrestation extends ConsumerWidget {
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () =>
+                      partager(context, 'Suivi de mon intervention Live'),
                   icon: const Icon(Icons.share_location),
                   label: const Text('Partager avec un proche'),
                 ),
@@ -179,7 +180,7 @@ class EcranPrestation extends ConsumerWidget {
                   child: const Text('Travaux conformes'),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => context.push('/probleme/prestation/${p.id}'),
                   child: const Text('Signaler un problème'),
                 ),
               ],
