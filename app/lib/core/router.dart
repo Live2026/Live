@@ -268,6 +268,10 @@ final routeur = GoRouter(
       (s) => EcranFicheUtilisateur(id: _p(s, 'id')),
     ),
     _route('/admin/configuration', (_) => const EcranAdmin(section: 6)),
+    _route('/admin/validations', (_) => const EcranAdmin(section: 7)),
+    _route('/admin/journal', (_) => const EcranAdmin(section: 8)),
+    _route('/admin/equipe', (_) => const EcranAdmin(section: 9)),
+    _route('/admin/connexion', (_) => const EcranConnexionAdmin()),
     _route('/scenarios', (_) => const EcranScenarios()),
   ],
 );

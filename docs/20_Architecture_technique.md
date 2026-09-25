@@ -123,6 +123,7 @@ Chaque fonctionnalité suit la même structure : `data/` (dépôts, sources), `d
 
 - **Supabase Auth, connexion par téléphone + OTP**.
 - Envoi des SMS via le **hook « Send SMS » de Supabase Auth** vers un **agrégateur SMS local ou régional** (meilleure délivrabilité vers MTN et Airtel Congo et coût plus bas que les fournisseurs internationaux). Fournisseur international en secours.
+- **Révision du 25/09/2026 (document 07, §11)** : le promoteur retient **Twilio Verify** (SMS, appel vocal, WhatsApp) branché sur ce même hook, et **Mux** pour la vidéo et les directs.
 - **PIN de l'application** et **PIN de paiement** gérés côté serveur (haché), avec un nombre de tentatives limité.
 - Sessions : jeton court + jeton de rafraîchissement ; liste des appareils ; révocation à distance.
 - Comptes des agents du back-office : e-mail + **authentification à deux facteurs** obligatoire.

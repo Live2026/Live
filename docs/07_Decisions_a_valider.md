@@ -119,4 +119,13 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | Ce qui ne change pas | Les phases du document 04 restent l'**ordre de construction et de lancement** : on construit et on lance d'abord le socle (Market, Immo, Services, Live Pay, Live IA), le reste s'active ensuite, sans refaire la navigation. |
 | Appareils | Une seule application adaptative : le même écran se déploie sur mobile et sur ordinateur. Seul le back-office est conçu pour l'ordinateur. |
 
+## 11. Fournisseurs retenus par le promoteur (25/09/2026)
+
+| Point | Décision | Conséquence |
+|-------|----------|-------------|
+| Backend | **Supabase** (confirmé) | Auth par téléphone, Postgres avec RLS, Realtime (chat, statuts, directs), Storage (photos, pièces KYC en privé), Edge Functions (webhooks) |
+| SMS et vérification | **Twilio** (remplace l'agrégateur SMS local prévu au document 20, §4) | Twilio Verify couvre les trois canaux de l'écran du code : **SMS, appel vocal, WhatsApp**. À mesurer : délivrabilité et coût vers MTN et Airtel Congo avant le lancement |
+| Vidéo | **Mux** (retenu parmi les options du document 20) | Téléversement, encodage adaptatif, lecture du fil, **directs** (Mux Live) et statistiques de qualité |
+| Paiement Mobile Money | **Toujours ouvert (D-11)** | Ni Supabase, ni Twilio, ni Mux n'encaissent MTN MoMo ou Airtel Money : il faut un agrégateur (CinetPay ou pawaPay), branché par des Edge Functions (initiation, webhooks, réconciliation) |
+
 **Fin du Document 07**

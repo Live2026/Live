@@ -146,6 +146,10 @@ const routes = [
   '/admin/utilisateurs',
   '/admin/utilisateurs/u2',
   '/admin/configuration',
+  '/admin/validations',
+  '/admin/journal',
+  '/admin/equipe',
+  '/admin/connexion',
   '/scenarios',
 ];
 

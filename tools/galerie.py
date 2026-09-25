@@ -225,6 +225,12 @@ SECTIONS = [
         'admin_utilisateurs': ('Utilisateurs', ''),
         'admin_fiche_utilisateur': ('Fiche utilisateur', 'Capacités, journal d’audit'),
         'admin_configuration': ('Configuration', 'Commissions, plafonds, boosts'),
+        'admin_validations': ('Double validation', 'Quatre yeux : l’auteur ne valide pas sa demande'),
+        'admin_journal': ('Journal d’audit', 'Filtrable, exportable, inaltérable'),
+        'admin_equipe': ('Équipe Live', 'Super administrateur, délégués, permissions'),
+        'admin_inviter': ('Inviter un administrateur', 'Fonction et permissions'),
+        'admin_connexion': ('Connexion d’un agent', 'E-mail professionnel, mot de passe'),
+        'admin_2fa': ('Double authentification', 'Code de l’application d’authentification'),
         'scenarios_test': ('Scénarios du test terrain', 'Pour l’animateur'),
     }),
 ]
