@@ -314,7 +314,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['partenaires', 'partenaires'],
       ['vendre', 'vendre_photo_ia', async () => { await bouton('Une photo, et c’est prêt'); await p.waitForTimeout(2800); }],
       ['ia/assistant', 'ia_assistant'],
-      ['ia/assistant', 'ia_assistant_joindre', async () => { await bouton('Joindre un fichier'); await bouton('Fichier', { exact: true }); }],
+      ['ia/assistant', 'ia_assistant_joindre', async () => { await bouton('Joindre un fichier'); await bouton('PDF, Word, Excel'); }],
       ['ia/assistant', 'ia_assistant_fichier', async () => { await bouton('Contrat_bail_Moungali.pdf'); await bouton('Envoyer'); await p.waitForTimeout(1200); }],
       ['ia/assistant', 'ia_assistant_lecture', async () => { await bouton('Lire pour 5 crédits'); await p.waitForTimeout(1600); }],
       ['ia/assistant', 'ia_mode_vocal', async () => { await bouton('Nouvelle conversation'); await bouton('Mode vocal'); await bouton('Parler'); await p.waitForTimeout(1400); }],
