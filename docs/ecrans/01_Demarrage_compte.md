@@ -120,6 +120,19 @@ Le logo de Live apparaît sur fond nuit, dans un disque blanc lumineux, avec le 
 
 ---
 
+## Révision du 25/09/2026 : les autres étapes
+
+Toutes les étapes partagent le même en-tête (`EnTeteDemarrage`) : barre de progression en 5 segments (Numéro, Code, Profil, Code secret, Intérêts), grande icône sur un dégradé propre à l'étape, titre et explication.
+
+| Écran | Ce qui change |
+|-------|---------------|
+| E-AUTH-04 Profil | Icône violette ; l'avatar se dessine au fil de la saisie du prénom ; ville en puces (villes de la CEMAC) ; « 18 ans ou plus » en interrupteur |
+| E-AUTH-06 Code secret | Icône verte ; **saisi deux fois** (« Confirmez votre code »), sinon on recommence ; option empreinte ou visage |
+| E-AUTH-05 Intérêts | Icône rose ; chaque centre d'intérêt a sa couleur, la tuile se remplit et se coche quand on la choisit |
+| E-AUTH-08 Connexion | Même en-tête à chaque étape (numéro, code en six cases, code secret), « Code secret oublié ? » |
+
+---
+
 ## E-AUTH-04 — Votre profil
 
 ```text

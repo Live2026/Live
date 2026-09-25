@@ -89,7 +89,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await saisir('Code à 6 chiffres', '123456'); await p.waitForTimeout(800);
     await saisir('Prénom', 'Grâce'); await ecran('inscription_profil');
     await bouton('Continuer'); await ecran('code_secret');
-    await pin(); await p.waitForTimeout(1200); await ecran('interets');
+    await pin(); await p.waitForTimeout(700); await ecran('code_secret_confirmer'); await pin(); await p.waitForTimeout(1200); await ecran('interets');
     await bouton('Continuer'); await p.waitForTimeout(1200); await ecran('fil');
 
     // 1. Acheter (depuis la pastille du fil puis la fiche)

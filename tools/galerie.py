@@ -17,6 +17,7 @@ SECTIONS = [
         'code_aide': ('Code non reçu ?', 'Conseils, modifier le numéro, assistance'),
         'inscription_profil': ('Profil', 'Prénom, ville, 18 ans ou plus'),
         'code_secret': ('Code secret Live', 'Protège le compte'),
+        'code_secret_confirmer': ('Confirmer le code secret', 'Deux saisies identiques, empreinte en option'),
         'interets': ('Centres d’intérêt', 'Un fil utile dès la première ouverture'),
         'connexion': ('Connexion', 'Retour d’un utilisateur'),
     }),

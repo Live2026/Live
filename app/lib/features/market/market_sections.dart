@@ -359,7 +359,10 @@ class _VendreSurLive extends StatelessWidget {
         children: [
           const _TitreBloc('Vendre sur Live'),
           for (final (icone, texte) in const [
-            (Icons.groups_rounded, 'Des milliers d’acheteurs à Brazzaville'),
+            (
+              Icons.groups_rounded,
+              'Des milliers d’acheteurs près de chez vous',
+            ),
             (Icons.percent_rounded, '0 % de commission pendant 3 mois'),
             (Icons.lock_rounded, 'Paiement garanti avant la remise'),
             (Icons.qr_code_2_rounded, 'Remise confirmée par QR'),

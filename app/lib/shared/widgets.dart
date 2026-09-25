@@ -19,3 +19,4 @@ export 'panier.dart';
 export 'plan_ville.dart';
 export 'reglement.dart';
 export 'saisie.dart';
+export 'ville.dart';

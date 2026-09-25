@@ -14,8 +14,10 @@ class EcranServices extends ConsumerWidget {
         for (final s in p.services.take(1)) (p, s),
     ];
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Services'),
+      appBar: EnTeteRecherche(
+        titre: const Text('Services'),
+        indice: 'Plombier, coiffure, cours…',
+        onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: [
           IconButton(
             tooltip: 'Voir sur la carte',
