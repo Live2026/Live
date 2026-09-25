@@ -122,12 +122,16 @@ class BadgeVerifie extends StatelessWidget {
       children: [
         const Icon(Icons.verified, color: LiveColors.bleu, size: 16),
         const SizedBox(width: 4),
-        Text(
-          texte,
-          style: const TextStyle(
-            color: LiveColors.bleu,
-            fontWeight: FontWeight.w600,
-            fontSize: 13,
+        Flexible(
+          child: Text(
+            texte,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: LiveColors.bleu,
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+            ),
           ),
         ),
       ],

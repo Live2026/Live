@@ -18,5 +18,6 @@ part 'verifier.dart';
 part 'espace.dart';
 part 'profil_public.dart';
 part 'boutique.dart';
+part 'enregistres.dart';
 part 'parametres.dart';
 part 'paiements_guide.dart';

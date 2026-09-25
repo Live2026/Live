@@ -172,36 +172,12 @@ class EcranMoi extends ConsumerWidget {
               onTap: () => context.push('/boutique/grace'),
             ),
           LigneMenu(
-            icone: Icons.school_outlined,
-            titre: 'Ma boutique de savoirs',
-            detail: 'Cours, PDF, vidéos : revenus et ventes',
-            onTap: () => context.push('/apprendre/boutique'),
-          ),
-          LigneMenu(
             icone: Icons.add_business_outlined,
             titre: 'Créer un espace',
             detail: 'Boutique, agence, prestataire ou chaîne',
             onTap: () => context.push('/espace/nouveau'),
           ),
           const EnTeteSection('Activité'),
-          LigneMenu(
-            icone: Icons.dynamic_feed_rounded,
-            titre: 'Activité de mes abonnements',
-            detail: 'Nouveaux cours, bourses, articles, logements',
-            onTap: () => context.push('/suivis'),
-          ),
-          LigneMenu(
-            icone: Icons.download_for_offline_outlined,
-            titre: 'Mes achats numériques',
-            valeur: '${etat.bibliotheque.length}',
-            onTap: () => context.push('/mes-achats'),
-          ),
-          LigneMenu(
-            icone: Icons.work_outline_rounded,
-            titre: 'Mes candidatures',
-            valeur: '${etat.candidatures.length + 2}',
-            onTap: () => context.push('/mes-candidatures'),
-          ),
           LigneMenu(
             icone: Icons.payments_outlined,
             titre: 'Ce qui se paie dans Live',
@@ -230,7 +206,7 @@ class EcranMoi extends ConsumerWidget {
             icone: Icons.bookmark_border_rounded,
             titre: 'Enregistrés',
             valeur: '${etat.favoris.length}',
-            onTap: () => context.push('/immo'),
+            onTap: () => context.push('/enregistres'),
           ),
           LigneMenu(
             icone: Icons.card_giftcard_rounded,

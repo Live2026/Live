@@ -13,7 +13,6 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
   var _livraison = false;
   var _mode = ModePaiement.avance;
   var _lieu = 0;
-  var _especes = false;
 
   static const _lieux = [
     ('Station Total Moungali', 'Éclairée, gardiennée'),
@@ -172,23 +171,16 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
         ],
         secondaire: [
           const Text(
-            'Au rendez-vous, vous payez',
+            'Paiement à la remise',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 6),
-          Choix(
-            titre: 'Avec le QR Live',
-            sousTitre: 'MoMo ou Airtel, après vérification. Protégé.',
-            icone: Icons.qr_code_2_rounded,
-            selectionne: !_especes,
-            onTap: () => setState(() => _especes = false),
-          ),
-          Choix(
-            titre: 'En espèces',
-            sousTitre: 'Hors de Live : aucune protection en cas de litige.',
-            icone: Icons.payments_outlined,
-            selectionne: _especes,
-            onTap: () => setState(() => _especes = true),
+          const LigneMenu(
+            icone: Icons.phone_android_rounded,
+            titre: 'MoMo ou Airtel, au rendez-vous',
+            detail:
+                'Vous vérifiez l’objet, le vendeur appuie sur « Encaisser » '
+                'et vous validez la demande sur votre téléphone.',
           ),
           const SizedBox(height: 8),
           const BandeauProtection(

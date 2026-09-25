@@ -11,8 +11,7 @@ class EcranGuidePaiements extends StatelessWidget {
       'L’argent est bloqué par Live et versé seulement quand vous confirmez '
           '(QR, réception, fin du service). Remboursé sinon.',
       [
-        'Cours, PDF, vidéos, livres et coaching',
-        'Articles neufs livrés par une boutique vérifiée',
+        'Achats payés d’avance (argent bloqué jusqu’au QR de remise)',
         'Frais de visite d’un logement',
         'Acompte de réservation d’un logement',
         'Services à prix fixe et acomptes de devis',
@@ -21,9 +20,9 @@ class EcranGuidePaiements extends StatelessWidget {
     ),
     (
       Reglement.surPlace,
-      'Vous devez voir l’objet avant d’acheter. Live fixe le rendez-vous dans '
-          'un lieu sûr ; vous payez sur place, de préférence avec le QR Live '
-          'pour garder la protection.',
+      'Vous voyez l’objet avant d’acheter. La commande est réservée sans '
+          'paiement ; au rendez-vous, vous validez la demande MoMo ou Airtel '
+          'envoyée par Live. Pas d’avance, pas d’espèces.',
       [
         'Téléphones et ordinateurs d’occasion',
         'Motos, voitures, pièces',
@@ -39,7 +38,7 @@ class EcranGuidePaiements extends StatelessWidget {
         'Loyers, avance et caution',
         'Commission d’agence',
         'Prix d’achat d’une maison ou d’un terrain (chez le notaire)',
-        'Frais officiels d’un concours (Trésor public)',
+        'Frais officiels d’un concours (Live Emploi, phase 3)',
       ],
     ),
   ];
@@ -86,8 +85,8 @@ class EcranGuidePaiements extends StatelessWidget {
           ),
           const BoutonEcouter(
             'Trois cas. Payé dans Live : Live garde votre argent jusqu’à ce que '
-            'vous confirmiez. Sur place : vous voyez d’abord l’objet, puis vous '
-            'payez, de préférence avec le QR Live. En direct : loyers, caution, '
+            'vous confirmiez. À la remise : vous voyez d’abord l’objet, puis vous '
+            'validez le paiement MoMo sur votre téléphone. En direct : loyers, caution, '
             'prix d’une maison ou frais officiels, payés contre reçu au '
             'propriétaire ou à l’organisme.',
           ),

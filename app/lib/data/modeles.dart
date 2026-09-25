@@ -10,25 +10,27 @@ enum Reglement {
   /// Payé dans Live : argent bloqué jusqu'à la remise ou au service rendu.
   dansLive,
 
-  /// On voit avant d'acheter : rendez-vous fixé dans Live, paiement à la
-  /// remise (QR Live pour rester protégé, ou espèces à ses risques).
+  /// On voit avant d'acheter : commande réservée sans paiement, rendez-vous
+  /// dans un lieu public, paiement MoMo ou Airtel via Live au moment de la
+  /// remise (mode B « payer à la remise », docs/10, section 3.6).
   surPlace,
 
   /// Payé directement au propriétaire, à l'agence ou à l'organisme, contre
-  /// reçu : loyers, caution, prix d'un bien, frais officiels d'un concours.
+  /// reçu : loyers, caution, prix d'un bien (encaissement par Live prévu en
+  /// P2, docs/11), frais officiels d'un concours.
   direct,
 }
 
 extension InfoReglement on Reglement {
   String get libelle => switch (this) {
     Reglement.dansLive => 'Payé dans Live',
-    Reglement.surPlace => 'Voir puis payer sur place',
+    Reglement.surPlace => 'Voir puis payer à la remise',
     Reglement.direct => 'Payé en direct',
   };
 
   String get court => switch (this) {
     Reglement.dansLive => 'Dans Live',
-    Reglement.surPlace => 'Sur place',
+    Reglement.surPlace => 'À la remise',
     Reglement.direct => 'En direct',
   };
 

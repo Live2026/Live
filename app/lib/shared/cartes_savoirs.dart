@@ -89,8 +89,14 @@ class CarteContenu extends StatelessWidget {
                   size: 15,
                   color: LiveColors.ambre,
                 ),
-                Text(' ${note(c.note)} (${compact(c.avis)})', style: _meta),
-                const Spacer(),
+                Expanded(
+                  child: Text(
+                    ' ${note(c.note).replaceAll('/5', '')} (${compact(c.avis)})',
+                    maxLines: 1,
+                    overflow: TextOverflow.clip,
+                    style: _meta,
+                  ),
+                ),
                 Text(
                   achete ? 'Acheté' : fcfa(c.prix),
                   style: TextStyle(

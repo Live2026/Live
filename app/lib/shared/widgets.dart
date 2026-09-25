@@ -8,6 +8,7 @@ export 'composants.dart';
 export 'confiance.dart';
 export 'elements.dart';
 export 'frise.dart';
+export 'apercu.dart';
 export 'medias.dart';
 export 'panier.dart';
 export 'reglement.dart';

@@ -90,6 +90,34 @@ class EcranExplorer extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
+            child: const EnTeteSection('Bientôt sur Live'),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: marge),
+            child: GrilleAdaptative(
+              largeurMax: 260,
+              espacement: 10,
+              hauteur: 116,
+              enfants: [
+                _Espace(
+                  icone: Icons.school_rounded,
+                  titre: 'Live Savoir',
+                  sous: 'Aperçu phase 3 · cours, PDF, vidéos',
+                  couleur: const Color(0xFF6D28D9),
+                  onTap: () => context.push('/apprendre'),
+                ),
+                _Espace(
+                  icone: Icons.work_rounded,
+                  titre: 'Live Emploi',
+                  sous: 'Aperçu phase 3 · bourses, stages, emplois',
+                  couleur: const Color(0xFF6D28D9),
+                  onTap: () => context.push('/opportunites'),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
               'Bonnes affaires près de vous',
               onTap: () => context.push('/market'),

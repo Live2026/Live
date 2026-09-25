@@ -1,6 +1,6 @@
 part of 'market_screens.dart';
 
-/// E-MKT-01 — Accueil Market : recherche, catégories, boutiques vérifiées,
+/// E-MKT-01 — Accueil Market : catégories (recherche en icône), boutiques vérifiées,
 /// tendances et toutes les annonces en grille.
 class EcranMarket extends StatefulWidget {
   const EcranMarket({super.key});
@@ -25,6 +25,11 @@ class _EcranMarketState extends State<EcranMarket> {
         title: const Text('Market'),
         actions: [
           IconButton(
+            tooltip: 'Rechercher',
+            onPressed: () => context.push('/recherche'),
+            icon: const Icon(Icons.search_rounded),
+          ),
+          IconButton(
             tooltip: 'Vendre',
             onPressed: () => context.push('/vendre'),
             icon: const Icon(Icons.add_circle_outline_rounded),
@@ -35,18 +40,7 @@ class _EcranMarketState extends State<EcranMarket> {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 32),
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: marge),
-            child: TextField(
-              readOnly: true,
-              onTap: () => context.push('/recherche'),
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search_rounded),
-                hintText: 'Téléphone, pagne, climatiseur…',
-              ),
-            ),
-          ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 4),
           SizedBox(
             height: 86,
             child: ListView(

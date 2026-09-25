@@ -90,7 +90,7 @@ class EcranProduit extends StatelessWidget {
       const SizedBox(height: 12),
       BandeauProtection(
         surPlace
-            ? 'Payez au rendez-vous avec le QR Live : vous restez protégé.'
+            ? 'Payez au rendez-vous par MoMo ou Airtel via Live : jamais d’avance.'
             : 'Remboursé si vous ne recevez pas le produit.',
       ),
       Align(
@@ -323,8 +323,9 @@ class _ReglementProduit extends StatelessWidget {
             Reglement.surPlace,
             montant: p.prix,
             detail:
-                'Vous vérifiez l’objet au rendez-vous, puis vous payez avec '
-                'le QR Live (protégé) ou en espèces.',
+                'Rien à payer maintenant. Au rendez-vous, vous vérifiez '
+                'l’objet puis vous validez la demande MoMo ou Airtel envoyée '
+                'par Live.',
           ),
         ],
         note: 'Ne versez jamais d’avance pour un objet que vous n’avez pas vu.',

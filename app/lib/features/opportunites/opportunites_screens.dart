@@ -75,6 +75,13 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 96),
         children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(marge, 4, marge, 8),
+            child: const BandeauApercu(
+              module: 'Live Emploi et opportunités',
+              phase: 3,
+            ),
+          ),
           SizedBox(
             height: 48,
             child: ListView(

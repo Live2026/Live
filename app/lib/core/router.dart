@@ -82,6 +82,7 @@ final routeur = GoRouter(
       ),
     ),
     _route('/suivis', (_) => const EcranSuivis()),
+    _route('/enregistres', (_) => const EcranEnregistres()),
     // Recherche
     _route('/recherche', (_) => const EcranRecherche()),
     _route('/alertes', (_) => const EcranAlertes()),

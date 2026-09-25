@@ -144,6 +144,10 @@ class _EcranGroupeState extends State<EcranGroupe> {
       ),
       body: Column(
         children: [
+          const Padding(
+            padding: EdgeInsets.fromLTRB(12, 8, 12, 4),
+            child: BandeauApercu(module: 'Groupes et canaux', phase: 2),
+          ),
           Material(
             color: Colors.white,
             child: ListTile(
