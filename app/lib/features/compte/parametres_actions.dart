@@ -87,17 +87,42 @@ class _ActionsParametres {
   }
 
   Future<void> langue() async {
-    await choisir<String>(
+    final choix = await choisir<String>(
       context,
       titre: 'Langue',
       actuel: 'fr',
-      actives: {'fr'},
       options: const [
         ('fr', 'Français', null),
-        ('ln', 'Lingala', 'Arrive en phase 2'),
-        ('kt', 'Kituba', 'Arrive en phase 2'),
+        ('ln', 'Lingala', 'Interface, sous-titres et Live IA'),
+        ('kt', 'Kituba', 'Interface, sous-titres et Live IA'),
       ],
     );
+    if (choix != null && context.mounted) {
+      informer(context, 'Langue enregistrée.');
+    }
+  }
+
+  /// Extension CEMAC : même monnaie (FCFA), annonces du pays choisi.
+  Future<void> pays() async {
+    final choix = await choisir<String>(
+      context,
+      titre: 'Pays et ville',
+      actuel: _etat.pays,
+      options: const [
+        ('Brazzaville', 'Congo · Brazzaville', null),
+        ('Pointe-Noire', 'Congo · Pointe-Noire', null),
+        ('Libreville', 'Gabon · Libreville', 'Airtel Money, Moov Money'),
+        ('Douala', 'Cameroun · Douala', 'MTN MoMo, Orange Money'),
+        ('Yaoundé', 'Cameroun · Yaoundé', 'MTN MoMo, Orange Money'),
+        ('N’Djamena', 'Tchad · N’Djamena', 'Airtel Money, Moov Money'),
+        ('Bangui', 'Centrafrique · Bangui', 'Orange Money'),
+        ('Malabo', 'Guinée équatoriale · Malabo', 'Muni Dinero'),
+      ],
+    );
+    if (choix != null && context.mounted) {
+      ref.read(liveProvider.notifier).choisirPays(choix);
+      informer(context, 'Annonces et prix de $choix, toujours en FCFA.');
+    }
   }
 
   void aide() {

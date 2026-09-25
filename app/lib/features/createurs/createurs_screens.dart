@@ -52,8 +52,6 @@ class _EcranStudioState extends ConsumerState<EcranStudio> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const BandeauApercu(module: 'Live Créateurs', phase: 2),
-          const SizedBox(height: 12),
           GrilleAdaptative(
             largeurMax: 200,
             espacement: 10,
@@ -99,20 +97,15 @@ class _EcranStudioState extends ConsumerState<EcranStudio> {
                 (Icons.videocam_rounded, 'Vidéo', '/publier/media'),
                 (Icons.podcasts_rounded, 'Direct', '/direct/lancer'),
                 (Icons.school_rounded, 'Cours', '/apprendre/vendre'),
-                (Icons.poll_rounded, 'Sondage', ''),
-                (Icons.event_rounded, 'Programmer', ''),
+                (Icons.poll_rounded, 'Sondage', '/publier/media'),
+                (Icons.event_rounded, 'Programmer', '/publier/media'),
               ])
                 Semantics(
                   button: true,
                   label: libelle,
                   excludeSemantics: true,
                   child: Pressable(
-                    onTap: () => route.isEmpty
-                        ? informer(
-                            context,
-                            '$libelle : prévu avec Live Créateurs (phase 2).',
-                          )
-                        : context.push(route),
+                    onTap: () => context.push(route),
                     child: Bloc(
                       padding: 8,
                       child: Column(

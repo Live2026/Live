@@ -69,6 +69,7 @@ const routes = [
   '/livraison/LV-00482',
   '/fonds-createurs',
   '/finance',
+  '/partenaires',
   '/apprendre',
   '/contenu/n1',
   '/contenu/n2',

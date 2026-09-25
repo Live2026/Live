@@ -175,7 +175,7 @@ class _EcranDirectState extends ConsumerState<EcranDirect> {
                       ),
                     ),
                   ),
-                  _PastilleDirect(spectateurs: d.spectateurs),
+                  PastilleDirect(spectateurs: d.spectateurs),
                   IconButton(
                     tooltip: 'Quitter le direct',
                     onPressed: () => context.pop(),

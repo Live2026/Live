@@ -49,10 +49,7 @@ class _EcranDirectsState extends ConsumerState<EcranDirects> {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 96),
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(marge, 4, marge, 8),
-            child: const BandeauApercu(module: 'Live Direct', phase: 2),
-          ),
+          const SizedBox(height: 8),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: const EnTeteSection('En direct maintenant'),
@@ -67,7 +64,7 @@ class _EcranDirectsState extends ConsumerState<EcranDirects> {
                 for (final (i, d) in enCours.indexed)
                   Apparition(
                     rang: i,
-                    child: _CarteDirect(direct: d),
+                    child: CarteDirect(direct: d),
                   ),
               ],
             ),
@@ -138,131 +135,6 @@ class _EcranDirectsState extends ConsumerState<EcranDirects> {
                 ),
               ),
             ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Vignette verticale d'un direct : pastille EN DIRECT, spectateurs, hôte.
-class _CarteDirect extends StatelessWidget {
-  const _CarteDirect({required this.direct});
-  final Direct direct;
-
-  @override
-  Widget build(BuildContext context) {
-    final d = direct;
-    return Semantics(
-      button: true,
-      label: 'Direct de ${d.hote.nom} : ${d.titre}',
-      excludeSemantics: true,
-      child: Pressable(
-        onTap: () => context.push('/direct/${d.id}'),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(14),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Vignette(
-                couleur: d.couleur,
-                icone: Icons.videocam_rounded,
-                rayon: 0,
-              ),
-              const DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.transparent, Color(0xCC000000)],
-                    begin: Alignment.center,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 8,
-                top: 8,
-                right: 8,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: _PastilleDirect(spectateurs: d.spectateurs),
-                ),
-              ),
-              Positioned(
-                left: 10,
-                right: 10,
-                bottom: 10,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      d.titre,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Row(
-                      children: [
-                        Avatar(
-                          nom: d.hote.nom,
-                          couleur: d.hote.couleur,
-                          taille: 24,
-                        ),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            d.hote.nom,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12.5,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Pastille rouge « EN DIRECT » qui pulse doucement.
-class _PastilleDirect extends StatelessWidget {
-  const _PastilleDirect({this.spectateurs});
-  final int? spectateurs;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFE2C55),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.circle, size: 7, color: Colors.white),
-          const SizedBox(width: 4),
-          Text(
-            spectateurs == null
-                ? 'EN DIRECT'
-                : 'EN DIRECT · ${compact(spectateurs!)}',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 10.5,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
         ],
       ),
     );

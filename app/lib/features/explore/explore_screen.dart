@@ -12,120 +12,165 @@ import '../../shared/widgets.dart';
 
 part 'recherche.dart';
 part 'carte.dart';
+part 'explore_espace.dart';
 
-/// Modules des phases suivantes (document 04, section 5), en aperçu.
-const _prochainement = [
+/// Les espaces de Live, dans l'ordre de la barre de recherche mentale :
+/// acheter, se loger, se faire aider, se divertir, apprendre, travailler.
+const _espaces = [
   (
-    Icons.podcasts_rounded,
-    'Live Direct',
-    'Phase 2 · vendre en direct',
-    '/directs',
+    Icons.shopping_bag_rounded,
+    'Market',
+    'Acheter et vendre',
+    '/market',
+    Color(0xFF13385C),
   ),
   (
-    Icons.insights_rounded,
-    'Studio créateur',
-    'Phase 2 · cadeaux, fans',
-    '/studio',
+    Icons.home_work_rounded,
+    'Immo',
+    'Louer, acheter',
+    '/immo',
+    Color(0xFF166534),
   ),
   (
     Icons.king_bed_rounded,
-    'Séjours meublés',
-    'Phase 2 · à la nuit',
+    'Séjours',
+    'À la nuit, meublé',
     '/sejours',
+    Color(0xFF9D174D),
   ),
   (
-    Icons.groups_rounded,
-    'Groupes et canaux',
-    'Phase 2 · quartier, classe',
-    '/groupe/g1',
+    Icons.handyman_rounded,
+    'Services',
+    'Trouver un pro',
+    '/services',
+    Color(0xFF0369A1),
   ),
   (
-    Icons.bolt_rounded,
-    'Live Plus',
-    'Phase 2 · crédits IA chaque mois',
-    '/live-plus',
+    Icons.podcasts_rounded,
+    'Directs',
+    'Acheter en direct',
+    '/directs',
+    Color(0xFFDB2777),
   ),
   (
-    Icons.campaign_rounded,
-    'Publicité',
-    'Phase 2 · vidéo sponsorisée',
-    '/publicite',
-  ),
-  (
-    Icons.workspace_premium_rounded,
-    'Offres Pro',
-    'Phase 2 · vendeur, agence, pro',
-    '/live-pro/offres',
+    Icons.auto_awesome_rounded,
+    'Live IA',
+    'CV, exercices, business plan',
+    '/ia',
+    Color(0xFFB45309),
   ),
   (
     Icons.school_rounded,
-    'Live Savoir',
-    'Phase 3 · cours, PDF, vidéos',
+    'Savoir',
+    'Cours, PDF, vidéos',
     '/apprendre',
+    Color(0xFF6D28D9),
   ),
   (
     Icons.work_rounded,
-    'Live Emploi',
-    'Phase 3 · bourses, stages, emplois',
+    'Emploi',
+    'Bourses, stages, emplois',
     '/opportunites',
+    Color(0xFF0F766E),
+  ),
+];
+
+/// Outils de Live utiles à tous, rangés après les espaces.
+const _outils = [
+  (
+    Icons.groups_rounded,
+    'Groupes et canaux',
+    'Quartier, classe, passion',
+    '/groupe/g1',
+    Color(0xFF1D4ED8),
   ),
   (
     Icons.two_wheeler_rounded,
     'Live Livraison',
-    'Phase 3 · courses à moto',
+    'Courses à moto',
     '/livraison/LV-00482',
+    Color(0xFFC2410C),
   ),
   (
-    Icons.volunteer_activism_rounded,
-    'Fonds Créateurs',
-    'Phase 3 · financé par la pub',
-    '/fonds-createurs',
+    Icons.insights_rounded,
+    'Studio créateur',
+    'Cadeaux, fans, statistiques',
+    '/studio',
+    Color(0xFFDB2777),
+  ),
+  (
+    Icons.bolt_rounded,
+    'Live Plus',
+    'Crédits IA chaque mois',
+    '/live-plus',
+    Color(0xFFB45309),
+  ),
+  (
+    Icons.campaign_rounded,
+    'Publicité',
+    'Vidéo sponsorisée',
+    '/publicite',
+    Color(0xFF13385C),
+  ),
+  (
+    Icons.workspace_premium_rounded,
+    'Offres Pro',
+    'Vendeur, agence, pro',
+    '/live-pro/offres',
+    Color(0xFF166534),
   ),
   (
     Icons.account_balance_rounded,
     'Services financiers',
-    'Phase 3 · 3 fois, épargne, crédit',
+    '3 fois, épargne, crédit',
     '/finance',
+    Color(0xFF0F766E),
+  ),
+  (
+    Icons.volunteer_activism_rounded,
+    'Fonds Créateurs',
+    'Financé par la publicité',
+    '/fonds-createurs',
+    Color(0xFF6D28D9),
   ),
 ];
 
-/// E-EXP-01 — Explorer : les 4 espaces, puis les meilleures annonces de chacun.
-class EcranExplorer extends StatelessWidget {
+/// E-EXP-01 — Explorer : tous les espaces de Live, puis le meilleur de chacun.
+class EcranExplorer extends ConsumerWidget {
   const EcranExplorer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final marge = context.grandEcran ? 24.0 : 16.0;
-    final espaces = [
-      (
-        Icons.shopping_bag_rounded,
-        'Market',
-        'Acheter et vendre',
-        '/market',
-        const Color(0xFF13385C),
+    final biblio = ref.watch(liveProvider.select((e) => e.bibliotheque));
+    Widget titre(String texte, String route) => Padding(
+      padding: EdgeInsets.symmetric(horizontal: marge),
+      child: EnTeteSection(texte, onTap: () => context.push(route)),
+    );
+    Widget grille(
+      List<(IconData, String, String, String, Color)> liste,
+    ) => Padding(
+      padding: EdgeInsets.fromLTRB(marge, 8, marge, 0),
+      child: GrilleAdaptative(
+        largeurMax: 260,
+        espacement: 10,
+        hauteur: 116,
+        enfants: [
+          for (final (i, (icone, titre, sous, route, couleur)) in liste.indexed)
+            Apparition(
+              rang: i,
+              child: _Espace(
+                icone: icone,
+                titre: titre,
+                sous: sous,
+                couleur: couleur,
+                onTap: () =>
+                    route == '/ia' ? context.go(route) : context.push(route),
+              ),
+            ),
+        ],
       ),
-      (
-        Icons.home_work_rounded,
-        'Immo',
-        'Louer, acheter',
-        '/immo',
-        const Color(0xFF166534),
-      ),
-      (
-        Icons.handyman_rounded,
-        'Services',
-        'Trouver un pro',
-        '/services',
-        const Color(0xFF0369A1),
-      ),
-      (
-        Icons.auto_awesome_rounded,
-        'Live IA',
-        'CV, exercices, business plan',
-        '/ia',
-        const Color(0xFFB45309),
-      ),
-    ];
+    );
     return Scaffold(
       appBar: AppBar(
         titleSpacing: marge,
@@ -142,37 +187,18 @@ class EcranExplorer extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 32),
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(marge, 8, marge, 0),
-            child: GrilleAdaptative(
-              largeurMax: 260,
-              espacement: 10,
-              hauteur: 116,
-              enfants: [
-                for (final (i, (icone, titre, sous, route, couleur))
-                    in espaces.indexed)
-                  Apparition(
-                    rang: i,
-                    child: _Espace(
-                      icone: icone,
-                      titre: titre,
-                      sous: sous,
-                      couleur: couleur,
-                      onTap: () => route == '/ia'
-                          ? context.go(route)
-                          : context.push(route),
-                    ),
-                  ),
-              ],
-            ),
+          grille(_espaces),
+          titre('En direct maintenant', '/directs'),
+          Carrousel(
+            largeur: 150,
+            hauteur: 240,
+            marge: marge,
+            enfants: [
+              for (final d in directs.where((d) => d.enCours))
+                CarteDirect(direct: d),
+            ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: marge),
-            child: EnTeteSection(
-              'Bonnes affaires près de vous',
-              onTap: () => context.push('/market'),
-            ),
-          ),
+          titre('Bonnes affaires près de vous', '/market'),
           Carrousel(
             largeur: 160,
             hauteur: 250,
@@ -182,13 +208,7 @@ class EcranExplorer extends StatelessWidget {
                 CarteProduit(produit: p, hero: false),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: marge),
-            child: EnTeteSection(
-              'Nouveaux logements vérifiés',
-              onTap: () => context.push('/immo'),
-            ),
-          ),
+          titre('Nouveaux logements vérifiés', '/immo'),
           Carrousel(
             largeur: 230,
             hauteur: 276,
@@ -197,13 +217,14 @@ class EcranExplorer extends StatelessWidget {
               for (final b in biens.take(8)) CarteBien(bien: b, hero: false),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: marge),
-            child: EnTeteSection(
-              "Pros disponibles aujourd'hui",
-              onTap: () => context.push('/services'),
-            ),
+          titre('Pour quelques nuits', '/sejours'),
+          Carrousel(
+            largeur: 230,
+            hauteur: 250,
+            marge: marge,
+            enfants: [for (final s in sejours) CarteSejour(sejour: s)],
           ),
+          titre("Pros disponibles aujourd'hui", '/services'),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: GrilleAdaptative(
@@ -212,119 +233,31 @@ class EcranExplorer extends StatelessWidget {
               enfants: [for (final s in prestataires.take(4)) CartePro(pro: s)],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Bientôt sur Live'),
+          titre('Apprendre avec Live Savoir', '/apprendre'),
+          Carrousel(
+            largeur: 220,
+            hauteur: 236,
+            marge: marge,
+            enfants: [
+              for (final c in contenus.take(6))
+                CarteContenu(contenu: c, achete: biblio.contains(c.id)),
+            ],
+          ),
+          titre('Opportunités à saisir', '/opportunites'),
+          Carrousel(
+            largeur: 300,
+            hauteur: 168,
+            marge: marge,
+            enfants: [
+              for (final o in opportunites) CarteOpportunite(opportunite: o),
+            ],
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: GrilleAdaptative(
-              largeurMax: 260,
-              espacement: 10,
-              hauteur: 116,
-              enfants: [
-                for (final (i, (icone, titre, sous, route))
-                    in _prochainement.indexed)
-                  Apparition(
-                    rang: i,
-                    child: _Espace(
-                      icone: icone,
-                      titre: titre,
-                      sous: sous,
-                      couleur: sous.startsWith('Phase 2')
-                          ? const Color(0xFFDB2777)
-                          : const Color(0xFF6D28D9),
-                      onTap: () => context.push(route),
-                    ),
-                  ),
-              ],
-            ),
+            child: const EnTeteSection('Outils et services Live'),
           ),
+          grille(_outils),
         ],
-      ),
-    );
-  }
-}
-
-/// Tuile d'un espace : même taille pour les quatre.
-class _Espace extends StatelessWidget {
-  const _Espace({
-    required this.icone,
-    required this.titre,
-    required this.sous,
-    required this.couleur,
-    required this.onTap,
-  });
-  final IconData icone;
-  final String titre;
-  final String sous;
-  final Color couleur;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      label: '$titre, $sous',
-      excludeSemantics: true,
-      child: Pressable(
-        onTap: onTap,
-        child: Bloc(
-          padding: 12,
-          child: LayoutBuilder(
-            builder: (context, c) {
-              final pastille = Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: couleur.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(icone, color: couleur),
-              );
-              final textes = [
-                Text(
-                  titre,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  sous,
-                  maxLines: c.maxWidth < 170 ? 1 : 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 12.5,
-                    color: LiveColors.gris,
-                  ),
-                ),
-              ];
-              // Tuile étroite (petit téléphone) : icône au-dessus du texte.
-              if (c.maxWidth < 170) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [pastille, const Spacer(), ...textes],
-                );
-              }
-              return Row(
-                children: [
-                  pastille,
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: textes,
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
       ),
     );
   }

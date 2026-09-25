@@ -73,8 +73,6 @@ class _EcranFansState extends ConsumerState<EcranFans> {
             padding: EdgeInsets.fromLTRB(marge, 16, marge, 32),
             sliver: SliverList.list(
               children: [
-                const BandeauApercu(module: 'Abonnements de fans', phase: 2),
-                const SizedBox(height: 12),
                 if (fan)
                   const Bloc(
                     fond: Color(0xFFE7F4EC),

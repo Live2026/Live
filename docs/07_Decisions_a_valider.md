@@ -109,4 +109,14 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | 4 | Commission sur les contenus numériques (aperçu Live Savoir). | **Hypothèse à valider** : 15 % (le créateur garde 85 %). À trancher avec D-09 avant la phase 3. |
 | 5 | Prix des modules des phases 2 et 3 montrés au prototype. | **Hypothèses à valider** : frais de service des séjours 5 % ; Pro Vendeur 5 000, Pro Agence 15 000, Pro Prestataire 4 000 FCFA / mois ; course Live Livraison 1 500 FCFA ; abonnements de fans 500 et 1 500 FCFA. Cadeaux et abonnements de fans : 25 % pour Live, conforme à D-09. |
 
+## 10. Décision du 25/09/2026 : application rassemblée
+
+| Point | Décision |
+|-------|----------|
+| Présentation | Le prototype montre **toute l'application**, tous espaces confondus : plus de bandeau « Aperçu · phase N », plus de rubrique « Bientôt sur Live ». |
+| Rangement | La navigation reste Accueil, Explorer, Publier, IA, Moi. Explorer présente 8 espaces (Market, Immo, Séjours, Services, Directs, Live IA, Savoir, Emploi) puis les « Outils et services Live » ; les outils pour vendre, créer et grandir sont dans Moi et le menu du profil. |
+| Ajouts | API partenaires et extension CEMAC (pays et ville), les deux modules de la phase 3 qui n'avaient pas d'écran. |
+| Ce qui ne change pas | Les phases du document 04 restent l'**ordre de construction et de lancement** : on construit et on lance d'abord le socle (Market, Immo, Services, Live Pay, Live IA), le reste s'active ensuite, sans refaire la navigation. |
+| Appareils | Une seule application adaptative : le même écran se déploie sur mobile et sur ordinateur. Seul le back-office est conçu pour l'ordinateur. |
+
 **Fin du Document 07**

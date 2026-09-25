@@ -47,8 +47,6 @@ class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const BandeauApercu(module: 'Live Plus', phase: 2),
-          const SizedBox(height: 16),
           const Text(
             'Vos crédits Live IA chaque mois, moins cher qu’à l’unité',
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),

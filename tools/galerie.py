@@ -1,9 +1,11 @@
-"""Génère la galerie HTML des maquettes à partir des captures du test de bout en bout.
+"""Génère la galerie HTML de toute l'application à partir des captures du test de bout en bout.
 
-Usage : python3 tools/galerie.py app/test_e2e/captures app/test_e2e/captures1280 sortie.html
-Les captures sont nommées NNN_nom.png ; chaque nom est rangé dans une section.
+Usage : python3 tools/galerie.py app/test_e2e/captures app/test_e2e/captures1280 dossier_sortie
+Les captures sont nommées NNN_nom.png ; chaque nom est rangé dans l'espace de l'application
+auquel il appartient. La galerie a deux parties : Mobile (360 px) et Ordinateur (1280 px).
+Les images sont écrites dans des fichiers data/<appareil>_<espace>.js, chargés à la demande.
 """
-import base64, glob, html, io, os, sys
+import base64, glob, html, io, json, os, sys
 from PIL import Image
 
 SECTIONS = [
@@ -16,7 +18,7 @@ SECTIONS = [
         'interets': ('Centres d’intérêt', 'Un fil utile dès la première ouverture'),
         'connexion': ('Connexion', 'Retour d’un utilisateur'),
     }),
-    ('fil', 'Fil vidéo', 'Le fil façon TikTok : chaque vidéo porte son annonce et son bouton d’achat.', {
+    ('fil', 'Accueil · fil vidéo', 'Le fil façon TikTok : chaque vidéo porte son annonce, et les directs sont à un geste.', {
         'fil': ('Fil « Pour toi »', 'Actions à droite, auteur, son, progression'),
         'fil_annonce': ('Annonce depuis la vidéo', 'Acheter sans quitter le fil'),
         'fil_retour': ('Fil, après les parcours', ''),
@@ -24,8 +26,11 @@ SECTIONS = [
         'fil_partage': ('Partager', 'WhatsApp, Facebook, SMS, lien avec aperçu'),
         'fil_options': ('Options', 'Enregistrer, masquer, signaler'),
     }),
-    ('explorer', 'Explorer et recherche', 'Les 4 espaces, les meilleures annonces, la recherche et les alertes.', {
-        'explorer': ('Explorer', 'Market, Immo, Services, Live IA'),
+    ('explorer', 'Explorer et recherche', 'Tous les espaces de Live, le meilleur de chacun, la recherche, la carte et les alertes.', {
+        'explorer': ('Explorer', 'Les 8 espaces de Live'),
+        'explorer_directs': ('Explorer · directs', 'En direct maintenant, bonnes affaires'),
+        'explorer_savoir': ('Explorer · savoir et emploi', 'Cours et opportunités à saisir'),
+        'explorer_outils': ('Outils et services Live', 'Groupes, livraison, studio, Live Plus, finance'),
         'explorer_retour': ('Explorer', 'Cartes de même taille dans chaque rangée'),
         'recherche_suggestions': ('Recherche', 'Récentes, tendances, catégories'),
         'alertes': ('Mes alertes', 'Recherches sauvegardées et notifiées'),
@@ -55,8 +60,9 @@ SECTIONS = [
         'suivi_qr': ('Suivi de commande', 'Frise et QR de confirmation'),
         'reception_confirmee': ('Réception confirmée', 'Le vendeur est payé'),
         'recu': ('Reçu', 'Référence opérateur, séquestre'),
+        'livraison': ('Live Livraison', 'Livreur suivi sur le plan, code de remise'),
     }),
-    ('vendre', 'Vendre', 'Publier en une minute, accepter, remettre en scannant le QR de l’acheteur, être payé.', {
+    ('vendre', 'Vendre et publier', 'Publier en une minute, accepter, remettre en scannant le QR de l’acheteur, être payé.', {
         'publier': ('Publier', 'Chaque option dit si le super-pouvoir est actif'),
         'vendre_categorie': ('Vendre · 1/6', 'Que vendez-vous ?'),
         'vendre_photos': ('Vendre · 2/6', 'Photos, couverture, vidéo 60 s'),
@@ -79,8 +85,9 @@ SECTIONS = [
         'publier_video_legende': ('Légende et lien', 'Bouton « Acheter » sur la vidéo'),
         'publier_envois': ('Envois en cours', 'Reprise après coupure réseau'),
     }),
-    ('immo', 'Live Immo', 'Logements vérifiés, coût d’entrée affiché, visite payée puis confirmée par QR, réservation protégée.', {
+    ('immo', 'Live Immo et séjours', 'Logements vérifiés, visite payée puis confirmée par QR, réservation protégée ; séjours meublés à la nuit.', {
         'immo_liste': ('Accueil Immo', 'Louer ou acheter, catégories, à la une'),
+        'immo_sejours': ('Accueil Immo, suite', 'Séjours meublés, visites en direct'),
         'immo_filtres': ('Filtres', 'Budget et équipements'),
         'fiche_logement': ('Fiche logement', 'Caractéristiques en tuiles, coût d’entrée'),
         'bien_a_vendre': ('Bien à vendre', 'Villa avec titre foncier'),
@@ -95,6 +102,8 @@ SECTIONS = [
         'agence_tableau': ('Espace agence', 'Visites du jour, demandes, biens, équipe'),
         'agence_valider_visite': ('Valider une visite', 'L’agent scanne le QR du visiteur'),
         'publier_bien': ('Publier un bien', 'Assistant en 5 étapes'),
+        'sejours': ('Séjours meublés', 'Location de courte durée'),
+        'sejour': ('Réserver un séjour', 'Nuits, voyageurs, payé dans Live'),
     }),
     ('services', 'Live Services', 'Décrire son besoin, comparer des devis, payer un acompte protégé ; et le côté du prestataire.', {
         'services_accueil': ('Accueil Services', 'Métiers, prix fixes, pros disponibles'),
@@ -109,7 +118,48 @@ SECTIONS = [
         'pro_creer_devis': ('Créer un devis (pro)', 'Lignes, acompte, créneau'),
         'publier_service': ('Proposer un service', 'Métier, tarif, zones, réalisations'),
     }),
-    ('confiance', 'Messages et confiance', 'Messagerie façon WhatsApp, protégée contre les arnaques ; avis vérifiés, réclamations suivies.', {
+    ('directs', 'Directs et créateurs', 'Vendre et visiter en direct, cadeaux, fans, studio, et le Fonds Créateurs financé par la publicité.', {
+        'directs': ('Live Direct', 'En direct, à venir avec rappel'),
+        'direct': ('Direct', 'Commentaires, cœurs, produit épinglé'),
+        'direct_cadeaux': ('Cadeaux', '75 % pour le créateur'),
+        'direct_visite': ('Visite en direct', 'Bien immobilier présenté en live'),
+        'direct_lancer': ('Lancer un direct', 'Produits épinglés, réglages'),
+        'studio': ('Studio créateur', 'Statistiques, outils, 500 abonnés'),
+        'fans': ('Devenir fan', 'Fan, Super fan, contenus réservés'),
+        'fonds_createurs': ('Fonds Créateurs', 'Financé par la publicité'),
+    }),
+    ('savoir', 'Live Savoir', 'Cours, PDF, vidéos et QCM ; payés dans Live, lisibles hors connexion ; et vendre son savoir.', {
+        'savoir_accueil': ('Live Savoir', 'Cours, PDF, vidéos, QCM, coaching'),
+        'savoir_fiche': ('Fiche d’un cours', 'Aperçu gratuit, programme, avis'),
+        'savoir_panier': ('Panier', 'Contenus numériques payés dans Live'),
+        'savoir_mes_achats': ('Mes achats', 'Téléchargement pour le hors connexion'),
+        'savoir_lecteur': ('Lecteur', 'Leçons, hors connexion'),
+        'savoir_vendre': ('Vendre un contenu', 'Assistant en 6 étapes'),
+        'savoir_boutique': ('Ma boutique de savoirs', 'Revenus, répartition, solde'),
+    }),
+    ('emploi', 'Live Emploi', 'Bourses, concours, stages et emplois : postuler est gratuit, les frais officiels sont affichés.', {
+        'emploi_accueil': ('Live Emploi', 'Bourses, concours, stages, emplois'),
+        'emploi_fiche': ('Fiche d’un concours', 'Coûts et frais transparents'),
+        'emploi_postuler': ('Postuler', 'Gratuit, pièces, motivation'),
+        'emploi_candidatures': ('Mes candidatures', 'Envoyée, vue, présélection'),
+        'emploi_publier': ('Publier une opportunité', 'Assistant en 4 étapes'),
+    }),
+    ('ia', 'Live IA et Live Plus', 'Les produits propres à Live, payés en Crédits Live (1 crédit = 10 FCFA), ou chaque mois avec Live Plus.', {
+        'ia_accueil': ('Live IA', 'Solde et services par besoin'),
+        'ia_credits': ('Acheter des crédits', 'Packs de 500 à 5 000 FCFA'),
+        'ia_solde': ('Crédits ajoutés', ''),
+        'ia_cv_formulaire': ('CV complet', 'Pré-rempli depuis le profil'),
+        'ia_confirmation': ('Confirmation du prix', 'Solde avant et après'),
+        'ia_cv_resultat': ('CV généré', 'PDF, Word, révision gratuite'),
+        'ia_exercice': ('Exercice par photo', 'Niveau et mode apprentissage'),
+        'ia_etape': ('Mode apprentissage', 'L’élève répond, l’IA explique'),
+        'ia_exercice_fin': ('Récapitulatif', 'Solution justifiée'),
+        'ia_mes_documents': ('Mes documents', ''),
+        'ia_business_plan': ('Business plan', 'Assistant en 6 étapes, prévisionnel'),
+        'ia_tuteur': ('Tuteur vocal', 'Conversation orale, 5 crédits / min'),
+        'live_plus': ('Live Plus', 'Crédits IA chaque mois'),
+    }),
+    ('messages', 'Messages, groupes et confiance', 'Messagerie protégée contre les arnaques, groupes et canaux ; avis vérifiés, réclamations suivies.', {
         'messages': ('Messages', 'Non lus, coches, annonce liée'),
         'conversation': ('Conversation', 'Vocal, offre, alerte anti-arnaque'),
         'conversation_lieu': ('Lieu de rendez-vous', 'Lieux publics recommandés'),
@@ -119,8 +169,10 @@ SECTIONS = [
         'avis': ('Laisser un avis', 'Seuls les clients ayant payé notent'),
         'probleme': ('Signaler un problème', 'Argent bloqué pendant l’examen'),
         'reclamation': ('Suivi de réclamation', 'Réponse du vendeur, décision Live'),
+        'groupe': ('Groupe', 'Message épinglé, PDF, réactions'),
+        'canal': ('Canal', 'Seuls les administrateurs publient'),
     }),
-    ('gains', 'Gains et super-pouvoirs', 'Tout le monde est utilisateur ; chacun débloque des super-pouvoirs pour gagner de l’argent.', {
+    ('moi', 'Moi, gains et outils', 'Tout le monde est utilisateur et débloque des super-pouvoirs ; outils pour vendre, créer et grandir.', {
         'retrait_verrouille': ('Retrait verrouillé', 'Retirer est un super-pouvoir'),
         'verifier_piece': ('Vérifier mon identité · 1/3', 'Pièce d’identité'),
         'verifier_selfie': ('Vérifier mon identité · 2/3', 'Selfie'),
@@ -130,7 +182,8 @@ SECTIONS = [
         'retrait_ok': ('Retrait envoyé', ''),
         'gains': ('Mes gains', 'Disponible, en attente, historique'),
         'moi': ('Moi', 'Profil social, super-pouvoirs, raccourcis'),
-        'moi_menu': ('Menu du profil', 'Compte, mon espace, espaces pro, aide'),
+        'moi_menu': ('Menu du profil', 'Compte, mon espace, créateur, activité'),
+        'moi_createur': ('Moi · créer et gagner', 'Studio, direct, Live Plus, publicité, finance'),
         'moi_suite': ('Moi', ''),
         'pouvoirs': ('Mes super-pouvoirs', 'À débloquer et actifs, N1 → N3 → Pro'),
         'live_pro': ('Live Pro', 'Statistiques, boosts −30 %'),
@@ -147,56 +200,13 @@ SECTIONS = [
         'parametres': ('Paramètres', 'Compte, sécurité, préférences'),
         'donnees': ('Économie de données', 'Vidéos en 360p sur réseau mobile'),
         'interets_retour': ('Centres d’intérêt', ''),
-    }),
-    ('ia', 'Live IA', 'Les produits propres à Live, payés en Crédits Live (1 crédit = 10 FCFA).', {
-        'ia_accueil': ('Live IA', 'Solde et services par besoin'),
-        'ia_credits': ('Acheter des crédits', 'Packs de 500 à 5 000 FCFA'),
-        'ia_solde': ('Crédits ajoutés', ''),
-        'ia_cv_formulaire': ('CV complet', 'Pré-rempli depuis le profil'),
-        'ia_confirmation': ('Confirmation du prix', 'Solde avant et après'),
-        'ia_cv_resultat': ('CV généré', 'PDF, Word, révision gratuite'),
-        'ia_exercice': ('Exercice par photo', 'Niveau et mode apprentissage'),
-        'ia_etape': ('Mode apprentissage', 'L’élève répond, l’IA explique'),
-        'ia_exercice_fin': ('Récapitulatif', 'Solution justifiée'),
-        'ia_mes_documents': ('Mes documents', ''),
-        'ia_business_plan': ('Business plan', 'Assistant en 6 étapes, prévisionnel'),
-        'ia_tuteur': ('Tuteur vocal', 'Conversation orale, 5 crédits / min'),
-    }),
-    ('phase2', 'Phase 2 · croissance', 'Hors MVP, étiquetée : directs, créateurs, séjours, Live Plus, publicité, offres Pro, groupes.', {
-        'explorer_bientot': ('Bientôt sur Live', 'Tous les modules des phases 2 et 3'),
-        'directs': ('Live Direct', 'En direct, à venir avec rappel'),
-        'direct': ('Direct', 'Commentaires, cœurs, produit épinglé'),
-        'direct_cadeaux': ('Cadeaux', '75 % pour le créateur'),
-        'direct_visite': ('Visite en direct', 'Bien immobilier présenté en live'),
-        'direct_lancer': ('Lancer un direct', 'Produits épinglés, réglages'),
-        'studio': ('Studio créateur', 'Statistiques, outils, 500 abonnés'),
-        'fans': ('Devenir fan', 'Fan, Super fan, contenus réservés'),
-        'sejours': ('Séjours meublés', 'Location de courte durée'),
-        'sejour': ('Réserver un séjour', 'Nuits, voyageurs, payé dans Live'),
-        'live_plus': ('Live Plus', 'Crédits IA chaque mois'),
-        'publicite': ('Publicité', 'Ciblage, budget, portée'),
+        'parametres_pays': ('Pays et ville', 'Toute la zone CEMAC, en FCFA'),
         'offres_pro': ('Offres Pro', 'Vendeur, Agence, Prestataire, Entreprise'),
-        'groupe': ('Groupe', 'Message épinglé, PDF, réactions'),
-        'canal': ('Canal', 'Seuls les administrateurs publient'),
-    }),
-    ('phase3', 'Phase 3 · expansion', 'Hors MVP, étiquetée : Live Savoir, Live Emploi, livraison, Fonds Créateurs, services financiers.', {
-        'savoir_accueil': ('Live Savoir', 'Cours, PDF, vidéos, QCM, coaching'),
-        'savoir_fiche': ('Fiche d’un cours', 'Aperçu gratuit, programme, avis'),
-        'savoir_panier': ('Panier', 'Contenus numériques payés dans Live'),
-        'savoir_mes_achats': ('Mes achats', 'Téléchargement pour le hors connexion'),
-        'savoir_lecteur': ('Lecteur', 'Leçons, hors connexion'),
-        'savoir_vendre': ('Vendre un contenu', 'Assistant en 6 étapes'),
-        'savoir_boutique': ('Ma boutique de savoirs', 'Revenus, répartition, solde'),
-        'emploi_accueil': ('Live Emploi', 'Bourses, concours, stages, emplois'),
-        'emploi_fiche': ('Fiche d’un concours', 'Coûts et frais transparents'),
-        'emploi_postuler': ('Postuler', 'Gratuit, pièces, motivation'),
-        'emploi_candidatures': ('Mes candidatures', 'Envoyée, vue, présélection'),
-        'emploi_publier': ('Publier une opportunité', 'Assistant en 4 étapes'),
-        'livraison': ('Live Livraison', 'Livreur suivi sur le plan'),
-        'fonds_createurs': ('Fonds Créateurs', 'Financé par la publicité'),
+        'publicite': ('Publicité', 'Ciblage, budget, portée'),
         'finance': ('Services financiers', '3 fois, tirelire, micro-crédit'),
+        'partenaires': ('API partenaires', 'Catalogue, commandes, Live Pay, livraison'),
     }),
-    ('admin', 'Back-office', 'L’outil interne des équipes Live : vérifications, modération, litiges, finance.', {
+    ('admin', 'Back-office', 'L’outil interne des équipes Live, pensé pour l’ordinateur : vérifications, modération, litiges, finance.', {
         'admin_tableau': ('Tableau de bord', 'Volume, séquestre, santé des paiements'),
         'admin_kyc': ('Vérifications KYC', 'File par niveau de risque'),
         'admin_dossier_kyc': ('Dossier KYC', 'Pièces, selfie, contrôles, décision'),
@@ -211,51 +221,77 @@ SECTIONS = [
     }),
 ]
 
-def jpeg(chemin, largeur, qualite=78):
+# Écrans pensés pour un seul appareil.
+ORDINATEUR_SEULEMENT = {'admin'}
+
+
+def webp(chemin, largeur, qualite):
     im = Image.open(chemin).convert('RGB')
     if im.width > largeur:
         im = im.resize((largeur, round(im.height * largeur / im.width)), Image.LANCZOS)
     b = io.BytesIO()
-    im.save(b, 'JPEG', quality=qualite, optimize=True)
-    return 'data:image/jpeg;base64,' + base64.b64encode(b.getvalue()).decode()
+    im.save(b, 'WEBP', quality=qualite, method=6)
+    return 'data:image/webp;base64,' + base64.b64encode(b.getvalue()).decode(), im.size
 
-def figures(dossier, noms, largeur, deja):
-    fichiers = sorted(glob.glob(os.path.join(dossier, '*.png')))
-    out = []
-    for f in fichiers:
+
+def captures(dossier):
+    """Dernière capture de chaque nom (le tour repasse parfois sur un écran)."""
+    out = {}
+    for f in sorted(glob.glob(os.path.join(dossier, '*.png'))):
         nom = os.path.basename(f)[4:-4]
-        if nom in noms and nom != 'ECHEC':
-            if (nom, dossier) in deja and nom != 'ia_etape':
-                continue
-            deja.add((nom, dossier))
-            out.append((nom, f))
+        if nom != 'ECHEC':
+            out.setdefault(nom, f)
     return out
 
-def main(tel, ordi, sortie):
-    tete = open(os.path.join(os.path.dirname(__file__), 'galerie_tete.html')).read()
-    nav, corps, total, deja = [], [], 0, set()
+
+def partie(appareil, dossier, largeur, qualite, sortie):
+    fichiers = captures(dossier)
+    code = appareil[0]
+    nav, corps, total = [], [], 0
     for sid, titre, desc, noms in SECTIONS:
-        nav.append(f'<a href="#{sid}">{html.escape(titre)}</a>')
-        figs = []
-        for nom, f in figures(tel, noms, 640, deja):
+        if appareil == 'mobile' and sid in ORDINATEUR_SEULEMENT:
+            continue
+        images, figs = {}, []
+        for nom, (t, s) in noms.items():
+            if nom not in fichiers:
+                continue
             total += 1
-            t, s = noms[nom]
-            figs.append(f'<figure><button class="shot" type="button" aria-label="Agrandir : {html.escape(t)}"><img loading="lazy" src="{jpeg(f, 640, 70)}" alt="{html.escape(t)}" width="360" height="760"></button><figcaption><span class="n">{total:03d}</span><b>{html.escape(t)}</b>{("<small>" + html.escape(s) + "</small>") if s else ""}</figcaption></figure>')
-        corps.append(f'<section id="{sid}"><header class="sh"><h2>{html.escape(titre)}</h2><p>{html.escape(desc)}</p></header><div class="grid">{"".join(figs)}</div></section>')
-    # Ordinateur : une sélection d'écrans.
-    choix = ['fil', 'explorer', 'market_accueil', 'market_liste', 'fiche_produit', 'mes_ventes_bilan', 'publier_video', 'immo_liste', 'fiche_logement', 'agence_tableau', 'services_accueil', 'conversation', 'moi', 'pouvoirs', 'ia_accueil', 'admin_tableau', 'admin_finance']
-    figs = []
-    fichiers = {os.path.basename(f)[4:-4]: f for f in sorted(glob.glob(os.path.join(ordi, '*.png')))}
-    for nom in choix:
-        if nom in fichiers:
-            titre = next((n[nom][0] for _, _, _, n in SECTIONS if nom in n), nom)
-            figs.append(f'<figure class="wide"><button class="shot" type="button" aria-label="Agrandir : {html.escape(titre)}"><img loading="lazy" src="{jpeg(fichiers[nom], 1280, 74)}" alt="{html.escape(titre)}" width="1280" height="760"></button><figcaption><b>{html.escape(titre)}</b></figcaption></figure>')
-    if figs:
-      nav.append('<a href="#ordinateur">Sur ordinateur</a>')
-      corps.append(f'<section id="ordinateur"><header class="sh"><h2>Sur ordinateur</h2><p>La même application en pleine largeur : barre latérale, grilles, deux colonnes.</p></header><div class="gridw">{"".join(figs)}</div></section>')
-    page = tete.replace('{{TOTAL}}', str(total)).replace('{{NAV}}', ''.join(nav)).replace('{{CORPS}}', ''.join(corps))
-    open(sortie, 'w').write(page)
-    print(f'{total} écrans téléphone, {len(figs)} sur ordinateur, {os.path.getsize(sortie) // 1024} Ko')
+            cle = f'{code}{total}'
+            images[cle], (w, h) = webp(fichiers[nom], largeur, qualite)
+            figs.append(
+                f'<figure><button class="shot" type="button" aria-label="Agrandir : {html.escape(t)}">'
+                f'<img data-k="{cle}" alt="{html.escape(t)}" width="{w}" height="{h}"></button>'
+                f'<figcaption><span class="n">{total:03d}</span><b>{html.escape(t)}</b>'
+                f'{("<small>" + html.escape(s) + "</small>") if s else ""}</figcaption></figure>')
+        if not figs:
+            continue
+        donnees = f'{code}_{sid}.js'
+        with open(os.path.join(sortie, 'data', donnees), 'w') as f:
+            f.write('charger(' + json.dumps(images) + ');')
+        nav.append(f'<a href="#{code}-{sid}">{html.escape(titre)} <span>{len(figs)}</span></a>')
+        classe = 'grid' if appareil == 'mobile' else 'gridw'
+        corps.append(
+            f'<section id="{code}-{sid}" data-src="data/{donnees}"><header class="sh"><h2>{html.escape(titre)}</h2>'
+            f'<p>{html.escape(desc)}</p></header><div class="{classe}">{"".join(figs)}</div></section>')
+    return total, ''.join(nav), ''.join(corps)
+
+
+def main(tel, ordi, sortie):
+    os.makedirs(os.path.join(sortie, 'data'), exist_ok=True)
+    for f in glob.glob(os.path.join(sortie, 'data', '*.js')):
+        os.remove(f)
+    tete = open(os.path.join(os.path.dirname(__file__), 'galerie_tete.html')).read()
+    nm, navm, corpsm = partie('mobile', tel, 540, 74, sortie)
+    no, navo, corpso = partie('ordinateur', ordi, 1280, 72, sortie)
+    page = (tete.replace('{{NM}}', str(nm)).replace('{{NO}}', str(no))
+            .replace('{{NAVM}}', navm).replace('{{NAVO}}', navo)
+            .replace('{{CORPSM}}', corpsm).replace('{{CORPSO}}', corpso))
+    open(os.path.join(sortie, 'index.html'), 'w').write(page)
+    poids = sum(os.path.getsize(f) for f in glob.glob(os.path.join(sortie, 'data', '*.js')))
+    plus_gros = max(os.path.getsize(f) for f in glob.glob(os.path.join(sortie, 'data', '*.js')))
+    print(f'{nm} écrans mobile, {no} écrans ordinateur, données {poids // 1024} Ko '
+          f'(plus gros fichier {plus_gros // 1024} Ko)')
+
 
 if __name__ == '__main__':
     main(*sys.argv[1:4])

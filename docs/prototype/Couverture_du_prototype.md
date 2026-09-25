@@ -36,24 +36,23 @@ Les **21 exigences serveur** (réconciliation automatique, compression vidéo, c
 
 Chaque fiche porte un bloc « Comment ça se paie » (document 06, §4.4) : **Payé dans Live** (séquestre), **À la remise** (mode B : voir l'objet, puis payer MoMo via Live) ou **En direct** (loyers, caution, prix d'un bien, contre reçu). Le paiement accepte aussi le **solde Live**.
 
-## 2 ter. Phases 2 et 3 (hors MVP, étiquetées)
+## 2 ter. Toute l'application rassemblée
 
-Chaque écran porte le bandeau « Aperçu · phase N » ; tous sont accessibles depuis Explorer (« Bientôt sur Live ») et le menu du profil, sans toucher aux parcours du MVP.
+Depuis le 25/09/2026 (document 07, §10), le prototype montre **toute l'application**, sans bandeau de phase : chaque espace est rangé à sa place naturelle. Les phases du document 04 restent l'**ordre de construction et de lancement**, pas une limite du prototype.
 
-| Module (document 04) | Phase | Écrans |
-|----------------------|-------|--------|
-| Live Direct (live shopping) | P2 | Directs en cours et à venir (rappel), lecteur plein écran (commentaires, cœurs, cadeaux, produit épinglé payable dans Live, visite immobilière en direct), lancer un direct (C-DIRECT) |
-| Live Créateurs | P2 | Studio (statistiques, outils, progression vers 500 abonnés), page fans (Fan 500 FCFA, Super fan 1 500 FCFA, contenus réservés) ; cadeaux à 75 % pour le créateur |
-| Groupes et canaux | P2 | Groupe (épinglé, PDF, réactions), canal |
-| Location de courte durée | P2 | Séjours meublés, réservation à la nuit payée dans Live |
-| Live Plus | P2 | Élève 1 500 FCFA (200 crédits), Pro 3 500 FCFA (500 crédits), document 19 |
-| Publicité (bêta) | P2 | Campagne : vidéo, objectif, quartiers, centres d'intérêt, budget, portée estimée |
-| Offres Pro complètes | P2 | Pro Vendeur, Pro Agence, Pro Prestataire, Entreprise |
-| Live Savoir | P3 | Accueil, fiche, panier, mes achats, lecteur, vendre, boutique de savoirs |
-| Live Emploi et opportunités | P3 | Liste, fiche aux coûts transparents, postuler, candidatures, publier |
-| Live Livraison | P3 | Suivi du livreur sur le plan de la ville, code de remise |
-| Fonds Créateurs | P3 | Fonds du mois, critères, conditions, leçon de la v1 |
-| Services financiers en partenariat | P3 | Paiement en 3 fois, tirelire, micro-crédit vendeur (établissements agréés) |
+| Espace | Écrans | Où on le trouve |
+|--------|--------|-----------------|
+| Live Direct | Directs en cours et à venir (rappel), lecteur plein écran (commentaires, cœurs, cadeaux, produit épinglé payable dans Live, visite immobilière en direct), lancer un direct (C-DIRECT) | Pastille « EN DIRECT » du fil, Explorer, Immo (visites en direct), Moi, menu du profil |
+| Live Créateurs | Studio (statistiques, outils, progression vers 500 abonnés), page fans (Fan 500 FCFA, Super fan 1 500 FCFA), Fonds Créateurs | Moi → Créer et gagner, menu du profil, Explorer → Outils |
+| Groupes et canaux | Groupe (épinglé, PDF, réactions), canal | Messages → Nouveau groupe, Explorer → Outils |
+| Séjours meublés | Liste, réservation à la nuit payée dans Live | Explorer (espace Séjours), accueil Immo |
+| Live Savoir | Accueil, fiche, panier, mes achats, lecteur, vendre, boutique de savoirs | Explorer (espace Savoir et section « Apprendre ») |
+| Live Emploi | Liste, fiche aux coûts transparents, postuler, candidatures, publier | Explorer (espace Emploi et « Opportunités à saisir ») |
+| Live Livraison | Suivi du livreur sur le plan de la ville, code de remise | Suivi de commande, Explorer → Outils |
+| Live Plus, Publicité, Offres Pro | Formules de crédits, campagne ciblée, offres Vendeur, Agence, Prestataire, Entreprise | Moi → Créer et gagner, menu du profil |
+| Services financiers | Paiement en 3 fois, tirelire, micro-crédit vendeur (établissements agréés) | Moi, menu du profil, Explorer → Outils |
+| API partenaires | Catalogue, commandes, Live Pay et séquestre, livraison, vérification ; clés test et production, webhook | Menu du profil, offre Entreprise |
+| Extension CEMAC | Pays et ville : Congo, Gabon, Cameroun, Tchad, Centrafrique, Guinée équatoriale ; toujours en FCFA | Paramètres → Pays et ville |
 
 ## 3. Super-pouvoirs (capacités du document 03)
 

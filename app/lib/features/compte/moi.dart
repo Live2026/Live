@@ -178,6 +178,39 @@ class EcranMoi extends ConsumerWidget {
             detail: 'Boutique, agence, prestataire ou chaîne',
             onTap: () => context.push('/espace/nouveau'),
           ),
+          const EnTeteSection('Créer et gagner'),
+          LigneMenu(
+            icone: Icons.insights_rounded,
+            titre: 'Studio créateur',
+            detail: 'Vues, cadeaux, fans et revenus',
+            onTap: () => context.push('/studio'),
+          ),
+          LigneMenu(
+            icone: Icons.podcasts_rounded,
+            titre: 'Lancer un direct',
+            detail: 'Vendre en direct, recevoir des cadeaux',
+            onTap: () => context.push('/direct/lancer'),
+          ),
+          LigneMenu(
+            icone: Icons.bolt_rounded,
+            titre: 'Live Plus',
+            detail: etat.formulePlus == null
+                ? 'Crédits Live IA chaque mois'
+                : 'Formule ${etat.formulePlus == 'pro' ? 'Pro' : 'Élève'} active',
+            onTap: () => context.push('/live-plus'),
+          ),
+          LigneMenu(
+            icone: Icons.campaign_outlined,
+            titre: 'Publicité',
+            detail: 'Faire voir une vidéo dans votre quartier',
+            onTap: () => context.push('/publicite'),
+          ),
+          LigneMenu(
+            icone: Icons.account_balance_outlined,
+            titre: 'Services financiers',
+            detail: 'Payer en 3 fois, tirelire, micro-crédit',
+            onTap: () => context.push('/finance'),
+          ),
           const EnTeteSection('Activité'),
           LigneMenu(
             icone: Icons.payments_outlined,
