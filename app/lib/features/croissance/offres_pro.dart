@@ -82,7 +82,7 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
           ),
           const SizedBox(height: 8),
           GrilleAdaptative(
-            largeurMax: 320,
+            largeurMax: 360,
             espacement: 12,
             enfants: [
               for (final (i, (nom, icone, prix, avantages)) in _offres.indexed)

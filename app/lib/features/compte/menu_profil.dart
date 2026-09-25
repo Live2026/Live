@@ -89,8 +89,8 @@ class _MenuProfil extends ConsumerWidget {
             section('Mon espace'),
             ligne(
               Icons.account_balance_wallet_outlined,
-              'Gains et retraits',
-              '/gains',
+              'Mon argent Live',
+              '/portefeuille',
               valeur: fcfaCourt(etat.disponible),
             ),
             ligne(

@@ -17,6 +17,12 @@ class _EcranCarteState extends State<EcranCarte> {
   final _fiches = PageController(viewportFraction: 0.86);
 
   @override
+  void didUpdateWidget(EcranCarte ancien) {
+    super.didUpdateWidget(ancien);
+    if (ancien.espace != widget.espace) _immo = widget.espace != 'services';
+  }
+
+  @override
   void dispose() {
     _fiches.dispose();
     super.dispose();

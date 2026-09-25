@@ -21,6 +21,12 @@ class _EcranListeMarketState extends State<EcranListeMarket> {
   ];
 
   @override
+  void didUpdateWidget(EcranListeMarket ancien) {
+    super.didUpdateWidget(ancien);
+    if (ancien.tri != widget.tri) _tri = widget.tri;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final liste = produits
         .where(

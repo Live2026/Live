@@ -200,7 +200,10 @@ class EcranProduit extends StatelessWidget {
               onPressed: () => p.details.containsKey('Tailles')
                   ? ouvrirVariantes(context, p)
                   : context.push('/commande/${p.id}'),
-              child: Text(surPlace ? 'Rendez-vous' : 'Acheter'),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(surPlace ? 'Voir et payer' : 'Acheter'),
+              ),
             ),
           ),
         ],

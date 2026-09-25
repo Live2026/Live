@@ -23,6 +23,12 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
 
   static const _taux = 0.02;
 
+  @override
+  void didUpdateWidget(EcranTransfert ancien) {
+    super.didUpdateWidget(ancien);
+    if (ancien.recevoir != widget.recevoir) _recevoir = widget.recevoir;
+  }
+
   static const _sources = [
     ('Carte bancaire', 'Visa, Mastercard', Icons.credit_card_rounded),
     (

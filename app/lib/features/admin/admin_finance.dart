@@ -309,7 +309,7 @@ class _Configuration extends StatelessWidget {
                 LigneMenu(
                   icone: Icons.tune_rounded,
                   titre: nom,
-                  valeur: valeur,
+                  detail: valeur,
                   onTap: () => _decider(
                     context,
                     'Modification soumise à double validation.',

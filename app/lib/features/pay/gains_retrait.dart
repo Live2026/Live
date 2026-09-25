@@ -141,33 +141,35 @@ class _EcranRetraitState extends ConsumerState<EcranRetrait> {
     if (_etape == 2) {
       return Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              children: [
-                const Spacer(),
-                const CocheAnimee(taille: 96),
-                Text(
-                  '${fcfa(montant)} envoyés',
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+          child: Etroit(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  const Spacer(),
+                  const CocheAnimee(taille: 96),
+                  Text(
+                    '${fcfa(montant)} envoyés',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  'sur ${etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money'} ${etat.telephone}',
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Vous allez recevoir un SMS de votre opérateur.',
-                  style: TextStyle(color: LiveColors.gris),
-                ),
-                const Spacer(),
-                FilledButton(
-                  onPressed: () => context.go('/gains'),
-                  child: const Text('Retour à mes gains'),
-                ),
-              ],
+                  Text(
+                    'sur ${etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money'} ${etat.telephone}',
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Vous allez recevoir un SMS de votre opérateur.',
+                    style: TextStyle(color: LiveColors.gris),
+                  ),
+                  const Spacer(),
+                  FilledButton(
+                    onPressed: () => context.go('/gains'),
+                    child: const Text('Retour à mes gains'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

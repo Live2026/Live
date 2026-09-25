@@ -115,7 +115,7 @@ Future<void> partager(BuildContext context, String titre) {
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                     const Text(
-                      'live.cg/a/8Kq2 · aperçu avec photo et prix',
+                      'live.africa/a/8Kq2 · aperçu avec photo et prix',
                       style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
                     ),
                   ],

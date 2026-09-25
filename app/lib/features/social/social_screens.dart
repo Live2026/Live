@@ -37,6 +37,13 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
   final _recherche = TextEditingController();
   final _ecartes = <String>{};
 
+  @override
+  void didUpdateWidget(EcranAbonnes ancien) {
+    super.didUpdateWidget(ancien);
+    // Même page ouverte avec un autre onglet (lien `?onglet=`).
+    if (ancien.onglet != widget.onglet) _onglet = widget.onglet;
+  }
+
   List<Compte> _trier(List<Compte> l) => switch (_tri) {
     _Tri.recents => l,
     _Tri.nom => [...l]..sort((a, b) => a.nom.compareTo(b.nom)),

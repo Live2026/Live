@@ -270,6 +270,21 @@ class _Tableau extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Sur un écran étroit, le tableau garde une largeur lisible et défile
+    // horizontalement plutôt que de couper les mots.
+    return LayoutBuilder(
+      builder: (context, contraintes) {
+        final tableau = _corps(context);
+        if (contraintes.maxWidth >= 600) return tableau;
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: SizedBox(width: 640, child: tableau),
+        );
+      },
+    );
+  }
+
+  Widget _corps(BuildContext context) {
     return Bloc(
       padding: 0,
       child: Column(

@@ -116,7 +116,7 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
               ),
               onPressed: () => context.push('/transfert'),
               icon: const Icon(Icons.send_rounded),
-              label: const Text('Envoyer de l’argent · Live Transfert'),
+              label: const Text('Envoyer de l’argent'),
             ),
           ),
           const EnTeteSection('Pour qui ?'),

@@ -148,72 +148,77 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
     final solde = widget.moyen == Moyen.solde.nom;
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              const Spacer(),
-              Text(
-                solde
-                    ? 'Paiement avec votre solde Live'
-                    : visa
-                    ? 'Page de paiement sécurisée'
-                    : 'Validez sur votre téléphone',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 520),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  const Spacer(),
+                  Text(
+                    solde
+                        ? 'Paiement avec votre solde Live'
+                        : visa
+                        ? 'Page de paiement sécurisée'
+                        : 'Validez sur votre téléphone',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  if (p != null)
+                    Text(
+                      '${fcfa(p.montant)} · ${widget.moyen}',
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  if (!visa && !solde) Text(etat.telephone),
+                  const SizedBox(height: 20),
+                  if (solde)
+                    const Text(
+                      'Le montant est prélevé sur vos gains disponibles.\nAucun frais.',
+                      textAlign: TextAlign.center,
+                    )
+                  else if (!visa) ...[
+                    const Text('1. Ouvrez la demande MoMo ou Airtel'),
+                    const Text('2. Tapez votre code secret Mobile Money'),
+                  ] else
+                    const Text(
+                      'Saisie de la carte chez le prestataire de paiement.\nLive ne voit jamais votre carte.',
+                      textAlign: TextAlign.center,
+                    ),
+                  const SizedBox(height: 24),
+                  const CircularProgressIndicator(),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${_secondes ~/ 60}:${(_secondes % 60).toString().padLeft(2, '0')}',
+                  ),
+                  const BoutonEcouter(
+                    "Votre téléphone va afficher une demande de paiement de votre opérateur. Tapez votre code secret Mobile Money sur cette demande, pas dans Live. Live ne vous demandera jamais ce code.",
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Live ne vous demandera JAMAIS votre code secret MoMo.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: LiveColors.erreur,
+                    ),
+                  ),
+                  const Spacer(),
+                  OutlinedButton(
+                    onPressed: () => _rienRecu(context),
+                    child: const Text("Je n'ai rien reçu"),
+                  ),
+                  TextButton(
+                    onPressed: () => context.pop(),
+                    child: const Text('Annuler'),
+                  ),
+                ],
               ),
-              const SizedBox(height: 12),
-              if (p != null)
-                Text(
-                  '${fcfa(p.montant)} · ${widget.moyen}',
-                  style: const TextStyle(fontSize: 18),
-                ),
-              if (!visa && !solde) Text(etat.telephone),
-              const SizedBox(height: 20),
-              if (solde)
-                const Text(
-                  'Le montant est prélevé sur vos gains disponibles.\nAucun frais.',
-                  textAlign: TextAlign.center,
-                )
-              else if (!visa) ...[
-                const Text('1. Ouvrez la demande MoMo ou Airtel'),
-                const Text('2. Tapez votre code secret Mobile Money'),
-              ] else
-                const Text(
-                  'Saisie de la carte chez le prestataire de paiement.\nLive ne voit jamais votre carte.',
-                  textAlign: TextAlign.center,
-                ),
-              const SizedBox(height: 24),
-              const CircularProgressIndicator(),
-              const SizedBox(height: 8),
-              Text(
-                '${_secondes ~/ 60}:${(_secondes % 60).toString().padLeft(2, '0')}',
-              ),
-              const BoutonEcouter(
-                "Votre téléphone va afficher une demande de paiement de votre opérateur. Tapez votre code secret Mobile Money sur cette demande, pas dans Live. Live ne vous demandera jamais ce code.",
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Live ne vous demandera JAMAIS votre code secret MoMo.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: LiveColors.erreur,
-                ),
-              ),
-              const Spacer(),
-              OutlinedButton(
-                onPressed: () => _rienRecu(context),
-                child: const Text("Je n'ai rien reçu"),
-              ),
-              TextButton(
-                onPressed: () => context.pop(),
-                child: const Text('Annuler'),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -328,7 +333,7 @@ class EcranPaiementReussi extends StatelessWidget {
         '/diaspora',
       ),
       TypePaiement.boost => (
-        'Votre annonce passe en tête du fil et des recherches à Brazzaville, '
+        'Votre annonce passe en tête du fil et des recherches de votre ville, '
             'avec la mention « Sponsorisé ».',
         'Voir mes ventes',
         '/mes-ventes',
@@ -336,37 +341,42 @@ class EcranPaiementReussi extends StatelessWidget {
     };
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              const Spacer(),
-              const CocheAnimee(taille: 96),
-              const Text(
-                'Paiement réussi',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 520),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  const Spacer(),
+                  const CocheAnimee(taille: 96),
+                  const Text(
+                    'Paiement réussi',
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '$moyen · Réf. LV-P-2026-${id.hashCode.abs() % 100000}',
+                    style: const TextStyle(color: LiveColors.gris),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const Spacer(),
+                  FilledButton(
+                    onPressed: () => context.go(route),
+                    child: Text(bouton),
+                  ),
+                  TextButton(
+                    onPressed: () => context.push('/recu/$id'),
+                    child: const Text('Voir le reçu'),
+                  ),
+                ],
               ),
-              const SizedBox(height: 8),
-              Text(
-                '$moyen · Réf. LV-P-2026-${id.hashCode.abs() % 100000}',
-                style: const TextStyle(color: LiveColors.gris),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                message,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16),
-              ),
-              const Spacer(),
-              FilledButton(
-                onPressed: () => context.go(route),
-                child: Text(bouton),
-              ),
-              TextButton(
-                onPressed: () => context.push('/recu/$id'),
-                child: const Text('Voir le reçu'),
-              ),
-            ],
+            ),
           ),
         ),
       ),

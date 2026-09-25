@@ -206,24 +206,18 @@ class _CarteSolde extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 14),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  '${etat.prenom} Mabiala · N${etat.niveau}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-              Text(
-                etat.identiteVerifiee
-                    ? 'Retrait jusqu’à 2 M FCFA / jour'
-                    : 'Retrait après vérification',
-                style: const TextStyle(color: Color(0xFFD7DCE4), fontSize: 12),
-              ),
-            ],
+          Text(
+            '${etat.prenom} Mabiala · N${etat.niveau}',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          Text(
+            etat.identiteVerifiee
+                ? 'Retrait vers votre numéro jusqu’à 2 M FCFA par mois'
+                : 'Retrait après vérification de votre identité',
+            style: const TextStyle(color: Color(0xFFD7DCE4), fontSize: 12),
           ),
         ],
       ),

@@ -104,7 +104,24 @@ Autre défaut corrigé : le menu latéral coupait « Retour à l'application » 
 - **En-têtes** : l'onglet Moi a maintenant le bouton Messages, comme Accueil, Explorer et IA.
 - **Accessibilité** : le bouton de devise de Live Transfert avait perdu son nœud sémantique, parce qu'il était fusionné avec la carte. Il est corrigé et vérifié par les tests de bout en bout.
 
-## 9. Ce qui reste, par nature, au back-end
+## 9. Revue visuelle de tous les écrans
+
+J'ai revu une à une les 218 captures sur téléphone (360 px) et les 223 sur ordinateur (1 280 px), regroupées par planches de 12. J'ai corrigé tous les défauts trouvés.
+
+| Défaut | Correction |
+|--------|------------|
+| Un lien vers la même page avec un autre onglet (`/abonnes/moi?onglet=1`, `/carte?espace=services`, `/transfert?sens=recevoir`, tri du Market) gardait l'ancien onglet | Les écrans suivent le nouveau paramètre ; test ajouté |
+| Liens de partage en `live.cg` ici, `live.africa` ailleurs | Un seul domaine : `live.africa` (Live vise plusieurs pays) |
+| Bouton « Rendez-vous » coupé sur deux lignes (fiche produit payée à la remise) | « Voir et payer », sur une seule ligne |
+| Back-office sur téléphone : Configuration et Journal coupaient les mots lettre par lettre | Valeurs sous le libellé ; tableaux défilants horizontalement sur écran étroit |
+| Offres Live Pro : deux colonnes trop serrées sur téléphone | Une colonne sur téléphone |
+| Menu du profil : « Gains et retraits » menait à l'écran vendeur | « Mon argent Live » |
+| Plafond de retrait affiché « par jour » alors que la Configuration dit « par mois » | Aligné : 2 M FCFA par mois |
+| Message de boost « à Brazzaville » écrit en dur | « de votre ville » |
+| Ordinateur : paiement en attente, paiement réussi, remise confirmée, identité vérifiée et retrait envoyé étiraient leur bouton sur toute la largeur | Colonne centrée de largeur lisible (`Etroit`, `core/adaptatif.dart`) |
+| Carte du solde : nom et plafond serrés sur une ligne | Deux lignes |
+
+## 10. Ce qui reste, par nature, au back-end
 
 Envoi réel des SMS (Twilio Verify), paiements réels (API MTN et Airtel), grand livre et réconciliation, vidéo (Mux), cartes et positions en direct (Google Maps, Supabase Realtime), partenaire de transfert agréé, modèles d'IA. L'ordre de construction est fixé par le document 26, §7.
 

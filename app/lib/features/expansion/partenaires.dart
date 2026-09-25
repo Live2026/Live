@@ -228,7 +228,7 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
             titre: 'Documentation',
             detail: 'Exemples en JavaScript, PHP et Python',
             onTap: () =>
-                informer(context, 'Documentation : developpeurs.live.cg'),
+                informer(context, 'Documentation : developpeurs.live.africa'),
           ),
         ],
       ),

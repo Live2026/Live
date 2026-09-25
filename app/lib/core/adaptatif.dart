@@ -117,3 +117,20 @@ int _colonnes(int max, int n) {
   }
   return c;
 }
+
+/// Colonne centrée de largeur lisible pour les écrans de confirmation
+/// (paiement réussi, identité vérifiée, retrait envoyé) : sur ordinateur,
+/// le bouton final ne s'étire pas sur toute la largeur.
+class Etroit extends StatelessWidget {
+  const Etroit({super.key, required this.child, this.largeur = 560});
+  final Widget child;
+  final double largeur;
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: largeur),
+      child: child,
+    ),
+  );
+}

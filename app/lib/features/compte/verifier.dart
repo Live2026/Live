@@ -170,56 +170,58 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
     final debloques = pouvoirs.where((p) => p.condition == Condition.identite);
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              const Spacer(),
-              if (valide)
-                const CocheAnimee(taille: 96)
-              else
-                const SizedBox(
-                  width: 72,
-                  height: 72,
-                  child: CircularProgressIndicator(strokeWidth: 5),
+        child: Etroit(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                const Spacer(),
+                if (valide)
+                  const CocheAnimee(taille: 96)
+                else
+                  const SizedBox(
+                    width: 72,
+                    height: 72,
+                    child: CircularProgressIndicator(strokeWidth: 5),
+                  ),
+                const SizedBox(height: 16),
+                Text(
+                  valide ? 'Identité vérifiée' : 'Vérification en cours…',
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
-              const SizedBox(height: 16),
-              Text(
-                valide ? 'Identité vérifiée' : 'Vérification en cours…',
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800,
+                const SizedBox(height: 8),
+                Text(
+                  valide ? 'Nouveaux super-pouvoirs débloqués :' : 'En général moins de 10 minutes. Vous pouvez continuer à utiliser Live.',
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                valide ? 'Nouveaux super-pouvoirs débloqués :' : 'En général moins de 10 minutes. Vous pouvez continuer à utiliser Live.',
-                textAlign: TextAlign.center,
-              ),
-              if (valide) ...[
-                const SizedBox(height: 12),
-                for (final p in debloques)
-                  Apparition(
-                    child: ListTile(
-                      leading: Icon(p.icone, color: LiveColors.bleu),
-                      title: Text(
-                        p.titre,
-                        style: const TextStyle(fontWeight: FontWeight.w700),
+                if (valide) ...[
+                  const SizedBox(height: 12),
+                  for (final p in debloques)
+                    Apparition(
+                      child: ListTile(
+                        leading: Icon(p.icone, color: LiveColors.bleu),
+                        title: Text(
+                          p.titre,
+                          style: const TextStyle(fontWeight: FontWeight.w700),
+                        ),
+                        subtitle: Text(p.gain),
                       ),
-                      subtitle: Text(p.gain),
+                    ),
+                ],
+                const Spacer(),
+                if (valide)
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: () => context.pop(),
+                      child: const Text('Continuer'),
                     ),
                   ),
               ],
-              const Spacer(),
-              if (valide)
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    onPressed: () => context.pop(),
-                    child: const Text('Continuer'),
-                  ),
-                ),
-            ],
+            ),
           ),
         ),
       ),
