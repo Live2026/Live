@@ -86,6 +86,7 @@ class _ChampCodeState extends State<ChampCode>
             Positioned.fill(
               child: Opacity(
                 opacity: 0,
+                alwaysIncludeSemantics: true,
                 child: TextField(
                   controller: _saisie,
                   focusNode: _focus,

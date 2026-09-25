@@ -86,7 +86,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await ecran('inscription_telephone');
     await bouton('Recevoir le code');
     await ecran('code_sms_vide');
-    await saisir(0, '123456'); await p.waitForTimeout(800);
+    await saisir('Code à 6 chiffres', '123456'); await p.waitForTimeout(800);
     await saisir('Prénom', 'Grâce'); await ecran('inscription_profil');
     await bouton('Continuer'); await ecran('code_secret');
     await pin(); await p.waitForTimeout(1200); await ecran('interets');
