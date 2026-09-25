@@ -183,7 +183,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['notifications', 'notifications'],
       ['market', 'market_accueil'],
       ['produit/p9', 'produit_alimentation'],
-      ['produit/p1', 'produit_offre', async () => { await bouton('Faire une offre'); }],
+      ['produit/p1', 'produit_offre', async () => { await bouton('Négocier'); }],
       ['boutique/grace', 'boutique'],
       ['vente/LV-00466/qr', 'qr_paiement_vendeur'],
       ['immo', 'immo_filtres', async () => { await bouton('Filtres'); }],
