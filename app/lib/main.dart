@@ -59,7 +59,13 @@ class _BandeauPrototype extends StatelessWidget {
           child: MediaQuery.removePadding(
             context: context,
             removeTop: true,
-            child: child,
+            // Nœud à part : sans lui, le navigateur masque aux lecteurs
+            // d'écran les bandeaux posés au-dessus (hors connexion).
+            child: Semantics(
+              container: true,
+              explicitChildNodes: true,
+              child: child,
+            ),
           ),
         ),
       ],
