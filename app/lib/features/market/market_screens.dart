@@ -17,6 +17,8 @@ part 'produit_commande.dart';
 part 'commande.dart';
 part 'suivi_commande.dart';
 part 'mes_ventes.dart';
+part 'mes_ventes_blocs.dart';
+part 'mes_ventes_outils.dart';
 part 'remise_vendre.dart';
 part 'market_accueil.dart';
 part 'market_sections.dart';

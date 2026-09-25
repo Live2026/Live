@@ -12,6 +12,8 @@ import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
 
 part 'publier_media.dart';
+part 'publier_legende.dart';
+part 'publier_envois.dart';
 part 'publier_bien.dart';
 part 'publier_service.dart';
 

@@ -136,4 +136,10 @@ void main() {
     ]);
     expect(etat().documents.single.id, id);
   });
+
+  test('refuser une commande la retire (acheteur remboursé)', () {
+    expect(etat().ventes.any((v) => v.id == 'LV-00479'), isTrue);
+    store().refuserVente('LV-00479', 'Rupture de stock');
+    expect(etat().ventes.any((v) => v.id == 'LV-00479'), isFalse);
+  });
 }

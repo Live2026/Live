@@ -68,6 +68,8 @@ Le bouton central **(+)** est le point de départ de toute création. Objectif :
 | Compression | Faite sur le téléphone après la sélection (720p max, images en WebP de moins de 300 Ko), document 20, section 6.3 |
 | Guide | Conseils de prise de vue propres à chaque verticale (Immo : façade, pièces, eau, sanitaires) |
 
+**Complément du 25/09/2026** : la caméra occupe **tout l'écran**, comme TikTok ou Reels : barre de progression en haut, « Ajouter un son », outils à droite (retourner, vitesse, filtres, minuteur, flash, texte), bouton d'enregistrement à anneau (rond rouge qui devient carré), chrono « 0:24 / 1:00 », galerie en panneau (10 photos + 1 vidéo, ordre numéroté), bouton « Suivant » qui apparaît dès qu'un média existe. L'étape suivante, façon Instagram, réunit miniature, légende (300 caractères, hashtags), lien vers une annonce (bouton « Acheter » sur la vidéo), visibilité, lieu, commentaires, partage en statut WhatsApp, « Brouillon » et « Publier ».
+
 ---
 
 ## E-PUB-03 — Vendre un produit (formulaire unique)

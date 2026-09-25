@@ -305,6 +305,8 @@ Liste des achats (numéro, produit, état : « Payée · argent bloqué par Live
 | Délai | 24 h pour accepter ; sinon annulation et remboursement automatiques (F-MKT-CMD-06) |
 | Refus | Motif obligatoire (rupture de stock, zone non desservie, autre) ; l'acheteur est remboursé immédiatement |
 
+**Complément du 25/09/2026 (tableau de bord vendeur)** : carte des revenus (vendu ce mois en chiffre animé, disponible, bloqué par Live, bouton « Retirer ») ; tuiles de statistiques de base F-PRO-02 (vues, contacts, conversion, note) ; histogramme des commandes sur 7 ou 30 jours ; rappel du délai de 24 h quand une commande attend ; onglets à pastilles ; carte de commande qui ouvre une **fiche en panneau du bas** (acheteur, suivi en 4 étapes, lieu de remise, montant, commission 6 %, net, actions) ; refus en **fenêtre avec motif obligatoire** ; **menu latéral** des outils (publier, QR de paiement, gains, statistiques Live Pro, avis, équipe, aide) ; section « Mes annonces » (modifier, booster, masquer, marquer comme vendu — F-MKT-DASH-04).
+
 ---
 
 ## E-MKT-08 — Remettre la commande (vendeur)

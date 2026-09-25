@@ -1,6 +1,25 @@
 part of 'publish_screen.dart';
 
-/// E-PUB-02 — Photos et vidéo : filmer ou choisir, légende, lien vers une annonce.
+/// Couleurs des vidéos et photos de la galerie simulée.
+const _galerie = [
+  Color(0xFFB45309),
+  Color(0xFF334155),
+  Color(0xFF166534),
+  Color(0xFF7E22CE),
+  Color(0xFF0E7490),
+  Color(0xFF9A3412),
+  Color(0xFF1E3A8A),
+  Color(0xFF3F6212),
+  Color(0xFF9D174D),
+  Color(0xFF0F766E),
+  Color(0xFF475569),
+  Color(0xFFC27A25),
+];
+
+/// E-PUB-02 — Créer une vidéo, plein écran comme TikTok ou Reels : viseur,
+/// outils à droite, bouton d'enregistrement avec progression jusqu'à 60 s
+/// (D-05), galerie en panneau (10 photos + 1 vidéo). « Suivant » ouvre la
+/// légende et le lien vers une annonce.
 class EcranPublierMedia extends StatefulWidget {
   const EcranPublierMedia({super.key});
 
@@ -8,333 +27,420 @@ class EcranPublierMedia extends StatefulWidget {
   State<EcranPublierMedia> createState() => _EcranPublierMediaState();
 }
 
-class _EcranPublierMediaState extends State<EcranPublierMedia> {
-  var _choisi = 0;
-  var _lien = 'Aucune';
-  final _legende = TextEditingController(
-    text: 'Nouvel arrivage ! Livraison 24 h à Brazzaville.',
-  );
+class _EcranPublierMediaState extends State<EcranPublierMedia>
+    with SingleTickerProviderStateMixin {
+  // L'enregistrement simulé avance quatre fois plus vite que le temps réel.
+  late final _enregistrement = AnimationController(
+    vsync: this,
+    duration: const Duration(seconds: 15),
+  )..addListener(() => setState(() {}));
+  var _couleur = 0;
+  var _vitesse = 1.0;
+  var _flash = false;
+  var _avant = false;
+  var _filtre = 'Original';
+  final _choisis = <int>{};
+  var _legende = false;
 
-  static const _galerie = [
-    Color(0xFFB45309),
-    Color(0xFF334155),
-    Color(0xFF166534),
-    Color(0xFF7E22CE),
-    Color(0xFF0E7490),
-    Color(0xFF9A3412),
-    Color(0xFF1E3A8A),
-    Color(0xFF3F6212),
-  ];
+  bool get _enCours => _enregistrement.isAnimating;
+  int get _secondes => (_enregistrement.value * 60).round();
+  bool get _pret => _secondes > 0 || _choisis.isNotEmpty;
+
+  @override
+  void dispose() {
+    _enregistrement.dispose();
+    super.dispose();
+  }
+
+  void _basculer() {
+    if (_enCours) {
+      _enregistrement.stop();
+    } else if (_enregistrement.value < 1) {
+      _enregistrement.forward();
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    final grand = context.grandEcran;
-    final apercu = AspectRatio(
-      aspectRatio: 9 / 16,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Vignette(
-            couleur: _galerie[_choisi],
-            icone: Icons.videocam_rounded,
-            rayon: 16,
+    if (_legende) {
+      return _EtapeLegende(
+        couleur: _galerie[_couleur],
+        duree: _secondes,
+        photos: _choisis.length,
+        onRetour: () => setState(() => _legende = false),
+      );
+    }
+    final ecran = Stack(
+      fit: StackFit.expand,
+      children: [
+        // Viseur : l'image filmée occupe tout l'écran.
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: Container(
+            key: ValueKey('$_couleur$_avant$_filtre'),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  _galerie[_couleur],
+                  Color.lerp(_galerie[_couleur], Colors.black, 0.7)!,
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: Icon(
+              _avant ? Icons.face_retouching_natural : Icons.videocam_rounded,
+              size: 96,
+              color: Colors.white.withValues(alpha: 0.18),
+            ),
           ),
-          Positioned(
-            right: 10,
-            top: 10,
+        ),
+        // Progression de l'enregistrement, en haut, comme TikTok.
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 6, 12, 0),
             child: Column(
               children: [
-                for (final (icone, nom) in const [
-                  (Icons.music_note_rounded, 'Son'),
-                  (Icons.text_fields_rounded, 'Texte'),
-                  (Icons.auto_fix_high_rounded, 'Filtres'),
-                  (Icons.speed_rounded, 'Vitesse'),
-                ])
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: BoutonVerre(
-                      icone: icone,
-                      libelle: nom,
-                      onTap: () {},
-                    ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(2),
+                  child: LinearProgressIndicator(
+                    value: _enregistrement.value,
+                    minHeight: 4,
+                    color: LiveColors.orangeVif,
+                    backgroundColor: Colors.white24,
                   ),
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    _BoutonCamera(
+                      icone: Icons.close_rounded,
+                      libelle: 'Fermer',
+                      onTap: () => context.pop(),
+                    ),
+                    const Spacer(),
+                    Material(
+                      color: Colors.black38,
+                      borderRadius: BorderRadius.circular(20),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(20),
+                        onTap: () => _choisirSon(context),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 8,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.music_note_rounded,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                              SizedBox(width: 6),
+                              Text(
+                                'Ajouter un son',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    const SizedBox(width: 48),
+                  ],
+                ),
               ],
             ),
           ),
-          const Positioned(
-            left: 12,
-            bottom: 12,
-            child: Etiquette(
-              '0:24 / 1:00',
-              fond: Color(0x99041936),
-              couleur: Colors.white,
-            ),
-          ),
-        ],
-      ),
-    );
-    final formulaire = <Widget>[
-      const Text('Galerie', style: TextStyle(fontWeight: FontWeight.w700)),
-      const SizedBox(height: 8),
-      SizedBox(
-        height: 84,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemCount: _galerie.length,
-          separatorBuilder: (_, _) => const SizedBox(width: 6),
-          itemBuilder: (_, i) => Semantics(
-            button: true,
-            selected: i == _choisi,
-            label: 'Vidéo ${i + 1}',
-            excludeSemantics: true,
-            child: GestureDetector(
-              onTap: () => setState(() => _choisi = i),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: 60,
-                padding: EdgeInsets.all(i == _choisi ? 2 : 0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: i == _choisi
-                        ? LiveColors.orangeVif
-                        : Colors.transparent,
-                    width: 2,
-                  ),
-                ),
-                child: Vignette(
-                  couleur: _galerie[i],
-                  icone: Icons.play_arrow_rounded,
-                  rayon: 8,
-                ),
-              ),
-            ),
-          ),
         ),
-      ),
-      const SizedBox(height: 16),
-      TextField(
-        controller: _legende,
-        maxLines: 2,
-        decoration: const InputDecoration(
-          labelText: 'Légende',
-          hintText: 'Décrivez votre vidéo, #hashtags',
-        ),
-      ),
-      const SizedBox(height: 16),
-      const Text(
-        'Lier à une annonce',
-        style: TextStyle(fontWeight: FontWeight.w700),
-      ),
-      const Text(
-        'Un bouton « Acheter » apparaîtra sur la vidéo.',
-        style: TextStyle(color: LiveColors.gris, fontSize: 13),
-      ),
-      const SizedBox(height: 8),
-      Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: [
-          for (final l in const [
-            'Aucune',
-            'Robe wax longue',
-            'iPhone 11 64 Go',
-            'Sac à main cuir',
-          ])
-            ChoiceChip(
-              label: Text(l),
-              selected: _lien == l,
-              onSelected: (_) => setState(() => _lien = l),
-            ),
-        ],
-      ),
-      const SizedBox(height: 12),
-      const LigneMenu(
-        icone: Icons.public_rounded,
-        titre: 'Qui peut voir',
-        valeur: 'Tout le monde',
-      ),
-      const LigneMenu(
-        icone: Icons.location_on_outlined,
-        titre: 'Lieu',
-        valeur: 'Moungali',
-      ),
-    ];
-    return Scaffold(
-      appBar: AppBar(title: const Text('Nouvelle vidéo')),
-      body: grand
-          ? DeuxColonnes(
-              ratio: 2 / 3,
-              principale: [Center(child: SizedBox(width: 320, child: apercu))],
-              secondaire: formulaire,
-            )
-          : ListView(
-              padding: const EdgeInsets.all(16),
+        // Outils à droite.
+        Positioned(
+          right: 8,
+          top: 110,
+          child: SafeArea(
+            child: Column(
               children: [
-                Center(child: SizedBox(width: 220, child: apercu)),
-                const SizedBox(height: 16),
-                ...formulaire,
+                _OutilCamera(
+                  icone: Icons.flip_camera_ios_rounded,
+                  libelle: 'Retourner',
+                  onTap: () => setState(() => _avant = !_avant),
+                ),
+                _OutilCamera(
+                  icone: Icons.speed_rounded,
+                  libelle:
+                      '×${_vitesse.toString().replaceAll('.0', '').replaceAll('.', ',')}',
+                  onTap: () => setState(
+                    () => _vitesse = switch (_vitesse) {
+                      1.0 => 2.0,
+                      2.0 => 0.5,
+                      _ => 1.0,
+                    },
+                  ),
+                ),
+                _OutilCamera(
+                  icone: Icons.auto_fix_high_rounded,
+                  libelle: _filtre,
+                  onTap: () => setState(
+                    () => _filtre = switch (_filtre) {
+                      'Original' => 'Lumineux',
+                      'Lumineux' => 'Chaud',
+                      _ => 'Original',
+                    },
+                  ),
+                ),
+                const _OutilCamera(icone: Icons.timer_outlined, libelle: '3 s'),
+                _OutilCamera(
+                  icone: _flash
+                      ? Icons.flash_on_rounded
+                      : Icons.flash_off_rounded,
+                  libelle: 'Flash',
+                  onTap: () => setState(() => _flash = !_flash),
+                ),
+                const _OutilCamera(
+                  icone: Icons.text_fields_rounded,
+                  libelle: 'Texte',
+                ),
               ],
             ),
-      bottomNavigationBar: BarreAction(
-        child: FilledButton(
-          onPressed: () => context.pushReplacement('/publier/envois'),
-          child: const Text('Publier la vidéo'),
+          ),
         ),
-      ),
-    );
-  }
-}
-
-/// E-PUB-06 — Envois en cours : compression, envoi, publication, reprise.
-class EcranEnvois extends StatefulWidget {
-  const EcranEnvois({super.key});
-
-  @override
-  State<EcranEnvois> createState() => _EcranEnvoisState();
-}
-
-class _EcranEnvoisState extends State<EcranEnvois> {
-  var _wifi = false;
-  var _repris = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Envois en cours')),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          const _Envoi(
-            titre: 'Nouvel arrivage ! Livraison 24 h…',
-            etape: 'Compression pour réseau mobile',
-            progression: 0.62,
-            couleur: Color(0xFFB45309),
-          ),
-          const _Envoi(
-            titre: 'Robe wax longue · photos',
-            etape: 'Publié il y a 2 min',
-            progression: 1,
-            couleur: Color(0xFF9A3412),
-          ),
-          _Envoi(
-            titre: 'Visite du studio',
-            etape: _repris ? 'Reprise de l’envoi…' : 'Connexion perdue à 48 %',
-            progression: _repris ? 0.55 : 0.48,
-            couleur: const Color(0xFF334155),
-            erreur: !_repris,
-            onReprendre: () => setState(() => _repris = true),
-          ),
-          const SizedBox(height: 12),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: const Text('Envoyer seulement en Wi-Fi'),
-            subtitle: const Text(
-              'Les vidéos attendent une connexion Wi-Fi pour économiser vos données.',
-            ),
-            value: _wifi,
-            onChanged: (v) => setState(() => _wifi = v),
-          ),
-          const Text(
-            'L’envoi reprend là où il s’est arrêté si la connexion coupe : rien n’est perdu.',
-            style: TextStyle(color: LiveColors.gris, fontSize: 13),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _Envoi extends StatelessWidget {
-  const _Envoi({
-    required this.titre,
-    required this.etape,
-    required this.progression,
-    required this.couleur,
-    this.erreur = false,
-    this.onReprendre,
-  });
-  final String titre;
-  final String etape;
-  final double progression;
-  final Color couleur;
-  final bool erreur;
-  final VoidCallback? onReprendre;
-
-  @override
-  Widget build(BuildContext context) {
-    final fini = progression >= 1;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Bloc(
-        padding: 12,
-        child: Row(
-          children: [
-            SizedBox(
-              width: 48,
-              height: 64,
-              child: Vignette(
-                couleur: couleur,
-                icone: Icons.play_arrow_rounded,
-                rayon: 8,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
+        // Bas : conseil, chrono, galerie, enregistrer, suivant.
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    titre,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                  Text(
-                    etape,
-                    style: TextStyle(
-                      fontSize: 12.5,
-                      color: erreur
-                          ? LiveColors.erreur
-                          : fini
-                          ? LiveColors.succes
-                          : LiveColors.gris,
+                  AnimatedOpacity(
+                    opacity: _enCours || _secondes > 0 ? 0 : 1,
+                    duration: const Duration(milliseconds: 250),
+                    child: const Etiquette(
+                      'Filmez l’objet de près, en pleine lumière, 30 s suffisent',
+                      icone: Icons.lightbulb_outline_rounded,
+                      fond: Colors.black45,
+                      couleur: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  TweenAnimationBuilder<double>(
-                    tween: Tween(end: progression),
-                    duration: const Duration(milliseconds: 900),
-                    curve: courbeDouce,
-                    builder: (_, v, _) => LinearProgressIndicator(
-                      value: v,
-                      minHeight: 5,
-                      borderRadius: BorderRadius.circular(3),
-                      color: erreur
-                          ? LiveColors.erreur
-                          : fini
-                          ? LiveColors.succes
-                          : LiveColors.bleu,
+                  const SizedBox(height: 10),
+                  Text(
+                    '0:${_secondes.toString().padLeft(2, '0')} / 1:00',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      shadows: [Shadow(blurRadius: 6)],
                     ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: _MiniatureGalerie(
+                            couleur: _galerie[(_couleur + 3) % _galerie.length],
+                            nombre: _choisis.length,
+                            onTap: () => _ouvrirGalerie(context),
+                          ),
+                        ),
+                      ),
+                      _BoutonEnregistrer(
+                        enCours: _enCours,
+                        progression: _enregistrement.value,
+                        onTap: _basculer,
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: AnimatedScale(
+                            scale: _pret && !_enCours ? 1 : 0,
+                            duration: const Duration(milliseconds: 220),
+                            curve: courbeDouce,
+                            child: FilledButton(
+                              style: FilledButton.styleFrom(
+                                backgroundColor: LiveColors.orangeVif,
+                                minimumSize: const Size(0, 44),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                ),
+                              ),
+                              onPressed: _pret
+                                  ? () => setState(() => _legende = true)
+                                  : null,
+                              child: const Text('Suivant'),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-            if (erreur)
-              IconButton(
-                tooltip: 'Reprendre',
-                onPressed: onReprendre,
-                icon: const Icon(Icons.refresh_rounded),
-              )
-            else if (fini)
-              const Padding(
-                padding: EdgeInsets.only(left: 8),
-                child: Icon(
-                  Icons.check_circle_rounded,
-                  color: LiveColors.succes,
+          ),
+        ),
+      ],
+    );
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: context.grandEcran
+          ? Center(
+              child: AspectRatio(aspectRatio: 9 / 16, child: ecran),
+            )
+          : ecran,
+    );
+  }
+
+  void _choisirSon(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: Colors.white,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (final (titre, auteur) in const [
+              ('Son original', 'Votre voix'),
+              ('Ndombolo 2026', 'Tendance à Brazzaville'),
+              ('Rumba douce', 'Musique libre de droits'),
+              ('Afro beat', 'Musique libre de droits'),
+            ])
+              ListTile(
+                leading: const CircleAvatar(
+                  backgroundColor: Color(0xFFEFF2F6),
+                  child: Icon(Icons.music_note_rounded, color: LiveColors.bleu),
                 ),
+                title: Text(titre),
+                subtitle: Text(auteur),
+                onTap: () => Navigator.pop(ctx),
               ),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// Galerie : jusqu'à 10 photos et 1 vidéo, avec compteur.
+  void _ouvrirGalerie(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, maj) => SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        'Galerie',
+                        style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '${_choisis.length} / 10 + 1 vidéo',
+                      style: const TextStyle(color: LiveColors.gris),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 4,
+                  crossAxisSpacing: 4,
+                  childAspectRatio: 9 / 14,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    for (var i = 0; i < _galerie.length; i++)
+                      Semantics(
+                        button: true,
+                        selected: _choisis.contains(i),
+                        label: 'Média ${i + 1}',
+                        excludeSemantics: true,
+                        child: GestureDetector(
+                          onTap: () {
+                            void f() => _choisis.contains(i)
+                                ? _choisis.remove(i)
+                                : _choisis.length < 10
+                                ? _choisis.add(i)
+                                : null;
+                            maj(f);
+                            setState(() => _couleur = i);
+                          },
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Vignette(
+                                couleur: _galerie[i],
+                                icone: i % 3 == 0
+                                    ? Icons.play_arrow_rounded
+                                    : Icons.photo_rounded,
+                                rayon: 6,
+                              ),
+                              if (i % 3 == 0)
+                                const Positioned(
+                                  left: 4,
+                                  bottom: 4,
+                                  child: Etiquette('0:42'),
+                                ),
+                              Positioned(
+                                right: 4,
+                                top: 4,
+                                child: CircleAvatar(
+                                  radius: 11,
+                                  backgroundColor: _choisis.contains(i)
+                                      ? LiveColors.orangeVif
+                                      : Colors.black26,
+                                  child: _choisis.contains(i)
+                                      ? Text(
+                                          '${_choisis.toList().indexOf(i) + 1}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        )
+                                      : null,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton(
+                    onPressed: () => Navigator.pop(ctx),
+                    child: const Text('Valider'),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
