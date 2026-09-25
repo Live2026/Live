@@ -7,6 +7,8 @@ import '../features/apprendre/apprendre_screens.dart';
 import '../features/auth/auth_screens.dart';
 import '../features/compte/compte_screens.dart';
 import '../features/confiance/confiance_screens.dart';
+import '../features/createurs/createurs_screens.dart';
+import '../features/croissance/croissance_screens.dart';
 import '../features/direct/direct_screens.dart';
 import '../features/explore/explore_screen.dart';
 import '../features/feed/feed_screen.dart';
@@ -120,6 +122,13 @@ final routeur = GoRouter(
     _route('/directs', (_) => const EcranDirects()),
     _route('/direct/lancer', (_) => const EcranLancerDirect()),
     _route('/direct/:id', (s) => EcranDirect(id: _p(s, 'id'))),
+    _route('/studio', (_) => const EcranStudio()),
+    _route('/fans/:id', (s) => EcranFans(id: _p(s, 'id'))),
+    _route('/sejours', (_) => const EcranSejours()),
+    _route('/sejour/:id', (s) => EcranSejour(id: _p(s, 'id'))),
+    _route('/live-plus', (_) => const EcranLivePlus()),
+    _route('/publicite', (_) => const EcranPublicite()),
+    _route('/live-pro/offres', (_) => const EcranOffresPro()),
     // Apprendre (contenus numériques)
     _route('/apprendre', (_) => const EcranApprendre()),
     _route('/apprendre/vendre', (_) => const EcranVendreContenu()),
