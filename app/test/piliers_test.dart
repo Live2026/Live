@@ -57,4 +57,26 @@ void main() {
       expect(a.inscrits, lessThan(a.objectif));
     }
   });
+
+  test('devises : euro et franc CFA ouest-africain à parité fixe', () {
+    final eur = deviseParCode('EUR');
+    expect(eur.fixe, isTrue);
+    expect(eur.versFcfa(100), 65596);
+    expect(deviseParCode('XOF').versFcfa(5000), 5000);
+    expect(deviseParCode('USD').fixe, isFalse);
+    expect(deviseParCode('???').code, 'EUR');
+    expect(eur.libelleTaux, '1 € = 655,957 FCFA');
+    for (final d in devises) {
+      expect(d.maximum, d.pas * 100);
+    }
+  });
+
+  test('transfert : devise mémorisée, transfert reçu retiré', () {
+    expect(etat().devise, 'EUR');
+    store().choisirDevise('USD');
+    expect(etat().devise, 'USD');
+    store().retirerTransfert('r1');
+    expect(etat().transfertsRetires, {'r1'});
+    expect(transfertsRecus.first.fcfa, 98394);
+  });
 }

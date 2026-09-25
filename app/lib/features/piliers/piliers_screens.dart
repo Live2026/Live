@@ -16,6 +16,7 @@ part 'tontine_detail.dart';
 part 'achats_groupes.dart';
 part 'diaspora.dart';
 part 'transfert.dart';
+part 'transfert_recevoir.dart';
 part 'factures.dart';
 part 'adresse_points.dart';
 

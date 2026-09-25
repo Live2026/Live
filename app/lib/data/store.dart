@@ -359,6 +359,13 @@ class LiveStore extends Notifier<LiveState> {
 
   void choisirPays(String ville) => state = state.copyWith(pays: ville);
 
+  void choisirDevise(String code) => state = state.copyWith(devise: code);
+
+  /// Transfert reçu de l'étranger, versé sur le compte Mobile Money.
+  void retirerTransfert(String id) => state = state.copyWith(
+    transfertsRetires: {...state.transfertsRetires, id},
+  );
+
   void reinitialiser() => state = LiveState(ventes: ventesInitiales());
 }
 

@@ -102,6 +102,13 @@ const _quotidien = [
     Color(0xFF0369A1),
   ),
   (
+    Icons.currency_exchange_rounded,
+    'Live Transfert',
+    'Envoyer, recevoir, toutes devises',
+    '/transfert',
+    Color(0xFF0F766E),
+  ),
+  (
     Icons.groups_2_rounded,
     'Achats groupés',
     'À plusieurs, prix de gros',

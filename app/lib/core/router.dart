@@ -181,7 +181,12 @@ final routeur = GoRouter(
     _route('/tontine/:id', (s) => EcranTontine(id: _p(s, 'id'))),
     _route('/achats-groupes', (_) => const EcranAchatsGroupes()),
     _route('/diaspora', (_) => const EcranDiaspora()),
-    _route('/transfert', (_) => const EcranTransfert()),
+    _route(
+      '/transfert',
+      (s) => EcranTransfert(
+        recevoir: s.uri.queryParameters['sens'] == 'recevoir',
+      ),
+    ),
     _route('/factures', (_) => const EcranFactures()),
     _route('/adresse', (_) => const EcranAdresseLive()),
     _route('/points-relais', (_) => const EcranPointsRelais()),

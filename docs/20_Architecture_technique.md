@@ -63,7 +63,7 @@
 | Gestion d'état | **Riverpod** | Testable, adapté à une grosse application modulaire |
 | Navigation et liens profonds | **go_router** + **Android App Links / iOS Universal Links** sur le domaine de Live | Les liens `live.xx/p/123` ouvrent directement l'annonce |
 | Client backend | **supabase_flutter** | Auth, requêtes, Realtime, Storage |
-| Base locale | **drift** (SQLite) | Brouillons hors ligne, cache, file d'envoi |
+| Base locale | **drift** (SQLite) | Brouillons hors ligne, cache, file d'envoi (détail : document 26) |
 | Lecture vidéo | Lecteur HLS natif (**video_player** ; `media_kit` à évaluer) | Lecture adaptative |
 | Compression vidéo et image sur l'appareil | Plugin de compression natif (Android MediaCodec / iOS AVFoundation) ; WebP pour les images | Diviser la taille des envois (voir section 6.3) |
 | Envoi de fichiers reprenable | Protocole **tus** | Reprise après coupure réseau |
@@ -395,7 +395,7 @@ Toutes les notifications passent par une **file** (`pgmq`) et une Edge Function 
 ## 14. Dépendances
 
 - Document 06 (paiements) : grand livre, agrégateur, webhooks.
-- Document 21 (modèle de données) : détail des tables de chaque schéma.
+- Document 26 (back-end) : détail des tables de chaque schéma, base locale Drift, synchronisation, ordre de construction.
 - Document 22 (sécurité et conformité) : localisation des données, conservation, chiffrement.
 - Documents 10, 11, 12 : règles métier implémentées dans les fonctions PostgreSQL.
 

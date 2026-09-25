@@ -12,6 +12,7 @@ export 'donnees_market.dart';
 export 'donnees_opportunites.dart';
 export 'donnees_piliers.dart';
 export 'donnees_createurs.dart';
+export 'donnees_devises.dart';
 export 'donnees_services.dart';
 export 'donnees_social.dart';
 export 'modeles.dart';

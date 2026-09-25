@@ -198,6 +198,12 @@ class EcranMoi extends ConsumerWidget {
             onTap: () => context.push('/diaspora'),
           ),
           LigneMenu(
+            icone: Icons.currency_exchange_rounded,
+            titre: 'Recevoir de l’étranger',
+            detail: 'Euro, dollar, livre… reçus en FCFA',
+            onTap: () => context.push('/transfert?sens=recevoir'),
+          ),
+          LigneMenu(
             icone: Icons.pin_drop_rounded,
             titre: 'Mon Adresse Live',
             detail: 'MNG-4821 · Moungali',

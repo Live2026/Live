@@ -1,8 +1,5 @@
 part of 'piliers_screens.dart';
 
-/// Taux fixe franc CFA (XAF) / euro, garanti par l'accord monétaire.
-const tauxEuro = 655.957;
-
 /// Ce que la diaspora paie pour un proche, et le bénéficiaire payé.
 const _besoins = [
   (Icons.home_rounded, 'Loyer', 'Payé à l’agence, reçu à votre nom', 90000),
@@ -25,7 +22,7 @@ const _besoins = [
 
 /// E-DIA-01 — Diaspora : payer, depuis l'étranger, ce dont un proche a
 /// besoin au pays, avec preuve de remise ; ou lui envoyer de l'argent
-/// (Live Transfert). Paiement par carte bancaire, en euros ou en dollars.
+/// (Live Transfert). Paiement par carte dans la devise choisie (donnees_devises).
 class EcranDiaspora extends ConsumerStatefulWidget {
   const EcranDiaspora({super.key});
 
@@ -38,6 +35,7 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
 
   void _payerBesoin(String besoin, int montant) {
     final (nom, _, _, _) = proches[_proche];
+    final d = deviseParCode(ref.read(liveProvider).devise);
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
@@ -61,7 +59,7 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
               LigneMontant(
                 'Soit, par carte',
                 0,
-                brut: '${(montant / tauxEuro).toStringAsFixed(2)} €',
+                brut: d.ecrire(d.depuisFcfa(montant), decimales: true),
               ),
               const LigneMontant('Frais Live', 0, brut: '1,5 %'),
               const SizedBox(height: 8),
@@ -107,8 +105,8 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
             titre: 'D’ici, prenez soin de ceux de là-bas',
             texte:
                 'Payez le loyer, les courses ou l’école de vos proches, avec '
-                'preuve de remise. Taux fixe : 1 € = 655,957 FCFA, aucune '
-                'surprise de change.',
+                'preuve de remise. Payez dans votre devise : euro, dollar, '
+                'livre, franc suisse, yuan…',
             couleurs: const [Color(0xFF0369A1), LiveColors.nuit],
             enfant: FilledButton.icon(
               style: FilledButton.styleFrom(
