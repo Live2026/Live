@@ -7,6 +7,7 @@ import '../features/apprendre/apprendre_screens.dart';
 import '../features/auth/auth_screens.dart';
 import '../features/compte/compte_screens.dart';
 import '../features/confiance/confiance_screens.dart';
+import '../features/direct/direct_screens.dart';
 import '../features/explore/explore_screen.dart';
 import '../features/feed/feed_screen.dart';
 import '../features/ia/ia_screens.dart';
@@ -115,6 +116,10 @@ final routeur = GoRouter(
     _route('/mes-ventes', (_) => const EcranMesVentes()),
     _route('/vente/:id', (s) => EcranRemise(id: _p(s, 'id'))),
     _route('/vente/:id/qr', (s) => EcranQrPaiement(id: _p(s, 'id'))),
+    // Phase 2 : Live Direct
+    _route('/directs', (_) => const EcranDirects()),
+    _route('/direct/lancer', (_) => const EcranLancerDirect()),
+    _route('/direct/:id', (s) => EcranDirect(id: _p(s, 'id'))),
     // Apprendre (contenus numériques)
     _route('/apprendre', (_) => const EcranApprendre()),
     _route('/apprendre/vendre', (_) => const EcranVendreContenu()),

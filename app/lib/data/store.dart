@@ -149,6 +149,33 @@ class LiveStore extends Notifier<LiveState> {
           effacerPaiement: true,
         );
         return _numero('NU');
+      case TypePaiement.fan:
+        state = state.copyWith(
+          fans: {...state.fans, p.cibleId},
+          effacerPaiement: true,
+        );
+        return p.cibleId;
+      case TypePaiement.sejour:
+        final id = _numero('SJ');
+        state = state.copyWith(
+          sejoursReserves: [id, ...state.sejoursReserves],
+          effacerPaiement: true,
+        );
+        return id;
+      case TypePaiement.publicite:
+        final id = _numero('PUB');
+        state = state.copyWith(
+          publicites: [p.libelle, ...state.publicites],
+          effacerPaiement: true,
+        );
+        return id;
+      case TypePaiement.livePlus:
+        state = state.copyWith(
+          formulePlus: p.cibleId,
+          credits: state.credits + (p.cibleId == 'pro' ? 500 : 200),
+          effacerPaiement: true,
+        );
+        return p.cibleId;
       case TypePaiement.credits:
         final pack = packs.firstWhere((k) => k.id == p.cibleId);
         state = state.copyWith(
@@ -447,6 +474,13 @@ class LiveStore extends Notifier<LiveState> {
         ...state.historique,
       ],
     );
+    return true;
+  }
+
+  /// Cadeau envoyé pendant un direct, prélevé sur le solde Live.
+  bool envoyerCadeau(int prix, String nom) {
+    if (!debiterSolde(prix, 'Cadeau $nom')) return false;
+    state = state.copyWith(cadeauxEnvoyes: state.cadeauxEnvoyes + prix);
     return true;
   }
 

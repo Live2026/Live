@@ -98,6 +98,18 @@ enum TypePaiement {
 
   /// Panier de contenus numériques (cours, PDF, vidéos…).
   numerique,
+
+  /// Abonnement de fan à un créateur (P2).
+  fan,
+
+  /// Séjour meublé réservé à la nuit (P2).
+  sejour,
+
+  /// Campagne de publicité dans le fil (P2).
+  publicite,
+
+  /// Abonnement Live Plus (crédits mensuels, P2).
+  livePlus,
 }
 
 /// Pack de Crédits Live (document 19, section 2.2).
@@ -223,6 +235,11 @@ class LiveState {
     this.retires = const {},
     this.sourdine = const {},
     this.cloches = const {'kimbembe'},
+    this.fans = const {},
+    this.sejoursReserves = const [],
+    this.publicites = const [],
+    this.formulePlus,
+    this.cadeauxEnvoyes = 0,
   });
 
   final bool connecte;
@@ -283,6 +300,14 @@ class LiveState {
   final Set<String> sourdine;
   final Set<String> cloches;
 
+  /// Phases 2 et 3 : créateurs soutenus, séjours, campagnes, Live Plus,
+  /// montant des cadeaux envoyés.
+  final Set<String> fans;
+  final List<String> sejoursReserves;
+  final List<String> publicites;
+  final String? formulePlus;
+  final int cadeauxEnvoyes;
+
   bool get identiteVerifiee => niveau >= 2;
 
   int get enAttente =>
@@ -326,6 +351,11 @@ class LiveState {
     Set<String>? retires,
     Set<String>? sourdine,
     Set<String>? cloches,
+    Set<String>? fans,
+    List<String>? sejoursReserves,
+    List<String>? publicites,
+    String? formulePlus,
+    int? cadeauxEnvoyes,
   }) {
     return LiveState(
       connecte: connecte ?? this.connecte,
@@ -364,6 +394,11 @@ class LiveState {
       retires: retires ?? this.retires,
       sourdine: sourdine ?? this.sourdine,
       cloches: cloches ?? this.cloches,
+      fans: fans ?? this.fans,
+      sejoursReserves: sejoursReserves ?? this.sejoursReserves,
+      publicites: publicites ?? this.publicites,
+      formulePlus: formulePlus ?? this.formulePlus,
+      cadeauxEnvoyes: cadeauxEnvoyes ?? this.cadeauxEnvoyes,
     );
   }
 }

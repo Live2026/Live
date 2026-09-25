@@ -277,6 +277,26 @@ class EcranPaiementReussi extends StatelessWidget {
         'Ouvrir mes achats',
         '/mes-achats',
       ),
+      TypePaiement.fan => (
+        'Vous êtes fan : badge dans les commentaires et vidéos réservées débloquées.',
+        'Voir le créateur',
+        '/fans/$id',
+      ),
+      TypePaiement.sejour => (
+        'Séjour réservé. Le paiement est versé à l’hôte après votre arrivée.',
+        'Voir ma réservation',
+        '/sejours',
+      ),
+      TypePaiement.publicite => (
+        'Campagne en vérification. Elle sera diffusée avec la mention « Sponsorisé ».',
+        'Voir mes campagnes',
+        '/publicite',
+      ),
+      TypePaiement.livePlus => (
+        'Live Plus est actif : vos crédits du mois sont ajoutés.',
+        'Utiliser mes crédits',
+        '/ia',
+      ),
       TypePaiement.boost => (
         'Votre annonce passe en tête du fil et des recherches à Brazzaville, '
             'avec la mention « Sponsorisé ».',
