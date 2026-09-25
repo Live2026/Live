@@ -118,7 +118,7 @@ const _quotidien = [
   (
     Icons.storefront_rounded,
     'Points relais',
-    'Colis et espèces → MoMo',
+    'Colis, espèces en MoMo',
     '/points-relais',
     Color(0xFF15803D),
   ),

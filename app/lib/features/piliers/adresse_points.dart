@@ -229,7 +229,7 @@ class _EcranPointsRelaisState extends State<EcranPointsRelais> {
                           ),
                           Etiquette('Retrait', icone: Icons.qr_code_2_rounded),
                           Etiquette(
-                            'Espèces → MoMo',
+                            'Espèces en MoMo',
                             icone: Icons.payments_rounded,
                           ),
                         ],

@@ -18,7 +18,7 @@ const _aValider = [
   ),
   (
     'Modification de commission',
-    'Produits : 6 % → 5 % (Pointe-Noire)',
+    'Produits : de 6 % à 5 % (Pointe-Noire)',
     'Direction générale',
     'Campagne de lancement',
     true,
@@ -176,7 +176,7 @@ const _journal = [
   (
     '09:58:40',
     'Direction générale',
-    'Commission 6 % → 5 % demandée',
+    'Commission de 6 % à 5 % demandée',
     'Configuration',
     'Finance',
   ),

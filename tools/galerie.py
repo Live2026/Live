@@ -178,7 +178,7 @@ SECTIONS = [
         'transfert': ('Live Transfert', 'Taux fixe euro, retrait MoMo sans frais'),
         'factures': ('Factures et crédit', 'Électricité, eau, télévision, recharge'),
         'adresse_live': ('Adresse Live', 'Un code, une position, un repère'),
-        'points_relais': ('Points relais', 'Colis et espèces vers Mobile Money'),
+        'points_relais': ('Points relais', 'Colis, espèces en Mobile Money'),
     }),
     ('messages', 'Messages, groupes et confiance', 'Messagerie protégée contre les arnaques, groupes et canaux ; avis vérifiés, réclamations suivies.', {
         'messages': ('Messages', 'Non lus, coches, annonce liée'),
