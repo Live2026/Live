@@ -43,6 +43,31 @@ class _Quartier extends StatelessWidget {
                   'Adresse exacte visible après le paiement de la visite.',
                   style: TextStyle(color: LiveColors.gris, fontSize: 13),
                 ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        minimumSize: const Size(0, 40),
+                      ),
+                      onPressed: () => context.push(
+                        '/rue?lieu=${Uri.encodeComponent('${bien.quartier}, Brazzaville')}',
+                      ),
+                      icon: const Icon(Icons.streetview_rounded, size: 18),
+                      label: const Text('Vue rue'),
+                    ),
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        minimumSize: const Size(0, 40),
+                      ),
+                      onPressed: () => context.push('/carte'),
+                      icon: const Icon(Icons.map_outlined, size: 18),
+                      label: const Text('Sur la carte'),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

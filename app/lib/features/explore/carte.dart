@@ -55,7 +55,16 @@ class _EcranCarteState extends State<EcranCarte> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Positioned.fill(child: PlanVille(reperes: reperes)),
+          Positioned.fill(
+            child: CarteInteractive(
+              reperes: reperes,
+              maPosition: const Offset(0.47, 0.5),
+              lieuVueRue: _immo
+                  ? '${biens[choix].quartier}, Brazzaville'
+                  : '${prestataires[choix].zone}, Brazzaville',
+              margeBas: 150,
+            ),
+          ),
           Positioned(
             left: 0,
             right: 0,

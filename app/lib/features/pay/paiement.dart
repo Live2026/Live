@@ -297,6 +297,36 @@ class EcranPaiementReussi extends StatelessWidget {
         'Utiliser mes crédits',
         '/ia',
       ),
+      TypePaiement.cotisation => (
+        'Cotisation reçue. Live la garde et verse la cagnotte au bénéficiaire le jour du tour.',
+        'Voir la tontine',
+        '/tontine/t1',
+      ),
+      TypePaiement.achatGroupe => (
+        'Vous participez. Si l’objectif n’est pas atteint, vous êtes remboursé automatiquement.',
+        'Voir les achats groupés',
+        '/achats-groupes',
+      ),
+      TypePaiement.facture => (
+        'Facture réglée. Le reçu du fournisseur est dans vos paiements.',
+        'Mes factures',
+        '/factures',
+      ),
+      TypePaiement.recharge => (
+        'Crédit envoyé sur le numéro choisi.',
+        'Mes factures',
+        '/factures',
+      ),
+      TypePaiement.pourUnProche => (
+        'Votre proche est prévenu par SMS. Il montre son QR à la remise ; vous recevez la confirmation.',
+        'Mes envois',
+        '/diaspora',
+      ),
+      TypePaiement.transfert => (
+        'Transfert envoyé. Votre proche le retire en MTN MoMo ou Airtel Money, sans frais de retrait.',
+        'Mes envois',
+        '/diaspora',
+      ),
       TypePaiement.boost => (
         'Votre annonce passe en tête du fil et des recherches à Brazzaville, '
             'avec la mention « Sponsorisé ».',

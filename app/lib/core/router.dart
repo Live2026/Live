@@ -19,6 +19,7 @@ import '../features/market/market_screens.dart';
 import '../features/messages/messages_screens.dart';
 import '../features/opportunites/opportunites_screens.dart';
 import '../features/pay/pay_screens.dart';
+import '../features/piliers/piliers_screens.dart';
 import '../features/publish/publish_screen.dart';
 import '../features/services/services_screens.dart';
 import '../features/social/social_screens.dart';
@@ -128,6 +129,10 @@ final routeur = GoRouter(
     _route('/recherche', (s) => EcranRecherche(initiale: s.extra as String?)),
     _route('/alertes', (_) => const EcranAlertes()),
     _route(
+      '/rue',
+      (s) => EcranVueRue(lieu: s.uri.queryParameters['lieu'] ?? 'Brazzaville'),
+    ),
+    _route(
       '/carte',
       (s) => EcranCarte(espace: s.uri.queryParameters['espace'] ?? 'immo'),
     ),
@@ -171,6 +176,15 @@ final routeur = GoRouter(
     _route('/fonds-createurs', (_) => const EcranFondsCreateurs()),
     _route('/finance', (_) => const EcranFinance()),
     _route('/partenaires', (_) => const EcranPartenaires()),
+    // Piliers « référence » (docs/21)
+    _route('/tontines', (_) => const EcranTontines()),
+    _route('/tontine/:id', (s) => EcranTontine(id: _p(s, 'id'))),
+    _route('/achats-groupes', (_) => const EcranAchatsGroupes()),
+    _route('/diaspora', (_) => const EcranDiaspora()),
+    _route('/transfert', (_) => const EcranTransfert()),
+    _route('/factures', (_) => const EcranFactures()),
+    _route('/adresse', (_) => const EcranAdresseLive()),
+    _route('/points-relais', (_) => const EcranPointsRelais()),
     // Apprendre (contenus numériques)
     _route('/apprendre', (_) => const EcranApprendre()),
     _route('/apprendre/vendre', (_) => const EcranVendreContenu()),
@@ -229,6 +243,7 @@ final routeur = GoRouter(
     _route('/ia/exercice', (_) => const EcranExercice()),
     _route('/ia/documents', (_) => const EcranMesDocuments()),
     _route('/ia/business-plan', (_) => const EcranBusinessPlan()),
+    _route('/ia/assistant', (_) => const EcranAssistant()),
     _route('/ia/tuteur', (_) => const EcranTuteur()),
     _route('/ia/service/:id', (s) => EcranGenerateur(serviceId: _p(s, 'id'))),
     _route('/ia/document/:id', (s) => EcranDocument(id: _p(s, 'id'))),

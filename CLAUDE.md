@@ -27,7 +27,9 @@ Tout écran se construit avec la bibliothèque `app/lib/shared/` (importer `widg
 | `cartes_savoirs.dart`, `cartes_divertissement.dart`, `panier.dart` | `CarteContenu`, `CarteOpportunite`, `CarteDirect`, `PastilleDirect`, `CarteSejour`, `BoutonPanier`, `BoutonNotifications`, `BoutonCommandes` |
 | `saisie.dart`, `frise.dart`, `medias.dart`, `animations.dart` | choix, clavier de code, frise, vignettes, animations |
 | `logo.dart`, `en_tete_recherche.dart` | `LogoLive` (le nom s'écrit « Live »), `EnTeteRecherche` (loupe qui déploie le champ dans l'en-tête) |
-| `champ_code.dart`, `demarrage.dart` | `ChampCode` (six cases animées), `SloganAnime`, `PastilleEspace`, `FondDemarrage` |
+| `champ_code.dart`, `demarrage.dart` | `ChampCode` (six cases animées), `SloganAnime`, `PastilleEspace`, `FondDemarrage`, `EnTeteDemarrage` |
+| `plan_ville.dart`, `carte_interactive.dart` | `PlanVille` (plan ou satellite, trajet, position), `CarteInteractive` (zoom, ma position, vue rue) |
+| `juste_prix.dart`, `ville.dart` | `JustePrix` (fourchette du marché, Live IA), `TexteVille` (ville choisie au lieu d'une ville écrite en dur) |
 
 ## Règles de design
 

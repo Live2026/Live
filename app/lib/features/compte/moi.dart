@@ -178,6 +178,31 @@ class EcranMoi extends ConsumerWidget {
             detail: 'Boutique, agence, prestataire ou chaîne',
             onTap: () => context.push('/espace/nouveau'),
           ),
+          const EnTeteSection('Mon argent au quotidien'),
+          LigneMenu(
+            icone: Icons.diversity_3_rounded,
+            titre: 'Mes tontines',
+            detail: '2 tontines · prochaine cotisation samedi',
+            onTap: () => context.push('/tontines'),
+          ),
+          LigneMenu(
+            icone: Icons.receipt_long_rounded,
+            titre: 'Factures et crédit',
+            detail: 'Électricité, eau, télévision, recharge',
+            onTap: () => context.push('/factures'),
+          ),
+          LigneMenu(
+            icone: Icons.flight_land_rounded,
+            titre: 'Diaspora et transferts',
+            detail: 'Payer pour un proche, Live Transfert',
+            onTap: () => context.push('/diaspora'),
+          ),
+          LigneMenu(
+            icone: Icons.pin_drop_rounded,
+            titre: 'Mon Adresse Live',
+            detail: 'MNG-4821 · Moungali',
+            onTap: () => context.push('/adresse'),
+          ),
           const EnTeteSection('Créer et gagner'),
           LigneMenu(
             icone: Icons.insights_rounded,

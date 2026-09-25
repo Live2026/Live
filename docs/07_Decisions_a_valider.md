@@ -128,4 +128,14 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | Vidéo | **Mux** (retenu parmi les options du document 20) | Téléversement, encodage adaptatif, lecture du fil, **directs** (Mux Live) et statistiques de qualité |
 | Paiement Mobile Money | **API directes MTN MoMo et Airtel Money** (décision du promoteur, 25/09/2026 ; remplace D-11) | Branchées par des Edge Functions Supabase : initiation, webhooks de confirmation, décaissements, réconciliation quotidienne. Reste à choisir un prestataire pour la **carte Visa** |
 
+## 12. Décision du 25/09/2026 : les piliers « référence » (document 21)
+
+| Point | Décision | Statut |
+|-------|----------|--------|
+| Nouveaux piliers | Live IA partout, tontines et achats groupés, diaspora, quotidien (factures, crédit, Adresse Live, points relais), cartes Google Maps | ✅ |
+| Monnaie et transferts | **Pas de monnaie émise par Live.** Solde Live et Live Transfert opérés par un **établissement agréé** (COBAC ; agrément de transfert dans les pays d'envoi) tant que Live n'a pas son agrément. « Payer pour un proche » (achat) ouvre en premier | ⚖️ D-16 |
+| Frais (hypothèses) | Tontine 1 % de la cagnotte versée ; payer pour un proche 1,5 % ; Live Transfert 2 % ; factures sans frais pour l'utilisateur (commission fournisseur à négocier) | ⚖️ |
+| Cartes | Google Maps Platform (Maps SDK, Street View, Directions, Places, Geocoding) ; positions en direct par Supabase Realtime | ✅ |
+| Voix locales | Lingala et kituba : collecte de voix consentie avant le lancement ; repli sur le français | ⚖️ |
+
 **Fin du Document 07**

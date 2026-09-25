@@ -123,6 +123,32 @@ import 'mock.dart';
         effacerPaiement: true,
       );
       return (state, id);
+    case TypePaiement.cotisation:
+      state = state.copyWith(
+        cotisations: {...state.cotisations, p.cibleId},
+        effacerPaiement: true,
+      );
+      return (state, numero('TO'));
+    case TypePaiement.achatGroupe:
+      state = state.copyWith(
+        groupes: {...state.groupes, p.cibleId},
+        effacerPaiement: true,
+      );
+      return (state, numero('AG'));
+    case TypePaiement.facture:
+    case TypePaiement.recharge:
+      state = state.copyWith(
+        facturesPayees: {...state.facturesPayees, p.cibleId},
+        effacerPaiement: true,
+      );
+      return (state, numero('FA'));
+    case TypePaiement.pourUnProche:
+    case TypePaiement.transfert:
+      state = state.copyWith(
+        envois: [p.libelle, ...state.envois],
+        effacerPaiement: true,
+      );
+      return (state, numero(p.type == TypePaiement.transfert ? 'TR' : 'PP'));
     case TypePaiement.livePlus:
       state = state.copyWith(
         formulePlus: p.cibleId,

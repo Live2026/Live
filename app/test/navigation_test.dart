@@ -31,7 +31,7 @@ void main() {
     expect(find.bySemanticsLabel('Explorer'), findsWidgets);
     await tester.tap(find.text('Explorer'));
     await tester.pumpAndSettle();
-    expect(find.text('Bonnes affaires près de vous'), findsOneWidget);
+    expect(find.text('Argent et quotidien'), findsOneWidget);
     semantique.dispose();
   });
 
@@ -64,7 +64,7 @@ void main() {
     expect(find.text('Mes ventes'), findsWidgets);
     await tester.tap(find.text('Explorer'));
     await tester.pumpAndSettle();
-    expect(find.text('Bonnes affaires près de vous'), findsOneWidget);
+    expect(find.text('Argent et quotidien'), findsOneWidget);
   });
 
   testWidgets('grand écran : messages en deux panneaux', (tester) async {

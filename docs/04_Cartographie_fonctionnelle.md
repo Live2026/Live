@@ -127,6 +127,14 @@ Campagnes publicitaires en libre-service pour les marques, ciblage par ville et 
 
 ---
 
+### 4.5 Piliers « référence » (document 21, décision du 25/09/2026)
+
+- **Live IA partout** : photo vers annonce, juste prix, assistant qui agit, voix en lingala et kituba, coach vendeur.
+- **Tontines et achats groupés** : épargne collective gardée par Live, versement automatique, prix de gros.
+- **Diaspora** : payer pour un proche, Live Transfert (partenaire agréé).
+- **Quotidien** : factures, crédit, Adresse Live, points relais.
+- **Cartes** : plan, satellite, vue rue, GPS, itinéraire (Google Maps Platform).
+
 ## 5. Synthèse des phases
 
 | Phase | Modules | Objectif business |

@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 import '../core/theme.dart';
 import 'animations.dart';
 
+part 'plan_satellite.dart';
+
+/// Fond de la carte : plan dessiné ou vue satellite.
+enum ModeCarte { plan, satellite }
+
 /// Position des quartiers de Brazzaville sur le plan (0 à 1, nord en haut).
 const positionsQuartiers = <String, Offset>{
   'Djiri': Offset(0.72, 0.08),
@@ -50,8 +55,21 @@ class Repere {
 /// Plan stylisé de Brazzaville (fleuve Congo, grands axes, quartiers) avec
 /// des repères cliquables. Remplace une carte en ligne dans le prototype.
 class PlanVille extends StatelessWidget {
-  const PlanVille({super.key, required this.reperes});
+  const PlanVille({
+    super.key,
+    required this.reperes,
+    this.mode = ModeCarte.plan,
+    this.trajet = const [],
+    this.maPosition,
+  });
   final List<Repere> reperes;
+  final ModeCarte mode;
+
+  /// Itinéraire dessiné sur la carte (points de 0 à 1).
+  final List<Offset> trajet;
+
+  /// Position GPS de l'utilisateur : point bleu qui pulse.
+  final Offset? maPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +78,19 @@ class PlanVille extends StatelessWidget {
         final taille = Size(c.maxWidth, c.maxHeight);
         return Stack(
           children: [
-            Positioned.fill(child: CustomPaint(painter: _Fond())),
+            Positioned.fill(
+              child: CustomPaint(
+                painter: mode == ModeCarte.plan ? _Fond() : _FondSatellite(),
+              ),
+            ),
+            if (trajet.length > 1)
+              Positioned.fill(child: CustomPaint(painter: _Trajet(trajet))),
+            if (maPosition != null)
+              Positioned(
+                left: maPosition!.dx * taille.width - 22,
+                top: maPosition!.dy * taille.height - 22,
+                child: const _MaPosition(),
+              ),
             for (final r in reperes)
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 250),

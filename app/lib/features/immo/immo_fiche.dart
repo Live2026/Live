@@ -17,6 +17,21 @@ class EcranBien extends ConsumerWidget {
       const SizedBox(height: 16),
       _CoutEntree(bien: b),
       const SizedBox(height: 16),
+      Builder(
+        builder: (context) {
+          final (bas, haut) = fourchetteMarche(b.loyer, b.id.hashCode);
+          return JustePrix(
+            prix: b.loyer,
+            bas: bas,
+            haut: haut,
+            suffixe: b.vente ? '' : ' / mois',
+            base: b.vente
+                ? 'Ventes récentes comparables à ${b.quartier}'
+                : 'Loyers de ${b.chambres} chambre${b.chambres > 1 ? 's' : ''} à ${b.quartier}, ces 6 derniers mois',
+          );
+        },
+      ),
+      const SizedBox(height: 14),
       _ReglementBien(bien: b),
       const SizedBox(height: 16),
       _Equipements(bien: b),

@@ -54,6 +54,17 @@ Depuis le 25/09/2026 (document 07, §10), le prototype montre **toute l'applicat
 | API partenaires | Catalogue, commandes, Live Pay et séquestre, livraison, vérification ; clés test et production, webhook | Menu du profil, offre Entreprise |
 | Extension CEMAC | Pays et ville : Congo, Gabon, Cameroun, Tchad, Centrafrique, Guinée équatoriale ; toujours en FCFA | Paramètres → Pays et ville |
 
+## 2 quater. Piliers « référence » (document 21)
+
+| Pilier | Écrans |
+|--------|--------|
+| Live IA partout | Photo vers annonce (Vendre, étape 1), juste prix (Vendre, fiche produit, fiche logement), Assistant Live `/ia/assistant` (écrit et voix, trois langues), coach vendeur (Mes ventes) |
+| Tontines | `/tontines` (mes tontines, créer), `/tontine/:id` (cagnotte, ordre des tours, cotiser, historique), `/achats-groupes` |
+| Diaspora | `/diaspora` (proches, que payer, mes envois), `/transfert` (Live Transfert, taux fixe euro) |
+| Quotidien | `/factures` (factures, crédit), `/adresse` (Adresse Live), `/points-relais` |
+| Cartes | `CarteInteractive` (plan, satellite, ma position, vue rue) sur la carte des biens et des pros, le suivi de livraison, l'Adresse Live et les points relais ; `/rue` (vue rue) |
+| Back-office | Connexion 2FA, Équipe Live (Super administrateur), double validation, journal d'audit |
+
 ## 3. Super-pouvoirs (capacités du document 03)
 
 Tout le monde commence comme simple utilisateur (N1, téléphone vérifié). Le prototype montre la montée en puissance :

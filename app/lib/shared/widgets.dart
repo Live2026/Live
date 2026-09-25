@@ -2,6 +2,7 @@
 /// Importer ce fichier donne accès à tous les composants.
 library;
 
+export 'carte_interactive.dart';
 export 'cartes.dart';
 export 'cartes_divertissement.dart';
 export 'cartes_savoirs.dart';
@@ -13,6 +14,7 @@ export 'dialogues.dart';
 export 'elements.dart';
 export 'en_tete_recherche.dart';
 export 'frise.dart';
+export 'juste_prix.dart';
 export 'logo.dart';
 export 'medias.dart';
 export 'panier.dart';

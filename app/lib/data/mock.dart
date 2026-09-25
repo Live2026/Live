@@ -10,6 +10,7 @@ export 'donnees_comptes.dart';
 export 'donnees_immo.dart';
 export 'donnees_market.dart';
 export 'donnees_opportunites.dart';
+export 'donnees_piliers.dart';
 export 'donnees_createurs.dart';
 export 'donnees_services.dart';
 export 'donnees_social.dart';

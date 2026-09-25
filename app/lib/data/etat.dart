@@ -108,6 +108,24 @@ enum TypePaiement {
   /// Campagne de publicité dans le fil (P2).
   publicite,
 
+  /// Cotisation d'une tontine, gardée par Live jusqu'au tour.
+  cotisation,
+
+  /// Participation à un achat groupé (remboursée si l'objectif échoue).
+  achatGroupe,
+
+  /// Facture du quotidien (électricité, eau, télévision).
+  facture,
+
+  /// Recharge de crédit téléphonique ou de forfait.
+  recharge,
+
+  /// Achat payé depuis l'étranger pour un proche au pays.
+  pourUnProche,
+
+  /// Live Transfert : envoi d'argent opéré par un partenaire agréé.
+  transfert,
+
   /// Abonnement Live Plus (crédits mensuels, P2).
   livePlus,
 }
@@ -237,6 +255,10 @@ class LiveState {
     this.sourdine = const {},
     this.cloches = const {'kimbembe'},
     this.fans = const {},
+    this.cotisations = const {},
+    this.groupes = const {},
+    this.facturesPayees = const {},
+    this.envois = const [],
     this.sejoursReserves = const [],
     this.publicites = const [],
     this.formulePlus,
@@ -307,6 +329,16 @@ class LiveState {
   /// Phases 2 et 3 : créateurs soutenus, séjours, campagnes, Live Plus,
   /// montant des cadeaux envoyés.
   final Set<String> fans;
+
+  /// Tontines dont la cotisation du tour est payée.
+  final Set<String> cotisations;
+
+  /// Achats groupés rejoints.
+  final Set<String> groupes;
+  final Set<String> facturesPayees;
+
+  /// Paiements pour un proche et transferts envoyés (libellés).
+  final List<String> envois;
   final List<String> sejoursReserves;
   final List<String> publicites;
   final String? formulePlus;
@@ -357,6 +389,10 @@ class LiveState {
     Set<String>? sourdine,
     Set<String>? cloches,
     Set<String>? fans,
+    Set<String>? cotisations,
+    Set<String>? groupes,
+    Set<String>? facturesPayees,
+    List<String>? envois,
     List<String>? sejoursReserves,
     List<String>? publicites,
     String? formulePlus,
@@ -401,6 +437,10 @@ class LiveState {
       sourdine: sourdine ?? this.sourdine,
       cloches: cloches ?? this.cloches,
       fans: fans ?? this.fans,
+      cotisations: cotisations ?? this.cotisations,
+      groupes: groupes ?? this.groupes,
+      facturesPayees: facturesPayees ?? this.facturesPayees,
+      envois: envois ?? this.envois,
       sejoursReserves: sejoursReserves ?? this.sejoursReserves,
       publicites: publicites ?? this.publicites,
       formulePlus: formulePlus ?? this.formulePlus,
