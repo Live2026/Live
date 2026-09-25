@@ -81,6 +81,13 @@ const _espaces = [
 /// Argent et quotidien : ce qu'on ouvre chaque semaine (docs/21).
 const _quotidien = [
   (
+    Icons.account_balance_wallet_rounded,
+    'Mon argent',
+    'Solde, séquestre, historique',
+    '/portefeuille',
+    Color(0xFF1D4ED8),
+  ),
+  (
     Icons.diversity_3_rounded,
     'Tontines',
     'Cotiser et recevoir, sans retard',

@@ -52,6 +52,7 @@ Le dossier est organisé en **quatre blocs**. On ne rédige pas un bloc tant que
 | 23 | Administration, modération et support |
 | 24 | Parcours utilisateurs détaillés |
 | 26 | Back-end : modèle de données, base locale (Drift) et synchronisation |
+| 27 | Audit de conformité du prototype |
 
 ### Bloc D — Pilotage (à rédiger)
 

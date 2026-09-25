@@ -7,6 +7,7 @@ import '../../core/navigation.dart';
 import '../../core/theme.dart';
 import '../../shared/widgets.dart';
 
+part 'admin_piliers.dart';
 part 'admin_tableau.dart';
 part 'admin_dossiers.dart';
 part 'admin_finance.dart';
@@ -23,6 +24,8 @@ const _sections = [
   (Icons.shield_outlined, 'Modération', '/admin/moderation'),
   (Icons.gavel_rounded, 'Litiges', '/admin/litiges'),
   (Icons.account_balance_outlined, 'Finance', '/admin/finance'),
+  (Icons.currency_exchange_rounded, 'Argent et quotidien', '/admin/quotidien'),
+  (Icons.auto_awesome_outlined, 'Live IA', '/admin/ia'),
   (Icons.people_outline, 'Utilisateurs', '/admin/utilisateurs'),
   (Icons.tune_rounded, 'Configuration', '/admin/configuration'),
   (Icons.fact_check_outlined, 'À valider (4 yeux)', '/admin/validations'),
@@ -132,7 +135,7 @@ class _MenuAdmin extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: large ? 14 : 0,
-                  vertical: 11,
+                  vertical: 8,
                 ),
                 child: Row(
                   mainAxisAlignment: large
@@ -178,10 +181,10 @@ class _MenuAdmin extends StatelessWidget {
         children: [
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(large ? 20 : 0, 4, 12, 20),
+                  padding: EdgeInsets.fromLTRB(large ? 20 : 0, 0, 12, 12),
                   child: large
                       ? const Row(
                           children: [
@@ -201,7 +204,7 @@ class _MenuAdmin extends StatelessWidget {
                 ),
                 for (final (i, (icone, nom, route)) in _sections.indexed)
                   entree(icone, nom, i == section, () => context.go(route)),
-                const Divider(color: Colors.white24, height: 32),
+                const Divider(color: Colors.white24, height: 16),
                 entree(
                   Icons.phone_android_rounded,
                   'Retour à l’application',
@@ -246,10 +249,12 @@ class EcranAdmin extends StatelessWidget {
       2 => ('Modération', const _FileModeration()),
       3 => ('Litiges', const _FileLitiges()),
       4 => ('Finance et réconciliation', const _Finance()),
-      5 => ('Utilisateurs', const _Utilisateurs()),
-      6 => ('Configuration', const _Configuration()),
-      7 => ('Double validation', const _Validations()),
-      8 => ('Journal d’audit', const _JournalAudit()),
+      5 => ('Argent et quotidien', const _ArgentQuotidien()),
+      6 => ('Live IA : coûts et usage', const _LiveIaAdmin()),
+      7 => ('Utilisateurs', const _Utilisateurs()),
+      8 => ('Configuration', const _Configuration()),
+      9 => ('Double validation', const _Validations()),
+      10 => ('Journal d’audit', const _JournalAudit()),
       _ => ('Équipe Live', const _EquipeLive()),
     };
     return _CoqueAdmin(section: section, titre: titre, corps: corps);

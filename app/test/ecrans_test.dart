@@ -80,6 +80,8 @@ const routes = [
   '/transfert',
   '/transfert?sens=recevoir',
   '/portefeuille',
+  '/admin/quotidien',
+  '/admin/ia',
   '/factures',
   '/adresse',
   '/points-relais',

@@ -57,9 +57,9 @@ class EcranIa extends ConsumerWidget {
                                 ),
                               ),
                               Text(
-                                'Il cherche, réserve et paie pour vous. À '
-                                'l’écrit ou à la voix : français, lingala, '
-                                'kituba. Gratuit.',
+                                'Il cherche, réserve, paie et lit vos '
+                                'fichiers (PDF, Word, Excel). À l’écrit ou '
+                                'en mode vocal.',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],

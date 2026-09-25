@@ -22,6 +22,7 @@ class EcranMoi extends ConsumerWidget {
               child: Icon(Icons.notifications_none_rounded),
             ),
           ),
+          const BoutonMessages(),
           Builder(
             builder: (ctx) => IconButton(
               tooltip: 'Menu du profil',
