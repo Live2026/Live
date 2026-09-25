@@ -170,6 +170,37 @@ class _EcranImmoState extends State<EcranImmo> {
               marge: marge,
               enfants: [for (final b in biens.take(8)) _VisiteVideo(bien: b)],
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: marge),
+              child: EnTeteSection(
+                'Séjours meublés à la nuit',
+                onTap: () => context.push('/sejours'),
+              ),
+            ),
+            Carrousel(
+              largeur: 230,
+              hauteur: 250,
+              marge: marge,
+              enfants: [for (final s in sejours) CarteSejour(sejour: s)],
+            ),
+            if (directs.any((d) => d.bien != null)) ...[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: marge),
+                child: EnTeteSection(
+                  'Visites en direct',
+                  onTap: () => context.push('/directs'),
+                ),
+              ),
+              Carrousel(
+                largeur: 150,
+                hauteur: 240,
+                marge: marge,
+                enfants: [
+                  for (final d in directs.where((d) => d.bien != null))
+                    CarteDirect(direct: d),
+                ],
+              ),
+            ],
           ],
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),

@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/format.dart';
 import 'etat.dart';
 import 'mock.dart';
+import 'paiement_reussi.dart';
+import 'ventes_initiales.dart';
 
 export 'etat.dart';
 
@@ -52,138 +54,9 @@ class LiveStore extends Notifier<LiveState> {
 
   /// Applique un paiement réussi et renvoie l'identifiant de l'objet créé.
   String paiementReussi() {
-    final p = state.paiement!;
-    switch (p.type) {
-      case TypePaiement.commande:
-        final existante = state.achats.where((c) => c.id == p.cibleId).toList();
-        if (existante.isNotEmpty) {
-          // Paiement d'une commande « payer à la remise » : terminée immédiatement.
-          state = state.copyWith(
-            achats: [
-              for (final c in state.achats)
-                c.id == p.cibleId ? c.avec(StatutCommande.terminee) : c,
-            ],
-            effacerPaiement: true,
-          );
-          return p.cibleId;
-        }
-        final id = _numero('LV');
-        final commande = Commande(
-          id: id,
-          produit: produitParId(p.cibleId),
-          total: p.montant,
-          mode: ModePaiement.avance,
-          statut: StatutCommande.acceptee,
-        );
-        state = state.copyWith(
-          achats: [commande, ...state.achats],
-          effacerPaiement: true,
-        );
-        return id;
-      case TypePaiement.visite:
-        final id = _numero('VI');
-        final visite = Visite(
-          id: id,
-          bien: bienParId(p.cibleId),
-          creneau: p.creneau ?? 'Mar 30 · 10:30',
-          statut: StatutVisite.payee,
-        );
-        state = state.copyWith(
-          visites: [visite, ...state.visites],
-          effacerPaiement: true,
-        );
-        return id;
-      case TypePaiement.acompte:
-        final id = _numero('PR');
-        final devis = devisRecus.firstWhere(
-          (d) => d.prestataire.id == p.cibleId,
-        );
-        state = state.copyWith(
-          prestations: [
-            Prestation(id: id, devis: devis, statut: StatutPrestation.acompte),
-            ...state.prestations,
-          ],
-          effacerPaiement: true,
-          demandeEnvoyee: false,
-        );
-        return id;
-      case TypePaiement.reservation:
-        state = state.copyWith(
-          visites: [
-            for (final v in state.visites)
-              v.id == p.cibleId ? v.avec(StatutVisite.reservee) : v,
-          ],
-          effacerPaiement: true,
-        );
-        return p.cibleId;
-      case TypePaiement.service:
-        final [idPro, idService] = p.cibleId.split('|');
-        final pro = prestataireParId(idPro);
-        final service = pro.services.firstWhere((s) => s.id == idService);
-        final id = _numero('PR');
-        final devis = Devis(
-          prestataire: pro,
-          mainOeuvre: service.prix,
-          materiel: 0,
-          acompte: service.prix,
-          quand: p.creneau ?? 'Demain 10:00',
-        );
-        state = state.copyWith(
-          prestations: [
-            Prestation(id: id, devis: devis, statut: StatutPrestation.acompte),
-            ...state.prestations,
-          ],
-          effacerPaiement: true,
-        );
-        return id;
-      case TypePaiement.abonnement:
-        state = state.copyWith(pro: true, effacerPaiement: true);
-        return 'pro';
-      case TypePaiement.boost:
-        state = state.copyWith(effacerPaiement: true);
-        return p.cibleId;
-      case TypePaiement.numerique:
-        state = state.copyWith(
-          bibliotheque: {...state.bibliotheque, ...p.cibleId.split(',')},
-          panier: const [],
-          effacerPaiement: true,
-        );
-        return _numero('NU');
-      case TypePaiement.fan:
-        state = state.copyWith(
-          fans: {...state.fans, p.cibleId},
-          effacerPaiement: true,
-        );
-        return p.cibleId;
-      case TypePaiement.sejour:
-        final id = _numero('SJ');
-        state = state.copyWith(
-          sejoursReserves: [id, ...state.sejoursReserves],
-          effacerPaiement: true,
-        );
-        return id;
-      case TypePaiement.publicite:
-        final id = _numero('PUB');
-        state = state.copyWith(
-          publicites: [p.libelle, ...state.publicites],
-          effacerPaiement: true,
-        );
-        return id;
-      case TypePaiement.livePlus:
-        state = state.copyWith(
-          formulePlus: p.cibleId,
-          credits: state.credits + (p.cibleId == 'pro' ? 500 : 200),
-          effacerPaiement: true,
-        );
-        return p.cibleId;
-      case TypePaiement.credits:
-        final pack = packs.firstWhere((k) => k.id == p.cibleId);
-        state = state.copyWith(
-          credits: state.credits + pack.credits,
-          effacerPaiement: true,
-        );
-        return pack.id;
-    }
+    final (etat, id) = appliquerPaiement(state, state.paiement!, _numero);
+    state = etat;
+    return id;
   }
 
   /// Débite des crédits pour un service Live IA ; faux si le solde est insuffisant.
@@ -484,43 +357,9 @@ class LiveStore extends Notifier<LiveState> {
     return true;
   }
 
+  void choisirPays(String ville) => state = state.copyWith(pays: ville);
+
   void reinitialiser() => state = LiveState(ventes: ventesInitiales());
 }
 
 final liveProvider = NotifierProvider<LiveStore, LiveState>(LiveStore.new);
-
-/// Ventes déjà réalisées par le compte de démonstration (historique de « Mes ventes »).
-List<Commande> ventesInitiales() => [
-  Commande(
-    id: 'LV-00479',
-    produit: produitParId('p8'),
-    total: 25000,
-    mode: ModePaiement.avance,
-    statut: StatutCommande.payee,
-    acheteur: 'Prince B.',
-  ),
-  Commande(
-    id: 'LV-00475',
-    produit: produitParId('p2'),
-    total: 17000,
-    mode: ModePaiement.avance,
-    statut: StatutCommande.acceptee,
-    acheteur: 'Merveille K.',
-  ),
-  Commande(
-    id: 'LV-00471',
-    produit: produitParId('p6'),
-    total: 18000,
-    mode: ModePaiement.avance,
-    statut: StatutCommande.terminee,
-    acheteur: 'Jordy M.',
-  ),
-  Commande(
-    id: 'LV-00466',
-    produit: produitParId('p2'),
-    total: 30000,
-    mode: ModePaiement.remise,
-    statut: StatutCommande.terminee,
-    acheteur: 'Nadège L.',
-  ),
-];

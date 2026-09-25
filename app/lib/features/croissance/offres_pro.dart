@@ -54,7 +54,7 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
       0,
       [
         'Plusieurs gestionnaires',
-        'Accès API (phase 3)',
+        'Accès à l’API partenaires',
         'Facturation mensuelle',
         'Accompagnement dédié',
       ],
@@ -69,8 +69,6 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const BandeauApercu(module: 'Les offres Pro complètes', phase: 2),
-          const SizedBox(height: 12),
           const Text(
             'Choisissez selon votre activité',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),

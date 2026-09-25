@@ -102,9 +102,7 @@ class EcranSuiviCommande extends ConsumerWidget {
               child: TextButton.icon(
                 onPressed: () => context.push('/livraison/${c.id}'),
                 icon: const Icon(Icons.two_wheeler_rounded, size: 18),
-                label: const Text(
-                  'Livraison Live : suivre le livreur (aperçu phase 3)',
-                ),
+                label: const Text('Livraison Live : suivre le livreur'),
               ),
             ),
           if (!termine && !remise)

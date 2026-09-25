@@ -14,8 +14,6 @@ class EcranFondsCreateurs extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const BandeauApercu(module: 'Le Fonds Créateurs', phase: 3),
-          const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(

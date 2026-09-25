@@ -87,6 +87,24 @@ class _EcranFilState extends State<EcranFil> {
           left: 4,
           child: SafeArea(child: BoutonNotifications(couleur: Colors.white)),
         ),
+        Positioned(
+          top: 56,
+          left: 10,
+          child: SafeArea(
+            child: Semantics(
+              button: true,
+              label: 'Voir les directs en cours',
+              excludeSemantics: true,
+              child: Pressable(
+                onTap: () => context.push('/directs'),
+                child: PastilleDirect(
+                  spectateurs: directs.where((d) => d.enCours).length,
+                  libelle: 'directs',
+                ),
+              ),
+            ),
+          ),
+        ),
       ],
     );
     if (!context.grandEcran) {

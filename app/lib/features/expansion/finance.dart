@@ -24,11 +24,6 @@ class _EcranFinanceState extends State<EcranFinance> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const BandeauApercu(
-            module: 'Les services financiers en partenariat',
-            phase: 3,
-          ),
-          const SizedBox(height: 12),
           GrilleAdaptative(
             largeurMax: 420,
             espacement: 12,

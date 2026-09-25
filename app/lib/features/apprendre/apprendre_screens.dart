@@ -75,10 +75,7 @@ class _SectionsApprendreState extends ConsumerState<SectionsApprendre> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(marge, 4, marge, 8),
-          child: const BandeauApercu(module: 'Live Savoir', phase: 3),
-        ),
+        const SizedBox(height: 8),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: marge),
           child: const _BanniereBac(),

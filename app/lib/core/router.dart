@@ -134,6 +134,7 @@ final routeur = GoRouter(
     _route('/livraison/:id', (s) => EcranLivraison(id: _p(s, 'id'))),
     _route('/fonds-createurs', (_) => const EcranFondsCreateurs()),
     _route('/finance', (_) => const EcranFinance()),
+    _route('/partenaires', (_) => const EcranPartenaires()),
     // Apprendre (contenus numériques)
     _route('/apprendre', (_) => const EcranApprendre()),
     _route('/apprendre/vendre', (_) => const EcranVendreContenu()),

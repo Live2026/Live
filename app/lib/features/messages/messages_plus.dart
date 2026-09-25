@@ -302,7 +302,7 @@ void _nouveauMessage(BuildContext context) {
               child: Icon(Icons.group_add_rounded, color: LiveColors.bleu),
             ),
             title: const Text('Nouveau groupe'),
-            subtitle: const Text('Aperçu · phase 2'),
+            subtitle: const Text('Quartier, classe, passion'),
             onTap: () {
               Navigator.pop(ctx);
               context.push('/groupe/g1');

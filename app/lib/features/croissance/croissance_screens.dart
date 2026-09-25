@@ -62,7 +62,6 @@ class EcranSejours extends ConsumerWidget {
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const BandeauApercu(module: 'La location de courte durée', phase: 2),
           if (reserves.isNotEmpty) ...[
             const SizedBox(height: 12),
             Bloc(
@@ -92,7 +91,7 @@ class EcranSejours extends ConsumerWidget {
               for (final (i, s) in sejours.indexed)
                 Apparition(
                   rang: i,
-                  child: _CarteSejour(sejour: s),
+                  child: CarteSejour(sejour: s),
                 ),
             ],
           ),
@@ -112,81 +111,6 @@ class EcranSejours extends ConsumerWidget {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _CarteSejour extends StatelessWidget {
-  const _CarteSejour({required this.sejour});
-  final Sejour sejour;
-
-  @override
-  Widget build(BuildContext context) {
-    final s = sejour;
-    return Semantics(
-      button: true,
-      label: '${s.titre}, ${fcfa(s.nuit)} la nuit',
-      excludeSemantics: true,
-      child: Pressable(
-        onTap: () => context.push('/sejour/${s.id}'),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AspectRatio(
-              aspectRatio: 4 / 3,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Vignette(couleur: s.couleur, icone: Icons.king_bed_rounded),
-                  Positioned(
-                    left: 8,
-                    top: 8,
-                    child: Etiquette(
-                      '${s.voyageurs} voyageur${s.voyageurs > 1 ? 's' : ''}',
-                      icone: Icons.people_alt_rounded,
-                    ),
-                  ),
-                  Positioned(
-                    right: 8,
-                    top: 8,
-                    child: Etiquette(
-                      note(s.note).replaceAll('/5', ''),
-                      icone: Icons.star_rounded,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              s.titre,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.w700),
-            ),
-            Text(
-              '${s.quartier} · ${s.hote.nom}',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
-            ),
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: fcfa(s.nuit),
-                    style: const TextStyle(fontWeight: FontWeight.w800),
-                  ),
-                  const TextSpan(
-                    text: ' la nuit',
-                    style: TextStyle(color: LiveColors.gris),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

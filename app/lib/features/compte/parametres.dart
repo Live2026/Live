@@ -76,6 +76,12 @@ class EcranParametres extends ConsumerWidget {
             onTap: a.langue,
           ),
           LigneMenu(
+            icone: Icons.public_rounded,
+            titre: 'Pays et ville',
+            valeur: etat.pays,
+            onTap: a.pays,
+          ),
+          LigneMenu(
             icone: Icons.interests_outlined,
             titre: 'Centres d’intérêt',
             onTap: () => context.push('/interets'),

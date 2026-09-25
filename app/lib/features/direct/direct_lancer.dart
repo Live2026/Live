@@ -50,7 +50,7 @@ class _EcranLancerDirectState extends ConsumerState<EcranLancerDirect> {
                   icone: Icons.face_retouching_natural,
                   rayon: 16,
                 ),
-                const Positioned(left: 12, top: 12, child: _PastilleDirect()),
+                const Positioned(left: 12, top: 12, child: PastilleDirect()),
                 Positioned(
                   right: 12,
                   top: 12,

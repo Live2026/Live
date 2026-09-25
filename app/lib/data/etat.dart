@@ -193,6 +193,7 @@ class LiveState {
   const LiveState({
     this.connecte = false,
     this.prenom = 'Grâce',
+    this.pays = 'Brazzaville',
     this.telephone = '06 123 45 67',
     this.operateur = 'MTN',
     this.niveau = 1,
@@ -244,6 +245,9 @@ class LiveState {
 
   final bool connecte;
   final String prenom;
+
+  /// Ville de référence (extension CEMAC : même monnaie, FCFA).
+  final String pays;
   final String telephone;
   final String operateur;
 
@@ -316,6 +320,7 @@ class LiveState {
   LiveState copyWith({
     bool? connecte,
     String? prenom,
+    String? pays,
     String? telephone,
     String? operateur,
     int? niveau,
@@ -360,6 +365,7 @@ class LiveState {
     return LiveState(
       connecte: connecte ?? this.connecte,
       prenom: prenom ?? this.prenom,
+      pays: pays ?? this.pays,
       telephone: telephone ?? this.telephone,
       operateur: operateur ?? this.operateur,
       niveau: niveau ?? this.niveau,

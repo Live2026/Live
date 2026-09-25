@@ -134,7 +134,7 @@ const pouvoirs = <Pouvoir>[
   Pouvoir(
     id: 'C-DIRECT',
     titre: 'Ouvrir un direct',
-    description: 'Vendre en direct, recevoir des cadeaux (phase 2).',
+    description: 'Vendre en direct, recevoir des cadeaux.',
     icone: Icons.podcasts_rounded,
     condition: Condition.identite,
     gain: '75 % des cadeaux reçus',

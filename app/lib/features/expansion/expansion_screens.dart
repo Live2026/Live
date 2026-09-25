@@ -9,6 +9,7 @@ import '../../shared/widgets.dart';
 
 part 'fonds.dart';
 part 'finance.dart';
+part 'partenaires.dart';
 
 /// E-LIV-01 — Live Livraison (phase 3) : suivi du livreur sur le plan de la
 /// ville, étapes, code de remise, course payée dans Live.
@@ -87,8 +88,6 @@ class EcranLivraison extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const BandeauApercu(module: 'Live Livraison', phase: 3),
-                    const SizedBox(height: 10),
                     const Row(
                       children: [
                         Expanded(

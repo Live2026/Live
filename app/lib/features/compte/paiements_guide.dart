@@ -38,7 +38,7 @@ class EcranGuidePaiements extends StatelessWidget {
         'Loyers, avance et caution',
         'Commission d’agence',
         'Prix d’achat d’une maison ou d’un terrain (chez le notaire)',
-        'Frais officiels d’un concours (Live Emploi, phase 3)',
+        'Frais officiels d’un concours (Live Emploi)',
       ],
     ),
   ];

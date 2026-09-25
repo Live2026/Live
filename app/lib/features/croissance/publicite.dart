@@ -28,10 +28,6 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const BandeauApercu(
-            module: 'La publicité en libre-service',
-            phase: 2,
-          ),
           if (campagnes.isNotEmpty) ...[
             const EnTeteSection('Mes campagnes'),
             for (final c in campagnes)
