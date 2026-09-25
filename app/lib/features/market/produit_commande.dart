@@ -127,7 +127,7 @@ class EcranProduit extends StatelessWidget {
             Expanded(
               child: OutlinedButton(
                 onPressed: () => ouvrirOffre(context, p),
-                child: const Text('Faire une offre'),
+                child: const Text('Négocier'),
               ),
             ),
             const SizedBox(width: 8),

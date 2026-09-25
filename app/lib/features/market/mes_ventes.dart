@@ -35,8 +35,13 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
         title: const Text('Mes ventes'),
         actions: [
           IconButton(
+            tooltip: 'Booster une annonce',
+            onPressed: () => ouvrirBoost(context, ref, 'Pagne wax 6 yards'),
+            icon: const Icon(Icons.rocket_launch_outlined),
+          ),
+          IconButton(
             tooltip: 'Statistiques',
-            onPressed: () {},
+            onPressed: () => context.push('/live-pro'),
             icon: const Icon(Icons.insights_outlined),
           ),
         ],

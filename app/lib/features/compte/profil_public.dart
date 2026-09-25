@@ -153,57 +153,47 @@ class _PageProfilState extends ConsumerState<_PageProfil> {
         slivers: [
           SliverAppBar(
             pinned: true,
-            expandedHeight: 140,
             backgroundColor: Colors.white,
-            leading: Padding(
-              padding: const EdgeInsets.all(8),
-              child: BoutonVerre(
-                icone: Icons.arrow_back_rounded,
-                libelle: 'Retour',
-                onTap: () => context.pop(),
-              ),
-            ),
             actions: [
-              BoutonVerre(
-                icone: Icons.ios_share_rounded,
-                libelle: 'Partager',
-                onTap: () => partager(context, w.nom),
+              IconButton(
+                tooltip: 'Partager',
+                onPressed: () => partager(context, w.nom),
+                icon: const Icon(Icons.ios_share_rounded),
               ),
-              const SizedBox(width: 8),
-              Padding(
-                padding: const EdgeInsets.only(right: 12),
-                child: BoutonVerre(
-                  icone: Icons.more_horiz_rounded,
-                  libelle: 'Options',
-                  onTap: () => signaler(context, 'ce profil'),
-                ),
+              IconButton(
+                tooltip: 'Options',
+                onPressed: () => signaler(context, 'ce profil'),
+                icon: const Icon(Icons.more_horiz_rounded),
               ),
+              const SizedBox(width: 4),
             ],
-            flexibleSpace: FlexibleSpaceBar(
-              background: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      w.couleur,
-                      Color.lerp(w.couleur, LiveColors.nuit, 0.6)!,
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-              ),
-            ),
           ),
           SliverPadding(
             padding: EdgeInsets.fromLTRB(marge, 0, marge, 32),
             sliver: SliverList.list(
               children: [
-                Transform.translate(
-                  offset: const Offset(0, -36),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
+                // Couverture et avatar qui déborde, dans le flux de la page.
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      height: 128,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                          colors: [
+                            w.couleur,
+                            Color.lerp(w.couleur, LiveColors.nuit, 0.6)!,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 16,
+                      bottom: -44,
+                      child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: const BoxDecoration(
                           color: Colors.white,
@@ -216,133 +206,131 @@ class _PageProfilState extends ConsumerState<_PageProfil> {
                           verifie: true,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Transform.translate(
-                  offset: const Offset(0, -26),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        w.nom,
-                        style: const TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.w800,
-                        ),
+                const SizedBox(height: 52),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      w.nom,
+                      style: const TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.w800,
                       ),
-                      Text(
-                        w.pseudo,
-                        style: const TextStyle(color: LiveColors.gris),
-                      ),
-                      const SizedBox(height: 4),
-                      BadgeVerifie(w.badge),
-                      const SizedBox(height: 8),
-                      Text(w.bio),
-                      const SizedBox(height: 8),
-                      for (final (icone, texte) in w.infos)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 2),
-                          child: Row(
-                            children: [
-                              Icon(icone, size: 16, color: LiveColors.gris),
-                              const SizedBox(width: 6),
-                              Flexible(
-                                child: Text(
-                                  texte,
-                                  style: const TextStyle(
-                                    color: LiveColors.gris,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      const SizedBox(height: 14),
-                      Row(
-                        children: [
-                          for (final (valeur, libelle) in w.stats)
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Text(
-                                    valeur,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                  Text(
-                                    libelle,
-                                    style: const TextStyle(
-                                      color: LiveColors.gris,
-                                      fontSize: 12.5,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                        ],
-                      ),
-                      const SizedBox(height: 14),
-                      if (w.idSuivi != null)
-                        Row(
+                    ),
+                    Text(
+                      w.pseudo,
+                      style: const TextStyle(color: LiveColors.gris),
+                    ),
+                    const SizedBox(height: 4),
+                    BadgeVerifie(w.badge),
+                    const SizedBox(height: 8),
+                    Text(w.bio),
+                    const SizedBox(height: 8),
+                    for (final (icone, texte) in w.infos)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        child: Row(
                           children: [
-                            Expanded(
-                              child: AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 200),
-                                child: suivi
-                                    ? OutlinedButton.icon(
-                                        key: const ValueKey('suivi'),
-                                        onPressed: () => ref
-                                            .read(liveProvider.notifier)
-                                            .basculerSuivi(w.idSuivi!),
-                                        icon: const Icon(
-                                          Icons.check_rounded,
-                                          size: 18,
-                                        ),
-                                        label: const Text('Abonné'),
-                                      )
-                                    : FilledButton(
-                                        key: const ValueKey('suivre'),
-                                        onPressed: () => ref
-                                            .read(liveProvider.notifier)
-                                            .basculerSuivi(w.idSuivi!),
-                                        child: const Text('Suivre'),
-                                      ),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: OutlinedButton(
-                                onPressed: () => context.push('/conversation'),
-                                child: const Text('Écrire'),
+                            Icon(icone, size: 16, color: LiveColors.gris),
+                            const SizedBox(width: 6),
+                            Flexible(
+                              child: Text(
+                                texte,
+                                style: const TextStyle(
+                                  color: LiveColors.gris,
+                                  fontSize: 13,
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      const SizedBox(height: 16),
-                      SegmentedButton<int>(
-                        showSelectedIcon: false,
-                        segments: [
-                          for (final (i, (titre, _)) in w.onglets.indexed)
-                            ButtonSegment(value: i, label: Text(titre)),
+                      ),
+                    const SizedBox(height: 14),
+                    Row(
+                      children: [
+                        for (final (valeur, libelle) in w.stats)
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  valeur,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                Text(
+                                  libelle,
+                                  style: const TextStyle(
+                                    color: LiveColors.gris,
+                                    fontSize: 12.5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+                    if (w.idSuivi != null)
+                      Row(
+                        children: [
+                          Expanded(
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 200),
+                              child: suivi
+                                  ? OutlinedButton.icon(
+                                      key: const ValueKey('suivi'),
+                                      onPressed: () => ref
+                                          .read(liveProvider.notifier)
+                                          .basculerSuivi(w.idSuivi!),
+                                      icon: const Icon(
+                                        Icons.check_rounded,
+                                        size: 18,
+                                      ),
+                                      label: const Text('Abonné'),
+                                    )
+                                  : FilledButton(
+                                      key: const ValueKey('suivre'),
+                                      onPressed: () => ref
+                                          .read(liveProvider.notifier)
+                                          .basculerSuivi(w.idSuivi!),
+                                      child: const Text('Suivre'),
+                                    ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: OutlinedButton(
+                              onPressed: () => context.push('/conversation'),
+                              child: const Text('Écrire'),
+                            ),
+                          ),
                         ],
-                        selected: {_onglet},
-                        onSelectionChanged: (s) =>
-                            setState(() => _onglet = s.first),
                       ),
-                      const SizedBox(height: 14),
-                      AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 250),
-                        child: KeyedSubtree(
-                          key: ValueKey(_onglet),
-                          child: w.onglets[_onglet].$2,
-                        ),
+                    const SizedBox(height: 16),
+                    SegmentedButton<int>(
+                      showSelectedIcon: false,
+                      segments: [
+                        for (final (i, (titre, _)) in w.onglets.indexed)
+                          ButtonSegment(value: i, label: Text(titre)),
+                      ],
+                      selected: {_onglet},
+                      onSelectionChanged: (s) =>
+                          setState(() => _onglet = s.first),
+                    ),
+                    const SizedBox(height: 14),
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 250),
+                      child: KeyedSubtree(
+                        key: ValueKey(_onglet),
+                        child: w.onglets[_onglet].$2,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

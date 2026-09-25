@@ -163,7 +163,7 @@ class CarteBien extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 4 / 3,
-              child: PhotoBien(bien: b),
+              child: PhotoBien(bien: b, hero: hero),
             ),
             const SizedBox(height: 8),
             PrixBien(bien: b),
@@ -192,10 +192,18 @@ class PhotoBien extends StatelessWidget {
     required this.bien,
     this.rayon = 12,
     this.hero = true,
+    this.favori = true,
+    this.haut = 8,
   });
   final Bien bien;
   final double rayon;
   final bool hero;
+
+  /// Cœur « enregistrer » sur la photo (absent quand la barre du haut l'a déjà).
+  final bool favori;
+
+  /// Marge des badges en haut, pour passer sous une barre transparente.
+  final double haut;
 
   @override
   Widget build(BuildContext context) {
@@ -214,8 +222,8 @@ class PhotoBien extends StatelessWidget {
         ),
         Positioned(
           left: 8,
-          top: 8,
-          right: 48,
+          top: haut,
+          right: favori ? 48 : 8,
           child: Wrap(
             spacing: 4,
             runSpacing: 4,
@@ -239,7 +247,7 @@ class PhotoBien extends StatelessWidget {
             ],
           ),
         ),
-        Positioned(right: 6, top: 6, child: BoutonFavori(id: b.id)),
+        if (favori) Positioned(right: 6, top: 6, child: BoutonFavori(id: b.id)),
         Positioned(
           left: 8,
           bottom: 8,

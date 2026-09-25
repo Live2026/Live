@@ -104,16 +104,26 @@ class _EcranAgenceState extends State<EcranAgence> {
             ],
           ),
           const SizedBox(height: 18),
-          SegmentedButton<int>(
-            showSelectedIcon: false,
-            segments: const [
-              ButtonSegment(value: 0, label: Text("Aujourd'hui")),
-              ButtonSegment(value: 1, label: Text('Demandes')),
-              ButtonSegment(value: 2, label: Text('Biens')),
-              ButtonSegment(value: 3, label: Text('Équipe')),
-            ],
-            selected: {_onglet},
-            onSelectionChanged: (s) => setState(() => _onglet = s.first),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                for (final (i, nom) in [
+                  "Aujourd'hui · ${aujourdhui.length}",
+                  'Demandes · ${nouvelles.length}',
+                  'Biens · ${mesBiens.length}',
+                  'Équipe · ${agentsPalmiers.length}',
+                ].indexed)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: ChoiceChip(
+                      label: Text(nom),
+                      selected: _onglet == i,
+                      onSelected: (_) => setState(() => _onglet = i),
+                    ),
+                  ),
+              ],
+            ),
           ),
           const SizedBox(height: 12),
           ...switch (_onglet) {
@@ -232,7 +242,7 @@ class _CarteDemande extends StatelessWidget {
                             ),
                           )
                         : () => context.push('/agence/visite/${d.id}'),
-                    child: Text(attribuer ? 'Attribuer' : 'Valider la visite'),
+                    child: Text(attribuer ? 'Attribuer' : 'Valider'),
                   ),
                 ),
               ],

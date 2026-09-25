@@ -128,6 +128,7 @@ class EcranVendre extends ConsumerStatefulWidget {
 class _EcranVendreState extends ConsumerState<EcranVendre> {
   final _titre = TextEditingController();
   final _prix = TextEditingController();
+  final _description = TextEditingController();
   var _photos = 0;
   var _etat = 'Très bon état';
 
@@ -175,12 +176,32 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
             ],
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 6, bottom: 12),
+            padding: EdgeInsets.only(top: 6, bottom: 4),
             child: Text(
               'Prototype : chaque appui ajoute une photo fictive.',
               style: TextStyle(color: LiveColors.gris, fontSize: 12),
             ),
           ),
+          // F-IA-08 — Rédiger mon annonce : gratuit, 3 fois par jour.
+          if (_photos > 0)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () => setState(() {
+                  if (_titre.text.trim().isEmpty) {
+                    _titre.text = 'Samsung Galaxy A10 32 Go';
+                  }
+                  _description.text =
+                      'Téléphone en très bon état, écran sans rayure, batterie '
+                      'qui tient la journée. Vendu avec chargeur. Remise en '
+                      'main propre à Moungali ou livraison.';
+                  _etat = 'Très bon état';
+                }),
+                icon: const Icon(Icons.auto_awesome, color: LiveColors.orange),
+                label: const Text('Rédiger avec Live IA · gratuit'),
+              ),
+            ),
+          const SizedBox(height: 8),
           TextField(
             controller: _titre,
             decoration: const InputDecoration(
@@ -217,8 +238,11 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
             ],
           ),
           const SizedBox(height: 12),
-          const TextField(
-            decoration: InputDecoration(labelText: 'Description (facultatif)'),
+          TextField(
+            controller: _description,
+            decoration: const InputDecoration(
+              labelText: 'Description (facultatif)',
+            ),
             maxLines: 3,
           ),
           const SizedBox(height: 16),

@@ -195,3 +195,67 @@ class _EcranQrPaiementState extends ConsumerState<EcranQrPaiement> {
     );
   }
 }
+
+/// F-PRO-01 — Booster une annonce : visibilité payée par Mobile Money.
+Future<void> ouvrirBoost(BuildContext context, WidgetRef ref, String titre) {
+  final pro = ref.read(liveProvider).pro;
+  const offres = [
+    ('24 heures', 1000, '≈ 1 500 vues'),
+    ('3 jours', 2500, '≈ 5 000 vues'),
+    ('7 jours', 5000, '≈ 12 000 vues'),
+  ];
+  return showModalBottomSheet<void>(
+    context: context,
+    showDragHandle: true,
+    backgroundColor: Colors.white,
+    builder: (ctx) => SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Booster une annonce',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+            ),
+            Text(
+              '$titre · en tête du fil et des recherches à Brazzaville.'
+              '${pro ? ' Live Pro : −30 %.' : ''}',
+              style: const TextStyle(color: LiveColors.gris),
+            ),
+            const SizedBox(height: 8),
+            for (final (duree, prix, vues) in offres)
+              LigneMenu(
+                icone: Icons.rocket_launch_outlined,
+                couleur: LiveColors.orangeVif,
+                titre: duree,
+                detail: vues,
+                valeur: fcfa(pro ? (prix * 0.7).round() : prix),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  ref
+                      .read(liveProvider.notifier)
+                      .preparerPaiement(
+                        PaiementEnCours(
+                          type: TypePaiement.boost,
+                          montant: pro ? (prix * 0.7).round() : prix,
+                          libelle: 'Boost $duree · $titre',
+                          beneficiaire: 'Live',
+                          cibleId: 'boost',
+                        ),
+                      );
+                  context.push('/payer');
+                },
+              ),
+            const SizedBox(height: 4),
+            const Text(
+              'Les annonces boostées portent la mention « Sponsorisé ».',
+              style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}

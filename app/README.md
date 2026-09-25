@@ -2,6 +2,8 @@
 
 Prototype des parcours clés de Live, destiné au **test terrain** avec de vrais utilisateurs avant la construction complète. **Aucune transaction réelle, aucun appel réseau** : les données sont fictives (`lib/data/mock.dart`) et les paiements, scans de QR et générations IA sont simulés.
 
+Règles du code (fichiers de moins de 500 lignes, composants partagés, cartes de même taille) : voir `CLAUDE.md` à la racine. Couverture écran par écran : `docs/prototype/Couverture_du_prototype.md` (les 92 écrans des maquettes sont dans le prototype).
+
 ## Parcours couverts
 
 1. Inscription (téléphone, code SMS, profil, code secret)
@@ -10,7 +12,9 @@ Prototype des parcours clés de Live, destiné au **test terrain** avec de vrais
 4. Visiter un logement (coût d'entrée, créneau, frais de visite, QR de visite)
 5. Demander un devis (devis comparés, acompte, QR de démarrage)
 6. Retirer ses gains
-7. Live IA (achat de crédits, CV, exercice en mode apprentissage, documents)
+7. Live IA (achat de crédits, CV, exercice en mode apprentissage, business plan, tuteur vocal, documents)
+
+S'y ajoutent les **super-pouvoirs** (vérification d'identité, espace pro, Live Pro), le côté des professionnels (agence, prestataire), la confiance (avis, réclamations) et le **back-office**.
 
 Les scénarios du test terrain sont dans l'application : **Moi → Scénarios de test** (voir `docs/prototype/Protocole_test_terrain.md`).
 

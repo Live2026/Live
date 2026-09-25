@@ -139,6 +139,9 @@ class LiveStore extends Notifier<LiveState> {
       case TypePaiement.abonnement:
         state = state.copyWith(pro: true, effacerPaiement: true);
         return 'pro';
+      case TypePaiement.boost:
+        state = state.copyWith(effacerPaiement: true);
+        return p.cibleId;
       case TypePaiement.credits:
         final pack = packs.firstWhere((k) => k.id == p.cibleId);
         state = state.copyWith(

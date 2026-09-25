@@ -10,7 +10,7 @@ require('fs').mkdirSync(DOSSIER, { recursive: true });
 let p, n = 0, etape = '';
 const erreurs = [];
 
-async function ecran(nom) { n++; await p.mouse.move(LARGEUR - 2, 2); await p.waitForTimeout(500); await p.screenshot({ path: `${DOSSIER}/${String(n).padStart(2, '0')}_${nom}.png` }); }
+async function ecran(nom) { n++; await p.mouse.move(LARGEUR - 2, 2); await p.waitForTimeout(500); await p.screenshot({ path: `${DOSSIER}/${String(n).padStart(3, '0')}_${nom}.png` }); }
 async function sem() { await p.evaluate(() => { const e = document.querySelector('flt-semantics-placeholder'); if (e) e.click(); }); await p.waitForTimeout(400); }
 async function bouton(nom, { exact = false } = {}) {
   etape = nom;
@@ -88,7 +88,8 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await saisir(0, '123456'); await p.waitForTimeout(800);
     await saisir('Prénom', 'Grâce'); await ecran('inscription_profil');
     await bouton('Continuer'); await ecran('code_secret');
-    await pin(); await p.waitForTimeout(1200); await ecran('fil');
+    await pin(); await p.waitForTimeout(1200); await ecran('interets');
+    await bouton('Continuer'); await p.waitForTimeout(1200); await ecran('fil');
 
     // 1. Acheter (depuis la pastille du fil puis la fiche)
     if (LARGEUR < 600) await bouton('Acheter ›'); await ecran('fil_annonce');
@@ -116,11 +117,14 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
 
     // 3. Visiter un logement
     await p.goto(BASE + '#/immo'); await p.waitForTimeout(1500); await sem(); await ecran('immo_liste');
-    await bouton('Appartement 2 chambres · Moungali'); await ecran('fiche_logement');
+    await bouton('Appartement 2 chambres'); await ecran('fiche_logement');
     await bouton('Demander une visite'); await bouton('10:30'); await ecran('creneau');
     await bouton('Payer'); await pin(); await p.waitForTimeout(4500);
     await bouton('Voir ma visite'); await ecran('visite_qr');
     await bouton("Simuler : l'agent scanne votre QR"); await texte('Visite effectuée'); await ecran('visite_confirmee');
+    await bouton("Voir l'offre de réservation"); await ecran('offre_reservation');
+    await bouton('Réserver'); await pin(); await p.waitForTimeout(4500);
+    await bouton('Voir ma réservation'); await texte('Logement réservé'); await ecran('logement_reserve');
 
     // 4. Demander un devis
     await p.goto(BASE + '#/services'); await p.waitForTimeout(1500); await sem();
@@ -134,6 +138,15 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
 
     // 5. Retirer ses gains
     await p.goto(BASE + '#/retirer'); await p.waitForTimeout(1500); await sem();
+    // Retirer est un super-pouvoir : il faut d'abord vérifier son identité (N2).
+    await texte('super-pouvoir'); await ecran('retrait_verrouille');
+    await bouton('Vérifier mon identité');
+    await bouton('Photo du recto'); await bouton('Photo du verso'); await ecran('verifier_piece');
+    await bouton('Continuer'); await bouton('Prendre le selfie'); await ecran('verifier_selfie');
+    await bouton('Continuer'); await ecran('verifier_momo');
+    await bouton('Envoyer pour vérification'); await p.waitForTimeout(3000);
+    await texte('Identité vérifiée'); await ecran('identite_verifiee');
+    await bouton('Continuer'); await p.waitForTimeout(1200);
     await saisir('Montant', '50000'); await ecran('retrait');
     await bouton('Retirer 50'); await pin(); await ecran('retrait_ok');
     await texte('FCFA envoyés');
@@ -155,18 +168,82 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     }
     await texte('Solution : x = 4'); await ecran('ia_exercice_fin');
 
-    // 7. Tour des autres écrans principaux (après les parcours, avec leurs données)
-    for (const [route, nom] of [
-      ['ia/documents', 'ia_mes_documents'], ['accueil', 'fil_retour'],
-      ['recherche', 'recherche'], ['services', 'services_accueil'],
-      ['publier', 'publier'], ['messages', 'messages'],
-      ['conversation', 'conversation'], ['moi', 'moi'],
-      ['gains', 'gains'], ['mes-ventes', 'mes_ventes_bilan'],
+    // 7. Tour de tous les autres écrans (maquettes), avec les panneaux du bas.
+    const defiler = async (n) => { await p.mouse.move(LARGEUR / 2, 400); for (let i = 0; i < n; i++) { await p.mouse.wheel(0, 350); await p.waitForTimeout(250); } await sem(); };
+    const fermer = async () => { await p.keyboard.press('Escape'); await p.waitForTimeout(700); };
+    const TOUR = [
+      ['connexion', 'connexion'],
+      ['accueil', 'fil_retour'],
+      ['accueil', 'fil_commentaires', async () => { await bouton('84', { exact: true }); }],
+      ['accueil', 'fil_partage', async () => { await fermer(); await bouton('210', { exact: true }); }],
+      ['accueil', 'fil_options', async () => { await fermer(); await bouton('Plus', { exact: true }); }],
+      ['explorer', 'explorer_retour'],
+      ['recherche', 'recherche_suggestions'],
+      ['alertes', 'alertes'],
+      ['notifications', 'notifications'],
+      ['market', 'market_accueil'],
+      ['produit/p9', 'produit_alimentation'],
+      ['produit/p1', 'produit_offre', async () => { await bouton('Faire une offre'); }],
+      ['boutique/grace', 'boutique'],
+      ['vente/LV-00466/qr', 'qr_paiement_vendeur'],
+      ['immo', 'immo_filtres', async () => { await bouton('Filtres'); }],
+      ['bien/b9', 'bien_a_vendre'],
+      ['bien/b1', 'bien_signaler', async () => { await defiler(12); await bouton('Déjà loué ou annonce fausse ?'); }],
+      ['boutique/palmiers', 'agence_page'],
+      ['agence', 'agence_tableau'],
+      ['agence/visite/dv1', 'agence_valider_visite'],
+      ['services', 'services_accueil'],
+      ['pro/s1', 'profil_prestataire'],
+      ['pro/s5/reserver/sf7', 'service_prix_fixe'],
+      ['pro/interventions', 'pro_interventions'],
+      ['pro/devis/nouveau', 'pro_creer_devis'],
+      ['publier', 'publier'],
+      ['publier/media', 'publier_video'],
+      ['publier/envois', 'publier_envois'],
+      ['publier/bien', 'publier_bien'],
+      ['publier/service', 'publier_service'],
+      ['messages', 'messages'],
+      ['conversation', 'conversation'],
+      ['conversation', 'conversation_lieu', async () => { await bouton('Joindre'); }],
+      ['avis/commande/LV-00482', 'avis'],
+      ['probleme/commande/LV-00482', 'probleme'],
+      ['reclamation/RC-00001', 'reclamation'],
+      ['recu/LV-00482', 'recu'],
+      ['gains', 'gains'],
+      ['mes-ventes', 'mes_ventes_bilan'],
+      ['ia/documents', 'ia_mes_documents'],
+      ['ia/business-plan', 'ia_business_plan'],
+      ['ia/tuteur', 'ia_tuteur'],
+      ['moi', 'moi'],
+      ['pouvoirs', 'pouvoirs'],
+      ['live-pro', 'live_pro'],
+      ['espace/nouveau', 'espace_creer'],
+      ['espace/equipe', 'espace_equipe'],
+      ['profil/moi', 'profil_public'],
+      ['parametres', 'parametres'],
+      ['notifications/preferences', 'notifications_preferences'],
+      ['donnees', 'donnees'],
+      ['interets', 'interets_retour'],
+      ['admin', 'admin_tableau'],
+      ['admin/kyc', 'admin_kyc'],
+      ['admin/kyc/k1', 'admin_dossier_kyc'],
+      ['admin/moderation', 'admin_moderation'],
+      ['admin/litiges', 'admin_litiges'],
+      ['admin/litiges/l1', 'admin_litige'],
+      ['admin/finance', 'admin_finance'],
+      ['admin/utilisateurs', 'admin_utilisateurs'],
+      ['admin/utilisateurs/u2', 'admin_fiche_utilisateur'],
+      ['admin/configuration', 'admin_configuration'],
       ['scenarios', 'scenarios_test'],
-    ]) {
-      etape = 'écran ' + route;
-      await p.goto(BASE + '#/' + route); await p.waitForTimeout(1500); await ecran(nom);
+    ];
+    for (const [route, nom, action] of TOUR) {
+      etape = 'écran ' + nom;
+      const actuel = await p.evaluate(() => location.hash);
+      if (actuel !== '#/' + route) { await p.goto(BASE + '#/' + route); await p.waitForTimeout(1500); await sem(); }
+      if (action) { await action(); await p.waitForTimeout(900); }
+      await ecran(nom);
     }
+    await fermer();
     console.log('RÉSULTAT : les 6 parcours ont abouti.');
     process.exitCode = 0;
   } catch (e) {

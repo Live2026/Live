@@ -83,12 +83,7 @@ class _EcranInterventionsState extends State<EcranInterventions> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        child: const Text('Ignorer'),
-                      ),
-                    ),
+                    TextButton(onPressed: () {}, child: const Text('Ignorer')),
                     const SizedBox(width: 8),
                     Expanded(
                       flex: 2,

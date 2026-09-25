@@ -77,7 +77,7 @@ class EcranBien extends ConsumerWidget {
         ),
         body: DeuxColonnes(
           principale: [
-            SizedBox(height: 380, child: PhotoBien(bien: b)),
+            SizedBox(height: 380, child: PhotoBien(bien: b, favori: false)),
             const SizedBox(height: 16),
             ...principal,
             _Similaires(biens: similaires),
@@ -117,7 +117,7 @@ class EcranBien extends ConsumerWidget {
             ],
             flexibleSpace: FlexibleSpaceBar(
               stretchModes: const [StretchMode.zoomBackground],
-              background: PhotoBien(bien: b, rayon: 0),
+              background: PhotoBien(bien: b, rayon: 0, favori: false, haut: 64),
             ),
           ),
           SliverPadding(

@@ -249,6 +249,12 @@ class EcranPaiementReussi extends StatelessWidget {
         'Voir mes super-pouvoirs',
         '/pouvoirs',
       ),
+      TypePaiement.boost => (
+        'Votre annonce passe en tête du fil et des recherches à Brazzaville, '
+            'avec la mention « Sponsorisé ».',
+        'Voir mes ventes',
+        '/mes-ventes',
+      ),
     };
     return Scaffold(
       body: SafeArea(

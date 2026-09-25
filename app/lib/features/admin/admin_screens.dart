@@ -45,17 +45,23 @@ class _CoqueAdmin extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text(titre),
         actions: [
-          const Padding(
-            padding: EdgeInsets.only(right: 16),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.verified_user_outlined,
                   size: 18,
                   color: LiveColors.succes,
                 ),
-                SizedBox(width: 6),
-                Text('Aïcha · Superviseure', style: TextStyle(fontSize: 13)),
+                // Sur téléphone, seule l'icône : le titre garde la place.
+                if (grand) ...[
+                  const SizedBox(width: 6),
+                  const Text(
+                    'Aïcha · Superviseure',
+                    style: TextStyle(fontSize: 13),
+                  ),
+                ],
               ],
             ),
           ),

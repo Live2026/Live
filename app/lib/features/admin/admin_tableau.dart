@@ -92,14 +92,6 @@ class _TableauDeBord extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              if (i == valeurs.length - 1)
-                                Text(
-                                  v.toString().replaceAll('.', ','),
-                                  style: const TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
                               Container(
                                 height: 140 * v / 7.1,
                                 decoration: BoxDecoration(

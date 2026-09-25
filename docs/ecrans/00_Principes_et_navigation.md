@@ -289,6 +289,12 @@ Courbe de référence : démarrage vif, arrivée amortie (`cubic(0.2, 0.8, 0.2, 
 
 ---
 
+### 9.5 Tailles et références (révision du 25/09/2026)
+
+- **Même catégorie, même taille.** Toutes les cartes d'une même catégorie (produits, logements, pros, tuiles de chiffres, raccourcis) ont exactement la même taille : image au même format (1:1 pour les produits, 4:3 pour les logements, 9:16 pour les vidéos) et textes dans des zones de hauteur fixe (titre sur 2 lignes pour un produit, 1 ligne pour un logement). Un titre court ne rend jamais une carte plus petite que sa voisine.
+- **Références assumées.** Le fil suit les codes de TikTok (vidéo plein écran, actions à droite, auteur avec « + », disque du son, barre de progression, double toucher pour aimer). La messagerie suit ceux de WhatsApp (liste avec non lus et coches, bulles à pointe, heure et coches dans la bulle, note vocale, fond à motif discret, réponses rapides). Les profils et boutiques suivent Instagram (couverture, avatar qui déborde, chiffres, onglets Produits / Vidéos / Avis).
+- **Boutons « verre ».** Sur une photo ou une vidéo, les boutons sont ronds et translucides (flou d'arrière-plan), jamais des blocs opaques.
+
 ## 7. Journal des révisions : défauts corrigés avant le prototype (24/09/2026)
 
 | # | Défaut relevé | Correction |

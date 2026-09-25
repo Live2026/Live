@@ -87,6 +87,15 @@ Le badge affiché publiquement reflète le niveau : c'est l'un des **principaux 
 
 ---
 
+## 5 bis. Présentation aux utilisateurs : les « super-pouvoirs »
+
+Dans l'application, les capacités s'appellent des **super-pouvoirs** : un mot simple, valorisant, qui dit « vous pouvez gagner de l'argent autrement ». Règles d'affichage (écran E-MOI-02) :
+
+- **Tout le monde est utilisateur.** À l'inscription, on reçoit déjà : acheter protégé, publier des vidéos, vendre (3 annonces), Live IA.
+- **Chaque pouvoir dit ce qu'il rapporte** (ex. « Retirer ses gains : sans frais de retrait ») et **comment le débloquer** (vérifier son identité, créer un espace pro, passer à Live Pro).
+- **Aucune fonction n'affiche d'erreur de droits** : une fonction réservée explique le pouvoir manquant et mène à l'écran qui le débloque (E-PUB-07).
+- **Progression visible** : échelle N1 → N2 → N3 → Pro sur la page Moi.
+
 ## 6. Les espaces (boutiques, agences, entreprises, chaînes)
 
 | Type d'espace | Contenu | Membres |

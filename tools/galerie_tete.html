@@ -1,0 +1,69 @@
+<title>Live, écran par écran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --bleu:#13385C; --nuit:#041936; --orange:#FB9618; --brume:#D7DCE4;
+  --fond:#F3F5F8; --surface:#FFFFFF; --texte:#041936; --doux:#5B6573; --ligne:#D7DCE4;
+  --puce:#E6EBF2;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --fond:#030F22; --surface:#0B213D; --texte:#E9EEF5; --doux:#9AA7B8; --ligne:#1D3656; --puce:#13385C;
+    --bleu:#8FB4DA; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --fond:#030F22; --surface:#0B213D; --texte:#E9EEF5; --doux:#9AA7B8; --ligne:#1D3656; --puce:#13385C;
+  --bleu:#8FB4DA; color-scheme:dark;
+}
+body{background:var(--fond);color:var(--texte);font:15px/1.5 Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;padding-inline:16px}
+.wrap{max-width:1320px;margin:0 auto;padding-block:28px 64px}
+.intro{display:grid;gap:10px;max-width:70ch}
+.marque{font-weight:900;letter-spacing:.32em;color:var(--bleu);font-size:14px}
+h1{margin:0;font-size:clamp(26px,4vw,38px);line-height:1.15;text-wrap:balance;font-weight:900}
+.intro p{margin:0;color:var(--doux)}
+.intro p b{color:var(--texte)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--fond);margin-inline:-16px;padding:12px 16px;display:flex;gap:8px;overflow-x:auto;border-bottom:1px solid var(--ligne);margin-top:20px;scrollbar-width:none}
+nav a{flex:none;text-decoration:none;color:var(--texte);background:var(--surface);border:1px solid var(--ligne);border-radius:8px;padding:6px 12px;font-weight:500;font-size:14px}
+nav a:hover,nav a:focus-visible{border-color:var(--bleu);outline:none}
+section{padding-top:36px;scroll-margin-top:64px}
+.sh{display:grid;gap:4px;margin-bottom:16px;max-width:70ch}
+.sh h2{margin:0;font-size:22px;text-wrap:balance}
+.sh p{margin:0;color:var(--doux)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:22px 16px}
+.gridw{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:22px 16px}
+figure{margin:0;display:grid;gap:8px;align-content:start}
+.shot{all:unset;cursor:zoom-in;display:block;border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:0 1px 2px rgba(4,25,54,.08),0 6px 18px rgba(4,25,54,.08);border:1px solid var(--ligne);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.shot:hover{transform:translateY(-2px)}
+.shot:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.shot img{display:block;width:100%;height:auto}
+figcaption{display:grid;grid-template-columns:auto 1fr;column-gap:8px;font-size:14px;line-height:1.35}
+figcaption .n{grid-row:span 2;font-variant-numeric:tabular-nums;font-weight:700;color:var(--bleu);background:var(--puce);border-radius:6px;padding:1px 6px;height:fit-content;font-size:12px}
+figure.wide figcaption{grid-template-columns:1fr}
+figcaption small{color:var(--doux);font-size:13px}
+dialog{border:0;padding:0;background:transparent;max-width:min(96vw,1400px);max-height:94vh}
+dialog::backdrop{background:rgba(4,25,54,.82)}
+dialog img{display:block;max-width:100%;max-height:90vh;border-radius:12px}
+dialog form{text-align:right;margin-bottom:8px}
+dialog button{font:inherit;border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;border-radius:8px;padding:6px 14px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.shot{transition:none}.shot:hover{transform:none}}
+@media (max-width:420px){.grid{grid-template-columns:repeat(2,1fr);gap:18px 12px}}
+</style>
+<div class="wrap">
+<div class="intro">
+  <span class="marque">LIVE</span>
+  <h1>Toute l'application, écran par écran</h1>
+  <p><b>{{TOTAL}} écrans</b> capturés automatiquement dans le prototype pendant un vrai parcours : une personne s'inscrit, achète, vend, visite et réserve un logement, commande un plombier, débloque ses super-pouvoirs, retire ses gains et utilise Live IA. Puis le côté des professionnels (agence, prestataire) et le back-office. Touchez une capture pour l'agrandir.</p>
+  <p>Prototype : données fictives, aucune transaction réelle. Téléphone de 360 px de large, puis ordinateur.</p>
+</div>
+<nav aria-label="Parties de l'application">{{NAV}}</nav>
+{{CORPS}}
+</div>
+<dialog id="zoom" aria-label="Capture agrandie"><form method="dialog"><button type="submit">Fermer</button></form><img id="zoomimg" alt=""></dialog>
+<script>
+const d=document.getElementById('zoom'),zi=document.getElementById('zoomimg');
+document.querySelectorAll('.shot').forEach(b=>b.addEventListener('click',()=>{const i=b.querySelector('img');zi.src=i.src;zi.alt=i.alt;d.showModal();}));
+d.addEventListener('click',e=>{if(e.target===d)d.close();});
+</script>

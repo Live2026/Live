@@ -83,7 +83,7 @@ class EcranMoi extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () => context.push('/parametres'),
-                  child: const Text('Modifier le profil'),
+                  child: const Text('Modifier'),
                 ),
               ),
               const SizedBox(width: 8),
@@ -197,6 +197,13 @@ class EcranMoi extends ConsumerWidget {
             titre: 'Enregistrés',
             valeur: '${etat.favoris.length}',
             onTap: () => context.push('/immo'),
+          ),
+          LigneMenu(
+            icone: Icons.card_giftcard_rounded,
+            titre: 'Inviter des amis',
+            detail: '1 000 FCFA de crédits pour vous deux',
+            onTap: () =>
+                partager(context, 'Rejoins-moi sur Live · code GRACE26'),
           ),
           LigneMenu(
             icone: Icons.data_saver_on_rounded,

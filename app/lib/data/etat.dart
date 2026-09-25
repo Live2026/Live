@@ -92,6 +92,9 @@ enum TypePaiement {
 
   /// Abonnement Live Pro (C-STATS-AVANCEES).
   abonnement,
+
+  /// Boost d'une annonce (F-PRO-01), payé par Mobile Money.
+  boost,
 }
 
 /// Pack de Crédits Live (document 19, section 2.2).

@@ -156,13 +156,22 @@ ThemeData liveTheme() {
         side: BorderSide(color: Color(0xFFE4E8EE)),
       ),
     ),
-    chipTheme: const ChipThemeData(
+    chipTheme: ChipThemeData(
       shape: _forme,
       backgroundColor: Colors.white,
       selectedColor: LiveColors.bleu,
       checkmarkColor: Colors.white,
-      secondaryLabelStyle: TextStyle(color: Colors.white),
-      side: BorderSide(color: Color(0xFFE4E8EE)),
+      // Texte blanc sur puce sélectionnée, quel que soit le type de puce.
+      labelStyle: WidgetStateTextStyle.resolveWith(
+        (s) => TextStyle(
+          fontWeight: FontWeight.w500,
+          color: s.contains(WidgetState.selected)
+              ? Colors.white
+              : LiveColors.nuit,
+        ),
+      ),
+      secondaryLabelStyle: const TextStyle(color: Colors.white),
+      side: const BorderSide(color: Color(0xFFE4E8EE)),
       showCheckmark: false,
     ),
     navigationBarTheme: NavigationBarThemeData(
