@@ -114,7 +114,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await saisir('Prix', '30000'); await ecran('vendre_prix'); await bouton('Continuer');
     await ecran('vendre_remise'); await bouton('Continuer');
     await bouton('Je certifie'); await ecran('vendre_apercu');
-    await bouton('Publier', { exact: true }); await p.waitForTimeout(1200); await ecran('annonce_publiee');
+    await bouton("Publier l'annonce"); await p.waitForTimeout(1200); await ecran('annonce_publiee');
     await bouton('Voir mes ventes'); await bouton('Accepter', { exact: true }); await ecran('mes_ventes');
     await bouton('Remettre le produit'); await ecran('remise_vendeur');
     await bouton("Scanner le QR de l'acheteur"); await p.waitForTimeout(2000); await ecran('scan');

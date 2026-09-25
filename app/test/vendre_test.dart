@@ -38,10 +38,10 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Continuer'));
     await tester.pumpAndSettle();
-    expect(find.text('Publier'), findsOneWidget);
+    expect(find.text("Publier l'annonce"), findsOneWidget);
     await tester.tap(find.textContaining('Je certifie'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Publier'));
+    await tester.tap(find.text("Publier l'annonce"));
     await tester.pumpAndSettle();
     expect(find.text('Félicitations !'), findsOneWidget);
   });
