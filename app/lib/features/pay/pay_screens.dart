@@ -16,10 +16,11 @@ part 'paiement.dart';
 part 'gains_retrait.dart';
 part 'recu.dart';
 
-enum Moyen { mtn, airtel, visa }
+enum Moyen { solde, mtn, airtel, visa }
 
 extension on Moyen {
   String get nom => switch (this) {
+    Moyen.solde => 'Solde Live',
     Moyen.mtn => 'MTN Mobile Money',
     Moyen.airtel => 'Airtel Money',
     Moyen.visa => 'Carte Visa',

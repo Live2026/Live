@@ -12,6 +12,7 @@ import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
 
 part 'produit_commande.dart';
+part 'commande.dart';
 part 'suivi_commande.dart';
 part 'mes_ventes.dart';
 part 'remise_vendre.dart';

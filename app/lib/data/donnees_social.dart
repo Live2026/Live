@@ -127,6 +127,26 @@ const conversations = <Conversation>[
     enLigne: true,
   ),
   Conversation(
+    id: 'g1',
+    type: TypeConversation.groupe,
+    membres: 38,
+    nom: 'Terminale C · Révisions BAC',
+    dernier: 'Prof. Kimbembe : Annales_Maths_2025.pdf',
+    quand: '10:05',
+    couleur: Color(0xFF1D4ED8),
+    nonLus: 7,
+  ),
+  Conversation(
+    id: 'g2',
+    type: TypeConversation.canal,
+    membres: 12400,
+    nom: 'Live Opportunités',
+    dernier: 'Nouvelle bourse : Fondation Mbongui, 40 places',
+    quand: '08:30',
+    couleur: Color(0xFFEA580C),
+    nonLus: 3,
+  ),
+  Conversation(
     id: 'c2',
     nom: 'Agence Les Palmiers',
     dernier: 'Christian vous attend à 10:30.',
@@ -160,6 +180,52 @@ const conversations = <Conversation>[
     couleur: Color(0xFF7E22CE),
     annonce: 'Samsung A10',
     lu: false,
+  ),
+];
+
+/// Premiers messages de personnes que l'on ne suit pas (demandes).
+const demandesMessages = <Conversation>[
+  Conversation(
+    id: 'd1',
+    nom: 'Jordy M.',
+    dernier: 'Bonjour, le climatiseur est encore disponible ?',
+    quand: '11:02',
+    couleur: Color(0xFF0F766E),
+    annonce: 'Climatiseur 1 CV occasion',
+  ),
+  Conversation(
+    id: 'd2',
+    nom: 'Recrutement Brasserie du Pool',
+    dernier: 'Votre profil nous intéresse pour le stage de juin.',
+    quand: 'hier',
+    couleur: Color(0xFF7C2D12),
+  ),
+  Conversation(
+    id: 'd3',
+    nom: 'Inconnu +242 05 ••• 12',
+    dernier: 'Envoyez 5 000 FCFA pour débloquer votre bourse…',
+    quand: 'lun.',
+    couleur: Color(0xFF64748B),
+  ),
+];
+
+const conversationsArchivees = <Conversation>[
+  Conversation(
+    id: 'a1',
+    nom: 'ÉlectroPlus',
+    dernier: 'Merci pour votre achat !',
+    quand: '12 sept.',
+    couleur: Color(0xFF0E7490),
+    annonce: 'Galaxy A14 128 Go',
+  ),
+  Conversation(
+    id: 'a2',
+    type: TypeConversation.groupe,
+    membres: 9,
+    nom: 'Mariage Nadège & Prince',
+    dernier: 'Nadège : Merci à tous ❤️',
+    quand: '2 sept.',
+    couleur: Color(0xFF9D174D),
   ),
 ];
 

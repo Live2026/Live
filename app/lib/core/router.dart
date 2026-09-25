@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data/store.dart';
 import '../features/admin/admin_screens.dart';
+import '../features/apprendre/apprendre_screens.dart';
 import '../features/auth/auth_screens.dart';
 import '../features/compte/compte_screens.dart';
 import '../features/confiance/confiance_screens.dart';
@@ -12,9 +13,11 @@ import '../features/ia/ia_screens.dart';
 import '../features/immo/immo_screens.dart';
 import '../features/market/market_screens.dart';
 import '../features/messages/messages_screens.dart';
+import '../features/opportunites/opportunites_screens.dart';
 import '../features/pay/pay_screens.dart';
 import '../features/publish/publish_screen.dart';
 import '../features/services/services_screens.dart';
+import '../features/social/social_screens.dart';
 import '../features/test/scenarios_screen.dart';
 import 'navigation.dart';
 
@@ -70,6 +73,15 @@ final routeur = GoRouter(
     _route('/notifications', (_) => const EcranNotifications()),
     _route('/notifications/preferences', (_) => const EcranPreferencesNotif()),
     _route('/donnees', (_) => const EcranDonnees()),
+    _route('/paiements', (_) => const EcranGuidePaiements()),
+    _route(
+      '/abonnes/:id',
+      (s) => EcranAbonnes(
+        id: _p(s, 'id'),
+        onglet: int.tryParse(s.uri.queryParameters['onglet'] ?? '') ?? 0,
+      ),
+    ),
+    _route('/suivis', (_) => const EcranSuivis()),
     // Recherche
     _route('/recherche', (_) => const EcranRecherche()),
     _route('/alertes', (_) => const EcranAlertes()),
@@ -82,6 +94,20 @@ final routeur = GoRouter(
     _route('/mes-ventes', (_) => const EcranMesVentes()),
     _route('/vente/:id', (s) => EcranRemise(id: _p(s, 'id'))),
     _route('/vente/:id/qr', (s) => EcranQrPaiement(id: _p(s, 'id'))),
+    // Apprendre (contenus numériques)
+    _route('/apprendre', (_) => const EcranApprendre()),
+    _route('/apprendre/vendre', (_) => const EcranVendreContenu()),
+    _route('/apprendre/boutique', (_) => const EcranBoutiqueSavoirs()),
+    _route('/contenu/:id', (s) => EcranContenu(id: _p(s, 'id'))),
+    _route('/lecteur/:id', (s) => EcranLecteur(id: _p(s, 'id'))),
+    _route('/panier', (_) => const EcranPanier()),
+    _route('/mes-achats', (_) => const EcranMesAchats()),
+    // Opportunités
+    _route('/opportunites', (_) => const EcranOpportunites()),
+    _route('/opportunite/:id', (s) => EcranOpportunite(id: _p(s, 'id'))),
+    _route('/opportunite/:id/postuler', (s) => EcranPostuler(id: _p(s, 'id'))),
+    _route('/mes-candidatures', (_) => const EcranMesCandidatures()),
+    _route('/publier/opportunite', (_) => const EcranPublierOpportunite()),
     // Immo
     _route('/immo', (_) => const EcranImmo()),
     _route('/bien/:id', (s) => EcranBien(id: _p(s, 'id'))),
@@ -147,6 +173,10 @@ final routeur = GoRouter(
     // Messages
     _route('/messages', (_) => const EcranMessages()),
     _route('/conversation', (_) => const EcranConversation()),
+    _route('/groupe/:id', (s) => EcranGroupe(id: _p(s, 'id'))),
+    _route('/messages/demandes', (_) => const EcranDemandes()),
+    _route('/messages/archives', (_) => const EcranArchives()),
+    _route('/messages/parametres', (_) => const EcranReglagesMessages()),
     // Back-office (outil interne, sur ordinateur)
     _route('/admin', (_) => const EcranAdmin(section: 0)),
     _route('/admin/kyc', (_) => const EcranAdmin(section: 1)),

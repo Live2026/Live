@@ -17,6 +17,8 @@ class EcranBien extends ConsumerWidget {
       const SizedBox(height: 16),
       _CoutEntree(bien: b),
       const SizedBox(height: 16),
+      _ReglementBien(bien: b),
+      const SizedBox(height: 16),
       _Equipements(bien: b),
     ];
     final secondaire = <Widget>[
@@ -25,7 +27,7 @@ class EcranBien extends ConsumerWidget {
       _Annonceur(vendeur: b.annonceur),
       const SizedBox(height: 12),
       const BandeauProtection(
-        "Ne payez jamais de frais ou d'avance hors de Live.",
+        "Frais de visite et acompte : toujours dans Live, jamais sur un numéro MoMo.",
       ),
       const SizedBox(height: 8),
       Align(

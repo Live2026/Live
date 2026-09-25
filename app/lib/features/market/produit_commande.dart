@@ -10,6 +10,7 @@ class EcranProduit extends StatelessWidget {
   Widget build(BuildContext context) {
     final p = produitParId(id);
     final grand = context.grandEcran;
+    final surPlace = p.reglement == Reglement.surPlace;
     final entete = <Widget>[
       Text(
         fcfa(p.prix),
@@ -36,6 +37,7 @@ class EcranProduit extends StatelessWidget {
               fond: Color(0xFFFFF1E0),
               couleur: LiveColors.cuivre,
             ),
+          PastilleReglement(p.reglement),
           Text(
             '${p.quartier} · ${compact(p.vues)} vues',
             style: const TextStyle(color: LiveColors.gris, fontSize: 13),
@@ -54,6 +56,8 @@ class EcranProduit extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 14),
+      _ReglementProduit(produit: p),
+      const SizedBox(height: 14),
       const Text(
         'Remise',
         style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
@@ -61,10 +65,12 @@ class EcranProduit extends StatelessWidget {
       LigneMenu(
         icone: Icons.handshake_outlined,
         titre: 'En main propre à ${p.quartier}',
-        detail: 'Vous vérifiez, puis vous montrez votre QR',
+        detail: surPlace
+            ? 'Dans un lieu public proposé par Live'
+            : 'Vous vérifiez, puis vous montrez votre QR',
         valeur: 'Gratuit',
       ),
-      if (p.livraison > 0)
+      if (p.livraison > 0 && !surPlace)
         LigneMenu(
           icone: Icons.local_shipping_outlined,
           titre: 'Livraison à Brazzaville',
@@ -82,7 +88,11 @@ class EcranProduit extends StatelessWidget {
     final vendeur = <Widget>[
       _CarteVendeur(vendeur: p.vendeur),
       const SizedBox(height: 12),
-      const BandeauProtection('Remboursé si vous ne recevez pas le produit.'),
+      BandeauProtection(
+        surPlace
+            ? 'Payez au rendez-vous avec le QR Live : vous restez protégé.'
+            : 'Remboursé si vous ne recevez pas le produit.',
+      ),
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
@@ -135,7 +145,7 @@ class EcranProduit extends StatelessWidget {
           Expanded(
             child: FilledButton(
               onPressed: () => context.push('/commande/${p.id}'),
-              child: const Text('Acheter'),
+              child: Text(surPlace ? 'Voir sur place' : 'Acheter'),
             ),
           ),
         ],
@@ -295,126 +305,46 @@ class _CarteVendeur extends ConsumerWidget {
   }
 }
 
-/// E-MKT-04 — Récapitulatif de la commande.
-class EcranCommande extends ConsumerStatefulWidget {
-  const EcranCommande({super.key, required this.id});
-  final String id;
-
-  @override
-  ConsumerState<EcranCommande> createState() => _EcranCommandeState();
-}
-
-class _EcranCommandeState extends ConsumerState<EcranCommande> {
-  var _livraison = false;
-  var _mode = ModePaiement.avance;
+/// Comment se paie ce produit : dans Live (neuf, livrable) ou sur place
+/// après l'avoir vu (occasion).
+class _ReglementProduit extends StatelessWidget {
+  const _ReglementProduit({required this.produit});
+  final Produit produit;
 
   @override
   Widget build(BuildContext context) {
-    final p = produitParId(widget.id);
-    final total = p.prix + (_livraison ? p.livraison : 0);
-    return Scaffold(
-      appBar: AppBar(title: const Text('Votre commande')),
-      body: DeuxColonnes(
-        principale: [
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: Vignette(
-              couleur: p.couleur,
-              icone: p.icone,
-              hauteur: 50,
-              largeur: 50,
-              rayon: 8,
-            ),
-            title: Text(p.titre),
-            trailing: Text(
-              fcfa(p.prix),
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Remise',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          const SizedBox(height: 6),
-          Choix(
-            titre: 'En main propre · ${p.quartier}',
-            icone: Icons.handshake,
-            selectionne: !_livraison,
-            onTap: () => setState(() => _livraison = false),
-          ),
-          if (p.livraison > 0)
-            Choix(
-              titre: 'Livraison',
-              icone: Icons.delivery_dining,
-              trailing: '+ ${fcfa(p.livraison)}',
-              selectionne: _livraison,
-              onTap: () => setState(() => _livraison = true),
-            ),
-          if (_livraison)
-            const Padding(
-              padding: EdgeInsets.only(bottom: 8),
-              child: TextField(
-                decoration: InputDecoration(hintText: 'Adresse ou repère…'),
-              ),
-            ),
-          const SizedBox(height: 8),
-        ],
-        secondaire: [
-          const Text(
-            'Paiement',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          const SizedBox(height: 6),
-          Choix(
-            titre: 'Payer maintenant',
-            sousTitre: "Argent bloqué jusqu'à réception.",
-            icone: Icons.lock_clock,
-            selectionne: _mode == ModePaiement.avance,
-            onTap: () => setState(() => _mode = ModePaiement.avance),
-          ),
-          Choix(
-            titre: 'Payer à la remise',
-            sousTitre: 'MoMo ou Airtel, produit en main.',
-            icone: Icons.phone_android,
-            selectionne: _mode == ModePaiement.remise,
-            onTap: () => setState(() => _mode = ModePaiement.remise),
-          ),
-          const BoutonEcouter(
-            "Payer maintenant : vous payez tout de suite, mais Live garde l'argent. Le vendeur ne le reçoit que quand vous avez le produit en main. "
-            "Payer à la remise : vous ne payez rien maintenant. Au moment où vous recevez le produit, vous validez le paiement MoMo ou Airtel sur votre téléphone.",
-          ),
-          const Divider(height: 24),
-          LigneMontant('Total à payer', total, gras: true),
-          const Text(
-            'Aucun frais supplémentaire.',
-            style: TextStyle(color: LiveColors.gris),
+    final p = produit;
+    if (p.reglement == Reglement.surPlace) {
+      return BlocReglement(
+        titre: 'Voir avant de payer',
+        lignes: [
+          LigneReglement(
+            'Prix',
+            Reglement.surPlace,
+            montant: p.prix,
+            detail:
+                'Vous vérifiez l’objet au rendez-vous, puis vous payez avec '
+                'le QR Live (protégé) ou en espèces.',
           ),
         ],
-      ),
-      bottomNavigationBar: BarreAction(
-        child: FilledButton(
-          onPressed: () {
-            final store = ref.read(liveProvider.notifier);
-            if (_mode == ModePaiement.avance) {
-              store.preparerPaiement(
-                PaiementEnCours(
-                  type: TypePaiement.commande,
-                  montant: total,
-                  libelle: p.titre,
-                  beneficiaire: p.vendeur.nom,
-                  cibleId: p.id,
-                ),
-              );
-              context.push('/payer');
-            } else {
-              final id = store.reserverCommande(p, total);
-              context.go('/suivi/$id');
-            }
-          },
-          child: const Text('Continuer'),
+        note: 'Ne versez jamais d’avance pour un objet que vous n’avez pas vu.',
+      );
+    }
+    return BlocReglement(
+      lignes: [
+        LigneReglement(
+          'Prix',
+          Reglement.dansLive,
+          montant: p.prix,
+          detail: 'Bloqué par Live jusqu’à la remise',
         ),
-      ),
+        if (p.livraison > 0)
+          LigneReglement(
+            'Livraison (si vous la choisissez)',
+            Reglement.dansLive,
+            montant: p.livraison,
+          ),
+      ],
     );
   }
 }

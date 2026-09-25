@@ -119,6 +119,19 @@ class CarteProduit extends StatelessWidget {
                       left: 8,
                       bottom: 8,
                       child: Etiquette('Neuf'),
+                    )
+                  else if (p.reglement == Reglement.surPlace)
+                    const Positioned(
+                      left: 8,
+                      bottom: 8,
+                      right: 8,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Etiquette(
+                          'À voir sur place',
+                          icone: Icons.handshake_rounded,
+                        ),
+                      ),
                     ),
                 ],
               ),

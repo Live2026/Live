@@ -71,6 +71,7 @@ const categoriesMarket = <(IconData, String)>[
 const produits = <Produit>[
   Produit(
     id: 'p1',
+    reglement: Reglement.surPlace,
     titre: 'iPhone 11 64 Go',
     prix: 85000,
     quartier: 'Moungali',
@@ -115,6 +116,7 @@ const produits = <Produit>[
   ),
   Produit(
     id: 'p4',
+    reglement: Reglement.surPlace,
     titre: 'Climatiseur 1 CV occasion',
     prix: 90000,
     quartier: 'Ouenzé',
@@ -156,6 +158,7 @@ const produits = <Produit>[
   ),
   Produit(
     id: 'p7',
+    reglement: Reglement.surPlace,
     titre: 'Ventilateur sur pied',
     prix: 22000,
     quartier: 'Ouenzé',
@@ -226,6 +229,7 @@ const produits = <Produit>[
   ),
   Produit(
     id: 'p12',
+    reglement: Reglement.surPlace,
     titre: 'Moto Haojue 125',
     prix: 650000,
     quartier: 'Talangaï',

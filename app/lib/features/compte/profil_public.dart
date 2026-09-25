@@ -6,56 +6,6 @@ const _avisDemo = [
   ('Prince B.', 4, 'Bon produit, un peu de retard.', '12 sept.'),
 ];
 
-/// E-MKT-06 — Page boutique ou agence : vitrine publique d'un espace vérifié.
-class EcranBoutique extends StatelessWidget {
-  const EcranBoutique({super.key, required this.id});
-  final String id;
-
-  @override
-  Widget build(BuildContext context) {
-    final v = vendeurParId(id);
-    final prods = produitsDe(v);
-    final lesBiens = biensDe(v);
-    return _PageProfil(
-      nom: v.nom,
-      pseudo: '@${v.id}',
-      couleur: v.couleur,
-      badge: v.badge,
-      bio: v.bio,
-      stats: [
-        (compact(v.abonnes), 'Abonnés'),
-        ('${v.ventes}', lesBiens.isEmpty ? 'Ventes' : 'Locations'),
-        (note(v.note).replaceAll('/5', ''), 'Note'),
-        (v.reponse, 'Répond en'),
-      ],
-      idSuivi: v.id,
-      onglets: [
-        (
-          lesBiens.isEmpty ? 'Produits' : 'Biens',
-          lesBiens.isEmpty
-              ? GrilleAdaptative(
-                  largeurMax: 200,
-                  espacement: 12,
-                  enfants: [for (final p in prods) CarteProduit(produit: p)],
-                )
-              : GrilleAdaptative(
-                  largeurMax: 220,
-                  espacement: 12,
-                  enfants: [for (final b in lesBiens) CarteBien(bien: b)],
-                ),
-        ),
-        ('Vidéos', _GrilleVideos(couleur: v.couleur)),
-        ('Avis', const _ListeAvis()),
-      ],
-      infos: [
-        (Icons.location_on_outlined, '${v.quartier}, Brazzaville'),
-        (Icons.calendar_month_outlined, 'Sur Live depuis ${v.depuis}'),
-        (Icons.local_shipping_outlined, 'Livraison ou remise en main propre'),
-      ],
-    );
-  }
-}
-
 /// E-MOI-07 — Profil public d'un utilisateur (ou le mien, avec « moi »).
 class EcranProfilPublic extends ConsumerWidget {
   const EcranProfilPublic({super.key, required this.id});

@@ -95,6 +95,9 @@ enum TypePaiement {
 
   /// Boost d'une annonce (F-PRO-01), payé par Mobile Money.
   boost,
+
+  /// Panier de contenus numériques (cours, PDF, vidéos…).
+  numerique,
 }
 
 /// Pack de Crédits Live (document 19, section 2.2).
@@ -211,6 +214,11 @@ class LiveState {
     this.servicesPublies = const [],
     this.interets = const {},
     this.economieDonnees = true,
+    this.panier = const [],
+    this.bibliotheque = const {'n2'},
+    this.candidatures = const {},
+    this.contenusPublies = const [],
+    this.opportunitesPubliees = const [],
   });
 
   final bool connecte;
@@ -255,6 +263,15 @@ class LiveState {
   final Set<String> interets;
   final bool economieDonnees;
 
+  /// Contenus numériques dans le panier, puis achetés (bibliothèque).
+  final List<String> panier;
+  final Set<String> bibliotheque;
+
+  /// Opportunités auxquelles l'utilisateur a postulé.
+  final Set<String> candidatures;
+  final List<String> contenusPublies;
+  final List<String> opportunitesPubliees;
+
   bool get identiteVerifiee => niveau >= 2;
 
   int get enAttente =>
@@ -289,6 +306,11 @@ class LiveState {
     List<String>? servicesPublies,
     Set<String>? interets,
     bool? economieDonnees,
+    List<String>? panier,
+    Set<String>? bibliotheque,
+    Set<String>? candidatures,
+    List<String>? contenusPublies,
+    List<String>? opportunitesPubliees,
   }) {
     return LiveState(
       connecte: connecte ?? this.connecte,
@@ -318,6 +340,11 @@ class LiveState {
       servicesPublies: servicesPublies ?? this.servicesPublies,
       interets: interets ?? this.interets,
       economieDonnees: economieDonnees ?? this.economieDonnees,
+      panier: panier ?? this.panier,
+      bibliotheque: bibliotheque ?? this.bibliotheque,
+      candidatures: candidatures ?? this.candidatures,
+      contenusPublies: contenusPublies ?? this.contenusPublies,
+      opportunitesPubliees: opportunitesPubliees ?? this.opportunitesPubliees,
     );
   }
 }

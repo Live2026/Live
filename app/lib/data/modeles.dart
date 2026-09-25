@@ -4,6 +4,47 @@ import 'package:flutter/material.dart';
 
 enum Verticale { market, immo, services }
 
+/// Où se règle une somme (docs/19, section 1 bis). Live distingue ce qui se
+/// paie dans l'application (protégé) de ce qui se paie sur place ou en direct.
+enum Reglement {
+  /// Payé dans Live : argent bloqué jusqu'à la remise ou au service rendu.
+  dansLive,
+
+  /// On voit avant d'acheter : rendez-vous fixé dans Live, paiement à la
+  /// remise (QR Live pour rester protégé, ou espèces à ses risques).
+  surPlace,
+
+  /// Payé directement au propriétaire, à l'agence ou à l'organisme, contre
+  /// reçu : loyers, caution, prix d'un bien, frais officiels d'un concours.
+  direct,
+}
+
+extension InfoReglement on Reglement {
+  String get libelle => switch (this) {
+    Reglement.dansLive => 'Payé dans Live',
+    Reglement.surPlace => 'Voir puis payer sur place',
+    Reglement.direct => 'Payé en direct',
+  };
+
+  String get court => switch (this) {
+    Reglement.dansLive => 'Dans Live',
+    Reglement.surPlace => 'Sur place',
+    Reglement.direct => 'En direct',
+  };
+
+  IconData get icone => switch (this) {
+    Reglement.dansLive => Icons.verified_user_rounded,
+    Reglement.surPlace => Icons.handshake_rounded,
+    Reglement.direct => Icons.receipt_long_rounded,
+  };
+
+  Color get couleur => switch (this) {
+    Reglement.dansLive => const Color(0xFF15803D),
+    Reglement.surPlace => const Color(0xFFB45309),
+    Reglement.direct => const Color(0xFF475569),
+  };
+}
+
 /// Type d'espace professionnel (docs/03, section 6).
 enum TypeEspace { boutique, agence, prestataire, chaine }
 
@@ -62,12 +103,16 @@ class Produit {
     this.description = '',
     this.details = const {},
     this.vues = 120,
+    this.reglement = Reglement.dansLive,
   });
   final String id;
   final String titre;
   final int prix;
   final String quartier;
   final Vendeur vendeur;
+
+  /// Occasion à voir avant d'acheter (téléphone, moto…) : [Reglement.surPlace].
+  final Reglement reglement;
   final Color couleur;
   final IconData icone;
   final String categorie;
@@ -264,8 +309,12 @@ class Commentaire {
   final bool vendeur;
 }
 
+enum TypeConversation { privee, groupe, canal }
+
 class Conversation {
   const Conversation({
+    this.type = TypeConversation.privee,
+    this.membres = 2,
     required this.id,
     required this.nom,
     required this.dernier,
@@ -276,6 +325,8 @@ class Conversation {
     this.enLigne = false,
     this.lu = true,
   });
+  final TypeConversation type;
+  final int membres;
   final String id;
   final String nom;
   final String dernier;

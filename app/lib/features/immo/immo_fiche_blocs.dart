@@ -185,3 +185,52 @@ class _Similaires extends StatelessWidget {
     );
   }
 }
+
+/// Ce qui se paie dans Live (visite, acompte) et ce qui se paie en direct
+/// au propriétaire ou à l'agence, contre reçu (loyers, caution, prix).
+class _ReglementBien extends StatelessWidget {
+  const _ReglementBien({required this.bien});
+  final Bien bien;
+
+  @override
+  Widget build(BuildContext context) {
+    final b = bien;
+    final qui = b.agence ? "l'agence" : 'le propriétaire';
+    return BlocReglement(
+      lignes: [
+        LigneReglement(
+          'Frais de visite',
+          Reglement.dansLive,
+          montant: b.fraisVisite,
+          detail: 'Bloqués jusqu’à la visite, remboursés si elle n’a pas lieu',
+        ),
+        LigneReglement(
+          'Acompte de réservation (facultatif)',
+          Reglement.dansLive,
+          detail: 'Après la visite, pour bloquer le bien',
+        ),
+        if (b.vente)
+          LigneReglement(
+            'Prix de vente',
+            Reglement.direct,
+            montant: b.loyer,
+            detail: 'Chez le notaire, à la signature de l’acte',
+          )
+        else ...[
+          LigneReglement(
+            'Avance, caution et commission',
+            Reglement.direct,
+            montant: b.coutEntree,
+            detail: 'À $qui, à la signature du bail, contre reçu',
+          ),
+          LigneReglement(
+            'Loyer mensuel',
+            Reglement.direct,
+            montant: b.loyer,
+            detail: 'Chaque mois, à $qui',
+          ),
+        ],
+      ],
+    );
+  }
+}

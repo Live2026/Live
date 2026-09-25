@@ -17,4 +17,6 @@ part 'pouvoirs_ecran.dart';
 part 'verifier.dart';
 part 'espace.dart';
 part 'profil_public.dart';
+part 'boutique.dart';
 part 'parametres.dart';
+part 'paiements_guide.dart';

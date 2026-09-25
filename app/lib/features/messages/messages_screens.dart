@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/adaptatif.dart';
+import '../../core/format.dart';
 import '../../core/theme.dart';
 import '../../data/mock.dart';
 import '../../shared/animations.dart';
@@ -10,6 +11,8 @@ import '../../shared/widgets.dart';
 
 part 'conversation.dart';
 part 'bulles.dart';
+part 'groupe.dart';
+part 'messages_plus.dart';
 
 /// E-CHAT-01 — Conversations, façon WhatsApp : recherche, filtres, non lus,
 /// coches de lecture et annonce liée.
@@ -28,8 +31,8 @@ class _EcranMessagesState extends State<EcranMessages> {
     final liste = conversations.where((c) {
       return switch (_filtre) {
         'Non lus' => c.nonLus > 0,
-        'Immo' => c.nom.contains('Agence'),
-        'Services' => c.nom.contains('Plombier'),
+        'Groupes' => c.type == TypeConversation.groupe,
+        'Canaux' => c.type == TypeConversation.canal,
         _ => true,
       };
     }).toList();
@@ -42,6 +45,11 @@ class _EcranMessagesState extends State<EcranMessages> {
             tooltip: 'Nouveau message',
             onPressed: () {},
             icon: const Icon(Icons.edit_square),
+          ),
+          IconButton(
+            tooltip: 'Réglages des messages',
+            onPressed: () => context.push('/messages/parametres'),
+            icon: const Icon(Icons.settings_outlined),
           ),
         ],
       ),
@@ -62,7 +70,7 @@ class _EcranMessagesState extends State<EcranMessages> {
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: marge),
               children: [
-                for (final f in const ['Tous', 'Non lus', 'Immo', 'Services'])
+                for (final f in const ['Tous', 'Non lus', 'Groupes', 'Canaux'])
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ChoiceChip(
@@ -74,6 +82,22 @@ class _EcranMessagesState extends State<EcranMessages> {
               ],
             ),
           ),
+          if (_filtre == 'Tous') ...[
+            _RangeeDossier(
+              icone: Icons.mark_email_unread_outlined,
+              titre: 'Demandes de messages',
+              nombre: demandesMessages.length,
+              route: '/messages/demandes',
+              marge: marge,
+            ),
+            _RangeeDossier(
+              icone: Icons.archive_outlined,
+              titre: 'Archivées',
+              nombre: conversationsArchivees.length,
+              route: '/messages/archives',
+              marge: marge,
+            ),
+          ],
           for (final (i, c) in liste.indexed)
             Apparition(
               rang: i,
@@ -115,8 +139,9 @@ class _LigneConversation extends StatelessWidget {
   Widget build(BuildContext context) {
     final nonLu = c.nonLus > 0;
     final deMoi = c.dernier.startsWith('Vous :');
+    final groupe = c.type != TypeConversation.privee;
     return InkWell(
-      onTap: () => context.push('/conversation'),
+      onTap: () => context.push(groupe ? '/groupe/${c.id}' : '/conversation'),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: marge, vertical: 10),
         child: Row(
@@ -134,6 +159,16 @@ class _LigneConversation extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+                      if (groupe) ...[
+                        Icon(
+                          c.type == TypeConversation.canal
+                              ? Icons.campaign_rounded
+                              : Icons.groups_rounded,
+                          size: 17,
+                          color: LiveColors.gris,
+                        ),
+                        const SizedBox(width: 4),
+                      ],
                       Expanded(
                         child: Text(
                           c.nom,

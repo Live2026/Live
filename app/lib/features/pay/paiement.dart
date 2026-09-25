@@ -36,6 +36,14 @@ class _EcranPaiementState extends ConsumerState<EcranPaiement> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 8),
+          if (etat.disponible >= p.montant)
+            Choix(
+              titre: Moyen.solde.nom,
+              sousTitre: 'Disponible : ${fcfa(etat.disponible)}',
+              icone: Icons.account_balance_wallet_rounded,
+              selectionne: _moyen == Moyen.solde,
+              onTap: () => setState(() => _moyen = Moyen.solde),
+            ),
           Choix(
             titre: Moyen.mtn.nom,
             sousTitre: etat.operateur == 'MTN' ? etat.telephone : null,
@@ -115,7 +123,13 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
 
   void _valide() {
     if (!mounted) return;
-    final type = ref.read(liveProvider).paiement!.type;
+    final paiement = ref.read(liveProvider).paiement!;
+    final type = paiement.type;
+    if (widget.moyen == Moyen.solde.nom) {
+      ref
+          .read(liveProvider.notifier)
+          .debiterSolde(paiement.montant, paiement.libelle);
+    }
     final id = ref.read(liveProvider.notifier).paiementReussi();
     context.go('/payer/ok', extra: (type, id, widget.moyen));
   }
@@ -131,6 +145,7 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
     final etat = ref.watch(liveProvider);
     final p = etat.paiement;
     final visa = widget.moyen.contains('Visa');
+    final solde = widget.moyen == Moyen.solde.nom;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -139,7 +154,9 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
             children: [
               const Spacer(),
               Text(
-                visa
+                solde
+                    ? 'Paiement avec votre solde Live'
+                    : visa
                     ? 'Page de paiement sécurisée'
                     : 'Validez sur votre téléphone',
                 textAlign: TextAlign.center,
@@ -154,9 +171,14 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
                   '${fcfa(p.montant)} · ${widget.moyen}',
                   style: const TextStyle(fontSize: 18),
                 ),
-              if (!visa) Text(etat.telephone),
+              if (!visa && !solde) Text(etat.telephone),
               const SizedBox(height: 20),
-              if (!visa) ...[
+              if (solde)
+                const Text(
+                  'Le montant est prélevé sur vos gains disponibles.\nAucun frais.',
+                  textAlign: TextAlign.center,
+                )
+              else if (!visa) ...[
                 const Text('1. Ouvrez la demande MoMo ou Airtel'),
                 const Text('2. Tapez votre code secret Mobile Money'),
               ] else
@@ -248,6 +270,12 @@ class EcranPaiementReussi extends StatelessWidget {
         'Live Pro est actif : statistiques détaillées et boosts à −30 %.',
         'Voir mes super-pouvoirs',
         '/pouvoirs',
+      ),
+      TypePaiement.numerique => (
+        'Vos contenus sont dans « Mes achats ». Téléchargez-les pour les '
+            'ouvrir sans connexion.',
+        'Ouvrir mes achats',
+        '/mes-achats',
       ),
       TypePaiement.boost => (
         'Votre annonce passe en tête du fil et des recherches à Brazzaville, '

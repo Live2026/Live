@@ -142,6 +142,13 @@ class LiveStore extends Notifier<LiveState> {
       case TypePaiement.boost:
         state = state.copyWith(effacerPaiement: true);
         return p.cibleId;
+      case TypePaiement.numerique:
+        state = state.copyWith(
+          bibliotheque: {...state.bibliotheque, ...p.cibleId.split(',')},
+          panier: const [],
+          effacerPaiement: true,
+        );
+        return _numero('NU');
       case TypePaiement.credits:
         final pack = packs.firstWhere((k) => k.id == p.cibleId);
         state = state.copyWith(
@@ -370,6 +377,44 @@ class LiveStore extends Notifier<LiveState> {
   void publierService(String titre) => state = state.copyWith(
     servicesPublies: [titre, ...state.servicesPublies],
   );
+
+  void publierContenu(String titre) => state = state.copyWith(
+    contenusPublies: [titre, ...state.contenusPublies],
+  );
+
+  void publierOpportunite(String titre) => state = state.copyWith(
+    opportunitesPubliees: [titre, ...state.opportunitesPubliees],
+  );
+
+  // ---- Apprendre et Opportunités ----
+
+  void ajouterAuPanier(String id) {
+    if (state.panier.contains(id) || state.bibliotheque.contains(id)) return;
+    state = state.copyWith(panier: [...state.panier, id]);
+  }
+
+  void retirerDuPanier(String id) => state = state.copyWith(
+    panier: [
+      for (final x in state.panier)
+        if (x != id) x,
+    ],
+  );
+
+  void postuler(String id) =>
+      state = state.copyWith(candidatures: {...state.candidatures, id});
+
+  /// Paiement avec le solde Live (gains disponibles) : débit immédiat.
+  bool debiterSolde(int montant, String libelle) {
+    if (montant > state.disponible) return false;
+    state = state.copyWith(
+      disponible: state.disponible - montant,
+      historique: [
+        Mouvement('Paiement · $libelle', -montant, "à l'instant"),
+        ...state.historique,
+      ],
+    );
+    return true;
+  }
 
   void reinitialiser() => state = LiveState(ventes: ventesInitiales());
 }

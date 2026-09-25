@@ -1,13 +1,19 @@
+import 'donnees_apprendre.dart';
 import 'donnees_immo.dart';
 import 'donnees_market.dart';
+import 'donnees_opportunites.dart';
 import 'donnees_services.dart';
 import 'modeles.dart';
 
+export 'donnees_apprendre.dart';
+export 'donnees_comptes.dart';
 export 'donnees_immo.dart';
 export 'donnees_market.dart';
+export 'donnees_opportunites.dart';
 export 'donnees_services.dart';
 export 'donnees_social.dart';
 export 'modeles.dart';
+export 'modeles_savoirs.dart';
 
 /// Données fictives du prototype. Aucune donnée réelle, aucun appel réseau.
 
@@ -21,7 +27,18 @@ Prestataire prestataireParId(String id) => prestataires.firstWhere(
 );
 
 /// Tous les vendeurs, agences et propriétaires, pour les pages publiques.
-const tousLesVendeurs = [...vendeurs, palmiers, congoHabitat, mbemba];
+const tousLesVendeurs = [
+  ...vendeurs,
+  palmiers,
+  congoHabitat,
+  mbemba,
+  ...auteursApprendre,
+  fondationMbongui,
+  brasseriePool,
+  ecoleAdministration,
+  cliniqueCardio,
+  institutNumerique,
+];
 
 Vendeur vendeurParId(String id) => tousLesVendeurs.firstWhere(
   (v) => v.id == id,

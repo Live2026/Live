@@ -69,10 +69,14 @@ class EcranMoi extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 16),
-          const Row(
+          Row(
             children: [
-              _Stat('128', 'Abonnés'),
-              _Stat('${3 + 1}', 'Abonnements'),
+              const _Stat('128', 'Abonnés', route: '/abonnes/moi'),
+              _Stat(
+                '${etat.suivis.length + 3}',
+                'Abonnements',
+                route: '/abonnes/moi?onglet=1',
+              ),
               _Stat('4,8', 'Note'),
               _Stat('12', 'Transactions'),
             ],
@@ -168,12 +172,42 @@ class EcranMoi extends ConsumerWidget {
               onTap: () => context.push('/boutique/grace'),
             ),
           LigneMenu(
+            icone: Icons.school_outlined,
+            titre: 'Ma boutique de savoirs',
+            detail: 'Cours, PDF, vidéos : revenus et ventes',
+            onTap: () => context.push('/apprendre/boutique'),
+          ),
+          LigneMenu(
             icone: Icons.add_business_outlined,
             titre: 'Créer un espace',
             detail: 'Boutique, agence, prestataire ou chaîne',
             onTap: () => context.push('/espace/nouveau'),
           ),
           const EnTeteSection('Activité'),
+          LigneMenu(
+            icone: Icons.dynamic_feed_rounded,
+            titre: 'Activité de mes abonnements',
+            detail: 'Nouveaux cours, bourses, articles, logements',
+            onTap: () => context.push('/suivis'),
+          ),
+          LigneMenu(
+            icone: Icons.download_for_offline_outlined,
+            titre: 'Mes achats numériques',
+            valeur: '${etat.bibliotheque.length}',
+            onTap: () => context.push('/mes-achats'),
+          ),
+          LigneMenu(
+            icone: Icons.work_outline_rounded,
+            titre: 'Mes candidatures',
+            valeur: '${etat.candidatures.length + 2}',
+            onTap: () => context.push('/mes-candidatures'),
+          ),
+          LigneMenu(
+            icone: Icons.payments_outlined,
+            titre: 'Ce qui se paie dans Live',
+            detail: 'Dans Live, sur place ou en direct',
+            onTap: () => context.push('/paiements'),
+          ),
           LigneMenu(
             icone: Icons.gavel_rounded,
             titre: 'Mes réclamations',
@@ -224,26 +258,31 @@ class EcranMoi extends ConsumerWidget {
 }
 
 class _Stat extends StatelessWidget {
-  const _Stat(this.valeur, this.libelle);
+  const _Stat(this.valeur, this.libelle, {this.route});
   final String valeur;
   final String libelle;
+  final String? route;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Column(
-        children: [
-          Text(
-            valeur,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
-          ),
-          Text(
-            libelle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
-          ),
-        ],
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: route == null ? null : () => context.push(route!),
+        child: Column(
+          children: [
+            Text(
+              valeur,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+            ),
+            Text(
+              libelle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
+            ),
+          ],
+        ),
       ),
     );
   }
