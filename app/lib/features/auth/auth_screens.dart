@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/adaptatif.dart';
 import '../../core/theme.dart';
 import '../../data/store.dart';
 import '../../shared/widgets.dart';
+
+part 'connexion_interets.dart';
 
 /// E-AUTH-01 — Bienvenue.
 class EcranBienvenue extends ConsumerWidget {
@@ -79,6 +82,10 @@ class EcranBienvenue extends ConsumerWidget {
                   context.go('/accueil');
                 },
                 child: const Text('Découvrir sans compte'),
+              ),
+              TextButton(
+                onPressed: () => context.push('/connexion'),
+                child: const Text("J'ai déjà un compte"),
               ),
             ],
           ),
@@ -380,7 +387,7 @@ class EcranPin extends ConsumerWidget {
                     telephone: telephone,
                     operateur: operateur,
                   );
-              context.go('/accueil');
+              context.go('/interets');
             },
           ),
         ],

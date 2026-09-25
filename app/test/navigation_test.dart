@@ -5,10 +5,13 @@ import 'package:live/core/router.dart';
 import 'package:live/main.dart';
 import 'package:live/shared/widgets.dart';
 
+import 'outils.dart';
+
 Future<void> _ouvrir(WidgetTester tester, Size taille) async {
   tester.view.physicalSize = taille;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
+  sansAnimations(tester);
   routeur.go('/bienvenue');
   await tester.pumpWidget(const ProviderScope(child: LiveApp()));
   await tester.pumpAndSettle();
@@ -41,6 +44,7 @@ void main() {
     tester.view.physicalSize = const Size(1280, 800);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
+    sansAnimations(tester);
     routeur.go('/produit/p1');
     await tester.pumpWidget(const ProviderScope(child: LiveApp()));
     await tester.pumpAndSettle();

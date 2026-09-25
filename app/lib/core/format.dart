@@ -19,3 +19,24 @@ int commission(int montant, double taux, {int minimum = 0}) {
 
 /// Note sur 5 au format français : `4,9/5`.
 String note(double n) => '${n.toStringAsFixed(1).replaceAll('.', ',')}/5';
+
+/// Montant court pour les gros prix : `95 M FCFA`, `18 M FCFA`, `650 000 FCFA`.
+String fcfaCourt(int montant) {
+  if (montant >= 1000000) {
+    final m = montant / 1000000;
+    final t = m == m.roundToDouble()
+        ? m.toStringAsFixed(0)
+        : m.toStringAsFixed(1).replaceAll('.', ',');
+    return '$t M FCFA';
+  }
+  return fcfa(montant);
+}
+
+/// Nombre court façon réseaux sociaux : `12,4k`, `310`.
+String compact(int n) {
+  if (n >= 1000) {
+    final k = n / 1000;
+    return '${k.toStringAsFixed(k >= 100 ? 0 : 1).replaceAll('.', ',').replaceAll(',0', '')}k';
+  }
+  return '$n';
+}

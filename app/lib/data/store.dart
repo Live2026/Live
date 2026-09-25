@@ -2,221 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/format.dart';
+import 'etat.dart';
 import 'mock.dart';
 
-/// État du prototype, gardé en mémoire (tout est perdu au redémarrage).
-
-enum ModePaiement { avance, remise }
-
-enum StatutCommande { payee, acceptee, remise, terminee, reservee }
-
-class Commande {
-  const Commande({
-    required this.id,
-    required this.produit,
-    required this.total,
-    required this.mode,
-    required this.statut,
-    this.acheteur,
-  });
-  final String id;
-  final Produit produit;
-  final int total;
-  final ModePaiement mode;
-  final StatutCommande statut;
-
-  /// Renseigné pour les ventes (l'utilisateur est le vendeur).
-  final String? acheteur;
-
-  Commande avec(StatutCommande s) => Commande(
-    id: id,
-    produit: produit,
-    total: total,
-    mode: mode,
-    statut: s,
-    acheteur: acheteur,
-  );
-}
-
-enum StatutVisite { payee, confirmee }
-
-class Visite {
-  const Visite({
-    required this.id,
-    required this.bien,
-    required this.creneau,
-    required this.statut,
-  });
-  final String id;
-  final Bien bien;
-  final String creneau;
-  final StatutVisite statut;
-}
-
-enum StatutPrestation { acompte, demarree, terminee }
-
-class Prestation {
-  const Prestation({
-    required this.id,
-    required this.devis,
-    required this.statut,
-  });
-  final String id;
-  final Devis devis;
-  final StatutPrestation statut;
-}
-
-class Mouvement {
-  const Mouvement(
-    this.libelle,
-    this.montant,
-    this.quand, {
-    this.enAttente = false,
-  });
-  final String libelle;
-  final int montant;
-  final String quand;
-  final bool enAttente;
-}
-
-enum TypePaiement { commande, visite, acompte, credits }
-
-/// Pack de Crédits Live (document 19, section 2.2).
-class Pack {
-  const Pack(this.id, this.prix, this.credits, {this.bonus});
-  final String id;
-  final int prix;
-  final int credits;
-  final String? bonus;
-}
-
-const packs = [
-  Pack('p500', 500, 50),
-  Pack('p1000', 1000, 110, bonus: '+10 %'),
-  Pack('p2500', 2500, 300, bonus: '+20 %'),
-  Pack('p5000', 5000, 650, bonus: '+30 %'),
-];
-
-/// Document produit par Live IA et conservé dans « Mes documents ».
-class DocumentIa {
-  const DocumentIa({
-    required this.id,
-    required this.type,
-    required this.titre,
-    required this.contenu,
-    required this.quand,
-  });
-  final String id;
-  final String type;
-  final String titre;
-  final List<(String, String)> contenu;
-  final String quand;
-}
-
-/// Paiement en cours de saisie : ce qu'on paie et ce qu'il faut faire en cas de succès.
-class PaiementEnCours {
-  const PaiementEnCours({
-    required this.type,
-    required this.montant,
-    required this.libelle,
-    required this.beneficiaire,
-    required this.cibleId,
-    this.modeCommande = ModePaiement.avance,
-    this.creneau,
-  });
-  final TypePaiement type;
-  final int montant;
-  final String libelle;
-  final String beneficiaire;
-  final String cibleId;
-  final ModePaiement modeCommande;
-  final String? creneau;
-}
-
-class LiveState {
-  const LiveState({
-    this.connecte = false,
-    this.prenom = 'Grâce',
-    this.telephone = '06 123 45 67',
-    this.operateur = 'MTN',
-    this.identiteVerifiee = true,
-    this.achats = const [],
-    this.ventes = const [],
-    this.visites = const [],
-    this.prestations = const [],
-    this.mesAnnonces = const [],
-    this.disponible = 184500,
-    this.historique = const [
-      Mouvement('Vente · Pagne 6 yards', 16920, 'hier'),
-      Mouvement('Retrait MTN MoMo', -150000, 'lun.'),
-      Mouvement('Vente · Robe wax ×2', 28200, 'lun.'),
-    ],
-    this.paiement,
-    this.demandeEnvoyee = false,
-    this.credits = 20,
-    this.documents = const [],
-  });
-
-  final bool connecte;
-  final String prenom;
-  final String telephone;
-  final String operateur;
-  final bool identiteVerifiee;
-  final List<Commande> achats;
-  final List<Commande> ventes;
-  final List<Visite> visites;
-  final List<Prestation> prestations;
-  final List<String> mesAnnonces;
-  final int disponible;
-  final List<Mouvement> historique;
-  final PaiementEnCours? paiement;
-  final bool demandeEnvoyee;
-
-  /// Crédits Live (20 offerts à l'inscription).
-  final int credits;
-  final List<DocumentIa> documents;
-
-  int get enAttente =>
-      historique.where((m) => m.enAttente).fold(0, (s, m) => s + m.montant);
-
-  LiveState copyWith({
-    bool? connecte,
-    String? prenom,
-    String? telephone,
-    String? operateur,
-    List<Commande>? achats,
-    List<Commande>? ventes,
-    List<Visite>? visites,
-    List<Prestation>? prestations,
-    List<String>? mesAnnonces,
-    int? disponible,
-    List<Mouvement>? historique,
-    PaiementEnCours? paiement,
-    bool effacerPaiement = false,
-    bool? demandeEnvoyee,
-    int? credits,
-    List<DocumentIa>? documents,
-  }) {
-    return LiveState(
-      connecte: connecte ?? this.connecte,
-      prenom: prenom ?? this.prenom,
-      telephone: telephone ?? this.telephone,
-      operateur: operateur ?? this.operateur,
-      identiteVerifiee: identiteVerifiee,
-      achats: achats ?? this.achats,
-      ventes: ventes ?? this.ventes,
-      visites: visites ?? this.visites,
-      prestations: prestations ?? this.prestations,
-      mesAnnonces: mesAnnonces ?? this.mesAnnonces,
-      disponible: disponible ?? this.disponible,
-      historique: historique ?? this.historique,
-      paiement: effacerPaiement ? null : (paiement ?? this.paiement),
-      demandeEnvoyee: demandeEnvoyee ?? this.demandeEnvoyee,
-      credits: credits ?? this.credits,
-      documents: documents ?? this.documents,
-    );
-  }
-}
+export 'etat.dart';
 
 class LiveStore extends Notifier<LiveState> {
   var _compteur = 482;
@@ -318,6 +107,38 @@ class LiveStore extends Notifier<LiveState> {
           demandeEnvoyee: false,
         );
         return id;
+      case TypePaiement.reservation:
+        state = state.copyWith(
+          visites: [
+            for (final v in state.visites)
+              v.id == p.cibleId ? v.avec(StatutVisite.reservee) : v,
+          ],
+          effacerPaiement: true,
+        );
+        return p.cibleId;
+      case TypePaiement.service:
+        final [idPro, idService] = p.cibleId.split('|');
+        final pro = prestataireParId(idPro);
+        final service = pro.services.firstWhere((s) => s.id == idService);
+        final id = _numero('PR');
+        final devis = Devis(
+          prestataire: pro,
+          mainOeuvre: service.prix,
+          materiel: 0,
+          acompte: service.prix,
+          quand: p.creneau ?? 'Demain 10:00',
+        );
+        state = state.copyWith(
+          prestations: [
+            Prestation(id: id, devis: devis, statut: StatutPrestation.acompte),
+            ...state.prestations,
+          ],
+          effacerPaiement: true,
+        );
+        return id;
+      case TypePaiement.abonnement:
+        state = state.copyWith(pro: true, effacerPaiement: true);
+        return 'pro';
       case TypePaiement.credits:
         final pack = packs.firstWhere((k) => k.id == p.cibleId);
         state = state.copyWith(
@@ -372,14 +193,7 @@ class LiveStore extends Notifier<LiveState> {
     state = state.copyWith(
       visites: [
         for (final v in state.visites)
-          v.id == id
-              ? Visite(
-                  id: v.id,
-                  bien: v.bien,
-                  creneau: v.creneau,
-                  statut: StatutVisite.confirmee,
-                )
-              : v,
+          v.id == id ? v.avec(StatutVisite.confirmee) : v,
       ],
     );
   }
@@ -469,6 +283,90 @@ class LiveStore extends Notifier<LiveState> {
     );
     return true;
   }
+
+  // ---- Super-pouvoirs et compte ----
+
+  /// Vérification d'identité (N2) : validée instantanément dans le prototype.
+  void verifierIdentite() {
+    if (state.niveau < 2) state = state.copyWith(niveau: 2);
+  }
+
+  /// Crée un espace pro vérifié (N3).
+  void creerEspace(String nom, TypeEspace type) {
+    state = state.copyWith(
+      niveau: 3,
+      espaces: [...state.espaces, Espace(nom, type)],
+    );
+  }
+
+  void basculerSuivi(String id) => state = state.copyWith(
+    suivis: state.suivis.contains(id)
+        ? ({...state.suivis}..remove(id))
+        : {...state.suivis, id},
+  );
+
+  void basculerFavori(String id) => state = state.copyWith(
+    favoris: state.favoris.contains(id)
+        ? ({...state.favoris}..remove(id))
+        : {...state.favoris, id},
+  );
+
+  // ---- Confiance ----
+
+  void donnerAvis(String cle) =>
+      state = state.copyWith(avisDonnes: {...state.avisDonnes, cle});
+
+  String ouvrirReclamation(String objet, String motif, int montant) {
+    final id = _numero('RC');
+    state = state.copyWith(
+      reclamations: [
+        Reclamation(id: id, objet: objet, motif: motif, montant: montant),
+        ...state.reclamations,
+      ],
+    );
+    return id;
+  }
+
+  void avancerReclamation(String id) => state = state.copyWith(
+    reclamations: [
+      for (final r in state.reclamations)
+        r.id == id
+            ? Reclamation(
+                id: r.id,
+                objet: r.objet,
+                motif: r.motif,
+                montant: r.montant,
+                etape: (r.etape + 1).clamp(1, 3),
+              )
+            : r,
+    ],
+  );
+
+  // ---- Recherche et préférences ----
+
+  void basculerAlerte(int i) => state = state.copyWith(
+    alertes: [
+      for (final (j, a) in state.alertes.indexed) j == i ? (a.$1, !a.$2) : a,
+    ],
+  );
+
+  void ajouterAlerte(String libelle) =>
+      state = state.copyWith(alertes: [(libelle, true), ...state.alertes]);
+
+  void choisirInterets(Set<String> interets) =>
+      state = state.copyWith(interets: interets);
+
+  void basculerEconomieDonnees() =>
+      state = state.copyWith(economieDonnees: !state.economieDonnees);
+
+  // ---- Publication ----
+
+  void publierBien(String titre) =>
+      state = state.copyWith(biensPublies: [titre, ...state.biensPublies]);
+
+  void publierService(String titre) => state = state.copyWith(
+    servicesPublies: [titre, ...state.servicesPublies],
+  );
 
   void reinitialiser() => state = LiveState(ventes: ventesInitiales());
 }

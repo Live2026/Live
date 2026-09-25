@@ -1,0 +1,452 @@
+part of 'ia_screens.dart';
+
+/// E-IA-05 — Génération en cours : étapes cochées au fil de l'avancement.
+class EtapesGeneration extends StatelessWidget {
+  const EtapesGeneration({super.key, required this.progression});
+  final double progression;
+
+  static const _etapes = [
+    'Lecture de vos informations',
+    'Rédaction du contenu',
+    'Calculs et mise en forme',
+    'Relecture finale',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 420),
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: 96,
+                height: 96,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                      value: progression,
+                      strokeWidth: 6,
+                      backgroundColor: const Color(0xFFE6EBF2),
+                      constraints: const BoxConstraints.expand(),
+                    ),
+                    const Icon(
+                      Icons.auto_awesome,
+                      color: LiveColors.orange,
+                      size: 40,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '${(progression * 100).round()} %',
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 16),
+              for (final (i, e) in _etapes.indexed)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Row(
+                    children: [
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 250),
+                        child: progression > (i + 1) / _etapes.length - 0.01
+                            ? const Icon(
+                                Icons.check_circle_rounded,
+                                key: ValueKey(1),
+                                color: LiveColors.succes,
+                              )
+                            : progression > i / _etapes.length
+                            ? const SizedBox(
+                                key: ValueKey(2),
+                                width: 24,
+                                height: 24,
+                                child: Padding(
+                                  padding: EdgeInsets.all(3),
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2.5,
+                                  ),
+                                ),
+                              )
+                            : const Icon(
+                                Icons.radio_button_unchecked,
+                                key: ValueKey(3),
+                                color: LiveColors.brume,
+                              ),
+                      ),
+                      const SizedBox(width: 12),
+                      Text(e),
+                    ],
+                  ),
+                ),
+              const SizedBox(height: 16),
+              const Text(
+                'Vous pouvez quitter l’écran : vous serez prévenu quand ce sera prêt.',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: LiveColors.gris),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// E-IA-09 — Business plan : assistant en 6 étapes avec prévisionnel.
+class EcranBusinessPlan extends ConsumerStatefulWidget {
+  const EcranBusinessPlan({super.key});
+
+  @override
+  ConsumerState<EcranBusinessPlan> createState() => _EcranBusinessPlanState();
+}
+
+class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
+  var _etape = 0;
+  var _progression = 0.0;
+  var _enCours = false;
+  final _c = {
+    'activite': TextEditingController(text: 'Boulangerie de quartier'),
+    'quartier': TextEditingController(text: 'Moungali, Brazzaville'),
+    'clients': TextEditingController(
+      text: 'Familles et petits commerces du quartier',
+    ),
+    'concurrents': TextEditingController(
+      text: 'Deux boulangeries à 1 km, pain souvent en rupture le soir',
+    ),
+  };
+  var _prix = 2500;
+  var _ventes = 300;
+  var _apport = 1500000;
+  var _pret = 3000000;
+
+  static const _titres = [
+    'Le projet',
+    'Les clients',
+    'La concurrence',
+    'Les ventes',
+    'Le financement',
+    'Récapitulatif',
+  ];
+
+  int get _caMensuel => _prix * _ventes;
+
+  Future<void> _generer() async {
+    final s = serviceParId('bp_complet');
+    if (!await confirmerPrix(context, ref, s.titre, s.prix)) return;
+    setState(() => _enCours = true);
+    for (var i = 1; i <= 12; i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 200));
+      if (!mounted) return;
+      setState(() => _progression = i / 12);
+    }
+    final a = _c['activite']!.text;
+    final id = ref.read(liveProvider.notifier).ajouterDocument(
+      'bp_complet',
+      'Business plan · $a',
+      [
+        (
+          'Résumé',
+          '$a à ${_c['quartier']!.text}. Besoin total ${fcfa(_apport + _pret)}, dont ${fcfa(_apport)} d’apport.',
+        ),
+        ('Marché et clients', _c['clients']!.text),
+        (
+          'Concurrence et avantage',
+          '${_c['concurrents']!.text}. Avantage : pain chaud matin et soir, livraison via Live.',
+        ),
+        (
+          'Prévisionnel',
+          'Chiffre d’affaires : ${fcfa(_caMensuel * 12)} en année 1, ${fcfa((_caMensuel * 12 * 1.15).round())} en année 2, ${fcfa((_caMensuel * 12 * 1.3).round())} en année 3.',
+        ),
+        (
+          'Financement',
+          'Apport ${fcfa(_apport)} et prêt ${fcfa(_pret)} remboursé sur 36 mois.',
+        ),
+        (
+          'Avertissement',
+          'Chiffres indicatifs à vérifier avec un comptable avant tout dépôt en banque.',
+        ),
+      ],
+    );
+    if (mounted) context.pushReplacement('/ia/document/$id');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_enCours) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Business plan complet')),
+        body: EtapesGeneration(progression: _progression),
+      );
+    }
+    final credits = ref.watch(liveProvider.select((e) => e.credits));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Business plan · ${_etape + 1}/6'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Credits(credits),
+          ),
+        ],
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          LinearProgressIndicator(
+            value: (_etape + 1) / 6,
+            minHeight: 6,
+            borderRadius: BorderRadius.circular(3),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            _titres[_etape],
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+          ),
+          const SizedBox(height: 12),
+          ...switch (_etape) {
+            0 => [
+              TextField(
+                controller: _c['activite'],
+                decoration: const InputDecoration(labelText: 'Votre activité'),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: _c['quartier'],
+                decoration: const InputDecoration(
+                  labelText: 'Ville et quartier',
+                ),
+              ),
+            ],
+            1 => [
+              TextField(
+                controller: _c['clients'],
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  labelText: 'Qui sont vos clients ?',
+                ),
+              ),
+            ],
+            2 => [
+              TextField(
+                controller: _c['concurrents'],
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  labelText: 'Qui sont vos concurrents ?',
+                ),
+              ),
+            ],
+            3 => [
+              _Curseur(
+                'Prix moyen d’une vente',
+                _prix,
+                500,
+                20000,
+                500,
+                (v) => setState(() => _prix = v),
+              ),
+              _Curseur(
+                'Ventes par mois',
+                _ventes,
+                50,
+                2000,
+                50,
+                (v) => setState(() => _ventes = v),
+                monnaie: false,
+              ),
+              Bloc(
+                fond: const Color(0xFFF3F5F8),
+                child: LigneMontant(
+                  'Chiffre d’affaires mensuel',
+                  _caMensuel,
+                  gras: true,
+                ),
+              ),
+            ],
+            4 => [
+              _Curseur(
+                'Votre apport',
+                _apport,
+                0,
+                10000000,
+                250000,
+                (v) => setState(() => _apport = v),
+              ),
+              _Curseur(
+                'Prêt recherché',
+                _pret,
+                0,
+                20000000,
+                250000,
+                (v) => setState(() => _pret = v),
+              ),
+            ],
+            _ => [
+              _Previsionnel(caAnnuel: _caMensuel * 12),
+              const SizedBox(height: 12),
+              LigneMontant('Besoin total', _apport + _pret, gras: true),
+            ],
+          },
+        ],
+      ),
+      bottomNavigationBar: BarreAction(
+        child: Row(
+          children: [
+            if (_etape > 0) ...[
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () => setState(() => _etape--),
+                  child: const Text('Retour'),
+                ),
+              ),
+              const SizedBox(width: 10),
+            ],
+            Expanded(
+              flex: 2,
+              child: FilledButton(
+                onPressed: _etape < 5
+                    ? () => setState(() => _etape++)
+                    : _generer,
+                child: Text(_etape < 5 ? 'Continuer' : 'Générer · 150 crédits'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Curseur extends StatelessWidget {
+  const _Curseur(
+    this.libelle,
+    this.valeur,
+    this.min,
+    this.max,
+    this.pas,
+    this.onChange, {
+    this.monnaie = true,
+  });
+  final String libelle;
+  final int valeur;
+  final int min;
+  final int max;
+  final int pas;
+  final ValueChanged<int> onChange;
+  final bool monnaie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(child: Text(libelle)),
+            Text(
+              monnaie ? fcfa(valeur) : '$valeur',
+              style: const TextStyle(fontWeight: FontWeight.w800),
+            ),
+          ],
+        ),
+        Slider(
+          value: valeur.toDouble(),
+          min: min.toDouble(),
+          max: max.toDouble(),
+          divisions: (max - min) ~/ pas,
+          onChanged: (v) => onChange(v.round()),
+        ),
+      ],
+    );
+  }
+}
+
+/// Prévisionnel sur 3 ans en barres (croissance prudente de 15 % par an).
+class _Previsionnel extends StatelessWidget {
+  const _Previsionnel({required this.caAnnuel});
+  final int caAnnuel;
+
+  @override
+  Widget build(BuildContext context) {
+    final annees = [
+      caAnnuel,
+      (caAnnuel * 1.15).round(),
+      (caAnnuel * 1.3).round(),
+    ];
+    final max = annees.last;
+    return Bloc(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Chiffre d’affaires prévisionnel',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 150,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                for (final (i, v) in annees.indexed)
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            fcfaCourt(v),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          TweenAnimationBuilder<double>(
+                            tween: Tween(end: v / max),
+                            duration: Duration(milliseconds: 600 + i * 200),
+                            curve: courbeDouce,
+                            builder: (_, f, _) => Container(
+                              height: 100 * f,
+                              decoration: BoxDecoration(
+                                color: i == 2
+                                    ? LiveColors.orange
+                                    : LiveColors.bleu,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Année ${i + 1}',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: LiveColors.gris,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Chiffres indicatifs à faire vérifier par un comptable.',
+            style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
+          ),
+        ],
+      ),
+    );
+  }
+}
