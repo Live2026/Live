@@ -264,6 +264,7 @@ final routeur = GoRouter(
           (TypePaiement.commande, 'LV-00482', 'MTN Mobile Money');
       return EcranPaiementReussi(type: type, id: id, moyen: moyen);
     }),
+    _route('/portefeuille', (_) => const EcranPortefeuille()),
     _route('/gains', (_) => const EcranGains()),
     _route('/retirer', (_) => const EcranRetrait()),
     _route('/recu/:id', (s) => EcranRecu(id: _p(s, 'id'))),

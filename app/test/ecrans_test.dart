@@ -79,6 +79,7 @@ const routes = [
   '/diaspora',
   '/transfert',
   '/transfert?sens=recevoir',
+  '/portefeuille',
   '/factures',
   '/adresse',
   '/points-relais',

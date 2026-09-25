@@ -103,6 +103,8 @@ class EcranMoi extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 16),
+          _CarteArgent(etat: etat),
+          const SizedBox(height: 12),
           _CartePouvoirs(actifs: actifs, total: pouvoirs.length),
           const SizedBox(height: 16),
           GrilleAdaptative(
@@ -110,12 +112,6 @@ class EcranMoi extends ConsumerWidget {
             espacement: 10,
             hauteur: 96,
             enfants: [
-              _Raccourci(
-                Icons.account_balance_wallet_outlined,
-                'Mes gains',
-                fcfaCourt(etat.disponible),
-                '/gains',
-              ),
               _Raccourci(
                 Icons.auto_awesome_outlined,
                 'Crédits Live',
@@ -149,6 +145,12 @@ class EcranMoi extends ConsumerWidget {
                 etat.prestations.isEmpty
                     ? '/services'
                     : '/prestation/${etat.prestations.first.id}',
+              ),
+              _Raccourci(
+                Icons.bookmark_border_rounded,
+                'Enregistrés',
+                '${etat.favoris.length} favori${etat.favoris.length > 1 ? 's' : ''}',
+                '/enregistres',
               ),
             ],
           ),

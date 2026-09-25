@@ -85,30 +85,7 @@ class EcranGains extends ConsumerWidget {
             ),
           ],
           const EnTeteSection('Historique'),
-          for (final m in etat.historique)
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              onTap: () => context.push('/recu/${m.libelle.hashCode.abs()}'),
-              leading: CircleAvatar(
-                backgroundColor: m.montant >= 0
-                    ? const Color(0xFFE7F4EC)
-                    : const Color(0xFFF3F5F8),
-                child: Icon(
-                  m.montant >= 0 ? Icons.south_west : Icons.north_east,
-                  color: m.montant >= 0 ? LiveColors.succes : LiveColors.nuit,
-                  size: 20,
-                ),
-              ),
-              title: Text(m.libelle),
-              subtitle: Text(m.quand),
-              trailing: Text(
-                '${m.montant >= 0 ? '+' : ''}${fcfa(m.montant)}',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: m.montant >= 0 ? LiveColors.succes : LiveColors.nuit,
-                ),
-              ),
-            ),
+          for (final m in etat.historique) _LigneMouvement(m),
         ],
       ),
     );

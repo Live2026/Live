@@ -15,6 +15,7 @@ import '../../shared/widgets.dart';
 part 'paiement.dart';
 part 'gains_retrait.dart';
 part 'recu.dart';
+part 'portefeuille.dart';
 
 enum Moyen { solde, mtn, airtel, visa }
 
