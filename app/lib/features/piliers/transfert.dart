@@ -281,6 +281,7 @@ class _BoutonDevise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
+      container: true,
       button: true,
       label: 'Devise : ${devise.nom}. Changer',
       onTap: onTap,
