@@ -1,0 +1,377 @@
+# Écrans — 04. Live Market
+
+Parcours d'achat et de vente de produits (document 10). Deux façons de payer : **payer maintenant** (argent bloqué jusqu'à la réception) ou **payer à la remise** via Mobile Money (DM-01).
+
+---
+
+## E-MKT-01 — Accueil Market
+
+Disposition revue le 25/09/2026 (inspirée des places de marché modernes, aux couleurs de Live). La logique ne change pas : pas de panier multi-vendeurs, une commande par vendeur avec son mode de remise.
+
+```text
+┌──────────────────────────────────────────┐
+│ Market                    ⌕   ⊕   ✉1     │
+│ Achetez et vendez près de chez vous      │
+├──────────────────────────────────────────┤
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   │
+│ ▓ 0 % de commission          🏷       ▓   │  carrousel automatique
+│ ▓ Vendez 3 mois sans rien payer      ▓   │  (arrêté si « réduire
+│ ▓ [Découvrir]                        ▓   │   les animations »)
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   │
+│                 ━ ● ●                    │
+│ Catégories populaires       Voir tout ▶  │
+│ [📱]  [👗]  [🍳]  [❄]  [🍲]  ▶           │  → liste de la catégorie
+│ Recommandé pour vous        Voir tout ▶  │
+│ ▒▒▒▒▒▒  ▒▒▒▒▒▒  ▒▒▒▒▒▒                   │
+│ Robe…   Saka…   iPhone…                  │
+│ 15 000 ★4,8                              │
+│ Vendeurs à la une                        │
+│ ┌────┐ ┌────┐ ┌────┐                     │
+│ │ GM✓│ │ É ✓│ │ MN✓│                     │
+│ │★4,8│ │★4,6│ │★4,9│                     │
+│ └────┘ └────┘ └────┘                     │
+│ Nouveautés près de vous     Voir tout ▶  │
+│ (grille d'annonces)                      │
+│ ┌ Vos commandes ────────── Voir tout ┐   │  si achats en cours
+│ ┌ Vendre sur Live ───────────────────┐   │
+│ ┌ Paiements sécurisés ───────────────┐   │  Solde Live · MoMo/Airtel
+│ │ Visa · À la remise · protection    │   │  · Visa · À la remise
+│ ┌ Besoin d'aide ? ───────────────────┐   │
+├──────────────────────────────────────────┤
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
+└──────────────────────────────────────────┘
+```
+
+- La recherche est une **icône** en haut (pas de barre dès l'ouverture) ; elle ouvre E-EXP-02.
+- Toutes les cartes d'une rangée ont la même taille (règle 9.5 du document 00).
+
+---
+
+## E-MKT-10 — Liste d'une catégorie
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀  Téléphones                       ⌕    │
+│    3 résultats à Brazzaville             │
+├──────────────────────────────────────────┤
+│ Pertinence  Nouveautés  Prix ↑  Prix ↓   │  onglet actif souligné orange
+│ ┌──────┐ Galaxy A14 128 Go          ♡    │
+│ │ ▒▒▒▒ │ Neuf · Bacongo                  │  lignes de hauteur fixe
+│ │ ▒▒▒▒ │ Par ÉlectroPlus                 │
+│ └──────┘ ★4,6              75 000 FCFA   │
+│ ┌──────┐ iPhone 11 64 Go            ♡    │
+│ │ ▒▒▒▒ │ Très bon état · payé à la remise│
+└──────────────────────────────────────────┘
+```
+
+## E-MKT-11 — Mes commandes
+
+Liste des achats (numéro, produit, état : « Payée · argent bloqué par Live », « Réservée · à payer à la remise », « Terminée », montant). Toucher une commande ouvre son suivi (E-MKT-05).
+
+---
+
+## E-MKT-02 — Fiche produit
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀                          ↗   ♡   ⋮     │
+├──────────────────────────────────────────┤
+│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   │
+│ ▒▒▒▒▒▒▒▒▒▒▒ PHOTOS / VIDÉO ▒▒▒▒▒▒▒▒▒▒▒   │
+│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   │
+│              ● ○ ○ ○ ○                   │
+│ iPhone 11 64 Go - très bon état          │
+│ 85 000 FCFA                négociable    │
+│ Moungali · publié il y a 2 h             │
+│                                          │
+│ État        Très bon état                │
+│ Stockage    64 Go                        │
+│ Couleur     Noir                         │
+│ Quantité    1                            │
+│                                          │
+│ Remise                                   │
+│ • En main propre (Moungali)  gratuit     │
+│ • Livraison Brazzaville     2 000 FCFA   │
+│                                          │
+│ Description                              │
+│ Batterie 86 %, aucune rayure, avec       │
+│ chargeur. Vendu car changement...        │
+│ (Lire la suite)                          │
+├──────────────────────────────────────────┤
+│ ( ▒) Grâce Mode ✓ Identité vérifiée      │
+│      ★ 4,8 (126 avis) · 214 ventes       │
+│      Répond en moins d'1 h  (Boutique)   │
+├──────────────────────────────────────────┤
+│ [Protégé par Live] Remboursé si vous     │
+│ ne recevez pas le produit.               │
+├──────────────────────────────────────────┤
+│ (Écrire) (Faire une offre) [Acheter]     │
+└──────────────────────────────────────────┘
+```
+
+| Élément | Comportement |
+|---------|-------------|
+| Photos / vidéo | Glisser horizontalement ; la vidéo est en premier si elle existe ; les images se chargent floues d'abord |
+| ↗ Partager | E-FEED-04 |
+| ⋮ | Signaler (E-CONF-02), Copier le lien |
+| Écrire | Ouvre la conversation liée à l'annonce (E-CHAT-02) |
+| Faire une offre | E-MKT-03 (seulement si « négociable ») |
+| Acheter | E-MKT-04 |
+| Mon annonce | Si l'utilisateur est le vendeur : les boutons deviennent `(Modifier) (Booster) [Statistiques]` |
+| Plus bas dans l'écran | « Autres produits de la boutique », « Produits similaires » (F-MKT-FICHE-05) |
+
+---
+
+**Complément du 25/09/2026** : sous le titre, le vendeur (avatar, badge, note, ventes) ; badge « Meilleure vente » pour les annonces très vues ; quatre tuiles de même taille (état, remise, paiement, protection) ; bloc « Comment ça se paie » (étiquette « Payé dans Live » ou « À la remise », document 06 §4.4). Pour un objet à voir avant d'acheter, le bouton principal devient **« Rendez-vous »** et mène à la réservation sans paiement (mode B).
+
+---
+
+## E-MKT-03 — Faire une offre (panneau du bas)
+
+```text
+┌──────────────────────────────────────────┐
+│ Faire une offre                   ✕      │
+├──────────────────────────────────────────┤
+│ iPhone 11 64 Go                          │
+│ Prix demandé : 85 000 FCFA               │
+│                                          │
+│ Votre offre                              │
+│ [        75 000             ] FCFA       │
+│                                          │
+│ Suggestions : [80 000] [78 000] [75 000] │
+│                                          │
+│ Le vendeur a 24 h pour répondre.         │
+│ Une offre acceptée est valable 24 h.     │
+├──────────────────────────────────────────┤
+│ [      Envoyer l'offre           ]       │
+└──────────────────────────────────────────┘
+```
+
+| Règle | Détail |
+|-------|--------|
+| Minimum | Une offre inférieure à 50 % du prix demandé est refusée avec un message poli |
+| Échanges | 3 allers-retours maximum (offre, contre-offre, offre) (F-MKT-CMD-01) |
+| Suite | L'offre apparaît sous forme de carte dans la conversation (E-CHAT-02) ; acceptée, elle donne un bouton « Payer 75 000 FCFA » |
+
+---
+
+## E-MKT-04 — Récapitulatif de la commande
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀  Votre commande                        │
+├──────────────────────────────────────────┤
+│ ▒▒ iPhone 11 64 Go      85 000 FCFA      │
+│                                          │
+│ Remise                                   │
+│ (•) En main propre · Moungali            │
+│ ( ) Livraison          + 2 000 FCFA      │
+│                                          │
+│ Paiement                                 │
+│ (•) Payer maintenant                     │
+│     Argent bloqué jusqu'à réception.     │
+│ ( ) Payer à la remise                    │
+│     MoMo ou Airtel, produit en main.     │
+│                                          │
+│ ▶ Écouter l'explication                  │
+├──────────────────────────────────────────┤
+│ Total à payer          85 000 FCFA       │
+│ Aucun frais supplémentaire.              │
+├──────────────────────────────────────────┤
+│ [            Continuer             ]     │
+└──────────────────────────────────────────┘
+```
+
+| Règle | Détail |
+|-------|--------|
+| Payer maintenant | Continuer ouvre le choix du moyen de paiement (E-PAY-01) |
+| Livraison | Si elle est choisie, un champ « Adresse ou repère » apparaît sous l'option |
+| Payer à la remise | Continuer **réserve** la commande sans paiement ; masqué si le vendeur exige le paiement d'avance (R-MKT-B1) ou si l'acheteur a perdu ce droit (R-MKT-B3) |
+| Total | Le prix affiché est le prix payé ; la commission Live est payée par le vendeur (R-MKT-03) |
+
+---
+
+## E-MKT-05 — Suivi de commande (acheteur)
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀  Commande LV-00482                     │
+├──────────────────────────────────────────┤
+│ ▒▒ iPhone 11 64 Go      85 000 FCFA      │
+│    Grâce Mode ✓       (Écrire)           │
+│                                          │
+│  ✓ Payée · argent bloqué par Live        │
+│  ✓ Acceptée par le vendeur               │
+│  ● Remise prévue aujourd'hui             │
+│  ○ Réception confirmée                   │
+│                                          │
+│ ┌──────────────────────────────────┐     │
+│ │ CONFIRMER LA REMISE              │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │        ▓▓▓  QR  ▓▓▓              │     │
+│ │        ▓▓▓▓▓▓▓▓▓▓▓▓              │     │
+│ │ Code de secours : LV-K4827       │     │
+│ │ Montrez-le au vendeur quand vous │     │
+│ │ avez vérifié le produit.         │     │
+│ │ Ce n'est PAS votre code MoMo.    │     │
+│ └──────────────────────────────────┘     │
+│                                          │
+│ (J'ai reçu le produit)                   │
+│ (Signaler un problème)                   │
+├──────────────────────────────────────────┤
+│ [Protégé par Live] 85 000 FCFA           │
+│ bloqués jusqu'à votre confirmation.      │
+└──────────────────────────────────────────┘
+```
+
+| Règle | Détail |
+|-------|--------|
+| Présentation (révision) | Carte produit (image animée depuis la liste), **frise chronologique** horodatée (étapes faites en bleu, étape en cours soulignée), QR dans une carte blanche flottante ; « J'ai reçu le produit » en bouton tonal, « Signaler un problème » en bouton texte ; sur grand écran : frise à gauche, QR et actions à droite |
+| QR de confirmation | Le vendeur le **scanne** avec son application (E-MKT-08) ; le code `LV-` n'est dicté qu'en secours ; c'est la preuve de remise (principe 10) |
+| Confirmation automatique | 48 h après la remise déclarée, sans réclamation (F-MKT-CONF-01) ; un compte à rebours s'affiche |
+| Signaler un problème | Ouvre la réclamation (E-CONF-03) |
+| Après la confirmation | Proposition de laisser un avis (E-CONF-01) |
+| Mode « payer à la remise » | Pas de QR de confirmation ; l'écran affiche « Vérifiez le produit, puis payez » et un bouton **[ Payer maintenant 85 000 FCFA ]** que l'acheteur peut utiliser lui-même sur place (secours si la demande du vendeur n'arrive pas, E-MKT-09) |
+
+---
+
+## E-MKT-06 — Page boutique
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀                           ↗     ⋮      │
+├──────────────────────────────────────────┤
+│ ▒▒▒▒▒▒▒▒▒▒▒▒▒ BANNIÈRE ▒▒▒▒▒▒▒▒▒▒▒▒▒▒    │
+│ ( ▒▒ ) Grâce Mode                        │
+│        ✓ Pro vérifié · Moungali          │
+│        ★ 4,8 (126) · 214 ventes Live     │
+│        2 340 abonnés                     │
+│ [   Suivre   ]  ( Écrire )               │
+├──────────────────────────────────────────┤
+│ [Produits] [Vidéos] [Avis] [Infos]       │
+├──────────────────────────────────────────┤
+│ [Tout][Robes][Pagnes][Sacs][Promos]      │
+│ ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒             │
+│ Robe wax  Pagne 6y  Sac cuir             │
+│ 15 000    18 000    25 000               │
+│ ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒             │
+│ Ensemble  Robe      Pagne                │
+│ 22 000    12 000    9 000                │
+├──────────────────────────────────────────┤
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
+└──────────────────────────────────────────┘
+```
+
+| Onglet | Contenu |
+|--------|---------|
+| Produits | Catalogue filtrable par catégorie de la boutique |
+| Vidéos | Publications du fil de la boutique |
+| Avis | Note moyenne, répartition, avis avec photos, réponses du vendeur |
+| Infos | Description, horaires, zone de livraison, date d'ouverture, lien de la boutique à partager |
+
+---
+
+## E-MKT-07 — Mes ventes (vendeur)
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀  Mes ventes                      ⤴     │
+├──────────────────────────────────────────┤
+│ ┌─────────────┐┌─────────────┐           │
+│ │↗ Vendu ce   ││⏱ En attente │           │
+│ │  mois       ││  96 000     │           │
+│ │  48 000     │└─────────────┘           │
+│ └─────────────┘┌─────────────┐           │
+│                │★ Note 4,8/5 │           │
+│                └─────────────┘           │
+│ [•À traiter (1)][En cours][Terminées]    │
+│ ┌──────────────────────────────────────┐ │
+│ │▒▒ [Nouvelle] LV-00483     30 000 FCFA│ │
+│ │▒▒ Samsung A10          net 28 200    │ │
+│ │   Merveille K. (4,9/5) · Payée       │ │
+│ │ ──────────────────────────────────── │ │
+│ │              (Refuser)  [ Accepter ] │ │
+│ └──────────────────────────────────────┘ │
+├──────────────────────────────────────────┤
+│ ⌂Accueil ⌕Explorer (+) ✦IA ☺Moi          │
+└──────────────────────────────────────────┘
+```
+
+| Règle | Détail |
+|-------|--------|
+| Chiffres clés | Vendu ce mois, en attente, note des clients ; les chiffres défilent jusqu'à leur valeur |
+| Onglets | À traiter, En cours, Terminées, avec le nombre de commandes ; **après « Accepter », l'écran bascule sur « En cours »** pour suivre la commande |
+| Carte | Statut coloré (Nouvelle, À remettre, Terminée), montant brut et **net**, acheteur et sa note ; actions discrètes : « Refuser » en texte, « Accepter » ou « Remettre le produit » en bouton compact |
+| Délai | 24 h pour accepter ; sinon annulation et remboursement automatiques (F-MKT-CMD-06) |
+| Refus | Motif obligatoire (rupture de stock, zone non desservie, autre) ; l'acheteur est remboursé immédiatement |
+
+**Complément du 25/09/2026 (tableau de bord vendeur)** : carte des revenus (vendu ce mois en chiffre animé, disponible, bloqué par Live, bouton « Retirer ») ; tuiles de statistiques de base F-PRO-02 (vues, contacts, conversion, note) ; histogramme des commandes sur 7 ou 30 jours ; rappel du délai de 24 h quand une commande attend ; onglets à pastilles ; carte de commande qui ouvre une **fiche en panneau du bas** (acheteur, suivi en 4 étapes, lieu de remise, montant, commission 6 %, net, actions) ; refus en **fenêtre avec motif obligatoire** ; **menu latéral** des outils (publier, QR de paiement, gains, statistiques Live Pro, avis, équipe, aide) ; section « Mes annonces » (modifier, booster, masquer, marquer comme vendu — F-MKT-DASH-04).
+
+---
+
+## E-MKT-08 — Remettre la commande (vendeur)
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀  Commande LV-00482                     │
+├──────────────────────────────────────────┤
+│ ▒▒ iPhone 11 64 Go      85 000 FCFA      │
+│    Acheteur : Merveille  (Écrire)        │
+│                                          │
+│ COMMANDE PAYÉE D'AVANCE                  │
+│ [   Scanner le QR de l'acheteur    ]     │
+│ (Saisir le code LV- à la place)          │
+│                                          │
+│ ─────────────── ou ───────────────       │
+│                                          │
+│ PAYER À LA REMISE                        │
+│ [   Encaisser 85 000 FCFA          ]     │
+│ La demande n'arrive pas ?                │
+│ (Afficher mon QR de paiement)            │
+├──────────────────────────────────────────┤
+│ Vous recevrez 79 900 FCFA                │
+│ (85 000 - 6 % de commission Live)        │
+└──────────────────────────────────────────┘
+```
+
+| Règle | Détail |
+|-------|--------|
+| Affichage | Seul le bloc correspondant au mode de la commande est affiché (les deux sont montrés ici pour la maquette) |
+| QR scanné ou code juste | Remise confirmée ; argent disponible dans « Mes gains » (E-PAY-04) |
+| Code faux | 5 essais maximum, puis blocage et alerte à l'acheteur |
+| QR de paiement | Secours du mode « payer à la remise » : voir E-MKT-09 |
+| Encaisser | Écran d'attente identique à E-PAY-02 côté vendeur : « En attente de la validation de l'acheteur » ; succès : « Payé ✓ Vous pouvez remettre le produit » |
+| Montant net | Toujours affiché au vendeur avant la remise (transparence, F-PAY-07) |
+
+---
+
+## E-MKT-09 — QR de paiement (secours du « payer à la remise »)
+
+Affiché par le vendeur quand la demande MoMo ou Airtel n'arrive pas sur le téléphone de l'acheteur.
+
+```text
+┌──────────────────────────────────────────┐
+│ ◀  Faire payer l'acheteur                │
+├──────────────────────────────────────────┤
+│ Demandez à l'acheteur de scanner ce      │
+│ QR avec son application Live.            │
+│                                          │
+│         ▓▓▓▓▓▓▓▓▓▓▓▓▓▓                   │
+│         ▓▓▓   QR   ▓▓▓                   │
+│         ▓▓▓▓▓▓▓▓▓▓▓▓▓▓                   │
+│                                          │
+│       Commande LV-00482                  │
+│       85 000 FCFA                        │
+│                                          │
+│ Il paiera depuis son téléphone,          │
+│ avec MoMo, Airtel ou Visa.               │
+├──────────────────────────────────────────┤
+│ En attente du paiement...   ◐            │
+└──────────────────────────────────────────┘
+```
+
+| Règle | Détail |
+|-------|--------|
+| Scan | L'acheteur scanne depuis l'onglet ⌕ ou sa commande ; E-PAY-01 s'ouvre, pré-rempli avec la commande |
+| Sans internet chez l'acheteur | Solution à étudier avec l'agrégateur : **code marchand USSD** propre à la commande (à confirmer, D-11) |
+| Sécurité | Le QR contient seulement la référence de la commande, jamais un montant modifiable ni une donnée personnelle |

@@ -1,0 +1,11 @@
+{
+  "name": "live-prototype-e2e",
+  "private": true,
+  "description": "Test de bout en bout des 5 parcours du prototype Live",
+  "scripts": {
+    "test": "node parcours.js"
+  },
+  "dependencies": {
+    "playwright": "^1.56.0"
+  }
+}
