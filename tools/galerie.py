@@ -218,7 +218,7 @@ def main(tel, ordi, sortie):
             figs.append(f'<figure><button class="shot" type="button" aria-label="Agrandir : {html.escape(t)}"><img loading="lazy" src="{jpeg(f, 640, 70)}" alt="{html.escape(t)}" width="360" height="760"></button><figcaption><span class="n">{total:03d}</span><b>{html.escape(t)}</b>{("<small>" + html.escape(s) + "</small>") if s else ""}</figcaption></figure>')
         corps.append(f'<section id="{sid}"><header class="sh"><h2>{html.escape(titre)}</h2><p>{html.escape(desc)}</p></header><div class="grid">{"".join(figs)}</div></section>')
     # Ordinateur : une sélection d'écrans.
-    choix = ['fil', 'explorer', 'market_accueil', 'fiche_produit', 'immo_liste', 'fiche_logement', 'agence_tableau', 'services_accueil', 'conversation', 'moi', 'pouvoirs', 'ia_accueil', 'admin_tableau', 'admin_finance']
+    choix = ['fil', 'explorer', 'market_accueil', 'market_liste', 'fiche_produit', 'mes_ventes_bilan', 'publier_video', 'immo_liste', 'fiche_logement', 'agence_tableau', 'services_accueil', 'conversation', 'moi', 'pouvoirs', 'ia_accueil', 'admin_tableau', 'admin_finance']
     figs = []
     fichiers = {os.path.basename(f)[4:-4]: f for f in sorted(glob.glob(os.path.join(ordi, '*.png')))}
     for nom in choix:
