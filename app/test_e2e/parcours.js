@@ -1,4 +1,4 @@
-// Test de bout en bout des 5 parcours du prototype (inscription, achat, vente,
+// Test de bout en bout des 6 parcours du prototype (inscription, achat, vente,
 // visite de logement, devis, retrait) dans Chromium, au format téléphone.
 // Usage : voir test_e2e/README.md.
 const { chromium } = require('playwright');
@@ -10,7 +10,7 @@ require('fs').mkdirSync(DOSSIER, { recursive: true });
 let p, n = 0, etape = '';
 const erreurs = [];
 
-async function ecran(nom) { n++; await p.waitForTimeout(500); await p.screenshot({ path: `${DOSSIER}/${String(n).padStart(2, '0')}_${nom}.png` }); }
+async function ecran(nom) { n++; await p.mouse.move(LARGEUR - 2, 2); await p.waitForTimeout(500); await p.screenshot({ path: `${DOSSIER}/${String(n).padStart(2, '0')}_${nom}.png` }); }
 async function sem() { await p.evaluate(() => { const e = document.querySelector('flt-semantics-placeholder'); if (e) e.click(); }); await p.waitForTimeout(400); }
 async function bouton(nom, { exact = false } = {}) {
   etape = nom;
@@ -78,14 +78,16 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await p.waitForTimeout(2500); await sem();
 
     // 0. Inscription
+    await ecran('bienvenue');
     await bouton('Commencer'); await sem();
     await saisir(0, '06 123 45 67');
     for (const c of await p.getByRole('checkbox').all()) await c.click();
     await ecran('inscription_telephone');
     await bouton('Recevoir le code par SMS');
+    await ecran('code_sms_vide');
     await saisir(0, '123456'); await p.waitForTimeout(800);
     await saisir('Prénom', 'Grâce'); await ecran('inscription_profil');
-    await bouton('Continuer');
+    await bouton('Continuer'); await ecran('code_secret');
     await pin(); await p.waitForTimeout(1200); await ecran('fil');
 
     // 1. Acheter (depuis la pastille du fil puis la fiche)
@@ -152,6 +154,19 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       await bouton('Étape suivante').catch(() => bouton('Voir le récapitulatif'));
     }
     await texte('Solution : x = 4'); await ecran('ia_exercice_fin');
+
+    // 7. Tour des autres écrans principaux (après les parcours, avec leurs données)
+    for (const [route, nom] of [
+      ['ia/documents', 'ia_mes_documents'], ['accueil', 'fil_retour'],
+      ['recherche', 'recherche'], ['services', 'services_accueil'],
+      ['publier', 'publier'], ['messages', 'messages'],
+      ['conversation', 'conversation'], ['moi', 'moi'],
+      ['gains', 'gains'], ['mes-ventes', 'mes_ventes_bilan'],
+      ['scenarios', 'scenarios_test'],
+    ]) {
+      etape = 'écran ' + route;
+      await p.goto(BASE + '#/' + route); await p.waitForTimeout(1500); await ecran(nom);
+    }
     console.log('RÉSULTAT : les 6 parcours ont abouti.');
     process.exitCode = 0;
   } catch (e) {

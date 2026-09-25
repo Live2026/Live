@@ -455,10 +455,8 @@ class _EcranCreditsState extends ConsumerState<EcranCredits> {
             largeurMax: 320,
             enfants: [
               for (final p in packs)
-                Choix(
-                  titre: fcfa(p.prix),
-                  sousTitre: p.bonus == null ? null : 'Bonus ${p.bonus}',
-                  trailing: '${p.credits} crédits',
+                _CartePack(
+                  pack: p,
                   selectionne: _pack == p,
                   onTap: () => setState(() => _pack = p),
                 ),
@@ -493,6 +491,91 @@ class _EcranCreditsState extends ConsumerState<EcranCredits> {
       bottomNavigationBar: context.grandEcran
           ? null
           : BarreAction(child: bouton),
+    );
+  }
+}
+
+/// Un pack de crédits : nombre de crédits en grand, prix et bonus dessous.
+class _CartePack extends StatelessWidget {
+  const _CartePack({
+    required this.pack,
+    required this.selectionne,
+    required this.onTap,
+  });
+  final Pack pack;
+  final bool selectionne;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      selected: selectionne,
+      label: '${pack.credits} crédits pour ${fcfa(pack.prix)}',
+      excludeSemantics: true,
+      child: Pressable(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 220),
+          curve: courbeDouce,
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: selectionne ? const Color(0xFFE6EBF2) : Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: selectionne ? LiveColors.bleu : LiveColors.brume,
+              width: selectionne ? 2 : 1,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Credits(pack.credits, taille: 22),
+                    ),
+                  ),
+                  if (selectionne)
+                    const Icon(
+                      Icons.check_circle,
+                      size: 20,
+                      color: LiveColors.bleu,
+                    ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                fcfa(pack.prix),
+                style: const TextStyle(color: LiveColors.gris),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: pack.bonus == null
+                      ? Colors.transparent
+                      : LiveColors.succes.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  pack.bonus == null ? 'Pack de base' : 'Bonus ${pack.bonus}',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: pack.bonus == null
+                        ? LiveColors.gris
+                        : LiveColors.succes,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
