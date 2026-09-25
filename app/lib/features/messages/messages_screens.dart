@@ -151,12 +151,18 @@ class _EcranMessagesState extends State<EcranMessages> {
         // Navigateur propre au panneau : la conversation n'a pas de flèche
         // retour, et ses panneaux du bas s'ouvrent dans le panneau.
         Expanded(
-          child: Navigator(
-            key: ValueKey(c.id),
-            onGenerateRoute: (_) => MaterialPageRoute<void>(
-              builder: (_) => c.type == TypeConversation.privee
-                  ? const EcranConversation()
-                  : EcranGroupe(id: c.id),
+          // Conteneur d'accessibilité propre : sans lui, la page du panneau
+          // masque la liste de gauche aux lecteurs d'écran.
+          child: Semantics(
+            container: true,
+            explicitChildNodes: true,
+            child: Navigator(
+              key: ValueKey(c.id),
+              onGenerateRoute: (_) => MaterialPageRoute<void>(
+                builder: (_) => c.type == TypeConversation.privee
+                    ? const EcranConversation()
+                    : EcranGroupe(id: c.id),
+              ),
             ),
           ),
         ),
