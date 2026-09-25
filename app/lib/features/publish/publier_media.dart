@@ -264,23 +264,25 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                       Expanded(
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: AnimatedScale(
-                            scale: _pret && !_enCours ? 1 : 0,
+                          child: AnimatedSwitcher(
                             duration: const Duration(milliseconds: 220),
-                            curve: courbeDouce,
-                            child: FilledButton(
-                              style: FilledButton.styleFrom(
-                                backgroundColor: LiveColors.orangeVif,
-                                minimumSize: const Size(0, 44),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 14,
-                                ),
-                              ),
-                              onPressed: _pret
-                                  ? () => setState(() => _legende = true)
-                                  : null,
-                              child: const Text('Suivant'),
-                            ),
+                            transitionBuilder: (c, a) =>
+                                ScaleTransition(scale: a, child: c),
+                            child: _pret && !_enCours
+                                ? FilledButton(
+                                    key: const ValueKey('suivant'),
+                                    style: FilledButton.styleFrom(
+                                      backgroundColor: LiveColors.orangeVif,
+                                      minimumSize: const Size(0, 44),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 14,
+                                      ),
+                                    ),
+                                    onPressed: () =>
+                                        setState(() => _legende = true),
+                                    child: const Text('Suivant'),
+                                  )
+                                : const SizedBox(key: ValueKey('vide')),
                           ),
                         ),
                       ),

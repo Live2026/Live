@@ -36,7 +36,7 @@ async function bouton(nom, { exact = false } = {}) {
           boite = await l.boundingBox();
         }
         if (boite) {
-          await p.mouse.click(boite.x + boite.width / 2, boite.y + boite.height / 2);
+          await p.mouse.click(boite.x + boite.width / 2, boite.y + Math.min(boite.height / 2, 24));
           await p.waitForTimeout(800);
           return;
         }
@@ -58,7 +58,7 @@ async function saisir(cible, valeur) {
   const l = typeof cible === 'number' ? champs.nth(cible) : p.getByRole('textbox', { name: cible }).filter({ visible: true }).first();
   await l.waitFor({ timeout: 8000 });
   const boite = await l.boundingBox();
-  await p.mouse.click(boite.x + boite.width / 2, boite.y + boite.height / 2);
+  await p.mouse.click(boite.x + boite.width / 2, boite.y + Math.min(boite.height / 2, 24));
   await p.waitForTimeout(300);
   await p.keyboard.press('Control+A');
   await p.keyboard.type(valeur, { delay: 20 });
@@ -232,13 +232,14 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['gains', 'gains'],
       ['mes-ventes', 'mes_ventes_bilan'],
       ['mes-ventes', 'mes_ventes_outils', async () => { await bouton('Outils du vendeur'); }],
-      ['mes-ventes', 'mes_ventes_detail', async () => { await fermer(); await bouton('LV-00479'); }],
+      ['mes-ventes', 'mes_ventes_detail', async () => { await p.mouse.click(12, 500); await p.waitForTimeout(800); await sem(); await bouton('LV-00479'); }],
       ['mes-ventes', 'mes_ventes_refus', async () => { await fermer(); await bouton('Refuser', { exact: true }); await bouton('Rupture de stock'); }],
       ['ia/documents', 'ia_mes_documents'],
       ['ia/business-plan', 'ia_business_plan'],
       ['ia/tuteur', 'ia_tuteur'],
       ['moi', 'moi'],
       ['moi', 'moi_menu', async () => { await bouton('Menu du profil'); }],
+      ['moi', 'moi_suite', async () => { await p.mouse.click(12, 500); await p.waitForTimeout(800); }],
       ['pouvoirs', 'pouvoirs'],
       ['live-pro', 'live_pro'],
       ['espace/nouveau', 'espace_creer'],

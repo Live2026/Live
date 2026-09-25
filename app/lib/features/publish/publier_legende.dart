@@ -213,6 +213,14 @@ class _EtapeLegendeState extends State<_EtapeLegende> {
           icon: const Icon(Icons.arrow_back_rounded),
         ),
         title: const Text('Nouvelle publication'),
+        actions: [
+          TextButton(
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Brouillon enregistré.')),
+            ),
+            child: const Text('Brouillon'),
+          ),
+        ],
       ),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
@@ -317,25 +325,9 @@ class _EtapeLegendeState extends State<_EtapeLegende> {
         ],
       ),
       bottomNavigationBar: BarreAction(
-        child: Row(
-          children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Brouillon enregistré.')),
-                ),
-                child: const Text('Brouillon'),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              flex: 2,
-              child: FilledButton(
-                onPressed: () => context.pushReplacement('/publier/envois'),
-                child: const Text('Publier'),
-              ),
-            ),
-          ],
+        child: FilledButton(
+          onPressed: () => context.pushReplacement('/publier/envois'),
+          child: const Text('Publier'),
         ),
       ),
     );

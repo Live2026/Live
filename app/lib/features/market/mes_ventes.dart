@@ -86,7 +86,7 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
                 libelle: 'Conversion',
                 valeur: '4,2 %',
                 icone: Icons.trending_up_rounded,
-                detail: 'vues → ventes',
+                detail: 'des vues aux ventes',
                 couleur: LiveColors.succes,
               ),
               TuileChiffre(

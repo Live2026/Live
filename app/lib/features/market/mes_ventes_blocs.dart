@@ -76,7 +76,7 @@ class _CarteVente extends ConsumerWidget {
                         style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        '${v.acheteur} · ★ 4,9 · ${v.mode == ModePaiement.avance ? 'payée, argent bloqué' : 'à payer à la remise'}',
+                        '${v.acheteur} · note 4,9 · ${v.mode == ModePaiement.avance ? 'payée, argent bloqué' : 'à payer à la remise'}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -233,7 +233,7 @@ void _ouvrirDetail(
               taille: 44,
             ),
             title: Text(v.acheteur ?? 'Client'),
-            subtitle: const Text('★ 4,9 · 12 achats · téléphone vérifié'),
+            subtitle: const Text('Note 4,9 · 12 achats · téléphone vérifié'),
             trailing: IconButton.outlined(
               tooltip: 'Écrire à l’acheteur',
               onPressed: () {

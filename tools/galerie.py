@@ -127,6 +127,7 @@ SECTIONS = [
         'gains': ('Mes gains', 'Disponible, en attente, historique'),
         'moi': ('Moi', 'Profil social, super-pouvoirs, raccourcis'),
         'moi_menu': ('Menu du profil', 'Compte, mon espace, espaces pro, aide'),
+        'moi_suite': ('Moi', ''),
         'pouvoirs': ('Mes super-pouvoirs', 'À débloquer et actifs, N1 → N3 → Pro'),
         'live_pro': ('Live Pro', 'Statistiques, boosts −30 %'),
         'espace_creer': ('Créer un espace', 'Boutique, agence, prestataire, chaîne'),
@@ -211,10 +212,10 @@ def main(tel, ordi, sortie):
     for sid, titre, desc, noms in SECTIONS:
         nav.append(f'<a href="#{sid}">{html.escape(titre)}</a>')
         figs = []
-        for nom, f in figures(tel, noms, 720, deja):
+        for nom, f in figures(tel, noms, 640, deja):
             total += 1
             t, s = noms[nom]
-            figs.append(f'<figure><button class="shot" type="button" aria-label="Agrandir : {html.escape(t)}"><img loading="lazy" src="{jpeg(f, 720)}" alt="{html.escape(t)}" width="360" height="760"></button><figcaption><span class="n">{total:03d}</span><b>{html.escape(t)}</b>{("<small>" + html.escape(s) + "</small>") if s else ""}</figcaption></figure>')
+            figs.append(f'<figure><button class="shot" type="button" aria-label="Agrandir : {html.escape(t)}"><img loading="lazy" src="{jpeg(f, 640, 70)}" alt="{html.escape(t)}" width="360" height="760"></button><figcaption><span class="n">{total:03d}</span><b>{html.escape(t)}</b>{("<small>" + html.escape(s) + "</small>") if s else ""}</figcaption></figure>')
         corps.append(f'<section id="{sid}"><header class="sh"><h2>{html.escape(titre)}</h2><p>{html.escape(desc)}</p></header><div class="grid">{"".join(figs)}</div></section>')
     # Ordinateur : une sélection d'écrans.
     choix = ['fil', 'explorer', 'market_accueil', 'fiche_produit', 'immo_liste', 'fiche_logement', 'agence_tableau', 'services_accueil', 'conversation', 'moi', 'pouvoirs', 'ia_accueil', 'admin_tableau', 'admin_finance']

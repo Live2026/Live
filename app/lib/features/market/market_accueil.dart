@@ -21,7 +21,7 @@ class EcranMarket extends ConsumerWidget {
           children: [
             Text('Market'),
             Text(
-              'Achetez et vendez près de chez vous',
+              'Paiement protégé',
               style: TextStyle(
                 fontSize: 13,
                 color: LiveColors.gris,

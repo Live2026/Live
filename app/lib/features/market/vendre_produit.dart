@@ -191,21 +191,19 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Semantics(
-          button: true,
-          label: 'Ajouter une photo',
-          excludeSemantics: true,
-          child: Pressable(
+        Material(
+          color: const Color(0xFFF3F5F8),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: const BorderSide(color: LiveColors.brume, width: 2),
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(12),
             onTap: () => setState(() => _photos = (_photos + 1).clamp(0, 10)),
-            child: Container(
+            child: const SizedBox(
               height: 120,
               width: double.infinity,
-              decoration: BoxDecoration(
-                color: const Color(0xFFF3F5F8),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: LiveColors.brume, width: 2),
-              ),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
