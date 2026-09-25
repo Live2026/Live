@@ -113,6 +113,19 @@ const packs = [
   Pack('p5000', 5000, 650, bonus: '+30 %'),
 ];
 
+/// Mouvement de Crédits Live : achat, dépense, offre ou recrédit (grand livre séparé, R-CR-08).
+class MouvementCredit {
+  const MouvementCredit(this.libelle, this.n, this.quand, {this.service});
+  final String libelle;
+
+  /// Positif pour un ajout, négatif pour une dépense.
+  final int n;
+  final String quand;
+
+  /// Service Live IA concerné par une dépense (répartition de la consommation).
+  final String? service;
+}
+
 /// Document produit par Live IA et conservé dans « Mes documents ».
 class DocumentIa {
   const DocumentIa({
@@ -198,6 +211,9 @@ class LiveState {
     this.demandeEnvoyee = false,
     this.credits = 20,
     this.documents = const [],
+    this.mouvementsCredits = const [
+      MouvementCredit("Crédits offerts à l'inscription", 20, 'sept.'),
+    ],
     this.suivis = const {'grace'},
     this.favoris = const {'b3'},
     this.reclamations = const [],
@@ -237,6 +253,9 @@ class LiveState {
   /// Crédits Live (20 offerts à l'inscription).
   final int credits;
   final List<DocumentIa> documents;
+
+  /// Historique des crédits, du plus récent au plus ancien.
+  final List<MouvementCredit> mouvementsCredits;
 
   /// Comptes et espaces suivis (identifiants de vendeurs).
   final Set<String> suivis;
@@ -280,6 +299,7 @@ class LiveState {
     bool? demandeEnvoyee,
     int? credits,
     List<DocumentIa>? documents,
+    List<MouvementCredit>? mouvementsCredits,
     Set<String>? suivis,
     Set<String>? favoris,
     List<Reclamation>? reclamations,
@@ -309,6 +329,7 @@ class LiveState {
       demandeEnvoyee: demandeEnvoyee ?? this.demandeEnvoyee,
       credits: credits ?? this.credits,
       documents: documents ?? this.documents,
+      mouvementsCredits: mouvementsCredits ?? this.mouvementsCredits,
       suivis: suivis ?? this.suivis,
       favoris: favoris ?? this.favoris,
       reclamations: reclamations ?? this.reclamations,

@@ -42,8 +42,45 @@ Produits propres de la plateforme, payés en **Crédits Live** (document 19). Ex
 |---------|-------------|
 | ✦ | Symbole des Crédits Live, toujours accompagné du nombre |
 | Solde | Un appui ouvre l'historique des crédits (achats, dépenses, offerts, expirations) |
+| « Que voulez-vous faire ? » | Champ libre et suggestions populaires : la demande **oriente vers un service à prix fixe** (panneau avec les services et leur prix). Ce n'est pas une conversation facturée au mot (R-CR-04) |
+| Crédits bas | Sous 20 crédits, un bandeau indique ce que permet le solde et le prix du pack Découverte |
 | Services | Prix toujours visible sur la carte ; un appui ouvre le service |
 | Grand écran | Les services s'affichent en grille (2 à 4 colonnes, voir 00, section 8) |
+
+---
+
+## E-IA-01b — Historique des crédits (appui sur le solde)
+
+```text
+┌──────────────────────────────────────────┐
+│ ←  Mes crédits                           │
+├──────────────────────────────────────────┤
+│ Solde disponible 45 ✦      [Recharger]   │
+│ 25 crédits utilisés                      │
+│                                          │
+│ OÙ VONT MES CRÉDITS                      │
+│ CV complet         20 crédits · 80 %     │
+│ ████████████████░░░░                     │
+│ Exercice par photo  5 crédits · 20 %     │
+│ ████░░░░░░░░░░░░░░░░                     │
+│                                          │
+│ MOUVEMENTS                               │
+│ ✦ Exercice par photo               −5    │
+│ ✦ CV complet                      −20    │
+│ ⊕ Achat · 500 FCFA                +50    │
+│ ⊕ Crédits offerts à l'inscription +20    │
+│                                          │
+│ Comment sont comptés les crédits         │
+│ 🔒 Documents privés, jamais utilisés     │
+│    pour entraîner une IA                 │
+└──────────────────────────────────────────┘
+```
+
+| Élément | Comportement |
+|---------|-------------|
+| Répartition | Part de chaque service dans les dépenses (grand livre des crédits, R-CR-08) |
+| Mouvements | Achats, dépenses, crédits offerts et recrédits automatiques (R-CR-05) |
+| Rappels | Prix fixe confirmé avant, révision gratuite, recrédit en cas d'échec, confidentialité (R-IA-06) |
 
 ---
 

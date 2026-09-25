@@ -38,7 +38,7 @@ Tout écran se construit avec la bibliothèque `app/lib/shared/` (importer `widg
 ```bash
 cd app
 flutter analyze                     # aucun problème
-flutter test                        # dont les 89 écrans à 320, 360 et 1280 px
+flutter test                        # dont les 90 écrans à 320, 360 et 1280 px
 flutter build web --release --no-web-resources-cdn
 cd test_e2e && node parcours.js     # 6 parcours + tour de tous les écrans
 ```

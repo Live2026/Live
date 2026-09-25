@@ -120,6 +120,9 @@ void main() {
       expect(etat().credits, 50);
       store().recrediter(20);
       expect(etat().credits, 70);
+      // Grand livre des crédits : recrédit, dépense, achat, crédits offerts.
+      expect(etat().mouvementsCredits.map((m) => m.n), [20, -20, 50, 20]);
+      expect(etat().mouvementsCredits[1].service, 'Live IA');
     },
   );
 

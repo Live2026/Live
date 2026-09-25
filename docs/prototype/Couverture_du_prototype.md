@@ -6,7 +6,7 @@
 
 | Élément | Total | Dans le prototype |
 |---------|-------|-------------------|
-| Écrans dessinés en Markdown (`docs/ecrans/`) | 92 | **92** (89 adresses, certains écrans sont des panneaux) |
+| Écrans dessinés en Markdown (`docs/ecrans/`) | 93 | **93** (90 adresses, certains écrans sont des panneaux) |
 | Exigences fonctionnelles du MVP (`docs/05`) | 98 | **77 visibles** (simulées) · 21 côté serveur |
 
 Chaque écran s'ouvre dans le prototype, sur téléphone (320 et 360 px) et sur ordinateur (1280 px) : le test `app/test/ecrans_test.dart` les ouvre tous et échoue au moindre débordement ou à la moindre erreur. Le test de bout en bout `app/test_e2e/parcours.js` déroule les 6 parcours puis capture tous les écrans.
@@ -29,7 +29,7 @@ Les **21 exigences serveur** (réconciliation automatique, compression vidéo, c
 | Moi (7) | E-MOI-01 Moi, 02 Super-pouvoirs, 03 Vérifier mon identité, 04 Créer un espace, 05 Équipe, 06 Paramètres, 07 Profil public |
 | Confiance (4) | E-CONF-01 Avis, 02 Signaler, 03 Signaler un problème, 04 Suivi de réclamation |
 | Notifications (2) | E-NOTIF-01 Centre, 02 Préférences |
-| Live IA (11) | E-IA-01 Accueil, 02 Crédits, 03 Confirmation du prix, 04 Formulaire, 05 Génération en cours, 06 Document, 07 Exercice photo, 08 Mode apprentissage, 09 Business plan en 6 étapes, 10 Tuteur vocal, 11 Mes documents |
+| Live IA (12) | E-IA-01 Accueil (avec orientation vers les services), 01b Historique des crédits, 02 Crédits, 03 Confirmation du prix, 04 Formulaire, 05 Génération en cours, 06 Document, 07 Exercice photo, 08 Mode apprentissage, 09 Business plan en 6 étapes, 10 Tuteur vocal, 11 Mes documents |
 | Back-office (8) | E-ADM-01 Tableau de bord, 02 File KYC, 03 Dossier KYC, 04 Modération, 05 Litiges et décision, 06 Finance et réconciliation, 07 Utilisateurs et fiche, 08 Configuration |
 
 ## 3. Super-pouvoirs (capacités du document 03)

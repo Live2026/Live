@@ -211,6 +211,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['recu/LV-00482', 'recu'],
       ['gains', 'gains'],
       ['mes-ventes', 'mes_ventes_bilan'],
+      ['ia/historique', 'ia_historique_credits'],
       ['ia/documents', 'ia_mes_documents'],
       ['ia/business-plan', 'ia_business_plan'],
       ['ia/tuteur', 'ia_tuteur'],
