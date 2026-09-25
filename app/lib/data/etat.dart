@@ -260,6 +260,7 @@ class LiveState {
     this.facturesPayees = const {},
     this.envois = const [],
     this.devise = 'EUR',
+    this.demandesSupport = const [],
     this.transfertsRetires = const {},
     this.sejoursReserves = const [],
     this.publicites = const [],
@@ -345,6 +346,9 @@ class LiveState {
   /// Devise d'envoi choisie (Live Transfert, diaspora) ; transferts reçus
   /// déjà retirés en Mobile Money.
   final String devise;
+
+  /// Demandes écrites au support : (numéro, sujet, message).
+  final List<(String, String, String)> demandesSupport;
   final Set<String> transfertsRetires;
   final List<String> sejoursReserves;
   final List<String> publicites;
@@ -401,6 +405,7 @@ class LiveState {
     Set<String>? facturesPayees,
     List<String>? envois,
     String? devise,
+    List<(String, String, String)>? demandesSupport,
     Set<String>? transfertsRetires,
     List<String>? sejoursReserves,
     List<String>? publicites,
@@ -451,6 +456,7 @@ class LiveState {
       facturesPayees: facturesPayees ?? this.facturesPayees,
       envois: envois ?? this.envois,
       devise: devise ?? this.devise,
+      demandesSupport: demandesSupport ?? this.demandesSupport,
       transfertsRetires: transfertsRetires ?? this.transfertsRetires,
       sejoursReserves: sejoursReserves ?? this.sejoursReserves,
       publicites: publicites ?? this.publicites,

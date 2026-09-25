@@ -70,7 +70,7 @@ class _CarrouselUneState extends State<_CarrouselUne> {
     return Column(
       children: [
         SizedBox(
-          height: 150,
+          height: 168,
           child: PageView(
             controller: _pages,
             onPageChanged: (i) => setState(() => _page = i),
@@ -102,6 +102,7 @@ class _CarrouselUneState extends State<_CarrouselUne> {
                                 Text(
                                   titre,
                                   maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
                                     color: LiveColors.ambreClair,
                                     fontWeight: FontWeight.w900,
@@ -470,10 +471,10 @@ class _BesoinAide extends StatelessWidget {
             onTap: () => context.push('/probleme/commande/LV-00482'),
           ),
           LigneMenu(
-            icone: Icons.storefront_outlined,
-            titre: 'Devenir vendeur',
-            detail: 'Publier en une minute',
-            onTap: () => context.push('/vendre'),
+            icone: Icons.support_agent_rounded,
+            titre: 'Centre d’aide',
+            detail: 'Questions fréquentes, écrire au support',
+            onTap: () => context.push('/aide'),
           ),
         ],
       ),

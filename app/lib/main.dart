@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/router.dart';
 import 'core/theme.dart';
+import 'shared/hors_connexion.dart';
 
 void main() => runApp(const ProviderScope(child: LiveApp()));
 
@@ -53,6 +54,7 @@ class _BandeauPrototype extends StatelessWidget {
             ),
           ),
         ),
+        const BandeauHorsConnexion(),
         Expanded(
           child: MediaQuery.removePadding(
             context: context,

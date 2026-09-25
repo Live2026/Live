@@ -361,6 +361,15 @@ class LiveStore extends Notifier<LiveState> {
 
   void choisirDevise(String code) => state = state.copyWith(devise: code);
 
+  /// Demande au support Live ; renvoie son numéro (SP-…).
+  String ecrireSupport(String sujet, String message) {
+    final id = 'SP-${(10421 + state.demandesSupport.length)}';
+    state = state.copyWith(
+      demandesSupport: [(id, sujet, message), ...state.demandesSupport],
+    );
+    return id;
+  }
+
   /// Transfert reçu de l'étranger, versé sur le compte Mobile Money.
   void retirerTransfert(String id) => state = state.copyWith(
     transfertsRetires: {...state.transfertsRetires, id},

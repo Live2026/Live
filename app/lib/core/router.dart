@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data/store.dart';
 import '../features/admin/admin_screens.dart';
+import '../features/aide/aide_screens.dart';
 import '../features/apprendre/apprendre_screens.dart';
 import '../features/auth/auth_screens.dart';
 import '../features/compte/compte_screens.dart';
@@ -111,6 +112,13 @@ final routeur = GoRouter(
     _route('/profil/:id', (s) => EcranProfilPublic(id: _p(s, 'id'))),
     _route('/boutique/:id', (s) => EcranBoutique(id: _p(s, 'id'))),
     _route('/parametres', (_) => const EcranParametres()),
+    _route('/aide', (_) => const EcranAide()),
+    _route(
+      '/aide/ecrire',
+      (s) => EcranEcrireSupport(sujet: s.uri.queryParameters['sujet']),
+    ),
+    _route('/aide/demandes', (_) => const EcranDemandesSupport()),
+    _route('/legal/:type', (s) => EcranLegal(type: _p(s, 'type'))),
     _route('/notifications', (_) => const EcranNotifications()),
     _route('/notifications/preferences', (_) => const EcranPreferencesNotif()),
     _route('/donnees', (_) => const EcranDonnees()),

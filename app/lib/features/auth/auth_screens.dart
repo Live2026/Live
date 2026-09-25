@@ -154,6 +154,11 @@ class _EcranTelephoneState extends State<EcranTelephone> {
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,
             title: const Text("J'accepte les Conditions d'utilisation"),
+            secondary: TextButton(
+              style: TextButton.styleFrom(minimumSize: const Size(0, 44)),
+              onPressed: () => context.push('/legal/cgu'),
+              child: const Text('Lire'),
+            ),
           ),
           CheckboxListTile(
             value: _confidentialite,
@@ -161,6 +166,11 @@ class _EcranTelephoneState extends State<EcranTelephone> {
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,
             title: const Text("J'accepte la Politique de confidentialité"),
+            secondary: TextButton(
+              style: TextButton.styleFrom(minimumSize: const Size(0, 44)),
+              onPressed: () => context.push('/legal/confidentialite'),
+              child: const Text('Lire'),
+            ),
           ),
         ],
       ),

@@ -90,7 +90,8 @@ class EcranParametres extends ConsumerWidget {
           LigneMenu(
             icone: Icons.help_outline_rounded,
             titre: 'Centre d’aide',
-            onTap: a.aide,
+            detail: 'Questions fréquentes, écrire au support, mes demandes',
+            onTap: () => context.push('/aide'),
           ),
           LigneMenu(
             icone: Icons.privacy_tip_outlined,
@@ -101,7 +102,12 @@ class EcranParametres extends ConsumerWidget {
           LigneMenu(
             icone: Icons.description_outlined,
             titre: 'Conditions d’utilisation',
-            onTap: a.conditions,
+            onTap: () => context.push('/legal/cgu'),
+          ),
+          LigneMenu(
+            icone: Icons.policy_outlined,
+            titre: 'Politique de confidentialité',
+            onTap: () => context.push('/legal/confidentialite'),
           ),
           LigneMenu(
             icone: Icons.logout_rounded,
@@ -341,6 +347,23 @@ class EcranDonnees extends ConsumerWidget {
             icone: Icons.download_for_offline_outlined,
             titre: 'Téléchargements',
             detail: 'Uniquement en Wi-Fi',
+          ),
+          const Divider(),
+          ValueListenableBuilder<bool>(
+            valueListenable: horsConnexion,
+            builder: (_, coupe, _) => SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text(
+                'Simuler une coupure du réseau',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+              subtitle: const Text(
+                'Prototype : affiche le bandeau « Hors connexion » sur toutes '
+                'les pages. Les brouillons restent, les envois attendent.',
+              ),
+              value: coupe,
+              onChanged: (v) => horsConnexion.value = v,
+            ),
           ),
         ],
       ),

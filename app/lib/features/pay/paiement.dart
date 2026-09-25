@@ -9,7 +9,7 @@ class EcranPaiement extends ConsumerStatefulWidget {
 }
 
 class _EcranPaiementState extends ConsumerState<EcranPaiement> {
-  Moyen? _moyen;
+  String? _moyen;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,11 @@ class _EcranPaiementState extends ConsumerState<EcranPaiement> {
         body: Center(child: Text('Aucun paiement en cours.')),
       );
     }
-    _moyen ??= etat.operateur == 'Airtel' ? Moyen.airtel : Moyen.mtn;
+    final operateurs = villeLive(etat.pays).operateurs;
+    _moyen ??= operateurs.firstWhere(
+      (o) => o.startsWith(etat.operateur),
+      orElse: () => operateurs.first,
+    );
     return Scaffold(
       appBar: AppBar(title: const Text('Paiement')),
       body: DeuxColonnes(
@@ -41,29 +45,26 @@ class _EcranPaiementState extends ConsumerState<EcranPaiement> {
               titre: Moyen.solde.nom,
               sousTitre: 'Disponible : ${fcfa(etat.disponible)}',
               icone: Icons.account_balance_wallet_rounded,
-              selectionne: _moyen == Moyen.solde,
-              onTap: () => setState(() => _moyen = Moyen.solde),
+              selectionne: _moyen == Moyen.solde.nom,
+              onTap: () => setState(() => _moyen = Moyen.solde.nom),
             ),
-          Choix(
-            titre: Moyen.mtn.nom,
-            sousTitre: etat.operateur == 'MTN' ? etat.telephone : null,
-            icone: Icons.phone_android,
-            selectionne: _moyen == Moyen.mtn,
-            onTap: () => setState(() => _moyen = Moyen.mtn),
-          ),
-          Choix(
-            titre: Moyen.airtel.nom,
-            sousTitre: etat.operateur == 'Airtel' ? etat.telephone : null,
-            icone: Icons.phone_android,
-            selectionne: _moyen == Moyen.airtel,
-            onTap: () => setState(() => _moyen = Moyen.airtel),
-          ),
+          // Opérateurs Mobile Money du pays choisi (Paramètres › Pays).
+          for (final o in operateurs)
+            Choix(
+              titre: o,
+              sousTitre: o.startsWith(etat.operateur)
+                  ? etat.telephone
+                  : 'Demande envoyée sur votre téléphone',
+              icone: Icons.phone_android,
+              selectionne: _moyen == o,
+              onTap: () => setState(() => _moyen = o),
+            ),
           Choix(
             titre: Moyen.visa.nom,
             sousTitre: 'Page sécurisée 3-D Secure',
             icone: Icons.credit_card,
-            selectionne: _moyen == Moyen.visa,
-            onTap: () => setState(() => _moyen = Moyen.visa),
+            selectionne: _moyen == Moyen.visa.nom,
+            onTap: () => setState(() => _moyen = Moyen.visa.nom),
           ),
         ],
         secondaire: [
@@ -88,8 +89,18 @@ class _EcranPaiementState extends ConsumerState<EcranPaiement> {
             style: TextStyle(color: LiveColors.gris, fontSize: 12),
           ),
           ClavierPin(
-            onComplet: (_) =>
-                context.push('/payer/attente', extra: _moyen!.nom),
+            onComplet: (_) {
+              // L'argent exige le réseau : pas de file d'envoi (docs/26 §4).
+              if (horsConnexion.value) {
+                informer(
+                  context,
+                  'Pas de réseau : le paiement partira quand vous serez '
+                  'reconnecté. Rien n’a été débité.',
+                );
+                return;
+              }
+              context.push('/payer/attente', extra: _moyen!);
+            },
           ),
         ],
       ),
@@ -182,7 +193,7 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
                       textAlign: TextAlign.center,
                     )
                   else if (!visa) ...[
-                    const Text('1. Ouvrez la demande MoMo ou Airtel'),
+                    Text('1. Ouvrez la demande de ${widget.moyen}'),
                     const Text('2. Tapez votre code secret Mobile Money'),
                   ] else
                     const Text(

@@ -108,82 +108,15 @@ class _ActionsParametres {
       context,
       titre: 'Pays et ville',
       actuel: _etat.pays,
-      options: const [
-        ('Brazzaville', 'Congo · Brazzaville', null),
-        ('Pointe-Noire', 'Congo · Pointe-Noire', null),
-        ('Libreville', 'Gabon · Libreville', 'Airtel Money, Moov Money'),
-        ('Douala', 'Cameroun · Douala', 'MTN MoMo, Orange Money'),
-        ('Yaoundé', 'Cameroun · Yaoundé', 'MTN MoMo, Orange Money'),
-        ('N’Djamena', 'Tchad · N’Djamena', 'Airtel Money, Moov Money'),
-        ('Bangui', 'Centrafrique · Bangui', 'Orange Money'),
-        ('Malabo', 'Guinée équatoriale · Malabo', 'Muni Dinero'),
+      options: [
+        for (final v in villesLive)
+          (v.ville, v.libelle, v.operateurs.join(', ')),
       ],
     );
     if (choix != null && context.mounted) {
       ref.read(liveProvider.notifier).choisirPays(choix);
       informer(context, 'Annonces et prix de $choix, toujours en FCFA.');
     }
-  }
-
-  void aide() {
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      isScrollControlled: true,
-      backgroundColor: Colors.white,
-      builder: (ctx) => SafeArea(
-        child: ListView(
-          shrinkWrap: true,
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-          children: [
-            const Text(
-              'Centre d’aide',
-              style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
-            ),
-            for (final (q, r) in const [
-              (
-                'Mon argent est-il protégé ?',
-                'Oui : Live garde l’argent jusqu’à votre confirmation (QR ou « J’ai reçu »). Sinon, vous êtes remboursé.',
-              ),
-              (
-                'Que se paie hors de Live ?',
-                'Loyers, caution et prix d’un bien se paient en direct, contre reçu. Tout le reste passe par Live.',
-              ),
-              (
-                'On me demande mon code MoMo',
-                'C’est une arnaque. Live ne le demande jamais. Signalez le message.',
-              ),
-              (
-                'Comment retirer mes gains ?',
-                'Vérifiez votre identité une fois, puis retirez sur votre MoMo ou Airtel Money, sans frais.',
-              ),
-            ])
-              ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                title: Text(
-                  q,
-                  style: const TextStyle(fontWeight: FontWeight.w700),
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Text(r),
-                  ),
-                ],
-              ),
-            const SizedBox(height: 8),
-            FilledButton.icon(
-              onPressed: () {
-                Navigator.pop(ctx);
-                context.push('/conversation');
-              },
-              icon: const Icon(Icons.support_agent_rounded),
-              label: const Text('Écrire au support Live'),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   Future<void> donnees() async {
@@ -205,28 +138,6 @@ class _ActionsParametres {
         'Demande enregistrée : lien de téléchargement sous 48 h.',
       );
     }
-  }
-
-  void conditions() {
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      backgroundColor: Colors.white,
-      builder: (_) => const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(20, 0, 20, 24),
-          child: Text(
-            'Conditions d’utilisation (résumé)\n\n'
-            '• Un compte par personne et par numéro de téléphone.\n'
-            '• Les paiements marqués « Payé dans Live » ne se font jamais ailleurs.\n'
-            '• Les objets interdits (armes, médicaments, faux documents…) sont retirés.\n'
-            '• Les avis ne sont possibles qu’après une transaction payée.\n'
-            '• Vos données restent au Congo et ne sont jamais vendues.',
-            style: TextStyle(height: 1.5),
-          ),
-        ),
-      ),
-    );
   }
 
   /// F-CPT-10 : suppression du compte, après retrait des gains.

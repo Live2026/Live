@@ -20,5 +20,6 @@ export 'medias.dart';
 export 'panier.dart';
 export 'plan_ville.dart';
 export 'reglement.dart';
+export 'hors_connexion.dart';
 export 'saisie.dart';
 export 'ville.dart';

@@ -121,7 +121,20 @@ J'ai revu une à une les 218 captures sur téléphone (360 px) et les 223 sur or
 | Ordinateur : paiement en attente, paiement réussi, remise confirmée, identité vérifiée et retrait envoyé étiraient leur bouton sur toute la largeur | Colonne centrée de largeur lisible (`Etroit`, `core/adaptatif.dart`) |
 | Carte du solde : nom et plafond serrés sur une ligne | Deux lignes |
 
-## 10. Ce qui reste, par nature, au back-end
+## 10. Au-delà des cahiers des charges
+
+L'audit par exigence ne trouve que ce qui est écrit. Une recherche ciblée des fonctions attendues de toute place de marché avec de l'argent en jeu a révélé quatre manques. Ils sont comblés.
+
+| Manque | Ce qui existe maintenant |
+|--------|--------------------------|
+| **Pages légales absentes** : l'inscription faisait accepter des conditions qu'on ne pouvait pas lire ; le résumé de Paramètres affirmait « vos données restent au Congo », intenable avec plusieurs pays | `/legal/cgu` et `/legal/confidentialite` (NF-07), liens « Lire » à l'inscription, dans Paramètres et le centre d'aide ; marquées « version de travail, à valider par l'avocat » (D-16) |
+| **Pas de centre d'aide** : un panneau de 4 questions, et « Écrire au support » ouvrait la conversation d'une vendeuse | `/aide` (recherche, thèmes, 12 questions, alerte arnaque), `/aide/ecrire` (sujet, message, capture), `/aide/demandes` (suivi) ; accès depuis le menu du profil, le Market, Paramètres et le code SMS |
+| **Paiement identique dans tous les pays** : le Gabon ou le Cameroun proposaient MTN et Airtel | Opérateurs par pays (`data/donnees_pays.dart`) : Congo MTN et Airtel, Gabon Airtel et Moov, Cameroun MTN et Orange, Tchad Airtel et Moov, Centrafrique Orange, Guinée équatoriale Muni Dinero |
+| **Bandeau « Hors connexion » limité au lecteur de cours** (NF-03, ecrans/00 §2 règle 6) | Bandeau sur toutes les pages (`BandeauHorsConnexion`) ; un paiement n'est jamais lancé sans réseau ; simulation dans Économie de données |
+
+Restent des choix assumés, pas des oublis : interface en lingala et kituba (phase 2), mode sombre (non demandé).
+
+## 11. Ce qui reste, par nature, au back-end
 
 Envoi réel des SMS (Twilio Verify), paiements réels (API MTN et Airtel), grand livre et réconciliation, vidéo (Mux), cartes et positions en direct (Google Maps, Supabase Realtime), partenaire de transfert agréé, modèles d'IA. L'ordre de construction est fixé par le document 26, §7.
 

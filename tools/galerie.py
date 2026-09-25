@@ -176,6 +176,13 @@ SECTIONS = [
     }),
     ('quotidien', 'Argent et quotidien', 'Tontines, achats groupés, diaspora et transferts, factures et crédit, Adresse Live, points relais.', {
         'mon_argent': ('Mon argent Live', 'Solde, en attente, bloqué, dépenses, historique'),
+        'centre_aide': ('Centre d’aide', 'Recherche, thèmes, questions fréquentes, agent'),
+        'aide_ecrire': ('Écrire au support', 'Sujet, message, capture'),
+        'aide_demandes': ('Mes demandes', 'Suivi des demandes au support'),
+        'conditions': ('Conditions d’utilisation', 'Version de travail, à valider (D-16)'),
+        'confidentialite': ('Politique de confidentialité', 'Données, finalités, droits'),
+        'hors_connexion': ('Simuler une coupure', 'Économie de données'),
+        'market_hors_connexion': ('Hors connexion', 'Bandeau sur toutes les pages'),
         'tontines': ('Mes tontines', 'Cotisations gardées par Live, créer une tontine'),
         'tontine': ('Une tontine', 'Cagnotte, ordre des tours, cotiser'),
         'achats_groupes': ('Achats groupés', 'Prix de gros à l’objectif, sinon remboursé'),

@@ -145,10 +145,10 @@ class _EcranCodeState extends State<EcranCode> {
                   color: LiveColors.bleu,
                 ),
                 title: const Text('Contacter l’assistance Live'),
-                subtitle: const Text('Par e-mail ou chat, 7 j / 7'),
+                subtitle: const Text('Un agent répond en moins de 2 h, 7 j / 7'),
                 onTap: () {
                   Navigator.pop(ctx);
-                  informer(context, 'Assistance : aide@live.africa');
+                  context.push('/aide/ecrire?sujet=Compte');
                 },
               ),
             ],
