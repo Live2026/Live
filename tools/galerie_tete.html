@@ -23,7 +23,7 @@
 body{background:var(--fond);color:var(--texte);font:15px/1.5 Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;padding-inline:16px}
 .wrap{max-width:1320px;margin:0 auto;padding-block:28px 64px}
 .intro{display:grid;gap:10px;max-width:70ch}
-.marque{font-weight:900;letter-spacing:.32em;color:var(--bleu);font-size:14px}
+.marque{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--bleu);font-size:26px;letter-spacing:-.01em}
 h1{margin:0;font-size:clamp(26px,4vw,38px);line-height:1.15;text-wrap:balance;font-weight:900}
 .intro p{margin:0;color:var(--doux)}
 .intro p b{color:var(--texte)}
@@ -66,7 +66,7 @@ nav a span{color:var(--doux);font-variant-numeric:tabular-nums;font-size:12px;ma
 </style>
 <div class="wrap">
 <div class="intro">
-  <span class="marque">LIVE</span>
+  <span class="marque"><img src="{{LOGO}}" alt="" width="40" height="40">Live</span>
   <h1>Toute l'application, rassemblée</h1>
   <p>Tous les espaces de Live réunis dans une seule application : fil, Explorer, Market, Immo et séjours, Services, directs et créateurs, Live Savoir, Live Emploi, Live IA, messages et groupes, gains et outils, back-office. Chaque écran a été capturé automatiquement pendant un vrai parcours dans le prototype. Touchez une capture pour l'agrandir.</p>
   <p>Prototype : données fictives, aucune transaction réelle. <b>Mobile</b> : téléphone de 360 px. <b>Ordinateur</b> : écran de 1280 px, avec barre latérale et deux colonnes ; le back-office n'existe que sur ordinateur.</p>
