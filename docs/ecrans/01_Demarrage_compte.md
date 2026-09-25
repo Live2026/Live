@@ -13,36 +13,44 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 
 ---
 
-## E-AUTH-01 — Bienvenue
+## E-AUTH-00 — Ouverture (révision du 25/09/2026)
 
-**But** : dire en une phrase ce qu'est Live et pourquoi rester.
+Le logo de Live apparaît sur fond nuit, dans un disque blanc lumineux, avec le nom **« Live »** (L majuscule, jamais « LIVE ») et « La place de marché sociale ». Après 1,8 s, la bienvenue s'ouvre.
+
+---
+
+## E-AUTH-01 — Bienvenue (révision du 25/09/2026)
+
+**But** : dire en une phrase ce qu'est Live, **sans le limiter à une ville ni à un opérateur** : Live vise toute l'Afrique centrale.
 
 ```text
 ┌──────────────────────────────────────────┐
-│             L I V E                      │
+│ (logo) Live                              │  fond nuit, halos orange,
+│                                          │  violet et bleu qui respirent
+│ Achetez                ← verbe animé :   │
+│ en toute confiance.      Achetez, Vendez,│
+│                          Louez, Réservez,│
+│ La place de marché sociale de            │  Apprenez, Gagnez (une couleur
+│ l'Afrique centrale : produits,           │  par verbe)
+│ logements, services, cours, créateurs.   │
 │                                          │
-│    Achetez, vendez, louez, réservez.     │
-│    Payez avec MTN MoMo, Airtel Money     │
-│    ou Visa.                              │
+│ (Market) (Immo) (Services) (Directs)     │  pastilles colorées des espaces
+│ (Savoir) (Live IA)                       │
 │                                          │
-│         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒             │
-│         ▒  vidéo de présentation ▒       │
-│         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒             │
-│                                          │
-│    ✓ Vendeurs vérifiés                   │
-│    ✓ Argent protégé jusqu'à réception    │
-│    ✓ Près de chez vous                   │
-│                                          │
+│ 🔒 Mobile Money, carte bancaire ou solde  │
+│    Live. Argent protégé jusqu'à la remise│
 ├──────────────────────────────────────────┤
-│ [          Commencer               ]     │
+│ [        Commencer (orange)        ]     │
 │ (    Découvrir sans compte    )          │
+│         J'ai déjà un compte              │
 └──────────────────────────────────────────┘
 ```
 
 | Élément | Comportement |
 |---------|-------------|
-| Vidéo | 10 s, en boucle, **sans son**, basse qualité (légère), remplacée par une image si la connexion est lente |
+| Verbe animé | Change toutes les 2 s ; fixe si l'utilisateur a demandé moins d'animations |
 | « Découvrir sans compte » | Ouvre le fil en mode visiteur (N0) ; toute action (acheter, écrire, aimer) redirige vers E-AUTH-02 |
+| Sur ordinateur | La présentation (verbe animé, espaces, trois promesses) occupe la gauche ; à droite, une **carte avec le logo** contient le formulaire (docs/ecrans/00, section 8) |
 
 ---
 
@@ -52,54 +60,61 @@ Parcours d'inscription : **moins de 60 secondes** entre l'ouverture de l'applica
 ┌──────────────────────────────────────────┐
 │ ◀                                        │
 ├──────────────────────────────────────────┤
+│ (icône téléphone orange)                 │
 │ Votre numéro de téléphone                │
+│ Il sert à vous connecter et à recevoir   │
+│ vos paiements. Jamais affiché.           │
 │                                          │
-│ Pour vous connecter et recevoir          │
-│ vos paiements Mobile Money.              │
-│                                          │
-│ [▼ +242 ] [ 06 123 45 67          ]      │
-│ Opérateur détecté : MTN                  │
+│ [ +242 ▼ ] [ 06 123 45 67          ]     │
+│              Congo                       │
+│ (✓ MTN Mobile Money détecté)             │
 │                                          │
 │ [ ] J'accepte les Conditions             │
-│     d'utilisation (Lire)                 │
 │ [ ] J'accepte la Politique de            │
-│     confidentialité (Lire)               │
+│     confidentialité                      │
 ├──────────────────────────────────────────┤
-│ [   Recevoir le code par SMS       ]     │
+│ [       Recevoir le code           ]     │
 └──────────────────────────────────────────┘
 ```
 
 | Règle | Détail |
 |-------|--------|
-| Format | Numéros congolais au MVP (+242), validation locale avant l'envoi |
-| Opérateur | Détecté selon le préfixe (MTN ou Airtel), affiché pour rassurer ; il pré-remplit le moyen de paiement plus tard |
-| Protection | Limite d'envois de SMS par numéro et par appareil (anti-abus) |
+| Pays | Les 6 pays de la CEMAC (Congo +242, Gabon +241, Cameroun +237, Tchad +235, Centrafrique +236, Guinée équatoriale +240), avec l'exemple de numéro de chaque pays |
+| Opérateur | Détecté selon le préfixe, affiché dans une pastille aux couleurs de l'opérateur ; il pré-remplit le moyen de paiement plus tard |
+| Protection | Limite d'envois par numéro et par appareil (anti-abus) |
 | Consentement | Les deux cases sont **obligatoires et non pré-cochées** ; le bouton reste inactif tant qu'elles ne sont pas cochées (principe 12) |
 
 ---
 
-## E-AUTH-03 — Code reçu par SMS
+## E-AUTH-03 — Code reçu (révision du 25/09/2026, sur le modèle de WhatsApp)
 
 ```text
 ┌──────────────────────────────────────────┐
-│ ◀                                        │
+│ ◀                                  Aide  │
 ├──────────────────────────────────────────┤
-│ Entrez le code reçu au                   │
-│ 06 123 45 67                             │
+│            (icône SMS orange)            │
+│         Vérifiez votre numéro            │
+│  Code envoyé par SMS au +242 06 123 45 67│
+│      Mauvais numéro ? Le modifier        │
 │                                          │
-│    [ 4 ] [ 7 ] [ 1 ] [ _ ] [ _ ] [ _ ]   │
+│   [4] [7] [1] [ ] [ ] [ ]  ← case active │
+│                              en orange   │
+│   ◔ Renvoyer le code dans 0:45           │
 │                                          │
-│ Renvoyer le code dans 0:45               │
-│ (Modifier le numéro)                     │
-│                                          │
-├──────────────────────────────────────────┤
-│ [          Valider               ]       │
+│ (après le décompte)                      │
+│ Vous n'avez pas reçu le code ?           │
+│ (SMS)      Renvoyer le SMS            ›  │
+│ (appel)    M'appeler                  ›  │
+│ (WhatsApp) Recevoir sur WhatsApp      ›  │
 └──────────────────────────────────────────┘
 ```
 
 | Règle | Détail |
 |-------|--------|
-| Lecture automatique | Le code est lu automatiquement sur Android (API SMS Retriever) |
+| Six cases | Composant partagé `ChampCode` : case active surlignée, chiffres qui apparaissent avec un rebond, vert quand le code est bon, rouge et tremblement s'il est faux ; lecture automatique du SMS (Android) et collage acceptés |
+| Validation | Automatique au 6ᵉ chiffre, sans bouton |
+| Renvoi | Après 45 s : SMS, appel automatique qui dicte le code, ou WhatsApp. Chaque renvoi allonge l'attente de 15 s (anti-abus) |
+| Aide | « Code non reçu ? » : réseau, numéro, SMS inconnus, délai ; modifier le numéro ; contacter l'assistance |
 | Échecs | 5 essais, puis blocage de 15 minutes |
 | Compte existant | Si le numéro a déjà un compte : connexion directe, puis demande du PIN (E-AUTH-06) |
 

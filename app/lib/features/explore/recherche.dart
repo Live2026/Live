@@ -3,14 +3,17 @@ part of 'explore_screen.dart';
 /// E-EXP-02 + E-EXP-03 — Recherche : suggestions avant la saisie, puis
 /// résultats par espace (produits, logements, pros).
 class EcranRecherche extends ConsumerStatefulWidget {
-  const EcranRecherche({super.key});
+  const EcranRecherche({super.key, this.initiale});
+
+  /// Texte déjà saisi dans la loupe d'un en-tête.
+  final String? initiale;
 
   @override
   ConsumerState<EcranRecherche> createState() => _EcranRechercheState();
 }
 
 class _EcranRechercheState extends ConsumerState<EcranRecherche> {
-  final _champ = TextEditingController();
+  late final _champ = TextEditingController(text: widget.initiale ?? '');
   var _onglet = 0;
 
   static const _recentes = [

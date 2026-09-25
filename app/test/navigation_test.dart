@@ -15,6 +15,8 @@ Future<void> _ouvrir(WidgetTester tester, Size taille) async {
   routeur.go('/bienvenue');
   await tester.pumpWidget(const ProviderScope(child: LiveApp()));
   await tester.pumpAndSettle();
+  await tester.ensureVisible(find.text('Découvrir sans compte'));
+  await tester.pumpAndSettle();
   await tester.tap(find.text('Découvrir sans compte'));
   await tester.pumpAndSettle();
 }
@@ -70,6 +72,11 @@ void main() {
     routeur.push('/messages');
     await tester.pumpAndSettle();
     // La liste et la conversation ouverte sont visibles ensemble.
+    expect(find.byTooltip('Rechercher'), findsOneWidget);
+    expect(find.byType(TextField), findsOneWidget);
+    // La loupe déploie le champ de recherche dans l'en-tête.
+    await tester.tap(find.byTooltip('Rechercher'));
+    await tester.pumpAndSettle();
     expect(find.text('Rechercher une conversation'), findsOneWidget);
     expect(find.byType(TextField), findsNWidgets(2));
   });

@@ -10,9 +10,11 @@ from PIL import Image
 
 SECTIONS = [
     ('demarrage', 'Démarrage', 'Premier lancement : accueil, numéro MoMo, code SMS, profil, code secret, centres d’intérêt.', {
+        'splash': ('Ouverture', 'Logo animé, puis la bienvenue'),
         'bienvenue': ('Accueil de l’application', 'Commencer, découvrir sans compte ou se connecter'),
         'inscription_telephone': ('Numéro de téléphone', 'Opérateur détecté, consentements explicites'),
         'code_sms_vide': ('Code reçu par SMS', '6 chiffres, renvoi après 45 s'),
+        'code_aide': ('Code non reçu ?', 'Conseils, modifier le numéro, assistance'),
         'inscription_profil': ('Profil', 'Prénom, ville, 18 ans ou plus'),
         'code_secret': ('Code secret Live', 'Protège le compte'),
         'interets': ('Centres d’intérêt', 'Un fil utile dès la première ouverture'),
@@ -32,6 +34,7 @@ SECTIONS = [
         'explorer_savoir': ('Explorer · savoir et emploi', 'Cours et opportunités à saisir'),
         'explorer_outils': ('Outils et services Live', 'Groupes, livraison, studio, Live Plus, finance'),
         'explorer_retour': ('Explorer', 'Cartes de même taille dans chaque rangée'),
+        'explorer_loupe': ('Recherche dans l’en-tête', 'La loupe déploie le champ'),
         'recherche_suggestions': ('Recherche', 'Récentes, tendances, catégories'),
         'alertes': ('Mes alertes', 'Recherches sauvegardées et notifiées'),
         'recherche_corrigee': ('Recherche corrigée', '« climatiser » → climatiseur'),
@@ -161,6 +164,7 @@ SECTIONS = [
     }),
     ('messages', 'Messages, groupes et confiance', 'Messagerie protégée contre les arnaques, groupes et canaux ; avis vérifiés, réclamations suivies.', {
         'messages': ('Messages', 'Non lus, coches, annonce liée'),
+        'messages_loupe': ('Rechercher une conversation', 'Loupe dans l’en-tête, filtre immédiat'),
         'conversation': ('Conversation', 'Vocal, offre, alerte anti-arnaque'),
         'conversation_lieu': ('Lieu de rendez-vous', 'Lieux publics recommandés'),
         'messages_demandes': ('Demandes de messages', 'Inconnus à part, arnaque signalée'),
@@ -183,6 +187,8 @@ SECTIONS = [
         'gains': ('Mes gains', 'Disponible, en attente, historique'),
         'moi': ('Moi', 'Profil social, super-pouvoirs, raccourcis'),
         'moi_menu': ('Menu du profil', 'Compte, mon espace, créateur, activité'),
+        'barre_repliee': ('Barre latérale repliée', 'Plus de place pour le contenu'),
+        'barre_depliee': ('Barre latérale dépliée', 'Logo, libellés, bouton Replier'),
         'moi_createur': ('Moi · créer et gagner', 'Studio, direct, Live Plus, publicité, finance'),
         'moi_suite': ('Moi', ''),
         'pouvoirs': ('Mes super-pouvoirs', 'À débloquer et actifs, N1 → N3 → Pro'),
@@ -207,6 +213,7 @@ SECTIONS = [
         'partenaires': ('API partenaires', 'Catalogue, commandes, Live Pay, livraison'),
     }),
     ('admin', 'Back-office', 'L’outil interne des équipes Live, pensé pour l’ordinateur : vérifications, modération, litiges, finance.', {
+        'admin_replie': ('Menu replié', 'Icônes seules, une touche pour déplier'),
         'admin_tableau': ('Tableau de bord', 'Volume, séquestre, santé des paiements'),
         'admin_kyc': ('Vérifications KYC', 'File par niveau de risque'),
         'admin_dossier_kyc': ('Dossier KYC', 'Pièces, selfie, contrôles, décision'),

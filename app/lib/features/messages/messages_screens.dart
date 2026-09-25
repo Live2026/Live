@@ -27,25 +27,36 @@ class EcranMessages extends StatefulWidget {
 
 class _EcranMessagesState extends State<EcranMessages> {
   var _filtre = 'Tous';
+  var _q = '';
 
   /// Conversation ouverte à droite, sur ordinateur (façon WhatsApp Web).
   Conversation _ouverte = conversations.first;
 
   @override
   Widget build(BuildContext context) {
-    final liste = conversations.where((c) {
-      return switch (_filtre) {
-        'Non lus' => c.nonLus > 0,
-        'Groupes' => c.type == TypeConversation.groupe,
-        'Canaux' => c.type == TypeConversation.canal,
-        _ => true,
-      };
-    }).toList();
+    final liste = conversations
+        .where((c) {
+          return switch (_filtre) {
+            'Non lus' => c.nonLus > 0,
+            'Groupes' => c.type == TypeConversation.groupe,
+            'Canaux' => c.type == TypeConversation.canal,
+            _ => true,
+          };
+        })
+        .where((c) {
+          final q = _q.trim().toLowerCase();
+          return q.isEmpty ||
+              c.nom.toLowerCase().contains(q) ||
+              c.dernier.toLowerCase().contains(q);
+        })
+        .toList();
     final marge = context.grandEcran ? 24.0 : 16.0;
     final deuxPanneaux = context.taille == Taille.etendue;
     final listeConversations = Scaffold(
-      appBar: AppBar(
-        title: const Text('Messages'),
+      appBar: EnTeteRecherche(
+        titre: const Text('Messages'),
+        indice: 'Rechercher une conversation',
+        onChanged: (v) => setState(() => _q = v),
         actions: [
           IconButton(
             tooltip: 'Nouveau message',
@@ -61,15 +72,6 @@ class _EcranMessagesState extends State<EcranMessages> {
       ),
       body: ListView(
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(marge, 4, marge, 8),
-            child: const TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search_rounded),
-                hintText: 'Rechercher une conversation',
-              ),
-            ),
-          ),
           SizedBox(
             height: 44,
             child: ListView(

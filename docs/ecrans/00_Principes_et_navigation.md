@@ -227,6 +227,9 @@ Les maquettes sont dessinées au format téléphone, mais l'application **occupe
 5. **La barre latérale ne disparaît jamais** sur grand écran (révision du 25/09/2026) : toute page ouverte depuis un onglet (Mes ventes, Messages, relations, paiement…) garde la barre et y signale son onglet de rattachement. Seuls le back-office (qui a sa propre barre), la caméra, le lecteur de direct et le lecteur de cours occupent tout l'écran.
 6. **Démarrage sur ordinateur** : la marque et ses quatre promesses (argent protégé, vérification, Mobile Money, Live IA) à gauche, le formulaire à droite dans une colonne de 480 px au plus.
 7. **Messages sur ordinateur** : deux panneaux, façon WhatsApp Web. La liste des conversations à gauche (400 px), la conversation ouverte à droite.
+8. **Barre latérale repliable** : le bouton « Replier » la réduit aux icônes (84 px), « Déplier » la rouvre ; le choix est gardé d'une page à l'autre, dans l'application comme dans le back-office.
+9. **Recherche dans l'en-tête** : sur les pages qui filtrent une liste (Explorer, Messages, Mes relations…), une **loupe** dans l'en-tête déploie le champ de saisie avec une animation ; la croix le referme et efface la saisie (composant `EnTeteRecherche`). Pas de barre de recherche permanente en haut de page.
+10. **Le nom s'écrit « Live »** (L majuscule), accompagné du logo (`LogoLive`), jamais « LIVE ».
 
 ---
 

@@ -30,7 +30,7 @@ async function bouton(nom, { exact = false } = {}) {
         let boite = await l.boundingBox();
         // Hors de l'écran : on fait défiler comme avec le doigt, puis on remesure.
         for (let i = 0; boite && boite.y + boite.height > 700 && i < 6; i++) {
-          await p.mouse.move(180, 400);
+          await p.mouse.move(LARGEUR > 700 ? LARGEUR * 0.6 : 180, 400);
           await p.mouse.wheel(0, 300);
           await p.waitForTimeout(400);
           boite = await l.boundingBox();
@@ -75,6 +75,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
   p.on('requestfailed', r => erreurs.push('Échec réseau : ' + r.url()));
   try {
     await p.goto(BASE, { waitUntil: 'networkidle' });
+    await p.waitForTimeout(700); await ecran('splash');
     await p.waitForTimeout(2500); await sem();
 
     // 0. Inscription
@@ -83,7 +84,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await saisir(0, '06 123 45 67');
     for (const c of await p.getByRole('checkbox').all()) await c.click();
     await ecran('inscription_telephone');
-    await bouton('Recevoir le code par SMS');
+    await bouton('Recevoir le code');
     await ecran('code_sms_vide');
     await saisir(0, '123456'); await p.waitForTimeout(800);
     await saisir('Prénom', 'Grâce'); await ecran('inscription_profil');
@@ -183,6 +184,8 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['accueil', 'fil_partage', async () => { await fermer(); await bouton('210', { exact: true }); }],
       ['accueil', 'fil_options', async () => { await fermer(); await bouton('Plus', { exact: true }); }],
       ['explorer', 'explorer_retour'],
+      ['explorer', 'explorer_loupe', async () => { await bouton('Rechercher', { exact: true }); await p.keyboard.type('robe', { delay: 30 }); }],
+      ['code', 'code_aide', async () => { await bouton('Aide', { exact: true }); }],
       ['recherche', 'recherche_suggestions'],
       ['alertes', 'alertes'],
       ['notifications', 'notifications'],
@@ -217,6 +220,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['publier/bien', 'publier_bien'],
       ['publier/service', 'publier_service'],
       ['messages', 'messages'],
+      ['messages', 'messages_loupe', async () => { await bouton('Rechercher', { exact: true }); await p.keyboard.type('Grâce', { delay: 30 }); }],
       ['conversation', 'conversation'],
       ['conversation', 'conversation_lieu', async () => { await bouton('Joindre'); }],
       ['messages/demandes', 'messages_demandes'],
@@ -302,6 +306,12 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['fonds-createurs', 'fonds_createurs'],
       ['finance', 'finance'],
       ['partenaires', 'partenaires'],
+      // Ordinateur : barres latérales repliées puis dépliées.
+      ...(LARGEUR > 700 ? [
+        ['admin', 'admin_replie', async () => { await bouton('Replier le menu'); }],
+        ['studio', 'barre_repliee'],
+        ['studio', 'barre_depliee', async () => { await bouton('Déplier le menu'); }],
+      ] : []),
       ['groupe/g1', 'groupe'],
       ['groupe/g2', 'canal'],
     ];

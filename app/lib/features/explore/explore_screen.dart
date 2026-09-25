@@ -172,16 +172,14 @@ class EcranExplorer extends ConsumerWidget {
       ),
     );
     return Scaffold(
-      appBar: AppBar(
+      appBar: EnTeteRecherche(
         titleSpacing: marge,
-        title: TextField(
-          readOnly: true,
-          onTap: () => context.push('/recherche'),
-          decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.search),
-            hintText: 'Rechercher sur Live…',
-          ),
+        titre: const Text(
+          'Explorer',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
         ),
+        indice: 'Rechercher sur Live…',
+        onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: const [BoutonNotifications(), BoutonMessages()],
       ),
       body: ListView(

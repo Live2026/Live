@@ -40,7 +40,12 @@ const _demarrage = {
 /// Pages qui occupent tout l'écran, même sur ordinateur : back-office (qui a
 /// sa propre barre), caméra, direct et lecteur.
 bool _pleinEcran(String chemin) =>
-    const {'/publier/media', '/direct/:id', '/lecteur/:id'}.contains(chemin) ||
+    const {
+      '/demarrage',
+      '/publier/media',
+      '/direct/:id',
+      '/lecteur/:id',
+    }.contains(chemin) ||
     chemin.startsWith('/admin');
 
 GoRoute _route(
@@ -59,9 +64,10 @@ GoRoute _route(
 String _p(GoRouterState s, String nom) => s.pathParameters[nom]!;
 
 final routeur = GoRouter(
-  initialLocation: '/bienvenue',
+  initialLocation: '/demarrage',
   routes: [
     // Démarrage et compte
+    _route('/demarrage', (_) => const EcranSplash()),
     _route('/bienvenue', (_) => const EcranBienvenue()),
     _route('/telephone', (_) => const EcranTelephone()),
     _route('/connexion', (_) => const EcranConnexion()),
@@ -119,7 +125,7 @@ final routeur = GoRouter(
     _route('/bloques', (_) => const EcranBloques()),
     _route('/enregistres', (_) => const EcranEnregistres()),
     // Recherche
-    _route('/recherche', (_) => const EcranRecherche()),
+    _route('/recherche', (s) => EcranRecherche(initiale: s.extra as String?)),
     _route('/alertes', (_) => const EcranAlertes()),
     _route(
       '/carte',
