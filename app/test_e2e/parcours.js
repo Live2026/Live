@@ -74,7 +74,8 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
   p.on('console', m => { if (m.type() === 'error') erreurs.push(m.text()); });
   p.on('requestfailed', r => erreurs.push('Échec réseau : ' + r.url()));
   try {
-    await p.goto(BASE, { waitUntil: 'networkidle' });
+    // Pas de « networkidle » : le worker de la base locale (Drift) reste actif.
+    await p.goto(BASE, { waitUntil: 'load' }); await p.waitForSelector('flutter-view, flt-glass-pane', { timeout: 30000 });
     await p.waitForTimeout(700); await ecran('splash');
     await p.waitForTimeout(2500); await sem();
 
