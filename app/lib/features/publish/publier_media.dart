@@ -77,6 +77,8 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
         // Viseur : l'image filmée occupe tout l'écran.
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
+          layoutBuilder: (actuel, anciens) =>
+              Stack(fit: StackFit.expand, children: [...anciens, ?actuel]),
           child: Container(
             key: ValueKey('$_couleur$_avant$_filtre'),
             decoration: BoxDecoration(

@@ -82,6 +82,11 @@ class _EcranFilState extends State<EcranFil> {
           right: 4,
           child: SafeArea(child: BoutonMessages(couleur: Colors.white)),
         ),
+        const Positioned(
+          top: 4,
+          left: 4,
+          child: SafeArea(child: BoutonNotifications(couleur: Colors.white)),
+        ),
       ],
     );
     if (!context.grandEcran) {

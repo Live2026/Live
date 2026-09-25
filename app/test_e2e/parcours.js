@@ -107,9 +107,13 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     // 2. Vendre
     await p.goto(BASE + '#/publier'); await p.waitForTimeout(1500); await sem();
     await bouton('Vendre un produit');
-    await bouton('Ajouter une photo');
-    await saisir('Titre', 'Samsung A10'); await saisir('Prix', '30000'); await ecran('vendre');
-    await bouton('Publier', { exact: true }); await ecran('annonce_publiee');
+    await bouton('Téléphones'); await ecran('vendre_categorie'); await bouton('Continuer');
+    await bouton('Ajouter une photo'); await bouton('Ajouter une photo'); await ecran('vendre_photos'); await bouton('Continuer');
+    await saisir('Titre', 'Samsung A10'); await bouton('Samsung', { exact: true }); await bouton('32 Go'); await ecran('vendre'); await bouton('Continuer');
+    await saisir('Prix', '30000'); await ecran('vendre_prix'); await bouton('Continuer');
+    await ecran('vendre_remise'); await bouton('Continuer');
+    await bouton('Je certifie'); await ecran('vendre_apercu');
+    await bouton('Publier', { exact: true }); await p.waitForTimeout(1200); await ecran('annonce_publiee');
     await bouton('Voir mes ventes'); await bouton('Accepter', { exact: true }); await ecran('mes_ventes');
     await bouton('Remettre le produit'); await ecran('remise_vendeur');
     await bouton("Scanner le QR de l'acheteur"); await p.waitForTimeout(2000); await ecran('scan');
@@ -208,7 +212,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['publier', 'publier'],
       ['publier/media', 'publier_video'],
       ['publier/media', 'publier_video_galerie', async () => { await bouton('Galerie'); await bouton('Média 2'); await bouton('Média 5'); }],
-      ['publier/media', 'publier_video_legende', async () => { await bouton('Valider', { exact: true }); await bouton('Suivant'); }],
+      ['publier/media', 'publier_video_legende', async () => { await bouton('Valider', { exact: true }); await p.waitForTimeout(800); await sem(); await bouton('Suivant'); }],
       ['publier/envois', 'publier_envois'],
       ['publier/bien', 'publier_bien'],
       ['publier/service', 'publier_service'],
@@ -234,6 +238,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['ia/business-plan', 'ia_business_plan'],
       ['ia/tuteur', 'ia_tuteur'],
       ['moi', 'moi'],
+      ['moi', 'moi_menu', async () => { await bouton('Menu du profil'); }],
       ['pouvoirs', 'pouvoirs'],
       ['live-pro', 'live_pro'],
       ['espace/nouveau', 'espace_creer'],

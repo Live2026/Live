@@ -10,6 +10,7 @@ class EcranMoi extends ConsumerWidget {
     final actifs = pouvoirs.where((p) => p.actifPour(etat)).length;
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
+      endDrawer: const _MenuProfil(),
       appBar: AppBar(
         title: const Text('Moi'),
         actions: [
@@ -21,10 +22,12 @@ class EcranMoi extends ConsumerWidget {
               child: Icon(Icons.notifications_none_rounded),
             ),
           ),
-          IconButton(
-            tooltip: 'Paramètres',
-            onPressed: () => context.push('/parametres'),
-            icon: const Icon(Icons.settings_outlined),
+          Builder(
+            builder: (ctx) => IconButton(
+              tooltip: 'Menu du profil',
+              onPressed: () => Scaffold.of(ctx).openEndDrawer(),
+              icon: const Icon(Icons.menu_rounded),
+            ),
           ),
         ],
       ),

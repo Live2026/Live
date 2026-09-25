@@ -59,7 +59,7 @@ class EcranExplorer extends StatelessWidget {
             hintText: 'Rechercher sur Live…',
           ),
         ),
-        actions: const [BoutonMessages()],
+        actions: const [BoutonNotifications(), BoutonMessages()],
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 32),

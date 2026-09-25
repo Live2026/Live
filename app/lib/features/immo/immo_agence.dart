@@ -31,6 +31,7 @@ class _EcranAgenceState extends State<EcranAgence> {
             onPressed: () => context.push('/publier/bien'),
             icon: const Icon(Icons.add_home_outlined),
           ),
+          const BoutonNotifications(),
           const BoutonMessages(),
         ],
       ),

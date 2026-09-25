@@ -16,7 +16,7 @@ class EcranServices extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Services'),
-        actions: const [BoutonMessages()],
+        actions: const [BoutonNotifications(), BoutonMessages()],
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 32),

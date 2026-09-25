@@ -59,6 +59,7 @@ class _EcranImmoState extends State<EcranImmo> {
             onPressed: () => context.push('/alertes'),
             icon: const Icon(Icons.notifications_none_rounded),
           ),
+          const BoutonNotifications(),
           const BoutonMessages(),
         ],
       ),

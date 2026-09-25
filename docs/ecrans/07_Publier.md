@@ -111,6 +111,8 @@ Le bouton central **(+)** est le point de départ de toute création. Objectif :
 | Publication | Passe par la modération automatique ; la vidéo est publiée dans le fil avec « Acheter » (F-MKT-PUB-06) |
 | Hors connexion | « Publier » met l'annonce en file d'envoi (E-PUB-06) |
 
+**Complément du 25/09/2026** : les mêmes champs sont présentés en **assistant de 6 étapes** (catégorie en tuiles, photos et vidéo, informations avec attributs de la catégorie et « Rédiger avec Live IA », prix avec négociable, promotion et stock, remise et paiement, aperçu avec certification), bouton « Brouillon » en haut, gain affiché en chiffre animé. La publication aboutit à un écran « Félicitations » avec le partage (WhatsApp, Facebook, statut, lien) et « Voir mes ventes ». Toutes les étapes restent courtes : une annonce se publie toujours en une minute.
+
 ---
 
 ## E-PUB-04 — Publier un bien (assistant en 5 étapes)

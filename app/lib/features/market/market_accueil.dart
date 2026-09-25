@@ -36,11 +36,8 @@ class EcranMarket extends ConsumerWidget {
             onPressed: () => context.push('/recherche'),
             icon: const Icon(Icons.search_rounded),
           ),
-          IconButton(
-            tooltip: 'Vendre',
-            onPressed: () => context.push('/vendre'),
-            icon: const Icon(Icons.add_circle_outline_rounded),
-          ),
+          const BoutonCommandes(),
+          const BoutonNotifications(),
           const BoutonMessages(),
         ],
       ),
