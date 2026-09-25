@@ -239,37 +239,61 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
 }
 
 /// E-IA-11 — Mes documents.
-class EcranMesDocuments extends ConsumerWidget {
+class EcranMesDocuments extends ConsumerStatefulWidget {
   const EcranMesDocuments({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EcranMesDocuments> createState() => _EcranMesDocumentsState();
+}
+
+class _EcranMesDocumentsState extends ConsumerState<EcranMesDocuments> {
+  /// Type affiché ; nul pour tous les documents.
+  String? _type;
+
+  @override
+  Widget build(BuildContext context) {
     final docs = ref.watch(liveProvider).documents;
+    final types = {for (final d in docs) d.type}.toList();
+    final affiches = docs.where((d) => _type == null || d.type == _type);
     return Scaffold(
       appBar: AppBar(title: const Text('Mes documents')),
       body: docs.isEmpty
-          ? const Center(
-              child: Padding(
-                padding: EdgeInsets.all(24),
-                child: Text(
-                  'Aucun document pour le moment. Vos CV, lettres et business plans apparaîtront ici.',
-                  textAlign: TextAlign.center,
-                ),
-              ),
+          ? const EtatVide(
+              icone: Icons.folder_open,
+              texte: 'Aucun document pour le moment. Vos CV, lettres et business plans apparaîtront ici.',
             )
           : ListView(
               padding: const EdgeInsets.all(16),
               children: [
+                if (types.length > 1) ...[
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      for (final t in [null, ...types])
+                        ChoiceChip(
+                          label: Text(
+                            t == null ? 'Tous' : serviceParId(t).titre,
+                          ),
+                          selected: _type == t,
+                          onSelected: (_) => setState(() => _type = t),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                ],
                 GrilleAdaptative(
                   largeurMax: 420,
                   enfants: [
-                    for (final d in docs)
+                    for (final d in affiches)
                       Card(
                         margin: EdgeInsets.zero,
                         child: ListTile(
                           leading: const Icon(Icons.description),
                           title: Text(d.titre),
-                          subtitle: Text(d.quand),
+                          subtitle: Text(
+                            '${serviceParId(d.type).titre} · ${d.quand}',
+                          ),
                           onTap: () => context.push('/ia/document/${d.id}'),
                         ),
                       ),

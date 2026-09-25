@@ -47,29 +47,33 @@ class EcranIa extends ConsumerWidget {
                 runSpacing: 16,
                 spacing: 16,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Mes Crédits Live',
-                        style: TextStyle(color: Color(0xCCFFFFFF)),
-                      ),
-                      const SizedBox(height: 4),
-                      Credits(
-                        etat.credits,
-                        taille: 34,
-                        couleur: Colors.white,
-                        couleurIcone: LiveColors.orange,
-                      ),
-                      const SizedBox(height: 2),
-                      const Text(
-                        '1 crédit = 10 FCFA · valables 12 mois',
-                        style: TextStyle(
-                          color: Color(0x99FFFFFF),
-                          fontSize: 12,
+                  // Un appui sur le solde ouvre l'historique des crédits (E-IA-01).
+                  InkWell(
+                    onTap: () => context.push('/ia/historique'),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Mes Crédits Live · historique ›',
+                          style: TextStyle(color: Color(0xCCFFFFFF)),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Credits(
+                          etat.credits,
+                          taille: 34,
+                          couleur: Colors.white,
+                          couleurIcone: LiveColors.orange,
+                        ),
+                        const SizedBox(height: 2),
+                        const Text(
+                          '1 crédit = 10 FCFA · valables 12 mois',
+                          style: TextStyle(
+                            color: Color(0x99FFFFFF),
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   FilledButton.icon(
                     style: FilledButton.styleFrom(
@@ -85,6 +89,21 @@ class EcranIa extends ConsumerWidget {
               ),
             ),
           ),
+          if (etat.credits < 20)
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: Bloc(
+                fond: LiveColors.fondAlerte,
+                padding: 12,
+                child: Text(
+                  'Il vous reste ${etat.credits} crédits : de quoi faire '
+                  '${etat.credits ~/ 5} exercice${etat.credits >= 10 ? 's' : ''}. '
+                  'Un pack Découverte coûte 500 FCFA.',
+                ),
+              ),
+            ),
+          const SizedBox(height: 16),
+          const _ChampOrientation(),
           for (final f in familles) ...[
             Padding(
               padding: const EdgeInsets.only(top: 18, bottom: 8),
@@ -123,8 +142,11 @@ class EcranIa extends ConsumerWidget {
 }
 
 class _CarteService extends StatelessWidget {
-  const _CarteService({required this.service});
+  const _CarteService({required this.service, this.avant});
   final ServiceIa service;
+
+  /// Appelé avant d'ouvrir le service (fermer le panneau d'orientation).
+  final VoidCallback? avant;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +168,9 @@ class _CarteService extends StatelessWidget {
             );
             return;
           }
-          context.push(s.route ?? '/ia/service/${s.id}');
+          final routeur = GoRouter.of(context);
+          avant?.call();
+          routeur.push(s.route ?? '/ia/service/${s.id}');
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -402,7 +426,7 @@ Future<bool> confirmerPrix(
     ),
   );
   if (ok != true) return false;
-  return ref.read(liveProvider.notifier).depenserCredits(prix);
+  return ref.read(liveProvider.notifier).depenserCredits(prix, service: titre);
 }
 
 class _Ligne extends StatelessWidget {

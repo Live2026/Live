@@ -97,23 +97,22 @@ class EcranMoi extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           _CartePouvoirs(actifs: actifs, total: pouvoirs.length),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
+          _CartePortefeuille(
+            disponible: etat.disponible,
+            enAttente: etat.enAttente,
+          ),
+          const SizedBox(height: 12),
           GrilleAdaptative(
             largeurMax: 180,
             espacement: 10,
             hauteur: 96,
             enfants: [
               _Raccourci(
-                Icons.account_balance_wallet_outlined,
-                'Mes gains',
-                fcfaCourt(etat.disponible),
-                '/gains',
-              ),
-              _Raccourci(
                 Icons.auto_awesome_outlined,
                 'Crédits Live',
                 '${etat.credits} crédits',
-                '/ia/credits',
+                '/ia/historique',
               ),
               _Raccourci(
                 Icons.storefront_outlined,
@@ -367,6 +366,73 @@ class _Raccourci extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// « Mon portefeuille » : argent disponible et argent en attente (séquestre).
+class _CartePortefeuille extends StatelessWidget {
+  const _CartePortefeuille({required this.disponible, required this.enAttente});
+  final int disponible;
+  final int enAttente;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label:
+          'Mon portefeuille, ${fcfa(disponible)} disponibles, '
+          '${fcfa(enAttente)} en attente',
+      excludeSemantics: true,
+      child: Pressable(
+        onTap: () => context.push('/gains'),
+        child: Bloc(
+          child: Row(
+            children: [
+              const Icon(
+                Icons.account_balance_wallet_outlined,
+                color: LiveColors.bleu,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _Montant('Disponible', disponible, LiveColors.succes),
+              ),
+              Expanded(
+                child: _Montant('En attente', enAttente, LiveColors.cuivre),
+              ),
+              const Icon(Icons.chevron_right_rounded, color: LiveColors.gris),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Montant extends StatelessWidget {
+  const _Montant(this.libelle, this.montant, this.couleur);
+  final String libelle;
+  final int montant;
+  final Color couleur;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          libelle,
+          style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
+        ),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Text(
+            fcfa(montant),
+            style: TextStyle(fontWeight: FontWeight.w800, color: couleur),
+          ),
+        ),
+      ],
     );
   }
 }

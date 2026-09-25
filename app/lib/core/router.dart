@@ -123,6 +123,7 @@ final routeur = GoRouter(
     _route('/reclamation/:id', (s) => EcranReclamation(id: _p(s, 'id'))),
     // Live IA
     _route('/ia/credits', (_) => const EcranCredits()),
+    _route('/ia/historique', (_) => const EcranHistoriqueCredits()),
     _route('/ia/exercice', (_) => const EcranExercice()),
     _route('/ia/documents', (_) => const EcranMesDocuments()),
     _route('/ia/business-plan', (_) => const EcranBusinessPlan()),

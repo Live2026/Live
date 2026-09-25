@@ -15,3 +15,5 @@ part 'ia_generateur.dart';
 part 'ia_exercice_documents.dart';
 part 'ia_business_plan.dart';
 part 'ia_tuteur.dart';
+part 'ia_orientation.dart';
+part 'ia_historique.dart';

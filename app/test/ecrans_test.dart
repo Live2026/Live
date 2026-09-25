@@ -69,6 +69,7 @@ const routes = [
   '/probleme/commande/LV-00482',
   '/reclamation/RC-00001',
   '/ia/credits',
+  '/ia/historique',
   '/ia/exercice',
   '/ia/documents',
   '/ia/business-plan',

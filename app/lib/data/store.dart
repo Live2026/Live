@@ -146,6 +146,14 @@ class LiveStore extends Notifier<LiveState> {
         final pack = packs.firstWhere((k) => k.id == p.cibleId);
         state = state.copyWith(
           credits: state.credits + pack.credits,
+          mouvementsCredits: [
+            MouvementCredit(
+              'Achat · ${fcfa(pack.prix)}',
+              pack.credits,
+              "à l'instant",
+            ),
+            ...state.mouvementsCredits,
+          ],
           effacerPaiement: true,
         );
         return pack.id;
@@ -153,14 +161,28 @@ class LiveStore extends Notifier<LiveState> {
   }
 
   /// Débite des crédits pour un service Live IA ; faux si le solde est insuffisant.
-  bool depenserCredits(int n) {
+  bool depenserCredits(int n, {String service = 'Live IA'}) {
     if (n > state.credits) return false;
-    state = state.copyWith(credits: state.credits - n);
+    state = state.copyWith(
+      credits: state.credits - n,
+      mouvementsCredits: [
+        MouvementCredit(service, -n, "à l'instant", service: service),
+        ...state.mouvementsCredits,
+      ],
+    );
     return true;
   }
 
   /// Recrédit automatique en cas d'échec d'une génération (R-CR-05).
-  void recrediter(int n) => state = state.copyWith(credits: state.credits + n);
+  void recrediter(int n, {String service = 'Live IA'}) {
+    state = state.copyWith(
+      credits: state.credits + n,
+      mouvementsCredits: [
+        MouvementCredit('Recrédit · $service', n, "à l'instant"),
+        ...state.mouvementsCredits,
+      ],
+    );
+  }
 
   String ajouterDocument(
     String type,
