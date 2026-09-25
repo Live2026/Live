@@ -88,6 +88,14 @@ final routeur = GoRouter(
     _route('/alertes', (_) => const EcranAlertes()),
     // Market
     _route('/market', (_) => const EcranMarket()),
+    _route(
+      '/market/liste',
+      (s) => EcranListeMarket(
+        categorie: s.uri.queryParameters['categorie'],
+        tri: int.tryParse(s.uri.queryParameters['tri'] ?? '') ?? 0,
+      ),
+    ),
+    _route('/commandes', (_) => const EcranMesCommandes()),
     _route('/produit/:id', (s) => EcranProduit(id: _p(s, 'id'))),
     _route('/commande/:id', (s) => EcranCommande(id: _p(s, 'id'))),
     _route('/suivi/:id', (s) => EcranSuiviCommande(id: _p(s, 'id'))),

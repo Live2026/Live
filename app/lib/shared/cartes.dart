@@ -139,16 +139,31 @@ class CarteProduit extends StatelessWidget {
             const SizedBox(height: 8),
             _Zone(p.titre, lignes: 2),
             const SizedBox(height: 2),
-            Text(
-              fcfa(p.prix),
-              maxLines: 1,
-              style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    fcfa(p.prix),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                const Icon(
+                  Icons.star_rounded,
+                  size: 14,
+                  color: LiveColors.ambre,
+                ),
+                Text(
+                  note(p.vendeur.note).replaceAll('/5', ''),
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ],
             ),
-            _Zone(
-              '${p.quartier} · ${note(p.vendeur.note)}',
-              lignes: 1,
-              style: _meta,
-            ),
+            _Zone('${p.categorie} · ${p.quartier}', lignes: 1, style: _meta),
           ],
         ),
       ),

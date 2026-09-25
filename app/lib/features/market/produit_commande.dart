@@ -12,13 +12,52 @@ class EcranProduit extends StatelessWidget {
     final grand = context.grandEcran;
     final surPlace = p.reglement == Reglement.surPlace;
     final entete = <Widget>[
+      if (p.vues >= 1000)
+        const Padding(
+          padding: EdgeInsets.only(bottom: 6),
+          child: Etiquette(
+            'Meilleure vente',
+            icone: Icons.local_fire_department_rounded,
+            fond: Color(0xFFFFF1E0),
+            couleur: LiveColors.cuivre,
+          ),
+        ),
+      Text(
+        p.titre,
+        style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800),
+      ),
+      const SizedBox(height: 4),
+      InkWell(
+        onTap: () => context.push('/boutique/${p.vendeur.id}'),
+        child: Row(
+          children: [
+            Avatar(nom: p.vendeur.nom, couleur: p.vendeur.couleur, taille: 24),
+            const SizedBox(width: 6),
+            Flexible(
+              child: Text(
+                p.vendeur.nom,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+            if (p.vendeur.verifie) ...[
+              const SizedBox(width: 3),
+              const Icon(Icons.verified, size: 15, color: LiveColors.bleu),
+            ],
+            const SizedBox(width: 8),
+            const Icon(Icons.star_rounded, size: 15, color: LiveColors.ambre),
+            Text(
+              ' ${note(p.vendeur.note).replaceAll('/5', '')} · ${p.vendeur.ventes} ventes',
+              style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 10),
       Text(
         fcfa(p.prix),
         style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w900),
-      ),
-      Text(
-        p.titre,
-        style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700),
       ),
       const SizedBox(height: 6),
       Wrap(
@@ -46,6 +85,8 @@ class EcranProduit extends StatelessWidget {
       ),
     ];
     final details = <Widget>[
+      _TuilesProduit(produit: p),
+      const SizedBox(height: 14),
       Bloc(
         child: Column(
           children: [
@@ -344,6 +385,62 @@ class _ReglementProduit extends StatelessWidget {
             'Livraison (si vous la choisissez)',
             Reglement.dansLive,
             montant: p.livraison,
+          ),
+      ],
+    );
+  }
+}
+
+/// Quatre informations clés en tuiles de même taille : état, remise,
+/// paiement, protection.
+class _TuilesProduit extends StatelessWidget {
+  const _TuilesProduit({required this.produit});
+  final Produit produit;
+
+  @override
+  Widget build(BuildContext context) {
+    final p = produit;
+    final surPlace = p.reglement == Reglement.surPlace;
+    final tuiles = [
+      (Icons.new_releases_outlined, p.etat, 'État'),
+      (
+        Icons.local_shipping_outlined,
+        p.livraison > 0 && !surPlace
+            ? 'Main propre ou livraison'
+            : 'Main propre',
+        'Remise',
+      ),
+      (p.reglement.icone, p.reglement.court, 'Paiement'),
+      (
+        Icons.verified_user_outlined,
+        surPlace ? 'Pas d’avance' : 'Remboursé',
+        'Protection',
+      ),
+    ];
+    return GrilleAdaptative(
+      largeurMax: 170,
+      espacement: 8,
+      enfants: [
+        for (final (icone, valeur, libelle) in tuiles)
+          Bloc(
+            padding: 10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(icone, size: 18, color: LiveColors.orangeVif),
+                const SizedBox(height: 6),
+                Text(
+                  valeur,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  libelle,
+                  style: const TextStyle(color: LiveColors.gris, fontSize: 12),
+                ),
+              ],
+            ),
           ),
       ],
     );

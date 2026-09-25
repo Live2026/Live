@@ -50,6 +50,6 @@ void main() {
     await tester.pumpAndSettle();
     final barre = tester.getSize(find.byType(BarreAction));
     expect(barre.height, lessThan(120));
-    expect(find.text('Stockage').hitTestable(), findsOneWidget);
+    expect(find.text('Protection').hitTestable(), findsOneWidget);
   });
 }

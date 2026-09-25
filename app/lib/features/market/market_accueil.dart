@@ -1,28 +1,35 @@
 part of 'market_screens.dart';
 
-/// E-MKT-01 — Accueil Market : catégories (recherche en icône), boutiques vérifiées,
-/// tendances et toutes les annonces en grille.
-class EcranMarket extends StatefulWidget {
+/// E-MKT-01 — Accueil Market : carrousel à la une, catégories, recommandés,
+/// vendeurs à la une, nouveautés, puis commandes, vente, paiements et aide.
+/// La recherche est une icône de la barre du haut.
+class EcranMarket extends ConsumerWidget {
   const EcranMarket({super.key});
 
   @override
-  State<EcranMarket> createState() => _EcranMarketState();
-}
-
-class _EcranMarketState extends State<EcranMarket> {
-  String? _categorie;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final achats = ref.watch(liveProvider.select((e) => e.achats));
     final marge = context.grandEcran ? 24.0 : 16.0;
-    final liste = produits
-        .where((p) => _categorie == null || p.categorie == _categorie)
-        .toList();
     final tendances = [...produits]..sort((a, b) => b.vues.compareTo(a.vues));
+    final nouveautes = produits.reversed.toList();
     return Scaffold(
       appBar: AppBar(
         titleSpacing: marge,
-        title: const Text('Market'),
+        toolbarHeight: 64,
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Market'),
+            Text(
+              'Achetez et vendez près de chez vous',
+              style: TextStyle(
+                fontSize: 13,
+                color: LiveColors.gris,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             tooltip: 'Rechercher',
@@ -40,106 +47,65 @@ class _EcranMarketState extends State<EcranMarket> {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 32),
         children: [
-          const SizedBox(height: 4),
+          Padding(
+            padding: EdgeInsets.fromLTRB(marge, 4, marge, 0),
+            child: const _CarrouselUne(),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: marge),
+            child: EnTeteSection(
+              'Catégories populaires',
+              onTap: () => context.push('/market/liste'),
+            ),
+          ),
           SizedBox(
             height: 86,
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: marge - 8),
               children: [
-                PuceIcone(
-                  icone: Icons.grid_view_rounded,
-                  texte: 'Tout',
-                  active: _categorie == null,
-                  onTap: () => setState(() => _categorie = null),
-                ),
                 for (final (icone, nom) in categoriesMarket)
                   PuceIcone(
                     icone: icone,
                     texte: nom,
-                    active: _categorie == nom,
-                    onTap: () => setState(
-                      () => _categorie = _categorie == nom ? null : nom,
+                    onTap: () => context.push(
+                      '/market/liste?categorie=${Uri.encodeComponent(nom)}',
                     ),
                   ),
               ],
             ),
           ),
-          if (_categorie == null) ...[
-            Padding(
-              padding: EdgeInsets.fromLTRB(marge, 8, marge, 0),
-              child: const _BanniereLancement(),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: marge),
-              child: EnTeteSection(
-                'Boutiques vérifiées',
-                onTap: () => context.push('/boutique/grace'),
-              ),
-            ),
-            SizedBox(
-              height: 104,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: marge),
-                itemCount: vendeurs.length,
-                separatorBuilder: (_, _) => const SizedBox(width: 14),
-                itemBuilder: (_, i) {
-                  final v = vendeurs[i];
-                  return Semantics(
-                    button: true,
-                    label: v.nom,
-                    excludeSemantics: true,
-                    child: Pressable(
-                      onTap: () => context.push('/boutique/${v.id}'),
-                      child: SizedBox(
-                        width: 76,
-                        child: Column(
-                          children: [
-                            Avatar(
-                              nom: v.nom,
-                              couleur: v.couleur,
-                              taille: 64,
-                              anneau: i < 3,
-                              verifie: v.badge.startsWith('Pro'),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              v.nom,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: marge),
-              child: const EnTeteSection('Tendances à Brazzaville'),
-            ),
-            Carrousel(
-              largeur: 160,
-              hauteur: 250,
-              marge: marge,
-              enfants: [
-                for (final p in tendances.take(8))
-                  CarteProduit(produit: p, hero: false),
-              ],
-            ),
-          ],
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
-              _categorie ?? 'Toutes les annonces',
-              action: _categorie == null ? null : 'Effacer',
-              onTap: _categorie == null
-                  ? null
-                  : () => setState(() => _categorie = null),
+              'Recommandé pour vous',
+              onTap: () => context.push('/market/liste'),
+            ),
+          ),
+          Carrousel(
+            largeur: 160,
+            hauteur: 250,
+            marge: marge,
+            enfants: [
+              for (final p in tendances.take(8))
+                CarteProduit(produit: p, hero: false),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: marge),
+            child: const EnTeteSection('Vendeurs à la une'),
+          ),
+          Carrousel(
+            largeur: 132,
+            hauteur: 156,
+            marge: marge,
+            enfants: [for (final v in vendeurs) _CarteVendeurUne(vendeur: v)],
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: marge),
+            child: EnTeteSection(
+              'Nouveautés près de vous',
+              onTap: () => context.push('/market/liste?tri=1'),
             ),
           ),
           Padding(
@@ -148,7 +114,7 @@ class _EcranMarketState extends State<EcranMarket> {
               largeurMax: context.grandEcran ? 220 : 180,
               espacement: 14,
               enfants: [
-                for (final (i, p) in liste.indexed)
+                for (final (i, p) in nouveautes.indexed)
                   Apparition(
                     rang: i,
                     child: CarteProduit(produit: p),
@@ -156,61 +122,21 @@ class _EcranMarketState extends State<EcranMarket> {
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Bannière de l'offre de lancement pour les vendeurs.
-class _BanniereLancement extends StatelessWidget {
-  const _BanniereLancement();
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      label: 'Vendez sans commission pendant 3 mois',
-      excludeSemantics: true,
-      child: Pressable(
-        onTap: () => context.push('/vendre'),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            gradient: const LinearGradient(
-              colors: [LiveColors.bleu, LiveColors.nuit],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+          const SizedBox(height: 20),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: marge),
+            child: GrilleAdaptative(
+              largeurMax: 420,
+              espacement: 12,
+              enfants: [
+                if (achats.isNotEmpty) _VosCommandes(achats: achats),
+                const _VendreSurLive(),
+                const _PaiementsSecurises(),
+                const _BesoinAide(),
+              ],
             ),
           ),
-          child: const Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '0 % de commission',
-                      style: TextStyle(
-                        color: LiveColors.ambreClair,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 20,
-                      ),
-                    ),
-                    Text(
-                      'Vendez sur Live pendant 3 mois sans rien payer. '
-                      'Votre argent est garanti.',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(width: 12),
-              Icon(Icons.sell_rounded, color: Colors.white, size: 40),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }

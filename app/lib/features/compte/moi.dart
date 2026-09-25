@@ -129,9 +129,7 @@ class EcranMoi extends ConsumerWidget {
                 Icons.shopping_bag_outlined,
                 'Mes achats',
                 '${etat.achats.length} en cours',
-                etat.achats.isEmpty
-                    ? '/market'
-                    : '/suivi/${etat.achats.first.id}',
+                '/commandes',
               ),
               _Raccourci(
                 Icons.home_outlined,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -17,4 +19,6 @@ part 'suivi_commande.dart';
 part 'mes_ventes.dart';
 part 'remise_vendre.dart';
 part 'market_accueil.dart';
+part 'market_sections.dart';
+part 'market_liste.dart';
 part 'offre_qr.dart';
