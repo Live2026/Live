@@ -370,7 +370,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                 const SizedBox(height: 10),
                 GridView.extent(
                   shrinkWrap: true,
-                  maxCrossAxisExtent: 110,
+                  maxCrossAxisExtent: 90,
                   mainAxisSpacing: 4,
                   crossAxisSpacing: 4,
                   childAspectRatio: 9 / 14,

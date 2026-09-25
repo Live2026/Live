@@ -22,7 +22,6 @@ class _LigneCompte extends ConsumerWidget {
     final etat = ref.watch(liveProvider);
     final suivi = etat.suivis.contains(c.id);
     final sourdine = etat.sourdine.contains(c.id);
-    final cloche = etat.cloches.contains(c.id);
     final store = ref.read(liveProvider.notifier);
     return InkWell(
       onTap: c.route == null ? null : () => context.push(c.route!),
@@ -99,23 +98,6 @@ class _LigneCompte extends ConsumerWidget {
               ),
             ),
             const SizedBox(width: 6),
-            if (suivi && !ongletAbonnes)
-              IconButton(
-                tooltip: cloche
-                    ? 'Ne plus être prévenu'
-                    : 'Être prévenu de chaque publication',
-                onPressed: () => store.basculerCloche(c.id),
-                icon: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
-                  child: Icon(
-                    cloche
-                        ? Icons.notifications_active_rounded
-                        : Icons.notifications_none_rounded,
-                    key: ValueKey(cloche),
-                    color: cloche ? LiveColors.orangeVif : LiveColors.gris,
-                  ),
-                ),
-              ),
             SizedBox(
               width: 104,
               child: AnimatedSwitcher(
@@ -220,6 +202,21 @@ void _menuCompte(
                   store.retirerAbonne(c.id);
                   message('${c.nom} ne vous suit plus.');
                 }),
+              ),
+            if (etat.suivis.contains(c.id))
+              ListTile(
+                leading: Icon(
+                  etat.cloches.contains(c.id)
+                      ? Icons.notifications_active_rounded
+                      : Icons.notifications_none_rounded,
+                  color: LiveColors.orangeVif,
+                ),
+                title: Text(
+                  etat.cloches.contains(c.id)
+                      ? 'Ne plus être prévenu de ses publications'
+                      : 'Être prévenu de chaque publication',
+                ),
+                onTap: () => action(() => store.basculerCloche(c.id)),
               ),
             ListTile(
               leading: Icon(

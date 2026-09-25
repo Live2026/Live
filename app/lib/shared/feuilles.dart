@@ -238,7 +238,7 @@ Future<int?> ouvrirFiltresImmo(
             children: [
               for (final p in paliers)
                 ChoiceChip(
-                  label: Text(p == 0 ? 'Tous' : '≤ ${fcfaCourt(p)}'),
+                  label: Text(p == 0 ? 'Tous' : 'max ${fcfaCourt(p)}'),
                   selected: choix == p,
                   onSelected: (_) => setState(() => choix = p),
                 ),

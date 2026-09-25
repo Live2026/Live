@@ -148,7 +148,7 @@ class _Annonceur extends ConsumerWidget {
                     ? OutlinedButton(
                         onPressed: () =>
                             ref.read(liveProvider.notifier).basculerSuivi(v.id),
-                        child: const Text('Suivi ✓'),
+                        child: const Text('Suivi'),
                       )
                     : FilledButton.tonal(
                         onPressed: () =>

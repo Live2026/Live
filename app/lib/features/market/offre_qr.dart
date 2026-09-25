@@ -200,9 +200,9 @@ class _EcranQrPaiementState extends ConsumerState<EcranQrPaiement> {
 Future<void> ouvrirBoost(BuildContext context, WidgetRef ref, String titre) {
   final pro = ref.read(liveProvider).pro;
   const offres = [
-    ('24 heures', 1000, '≈ 1 500 vues'),
-    ('3 jours', 2500, '≈ 5 000 vues'),
-    ('7 jours', 5000, '≈ 12 000 vues'),
+    ('24 heures', 1000, 'env. 1 500 vues'),
+    ('3 jours', 2500, 'env. 5 000 vues'),
+    ('7 jours', 5000, 'env. 12 000 vues'),
   ];
   return showModalBottomSheet<void>(
     context: context,

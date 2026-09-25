@@ -104,78 +104,85 @@ class _EcranDirectState extends ConsumerState<EcranDirect> {
             ),
           ),
         ),
-        SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 6, 6, 0),
-            child: Row(
-              children: [
-                Flexible(
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(4, 4, 6, 4),
-                    decoration: BoxDecoration(
-                      color: Colors.black38,
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Avatar(
-                          nom: d.hote.nom,
-                          couleur: d.hote.couleur,
-                          taille: 34,
-                          verifie: true,
+        Positioned(
+          left: 0,
+          right: 0,
+          top: 0,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 6, 6, 0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(4, 4, 6, 4),
+                        decoration: BoxDecoration(
+                          color: Colors.black38,
+                          borderRadius: BorderRadius.circular(24),
                         ),
-                        const SizedBox(width: 6),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                d.hote.nom,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                              Text(
-                                '${compact(d.hote.abonnes)} abonnés',
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 11,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 6),
-                        if (!suivi)
-                          FilledButton(
-                            style: FilledButton.styleFrom(
-                              backgroundColor: const Color(0xFFFE2C55),
-                              minimumSize: const Size(0, 30),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Avatar(
+                              nom: d.hote.nom,
+                              couleur: d.hote.couleur,
+                              taille: 34,
+                              verifie: true,
+                            ),
+                            const SizedBox(width: 6),
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    d.hote.nom,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${compact(d.hote.abonnes)} abonnés',
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            onPressed: () => ref
-                                .read(liveProvider.notifier)
-                                .basculerSuivi(d.hote.id),
-                            child: const Text('Suivre'),
-                          ),
-                      ],
+                            const SizedBox(width: 6),
+                            if (!suivi)
+                              FilledButton(
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: const Color(0xFFFE2C55),
+                                  minimumSize: const Size(0, 30),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                  ),
+                                ),
+                                onPressed: () => ref
+                                    .read(liveProvider.notifier)
+                                    .basculerSuivi(d.hote.id),
+                                child: const Text('Suivre'),
+                              ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                const Spacer(),
-                _PastilleDirect(spectateurs: d.spectateurs),
-                IconButton(
-                  tooltip: 'Quitter le direct',
-                  onPressed: () => context.pop(),
-                  icon: const Icon(Icons.close_rounded, color: Colors.white),
-                ),
-              ],
+                  _PastilleDirect(spectateurs: d.spectateurs),
+                  IconButton(
+                    tooltip: 'Quitter le direct',
+                    onPressed: () => context.pop(),
+                    icon: const Icon(Icons.close_rounded, color: Colors.white),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
