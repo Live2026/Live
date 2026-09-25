@@ -160,7 +160,7 @@ class _EcranAvisState extends ConsumerState<EcranAvis> {
               alignment: WrapAlignment.center,
               children: [
                 for (final p in points)
-                  FilterChip(
+                  ChoiceChip(
                     label: Text(p),
                     selected: _points.contains(p),
                     onSelected: (v) =>

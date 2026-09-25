@@ -183,8 +183,9 @@ def main(tel, ordi, sortie):
         if nom in fichiers:
             titre = next((n[nom][0] for _, _, _, n in SECTIONS if nom in n), nom)
             figs.append(f'<figure class="wide"><button class="shot" type="button" aria-label="Agrandir : {html.escape(titre)}"><img loading="lazy" src="{jpeg(fichiers[nom], 1280, 74)}" alt="{html.escape(titre)}" width="1280" height="760"></button><figcaption><b>{html.escape(titre)}</b></figcaption></figure>')
-    nav.append('<a href="#ordinateur">Sur ordinateur</a>')
-    corps.append(f'<section id="ordinateur"><header class="sh"><h2>Sur ordinateur</h2><p>La même application en pleine largeur : barre latérale, grilles, deux colonnes.</p></header><div class="gridw">{"".join(figs)}</div></section>')
+    if figs:
+      nav.append('<a href="#ordinateur">Sur ordinateur</a>')
+      corps.append(f'<section id="ordinateur"><header class="sh"><h2>Sur ordinateur</h2><p>La même application en pleine largeur : barre latérale, grilles, deux colonnes.</p></header><div class="gridw">{"".join(figs)}</div></section>')
     page = tete.replace('{{TOTAL}}', str(total)).replace('{{NAV}}', ''.join(nav)).replace('{{CORPS}}', ''.join(corps))
     open(sortie, 'w').write(page)
     print(f'{total} écrans téléphone, {len(figs)} sur ordinateur, {os.path.getsize(sortie) // 1024} Ko')

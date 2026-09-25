@@ -124,7 +124,7 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
             runSpacing: 8,
             children: [
               for (final q in quartiersBrazzaville)
-                FilterChip(
+                ChoiceChip(
                   label: Text(q),
                   selected: _zones.contains(q),
                   onSelected: (v) =>

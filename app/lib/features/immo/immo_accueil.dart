@@ -128,7 +128,7 @@ class _EcranImmoState extends State<EcranImmo> {
                 for (final q in quartiersBrazzaville)
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: FilterChip(
+                    child: ChoiceChip(
                       label: Text(q),
                       selected: _quartier == q,
                       onSelected: (v) =>

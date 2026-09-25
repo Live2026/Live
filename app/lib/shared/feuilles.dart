@@ -280,7 +280,7 @@ class _BasculesState extends State<_Bascules> {
       runSpacing: 8,
       children: [
         for (final o in widget.options)
-          FilterChip(
+          ChoiceChip(
             label: Text(o),
             selected: _actives.contains(o),
             onSelected: (v) =>
