@@ -283,6 +283,7 @@ class _BoutonDevise extends StatelessWidget {
     return Semantics(
       button: true,
       label: 'Devise : ${devise.nom}. Changer',
+      onTap: onTap,
       excludeSemantics: true,
       child: Material(
         color: Colors.white,
