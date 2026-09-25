@@ -263,8 +263,7 @@ class _EcranReglagesMessagesState extends State<EcranReglagesMessages> {
           LigneMenu(
             icone: Icons.block_rounded,
             titre: 'Comptes bloqués',
-            valeur: '2',
-            onTap: () {},
+            onTap: () => context.push('/bloques'),
           ),
         ],
       ),

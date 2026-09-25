@@ -76,7 +76,7 @@ class EcranMoi extends ConsumerWidget {
             children: [
               const _Stat('128', 'Abonnés', route: '/abonnes/moi'),
               _Stat(
-                '${etat.suivis.length + 3}',
+                '${etat.suivis.length}',
                 'Abonnements',
                 route: '/abonnes/moi?onglet=1',
               ),

@@ -201,7 +201,7 @@ class LiveState {
     this.demandeEnvoyee = false,
     this.credits = 20,
     this.documents = const [],
-    this.suivis = const {'grace'},
+    this.suivis = const {'grace', 'kimbembe', 'palmiers', 'bantu', 'ingrid'},
     this.favoris = const {'b3'},
     this.reclamations = const [],
     this.avisDonnes = const {},
@@ -219,6 +219,10 @@ class LiveState {
     this.candidatures = const {},
     this.contenusPublies = const [],
     this.opportunitesPubliees = const [],
+    this.bloques = const {'inconnu1', 'inconnu2'},
+    this.retires = const {},
+    this.sourdine = const {},
+    this.cloches = const {'kimbembe'},
   });
 
   final bool connecte;
@@ -272,6 +276,13 @@ class LiveState {
   final List<String> contenusPublies;
   final List<String> opportunitesPubliees;
 
+  /// Relations : comptes bloqués, abonnés retirés, comptes en sourdine,
+  /// comptes dont on reçoit chaque publication (cloche).
+  final Set<String> bloques;
+  final Set<String> retires;
+  final Set<String> sourdine;
+  final Set<String> cloches;
+
   bool get identiteVerifiee => niveau >= 2;
 
   int get enAttente =>
@@ -311,6 +322,10 @@ class LiveState {
     Set<String>? candidatures,
     List<String>? contenusPublies,
     List<String>? opportunitesPubliees,
+    Set<String>? bloques,
+    Set<String>? retires,
+    Set<String>? sourdine,
+    Set<String>? cloches,
   }) {
     return LiveState(
       connecte: connecte ?? this.connecte,
@@ -345,6 +360,10 @@ class LiveState {
       candidatures: candidatures ?? this.candidatures,
       contenusPublies: contenusPublies ?? this.contenusPublies,
       opportunitesPubliees: opportunitesPubliees ?? this.opportunitesPubliees,
+      bloques: bloques ?? this.bloques,
+      retires: retires ?? this.retires,
+      sourdine: sourdine ?? this.sourdine,
+      cloches: cloches ?? this.cloches,
     );
   }
 }

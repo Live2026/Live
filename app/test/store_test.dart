@@ -142,4 +142,19 @@ void main() {
     store().refuserVente('LV-00479', 'Rupture de stock');
     expect(etat().ventes.any((v) => v.id == 'LV-00479'), isFalse);
   });
+
+  test('bloquer retire l’abonnement ; débloquer ; sourdine et cloche', () {
+    expect(etat().suivis, contains('kimbembe'));
+    store().bloquer('kimbembe');
+    expect(etat().suivis, isNot(contains('kimbembe')));
+    expect(etat().bloques, contains('kimbembe'));
+    store().debloquer('kimbembe');
+    expect(etat().bloques, isNot(contains('kimbembe')));
+    store().basculerSourdine('grace');
+    expect(etat().sourdine, contains('grace'));
+    store().basculerCloche('kimbembe');
+    expect(etat().cloches, isNot(contains('kimbembe')));
+    store().retirerAbonne('jordy');
+    expect(etat().retires, contains('jordy'));
+  });
 }

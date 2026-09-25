@@ -179,6 +179,8 @@ class Compte {
     this.verifie = false,
     this.abonnes = 0,
     this.route,
+    this.enCommun = const [],
+    this.recent = false,
   });
   final String id;
   final String nom;
@@ -190,6 +192,12 @@ class Compte {
 
   /// Page ouverte au toucher (boutique, profil…).
   final String? route;
+
+  /// Relations en commun (« Suivi par Merveille K. et 2 autres »).
+  final List<String> enCommun;
+
+  /// Nouvelle vidéo ou direct récent (anneau autour de l'avatar).
+  final bool recent;
 }
 
 /// Activité récente d'un compte suivi (fil « Suivis »).

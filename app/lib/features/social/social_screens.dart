@@ -8,10 +8,19 @@ import '../../core/theme.dart';
 import '../../data/mock.dart';
 import '../../data/store.dart';
 import '../../shared/animations.dart';
+import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
 
-/// E-SOC-01 — Abonnés et abonnements, avec filtres par type de compte
-/// (personnes, organisations, créateurs, enseignants).
+part 'relations_lignes.dart';
+part 'suivis.dart';
+part 'bloques.dart';
+
+enum _Tri { recents, nom, populaires }
+
+/// E-SOC-01 — Mes relations, comme les grandes applications : abonnés,
+/// abonnements et suggestions ; recherche, filtres par type de compte, tri,
+/// « Vous suit », « Suivre en retour », menu par compte (retirer, sourdine,
+/// cloche, bloquer, signaler) et invitation des contacts.
 class EcranAbonnes extends ConsumerStatefulWidget {
   const EcranAbonnes({super.key, required this.id, this.onglet = 0});
   final String id;
@@ -24,355 +33,311 @@ class EcranAbonnes extends ConsumerStatefulWidget {
 class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
   late var _onglet = widget.onglet;
   TypeCompte? _filtre;
+  var _tri = _Tri.recents;
+  final _recherche = TextEditingController();
+  final _ecartes = <String>{};
+
+  List<Compte> _trier(List<Compte> l) => switch (_tri) {
+    _Tri.recents => l,
+    _Tri.nom => [...l]..sort((a, b) => a.nom.compareTo(b.nom)),
+    _Tri.populaires => [...l]..sort((a, b) => b.abonnes.compareTo(a.abonnes)),
+  };
 
   @override
   Widget build(BuildContext context) {
-    final suivis = ref.watch(liveProvider.select((e) => e.suivis));
+    final etat = ref.watch(liveProvider);
+    final abonnes = abonnesDemo
+        .where(
+          (c) => !etat.retires.contains(c.id) && !etat.bloques.contains(c.id),
+        )
+        .toList();
+    final idsAbonnes = {for (final c in abonnes) c.id};
     final abonnements = comptes
-        .where((c) => suivis.contains(c.id) || c.verifie)
+        .where((c) => etat.suivis.contains(c.id))
         .toList();
-    final source = _onglet == 0 ? abonnesDemo : abonnements;
-    final liste = source
-        .where((c) => _filtre == null || c.type == _filtre)
+    final suggestions = comptes
+        .where(
+          (c) =>
+              !etat.suivis.contains(c.id) &&
+              !idsAbonnes.contains(c.id) &&
+              !etat.bloques.contains(c.id) &&
+              !_ecartes.contains(c.id),
+        )
         .toList();
+    final q = _recherche.text.trim().toLowerCase();
+    final source = [abonnes, abonnements, suggestions][_onglet];
+    final liste = _trier(
+      source
+          .where((c) => _filtre == null || c.type == _filtre)
+          .where((c) => q.isEmpty || c.nom.toLowerCase().contains(q))
+          .toList(),
+    );
     final marge = context.grandEcran ? 24.0 : 16.0;
+    final total = [
+      abonnes.length + 122,
+      abonnements.length,
+      suggestions.length,
+    ];
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes relations')),
+      appBar: AppBar(
+        title: const Text('Mes relations'),
+        actions: [
+          IconButton(
+            tooltip: 'Inviter des contacts',
+            onPressed: () => _inviter(context),
+            icon: const Icon(Icons.person_add_alt_1_outlined),
+          ),
+          IconButton(
+            tooltip: 'Comptes bloqués',
+            onPressed: () => context.push('/bloques'),
+            icon: Badge(
+              isLabelVisible: etat.bloques.isNotEmpty,
+              label: Text('${etat.bloques.length}'),
+              child: const Icon(Icons.block_rounded),
+            ),
+          ),
+        ],
+      ),
       body: ListView(
-        padding: const EdgeInsets.only(bottom: 24),
+        padding: const EdgeInsets.only(bottom: 32),
         children: [
+          _OngletsRelations(
+            actif: _onglet,
+            libelles: ['Abonnés', 'Abonnements', 'Suggestions'],
+            nombres: total,
+            onTap: (i) => setState(() => _onglet = i),
+          ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: marge),
+            padding: EdgeInsets.fromLTRB(marge, 12, marge, 4),
             child: Row(
               children: [
-                for (final (i, t) in [
-                  '${abonnesDemo.length + 122} abonnés',
-                  '${abonnements.length} abonnements',
-                ].indexed)
-                  Expanded(
-                    child: InkWell(
-                      onTap: () => setState(() => _onglet = i),
-                      child: Container(
-                        height: 48,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 3,
-                              color: _onglet == i
-                                  ? LiveColors.bleu
-                                  : const Color(0xFFE4E8EE),
+                Expanded(
+                  child: TextField(
+                    controller: _recherche,
+                    onChanged: (_) => setState(() {}),
+                    textInputAction: TextInputAction.search,
+                    decoration: InputDecoration(
+                      hintText: 'Rechercher un nom',
+                      prefixIcon: const Icon(Icons.search_rounded),
+                      suffixIcon: q.isEmpty
+                          ? null
+                          : IconButton(
+                              tooltip: 'Effacer',
+                              onPressed: () => setState(_recherche.clear),
+                              icon: const Icon(Icons.close_rounded),
                             ),
-                          ),
-                        ),
-                        child: Text(
-                          t,
-                          style: TextStyle(
-                            fontWeight: _onglet == i
-                                ? FontWeight.w800
-                                : FontWeight.w500,
-                            color: _onglet == i
-                                ? LiveColors.nuit
-                                : LiveColors.gris,
-                          ),
-                        ),
-                      ),
                     ),
                   ),
+                ),
+                const SizedBox(width: 8),
+                PopupMenuButton<_Tri>(
+                  tooltip: 'Trier',
+                  initialValue: _tri,
+                  onSelected: (t) => setState(() => _tri = t),
+                  icon: const Icon(Icons.swap_vert_rounded),
+                  itemBuilder: (_) => const [
+                    PopupMenuItem(
+                      value: _Tri.recents,
+                      child: Text('Les plus récents'),
+                    ),
+                    PopupMenuItem(
+                      value: _Tri.nom,
+                      child: Text('Nom, de A à Z'),
+                    ),
+                    PopupMenuItem(
+                      value: _Tri.populaires,
+                      child: Text('Les plus suivis'),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
           SizedBox(
-            height: 52,
+            height: 48,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.fromLTRB(marge, 8, marge, 0),
+              padding: EdgeInsets.fromLTRB(marge, 6, marge, 0),
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ChoiceChip(
-                    label: const Text('Tous'),
-                    selected: _filtre == null,
-                    onSelected: (_) => setState(() => _filtre = null),
-                  ),
-                ),
-                for (final t in TypeCompte.values)
+                for (final t in <TypeCompte?>[null, ...TypeCompte.values])
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ChoiceChip(
-                      label: Text(t.pluriel),
+                      label: Text(t?.pluriel ?? 'Tous'),
                       selected: _filtre == t,
-                      onSelected: (_) =>
-                          setState(() => _filtre = _filtre == t ? null : t),
+                      onSelected: (_) => setState(() => _filtre = t),
                     ),
                   ),
               ],
             ),
           ),
-          if (liste.isEmpty)
-            const EtatVide(
-              icone: Icons.people_outline_rounded,
-              texte: 'Aucun compte dans cette catégorie.',
+          if (_onglet == 2) ...[
+            Padding(
+              padding: EdgeInsets.fromLTRB(marge, 8, marge, 4),
+              child: _CarteInviter(onTap: () => _inviter(context)),
             ),
-          for (final (i, c) in liste.indexed)
-            Apparition(
-              rang: i,
-              child: _LigneCompte(compte: c, marge: marge),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: marge),
+              child: const EnTeteSection('Vous pourriez les connaître'),
             ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(marge, 16, marge, 0),
-            child: OutlinedButton.icon(
-              onPressed: () => context.push('/suivis'),
-              icon: const Icon(Icons.dynamic_feed_rounded),
-              label: const Text('Voir l’activité de mes abonnements'),
+            if (liste.isEmpty) const _Vide(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: marge),
+              child: GrilleAdaptative(
+                largeurMax: 200,
+                espacement: 10,
+                hauteur: 248,
+                enfants: [
+                  for (final (i, c) in liste.indexed)
+                    Apparition(
+                      rang: i,
+                      child: _CarteSuggestion(
+                        compte: c,
+                        onEcarter: () => setState(() => _ecartes.add(c.id)),
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
+          ] else ...[
+            Padding(
+              padding: EdgeInsets.fromLTRB(marge, 10, marge, 4),
+              child: Text(
+                q.isEmpty
+                    ? (_onglet == 0
+                          ? 'Les personnes qui vous suivent'
+                          : 'Les comptes que vous suivez')
+                    : '${liste.length} résultat${liste.length > 1 ? 's' : ''} pour « ${_recherche.text.trim()} »',
+                style: const TextStyle(color: LiveColors.gris, fontSize: 13),
+              ),
+            ),
+            if (liste.isEmpty) const _Vide(),
+            for (final (i, c) in liste.indexed)
+              Apparition(
+                rang: i,
+                child: _LigneCompte(
+                  compte: c,
+                  marge: marge,
+                  abonne: idsAbonnes.contains(c.id),
+                  ongletAbonnes: _onglet == 0,
+                ),
+              ),
+            if (_onglet == 1)
+              Padding(
+                padding: EdgeInsets.fromLTRB(marge, 16, marge, 0),
+                child: OutlinedButton.icon(
+                  onPressed: () => context.push('/suivis'),
+                  icon: const Icon(Icons.dynamic_feed_rounded),
+                  label: const Text('Voir l’activité de mes abonnements'),
+                ),
+              ),
+          ],
         ],
       ),
     );
   }
 }
 
-/// Ligne d'un compte : avatar, nom, type, bio et bouton Suivre.
-class _LigneCompte extends ConsumerWidget {
-  const _LigneCompte({required this.compte, required this.marge});
-  final Compte compte;
-  final double marge;
+class _Vide extends StatelessWidget {
+  const _Vide();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final c = compte;
-    final suivi = ref.watch(
-      liveProvider.select((e) => e.suivis.contains(c.id)),
-    );
-    return InkWell(
-      onTap: c.route == null ? null : () => context.push(c.route!),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: marge, vertical: 8),
-        child: Row(
-          children: [
-            Avatar(
-              nom: c.nom,
-              couleur: c.couleur,
-              taille: 48,
-              verifie: c.verifie,
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    c.nom,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                  Text(
-                    '${c.type.libelle} · ${compact(c.abonnes)} abonnés',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: LiveColors.gris,
-                      fontSize: 12.5,
-                    ),
-                  ),
-                  Text(
-                    c.bio,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 13),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 8),
-            SizedBox(
-              width: 96,
-              child: suivi
-                  ? OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        minimumSize: const Size(0, 36),
-                        padding: EdgeInsets.zero,
-                      ),
-                      onPressed: () =>
-                          ref.read(liveProvider.notifier).basculerSuivi(c.id),
-                      child: const Text('Abonné'),
-                    )
-                  : FilledButton(
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size(0, 36),
-                        padding: EdgeInsets.zero,
-                      ),
-                      onPressed: () =>
-                          ref.read(liveProvider.notifier).basculerSuivi(c.id),
-                      child: const Text('Suivre'),
-                    ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => const EtatVide(
+    icone: Icons.person_search_rounded,
+    texte: 'Aucun compte ne correspond.',
+  );
 }
 
-/// E-SOC-02 — Activité des comptes suivis : cours, bourses, articles,
-/// logements et directs, comme un fil d'abonnements.
-class EcranSuivis extends StatelessWidget {
-  const EcranSuivis({super.key});
+/// Onglets soulignés avec un trait qui glisse sous l'onglet actif.
+class _OngletsRelations extends StatelessWidget {
+  const _OngletsRelations({
+    required this.actif,
+    required this.libelles,
+    required this.nombres,
+    required this.onTap,
+  });
+  final int actif;
+  final List<String> libelles;
+  final List<int> nombres;
+  final ValueChanged<int> onTap;
 
   @override
   Widget build(BuildContext context) {
-    final marge = context.grandEcran ? 24.0 : 16.0;
-    return Scaffold(
-      appBar: AppBar(title: const Text('Mes abonnements')),
-      body: ListView(
-        padding: const EdgeInsets.only(bottom: 24),
-        children: [
-          SizedBox(
-            height: 100,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.fromLTRB(marge, 8, marge, 0),
-              itemCount: activitesSuivis.length,
-              separatorBuilder: (_, _) => const SizedBox(width: 14),
-              itemBuilder: (_, i) {
-                final c = activitesSuivis[i].compte;
-                return Semantics(
-                  button: true,
-                  label: c.nom,
-                  excludeSemantics: true,
-                  child: Pressable(
-                    onTap: () => context.push(activitesSuivis[i].route),
-                    child: SizedBox(
-                      width: 72,
-                      child: Column(
-                        children: [
-                          Avatar(
-                            nom: c.nom,
-                            couleur: c.couleur,
-                            taille: 58,
-                            anneau: true,
+    return LayoutBuilder(
+      builder: (context, c) {
+        final largeur = c.maxWidth / libelles.length;
+        return SizedBox(
+          height: 58,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Container(height: 1, color: const Color(0xFFE4E8EE)),
+              ),
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 260),
+                curve: courbeDouce,
+                left: largeur * actif + 16,
+                width: largeur - 32,
+                bottom: 0,
+                child: Container(
+                  height: 3,
+                  decoration: BoxDecoration(
+                    color: LiveColors.bleu,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  for (final (i, l) in libelles.indexed)
+                    Expanded(
+                      child: Semantics(
+                        button: true,
+                        selected: actif == i,
+                        label: '${nombres[i]} $l',
+                        excludeSemantics: true,
+                        child: InkWell(
+                          onTap: () => onTap(i),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ChiffreAnime(
+                                valeur: nombres[i],
+                                format: (n) => '$n',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w800,
+                                  color: actif == i
+                                      ? LiveColors.nuit
+                                      : LiveColors.gris,
+                                ),
+                              ),
+                              Text(
+                                l,
+                                style: TextStyle(
+                                  fontSize: 12.5,
+                                  color: actif == i
+                                      ? LiveColors.nuit
+                                      : LiveColors.gris,
+                                  fontWeight: actif == i
+                                      ? FontWeight.w700
+                                      : FontWeight.w500,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            c.nom,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
+                ],
+              ),
+            ],
           ),
-          const Divider(height: 16),
-          for (final (i, a) in activitesSuivis.indexed)
-            Apparition(
-              rang: i,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(marge, 6, marge, 6),
-                child: _CarteActivite(activite: a),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Carte d'activité : qui, quoi, aperçu cliquable. Hauteur fixe.
-class _CarteActivite extends StatelessWidget {
-  const _CarteActivite({required this.activite});
-  final Activite activite;
-
-  @override
-  Widget build(BuildContext context) {
-    final a = activite;
-    return Pressable(
-      onTap: () => context.push(a.route),
-      child: Bloc(
-        padding: 12,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Avatar(
-                  nom: a.compte.nom,
-                  couleur: a.compte.couleur,
-                  taille: 38,
-                  verifie: a.compte.verifie,
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: a.compte.nom,
-                          style: const TextStyle(fontWeight: FontWeight.w700),
-                        ),
-                        TextSpan(text: ' ${a.action}'),
-                      ],
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                const SizedBox(width: 6),
-                Text(
-                  a.quand,
-                  style: const TextStyle(color: LiveColors.gris, fontSize: 12),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: 72,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 108,
-                    child: Vignette(
-                      couleur: a.couleur,
-                      icone: a.icone,
-                      rayon: 8,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          a.titre,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontWeight: FontWeight.w700),
-                        ),
-                        Text(
-                          a.detail,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: LiveColors.gris,
-                            fontSize: 12.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+        );
+      },
     );
   }
 }

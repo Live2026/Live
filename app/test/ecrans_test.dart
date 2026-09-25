@@ -37,6 +37,8 @@ const routes = [
   '/abonnes/moi',
   '/abonnes/moi?onglet=1',
   '/suivis',
+  '/abonnes/moi?onglet=2',
+  '/bloques',
   '/enregistres',
   '/boutique/kimbembe',
   '/boutique/mbongui',

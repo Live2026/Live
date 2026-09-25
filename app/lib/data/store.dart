@@ -324,6 +324,31 @@ class LiveStore extends Notifier<LiveState> {
         : {...state.suivis, id},
   );
 
+  // ---- Relations ----
+
+  Set<String> _bascule(Set<String> s, String id) =>
+      s.contains(id) ? ({...s}..remove(id)) : {...s, id};
+
+  /// Bloquer : on ne se suit plus dans aucun sens, plus de messages.
+  void bloquer(String id) => state = state.copyWith(
+    bloques: {...state.bloques, id},
+    suivis: {...state.suivis}..remove(id),
+    retires: {...state.retires, id},
+  );
+
+  void debloquer(String id) =>
+      state = state.copyWith(bloques: {...state.bloques}..remove(id));
+
+  /// Retirer un abonné, sans le bloquer ni le prévenir.
+  void retirerAbonne(String id) =>
+      state = state.copyWith(retires: {...state.retires, id});
+
+  void basculerSourdine(String id) =>
+      state = state.copyWith(sourdine: _bascule(state.sourdine, id));
+
+  void basculerCloche(String id) =>
+      state = state.copyWith(cloches: _bascule(state.cloches, id));
+
   void basculerFavori(String id) => state = state.copyWith(
     favoris: state.favoris.contains(id)
         ? ({...state.favoris}..remove(id))
