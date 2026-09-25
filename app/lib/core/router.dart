@@ -23,17 +23,51 @@ import '../features/publish/publish_screen.dart';
 import '../features/services/services_screens.dart';
 import '../features/social/social_screens.dart';
 import '../features/test/scenarios_screen.dart';
+import 'cadre_demarrage.dart';
 import 'navigation.dart';
 
-GoRoute _route(String chemin, Widget Function(GoRouterState s) ecran) =>
-    GoRoute(path: chemin, builder: (_, s) => ecran(s));
+/// Démarrage : marque à gauche, formulaire à droite sur ordinateur.
+const _demarrage = {
+  '/bienvenue',
+  '/telephone',
+  '/connexion',
+  '/code',
+  '/profil',
+  '/interets',
+  '/pin',
+};
+
+/// Pages qui occupent tout l'écran, même sur ordinateur : back-office (qui a
+/// sa propre barre), caméra, direct et lecteur.
+bool _pleinEcran(String chemin) =>
+    const {
+      '/demarrage',
+      '/publier/media',
+      '/direct/:id',
+      '/lecteur/:id',
+    }.contains(chemin) ||
+    chemin.startsWith('/admin');
+
+GoRoute _route(
+  String chemin,
+  Widget Function(GoRouterState s) ecran, {
+  bool cadre = true,
+}) => GoRoute(
+  path: chemin,
+  builder: (_, s) => _demarrage.contains(chemin)
+      ? CadreDemarrage(child: ecran(s))
+      : !cadre || _pleinEcran(chemin)
+      ? ecran(s)
+      : CadreOrdinateur(chemin: s.uri.path, child: ecran(s)),
+);
 
 String _p(GoRouterState s, String nom) => s.pathParameters[nom]!;
 
 final routeur = GoRouter(
-  initialLocation: '/bienvenue',
+  initialLocation: '/demarrage',
   routes: [
     // Démarrage et compte
+    _route('/demarrage', (_) => const EcranSplash()),
     _route('/bienvenue', (_) => const EcranBienvenue()),
     _route('/telephone', (_) => const EcranTelephone()),
     _route('/connexion', (_) => const EcranConnexion()),
@@ -62,7 +96,9 @@ final routeur = GoRouter(
           ('/ia', const EcranIa()),
           ('/moi', const EcranMoi()),
         ])
-          StatefulShellBranch(routes: [_route(chemin, (_) => ecran)]),
+          StatefulShellBranch(
+            routes: [_route(chemin, (_) => ecran, cadre: false)],
+          ),
       ],
     ),
     // Super-pouvoirs, profil et réglages
@@ -89,7 +125,7 @@ final routeur = GoRouter(
     _route('/bloques', (_) => const EcranBloques()),
     _route('/enregistres', (_) => const EcranEnregistres()),
     // Recherche
-    _route('/recherche', (_) => const EcranRecherche()),
+    _route('/recherche', (s) => EcranRecherche(initiale: s.extra as String?)),
     _route('/alertes', (_) => const EcranAlertes()),
     _route(
       '/carte',

@@ -149,6 +149,7 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
         child: BoutonsAssistant(
           etape: _etape,
           derniere: _etape == _titres.length - 1,
+          libelleFin: "Publier l'annonce",
           onRetour: () => setState(() => _etape--),
           onSuivant: _valide ? _suivant : null,
         ),

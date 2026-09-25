@@ -79,9 +79,28 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
       suggestions.length,
     ];
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mes relations'),
+      appBar: EnTeteRecherche(
+        titre: const Text('Mes relations'),
+        indice: 'Rechercher un nom',
+        onChanged: (v) => setState(() => _recherche.text = v),
         actions: [
+          PopupMenuButton<_Tri>(
+            tooltip: 'Trier',
+            initialValue: _tri,
+            onSelected: (t) => setState(() => _tri = t),
+            icon: const Icon(Icons.swap_vert_rounded),
+            itemBuilder: (_) => const [
+              PopupMenuItem(
+                value: _Tri.recents,
+                child: Text('Les plus récents'),
+              ),
+              PopupMenuItem(value: _Tri.nom, child: Text('Nom, de A à Z')),
+              PopupMenuItem(
+                value: _Tri.populaires,
+                child: Text('Les plus suivis'),
+              ),
+            ],
+          ),
           IconButton(
             tooltip: 'Inviter des contacts',
             onPressed: () => _inviter(context),
@@ -106,52 +125,6 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
             libelles: ['Abonnés', 'Abonnements', 'Suggestions'],
             nombres: total,
             onTap: (i) => setState(() => _onglet = i),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(marge, 12, marge, 4),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _recherche,
-                    onChanged: (_) => setState(() {}),
-                    textInputAction: TextInputAction.search,
-                    decoration: InputDecoration(
-                      hintText: 'Rechercher un nom',
-                      prefixIcon: const Icon(Icons.search_rounded),
-                      suffixIcon: q.isEmpty
-                          ? null
-                          : IconButton(
-                              tooltip: 'Effacer',
-                              onPressed: () => setState(_recherche.clear),
-                              icon: const Icon(Icons.close_rounded),
-                            ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                PopupMenuButton<_Tri>(
-                  tooltip: 'Trier',
-                  initialValue: _tri,
-                  onSelected: (t) => setState(() => _tri = t),
-                  icon: const Icon(Icons.swap_vert_rounded),
-                  itemBuilder: (_) => const [
-                    PopupMenuItem(
-                      value: _Tri.recents,
-                      child: Text('Les plus récents'),
-                    ),
-                    PopupMenuItem(
-                      value: _Tri.nom,
-                      child: Text('Nom, de A à Z'),
-                    ),
-                    PopupMenuItem(
-                      value: _Tri.populaires,
-                      child: Text('Les plus suivis'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
           ),
           SizedBox(
             height: 48,

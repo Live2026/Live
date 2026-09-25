@@ -30,15 +30,7 @@ class EcranRecu extends ConsumerWidget {
             padding: 20,
             child: Column(
               children: [
-                const Text(
-                  'LIVE',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 4,
-                    color: LiveColors.bleu,
-                    fontSize: 20,
-                  ),
-                ),
+                const LogoLive(taille: 30),
                 const SizedBox(height: 4),
                 const Text(
                   'Reçu de paiement',

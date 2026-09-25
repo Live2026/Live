@@ -8,6 +8,7 @@ import 'outils.dart';
 
 /// Tous les écrans du prototype, ouverts directement par leur adresse.
 const routes = [
+  '/demarrage',
   '/bienvenue',
   '/telephone',
   '/connexion',

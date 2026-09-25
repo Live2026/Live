@@ -30,7 +30,7 @@ async function bouton(nom, { exact = false } = {}) {
         let boite = await l.boundingBox();
         // Hors de l'écran : on fait défiler comme avec le doigt, puis on remesure.
         for (let i = 0; boite && boite.y + boite.height > 700 && i < 6; i++) {
-          await p.mouse.move(180, 400);
+          await p.mouse.move(LARGEUR > 700 ? LARGEUR * 0.6 : 180, 400);
           await p.mouse.wheel(0, 300);
           await p.waitForTimeout(400);
           boite = await l.boundingBox();
@@ -75,6 +75,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
   p.on('requestfailed', r => erreurs.push('Échec réseau : ' + r.url()));
   try {
     await p.goto(BASE, { waitUntil: 'networkidle' });
+    await p.waitForTimeout(700); await ecran('splash');
     await p.waitForTimeout(2500); await sem();
 
     // 0. Inscription
@@ -83,9 +84,9 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await saisir(0, '06 123 45 67');
     for (const c of await p.getByRole('checkbox').all()) await c.click();
     await ecran('inscription_telephone');
-    await bouton('Recevoir le code par SMS');
+    await bouton('Recevoir le code');
     await ecran('code_sms_vide');
-    await saisir(0, '123456'); await p.waitForTimeout(800);
+    await saisir('Code à 6 chiffres', '123456'); await p.waitForTimeout(800);
     await saisir('Prénom', 'Grâce'); await ecran('inscription_profil');
     await bouton('Continuer'); await ecran('code_secret');
     await pin(); await p.waitForTimeout(1200); await ecran('interets');
@@ -113,7 +114,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await saisir('Prix', '30000'); await ecran('vendre_prix'); await bouton('Continuer');
     await ecran('vendre_remise'); await bouton('Continuer');
     await bouton('Je certifie'); await ecran('vendre_apercu');
-    await bouton('Publier', { exact: true }); await p.waitForTimeout(1200); await ecran('annonce_publiee');
+    await bouton("Publier l'annonce"); await p.waitForTimeout(1200); await ecran('annonce_publiee');
     await bouton('Voir mes ventes'); await bouton('Accepter', { exact: true }); await ecran('mes_ventes');
     await bouton('Remettre le produit'); await ecran('remise_vendeur');
     await bouton("Scanner le QR de l'acheteur"); await p.waitForTimeout(2000); await ecran('scan');
@@ -183,6 +184,8 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['accueil', 'fil_partage', async () => { await fermer(); await bouton('210', { exact: true }); }],
       ['accueil', 'fil_options', async () => { await fermer(); await bouton('Plus', { exact: true }); }],
       ['explorer', 'explorer_retour'],
+      ['explorer', 'explorer_loupe', async () => { await bouton('Rechercher', { exact: true }); await p.keyboard.type('robe', { delay: 30 }); }],
+      ['code', 'code_aide', async () => { await bouton('Aide', { exact: true }); }],
       ['recherche', 'recherche_suggestions'],
       ['alertes', 'alertes'],
       ['notifications', 'notifications'],
@@ -217,6 +220,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['publier/bien', 'publier_bien'],
       ['publier/service', 'publier_service'],
       ['messages', 'messages'],
+      ['messages', 'messages_loupe', async () => { await bouton('Rechercher', { exact: true }); await p.keyboard.type('Grâce', { delay: 30 }); }],
       ['conversation', 'conversation'],
       ['conversation', 'conversation_lieu', async () => { await bouton('Joindre'); }],
       ['messages/demandes', 'messages_demandes'],
@@ -240,14 +244,14 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['gains', 'gains'],
       ['mes-ventes', 'mes_ventes_bilan'],
       ['mes-ventes', 'mes_ventes_outils', async () => { await bouton('Outils du vendeur'); }],
-      ['mes-ventes', 'mes_ventes_detail', async () => { await p.mouse.click(12, 500); await p.waitForTimeout(800); await sem(); await bouton('LV-00479'); }],
+      ['mes-ventes', 'mes_ventes_detail', async () => { await p.mouse.click(LARGEUR > 700 ? 400 : 12, 500); await p.waitForTimeout(800); await sem(); await bouton('LV-00479'); }],
       ['mes-ventes', 'mes_ventes_refus', async () => { await fermer(); await bouton('Refuser', { exact: true }); await bouton('Rupture de stock'); }],
       ['ia/documents', 'ia_mes_documents'],
       ['ia/business-plan', 'ia_business_plan'],
       ['ia/tuteur', 'ia_tuteur'],
       ['moi', 'moi'],
       ['moi', 'moi_menu', async () => { await bouton('Menu du profil'); }],
-      ['moi', 'moi_suite', async () => { await p.mouse.click(12, 500); await p.waitForTimeout(800); }],
+      ['moi', 'moi_suite', async () => { await p.mouse.click(LARGEUR > 700 ? 400 : 12, 500); await p.waitForTimeout(800); }],
       ['pouvoirs', 'pouvoirs'],
       ['live-pro', 'live_pro'],
       ['espace/nouveau', 'espace_creer'],
@@ -302,6 +306,12 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['fonds-createurs', 'fonds_createurs'],
       ['finance', 'finance'],
       ['partenaires', 'partenaires'],
+      // Ordinateur : barres latérales repliées puis dépliées.
+      ...(LARGEUR > 700 ? [
+        ['admin', 'admin_replie', async () => { await bouton('Replier le menu'); }],
+        ['studio', 'barre_repliee'],
+        ['studio', 'barre_depliee', async () => { await bouton('Déplier le menu'); }],
+      ] : []),
       ['groupe/g1', 'groupe'],
       ['groupe/g2', 'canal'],
     ];

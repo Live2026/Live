@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/adaptatif.dart';
 import '../../core/format.dart';
+import '../../core/navigation.dart';
 import '../../core/theme.dart';
 import '../../shared/widgets.dart';
 
@@ -37,10 +38,9 @@ class _CoqueAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final grand = context.grandEcran;
-    final menu = _MenuAdmin(section: section);
     return Scaffold(
       backgroundColor: const Color(0xFFF3F5F8),
-      drawer: grand ? null : Drawer(child: menu),
+      drawer: grand ? null : Drawer(child: _MenuAdmin(section: section)),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(titre),
@@ -70,7 +70,7 @@ class _CoqueAdmin extends StatelessWidget {
       body: grand
           ? Row(
               children: [
-                SizedBox(width: 240, child: menu),
+                _MenuAdmin(section: section, pliable: true),
                 const VerticalDivider(width: 1),
                 Expanded(child: corps),
               ],
@@ -81,74 +81,140 @@ class _CoqueAdmin extends StatelessWidget {
 }
 
 class _MenuAdmin extends StatelessWidget {
-  const _MenuAdmin({required this.section});
+  const _MenuAdmin({required this.section, this.pliable = false});
   final int section;
+
+  /// Vrai sur ordinateur : le menu se replie en colonne d'icônes.
+  final bool pliable;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: LiveColors.nuit,
-      child: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 8, 20, 20),
-            child: Text(
-              'LIVE · Back-office',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 1.5,
-              ),
-            ),
+    if (!pliable) return _contenu(context, true, false);
+    return ValueListenableBuilder<bool>(
+      valueListenable: barreRepliee,
+      builder: (context, replie, _) => AnimatedContainer(
+        duration: MediaQuery.disableAnimationsOf(context)
+            ? Duration.zero
+            : const Duration(milliseconds: 260),
+        curve: Curves.easeOutCubic,
+        width: replie ? 76 : 240,
+        child: ClipRect(
+          child: LayoutBuilder(
+            builder: (context, c) =>
+                _contenu(context, c.maxWidth > 170, replie),
           ),
-          for (final (i, (icone, nom, route)) in _sections.indexed)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-              child: Material(
-                color: i == section
-                    ? Colors.white.withValues(alpha: 0.12)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(8),
-                child: ListTile(
-                  dense: true,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  leading: Icon(
-                    icone,
-                    color: i == section
-                        ? Colors.white
-                        : const Color(0xFF9AA7B8),
-                  ),
-                  title: Text(
-                    nom,
-                    style: TextStyle(
-                      color: i == section
-                          ? Colors.white
-                          : const Color(0xFFD7DCE4),
-                      fontWeight: i == section
-                          ? FontWeight.w700
-                          : FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _contenu(BuildContext context, bool large, bool replie) {
+    Widget entree(IconData icone, String nom, bool actif, VoidCallback onTap) {
+      final teinte = actif ? Colors.white : const Color(0xFF9AA7B8);
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+        child: Tooltip(
+          message: large ? '' : nom,
+          child: Material(
+            color: actif
+                ? Colors.white.withValues(alpha: 0.12)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: onTap,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: large ? 14 : 0,
+                  vertical: 11,
+                ),
+                child: Row(
+                  mainAxisAlignment: large
+                      ? MainAxisAlignment.start
+                      : MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      icone,
+                      color: teinte,
+                      semanticLabel: large ? null : nom,
                     ),
-                  ),
-                  onTap: () => context.go(route),
+                    if (large) ...[
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Text(
+                          nom,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: actif
+                                ? Colors.white
+                                : const Color(0xFFD7DCE4),
+                            fontWeight: actif
+                                ? FontWeight.w700
+                                : FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
             ),
-          const Divider(color: Colors.white24, height: 32),
-          ListTile(
-            dense: true,
-            leading: const Icon(
-              Icons.phone_android_rounded,
-              color: Color(0xFF9AA7B8),
-            ),
-            title: const Text(
-              'Retour à l’application',
-              style: TextStyle(color: Color(0xFFD7DCE4)),
-            ),
-            onTap: () => context.go('/moi'),
           ),
+        ),
+      );
+    }
+
+    return Material(
+      color: LiveColors.nuit,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(large ? 20 : 0, 4, 12, 20),
+                  child: large
+                      ? const Row(
+                          children: [
+                            LogoLive(taille: 30, couleur: Colors.white),
+                            SizedBox(width: 8),
+                            Flexible(
+                              child: Text(
+                                'Back-office',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(color: Color(0xFFFBCC6A)),
+                              ),
+                            ),
+                          ],
+                        )
+                      : const Center(child: LogoLive(taille: 34, nom: false)),
+                ),
+                for (final (i, (icone, nom, route)) in _sections.indexed)
+                  entree(icone, nom, i == section, () => context.go(route)),
+                const Divider(color: Colors.white24, height: 32),
+                entree(
+                  Icons.phone_android_rounded,
+                  'Retour à l’application',
+                  false,
+                  () => context.go('/moi'),
+                ),
+              ],
+            ),
+          ),
+          if (pliable)
+            entree(
+              replie
+                  ? Icons.keyboard_double_arrow_right_rounded
+                  : Icons.keyboard_double_arrow_left_rounded,
+              replie ? 'Déplier le menu' : 'Replier le menu',
+              false,
+              () => barreRepliee.value = !replie,
+            ),
+          const SizedBox(height: 12),
         ],
       ),
     );

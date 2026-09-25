@@ -13,10 +13,15 @@ void main() {
     sansAnimations(tester);
 
     await tester.pumpWidget(const ProviderScope(child: LiveApp()));
+    await tester.pump();
+    // Écran d'ouverture, puis la bienvenue.
+    expect(find.text('La place de marché sociale'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 2));
     await tester.pumpAndSettle();
     expect(find.text('PROTOTYPE · aucune transaction réelle'), findsOneWidget);
     expect(find.text('Commencer'), findsOneWidget);
 
+    await tester.ensureVisible(find.text('Découvrir sans compte'));
     await tester.tap(find.text('Découvrir sans compte'));
     await tester.pumpAndSettle();
     expect(find.text('Pour toi'), findsOneWidget);

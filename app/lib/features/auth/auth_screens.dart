@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,97 +7,25 @@ import 'package:go_router/go_router.dart';
 import '../../core/adaptatif.dart';
 import '../../core/theme.dart';
 import '../../data/store.dart';
+import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
 
+part 'bienvenue.dart';
+part 'code_sms.dart';
 part 'connexion_interets.dart';
 
-/// E-AUTH-01 — Bienvenue.
-class EcranBienvenue extends ConsumerWidget {
-  const EcranBienvenue({super.key});
+/// Pays de la zone CEMAC : indicatif, exemple de numéro, opérateurs.
+const _paysCemac = [
+  ('Congo', '+242', '06 123 45 67', 'MTN, Airtel'),
+  ('Gabon', '+241', '077 12 34 56', 'Airtel, Moov'),
+  ('Cameroun', '+237', '6 71 23 45 67', 'MTN, Orange'),
+  ('Tchad', '+235', '66 12 34 56', 'Airtel, Moov'),
+  ('Centrafrique', '+236', '72 12 34 56', 'Orange, Telecel'),
+  ('Guinée équatoriale', '+240', '222 123 456', 'Muni, GETESA'),
+];
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Spacer(),
-              const Text(
-                'LIVE',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 44,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 10,
-                  color: LiveColors.bleu,
-                ),
-              ),
-              const SizedBox(height: 12),
-              const Text(
-                'Achetez, vendez, louez, réservez.\nPayez avec MTN MoMo, Airtel Money ou Visa.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, height: 1.4),
-              ),
-              const SizedBox(height: 24),
-              const Vignette(
-                couleur: LiveColors.bleu,
-                icone: Icons.storefront,
-                hauteur: 160,
-                video: true,
-              ),
-              const SizedBox(height: 24),
-              for (final t in const [
-                'Vendeurs vérifiés',
-                "Argent protégé jusqu'à réception",
-                'Près de chez vous',
-              ])
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.check_circle, color: LiveColors.bleu),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(t, style: const TextStyle(fontSize: 16)),
-                      ),
-                    ],
-                  ),
-                ),
-              const Spacer(),
-              FilledButton(
-                onPressed: () => context.push('/telephone'),
-                child: const Text('Commencer'),
-              ),
-              const SizedBox(height: 8),
-              OutlinedButton(
-                onPressed: () {
-                  ref
-                      .read(liveProvider.notifier)
-                      .connecter(
-                        prenom: 'Grâce',
-                        telephone: '06 123 45 67',
-                        operateur: 'MTN',
-                      );
-                  context.go('/accueil');
-                },
-                child: const Text('Découvrir sans compte'),
-              ),
-              TextButton(
-                onPressed: () => context.push('/connexion'),
-                child: const Text("J'ai déjà un compte"),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// E-AUTH-02 — Numéro de téléphone, avec consentements explicites.
+/// E-AUTH-02 — Numéro de téléphone : pays, numéro, opérateur détecté,
+/// consentements explicites.
 class EcranTelephone extends StatefulWidget {
   const EcranTelephone({super.key});
 
@@ -107,67 +37,138 @@ class _EcranTelephoneState extends State<EcranTelephone> {
   final _numero = TextEditingController();
   var _cgu = false;
   var _confidentialite = false;
+  var _pays = 0;
 
   String get _operateur {
+    if (_pays != 0) return '';
     final n = _numero.text.replaceAll(' ', '');
     if (n.startsWith('06')) return 'MTN';
     if (n.startsWith('05') || n.startsWith('04')) return 'Airtel';
     return '';
   }
 
+  Future<void> _choisirPays() async {
+    final choix = await choisir<int>(
+      context,
+      titre: 'Votre pays',
+      actuel: _pays,
+      options: [
+        for (final (i, (nom, indicatif, _, operateurs)) in _paysCemac.indexed)
+          (i, '$nom  $indicatif', operateurs),
+      ],
+    );
+    if (choix != null) setState(() => _pays = choix);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final (nom, indicatif, exemple, _) = _paysCemac[_pays];
     final valide =
-        _numero.text.replaceAll(' ', '').length >= 9 &&
+        _numero.text.replaceAll(' ', '').length >= 8 &&
         _cgu &&
         _confidentialite;
+    final operateur = _operateur;
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Apparition(
+              child: Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFF1E0),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Icon(
+                  Icons.phone_iphone_rounded,
+                  color: LiveColors.orangeVif,
+                  size: 32,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
           const Text(
             'Votre numéro de téléphone',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           const Text(
-            'Pour vous connecter et recevoir vos paiements Mobile Money.',
+            'Il sert à vous connecter et à recevoir vos paiements '
+            'Mobile Money. Il n’est jamais affiché sur votre profil.',
+            style: TextStyle(color: LiveColors.gris, height: 1.4),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 22),
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 14,
+              Material(
+                color: const Color(0xFFF3F5F8),
+                borderRadius: BorderRadius.circular(8),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(8),
+                  onTap: _choisirPays,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 15,
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          indicatif,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const Icon(Icons.expand_more_rounded, size: 20),
+                      ],
+                    ),
+                  ),
                 ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: const Text('+242', style: TextStyle(fontSize: 16)),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: TextField(
                   controller: _numero,
                   keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(hintText: '06 123 45 67'),
+                  style: const TextStyle(fontSize: 17, letterSpacing: 1),
+                  decoration: InputDecoration(
+                    hintText: exemple,
+                    helperText: nom,
+                  ),
                   onChanged: (_) => setState(() {}),
                 ),
               ),
             ],
           ),
-          if (_operateur.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Text(
-                'Opérateur détecté : $_operateur',
-                style: const TextStyle(color: LiveColors.bleu),
-              ),
-            ),
-          const SizedBox(height: 20),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 250),
+            child: operateur.isEmpty
+                ? const SizedBox(height: 8)
+                : Padding(
+                    key: ValueKey(operateur),
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Etiquette(
+                        '$operateur Mobile Money détecté',
+                        icone: Icons.check_circle_rounded,
+                        fond: operateur == 'MTN'
+                            ? const Color(0xFFFFF4C2)
+                            : const Color(0xFFFDE2E2),
+                        couleur: operateur == 'MTN'
+                            ? const Color(0xFF7A5A00)
+                            : const Color(0xFFB91C1C),
+                      ),
+                    ),
+                  ),
+          ),
+          const SizedBox(height: 14),
           CheckboxListTile(
             value: _cgu,
             onChanged: (v) => setState(() => _cgu = v ?? false),
@@ -190,63 +191,13 @@ class _EcranTelephoneState extends State<EcranTelephone> {
               ? () => context.push(
                   '/code',
                   extra: (
-                    _numero.text,
-                    _operateur.isEmpty ? 'MTN' : _operateur,
+                    '$indicatif ${_numero.text}',
+                    operateur.isEmpty ? 'MTN' : operateur,
                   ),
                 )
               : null,
-          child: const Text('Recevoir le code par SMS'),
+          child: const Text('Recevoir le code'),
         ),
-      ),
-    );
-  }
-}
-
-/// E-AUTH-03 — Code reçu par SMS (le prototype accepte n'importe quel code).
-class EcranCode extends StatelessWidget {
-  const EcranCode({
-    super.key,
-    required this.telephone,
-    required this.operateur,
-  });
-  final String telephone;
-  final String operateur;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
-        children: [
-          Text(
-            'Entrez le code reçu au\n$telephone',
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Prototype : tapez 6 chiffres au choix.',
-            style: TextStyle(color: LiveColors.gris),
-          ),
-          const SizedBox(height: 24),
-          TextField(
-            autofocus: true,
-            keyboardType: TextInputType.number,
-            maxLength: 6,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 28, letterSpacing: 12),
-            onChanged: (v) {
-              if (v.length == 6) {
-                context.push('/profil', extra: (telephone, operateur));
-              }
-            },
-          ),
-          TextButton(
-            onPressed: () =>
-                informer(context, 'Nouveau code envoyé par SMS au $telephone.'),
-            child: const Text('Renvoyer le code dans 0:45'),
-          ),
-        ],
       ),
     );
   }
