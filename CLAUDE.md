@@ -10,7 +10,7 @@ Ces règles s'appliquent à tout le code de Live (prototype `app/` et applicatio
 - les éléments réutilisés vont dans `app/lib/shared/` (voir ci-dessous), jamais recopiés d'un écran à l'autre ;
 - les données de démonstration sont rangées par domaine (`app/lib/data/donnees_*.dart`).
 
-Vérification : `find app/lib app/test -name "*.dart" | xargs wc -l | sort -n | tail` ; le plus gros fichier doit rester sous 500 lignes.
+Vérification : `find app/lib app/test -name "*.dart" ! -name "*.g.dart" | xargs wc -l | sort -n | tail` ; le plus gros fichier doit rester sous 500 lignes. Seule exception : les fichiers générés (`*.g.dart`, Drift), qu'on ne modifie jamais à la main et qu'on régénère avec `dart run build_runner build`.
 
 ## Composants réutilisables
 
@@ -30,6 +30,13 @@ Tout écran se construit avec la bibliothèque `app/lib/shared/` (importer `widg
 | `champ_code.dart`, `demarrage.dart` | `ChampCode` (six cases animées), `SloganAnime`, `PastilleEspace`, `FondDemarrage`, `EnTeteDemarrage` |
 | `plan_ville.dart`, `carte_interactive.dart` | `PlanVille` (plan ou satellite, trajet, position), `CarteInteractive` (zoom, ma position, vue rue) |
 | `juste_prix.dart`, `ville.dart` | `JustePrix` (fourchette du marché, Live IA), `TexteVille` (ville choisie au lieu d'une ville écrite en dur) |
+
+## Données locales (Drift)
+
+- Les écrans et `LiveStore` passent par les **dépôts** de `app/lib/data/depots/depots.dart` (réglages, brouillons, favoris, file d'envoi), jamais directement par Drift.
+- Chaque dépôt a une version en mémoire (tests, par défaut) et une version Drift (`depots_drift.dart`), branchée dans `main.dart`.
+- Tables dans `app/lib/data/local/base_locale.dart` ; toute modification de table augmente `schemaVersion` et ajoute sa migration.
+- L'argent ne passe jamais par la base locale ni par la file d'envoi (docs/26, §3.2).
 
 ## Règles de design
 

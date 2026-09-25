@@ -59,6 +59,15 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
   var _certifie = false;
   var _publie = false;
 
+  /// Brouillon trouvé sur l'appareil à l'ouverture (vendre_brouillon.dart).
+  BrouillonLocal? _aReprendre;
+
+  @override
+  void initState() {
+    super.initState();
+    _chercherBrouillon();
+  }
+
   int get _montant => int.tryParse(_prix.text.replaceAll(' ', '')) ?? 0;
 
   /// R-MKT-02 : pas de numéro de téléphone dans le titre ou la description.
@@ -100,9 +109,11 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
   void _suivant() {
     if (_etape < _titres.length - 1) {
       setState(() => _etape++);
+      _enregistrerBrouillon(silencieux: true);
       return;
     }
     ref.read(liveProvider.notifier).publier(_titre.text.trim(), _montant);
+    ref.read(depotBrouillonsProvider).supprimer(_idBrouillon);
     setState(() => _publie = true);
   }
 
@@ -128,9 +139,7 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
         title: const Text('Vendre un produit'),
         actions: [
           TextButton(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Brouillon enregistré.')),
-            ),
+            onPressed: _enregistrerBrouillon,
             child: const Text('Brouillon'),
           ),
         ],
@@ -138,6 +147,7 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
         children: [
+          if (_aReprendre != null) _bandeauBrouillon(_aReprendre!),
           EtapesAssistant(titres: _titres, etape: _etape),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 250),

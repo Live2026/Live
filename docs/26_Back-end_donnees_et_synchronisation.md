@@ -128,4 +128,14 @@ Le prototype est déjà prêt pour le transfert : choix de la devise, taux fixe 
 
 Chaque étape se termine comme aujourd'hui : analyse, tests, tests de bout en bout, galerie. On y ajoute les **tests pgTAP** du grand livre et de la RLS.
 
+## 8. État d'avancement (25/09/2026)
+
+| Élément | État |
+|---------|------|
+| Couche dépôt (`app/lib/data/depots/depots.dart`) | Fait : réglages, brouillons, favoris, file d'envoi ; version en mémoire et version Drift |
+| Base locale Drift (`app/lib/data/local/base_locale.dart`) | Fait : tables `parametres`, `brouillons`, `favoris`, `file_envoi` ; schéma v1 ; web par `sqlite3.wasm` et `drift_worker.js` (dossier `web/`) |
+| Premier domaine branché | Fait : ville, devise, économie de données, centres d'intérêt et favoris gardés entre deux ouvertures ; brouillon de vente repris à l'ouverture de « Vendre » |
+| Tests | Dépôts Drift sur SQLite en mémoire ; réouverture de l'application simulée |
+| À suivre | Tables `annonce_cache`, `conversation`, `message`, `notification` ; chiffrement SQLCipher (§3.3) ; rejouer la file d'envoi au retour du réseau quand Supabase sera branché |
+
 **Fin du Document 26**

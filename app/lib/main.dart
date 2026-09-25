@@ -3,9 +3,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/router.dart';
 import 'core/theme.dart';
+import 'data/depots/depots.dart';
+import 'data/depots/depots_drift.dart';
+import 'data/local/base_locale.dart';
 import 'shared/hors_connexion.dart';
 
-void main() => runApp(const ProviderScope(child: LiveApp()));
+/// Au démarrage, les dépôts passent de la mémoire à la base locale Drift
+/// (docs/26) : réglages, favoris, brouillons et file d'envoi survivent à la
+/// fermeture de l'application. Les tests gardent les dépôts en mémoire.
+void main() {
+  final base = BaseLocale.appareil();
+  runApp(
+    ProviderScope(
+      overrides: [
+        depotParametresProvider.overrideWithValue(DepotParametresDrift(base)),
+        depotBrouillonsProvider.overrideWithValue(DepotBrouillonsDrift(base)),
+        depotFavorisProvider.overrideWithValue(DepotFavorisDrift(base)),
+        depotFileEnvoiProvider.overrideWithValue(DepotFileEnvoiDrift(base)),
+      ],
+      child: const LiveApp(),
+    ),
+  );
+}
 
 class LiveApp extends StatelessWidget {
   const LiveApp({super.key});
