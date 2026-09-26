@@ -40,16 +40,16 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
     return Scaffold(
       endDrawer: const _OutilsVendeur(),
       appBar: AppBar(
-        title: const Text('Mes ventes'),
+        title: Text(context.t.marketMesVentes),
         actions: [
           IconButton(
-            tooltip: 'Booster une annonce',
+            tooltip: context.t.marketBoosterUneAnnonce,
             onPressed: () => ouvrirBoost(context, ref, 'Pagne wax 6 yards'),
             icon: const Icon(Icons.rocket_launch_outlined),
           ),
           Builder(
             builder: (ctx) => IconButton(
-              tooltip: 'Outils du vendeur',
+              tooltip: context.t.marketOutilsDuVendeur,
               onPressed: () => Scaffold.of(ctx).openEndDrawer(),
               icon: const Icon(Icons.menu_rounded),
             ),
@@ -69,31 +69,31 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
             largeurMax: 200,
             espacement: 10,
             hauteur: 112,
-            enfants: const [
+            enfants: [
               TuileChiffre(
-                libelle: 'Vues',
+                libelle: context.t.marketVues,
                 valeur: '1 240',
                 icone: Icons.visibility_outlined,
-                detail: '+12 % cette semaine',
+                detail: context.t.marketN12CetteSemaine,
               ),
               TuileChiffre(
-                libelle: 'Contacts',
+                libelle: context.t.marketContacts,
                 valeur: '86',
                 icone: Icons.chat_bubble_outline_rounded,
-                detail: 'messages et offres',
+                detail: context.t.marketMessagesEtOffres,
               ),
               TuileChiffre(
-                libelle: 'Conversion',
+                libelle: context.t.marketConversion,
                 valeur: '4,2 %',
                 icone: Icons.trending_up_rounded,
-                detail: 'des vues aux ventes',
+                detail: context.t.marketDesVuesAuxVentes,
                 couleur: LiveColors.succes,
               ),
               TuileChiffre(
-                libelle: 'Note clients',
+                libelle: context.t.marketNoteClients,
                 valeur: '4,8/5',
                 icone: Icons.star_rounded,
-                detail: '37 avis',
+                detail: context.t.marketN37Avis,
                 couleur: LiveColors.cuivre,
               ),
             ],
@@ -118,9 +118,9 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
             EtatVide(
               icone: Icons.inventory_2_outlined,
               texte: _onglet == 0
-                  ? 'Aucune commande à traiter.'
-                  : 'Rien ici pour le moment.',
-              action: 'Publier une annonce',
+                  ? context.t.marketAucuneCommandeATraiter
+                  : context.t.marketRienIciPourLe,
+              action: context.t.marketPublierUneAnnonce,
               onTap: () => context.push('/vendre'),
             )
           else
@@ -139,7 +139,7 @@ class _EcranMesVentesState extends ConsumerState<EcranMesVentes> {
               ],
             ),
           const _CoachIa(),
-          const EnTeteSection('Mes annonces'),
+          EnTeteSection(context.t.marketMesAnnonces),
           const _MesAnnonces(),
         ],
       ),
@@ -174,12 +174,12 @@ class _CarteRevenus extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Text('Vendu ce mois', style: blanc),
+              Text(context.t.marketVenduCeMois, style: blanc),
               Spacer(),
               Etiquette(
-                '+18 % vs août',
+                context.t.marketN18VsAout,
                 icone: Icons.north_east_rounded,
                 fond: Color(0x3322C55E),
                 couleur: Color(0xFF86EFAC),
@@ -207,7 +207,7 @@ class _CarteRevenus extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Disponible', style: blanc),
+                    Text(context.t.marketDisponible, style: blanc),
                     Text(
                       fcfaCourt(disponible),
                       style: const TextStyle(
@@ -222,7 +222,7 @@ class _CarteRevenus extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Bloqué par Live', style: blanc),
+                    Text(context.t.marketBloqueParLive, style: blanc),
                     Text(
                       fcfaCourt(bloque),
                       style: const TextStyle(
@@ -239,7 +239,7 @@ class _CarteRevenus extends StatelessWidget {
                   minimumSize: const Size(0, 40),
                 ),
                 onPressed: () => context.push('/retirer'),
-                child: const Text('Retirer'),
+                child: Text(context.t.marketRetirer),
               ),
             ],
           ),
@@ -276,12 +276,12 @@ class _GraphiqueVentes extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Commandes',
+                    Text(
+                      context.t.marketCommandes,
                       style: TextStyle(color: LiveColors.gris, fontSize: 13),
                     ),
                     Text(
-                      '$total sur $periode jours',
+                      context.t.marketTotalSurJours('$total', periode),
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w800,
@@ -294,7 +294,7 @@ class _GraphiqueVentes extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 6),
                   child: ChoiceChip(
-                    label: Text('$p j'),
+                    label: Text(context.t.marketNJours(p)),
                     selected: periode == p,
                     onSelected: (_) => onPeriode(p),
                   ),
@@ -368,12 +368,7 @@ class _AlerteDelai extends StatelessWidget {
         children: [
           const Icon(Icons.timer_outlined, color: LiveColors.cuivre),
           const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              '$nombre commande${nombre > 1 ? 's' : ''} à accepter avant '
-              '23 h 12. Sans réponse, l’acheteur est remboursé.',
-            ),
-          ),
+          Expanded(child: Text(context.t.marketCommandesAAccepter(nombre))),
         ],
       ),
     );
@@ -396,15 +391,15 @@ class _OngletsVentes extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: const Color(0xFFEFF2F6),
+        color: LiveColors.champ2,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
-          for (final (i, t) in const [
-            'À traiter',
-            'En cours',
-            'Terminées',
+          for (final (i, t) in [
+            context.t.marketATraiter,
+            context.t.marketEnCours,
+            context.t.marketTerminees,
           ].indexed)
             Expanded(
               child: Semantics(
@@ -419,7 +414,9 @@ class _OngletsVentes extends StatelessWidget {
                     curve: courbeDouce,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: actif == i ? Colors.white : Colors.transparent,
+                      color: actif == i
+                          ? LiveColors.surface
+                          : Colors.transparent,
                       borderRadius: BorderRadius.circular(9),
                       boxShadow: actif == i
                           ? const [
@@ -444,7 +441,7 @@ class _OngletsVentes extends StatelessWidget {
                                   ? FontWeight.w800
                                   : FontWeight.w500,
                               color: actif == i
-                                  ? LiveColors.nuit
+                                  ? LiveColors.encre
                                   : LiveColors.gris,
                             ),
                           ),
@@ -467,7 +464,7 @@ class _OngletsVentes extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 11.5,
                                 fontWeight: FontWeight.w800,
-                                color: i == 0 ? Colors.white : LiveColors.nuit,
+                                color: i == 0 ? Colors.white : LiveColors.encre,
                               ),
                             ),
                           ),

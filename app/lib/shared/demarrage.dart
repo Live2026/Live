@@ -1,152 +1,35 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 
-/// Ce que l'on fait sur Live : un verbe par espace, avec sa couleur.
-const versLive = [
-  ('Achetez', Color(0xFFFB9618)),
-  ('Vendez', Color(0xFFFCAF20)),
-  ('Louez', Color(0xFF34D399)),
-  ('Réservez', Color(0xFFF472B6)),
-  ('Apprenez', Color(0xFFA78BFA)),
-  ('Gagnez', Color(0xFF60A5FA)),
-];
+/// Posé par `CadreDemarrage` : la page s'affiche dans la carte du démarrage
+/// sur ordinateur, en version simple et centrée (façon WhatsApp Web).
+class DansCarte extends InheritedWidget {
+  const DansCarte({super.key, required super.child});
 
-/// Les espaces de Live, en pastilles colorées (écrans de démarrage).
-const espacesLive = [
-  (Icons.shopping_bag_rounded, 'Market', Color(0xFFFB9618)),
-  (Icons.home_work_rounded, 'Immo', Color(0xFF22C55E)),
-  (Icons.handyman_rounded, 'Services', Color(0xFF38BDF8)),
-  (Icons.podcasts_rounded, 'Directs', Color(0xFFF472B6)),
-  (Icons.school_rounded, 'Savoir', Color(0xFFA78BFA)),
-  (Icons.auto_awesome_rounded, 'Live IA', Color(0xFFFCAF20)),
-];
-
-/// Slogan dont le verbe change toutes les deux secondes : « Achetez »,
-/// « Vendez », « Louez »… Fixe quand les animations sont réduites.
-class SloganAnime extends StatefulWidget {
-  const SloganAnime({super.key, this.taille = 34, this.couleur = Colors.white});
-  final double taille;
-  final Color couleur;
+  static bool de(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<DansCarte>() != null;
 
   @override
-  State<SloganAnime> createState() => _SloganAnimeState();
+  bool updateShouldNotify(DansCarte ancien) => false;
 }
 
-class _SloganAnimeState extends State<SloganAnime> {
-  var _rang = 0;
-  Timer? _minuteur;
+/// Barre du haut des pages du démarrage. Sur ordinateur (dans
+/// `CadreDemarrage`), la flèche de retour est en haut à gauche de la page,
+/// comme sur WhatsApp : la barre n'en affiche pas une seconde.
+class BarreDemarrage extends StatelessWidget implements PreferredSizeWidget {
+  const BarreDemarrage({super.key, this.actions});
+  final List<Widget>? actions;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _minuteur?.cancel();
-    if (!MediaQuery.disableAnimationsOf(context)) {
-      _minuteur = Timer.periodic(
-        const Duration(milliseconds: 2000),
-        (_) => setState(() => _rang = (_rang + 1) % versLive.length),
-      );
-    }
-  }
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
-  void dispose() {
-    _minuteur?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final (verbe, couleur) = versLive[_rang];
-    final style = TextStyle(
-      fontSize: widget.taille,
-      height: 1.12,
-      fontWeight: FontWeight.w900,
-      color: widget.couleur,
-    );
-    return Semantics(
-      label: 'Achetez, vendez, louez, apprenez et gagnez, en toute confiance.',
-      excludeSemantics: true,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 450),
-            reverseDuration: const Duration(milliseconds: 120),
-            switchInCurve: courbeSortie,
-            transitionBuilder: (enfant, animation) => FadeTransition(
-              opacity: animation,
-              child: SlideTransition(
-                position: Tween(
-                  begin: const Offset(0, 0.35),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: enfant,
-              ),
-            ),
-            child: Text(
-              verbe,
-              key: ValueKey(verbe),
-              style: style.copyWith(color: couleur),
-            ),
-          ),
-          Text('en toute confiance.', style: style),
-        ],
-      ),
-    );
-  }
-}
-
-/// Courbe d'arrivée des éléments du démarrage.
-const courbeSortie = Curves.easeOutCubic;
-
-/// Pastille d'un espace : icône colorée et nom, sur fond sombre.
-class PastilleEspace extends StatelessWidget {
-  const PastilleEspace({
-    super.key,
-    required this.icone,
-    required this.nom,
-    required this.couleur,
-  });
-  final IconData icone;
-  final String nom;
-  final Color couleur;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(8, 6, 12, 6),
-      decoration: BoxDecoration(
-        color: const Color(0x1AFFFFFF),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0x26FFFFFF)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 26,
-            height: 26,
-            decoration: BoxDecoration(
-              color: couleur.withValues(alpha: 0.2),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(icone, size: 16, color: couleur),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            nom,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => AppBar(
+    automaticallyImplyLeading: !DansCarte.de(context),
+    actions: actions,
+  );
 }
 
 /// Fond du démarrage : dégradé nuit et halos de couleur qui respirent.
@@ -249,123 +132,64 @@ class _Halo extends StatelessWidget {
 }
 
 /// Étapes de l'inscription, pour la barre de progression.
-const etapesInscription = [
-  'Numéro',
-  'Code',
-  'Profil',
-  'Code secret',
-  'Intérêts',
-];
+/// Nombre d'étapes de l'inscription (numéro, code, profil, code secret,
+/// intérêts), pour la barre de progression.
+const nombreEtapesInscription = 5;
 
-/// En-tête d'une étape du démarrage : barre de progression en segments,
-/// grande icône sur un dégradé, titre et explication.
+/// En-tête des pages du démarrage, comme WhatsApp : titre et texte centrés.
+/// Pendant l'inscription, une petite mention « Étape 1 sur 5 » au-dessus.
 class EnTeteDemarrage extends StatelessWidget {
   const EnTeteDemarrage({
     super.key,
-    required this.icone,
-    required this.couleurs,
     required this.titre,
     required this.texte,
     this.etape,
   });
-  final IconData icone;
-
-  /// Deux couleurs du dégradé de l'icône (chaque étape a les siennes).
-  final List<Color> couleurs;
   final String titre;
   final String texte;
 
-  /// Rang dans [etapesInscription] ; nul hors inscription (connexion).
+  /// Rang parmi les [nombreEtapesInscription] étapes ; nul hors inscription (connexion).
   final int? etape;
 
   @override
   Widget build(BuildContext context) {
-    final reduit = MediaQuery.disableAnimationsOf(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (etape != null) ...[
-          Semantics(
-            label:
-                'Étape ${etape! + 1} sur ${etapesInscription.length} : '
-                '${etapesInscription[etape!]}',
-            excludeSemantics: true,
-            child: Row(
-              children: [
-                for (var i = 0; i < etapesInscription.length; i++) ...[
-                  if (i > 0) const SizedBox(width: 6),
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(3),
-                      child: TweenAnimationBuilder<double>(
-                        tween: Tween(begin: 0, end: i <= etape! ? 1 : 0),
-                        duration: reduit
-                            ? Duration.zero
-                            : Duration(milliseconds: 400 + 120 * i),
-                        curve: courbeSortie,
-                        builder: (_, v, _) => LinearProgressIndicator(
-                          value: v,
-                          minHeight: 5,
-                          color: couleurs.last,
-                          backgroundColor: const Color(0xFFE6EBF2),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            'Étape ${etape! + 1} sur ${etapesInscription.length} · '
-            '${etapesInscription[etape!]}',
-            style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
-          ),
-          const SizedBox(height: 18),
-        ],
-        TweenAnimationBuilder<double>(
-          tween: Tween(begin: reduit ? 1 : 0.6, end: 1),
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeOutBack,
-          builder: (_, e, enfant) => Transform.scale(
-            scale: e,
-            alignment: Alignment.centerLeft,
-            child: enfant,
-          ),
-          child: Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: couleurs,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+    return Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 26),
+      child: Column(
+        children: [
+          if (etape != null) ...[
+            Text(
+              context.t.etapeSur(etape! + 1, nombreEtapesInscription),
+              style: const TextStyle(
+                color: LiveColors.gris,
+                fontSize: 12.5,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.3,
               ),
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: couleurs.last.withValues(alpha: 0.3),
-                  blurRadius: 16,
-                  offset: const Offset(0, 6),
-                ),
-              ],
             ),
-            child: Icon(icone, color: Colors.white, size: 32),
+            const SizedBox(height: 8),
+          ],
+          Text(
+            titre,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: LiveColors.bleu,
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          titre,
-          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          texte,
-          style: const TextStyle(color: LiveColors.gris, height: 1.4),
-        ),
-        const SizedBox(height: 22),
-      ],
+          const SizedBox(height: 8),
+          Text(
+            texte,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: LiveColors.gris,
+              fontSize: 15,
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

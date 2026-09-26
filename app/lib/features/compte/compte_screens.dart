@@ -11,7 +11,10 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
+part 'legal.dart';
+part 'carte_argent.dart';
 part 'moi.dart';
 part 'pouvoirs_ecran.dart';
 part 'verifier.dart';

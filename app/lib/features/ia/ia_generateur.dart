@@ -10,7 +10,7 @@ class EcranGenerateur extends ConsumerStatefulWidget {
 }
 
 class _EcranGenerateurState extends ConsumerState<EcranGenerateur> {
-  late final ServiceIa _service = serviceParId(widget.serviceId);
+  late final ServiceIa _service = serviceParId(context.t, widget.serviceId);
   late final Map<String, TextEditingController> _champs = {
     for (final c in _service.champs)
       c.cle: TextEditingController(text: c.exemple),
@@ -148,7 +148,7 @@ class _EcranGenerateurState extends ConsumerState<EcranGenerateur> {
     final bouton = FilledButton.icon(
       onPressed: _generer,
       icon: const Icon(Icons.auto_awesome),
-      label: Text('Générer · ${s.prix} crédits'),
+      label: Text(context.t.iaGenererCredits(s.prix)),
     );
     return Scaffold(
       appBar: AppBar(
@@ -169,7 +169,7 @@ class _EcranGenerateurState extends ConsumerState<EcranGenerateur> {
                 style: OutlinedButton.styleFrom(minimumSize: const Size(0, 44)),
                 onPressed: _remplirProfil,
                 icon: const Icon(Icons.person),
-                label: const Text('Remplir avec mon profil Live'),
+                label: Text(context.t.iaRemplirAvecMonProfil),
               ),
             ),
           const SizedBox(height: 12),
@@ -185,10 +185,10 @@ class _EcranGenerateurState extends ConsumerState<EcranGenerateur> {
             ],
           ),
           if (s.id == 'cv' || s.id == 'lettre')
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 8),
               child: Text(
-                'L\'IA reformule vos informations ; elle n\'invente ni expérience ni diplôme.',
+                context.t.iaLIaReformuleVos,
                 style: TextStyle(color: LiveColors.gris),
               ),
             ),
@@ -200,17 +200,17 @@ class _EcranGenerateurState extends ConsumerState<EcranGenerateur> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Vous obtiendrez',
+                  Text(
+                    context.t.iaVousObtiendrez,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 6),
                   Text(s.description),
-                  const Text('Export PDF et Word · une révision gratuite'),
+                  Text(context.t.iaExportPdfEtWord),
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      const Text('Prix : '),
+                      Text(context.t.iaPrixDeux),
                       Credits(s.prix),
                       Text(
                         '  (${fcfa(s.prix * 10)})',
@@ -223,11 +223,7 @@ class _EcranGenerateurState extends ConsumerState<EcranGenerateur> {
             ),
           ),
           if (s.id.startsWith('bp'))
-            const BoutonEcouter(
-              'Répondez simplement aux questions sur votre projet. Live IA rédige ensuite un dossier '
-              'que vous pourrez modifier, télécharger et présenter à une banque ou à un partenaire. '
-              'Vérifiez toujours les chiffres avant de vous engager.',
-            ),
+            BoutonEcouter(context.t.iaRepondezSimplementAuxQuestions),
           if (context.grandEcran) ...[const SizedBox(height: 12), bouton],
         ],
       ),
@@ -264,36 +260,36 @@ class EcranDocument extends ConsumerWidget {
               ('Formation', _profil['formation']!),
               ('Compétences', _profil['competences']!),
             ],
-            quand: "à l'instant",
+            quand: context.t.iaALInstant,
           ),
         );
-    void simule(String quoi) => ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text('$quoi (simulé dans le prototype)')));
+    void simule(String quoi) =>
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(context.t.iaSimule(quoi))));
     final actions = Wrap(
       spacing: 8,
       runSpacing: 8,
       children: [
         FilledButton.icon(
           style: FilledButton.styleFrom(minimumSize: const Size(0, 48)),
-          onPressed: () => simule('Téléchargement du PDF'),
+          onPressed: () => simule(context.t.iaTelechargementDuPdf),
           icon: const Icon(Icons.picture_as_pdf),
-          label: const Text('Télécharger PDF'),
+          label: Text(context.t.iaTelechargerPdf),
         ),
         OutlinedButton(
           style: OutlinedButton.styleFrom(minimumSize: const Size(0, 48)),
-          onPressed: () => simule('Téléchargement Word'),
+          onPressed: () => simule(context.t.iaTelechargementWord),
           child: const Text('Word'),
         ),
         OutlinedButton(
           style: OutlinedButton.styleFrom(minimumSize: const Size(0, 48)),
-          onPressed: () => simule('Partage'),
-          child: const Text('Partager'),
+          onPressed: () => simule(context.t.iaPartage),
+          child: Text(context.t.partager),
         ),
         OutlinedButton(
           style: OutlinedButton.styleFrom(minimumSize: const Size(0, 48)),
-          onPressed: () => simule('Révision gratuite'),
-          child: const Text('Révision gratuite'),
+          onPressed: () => simule(context.t.iaRevisionGratuite),
+          child: Text(context.t.iaRevisionGratuite),
         ),
       ],
     );
@@ -302,8 +298,8 @@ class EcranDocument extends ConsumerWidget {
       body: DeuxColonnes(
         ratio: 2,
         principale: [
-          const Text(
-            'Document prêt',
+          Text(
+            context.t.iaDocumentPret,
             style: TextStyle(
               color: LiveColors.bleu,
               fontWeight: FontWeight.bold,
@@ -313,7 +309,7 @@ class EcranDocument extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: LiveColors.surface,
               border: Border.all(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(8),
               boxShadow: const [
@@ -329,7 +325,7 @@ class EcranDocument extends ConsumerWidget {
                     style: TextStyle(
                       fontSize: i == 0 ? 22 : 13,
                       fontWeight: FontWeight.bold,
-                      color: i == 0 ? Colors.black : LiveColors.bleu,
+                      color: i == 0 ? LiveColors.encre : LiveColors.bleu,
                       letterSpacing: i == 0 ? 0 : 0.8,
                     ),
                   ),
@@ -344,14 +340,14 @@ class EcranDocument extends ConsumerWidget {
         secondaire: [
           actions,
           const SizedBox(height: 12),
-          const Text(
-            'Généré avec Live IA : relisez avant d\'envoyer. Le document est conservé dans « Mes documents ».',
+          Text(
+            context.t.iaGenereAvecLiveIa,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 12),
           OutlinedButton(
             onPressed: () => context.go('/ia'),
-            child: const Text('Retour à Live IA'),
+            child: Text(context.t.iaRetourALiveIa),
           ),
         ],
       ),

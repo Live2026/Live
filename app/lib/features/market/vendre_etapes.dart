@@ -12,15 +12,15 @@ extension _EtapesVente on _EcranVendreState {
           child: TextButton.icon(
             onPressed: _rediger,
             icon: const Icon(Icons.auto_awesome, color: LiveColors.orange),
-            label: const Text('Rédiger avec Live IA · gratuit'),
+            label: Text(context.t.marketRedigerAvecLiveIa),
           ),
         ),
         TextField(
           controller: _titre,
           onChanged: (_) => _maj(() {}),
-          decoration: const InputDecoration(
-            labelText: 'Titre',
-            hintText: 'Ex. iPhone 11 64 Go',
+          decoration: InputDecoration(
+            labelText: context.t.marketTitre,
+            hintText: context.t.marketExIphone1164,
           ),
         ),
         for (final (nom, valeurs) in attributs) ...[
@@ -41,7 +41,10 @@ extension _EtapesVente on _EcranVendreState {
           ),
         ],
         const SizedBox(height: 14),
-        const Text('État', style: TextStyle(fontWeight: FontWeight.w700)),
+        Text(
+          context.t.marketEtat,
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
         const SizedBox(height: 6),
         Wrap(
           spacing: 8,
@@ -54,7 +57,7 @@ extension _EtapesVente on _EcranVendreState {
               'À réparer',
             ])
               ChoiceChip(
-                label: Text(e),
+                label: Text(etatAffiche(context.t, e)),
                 selected: _etat == e,
                 onSelected: (_) => _maj(() => _etat = e),
               ),
@@ -66,23 +69,21 @@ extension _EtapesVente on _EcranVendreState {
           onChanged: (_) => _maj(() {}),
           minLines: 3,
           maxLines: 5,
-          decoration: const InputDecoration(labelText: 'Description'),
+          decoration: InputDecoration(labelText: context.t.marketDescription),
         ),
         if (_interdit != null)
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              'Live n’accepte pas $_interdit (liste des objets interdits, '
-              'conditions d’utilisation).',
+              context.t.marketInterdit(_interdit!),
               style: const TextStyle(color: LiveColors.erreur),
             ),
           ),
         if (_coordonnees)
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(top: 8),
             child: Text(
-              'Retirez le numéro de téléphone : les échanges se font dans la '
-              'messagerie de Live, pour votre sécurité.',
+              context.t.marketRetirezLeNumeroDe,
               style: TextStyle(color: LiveColors.erreur),
             ),
           ),
@@ -103,8 +104,8 @@ extension _EtapesVente on _EcranVendreState {
           onChanged: (_) => _maj(() {}),
           keyboardType: TextInputType.number,
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
-          decoration: const InputDecoration(
-            labelText: 'Prix',
+          decoration: InputDecoration(
+            labelText: context.t.marketPrix,
             suffixText: 'FCFA',
           ),
         ),
@@ -114,16 +115,15 @@ extension _EtapesVente on _EcranVendreState {
             prix: prix,
             bas: 28000,
             haut: 34000,
-            base:
-                '38 ventes de ce modèle ces 3 derniers mois, dans votre ville',
+            base: context.t.marketN38VentesDeCe,
           ),
         ],
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           value: _negociable,
           onChanged: (v) => _maj(() => _negociable = v),
-          title: const Text('Prix négociable'),
-          subtitle: const Text('Les acheteurs peuvent faire une offre'),
+          title: Text(context.t.marketPrixNegociable),
+          subtitle: Text(context.t.marketLesAcheteursPeuventFaire),
         ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
@@ -132,23 +132,23 @@ extension _EtapesVente on _EcranVendreState {
             _promo = v;
             if (v && _ancien == 0) _ancien = (prix * 1.25).round();
           }),
-          title: const Text('Promotion'),
+          title: Text(context.t.marketPromotion),
           subtitle: Text(
             reduction > 0
-                ? 'Ancien prix ${fcfa(_ancien)} · −$reduction % affiché'
-                : 'Afficher l’ancien prix barré',
+                ? context.t.marketAncienPrix(fcfa(_ancien), reduction)
+                : context.t.marketAfficherLAncienPrix,
           ),
         ),
         Row(
           children: [
-            const Expanded(
+            Expanded(
               child: Text(
-                'Quantité en stock',
+                context.t.marketQuantiteEnStock,
                 style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
             IconButton.outlined(
-              tooltip: 'Moins',
+              tooltip: context.t.marketMoins,
               onPressed: _quantite > 1 ? () => _maj(() => _quantite--) : null,
               icon: const Icon(Icons.remove),
             ),
@@ -164,7 +164,7 @@ extension _EtapesVente on _EcranVendreState {
               ),
             ),
             IconButton.outlined(
-              tooltip: 'Plus',
+              tooltip: context.t.marketPlus,
               onPressed: () => _maj(() => _quantite++),
               icon: const Icon(Icons.add),
             ),
@@ -181,7 +181,10 @@ extension _EtapesVente on _EcranVendreState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Quartier', style: TextStyle(fontWeight: FontWeight.w700)),
+        Text(
+          context.t.marketQuartier,
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
         const SizedBox(height: 6),
         Wrap(
           spacing: 8,
@@ -206,18 +209,18 @@ extension _EtapesVente on _EcranVendreState {
           contentPadding: EdgeInsets.zero,
           value: _mainPropre,
           onChanged: (v) => _maj(() => _mainPropre = v),
-          title: const Text('Remise en main propre'),
-          subtitle: const Text('Dans un lieu public, confirmée par QR'),
+          title: Text(context.t.marketRemiseEnMainPropre),
+          subtitle: Text(context.t.marketDansUnLieuPublic),
         ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           value: _livraison,
           onChanged: (v) => _maj(() => _livraison = v),
-          title: const Text('Livraison par vos soins'),
+          title: Text(context.t.marketLivraisonParVosSoins),
           subtitle: Text(
             _livraison
-                ? '${fcfa(_fraisLivraison)} à Brazzaville'
-                : 'Non proposée',
+                ? context.t.marketFraisBrazzaville(fcfa(_fraisLivraison))
+                : context.t.marketNonProposee,
           ),
         ),
         if (_livraison)
@@ -233,23 +236,23 @@ extension _EtapesVente on _EcranVendreState {
             ],
           ),
         const SizedBox(height: 16),
-        const Text(
-          'Paiement',
+        Text(
+          context.t.marketPaiement,
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
         ),
         const SizedBox(height: 6),
         Choix(
-          titre: 'D’avance ou à la remise',
+          titre: context.t.marketDAvanceOuA,
           sousTitre: occasion
-              ? 'Recommandé pour l’occasion : l’acheteur voit l’objet, puis paie par MoMo via Live.'
-              : 'L’acheteur choisit. Vous êtes payé dans tous les cas via Live.',
+              ? context.t.marketRecommandePourLOccasion
+              : context.t.marketLAcheteurChoisitVous,
           icone: Icons.handshake_outlined,
           selectionne: !_avanceSeulement,
           onTap: () => _maj(() => _avanceSeulement = false),
         ),
         Choix(
-          titre: 'Exiger le paiement d’avance',
-          sousTitre: 'Argent bloqué par Live jusqu’au QR de remise.',
+          titre: context.t.marketExigerLePaiementD,
+          sousTitre: context.t.marketArgentBloqueParLive,
           icone: Icons.lock_clock_outlined,
           selectionne: _avanceSeulement,
           onTap: () => _maj(() => _avanceSeulement = true),
@@ -278,8 +281,8 @@ extension _EtapesVente on _EcranVendreState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Voici votre annonce dans le Market :',
+        Text(
+          context.t.marketVoiciVotreAnnonceDans,
           style: TextStyle(color: LiveColors.gris),
         ),
         const SizedBox(height: 8),
@@ -298,19 +301,24 @@ extension _EtapesVente on _EcranVendreState {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   for (final (k, v) in [
-                    ('Catégorie', _categorie ?? ''),
-                    ('Photos', '$_photos${_video ? ' + vidéo' : ''}'),
-                    ('Stock', '$_quantite'),
+                    (context.t.marketCategorie, _categorie ?? ''),
                     (
-                      'Remise',
+                      context.t.marketPhotos,
+                      '$_photos${_video ? ' + ${context.t.marketVideo}' : ''}',
+                    ),
+                    (context.t.marketStock, '$_quantite'),
+                    (
+                      context.t.marketRemise,
                       [
-                        if (_mainPropre) 'main propre',
-                        if (_livraison) 'livraison',
+                        if (_mainPropre) context.t.marketMainPropreMin,
+                        if (_livraison) context.t.marketLivraisonMin,
                       ].join(', '),
                     ),
                     (
-                      'Paiement',
-                      _avanceSeulement ? 'd’avance' : 'd’avance ou à la remise',
+                      context.t.marketPaiement,
+                      _avanceSeulement
+                          ? context.t.marketDavance
+                          : context.t.marketDavanceOuRemise,
                     ),
                   ])
                     Padding(
@@ -345,9 +353,7 @@ extension _EtapesVente on _EcranVendreState {
           controlAffinity: ListTileControlAffinity.leading,
           value: _certifie,
           onChanged: (v) => _maj(() => _certifie = v ?? false),
-          title: const Text(
-            'Je certifie que cet objet m’appartient et respecte les règles de Live.',
-          ),
+          title: Text(context.t.marketJeCertifieQueCet),
         ),
       ],
     );

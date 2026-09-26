@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/textes.dart';
 import 'modeles.dart';
 
 /// Modèles des espaces Apprendre (contenus numériques), Opportunités et des
@@ -16,6 +17,17 @@ extension InfoTypeContenu on TypeContenu {
     TypeContenu.serie => 'Série',
     TypeContenu.qcm => 'Exercices & QCM',
     TypeContenu.coaching => 'Coaching',
+  };
+
+  /// Libellé dans la langue choisie.
+  String libelleDe(Textes t) => switch (this) {
+    TypeContenu.cours => t.contenuCours,
+    TypeContenu.pdf => t.contenuPdf,
+    TypeContenu.video => t.contenuVideo,
+    TypeContenu.livre => t.contenuLivre,
+    TypeContenu.serie => t.contenuSerie,
+    TypeContenu.qcm => t.contenuQcm,
+    TypeContenu.coaching => t.contenuCoaching,
   };
 
   IconData get icone => switch (this) {
@@ -80,6 +92,16 @@ extension InfoTypeOpportunite on TypeOpportunite {
     TypeOpportunite.emploi => 'Emploi',
     TypeOpportunite.formation => 'Formation',
     TypeOpportunite.autre => 'Autre',
+  };
+
+  /// Libellé dans la langue choisie.
+  String libelleDe(Textes t) => switch (this) {
+    TypeOpportunite.bourse => t.opportuniteBourse,
+    TypeOpportunite.concours => t.opportuniteConcours,
+    TypeOpportunite.stage => t.opportuniteStage,
+    TypeOpportunite.emploi => t.opportuniteEmploi,
+    TypeOpportunite.formation => t.opportuniteFormation,
+    TypeOpportunite.autre => t.opportuniteAutre,
   };
 
   IconData get icone => switch (this) {
@@ -165,6 +187,21 @@ extension InfoTypeCompte on TypeCompte {
     TypeCompte.organisation => 'Organisations',
     TypeCompte.createur => 'Créateurs',
     TypeCompte.enseignant => 'Enseignants',
+  };
+
+  /// Libellés dans la langue choisie.
+  String libelleDe(Textes t) => switch (this) {
+    TypeCompte.personne => t.comptePersonne,
+    TypeCompte.organisation => t.compteOrganisation,
+    TypeCompte.createur => t.compteCreateur,
+    TypeCompte.enseignant => t.compteEnseignant,
+  };
+
+  String plurielDe(Textes t) => switch (this) {
+    TypeCompte.personne => t.comptePersonnes,
+    TypeCompte.organisation => t.compteOrganisations,
+    TypeCompte.createur => t.compteCreateurs,
+    TypeCompte.enseignant => t.compteEnseignants,
   };
 }
 

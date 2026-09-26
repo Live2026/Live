@@ -14,16 +14,16 @@ extension _FelicitationsVente on _EcranVendreState {
               const Spacer(),
               const CocheAnimee(taille: 96),
               const SizedBox(height: 8),
-              const Text(
-                'Félicitations !',
+              Text(
+                context.t.marketFelicitations,
                 style: TextStyle(
                   color: LiveColors.ambreClair,
                   fontSize: 28,
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              const Text(
-                'Votre annonce est en ligne',
+              Text(
+                context.t.marketVotreAnnonceEstEn,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -73,19 +73,19 @@ extension _FelicitationsVente on _EcranVendreState {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Partagez votre annonce',
+              Text(
+                context.t.marketPartagezVotreAnnonce,
                 style: TextStyle(color: Colors.white70),
               ),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (final (icone, nom) in const [
+                  for (final (icone, nom) in [
                     (Icons.chat_rounded, 'WhatsApp'),
                     (Icons.facebook_rounded, 'Facebook'),
-                    (Icons.amp_stories_rounded, 'Statut'),
-                    (Icons.link_rounded, 'Copier le lien'),
+                    (Icons.amp_stories_rounded, context.t.marketStatut),
+                    (Icons.link_rounded, context.t.marketCopierLeLien),
                   ])
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -98,8 +98,8 @@ extension _FelicitationsVente on _EcranVendreState {
                 ],
               ),
               const Spacer(),
-              const Text(
-                'Pour le test : une acheteuse (Merveille) vient de commander et de payer.',
+              Text(
+                context.t.marketPourLeTestUne,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white60, fontSize: 12.5),
               ),
@@ -111,13 +111,13 @@ extension _FelicitationsVente on _EcranVendreState {
                     backgroundColor: LiveColors.orangeVif,
                   ),
                   onPressed: () => context.go('/mes-ventes'),
-                  child: const Text('Voir mes ventes'),
+                  child: Text(context.t.marketVoirMesVentes),
                 ),
               ),
               TextButton(
                 onPressed: () => context.pushReplacement('/vendre'),
-                child: const Text(
-                  'Vendre un autre objet',
+                child: Text(
+                  context.t.marketVendreUnAutreObjet,
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -151,8 +151,8 @@ class _Gain extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Vous recevez',
+                Text(
+                  context.t.marketVousRecevez,
                   style: TextStyle(color: Colors.white70),
                 ),
                 ChiffreAnime(
@@ -165,7 +165,7 @@ class _Gain extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '100 % pendant l’offre de lancement, puis ${fcfa(net)} (6 %).',
+                  context.t.marketCentPourcentOffre(fcfa(net)),
                   style: const TextStyle(color: Colors.white70, fontSize: 12.5),
                 ),
               ],

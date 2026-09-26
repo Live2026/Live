@@ -10,22 +10,22 @@ class EcranVendreContenu extends ConsumerStatefulWidget {
 }
 
 class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
-  static const _titres = [
-    'Que vendez-vous ?',
-    'Informations',
-    'Fichiers',
-    'Prix',
-    'Aperçu gratuit',
-    'Vérification',
+  late final _titres = [
+    context.t.apprendreQueVendezVous,
+    context.t.apprendreInformations,
+    context.t.apprendreFichiers,
+    context.t.apprendrePrix,
+    context.t.apprendreApercuGratuit,
+    context.t.apprendreVerification,
   ];
   static const _prixProposes = [1000, 2500, 5000, 10000, 15000];
 
   var _etape = 0;
   var _type = TypeContenu.cours;
-  final _titre = TextEditingController(
-    text: 'Comptabilité pour les commerçants',
+  late final _titre = TextEditingController(
+    text: context.t.apprendreComptabiliteCommercants,
   );
-  var _niveau = 'Débutant';
+  late var _niveau = context.t.apprendreDebutant;
   final _fichiers = <String>['Leçon 1 · Bienvenue.mp4 · 38 Mo'];
   var _prix = 5000;
   var _apercu = 0;
@@ -45,7 +45,7 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
     if (_publie) return _succes(context);
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Vendre un contenu')),
+      appBar: AppBar(title: Text(context.t.apprendreVendreUnContenu)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
         children: [
@@ -83,16 +83,18 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
         children: [
           for (final t in TypeContenu.values)
             Choix(
-              titre: t.libelle,
+              titre: t.libelleDe(context.t),
               icone: t.icone,
               sousTitre: switch (t) {
-                TypeContenu.cours => 'Leçons vidéo avec exercices',
-                TypeContenu.pdf => 'Fiches, annales, modèles',
-                TypeContenu.video => 'Une vidéo ou un tutoriel',
-                TypeContenu.livre => 'ePub ou PDF',
-                TypeContenu.serie => 'Épisodes courts réguliers',
-                TypeContenu.qcm => 'Questions corrigées et chronométrées',
-                TypeContenu.coaching => 'Séance en direct, sur rendez-vous',
+                TypeContenu.cours =>
+                  context.t.apprendreLeconsVideoAvecExercices,
+                TypeContenu.pdf => context.t.apprendreFichesAnnalesModeles,
+                TypeContenu.video => context.t.apprendreUneVideoOuUn,
+                TypeContenu.livre => context.t.apprendreEpubOuPdf,
+                TypeContenu.serie => context.t.apprendreEpisodesCourtsReguliers,
+                TypeContenu.qcm =>
+                  context.t.apprendreQuestionsCorrigeesEtChronometrees,
+                TypeContenu.coaching => context.t.apprendreSeanceEnDirectSur,
               },
               selectionne: _type == t,
               onTap: () => setState(() => _type = t),
@@ -105,29 +107,32 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
           TextField(
             controller: _titre,
             onChanged: (_) => setState(() {}),
-            decoration: const InputDecoration(labelText: 'Titre'),
+            decoration: InputDecoration(labelText: context.t.apprendreTitre),
           ),
           const SizedBox(height: 12),
-          const TextField(
+          TextField(
             minLines: 3,
             maxLines: 5,
             decoration: InputDecoration(
-              labelText: 'Description',
-              hintText: 'Ce que l’élève saura faire à la fin…',
+              labelText: context.t.apprendreDescription,
+              hintText: context.t.apprendreCeQueLEleve,
             ),
           ),
           const SizedBox(height: 12),
-          const Text('Niveau', style: TextStyle(fontWeight: FontWeight.w700)),
+          Text(
+            context.t.apprendreNiveau,
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 6),
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: [
               for (final n in [
-                'Débutant',
-                'Intermédiaire',
-                'Terminale',
-                'Professionnel',
+                context.t.apprendreDebutant,
+                context.t.apprendreIntermediaire,
+                context.t.apprendreTerminale,
+                context.t.apprendreProfessionnel,
               ])
                 ChoiceChip(
                   label: Text(n),
@@ -154,16 +159,15 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
           OutlinedButton.icon(
             onPressed: () => setState(
               () => _fichiers.add(
-                'Leçon ${_fichiers.length + 1} · Exercices.pdf · 2 Mo',
+                context.t.apprendreLeconExercices(_fichiers.length + 1),
               ),
             ),
             icon: const Icon(Icons.upload_file_rounded),
-            label: const Text('Ajouter un fichier'),
+            label: Text(context.t.apprendreAjouterUnFichier),
           ),
           const SizedBox(height: 10),
-          const Text(
-            'Vidéos, PDF, ePub, images. Live prépare une version légère pour '
-            'les petits forfaits et reprend l’envoi après une coupure.',
+          Text(
+            context.t.apprendreVideosPdfEpubImages,
             style: TextStyle(color: LiveColors.gris),
           ),
         ],
@@ -187,17 +191,16 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
           Bloc(
             child: Column(
               children: [
-                LigneMontant('Prix payé par l’élève', _prix),
-                LigneMontant('Part de Live (15 %)', _prix - gain),
+                LigneMontant(context.t.apprendrePrixPayeParL, _prix),
+                LigneMontant(context.t.apprendrePartDeLive15, _prix - gain),
                 const Divider(),
-                LigneMontant('Vous recevez', gain, gras: true),
+                LigneMontant(context.t.apprendreVousRecevez, gain, gras: true),
               ],
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Versé sur votre solde Live à chaque vente, retirable sur MoMo '
-            'ou Airtel Money.',
+          Text(
+            context.t.apprendreVerseSurVotreSolde,
             style: TextStyle(color: LiveColors.gris),
           ),
         ],
@@ -205,7 +208,7 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
       4 => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Partie offerte en aperçu'),
+          Text(context.t.apprendrePartieOfferteEnApercu),
           const SizedBox(height: 6),
           for (final (i, f) in _fichiers.indexed)
             Choix(
@@ -217,10 +220,8 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
             contentPadding: EdgeInsets.zero,
             value: _bandeAnnonce,
             onChanged: (v) => setState(() => _bandeAnnonce = v),
-            title: const Text('Vidéo verticale de 30 s pour le fil'),
-            subtitle: const Text(
-              'Vos futurs élèves vous découvrent en défilant',
-            ),
+            title: Text(context.t.apprendreVideoVerticaleDe30),
+            subtitle: Text(context.t.apprendreVosFutursElevesVous),
           ),
         ],
       ),
@@ -237,8 +238,7 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
                 auteur: Vendeur(ref.watch(liveProvider).prenom),
                 prix: _prix,
                 couleur: const Color(0xFF0F766E),
-                format:
-                    '${_fichiers.length} fichier${_fichiers.length > 1 ? 's' : ''}',
+                format: context.t.apprendreNFichiers(_fichiers.length),
                 nouveau: true,
               ),
             ),
@@ -249,13 +249,10 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
             controlAffinity: ListTileControlAffinity.leading,
             value: _droits,
             onChanged: (v) => setState(() => _droits = v ?? false),
-            title: const Text(
-              'Je suis l’auteur de ce contenu ou j’ai le droit de le vendre.',
-            ),
+            title: Text(context.t.apprendreJeSuisLAuteur),
           ),
-          const Text(
-            'Live vérifie chaque contenu en moins de 24 h (qualité, droits, '
-            'contenu interdit) avant sa mise en vente.',
+          Text(
+            context.t.apprendreLiveVerifieChaqueContenu,
             style: TextStyle(color: LiveColors.gris),
           ),
         ],
@@ -272,20 +269,19 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
             children: [
               const Spacer(),
               const CocheAnimee(taille: 96),
-              const Text(
-                'Contenu envoyé',
+              Text(
+                context.t.apprendreContenuEnvoye,
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Text(
-                '« ${_titre.text} » est en vérification. Il sera en vente '
-                'dans moins de 24 h.',
+                context.t.apprendreEnVerification(_titre.text),
                 textAlign: TextAlign.center,
               ),
               const Spacer(),
               FilledButton(
                 onPressed: () => context.go('/apprendre/boutique'),
-                child: const Text('Voir ma boutique'),
+                child: Text(context.t.apprendreVoirMaBoutique),
               ),
             ],
           ),

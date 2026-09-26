@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 import 'animations.dart';
 
 part 'plan_satellite.dart';
@@ -131,7 +132,9 @@ class _Pastille extends StatelessWidget {
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 decoration: BoxDecoration(
-                  color: r.selectionne ? LiveColors.orangeVif : Colors.white,
+                  color: r.selectionne
+                      ? LiveColors.orangeVif
+                      : LiveColors.surface,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
                     color: r.selectionne ? LiveColors.orangeVif : r.couleur,
@@ -205,7 +208,7 @@ class _Fond extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
     final bord = Paint()
-      ..color = const Color(0xFFD7DCE4)
+      ..color = LiveColors.brume
       ..strokeWidth = 9
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;

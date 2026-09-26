@@ -30,13 +30,13 @@ class EcranContenu extends ConsumerWidget {
                   color: Colors.black.withValues(alpha: 0.45),
                   borderRadius: BorderRadius.circular(24),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.play_arrow_rounded, color: Colors.white),
                     SizedBox(width: 4),
                     Text(
-                      'Aperçu gratuit · 2 min',
+                      context.t.apprendreApercuGratuit2Min,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w700,
@@ -49,7 +49,10 @@ class EcranContenu extends ConsumerWidget {
             Positioned(
               left: 10,
               top: 10,
-              child: Etiquette(c.type.libelle, icone: c.type.icone),
+              child: Etiquette(
+                c.type.libelleDe(context.t),
+                icone: c.type.icone,
+              ),
             ),
           ],
         ),
@@ -65,39 +68,38 @@ class EcranContenu extends ConsumerWidget {
         runSpacing: 6,
         children: [
           Etiquette(
-            '${note(c.note)} · ${compact(c.avis)} avis',
+            context.t.apprendreNoteAvis(note(c.note), compact(c.avis)),
             icone: Icons.star_rounded,
-            fond: const Color(0xFFFFF1E0),
+            fond: LiveColors.teinteOrange,
             couleur: LiveColors.cuivre,
           ),
           Etiquette(
-            '${compact(c.ventes)} élèves',
+            context.t.apprendreNEleves(compact(c.ventes)),
             icone: Icons.people_alt_outlined,
-            fond: const Color(0xFFE6EBF2),
+            fond: LiveColors.voile,
             couleur: LiveColors.bleu,
           ),
-          Etiquette(
-            c.niveau,
-            fond: const Color(0xFFE6EBF2),
-            couleur: LiveColors.bleu,
-          ),
+          Etiquette(c.niveau, fond: LiveColors.voile, couleur: LiveColors.bleu),
         ],
       ),
       const SizedBox(height: 12),
       _Auteur(auteur: c.auteur),
       const SizedBox(height: 12),
       Text(c.description, style: const TextStyle(fontSize: 15)),
-      const EnTeteSection('Ce que vous obtenez'),
+      EnTeteSection(context.t.apprendreCeQueVousObtenez),
       for (final (icone, texte) in [
         (Icons.schedule_rounded, c.format),
-        (Icons.all_inclusive_rounded, 'Accès à vie, sur tous vos appareils'),
+        (Icons.all_inclusive_rounded, context.t.apprendreAccesAVieSur),
         (
           Icons.download_for_offline_outlined,
-          'Téléchargeable hors connexion · ${c.taille}',
+          context.t.apprendreHorsConnexion(c.taille),
         ),
         if (c.type == TypeContenu.cours)
-          (Icons.workspace_premium_outlined, 'Attestation Live à la fin'),
-        (Icons.forum_outlined, 'Questions à l’auteur dans Messages'),
+          (
+            Icons.workspace_premium_outlined,
+            context.t.apprendreAttestationLiveALa,
+          ),
+        (Icons.forum_outlined, context.t.apprendreQuestionsALAuteur),
       ])
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 4),
@@ -109,14 +111,14 @@ class EcranContenu extends ConsumerWidget {
             ],
           ),
         ),
-      const EnTeteSection('Programme'),
+      EnTeteSection(context.t.apprendreProgramme),
       for (final (i, titre) in c.programme.indexed)
         ListTile(
           contentPadding: EdgeInsets.zero,
           dense: true,
           leading: CircleAvatar(
             radius: 16,
-            backgroundColor: const Color(0xFFEFF2F6),
+            backgroundColor: LiveColors.champ2,
             child: Text(
               '${i + 1}',
               style: const TextStyle(fontWeight: FontWeight.w700),
@@ -137,15 +139,15 @@ class EcranContenu extends ConsumerWidget {
       BlocReglement(
         lignes: [
           LigneReglement(
-            'Prix',
+            context.t.apprendrePrix,
             Reglement.dansLive,
             montant: c.prix,
-            detail: 'Remboursé sous 48 h si le contenu ne correspond pas',
+            detail: context.t.apprendreRembourseSous48H,
           ),
         ],
-        note: 'Solde Live, MTN MoMo, Airtel Money ou Visa.',
+        note: context.t.apprendreSoldeLiveMtnMomo,
       ),
-      const EnTeteSection('Avis des élèves'),
+      EnTeteSection(context.t.apprendreAvisDesEleves),
       for (final (nom, texte) in const [
         (
           'Merveille K.',
@@ -164,7 +166,7 @@ class EcranContenu extends ConsumerWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            tooltip: 'Partager',
+            tooltip: context.t.partager,
             onPressed: () => partager(context, c.titre),
             icon: const Icon(Icons.ios_share_rounded),
           ),
@@ -177,7 +179,7 @@ class EcranContenu extends ConsumerWidget {
             ? FilledButton.icon(
                 onPressed: () => context.push('/lecteur/${c.id}'),
                 icon: const Icon(Icons.play_arrow_rounded),
-                label: const Text('Ouvrir'),
+                label: Text(context.t.apprendreOuvrir),
               )
             : Row(
                 children: [
@@ -186,7 +188,11 @@ class EcranContenu extends ConsumerWidget {
                       onPressed: auPanier
                           ? () => context.push('/panier')
                           : () => store.ajouterAuPanier(c.id),
-                      child: Text(auPanier ? 'Voir le panier' : 'Au panier'),
+                      child: Text(
+                        auPanier
+                            ? context.t.apprendreVoirLePanier
+                            : context.t.apprendreAuPanier,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -196,7 +202,7 @@ class EcranContenu extends ConsumerWidget {
                         store.ajouterAuPanier(c.id);
                         context.push('/panier');
                       },
-                      child: const Text('Acheter'),
+                      child: Text(context.t.apprendreAcheter),
                     ),
                   ),
                 ],
@@ -243,7 +249,7 @@ class _Auteur extends ConsumerWidget {
                   ),
                   BadgeVerifie(a.badge),
                   Text(
-                    '${compact(a.abonnes)} abonnés',
+                    context.t.apprendreNAbonnes(compact(a.abonnes)),
                     style: const TextStyle(
                       color: LiveColors.gris,
                       fontSize: 12.5,
@@ -256,7 +262,9 @@ class _Auteur extends ConsumerWidget {
           TextButton(
             onPressed: () =>
                 ref.read(liveProvider.notifier).basculerSuivi(a.id),
-            child: Text(suivi ? 'Abonné' : 'Suivre'),
+            child: Text(
+              suivi ? context.t.apprendreAbonne : context.t.apprendreSuivre,
+            ),
           ),
         ],
       ),

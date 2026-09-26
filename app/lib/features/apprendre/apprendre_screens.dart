@@ -10,6 +10,7 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'contenu_fiche.dart';
 part 'panier_achats.dart';
@@ -27,11 +28,11 @@ class EcranApprendre extends StatelessWidget {
     return Scaffold(
       appBar: EnTeteRecherche(
         titre: const Text('Apprendre'),
-        indice: 'Rechercher un cours, un PDF…',
+        indice: context.t.apprendreRechercherUnCoursUn,
         onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: [
           IconButton(
-            tooltip: 'Mes achats',
+            tooltip: context.t.apprendreMesAchats,
             onPressed: () => context.push('/mes-achats'),
             icon: const Icon(Icons.download_for_offline_outlined),
           ),
@@ -86,14 +87,14 @@ class _SectionsApprendreState extends ConsumerState<SectionsApprendre> {
             children: [
               PuceIcone(
                 icone: Icons.apps_rounded,
-                texte: 'Tout',
+                texte: context.t.apprendreTout,
                 active: _type == null,
                 onTap: () => setState(() => _type = null),
               ),
               for (final t in TypeContenu.values)
                 PuceIcone(
                   icone: t.icone,
-                  texte: t.libelle,
+                  texte: t.libelleDe(context.t),
                   active: _type == t,
                   onTap: () => setState(() => _type = _type == t ? null : t),
                 ),
@@ -103,7 +104,7 @@ class _SectionsApprendreState extends ConsumerState<SectionsApprendre> {
         if (_type == null) ...[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Les plus suivis'),
+            child: EnTeteSection(context.t.apprendreLesPlusSuivis),
           ),
           Carrousel(
             largeur: 220,
@@ -113,7 +114,7 @@ class _SectionsApprendreState extends ConsumerState<SectionsApprendre> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Enseignants et créateurs'),
+            child: EnTeteSection(context.t.apprendreEnseignantsEtCreateurs),
           ),
           SizedBox(
             height: 104,
@@ -160,8 +161,8 @@ class _SectionsApprendreState extends ConsumerState<SectionsApprendre> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: marge),
           child: EnTeteSection(
-            _type?.libelle ?? 'Tous les contenus',
-            action: _type == null ? null : 'Effacer',
+            _type?.libelleDe(context.t) ?? context.t.apprendreTousLesContenus,
+            action: _type == null ? null : context.t.apprendreEffacer,
             onTap: _type == null ? null : () => setState(() => _type = null),
           ),
         ),
@@ -179,32 +180,29 @@ class _SectionsApprendreState extends ConsumerState<SectionsApprendre> {
         Padding(
           padding: EdgeInsets.fromLTRB(marge, 20, marge, 0),
           child: Bloc(
-            fond: const Color(0xFFF3F5F8),
+            fond: LiveColors.champ,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Vous enseignez ou vous savez faire ?',
+                Text(
+                  context.t.apprendreVousEnseignezOuVous,
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
                 ),
-                const Text(
-                  'Vendez vos cours, PDF et vidéos. Vous gardez 85 % de '
-                  'chaque vente, versés sur votre MoMo.',
-                ),
+                Text(context.t.apprendreVendezVosCoursPdf),
                 const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
                       child: OutlinedButton(
                         onPressed: () => context.push('/apprendre/boutique'),
-                        child: const Text('Ma boutique'),
+                        child: Text(context.t.apprendreMaBoutique),
                       ),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: FilledButton(
                         onPressed: () => context.push('/apprendre/vendre'),
-                        child: const Text('Vendre'),
+                        child: Text(context.t.apprendreVendre),
                       ),
                     ),
                   ],
@@ -226,7 +224,7 @@ class _BanniereBac extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      label: 'Réussir le BAC 2027',
+      label: context.t.apprendreReussirLeBac2027,
       excludeSemantics: true,
       child: Pressable(
         onTap: () => context.push('/contenu/n1'),
@@ -240,14 +238,14 @@ class _BanniereBac extends StatelessWidget {
               end: Alignment.bottomRight,
             ),
           ),
-          child: const Row(
+          child: Row(
             children: [
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Réussir le BAC 2027',
+                      context.t.apprendreReussirLeBac2027,
                       style: TextStyle(
                         color: LiveColors.ambreClair,
                         fontWeight: FontWeight.w900,
@@ -255,8 +253,7 @@ class _BanniereBac extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Les cours des meilleurs profs du Congo, à regarder '
-                      'même sans connexion.',
+                      context.t.apprendreLesCoursDesMeilleurs,
                       style: TextStyle(color: Colors.white),
                     ),
                   ],

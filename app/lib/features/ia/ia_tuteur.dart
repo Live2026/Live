@@ -14,23 +14,17 @@ class _EcranTuteurState extends ConsumerState<EcranTuteur>
     vsync: this,
     duration: const Duration(milliseconds: 1400),
   );
-  var _sujet = 'Mathématiques';
+  late var _sujet = context.t.iaMathematiques;
   var _parle = false;
-  final _echanges = <(bool, String)>[
-    (
-      false,
-      'Bonjour Grâce ! On révise quoi aujourd’hui ? Parle-moi normalement, je t’écoute.',
-    ),
+  late final _echanges = <(bool, String)>[
+    (false, context.t.iaBonjourGraceOnRevise),
   ];
 
-  static const _reponses = [
-    (true, 'Je ne comprends pas les équations du premier degré.'),
-    (
-      false,
-      'D’accord. Une équation, c’est une balance. Si j’ajoute 3 d’un côté, je dois enlever 3 de l’autre. Essaie : 2x + 3 = 11, que fais-tu avec le 3 ?',
-    ),
-    (true, 'Je l’enlève des deux côtés, donc 2x = 8.'),
-    (false, 'Parfait ! Et maintenant, pour trouver x ?'),
+  late final _reponses = [
+    (true, context.t.iaJeNeComprendsPas),
+    (false, context.t.iaDAccordUneEquation),
+    (true, context.t.iaJeLEnleveDes),
+    (false, context.t.iaParfaitEtMaintenantPour),
   ];
 
   @override
@@ -67,8 +61,8 @@ class _EcranTuteurState extends ConsumerState<EcranTuteur>
       appBar: AppBar(
         backgroundColor: LiveColors.nuit,
         foregroundColor: Colors.white,
-        title: const Text(
-          'Tuteur vocal',
+        title: Text(
+          context.t.iaTuteurVocal,
           style: TextStyle(color: Colors.white),
         ),
         actions: [
@@ -86,11 +80,11 @@ class _EcranTuteurState extends ConsumerState<EcranTuteur>
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
-                for (final s in const [
-                  'Mathématiques',
-                  'Français',
-                  'Anglais',
-                  'Entretien d’embauche',
+                for (final s in [
+                  context.t.iaMathematiques,
+                  context.t.iaFrancais,
+                  context.t.iaAnglais,
+                  context.t.iaEntretien,
                 ])
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
@@ -135,7 +129,9 @@ class _EcranTuteurState extends ConsumerState<EcranTuteur>
           ),
           Semantics(
             button: true,
-            label: _parle ? 'Arrêter de parler' : 'Parler au tuteur',
+            label: _parle
+                ? context.t.iaArreterDeParler
+                : context.t.iaParlerAuTuteur,
             excludeSemantics: true,
             child: GestureDetector(
               onTap: _basculer,
@@ -163,7 +159,7 @@ class _EcranTuteurState extends ConsumerState<EcranTuteur>
                     child: Icon(
                       _parle ? Icons.stop_rounded : Icons.mic_rounded,
                       size: 38,
-                      color: LiveColors.nuit,
+                      color: LiveColors.encre,
                     ),
                   ),
                 ),
@@ -172,10 +168,8 @@ class _EcranTuteurState extends ConsumerState<EcranTuteur>
           ),
           const SizedBox(height: 10),
           Text(
-            _parle
-                ? 'Je vous écoute…'
-                : 'Touchez pour parler · 5 crédits / minute',
-            style: const TextStyle(color: Color(0xFFD7DCE4)),
+            _parle ? context.t.iaJeVousEcoute : context.t.iaTouchezPourParler5,
+            style: const TextStyle(color: LiveColors.brumeClaire),
           ),
           const SizedBox(height: 24),
         ],

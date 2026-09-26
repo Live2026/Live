@@ -105,7 +105,7 @@ class _EcranConnexionAdminState extends State<EcranConnexionAdmin> {
       ),
     );
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F5F8),
+      backgroundColor: LiveColors.champ,
       body: Row(
         children: [
           if (context.taille == Taille.etendue)

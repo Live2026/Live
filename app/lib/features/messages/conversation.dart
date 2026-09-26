@@ -45,10 +45,10 @@ class _EcranConversationState extends State<EcranConversation> {
   var _offreAcceptee = false;
   final _envoyes = <_Element>[];
 
-  static const _rapides = [
-    'Toujours disponible ?',
-    'Dernier prix ?',
-    'Où se rencontrer ?',
+  late final _rapides = [
+    context.t.messagesToujoursDisponible,
+    context.t.messagesDernierPrix,
+    context.t.messagesOuSeRencontrer,
   ];
 
   void _envoyer(_Element e) {
@@ -68,12 +68,12 @@ class _EcranConversationState extends State<EcranConversation> {
   Widget build(BuildContext context) {
     final vide = _saisie.text.trim().isEmpty;
     return Scaffold(
-      backgroundColor: const Color(0xFFEEF1F5),
+      backgroundColor: LiveColors.fondConversation,
       appBar: AppBar(
         titleSpacing: 0,
         title: InkWell(
           onTap: () => context.push('/boutique/grace'),
-          child: const Row(
+          child: Row(
             children: [
               Avatar(
                 nom: 'Grâce Mode',
@@ -90,7 +90,7 @@ class _EcranConversationState extends State<EcranConversation> {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    'en ligne · Pro vérifié',
+                    context.t.messagesEnLigneProVerifie,
                     style: TextStyle(fontSize: 12, color: LiveColors.succes),
                   ),
                 ],
@@ -99,8 +99,9 @@ class _EcranConversationState extends State<EcranConversation> {
           ),
         ),
         actions: [
+          ...boutonsAppel(context, 'Grâce Mode'),
           IconButton(
-            tooltip: 'Options',
+            tooltip: context.t.messagesOptions,
             onPressed: () => _options(context),
             icon: const Icon(Icons.more_vert_rounded),
           ),
@@ -109,7 +110,7 @@ class _EcranConversationState extends State<EcranConversation> {
       body: Column(
         children: [
           Material(
-            color: Colors.white,
+            color: LiveColors.surface,
             child: InkWell(
               onTap: () => context.push('/produit/p1'),
               child: Padding(
@@ -149,7 +150,7 @@ class _EcranConversationState extends State<EcranConversation> {
                         minimumSize: const Size(0, 36),
                       ),
                       onPressed: () => context.push('/commande/p1'),
-                      child: const Text('Payer'),
+                      child: Text(context.t.messagesPayer),
                     ),
                   ],
                 ),
@@ -163,10 +164,8 @@ class _EcranConversationState extends State<EcranConversation> {
                 controller: _defilement,
                 padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
                 children: [
-                  const _Pastille('Aujourd’hui'),
-                  const _Info(
-                    'Payez toujours avec le bouton Payer : votre argent reste bloqué par Live jusqu’à la remise.',
-                  ),
+                  _Pastille(context.t.messagesAujourdHui),
+                  _Info(context.t.messagesPayezToujoursAvecLe),
                   const _BulleTexte(
                     _Texte(
                       'Bonjour, toujours disponible ?',
@@ -181,9 +180,9 @@ class _EcranConversationState extends State<EcranConversation> {
                     ),
                   ),
                   const _BulleVocale(_Vocal('0:12', '10:15')),
-                  const _CarteOffre(
-                    titre: 'OFFRE · Vous proposez 75 000 FCFA',
-                    detail: 'Refusée par Grâce',
+                  _CarteOffre(
+                    titre: context.t.messagesOffreVousProposez75,
+                    detail: context.t.messagesRefuseeParGrace,
                     moi: true,
                   ),
                   const _BulleTexte(
@@ -194,25 +193,25 @@ class _EcranConversationState extends State<EcranConversation> {
                   ),
                   const _AlerteArnaque(),
                   _CarteOffre(
-                    titre: 'CONTRE-OFFRE · Grâce : 80 000 FCFA',
+                    titre: context.t.messagesContreOffreGrace80,
                     detail: _offreAcceptee
-                        ? 'Offre acceptée · lien de paiement prêt'
-                        : "Valable jusqu'à demain 10:30",
+                        ? context.t.messagesOffreAccepteeLienDe
+                        : context.t.messagesValableJusquADemain,
                     action: _offreAcceptee
                         ? FilledButton(
                             onPressed: () => context.push('/commande/p1'),
-                            child: const Text('Payer 80 000 FCFA dans Live'),
+                            child: Text(context.t.messagesPayer80000Fcfa),
                           )
                         : Row(
                             children: [
                               Expanded(
                                 child: OutlinedButton(
                                   onPressed: () => _envoyer(
-                                    const _Systeme(
-                                      'Vous avez refusé la contre-offre.',
+                                    _Systeme(
+                                      context.t.messagesVousAvezRefuseLa,
                                     ),
                                   ),
-                                  child: const Text('Refuser'),
+                                  child: Text(context.t.messagesRefuser),
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -220,7 +219,7 @@ class _EcranConversationState extends State<EcranConversation> {
                                 child: FilledButton(
                                   onPressed: () =>
                                       setState(() => _offreAcceptee = true),
-                                  child: const Text('Accepter'),
+                                  child: Text(context.t.messagesAccepter),
                                 ),
                               ),
                             ],
@@ -247,7 +246,7 @@ class _EcranConversationState extends State<EcranConversation> {
                   Padding(
                     padding: const EdgeInsets.only(right: 6),
                     child: ActionChip(
-                      backgroundColor: Colors.white,
+                      backgroundColor: LiveColors.surface,
                       label: Text(r),
                       onPressed: () =>
                           _envoyer(_Texte(r, 'maintenant', moi: true)),
@@ -266,13 +265,13 @@ class _EcranConversationState extends State<EcranConversation> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: LiveColors.surface,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Row(
                         children: [
                           IconButton(
-                            tooltip: 'Joindre',
+                            tooltip: context.t.messagesJoindre,
                             onPressed: () => _joindre(context),
                             icon: const Icon(
                               Icons.add_rounded,
@@ -285,8 +284,8 @@ class _EcranConversationState extends State<EcranConversation> {
                               minLines: 1,
                               maxLines: 4,
                               onChanged: (_) => setState(() {}),
-                              decoration: const InputDecoration(
-                                hintText: 'Message',
+                              decoration: InputDecoration(
+                                hintText: context.t.messagesMessage,
                                 filled: false,
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -298,9 +297,11 @@ class _EcranConversationState extends State<EcranConversation> {
                             ),
                           ),
                           IconButton(
-                            tooltip: 'Photo',
+                            tooltip: context.t.messagesPhoto,
                             onPressed: () => _envoyer(
-                              const _Systeme('Photo envoyée (simulation).'),
+                              _Systeme(
+                                context.t.messagesPhotoEnvoyeeSimulation,
+                              ),
                             ),
                             icon: const Icon(
                               Icons.photo_camera_outlined,
@@ -314,7 +315,9 @@ class _EcranConversationState extends State<EcranConversation> {
                   const SizedBox(width: 6),
                   Semantics(
                     button: true,
-                    label: vide ? 'Note vocale' : 'Envoyer',
+                    label: vide
+                        ? context.t.messagesNoteVocale
+                        : context.t.messagesEnvoyer,
                     excludeSemantics: true,
                     child: Pressable(
                       echelle: 0.9,
@@ -360,127 +363,6 @@ class _EcranConversationState extends State<EcranConversation> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  /// Options de la conversation (F-CHAT-06) : profil, archiver, bloquer,
-  /// signaler.
-  void _options(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      backgroundColor: Colors.white,
-      builder: (ctx) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.storefront_outlined),
-              title: const Text('Voir la boutique'),
-              onTap: () {
-                Navigator.pop(ctx);
-                context.push('/boutique/grace');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.archive_outlined),
-              title: const Text('Archiver la conversation'),
-              onTap: () {
-                Navigator.pop(ctx);
-                context.pop();
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.block_rounded,
-                color: LiveColors.erreur,
-              ),
-              title: const Text(
-                'Bloquer',
-                style: TextStyle(color: LiveColors.erreur),
-              ),
-              subtitle: const Text(
-                'Il ne pourra plus vous écrire ni voir vos annonces',
-              ),
-              onTap: () {
-                Navigator.pop(ctx);
-                ProviderScope.containerOf(context)
-                    .read(liveProvider.notifier)
-                    .bloquer('grace');
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Grâce Mode est bloqué.')),
-                );
-                context.pop();
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.flag_outlined,
-                color: LiveColors.erreur,
-              ),
-              title: const Text(
-                'Signaler',
-                style: TextStyle(color: LiveColors.erreur),
-              ),
-              onTap: () {
-                Navigator.pop(ctx);
-                signaler(context, 'cette conversation');
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// Pièces jointes, dont E-CHAT-03 « Proposer un lieu de rendez-vous ».
-  void _joindre(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      backgroundColor: Colors.white,
-      builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Proposer un lieu de rendez-vous',
-                style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
-              ),
-              const Text(
-                'Lieux publics et fréquentés, recommandés pour les remises en main propre.',
-                style: TextStyle(color: LiveColors.gris),
-              ),
-              const SizedBox(height: 8),
-              for (final (lieu, detail) in const [
-                ('Station Total Moungali', 'Éclairée, gardiennée · à 600 m'),
-                ('Marché Total', 'Entrée principale · à 1,1 km'),
-                ('Centre commercial Plateau', 'Parking surveillé · à 3,4 km'),
-                ('Commissariat de Moungali', 'Point de remise sûr · à 900 m'),
-              ])
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const CircleAvatar(
-                    backgroundColor: Color(0xFFE7F4EC),
-                    child: Icon(
-                      Icons.verified_user_outlined,
-                      color: LiveColors.succes,
-                    ),
-                  ),
-                  title: Text(lieu),
-                  subtitle: Text(detail),
-                  onTap: () {
-                    Navigator.pop(ctx);
-                    _envoyer(_Lieu(lieu, 'maintenant'));
-                  },
-                ),
-            ],
-          ),
-        ),
       ),
     );
   }

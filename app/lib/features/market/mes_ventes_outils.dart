@@ -12,7 +12,7 @@ class _OutilsVendeur extends StatelessWidget {
     }
 
     return Drawer(
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       child: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -28,46 +28,54 @@ class _OutilsVendeur extends StatelessWidget {
                 'Grâce Mode',
                 style: TextStyle(fontWeight: FontWeight.w800),
               ),
-              subtitle: const Text('Boutique vérifiée · Moungali'),
+              subtitle: Text(context.t.marketBoutiqueVerifieeMoungali),
               onTap: () => aller('/boutique/grace'),
             ),
             const Divider(),
-            for (final (icone, titre, route) in const [
-              (Icons.add_box_outlined, 'Publier une annonce', '/vendre'),
-              (Icons.receipt_long_outlined, 'Commandes', '/mes-ventes'),
+            for (final (icone, titre, route) in [
+              (
+                Icons.add_box_outlined,
+                context.t.marketPublierUneAnnonce,
+                '/vendre',
+              ),
+              (
+                Icons.receipt_long_outlined,
+                context.t.marketCommandes,
+                '/mes-ventes',
+              ),
               (
                 Icons.qr_code_2_rounded,
-                'QR de paiement à la remise',
+                context.t.marketQrDePaiementA,
                 '/vente/LV-00466/qr',
               ),
               (
                 Icons.account_balance_wallet_outlined,
-                'Gains et retraits',
+                context.t.marketGainsEtRetraits,
                 '/gains',
               ),
               (
                 Icons.insights_outlined,
-                'Statistiques avancées (Live Pro)',
+                context.t.marketStatistiquesAvanceesLivePro,
                 '/live-pro',
               ),
               (
                 Icons.star_outline_rounded,
-                'Avis des clients',
+                context.t.marketAvisDesClients,
                 '/boutique/grace',
               ),
               (
                 Icons.groups_outlined,
-                'Équipe de la boutique',
+                context.t.marketEquipeDeLaBoutique,
                 '/espace/equipe',
               ),
               (
                 Icons.payments_outlined,
-                'Ce qui se paie dans Live',
+                context.t.marketCeQuiSePaie,
                 '/paiements',
               ),
               (
                 Icons.help_outline_rounded,
-                'Signaler un problème',
+                context.t.marketSignalerUnProbleme,
                 '/probleme/commande/LV-00482',
               ),
             ])
@@ -77,10 +85,10 @@ class _OutilsVendeur extends StatelessWidget {
                 onTap: () => aller(route),
               ),
             const Divider(),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(12),
               child: Text(
-                'Offre de lancement : 0 % de commission jusqu’au 31 décembre.',
+                context.t.marketOffreDeLancement0,
                 style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
               ),
             ),
@@ -138,7 +146,10 @@ class _MesAnnoncesState extends ConsumerState<_MesAnnonces> {
                           style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          '${fcfa(p.prix)} · ${compact(p.vues)} vues',
+                          context.t.marketPrixVues(
+                            fcfa(p.prix),
+                            compact(p.vues),
+                          ),
                           style: const TextStyle(
                             color: LiveColors.gris,
                             fontSize: 12.5,
@@ -146,10 +157,12 @@ class _MesAnnoncesState extends ConsumerState<_MesAnnonces> {
                         ),
                         Text(
                           _vendues.contains(p.id)
-                              ? 'Vendu'
+                              ? context.t.marketVendu
                               : _masquees.contains(p.id)
-                              ? 'Masquée'
-                              : 'En ligne · stock ${p.details['Quantité'] ?? '5'}',
+                              ? context.t.marketMasquee
+                              : context.t.marketEnLigneStock(
+                                  p.details['Quantité'] ?? '5',
+                                ),
                           style: TextStyle(
                             fontSize: 12.5,
                             fontWeight: FontWeight.w600,
@@ -164,7 +177,7 @@ class _MesAnnoncesState extends ConsumerState<_MesAnnonces> {
                     ),
                   ),
                   PopupMenuButton<String>(
-                    tooltip: 'Gérer l’annonce',
+                    tooltip: context.t.marketGererLAnnonce,
                     onSelected: (a) => setState(() {
                       switch (a) {
                         case 'booster':
@@ -178,36 +191,36 @@ class _MesAnnoncesState extends ConsumerState<_MesAnnonces> {
                         case 'dupliquer':
                           informer(
                             context,
-                            'Copie créée : « ${p.titre} » en brouillon.',
+                            context.t.marketCopieCreee(p.titre),
                           );
                         case 'modifier':
                           context.push('/produit/${p.id}');
                       }
                     }),
                     itemBuilder: (_) => [
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'modifier',
-                        child: Text('Modifier'),
+                        child: Text(context.t.modifier),
                       ),
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'dupliquer',
-                        child: Text('Dupliquer'),
+                        child: Text(context.t.marketDupliquer),
                       ),
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'booster',
-                        child: Text('Booster'),
+                        child: Text(context.t.marketBooster),
                       ),
                       PopupMenuItem(
                         value: 'masquer',
                         child: Text(
                           _masquees.contains(p.id)
-                              ? 'Remettre en ligne'
-                              : 'Masquer',
+                              ? context.t.marketRemettreEnLigne
+                              : context.t.marketMasquer,
                         ),
                       ),
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'vendu',
-                        child: Text('Marquer comme vendu'),
+                        child: Text(context.t.marketMarquerCommeVendu),
                       ),
                     ],
                   ),

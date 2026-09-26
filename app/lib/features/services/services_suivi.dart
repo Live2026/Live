@@ -15,38 +15,38 @@ class EcranDetailDevis extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Devis de ${d.prestataire.nom} · ${note(d.prestataire.note)}',
+          context.t.servicesDevisDe(
+            d.prestataire.nom,
+            note(d.prestataire.note),
+          ),
         ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const Text(
-            'Réparation fuite évier cuisine',
+          Text(
+            context.t.servicesReparationFuiteEvierCuisine,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          Text('${d.quand} · environ 1 h 30'),
+          Text(context.t.servicesQuandDuree(d.quand)),
           const Divider(height: 24),
-          LigneMontant("Main-d'œuvre", d.mainOeuvre),
-          LigneMontant('Matériel', d.materiel),
-          LigneMontant('TOTAL', d.total, gras: true),
+          LigneMontant(context.t.servicesMainDUvre2, d.mainOeuvre),
+          LigneMontant(context.t.servicesMateriel, d.materiel),
+          LigneMontant(context.t.servicesTotal2, d.total, gras: true),
           const Divider(height: 24),
           if (finSeule)
-            const Text(
-              'Rien à payer maintenant : vous payez à la fin, par MoMo ou Airtel.',
-            )
+            Text(context.t.servicesRienAPayerMaintenant)
           else ...[
-            LigneMontant('Maintenant (acompte)', d.acompte),
-            LigneMontant('Après les travaux', d.total - d.acompte),
+            LigneMontant(context.t.servicesMaintenantAcompte, d.acompte),
+            LigneMontant(
+              context.t.servicesApresLesTravaux,
+              d.total - d.acompte,
+            ),
           ],
           const SizedBox(height: 8),
-          const Text('Garantie 72 h · annulation gratuite jusqu\'à 2 h avant.'),
-          const BoutonEcouter(
-            "L'acompte est gardé par Live. Au démarrage des travaux, vous montrez votre QR au plombier : il reçoit alors la part matériel. Le reste lui est versé à la fin. Si le travail est mal fait, vous avez 72 heures pour le signaler.",
-          ),
-          const BandeauProtection(
-            'Matériel payé au démarrage, le reste à la fin.',
-          ),
+          Text(context.t.servicesGarantieAnnulation),
+          BoutonEcouter(context.t.servicesLAcompteEstGarde),
+          BandeauProtection(context.t.servicesMaterielPayeAuDemarrage),
         ],
       ),
       bottomNavigationBar: BarreAction(
@@ -57,7 +57,7 @@ class EcranDetailDevis extends ConsumerWidget {
               PaiementEnCours(
                 type: TypePaiement.acompte,
                 montant: d.acompte,
-                libelle: 'Acompte devis',
+                libelle: context.t.servicesAcompteDevis,
                 beneficiaire: d.prestataire.nom,
                 cibleId: d.prestataire.id,
               ),
@@ -71,8 +71,8 @@ class EcranDetailDevis extends ConsumerWidget {
           },
           child: Text(
             finSeule
-                ? 'Accepter le devis'
-                : 'Accepter et payer ${fcfa(d.acompte)}',
+                ? context.t.servicesAccepterLeDevis
+                : context.t.servicesAccepterPayer(fcfa(d.acompte)),
           ),
         ),
       ),
@@ -103,7 +103,7 @@ class EcranPrestation extends ConsumerWidget {
     final store = ref.read(liveProvider.notifier);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Prestation · ${d.prestataire.nom}'),
+        title: Text(context.t.servicesPrestationDe(d.prestataire.nom)),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => context.go('/accueil'),
@@ -113,50 +113,62 @@ class EcranPrestation extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         children: [
           Text(
-            'Réparation fuite · ${d.quand}',
+            context.t.servicesReparationQuand(d.quand),
             style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           _Etape(
             d.acompte == 0
-                ? 'Devis accepté (payer à la fin)'
-                : 'Acompte payé (${fcfa(d.acompte)} bloqués)',
+                ? context.t.servicesDevisAcceptePayerA
+                : context.t.servicesAcomptePayeBloques(fcfa(d.acompte)),
             true,
           ),
-          _Etape('Travaux démarrés', p.statut != StatutPrestation.acompte),
-          _Etape('Travaux terminés', p.statut == StatutPrestation.terminee),
+          _Etape(
+            context.t.servicesTravauxDemarres,
+            p.statut != StatutPrestation.acompte,
+          ),
+          _Etape(
+            context.t.servicesTravauxTermines,
+            p.statut == StatutPrestation.terminee,
+          ),
           const SizedBox(height: 16),
           switch (p.statut) {
             StatutPrestation.acompte => Column(
               children: [
                 CarteQr(
-                  titre: 'Démarrer les travaux',
+                  titre: context.t.servicesDemarrerLesTravaux,
                   donnee: 'live://demarrage/${p.id}',
                   codeSecours: 'LV-D6042',
                   consigne: d.materiel > 0
-                      ? 'À montrer quand ${d.prestataire.nom} commence : il reçoit ${fcfa(d.materiel)} (matériel).'
-                      : 'À montrer quand ${d.prestataire.nom} commence.',
+                      ? context.t.servicesMontrerMateriel(
+                          d.prestataire.nom,
+                          fcfa(d.materiel),
+                        )
+                      : context.t.servicesMontrerQuand(d.prestataire.nom),
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton.icon(
                   onPressed: () =>
                       partager(context, 'Suivi de mon intervention Live'),
                   icon: const Icon(Icons.share_location),
-                  label: const Text('Partager avec un proche'),
+                  label: Text(context.t.servicesPartagerAvecUnProche),
                 ),
                 const SizedBox(height: 12),
                 BoutonSimulation(
-                  texte: '${d.prestataire.nom} scanne votre QR',
+                  texte: context.t.servicesScanneQr(d.prestataire.nom),
                   onTap: () => store.avancerPrestation(p.id),
                 ),
               ],
             ),
             StatutPrestation.demarree => Column(
               children: [
-                const Text('Travaux en cours…', style: TextStyle(fontSize: 16)),
+                Text(
+                  context.t.servicesTravauxEnCours,
+                  style: TextStyle(fontSize: 16),
+                ),
                 const SizedBox(height: 12),
                 BoutonSimulation(
-                  texte: '${d.prestataire.nom} déclare la fin (avec photos)',
+                  texte: context.t.servicesDeclareFin(d.prestataire.nom),
                   onTap: () => store.avancerPrestation(p.id),
                 ),
               ],
@@ -165,7 +177,7 @@ class EcranPrestation extends ConsumerWidget {
               children: [
                 const CocheAnimee(taille: 64),
                 Text(
-                  'Travaux terminés. Reste à payer : ${fcfa(d.total - d.acompte)}',
+                  context.t.servicesResteAPayer(fcfa(d.total - d.acompte)),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 17,
@@ -173,15 +185,15 @@ class EcranPrestation extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text('Garantie : 72 h pour signaler un problème.'),
+                Text(context.t.servicesGarantie72HPour),
                 const SizedBox(height: 12),
                 FilledButton(
                   onPressed: () => _fin(context),
-                  child: const Text('Travaux conformes'),
+                  child: Text(context.t.servicesTravauxConformes),
                 ),
                 TextButton(
                   onPressed: () => context.push('/probleme/prestation/${p.id}'),
-                  child: const Text('Signaler un problème'),
+                  child: Text(context.t.servicesSignalerUnProbleme),
                 ),
               ],
             ),
@@ -195,14 +207,12 @@ class EcranPrestation extends ConsumerWidget {
     showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Merci !'),
-        content: const Text(
-          "Dans l'application réelle : le solde est payé par MoMo ou Airtel, le prestataire est payé, puis vous pouvez laisser un avis.",
-        ),
+        title: Text(context.t.servicesMerci),
+        content: Text(context.t.servicesDansLApplicationReelle),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('OK'),
+            child: Text(context.t.ok),
           ),
         ],
       ),
@@ -231,7 +241,7 @@ class _Etape extends StatelessWidget {
               texte,
               style: TextStyle(
                 fontSize: 16,
-                color: fait ? Colors.black : LiveColors.gris,
+                color: fait ? LiveColors.encre : LiveColors.gris,
               ),
             ),
           ),

@@ -15,16 +15,17 @@ class EcranMoi extends ConsumerWidget {
         title: const Text('Moi'),
         actions: [
           IconButton(
-            tooltip: 'Notifications',
+            tooltip: context.t.compteNotifications,
             onPressed: () => context.push('/notifications'),
             icon: const Badge(
               label: Text('2'),
               child: Icon(Icons.notifications_none_rounded),
             ),
           ),
+          const BoutonMessages(),
           Builder(
             builder: (ctx) => IconButton(
-              tooltip: 'Menu du profil',
+              tooltip: context.t.compteMenuDuProfil,
               onPressed: () => Scaffold.of(ctx).openEndDrawer(),
               icon: const Icon(Icons.menu_rounded),
             ),
@@ -42,6 +43,7 @@ class EcranMoi extends ConsumerWidget {
                 taille: 72,
                 verifie: etat.identiteVerifiee,
                 anneau: true,
+                photo: etat.photoProfil,
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -61,9 +63,9 @@ class EcranMoi extends ConsumerWidget {
                     ),
                     const SizedBox(height: 4),
                     Etiquette(
-                      'N${etat.niveau} · ${libelleNiveau(etat.niveau)}',
+                      'N${etat.niveau} · ${libelleNiveau(context.t, etat.niveau)}',
                       icone: Icons.verified_user_outlined,
-                      fond: const Color(0xFFE6EBF2),
+                      fond: LiveColors.voile,
                       couleur: LiveColors.bleu,
                     ),
                   ],
@@ -74,14 +76,14 @@ class EcranMoi extends ConsumerWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              const _Stat('128', 'Abonnés', route: '/abonnes/moi'),
+              _Stat('128', context.t.compteAbonnes, route: '/abonnes/moi'),
               _Stat(
                 '${etat.suivis.length}',
-                'Abonnements',
+                context.t.compteAbonnements,
                 route: '/abonnes/moi?onglet=1',
               ),
-              _Stat('4,8', 'Note'),
-              _Stat('12', 'Transactions'),
+              _Stat('4,8', context.t.compteNote),
+              _Stat('12', context.t.compteTransactions),
             ],
           ),
           const SizedBox(height: 14),
@@ -90,19 +92,21 @@ class EcranMoi extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () => context.push('/parametres'),
-                  child: const Text('Modifier'),
+                  child: Text(context.t.modifier),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton(
                   onPressed: () => context.push('/profil/moi'),
-                  child: const Text('Profil public'),
+                  child: Text(context.t.compteProfilPublic),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 16),
+          _CarteArgent(etat: etat),
+          const SizedBox(height: 12),
           _CartePouvoirs(actifs: actifs, total: pouvoirs.length),
           const SizedBox(height: 16),
           GrilleAdaptative(
@@ -111,178 +115,186 @@ class EcranMoi extends ConsumerWidget {
             hauteur: 96,
             enfants: [
               _Raccourci(
-                Icons.account_balance_wallet_outlined,
-                'Mes gains',
-                fcfaCourt(etat.disponible),
-                '/gains',
-              ),
-              _Raccourci(
                 Icons.auto_awesome_outlined,
-                'Crédits Live',
-                '${etat.credits} crédits',
+                context.t.compteCreditsLive,
+                context.t.moiNCredits(etat.credits),
                 '/ia/credits',
               ),
               _Raccourci(
                 Icons.storefront_outlined,
-                'Mes ventes',
-                '${etat.ventes.length} ventes',
+                context.t.compteMesVentes,
+                context.t.moiNVentes(etat.ventes.length),
                 '/mes-ventes',
               ),
               _Raccourci(
                 Icons.shopping_bag_outlined,
-                'Mes achats',
-                '${etat.achats.length} en cours',
+                context.t.compteMesAchats,
+                context.t.moiNEnCours(etat.achats.length),
                 '/commandes',
               ),
               _Raccourci(
                 Icons.home_outlined,
-                'Mes visites',
-                '${etat.visites.length} visite${etat.visites.length > 1 ? 's' : ''}',
+                context.t.compteMesVisites,
+                context.t.moiNVisites(etat.visites.length),
                 etat.visites.isEmpty
                     ? '/immo'
                     : '/visite/${etat.visites.first.id}',
               ),
               _Raccourci(
                 Icons.handyman_outlined,
-                'Prestations',
-                '${etat.prestations.length} en cours',
+                context.t.comptePrestations,
+                context.t.moiNEnCours(etat.prestations.length),
                 etat.prestations.isEmpty
                     ? '/services'
                     : '/prestation/${etat.prestations.first.id}',
               ),
+              _Raccourci(
+                Icons.bookmark_border_rounded,
+                context.t.compteEnregistres,
+                context.t.moiNFavoris(etat.favoris.length),
+                '/enregistres',
+              ),
             ],
           ),
-          const EnTeteSection('Mes espaces'),
+          EnTeteSection(context.t.compteMesEspaces),
           LigneMenu(
             icone: Icons.apartment_rounded,
             titre: 'Agence Les Palmiers',
-            detail: 'Espace agence de démonstration · 3 agents',
+            detail: context.t.compteEspaceAgenceDeDemonstration,
             onTap: () => context.push('/agence'),
           ),
           LigneMenu(
             icone: Icons.handyman_rounded,
-            titre: 'Mes interventions',
-            detail: 'Espace prestataire de démonstration (Serge)',
+            titre: context.t.compteMesInterventions,
+            detail: context.t.compteEspacePrestataireDeDemonstration,
             onTap: () => context.push('/pro/interventions'),
           ),
           for (final e in etat.espaces)
             LigneMenu(
               icone: Icons.storefront_rounded,
               titre: e.nom,
-              detail: 'Mon espace vérifié',
+              detail: context.t.compteMonEspaceVerifie,
               onTap: () => context.push('/boutique/grace'),
             ),
           LigneMenu(
             icone: Icons.add_business_outlined,
-            titre: 'Créer un espace',
-            detail: 'Boutique, agence, prestataire ou chaîne',
+            titre: context.t.compteCreerUnEspace,
+            detail: context.t.compteBoutiqueAgencePrestataireOu,
             onTap: () => context.push('/espace/nouveau'),
           ),
-          const EnTeteSection('Mon argent au quotidien'),
+          EnTeteSection(context.t.compteMonArgentAuQuotidien),
           LigneMenu(
             icone: Icons.diversity_3_rounded,
-            titre: 'Mes tontines',
-            detail: '2 tontines · prochaine cotisation samedi',
+            titre: context.t.compteMesTontines,
+            detail: context.t.compteN2TontinesProchaineCotisation,
             onTap: () => context.push('/tontines'),
           ),
           LigneMenu(
             icone: Icons.receipt_long_rounded,
-            titre: 'Factures et crédit',
-            detail: 'Électricité, eau, télévision, recharge',
+            titre: context.t.compteFacturesEtCredit,
+            detail: context.t.compteElectriciteEauTelevisionRecharge,
             onTap: () => context.push('/factures'),
           ),
           LigneMenu(
             icone: Icons.flight_land_rounded,
-            titre: 'Diaspora et transferts',
-            detail: 'Payer pour un proche, Live Transfert',
+            titre: context.t.compteDiasporaEtTransferts,
+            detail: context.t.comptePayerPourUnProche,
             onTap: () => context.push('/diaspora'),
           ),
           LigneMenu(
+            icone: Icons.currency_exchange_rounded,
+            titre: context.t.compteRecevoirDeLEtranger,
+            detail: context.t.compteEuroDollarLivreRecus,
+            onTap: () => context.push('/transfert?sens=recevoir'),
+          ),
+          LigneMenu(
             icone: Icons.pin_drop_rounded,
-            titre: 'Mon Adresse Live',
+            titre: context.t.compteMonAdresseLive,
             detail: 'MNG-4821 · Moungali',
             onTap: () => context.push('/adresse'),
           ),
-          const EnTeteSection('Créer et gagner'),
+          EnTeteSection(context.t.compteCreerEtGagner),
           LigneMenu(
             icone: Icons.insights_rounded,
-            titre: 'Studio créateur',
-            detail: 'Vues, cadeaux, fans et revenus',
+            titre: context.t.compteStudioCreateur,
+            detail: context.t.compteVuesCadeauxFansEt,
             onTap: () => context.push('/studio'),
           ),
           LigneMenu(
             icone: Icons.podcasts_rounded,
-            titre: 'Lancer un direct',
-            detail: 'Vendre en direct, recevoir des cadeaux',
+            titre: context.t.compteLancerUnDirect,
+            detail: context.t.compteVendreEnDirectRecevoir,
             onTap: () => context.push('/direct/lancer'),
           ),
           LigneMenu(
             icone: Icons.bolt_rounded,
             titre: 'Live Plus',
             detail: etat.formulePlus == null
-                ? 'Crédits Live IA chaque mois'
-                : 'Formule ${etat.formulePlus == 'pro' ? 'Pro' : 'Élève'} active',
+                ? context.t.compteCreditsLiveIaChaque
+                : context.t.moiFormuleActive(
+                    etat.formulePlus == 'pro' ? 'Pro' : context.t.moiEleve,
+                  ),
             onTap: () => context.push('/live-plus'),
           ),
           LigneMenu(
             icone: Icons.campaign_outlined,
-            titre: 'Publicité',
-            detail: 'Faire voir une vidéo dans votre quartier',
+            titre: context.t.comptePublicite,
+            detail: context.t.compteFaireVoirUneVideo,
             onTap: () => context.push('/publicite'),
           ),
           LigneMenu(
             icone: Icons.account_balance_outlined,
-            titre: 'Services financiers',
-            detail: 'Payer en 3 fois, tirelire, micro-crédit',
+            titre: context.t.compteServicesFinanciers,
+            detail: context.t.comptePayerEn3Fois,
             onTap: () => context.push('/finance'),
           ),
-          const EnTeteSection('Activité'),
+          EnTeteSection(context.t.compteActivite),
           LigneMenu(
             icone: Icons.payments_outlined,
-            titre: 'Ce qui se paie dans Live',
-            detail: 'Dans Live, sur place ou en direct',
+            titre: context.t.compteCeQuiSePaie,
+            detail: context.t.compteDansLiveSurPlace,
             onTap: () => context.push('/paiements'),
           ),
           LigneMenu(
             icone: Icons.gavel_rounded,
-            titre: 'Mes réclamations',
+            titre: context.t.compteMesReclamations,
             valeur: '${etat.reclamations.length}',
             onTap: () => etat.reclamations.isEmpty
                 ? ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Aucune réclamation en cours.'),
+                    SnackBar(
+                      content: Text(context.t.compteAucuneReclamationEnCours),
                     ),
                   )
                 : context.push('/reclamation/${etat.reclamations.first.id}'),
           ),
           LigneMenu(
             icone: Icons.notifications_active_outlined,
-            titre: 'Mes alertes de recherche',
+            titre: context.t.compteMesAlertesDeRecherche,
             valeur: '${etat.alertes.length}',
             onTap: () => context.push('/alertes'),
           ),
           LigneMenu(
             icone: Icons.bookmark_border_rounded,
-            titre: 'Enregistrés',
+            titre: context.t.compteEnregistres,
             valeur: '${etat.favoris.length}',
             onTap: () => context.push('/enregistres'),
           ),
           LigneMenu(
             icone: Icons.card_giftcard_rounded,
-            titre: 'Inviter des amis',
-            detail: '1 000 FCFA de crédits pour vous deux',
+            titre: context.t.compteInviterDesAmis,
+            detail: context.t.compteN1000FcfaDe,
             onTap: () =>
                 partager(context, 'Rejoins-moi sur Live · code GRACE26'),
           ),
           LigneMenu(
             icone: Icons.data_saver_on_rounded,
-            titre: 'Données utilisées ce mois',
+            titre: context.t.compteDonneesUtiliseesCeMois,
             valeur: '312 Mo',
             onTap: () => context.push('/donnees'),
           ),
           LigneMenu(
             icone: Icons.science_outlined,
-            titre: 'Scénarios de test',
+            titre: context.t.compteScenariosDeTest,
             couleur: LiveColors.gris,
             onTap: () => context.push('/scenarios'),
           ),
@@ -333,7 +345,7 @@ class _CartePouvoirs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      label: 'Mes super-pouvoirs, $actifs sur $total actifs',
+      label: context.t.moiPouvoirsSemantique(actifs, total),
       excludeSemantics: true,
       child: Pressable(
         onTap: () => context.push('/pouvoirs'),
@@ -380,8 +392,8 @@ class _CartePouvoirs extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Mes super-pouvoirs',
+                    Text(
+                      context.t.compteMesSuperPouvoirs,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
@@ -389,9 +401,9 @@ class _CartePouvoirs extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '$actifs sur $total actifs · gagnez de l’argent en débloquant les autres',
+                      context.t.moiPouvoirsActifs(actifs, total),
                       style: const TextStyle(
-                        color: Color(0xFFD7DCE4),
+                        color: LiveColors.brumeClaire,
                         fontSize: 13,
                       ),
                     ),

@@ -66,22 +66,21 @@ class _EcranDemandesState extends State<EcranDemandes> {
         .where((d) => !_traitees.contains(d.id))
         .toList();
     return Scaffold(
-      appBar: AppBar(title: const Text('Demandes de messages')),
+      appBar: AppBar(title: Text(context.t.messagesDemandesDeMessages)),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 24),
         children: [
           Padding(
             padding: EdgeInsets.fromLTRB(marge, 4, marge, 8),
-            child: const Text(
-              'Messages de personnes que vous ne suivez pas. Elles ne savent '
-              'pas si vous les avez lus tant que vous n’acceptez pas.',
+            child: Text(
+              context.t.messagesMessagesDePersonnesQue,
               style: TextStyle(color: LiveColors.gris),
             ),
           ),
           if (liste.isEmpty)
-            const EtatVide(
+            EtatVide(
               icone: Icons.mark_email_read_outlined,
-              texte: 'Aucune demande en attente.',
+              texte: context.t.messagesAucuneDemandeEnAttente,
             ),
           for (final d in liste)
             Padding(
@@ -119,10 +118,10 @@ class _EcranDemandesState extends State<EcranDemandes> {
                     ),
                     if (d.id == 'd3') ...[
                       const SizedBox(height: 8),
-                      const Etiquette(
-                        'Arnaque probable : demande d’argent',
+                      Etiquette(
+                        context.t.messagesArnaqueProbableDemandeD,
                         icone: Icons.warning_amber_rounded,
-                        fond: Color(0xFFFDECEC),
+                        fond: LiveColors.teinteRouge,
                         couleur: LiveColors.erreur,
                       ),
                     ],
@@ -134,7 +133,9 @@ class _EcranDemandesState extends State<EcranDemandes> {
                             onPressed: () =>
                                 setState(() => _traitees.add(d.id)),
                             child: Text(
-                              d.id == 'd3' ? 'Signaler' : 'Supprimer',
+                              d.id == 'd3'
+                                  ? context.t.messagesSignaler
+                                  : context.t.supprimer,
                             ),
                           ),
                         ),
@@ -147,7 +148,7 @@ class _EcranDemandesState extends State<EcranDemandes> {
                                     setState(() => _traitees.add(d.id));
                                     context.push('/conversation');
                                   },
-                            child: const Text('Accepter'),
+                            child: Text(context.t.messagesAccepter),
                           ),
                         ),
                       ],
@@ -170,7 +171,7 @@ class EcranArchives extends StatelessWidget {
   Widget build(BuildContext context) {
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Archivées')),
+      appBar: AppBar(title: Text(context.t.messagesArchivees)),
       body: ListView(
         children: [
           for (final c in conversationsArchivees)
@@ -178,8 +179,7 @@ class EcranArchives extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'Une conversation archivée revient dans la liste dès qu’un '
-              'nouveau message arrive.',
+              context.t.messagesUneConversationArchiveeRevient,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey.shade600),
             ),
@@ -209,15 +209,24 @@ class _EcranReglagesMessagesState extends State<EcranReglagesMessages> {
   Widget build(BuildContext context) {
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Réglages des messages')),
+      appBar: AppBar(title: Text(context.t.messagesReglagesDesMessages)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 24),
         children: [
-          const EnTeteSection('Qui peut m’écrire'),
-          for (final (i, (titre, detail)) in const [
-            ('Tout le monde', 'Les inconnus arrivent dans « Demandes »'),
-            ('Mes abonnements et mes clients', 'Recommandé'),
-            ('Personne', 'Sauf les conversations en cours'),
+          EnTeteSection(context.t.messagesQuiPeutMEcrire),
+          for (final (i, (titre, detail)) in [
+            (
+              context.t.messagesToutLeMonde,
+              context.t.messagesLesInconnusArriventDans,
+            ),
+            (
+              context.t.messagesMesAbonnementsEtMes,
+              context.t.messagesRecommande,
+            ),
+            (
+              context.t.messagesPersonne,
+              context.t.messagesSaufLesConversationsEn,
+            ),
           ].indexed)
             Choix(
               titre: titre,
@@ -225,44 +234,39 @@ class _EcranReglagesMessagesState extends State<EcranReglagesMessages> {
               selectionne: _qui == i,
               onTap: () => setState(() => _qui = i),
             ),
-          const EnTeteSection('Confidentialité'),
+          EnTeteSection(context.t.messagesConfidentialite),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             value: _lecture,
             onChanged: (v) => setState(() => _lecture = v),
-            title: const Text('Confirmations de lecture'),
-            subtitle: const Text('Les coches bleues'),
+            title: Text(context.t.messagesConfirmationsDeLecture),
+            subtitle: Text(context.t.messagesLesCochesBleues),
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             value: _enLigne,
             onChanged: (v) => setState(() => _enLigne = v),
-            title: const Text('Montrer quand je suis en ligne'),
+            title: Text(context.t.messagesMontrerQuandJeSuis),
           ),
-          const EnTeteSection('Données'),
+          EnTeteSection(context.t.messagesDonnees),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             value: _wifi,
             onChanged: (v) => setState(() => _wifi = v),
-            title: const Text(
-              'Télécharger photos, vidéos et PDF en Wi-Fi seulement',
-            ),
-            subtitle: const Text('Économise votre forfait'),
+            title: Text(context.t.messagesTelechargerPhotosVideosEt),
+            subtitle: Text(context.t.messagesEconomiseVotreForfait),
           ),
-          const EnTeteSection('Protection'),
-          const ListTile(
+          EnTeteSection(context.t.messagesProtection),
+          ListTile(
             contentPadding: EdgeInsets.zero,
             leading: Icon(Icons.shield_rounded, color: LiveColors.succes),
-            title: Text('Alerte anti-arnaque'),
-            subtitle: Text(
-              'Toujours active : Live vous prévient quand un message demande '
-              'de payer hors de l’application.',
-            ),
+            title: Text(context.t.messagesAlerteAntiArnaque),
+            subtitle: Text(context.t.messagesToujoursActiveLiveVous),
             trailing: Icon(Icons.lock_rounded, color: LiveColors.gris),
           ),
           LigneMenu(
             icone: Icons.block_rounded,
-            titre: 'Comptes bloqués',
+            titre: context.t.messagesComptesBloques,
             onTap: () => context.push('/bloques'),
           ),
         ],
@@ -277,20 +281,20 @@ void _nouveauMessage(BuildContext context) {
     context: context,
     showDragHandle: true,
     isScrollControlled: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => SafeArea(
       child: ListView(
         shrinkWrap: true,
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         children: [
-          const Text(
-            'Nouveau message',
+          Text(
+            context.t.messagesNouveauMessage,
             style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
-          const TextField(
+          TextField(
             decoration: InputDecoration(
-              hintText: 'Rechercher un nom',
+              hintText: context.t.messagesRechercherUnNom,
               prefixIcon: Icon(Icons.search_rounded),
             ),
           ),
@@ -298,11 +302,11 @@ void _nouveauMessage(BuildContext context) {
           ListTile(
             contentPadding: EdgeInsets.zero,
             leading: const CircleAvatar(
-              backgroundColor: Color(0xFFE6EBF2),
+              backgroundColor: LiveColors.voile,
               child: Icon(Icons.group_add_rounded, color: LiveColors.bleu),
             ),
-            title: const Text('Nouveau groupe'),
-            subtitle: const Text('Quartier, classe, passion'),
+            title: Text(context.t.messagesNouveauGroupe),
+            subtitle: Text(context.t.messagesQuartierClassePassion),
             onTap: () {
               Navigator.pop(ctx);
               context.push('/groupe/g1');

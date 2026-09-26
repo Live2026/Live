@@ -12,42 +12,42 @@ class _ActionsParametres {
   Future<void> numero() async {
     if (await confirmer(
       context,
-      titre: 'Changer de numéro',
-      texte:
-          'Un code SMS sera envoyé au nouveau numéro. Pour votre sécurité, '
-          'les retraits sont suspendus 24 h après le changement.',
-      action: 'Continuer',
+      titre: context.t.compteChangerDeNumero,
+      texte: context.t.compteUnCodeSmsSera,
+      action: context.t.continuer,
     )) {
-      if (context.mounted) informer(context, 'Code envoyé au nouveau numéro.');
+      if (context.mounted) {
+        informer(context, context.t.compteCodeEnvoyeAuNouveau);
+      }
     }
   }
 
   Future<void> comptesRetrait() async {
     final choix = await choisir<String>(
       context,
-      titre: 'Compte de retrait',
+      titre: context.t.compteCompteDeRetrait,
       actuel: _etat.operateur,
       options: [
         (
           'MTN',
-          'MTN MoMo · ${_etat.telephone}',
-          'Au nom de ${_etat.prenom} Mabiala',
+          context.t.compteMomoTelephone(_etat.telephone),
+          context.t.compteAuNomDe(_etat.prenom),
         ),
         (
           'Airtel',
-          'Ajouter un numéro Airtel Money',
-          'Il doit être à votre nom (vérifié)',
+          context.t.compteAjouterUnNumeroAirtel,
+          context.t.compteIlDoitEtreA,
         ),
       ],
     );
     if (choix == 'Airtel' && context.mounted) {
-      informer(context, 'Un code SMS vérifiera le numéro Airtel Money.');
+      informer(context, context.t.compteUnCodeSmsVerifiera);
     }
   }
 
   Future<void> code(String titre) async {
     if (await changerCode(context, titre: titre) && context.mounted) {
-      informer(context, '$titre modifié.');
+      informer(context, context.t.compteModifie(titre));
     }
   }
 
@@ -55,29 +55,50 @@ class _ActionsParametres {
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const ListTile(
+            ListTile(
               leading: Icon(
                 Icons.phone_android_rounded,
                 color: LiveColors.bleu,
               ),
-              title: Text('Ce téléphone · Tecno Spark 10'),
-              subtitle: Text('Brazzaville · actif maintenant'),
+              title: Text(context.t.compteCeTelephoneTecnoSpark),
+              subtitle: Text(context.t.compteBrazzavilleActifMaintenant),
             ),
             ListTile(
               leading: const Icon(Icons.laptop_rounded),
-              title: const Text('Chrome sur ordinateur'),
-              subtitle: const Text('Pointe-Noire · il y a 2 jours'),
+              title: Text(context.t.compteChromeSurOrdinateur),
+              subtitle: Text(context.t.comptePointeNoireIlY),
               trailing: TextButton(
                 onPressed: () {
                   Navigator.pop(ctx);
-                  informer(context, 'Appareil déconnecté.');
+                  informer(context, context.t.compteAppareilDeconnecte);
                 },
-                child: const Text('Déconnecter'),
+                child: Text(context.t.compteDeconnecter),
+              ),
+            ),
+            // Connexion sur ordinateur par code QR (E-AUTH-09).
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+              child: FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size.fromHeight(48),
+                ),
+                onPressed: () async {
+                  Navigator.pop(ctx);
+                  if (await simulerScan(
+                        context,
+                        quoi: context.t.compteLeCodeAfficheSur,
+                      ) &&
+                      context.mounted) {
+                    informer(context, context.t.compteOrdinateurConnecteAVotre);
+                  }
+                },
+                icon: const Icon(Icons.qr_code_scanner_rounded),
+                label: Text(context.t.compteConnecterUnAppareil),
               ),
             ),
           ],
@@ -89,16 +110,37 @@ class _ActionsParametres {
   Future<void> langue() async {
     final choix = await choisir<String>(
       context,
-      titre: 'Langue',
-      actuel: 'fr',
-      options: const [
-        ('fr', 'Français', null),
-        ('ln', 'Lingala', 'Interface, sous-titres et Live IA'),
-        ('kt', 'Kituba', 'Interface, sous-titres et Live IA'),
+      titre: context.t.compteLangue,
+      actuel: _etat.langue,
+      options: [
+        for (final (code, nom, francais) in languesLive)
+          (code, nom, nom == francais ? null : francais),
       ],
     );
     if (choix != null && context.mounted) {
-      informer(context, 'Langue enregistrée.');
+      ref.read(liveProvider.notifier).choisirLangue(choix);
+      informer(context, context.t.compteLangueEnregistree);
+    }
+  }
+
+  /// Mode clair ou sombre ; « Comme le téléphone » suit le réglage du système.
+  Future<void> apparence() async {
+    final choix = await choisir<String>(
+      context,
+      titre: context.t.compteApparence,
+      actuel: _etat.apparence,
+      options: [
+        (
+          'systeme',
+          context.t.compteCommeLeTelephone,
+          context.t.compteClairLeJourSombre,
+        ),
+        ('clair', context.t.compteClair, null),
+        ('sombre', context.t.compteSombre, context.t.compteReposeLesYeuxLa),
+      ],
+    );
+    if (choix != null && context.mounted) {
+      ref.read(liveProvider.notifier).choisirApparence(choix);
     }
   }
 
@@ -106,127 +148,39 @@ class _ActionsParametres {
   Future<void> pays() async {
     final choix = await choisir<String>(
       context,
-      titre: 'Pays et ville',
+      titre: context.t.comptePaysEtVille,
       actuel: _etat.pays,
-      options: const [
-        ('Brazzaville', 'Congo · Brazzaville', null),
-        ('Pointe-Noire', 'Congo · Pointe-Noire', null),
-        ('Libreville', 'Gabon · Libreville', 'Airtel Money, Moov Money'),
-        ('Douala', 'Cameroun · Douala', 'MTN MoMo, Orange Money'),
-        ('Yaoundé', 'Cameroun · Yaoundé', 'MTN MoMo, Orange Money'),
-        ('N’Djamena', 'Tchad · N’Djamena', 'Airtel Money, Moov Money'),
-        ('Bangui', 'Centrafrique · Bangui', 'Orange Money'),
-        ('Malabo', 'Guinée équatoriale · Malabo', 'Muni Dinero'),
+      options: [
+        for (final v in villesLive)
+          (v.ville, v.libelle, v.operateurs.join(', ')),
       ],
     );
     if (choix != null && context.mounted) {
       ref.read(liveProvider.notifier).choisirPays(choix);
-      informer(context, 'Annonces et prix de $choix, toujours en FCFA.');
+      informer(context, context.t.compteAnnoncesPrixDe(choix));
     }
-  }
-
-  void aide() {
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      isScrollControlled: true,
-      backgroundColor: Colors.white,
-      builder: (ctx) => SafeArea(
-        child: ListView(
-          shrinkWrap: true,
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-          children: [
-            const Text(
-              'Centre d’aide',
-              style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
-            ),
-            for (final (q, r) in const [
-              (
-                'Mon argent est-il protégé ?',
-                'Oui : Live garde l’argent jusqu’à votre confirmation (QR ou « J’ai reçu »). Sinon, vous êtes remboursé.',
-              ),
-              (
-                'Que se paie hors de Live ?',
-                'Loyers, caution et prix d’un bien se paient en direct, contre reçu. Tout le reste passe par Live.',
-              ),
-              (
-                'On me demande mon code MoMo',
-                'C’est une arnaque. Live ne le demande jamais. Signalez le message.',
-              ),
-              (
-                'Comment retirer mes gains ?',
-                'Vérifiez votre identité une fois, puis retirez sur votre MoMo ou Airtel Money, sans frais.',
-              ),
-            ])
-              ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                title: Text(
-                  q,
-                  style: const TextStyle(fontWeight: FontWeight.w700),
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Text(r),
-                  ),
-                ],
-              ),
-            const SizedBox(height: 8),
-            FilledButton.icon(
-              onPressed: () {
-                Navigator.pop(ctx);
-                context.push('/conversation');
-              },
-              icon: const Icon(Icons.support_agent_rounded),
-              label: const Text('Écrire au support Live'),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   Future<void> donnees() async {
     final choix = await choisir<int>(
       context,
-      titre: 'Mes données personnelles',
-      options: const [
-        (0, 'Télécharger mes données', 'Archive envoyée par SMS sous 48 h'),
+      titre: context.t.compteMesDonneesPersonnelles,
+      options: [
+        (
+          0,
+          context.t.compteTelechargerMesDonnees,
+          context.t.compteArchiveEnvoyeeParSms,
+        ),
         (
           1,
-          'Voir ce que Live conserve',
-          'Profil, annonces, transactions, messages',
+          context.t.compteVoirCeQueLive,
+          context.t.compteProfilAnnoncesTransactionsMessages,
         ),
       ],
     );
     if (choix == 0 && context.mounted) {
-      informer(
-        context,
-        'Demande enregistrée : lien de téléchargement sous 48 h.',
-      );
+      informer(context, context.t.compteDemandeEnregistreeLienDe);
     }
-  }
-
-  void conditions() {
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      backgroundColor: Colors.white,
-      builder: (_) => const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(20, 0, 20, 24),
-          child: Text(
-            'Conditions d’utilisation (résumé)\n\n'
-            '• Un compte par personne et par numéro de téléphone.\n'
-            '• Les paiements marqués « Payé dans Live » ne se font jamais ailleurs.\n'
-            '• Les objets interdits (armes, médicaments, faux documents…) sont retirés.\n'
-            '• Les avis ne sont possibles qu’après une transaction payée.\n'
-            '• Vos données restent au Congo et ne sont jamais vendues.',
-            style: TextStyle(height: 1.5),
-          ),
-        ),
-      ),
-    );
   }
 
   /// F-CPT-10 : suppression du compte, après retrait des gains.
@@ -234,22 +188,18 @@ class _ActionsParametres {
     if (_etat.disponible > 0) {
       final retirer = await confirmer(
         context,
-        titre: 'Retirez d’abord vos gains',
-        texte:
-            'Il vous reste ${fcfa(_etat.disponible)}. Retirez-les sur votre '
-            'Mobile Money avant de supprimer votre compte.',
-        action: 'Retirer mes gains',
+        titre: context.t.compteRetirezDAbordVos,
+        texte: context.t.compteRetirezGainsTexte(fcfa(_etat.disponible)),
+        action: context.t.compteRetirerMesGains,
       );
       if (retirer && context.mounted) context.push('/retirer');
       return;
     }
     if (await confirmer(
       context,
-      titre: 'Supprimer mon compte',
-      texte:
-          'Vos annonces et votre profil disparaissent. Les reçus de paiement '
-          'sont conservés 10 ans, comme la loi l’exige.',
-      action: 'Supprimer',
+      titre: context.t.compteSupprimerMonCompte,
+      texte: context.t.compteVosAnnoncesEtVotre,
+      action: context.t.supprimer,
       danger: true,
     )) {
       if (context.mounted) context.go('/bienvenue');

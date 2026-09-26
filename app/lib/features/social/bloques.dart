@@ -19,22 +19,21 @@ class EcranBloques extends ConsumerWidget {
     final bloques = ref.watch(liveProvider.select((e) => e.bloques)).toList();
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Comptes bloqués')),
+      appBar: AppBar(title: Text(context.t.socialComptesBloques)),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 24),
         children: [
           Padding(
             padding: EdgeInsets.fromLTRB(marge, 4, marge, 8),
-            child: const Text(
-              'Un compte bloqué ne voit plus votre profil ni vos annonces et ne '
-              'peut plus vous écrire. Il n’est pas prévenu.',
+            child: Text(
+              context.t.socialUnCompteBloqueNe,
               style: TextStyle(color: LiveColors.gris),
             ),
           ),
           if (bloques.isEmpty)
-            const EtatVide(
+            EtatVide(
               icone: Icons.verified_user_outlined,
-              texte: 'Aucun compte bloqué.',
+              texte: context.t.socialAucunCompteBloque,
             ),
           for (final id in bloques)
             Builder(
@@ -64,7 +63,7 @@ class EcranBloques extends ConsumerWidget {
                     ),
                     onPressed: () =>
                         ref.read(liveProvider.notifier).debloquer(id),
-                    child: const Text('Débloquer'),
+                    child: Text(context.t.socialDebloquer),
                   ),
                 );
               },

@@ -47,10 +47,12 @@ Le dossier est organisé en **quatre blocs**. On ne rédige pas un bloc tant que
 | N° | Document |
 |----|----------|
 | 20 | Architecture technique (mobile, web, backend, vidéo, recherche, hors ligne et faible débit) |
-| 21 | Modèle de données |
+| 21 | Piliers « référence » : Live IA partout, tontines, diaspora, quotidien, cartes |
 | 22 | Sécurité, protection des données et conformité (droit congolais et CEMAC) |
 | 23 | Administration, modération et support |
 | 24 | Parcours utilisateurs détaillés |
+| 26 | Back-end : modèle de données, base locale (Drift) et synchronisation |
+| 27 | Audit de conformité du prototype |
 
 ### Bloc D — Pilotage (à rédiger)
 

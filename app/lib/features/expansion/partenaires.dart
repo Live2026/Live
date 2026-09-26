@@ -14,31 +14,31 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
   var _production = false;
   var _cleVisible = false;
 
-  static const _apis = [
+  late final _apis = [
     (
       Icons.inventory_2_rounded,
-      'Catalogue',
-      'Publier et mettre à jour annonces, prix et stock depuis votre logiciel.',
+      context.t.expansionCatalogue,
+      context.t.expansionPublierEtMettreA,
     ),
     (
       Icons.receipt_long_rounded,
-      'Commandes',
-      'Recevoir les commandes, les accepter, suivre la remise par QR.',
+      context.t.expansionCommandes,
+      context.t.expansionRecevoirLesCommandesLes,
     ),
     (
       Icons.lock_rounded,
-      'Live Pay et séquestre',
-      'Encaisser MoMo, Airtel Money et Visa ; argent bloqué jusqu’à la remise.',
+      context.t.expansionLivePayEtSequestre,
+      context.t.expansionEncaisserMomoAirtelMoney,
     ),
     (
       Icons.two_wheeler_rounded,
-      'Livraison',
-      'Recevoir des courses, envoyer la position du livreur et le code de remise.',
+      context.t.expansionLivraison,
+      context.t.expansionRecevoirDesCoursesEnvoyer,
     ),
     (
       Icons.verified_user_rounded,
-      'Vérification',
-      'Savoir si un vendeur ou une agence est vérifié, avec son accord.',
+      context.t.expansionVerification,
+      context.t.expansionSavoirSiUnVendeur,
     ),
   ];
 
@@ -47,7 +47,7 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
     final marge = context.grandEcran ? 24.0 : 16.0;
     final cle = _production ? 'live_prod_7Hq2…Xk91' : 'live_test_4Fz8…Mb20';
     return Scaffold(
-      appBar: AppBar(title: const Text('API partenaires')),
+      appBar: AppBar(title: Text(context.t.expansionApiPartenaires)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
@@ -61,13 +61,13 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
                 end: Alignment.bottomRight,
               ),
             ),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(Icons.hub_rounded, color: LiveColors.ambreClair, size: 32),
                 SizedBox(height: 8),
                 Text(
-                  'Branchez votre activité sur Live',
+                  context.t.expansionBranchezVotreActiviteSur,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -76,14 +76,13 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  'Pour les banques, livreurs, agences, écoles et grandes '
-                  'boutiques. Réservé aux espaces Pro vérifiés.',
+                  context.t.expansionPourLesBanquesLivreurs,
                   style: TextStyle(color: Colors.white70),
                 ),
               ],
             ),
           ),
-          const EnTeteSection('Ce que vous pouvez faire'),
+          EnTeteSection(context.t.expansionCeQueVousPouvez),
           GrilleAdaptative(
             largeurMax: 420,
             espacement: 10,
@@ -100,7 +99,7 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
                           width: 42,
                           height: 42,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE6EBF2),
+                            color: LiveColors.voile,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(icone, color: LiveColors.bleu),
@@ -135,7 +134,7 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
                 ),
             ],
           ),
-          const EnTeteSection('Mes clés'),
+          EnTeteSection(context.t.expansionMesCles),
           SegmentedButton<bool>(
             segments: const [
               ButtonSegment(value: false, label: Text('Test')),
@@ -163,15 +162,17 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
                   ),
                 ),
                 IconButton(
-                  tooltip: _cleVisible ? 'Masquer la clé' : 'Afficher la clé',
+                  tooltip: _cleVisible
+                      ? context.t.expansionMasquerLaCle
+                      : context.t.expansionAfficherLaCle,
                   onPressed: () async {
                     if (_cleVisible) {
                       setState(() => _cleVisible = false);
                     } else if (await confirmer(
                       context,
-                      titre: 'Afficher la clé',
-                      texte: 'Ne la partagez jamais : elle donne accès à vos commandes et paiements.',
-                      action: 'Afficher',
+                      titre: context.t.expansionAfficherLaCle,
+                      texte: context.t.expansionNeLaPartagezJamais,
+                      action: context.t.expansionAfficher,
                     )) {
                       setState(() => _cleVisible = true);
                     }
@@ -188,30 +189,30 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
           const SizedBox(height: 6),
           Text(
             _production
-                ? 'Production : vraies transactions. Afficher la clé demande votre code Live.'
-                : 'Test : paiements simulés, aucun argent réel ne circule.',
+                ? context.t.expansionProductionVraiesTransactionsAfficher
+                : context.t.expansionTestPaiementsSimulesAucun,
             style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
-          const EnTeteSection('Utilisation ce mois-ci'),
-          const GrilleAdaptative(
+          EnTeteSection(context.t.expansionUtilisationCeMoisCi),
+          GrilleAdaptative(
             largeurMax: 260,
             espacement: 10,
             enfants: [
               TuileChiffre(
                 icone: Icons.swap_horiz_rounded,
                 valeur: '6 214',
-                libelle: 'Appels',
+                libelle: context.t.expansionAppels,
               ),
               TuileChiffre(
                 icone: Icons.check_circle_rounded,
                 valeur: '99,8 %',
-                libelle: 'Réussis',
+                libelle: context.t.expansionReussis,
                 couleur: LiveColors.succes,
               ),
               TuileChiffre(
                 icone: Icons.card_giftcard_rounded,
                 valeur: '10 000',
-                libelle: 'Appels gratuits par mois',
+                libelle: context.t.expansionAppelsGratuitsParMois,
                 couleur: LiveColors.cuivre,
               ),
             ],
@@ -219,27 +220,28 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
           const SizedBox(height: 12),
           LigneMenu(
             icone: Icons.webhook_rounded,
-            titre: 'Adresse de notification (webhook)',
+            titre: context.t.expansionAdresseDeNotificationWebhook,
             detail: 'https://boutique-grace.cg/live',
-            onTap: () => informer(context, 'Notification de test envoyée.'),
+            onTap: () =>
+                informer(context, context.t.expansionNotificationDeTestEnvoyee),
           ),
           LigneMenu(
             icone: Icons.menu_book_rounded,
-            titre: 'Documentation',
-            detail: 'Exemples en JavaScript, PHP et Python',
-            onTap: () =>
-                informer(context, 'Documentation : developpeurs.live.cg'),
+            titre: context.t.expansionDocumentation,
+            detail: context.t.expansionExemplesEnJavascriptPhp,
+            onTap: () => informer(
+              context,
+              context.t.expansionDocumentationDeveloppeursLiveAfrica,
+            ),
           ),
         ],
       ),
       bottomNavigationBar: BarreAction(
         child: FilledButton.icon(
-          onPressed: () => informer(
-            context,
-            'Demande envoyée : un conseiller Live vous rappelle sous 48 h.',
-          ),
+          onPressed: () =>
+              informer(context, context.t.expansionDemandeEnvoyeeUnConseiller),
           icon: const Icon(Icons.handshake_rounded),
-          label: const Text('Devenir partenaire'),
+          label: Text(context.t.expansionDevenirPartenaire),
         ),
       ),
     );

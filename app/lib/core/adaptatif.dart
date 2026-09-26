@@ -62,7 +62,9 @@ class DeuxColonnes extends StatelessWidget {
 }
 
 /// Grille qui remplit toute la largeur : autant de colonnes que possible,
-/// chaque carte gardant une largeur maximale lisible.
+/// chaque carte gardant une largeur maximale lisible. Les lignes restent
+/// pleines quand c'est possible (6 cartes : 3 + 3 plutôt que 5 + 1), et
+/// jamais une carte seule sur la dernière ligne.
 class GrilleAdaptative extends StatelessWidget {
   const GrilleAdaptative({
     super.key,
@@ -83,7 +85,10 @@ class GrilleAdaptative extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, contraintes) {
-        final colonnes = (contraintes.maxWidth / largeurMax).ceil().clamp(1, 8);
+        final colonnes = _colonnes(
+          (contraintes.maxWidth / largeurMax).ceil().clamp(1, 8),
+          enfants.length,
+        );
         final largeur =
             (contraintes.maxWidth - espacement * (colonnes - 1)) / colonnes;
         return Wrap(
@@ -97,4 +102,35 @@ class GrilleAdaptative extends StatelessWidget {
       },
     );
   }
+}
+
+/// Nombre de colonnes : un diviseur du nombre de cartes proche du maximum
+/// si possible, sinon le maximum sans laisser une carte seule.
+int _colonnes(int max, int n) {
+  if (n <= max) return max;
+  for (var c = max; c >= (max * 0.6).ceil() && c > 1; c--) {
+    if (n % c == 0) return c;
+  }
+  var c = max;
+  while (c > 2 && n % c == 1) {
+    c--;
+  }
+  return c;
+}
+
+/// Colonne centrée de largeur lisible pour les écrans de confirmation
+/// (paiement réussi, identité vérifiée, retrait envoyé) : sur ordinateur,
+/// le bouton final ne s'étire pas sur toute la largeur.
+class Etroit extends StatelessWidget {
+  const Etroit({super.key, required this.child, this.largeur = 560});
+  final Widget child;
+  final double largeur;
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: largeur),
+      child: child,
+    ),
+  );
 }

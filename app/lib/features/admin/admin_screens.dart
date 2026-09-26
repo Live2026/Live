@@ -7,6 +7,7 @@ import '../../core/navigation.dart';
 import '../../core/theme.dart';
 import '../../shared/widgets.dart';
 
+part 'admin_piliers.dart';
 part 'admin_tableau.dart';
 part 'admin_dossiers.dart';
 part 'admin_finance.dart';
@@ -23,6 +24,8 @@ const _sections = [
   (Icons.shield_outlined, 'Modération', '/admin/moderation'),
   (Icons.gavel_rounded, 'Litiges', '/admin/litiges'),
   (Icons.account_balance_outlined, 'Finance', '/admin/finance'),
+  (Icons.currency_exchange_rounded, 'Argent et quotidien', '/admin/quotidien'),
+  (Icons.auto_awesome_outlined, 'Live IA', '/admin/ia'),
   (Icons.people_outline, 'Utilisateurs', '/admin/utilisateurs'),
   (Icons.tune_rounded, 'Configuration', '/admin/configuration'),
   (Icons.fact_check_outlined, 'À valider (4 yeux)', '/admin/validations'),
@@ -45,10 +48,10 @@ class _CoqueAdmin extends StatelessWidget {
   Widget build(BuildContext context) {
     final grand = context.grandEcran;
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F5F8),
+      backgroundColor: LiveColors.champ,
       drawer: grand ? null : Drawer(child: _MenuAdmin(section: section)),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: LiveColors.surface,
         title: Text(titre),
         actions: [
           Padding(
@@ -116,7 +119,7 @@ class _MenuAdmin extends StatelessWidget {
 
   Widget _contenu(BuildContext context, bool large, bool replie) {
     Widget entree(IconData icone, String nom, bool actif, VoidCallback onTap) {
-      final teinte = actif ? Colors.white : const Color(0xFF9AA7B8);
+      final teinte = actif ? LiveColors.surface : const Color(0xFF9AA7B8);
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
         child: Tooltip(
@@ -132,7 +135,7 @@ class _MenuAdmin extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: large ? 14 : 0,
-                  vertical: 11,
+                  vertical: 8,
                 ),
                 child: Row(
                   mainAxisAlignment: large
@@ -154,7 +157,7 @@ class _MenuAdmin extends StatelessWidget {
                           style: TextStyle(
                             color: actif
                                 ? Colors.white
-                                : const Color(0xFFD7DCE4),
+                                : LiveColors.brumeClaire,
                             fontWeight: actif
                                 ? FontWeight.w700
                                 : FontWeight.w500,
@@ -178,10 +181,10 @@ class _MenuAdmin extends StatelessWidget {
         children: [
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(large ? 20 : 0, 4, 12, 20),
+                  padding: EdgeInsets.fromLTRB(large ? 20 : 0, 0, 12, 12),
                   child: large
                       ? const Row(
                           children: [
@@ -201,7 +204,7 @@ class _MenuAdmin extends StatelessWidget {
                 ),
                 for (final (i, (icone, nom, route)) in _sections.indexed)
                   entree(icone, nom, i == section, () => context.go(route)),
-                const Divider(color: Colors.white24, height: 32),
+                const Divider(color: Colors.white24, height: 16),
                 entree(
                   Icons.phone_android_rounded,
                   'Retour à l’application',
@@ -246,10 +249,12 @@ class EcranAdmin extends StatelessWidget {
       2 => ('Modération', const _FileModeration()),
       3 => ('Litiges', const _FileLitiges()),
       4 => ('Finance et réconciliation', const _Finance()),
-      5 => ('Utilisateurs', const _Utilisateurs()),
-      6 => ('Configuration', const _Configuration()),
-      7 => ('Double validation', const _Validations()),
-      8 => ('Journal d’audit', const _JournalAudit()),
+      5 => ('Argent et quotidien', const _ArgentQuotidien()),
+      6 => ('Live IA : coûts et usage', const _LiveIaAdmin()),
+      7 => ('Utilisateurs', const _Utilisateurs()),
+      8 => ('Configuration', const _Configuration()),
+      9 => ('Double validation', const _Validations()),
+      10 => ('Journal d’audit', const _JournalAudit()),
       _ => ('Équipe Live', const _EquipeLive()),
     };
     return _CoqueAdmin(section: section, titre: titre, corps: corps);
@@ -265,13 +270,28 @@ class _Tableau extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Sur un écran étroit, le tableau garde une largeur lisible et défile
+    // horizontalement plutôt que de couper les mots.
+    return LayoutBuilder(
+      builder: (context, contraintes) {
+        final tableau = _corps(context);
+        if (contraintes.maxWidth >= 600) return tableau;
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: SizedBox(width: 640, child: tableau),
+        );
+      },
+    );
+  }
+
+  Widget _corps(BuildContext context) {
     return Bloc(
       padding: 0,
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            color: const Color(0xFFF8FAFC),
+            color: LiveColors.champ,
             child: Row(
               children: [
                 for (final (nom, flex) in colonnes)
@@ -298,7 +318,7 @@ class _Tableau extends StatelessWidget {
                   vertical: 12,
                 ),
                 decoration: const BoxDecoration(
-                  border: Border(top: BorderSide(color: Color(0xFFE4E8EE))),
+                  border: Border(top: BorderSide(color: LiveColors.filet)),
                 ),
                 child: Row(
                   children: [
@@ -320,12 +340,12 @@ Widget _etat(String texte) {
     'Urgent' ||
     'Bloqué' ||
     'Écart' ||
-    'Rejeté' => (const Color(0xFFFDECEC), LiveColors.erreur),
+    'Rejeté' => (LiveColors.teinteRouge, LiveColors.erreur),
     'Validé' ||
     'Réconcilié' ||
     'Actif' ||
-    'Résolu' => (const Color(0xFFE7F4EC), LiveColors.succes),
-    _ => (const Color(0xFFFFF4E0), LiveColors.cuivre),
+    'Résolu' => (LiveColors.teinteVerte, LiveColors.succes),
+    _ => (LiveColors.teinteAmbre, LiveColors.cuivre),
   };
   return Align(
     alignment: Alignment.centerLeft,

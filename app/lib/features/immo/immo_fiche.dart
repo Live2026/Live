@@ -24,10 +24,10 @@ class EcranBien extends ConsumerWidget {
             prix: b.loyer,
             bas: bas,
             haut: haut,
-            suffixe: b.vente ? '' : ' / mois',
+            suffixe: b.vente ? '' : context.t.immoParMoisSuffixe,
             base: b.vente
-                ? 'Ventes récentes comparables à ${b.quartier}'
-                : 'Loyers de ${b.chambres} chambre${b.chambres > 1 ? 's' : ''} à ${b.quartier}, ces 6 derniers mois',
+                ? context.t.immoVentesComparablesA(b.quartier)
+                : context.t.immoLoyersDe(b.chambres, b.quartier),
           );
         },
       ),
@@ -41,16 +41,15 @@ class EcranBien extends ConsumerWidget {
       const SizedBox(height: 16),
       _Annonceur(vendeur: b.annonceur),
       const SizedBox(height: 12),
-      const BandeauProtection(
-        "Frais de visite et acompte : toujours dans Live, jamais sur un numéro MoMo.",
-      ),
+      BandeauProtection(context.t.immoFraisDeVisiteEt),
       const SizedBox(height: 8),
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: () => signaler(context, 'cette annonce', immo: true),
+          onPressed: () =>
+              signaler(context, context.t.immoCetteAnnonce, immo: true),
           icon: const Icon(Icons.flag_outlined, size: 18),
-          label: const Text('Déjà loué ou annonce fausse ?'),
+          label: Text(context.t.immoDejaLoueOuAnnonce),
         ),
       ),
     ];
@@ -65,7 +64,7 @@ class EcranBien extends ConsumerWidget {
             child: OutlinedButton.icon(
               onPressed: () => context.push('/conversation'),
               icon: const Icon(Icons.chat_bubble_outline, size: 18),
-              label: const Text('Écrire'),
+              label: Text(context.t.immoEcrire),
             ),
           ),
           const SizedBox(width: 10),
@@ -73,7 +72,7 @@ class EcranBien extends ConsumerWidget {
             flex: 2,
             child: FilledButton(
               onPressed: () => context.push('/bien/${b.id}/visite'),
-              child: const Text('Demander une visite'),
+              child: Text(context.t.immoDemanderUneVisite),
             ),
           ),
         ],
@@ -84,7 +83,7 @@ class EcranBien extends ConsumerWidget {
         appBar: AppBar(
           actions: [
             IconButton(
-              tooltip: 'Partager',
+              tooltip: context.t.partager,
               onPressed: () => partager(context, b.titre),
               icon: const Icon(Icons.ios_share_rounded),
             ),
@@ -111,19 +110,19 @@ class EcranBien extends ConsumerWidget {
             expandedHeight: 300,
             pinned: true,
             stretch: true,
-            backgroundColor: Colors.white,
+            backgroundColor: LiveColors.surface,
             leading: Padding(
               padding: const EdgeInsets.all(8),
               child: BoutonVerre(
                 icone: Icons.arrow_back_rounded,
-                libelle: 'Retour',
+                libelle: context.t.retour,
                 onTap: () => context.pop(),
               ),
             ),
             actions: [
               BoutonVerre(
                 icone: Icons.ios_share_rounded,
-                libelle: 'Partager',
+                libelle: context.t.partager,
                 onTap: () => partager(context, b.titre),
               ),
               const SizedBox(width: 8),
@@ -168,7 +167,7 @@ class _EnTeteBien extends StatelessWidget {
         PrixBien(bien: b, taille: 26),
         const SizedBox(height: 2),
         Text(
-          '${b.titre} · ${b.quartier}',
+          context.t.immoTitreQuartier(b.titre, b.quartier),
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 6),
@@ -182,7 +181,7 @@ class _EnTeteBien extends StatelessWidget {
             const SizedBox(width: 4),
             Expanded(
               child: Text(
-                'Disponibilité confirmée il y a ${b.confirmeIlYa} jour${b.confirmeIlYa > 1 ? 's' : ''}',
+                context.t.immoDisponibiliteConfirmee(b.confirmeIlYa),
                 style: const TextStyle(color: LiveColors.succes, fontSize: 13),
               ),
             ),
@@ -202,12 +201,22 @@ class _TuilesSpecs extends StatelessWidget {
   Widget build(BuildContext context) {
     final b = bien;
     final tuiles = <(IconData, String, String)>[
-      (b.type.icone, b.type.libelle.split(' ').first, 'Type'),
-      if (b.chambres > 0) (Icons.bed_outlined, '${b.chambres}', 'Chambres'),
-      if (b.douches > 0) (Icons.shower_outlined, '${b.douches}', 'Douches'),
+      (
+        b.type.icone,
+        b.type.libelleDe(context.t).split(' ').first,
+        context.t.immoType,
+      ),
+      if (b.chambres > 0)
+        (Icons.bed_outlined, '${b.chambres}', context.t.immoChambres),
+      if (b.douches > 0)
+        (Icons.shower_outlined, '${b.douches}', context.t.immoDouches),
       if (b.surface > 0)
-        (Icons.square_foot_rounded, '${b.surface} m²', 'Surface'),
-      (Icons.chair_outlined, b.meuble ? 'Oui' : 'Non', 'Meublé'),
+        (Icons.square_foot_rounded, '${b.surface} m²', context.t.immoSurface),
+      (
+        Icons.chair_outlined,
+        b.meuble ? context.t.immoOui : context.t.immoNon,
+        context.t.immoMeuble,
+      ),
     ];
     return GrilleAdaptative(
       largeurMax: 110,
@@ -218,7 +227,7 @@ class _TuilesSpecs extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF3F5F8),
+              color: LiveColors.champ,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
@@ -256,12 +265,14 @@ class _CoutEntree extends StatelessWidget {
       return Bloc(
         child: Column(
           children: [
-            LigneMontant('Prix de vente', b.loyer, gras: true),
-            LigneMontant('Frais de visite (remboursables)', b.fraisVisite),
+            LigneMontant(context.t.immoPrixDeVente, b.loyer, gras: true),
+            LigneMontant(
+              context.t.immoFraisDeVisiteRemboursables,
+              b.fraisVisite,
+            ),
             const SizedBox(height: 6),
-            const Text(
-              'Titre foncier vérifié par Live avant la mise en ligne. '
-              'Acompte de réservation séquestré jusqu’à la signature chez le notaire.',
+            Text(
+              context.t.immoTitreFoncierVerifiePar,
               style: TextStyle(color: LiveColors.gris, fontSize: 13),
             ),
           ],
@@ -269,16 +280,21 @@ class _CoutEntree extends StatelessWidget {
       );
     }
     final parts = [
-      ('Avance (${b.moisAvance} mois)', b.avance, LiveColors.bleu),
-      ('Caution (${b.moisCaution} mois)', b.caution, const Color(0xFF4F7CAC)),
-      if (b.commission > 0) ('Commission', b.commission, LiveColors.orange),
+      (context.t.immoAvanceMois(b.moisAvance), b.avance, LiveColors.bleu),
+      (
+        context.t.immoCautionMois(b.moisCaution),
+        b.caution,
+        const Color(0xFF4F7CAC),
+      ),
+      if (b.commission > 0)
+        (context.t.immoCommission, b.commission, LiveColors.orange),
     ];
     return Bloc(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "COÛT D'ENTRÉE",
+          Text(
+            context.t.immoCoutDEntree,
             style: TextStyle(
               fontSize: 12,
               letterSpacing: 1,
@@ -325,15 +341,12 @@ class _CoutEntree extends StatelessWidget {
             ),
           const Divider(height: 20),
           LigneMontant(
-            'Loyer ensuite',
+            context.t.immoLoyerEnsuite,
             b.loyer,
-            brut: '${fcfa(b.loyer)} / mois',
+            brut: context.t.parMois(fcfa(b.loyer)),
           ),
-          LigneMontant('Frais de visite', b.fraisVisite),
-          const BoutonEcouter(
-            "Pour entrer dans ce logement, vous payez l'avance, la caution et la commission. "
-            "La caution vous est rendue à votre départ si le logement est en bon état.",
-          ),
+          LigneMontant(context.t.immoFraisDeVisite, b.fraisVisite),
+          BoutonEcouter(context.t.immoPourEntrerDansCe),
         ],
       ),
     );
@@ -348,16 +361,16 @@ class _Equipements extends StatelessWidget {
   Widget build(BuildContext context) {
     final b = bien;
     final items = <(IconData, String)>[
-      (Icons.water_drop_outlined, 'Eau : ${b.eau}'),
-      (Icons.bolt_outlined, 'Électricité : ${b.electricite}'),
-      if (b.parking) (Icons.local_parking_rounded, 'Parking'),
+      (Icons.water_drop_outlined, context.t.immoEau(b.eau)),
+      (Icons.bolt_outlined, context.t.immoElectricite(b.electricite)),
+      if (b.parking) (Icons.local_parking_rounded, context.t.immoParking),
       for (final c in b.caracteristiques) (Icons.check_circle_outline, c),
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Équipements',
+        Text(
+          context.t.immoEquipements,
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 8),
@@ -372,7 +385,7 @@ class _Equipements extends StatelessWidget {
                   vertical: 7,
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFE4E8EE)),
+                  border: Border.all(color: LiveColors.filet),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(

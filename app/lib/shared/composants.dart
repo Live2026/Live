@@ -1,7 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
 import 'animations.dart';
+import '../l10n/textes.dart';
 
 /// Petits composants réutilisés sur tous les écrans : en-têtes de section,
 /// carrousels, pastilles, avatars, étoiles, états vides, chiffres clés.
@@ -36,7 +39,7 @@ class EnTeteSection extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
               ),
               onPressed: onTap,
-              child: Text(action ?? 'Voir tout'),
+              child: Text(action ?? context.t.voirTout),
             ),
         ],
       ),
@@ -132,8 +135,12 @@ class Avatar extends StatelessWidget {
     this.verifie = false,
     this.anneau = false,
     this.enLigne = false,
+    this.photo,
   });
   final String nom;
+
+  /// Photo choisie par l'utilisateur ; sinon, les initiales.
+  final Uint8List? photo;
   final Color couleur;
   final double taille;
   final bool verifie;
@@ -164,15 +171,20 @@ class Avatar extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
+        image: photo == null
+            ? null
+            : DecorationImage(image: MemoryImage(photo!), fit: BoxFit.cover),
       ),
-      child: Text(
-        _initiales,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: taille * 0.36,
-        ),
-      ),
+      child: photo != null
+          ? null
+          : Text(
+              _initiales,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: taille * 0.36,
+              ),
+            ),
     );
     return Stack(
       clipBehavior: Clip.none,
@@ -189,7 +201,7 @@ class Avatar extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(2),
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: LiveColors.surface,
                     shape: BoxShape.circle,
                   ),
                   child: rond,
@@ -202,7 +214,7 @@ class Avatar extends StatelessWidget {
             bottom: -2,
             child: Container(
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: LiveColors.surface,
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -222,7 +234,7 @@ class Avatar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color(0xFF22C55E),
                 shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
+                border: Border.all(color: LiveColors.surface, width: 2),
               ),
             ),
           ),
@@ -276,7 +288,7 @@ class SelecteurEtoiles extends StatelessWidget {
           Semantics(
             button: true,
             selected: note == i,
-            label: '$i étoile${i > 1 ? 's' : ''}',
+            label: context.t.etoilesN(i),
             child: Pressable(
               echelle: 0.85,
               onTap: () => onChange(i),
@@ -289,7 +301,9 @@ class SelecteurEtoiles extends StatelessWidget {
                   child: Icon(
                     note >= i ? Icons.star_rounded : Icons.star_outline_rounded,
                     size: 44,
-                    color: note >= i ? LiveColors.ambre : LiveColors.brume,
+                    color: note >= i
+                        ? LiveColors.ambre
+                        : LiveColors.brumeClaire,
                   ),
                 ),
               ),
@@ -324,7 +338,7 @@ class EtatVide extends StatelessWidget {
             width: 72,
             height: 72,
             decoration: const BoxDecoration(
-              color: Color(0xFFEFF2F6),
+              color: LiveColors.champ2,
               shape: BoxShape.circle,
             ),
             child: Icon(icone, size: 34, color: LiveColors.gris),
@@ -367,9 +381,9 @@ class TuileChiffre extends StatelessWidget {
       height: 112,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: LiveColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE4E8EE)),
+        border: Border.all(color: LiveColors.filet),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -439,7 +453,7 @@ class PuceIcone extends StatelessWidget {
                 width: 56,
                 height: 56,
                 decoration: BoxDecoration(
-                  color: active ? LiveColors.bleu : const Color(0xFFEFF2F6),
+                  color: active ? LiveColors.bleu : LiveColors.champ2,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Icon(

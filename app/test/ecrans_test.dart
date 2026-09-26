@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:live/core/router.dart';
+import 'package:live/core/theme.dart';
+import 'package:live/data/store.dart';
 import 'package:live/main.dart';
 
 import 'outils.dart';
@@ -10,8 +12,10 @@ import 'outils.dart';
 const routes = [
   '/demarrage',
   '/bienvenue',
+  '/langue',
   '/telephone',
   '/connexion',
+  '/connexion/qr',
   '/code',
   '/profil',
   '/interets',
@@ -78,6 +82,15 @@ const routes = [
   '/achats-groupes',
   '/diaspora',
   '/transfert',
+  '/transfert?sens=recevoir',
+  '/portefeuille',
+  '/aide',
+  '/aide/ecrire',
+  '/aide/demandes',
+  '/legal/cgu',
+  '/legal/confidentialite',
+  '/admin/quotidien',
+  '/admin/ia',
   '/factures',
   '/adresse',
   '/points-relais',
@@ -147,6 +160,11 @@ const routes = [
   '/messages/demandes',
   '/messages/archives',
   '/messages/parametres',
+  '/appels',
+  '/appel?avec=Gr%C3%A2ce%20Mode',
+  '/appel?avec=Gr%C3%A2ce%20Mode&video=1',
+  '/appel?avec=Terminale%20C&video=1&groupe=g1',
+  '/appel?avec=Gr%C3%A2ce%20Mode&video=1&entrant=1',
   '/admin',
   '/admin/kyc',
   '/admin/kyc/k1',
@@ -189,5 +207,104 @@ void main() {
         expect(erreurs, isEmpty, reason: erreurs.join('\n'));
       },
     );
+  }
+
+  // Accessibilité : texte agrandi par le téléphone (150 % et 200 %), sur
+  // les écrans du démarrage, qu'on ne peut pas contourner.
+  for (final echelle in [1.5, 2.0]) {
+    testWidgets(
+      'démarrage lisible avec le texte à ${(echelle * 100).toInt()} %',
+      (tester) async {
+        tester.view.physicalSize = const Size(360, 740);
+        tester.view.devicePixelRatio = 1;
+        tester.platformDispatcher.textScaleFactorTestValue = echelle;
+        addTearDown(tester.view.reset);
+        addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+        sansAnimations(tester);
+        routeur.go('/bienvenue');
+        await tester.pumpWidget(const ProviderScope(child: LiveApp()));
+        await tester.pumpAndSettle();
+        final erreurs = <String>[];
+        for (final r in const [
+          '/demarrage',
+          '/bienvenue',
+          '/langue',
+          '/telephone',
+          '/connexion',
+          '/connexion/qr',
+          '/code',
+          '/profil',
+          '/interets',
+          '/pin',
+        ]) {
+          routeur.go(r);
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 600));
+          final e = tester.takeException();
+          if (e != null) erreurs.add('$r : ${e.toString().split('\n').first}');
+        }
+        expect(erreurs, isEmpty, reason: erreurs.join('\n'));
+      },
+    );
+  }
+
+  // Mode sombre : tous les écrans, sur téléphone et sur ordinateur.
+  for (final largeur in [360.0, 1280.0]) {
+    testWidgets('tous les écrans en mode sombre à ${largeur.toInt()} px', (
+      tester,
+    ) async {
+      tester.view.physicalSize = Size(largeur, largeur > 600 ? 800 : 780);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      addTearDown(() => LiveColors.sombre = false);
+      sansAnimations(tester);
+      routeur.go('/bienvenue');
+      await tester.pumpWidget(const ProviderScope(child: LiveApp()));
+      ProviderScope.containerOf(tester.element(find.byType(LiveApp)))
+          .read(liveProvider.notifier)
+          .choisirApparence('sombre');
+      await tester.pumpAndSettle();
+      expect(LiveColors.sombre, isTrue);
+      expect(
+        Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+        Brightness.dark,
+      );
+      final erreurs = <String>[];
+      for (final r in routes) {
+        routeur.go(r);
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 600));
+        final e = tester.takeException();
+        if (e != null) erreurs.add('$r : ${e.toString().split('\n').first}');
+      }
+      expect(erreurs, isEmpty, reason: erreurs.join('\n'));
+    });
+  }
+
+  // Anglais : les textes plus longs ne doivent rien faire déborder.
+  for (final largeur in [320.0, 1280.0]) {
+    testWidgets('tous les écrans en anglais à ${largeur.toInt()} px', (
+      tester,
+    ) async {
+      tester.view.physicalSize = Size(largeur, largeur > 600 ? 800 : 780);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      sansAnimations(tester);
+      routeur.go('/bienvenue');
+      await tester.pumpWidget(const ProviderScope(child: LiveApp()));
+      ProviderScope.containerOf(tester.element(find.byType(LiveApp)))
+          .read(liveProvider.notifier)
+          .choisirLangue('en');
+      await tester.pumpAndSettle();
+      final erreurs = <String>[];
+      for (final r in routes) {
+        routeur.go(r);
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 600));
+        final e = tester.takeException();
+        if (e != null) erreurs.add('$r : ${e.toString().split('\n').first}');
+      }
+      expect(erreurs, isEmpty, reason: erreurs.join('\n'));
+    });
   }
 }

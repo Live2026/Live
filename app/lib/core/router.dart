@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data/store.dart';
 import '../features/admin/admin_screens.dart';
+import '../features/aide/aide_screens.dart';
 import '../features/apprendre/apprendre_screens.dart';
 import '../features/auth/auth_screens.dart';
 import '../features/compte/compte_screens.dart';
@@ -16,6 +17,8 @@ import '../features/feed/feed_screen.dart';
 import '../features/ia/ia_screens.dart';
 import '../features/immo/immo_screens.dart';
 import '../features/market/market_screens.dart';
+import '../features/messages/appel_en_cours.dart';
+import '../features/messages/appels.dart';
 import '../features/messages/messages_screens.dart';
 import '../features/opportunites/opportunites_screens.dart';
 import '../features/pay/pay_screens.dart';
@@ -27,25 +30,30 @@ import '../features/test/scenarios_screen.dart';
 import 'cadre_demarrage.dart';
 import 'navigation.dart';
 
-/// Démarrage : marque à gauche, formulaire à droite sur ordinateur.
+/// Démarrage : sur ordinateur, page blanche et colonne centrée façon
+/// WhatsApp (CadreDemarrage).
 const _demarrage = {
-  '/bienvenue',
+  '/langue',
   '/telephone',
   '/connexion',
+  '/connexion/qr',
   '/code',
   '/profil',
   '/interets',
   '/pin',
 };
 
-/// Pages qui occupent tout l'écran, même sur ordinateur : back-office (qui a
-/// sa propre barre), caméra, direct et lecteur.
+/// Pages qui occupent tout l'écran, même sur ordinateur : accueil (motif
+/// plein écran), back-office (qui a sa propre barre), caméra, direct et
+/// lecteur.
 bool _pleinEcran(String chemin) =>
     const {
       '/demarrage',
+      '/bienvenue',
       '/publier/media',
       '/direct/:id',
       '/lecteur/:id',
+      '/appel',
     }.contains(chemin) ||
     chemin.startsWith('/admin');
 
@@ -56,7 +64,11 @@ GoRoute _route(
 }) => GoRoute(
   path: chemin,
   builder: (_, s) => _demarrage.contains(chemin)
-      ? CadreDemarrage(child: ecran(s))
+      ? CadreDemarrage(
+          chemin: chemin,
+          largeur: chemin == '/connexion/qr' ? 760 : 460,
+          child: ecran(s),
+        )
       : !cadre || _pleinEcran(chemin)
       ? ecran(s)
       : CadreOrdinateur(chemin: s.uri.path, child: ecran(s)),
@@ -70,7 +82,9 @@ final routeur = GoRouter(
     // Démarrage et compte
     _route('/demarrage', (_) => const EcranSplash()),
     _route('/bienvenue', (_) => const EcranBienvenue()),
+    _route('/langue', (_) => const EcranLangue()),
     _route('/telephone', (_) => const EcranTelephone()),
+    _route('/connexion/qr', (_) => const EcranConnexionQr()),
     _route('/connexion', (_) => const EcranConnexion()),
     _route('/code', (s) {
       final (tel, op) = s.extra as (String, String)? ?? ('06 123 45 67', 'MTN');
@@ -111,6 +125,13 @@ final routeur = GoRouter(
     _route('/profil/:id', (s) => EcranProfilPublic(id: _p(s, 'id'))),
     _route('/boutique/:id', (s) => EcranBoutique(id: _p(s, 'id'))),
     _route('/parametres', (_) => const EcranParametres()),
+    _route('/aide', (_) => const EcranAide()),
+    _route(
+      '/aide/ecrire',
+      (s) => EcranEcrireSupport(sujet: s.uri.queryParameters['sujet']),
+    ),
+    _route('/aide/demandes', (_) => const EcranDemandesSupport()),
+    _route('/legal/:type', (s) => EcranLegal(type: _p(s, 'type'))),
     _route('/notifications', (_) => const EcranNotifications()),
     _route('/notifications/preferences', (_) => const EcranPreferencesNotif()),
     _route('/donnees', (_) => const EcranDonnees()),
@@ -181,7 +202,11 @@ final routeur = GoRouter(
     _route('/tontine/:id', (s) => EcranTontine(id: _p(s, 'id'))),
     _route('/achats-groupes', (_) => const EcranAchatsGroupes()),
     _route('/diaspora', (_) => const EcranDiaspora()),
-    _route('/transfert', (_) => const EcranTransfert()),
+    _route(
+      '/transfert',
+      (s) =>
+          EcranTransfert(recevoir: s.uri.queryParameters['sens'] == 'recevoir'),
+    ),
     _route('/factures', (_) => const EcranFactures()),
     _route('/adresse', (_) => const EcranAdresseLive()),
     _route('/points-relais', (_) => const EcranPointsRelais()),
@@ -259,11 +284,24 @@ final routeur = GoRouter(
           (TypePaiement.commande, 'LV-00482', 'MTN Mobile Money');
       return EcranPaiementReussi(type: type, id: id, moyen: moyen);
     }),
+    _route('/portefeuille', (_) => const EcranPortefeuille()),
     _route('/gains', (_) => const EcranGains()),
     _route('/retirer', (_) => const EcranRetrait()),
     _route('/recu/:id', (s) => EcranRecu(id: _p(s, 'id'))),
     // Messages
     _route('/messages', (_) => const EcranMessages()),
+    _route('/appels', (_) => const EcranAppels()),
+    _route('/appel', (s) {
+      final q = s.uri.queryParameters;
+      return EcranAppel(
+        // Un autre appel est un nouvel écran, pas le même mis à jour.
+        key: ValueKey(s.uri.toString()),
+        avec: q['avec'] ?? 'Grâce Mode',
+        video: q['video'] == '1',
+        groupe: q['groupe'],
+        entrant: q['entrant'] == '1',
+      );
+    }),
     _route('/conversation', (_) => const EcranConversation()),
     _route('/groupe/:id', (s) => EcranGroupe(id: _p(s, 'id'))),
     _route('/messages/demandes', (_) => const EcranDemandes()),
@@ -277,15 +315,17 @@ final routeur = GoRouter(
     _route('/admin/litiges', (_) => const EcranAdmin(section: 3)),
     _route('/admin/litiges/:id', (s) => EcranLitige(id: _p(s, 'id'))),
     _route('/admin/finance', (_) => const EcranAdmin(section: 4)),
-    _route('/admin/utilisateurs', (_) => const EcranAdmin(section: 5)),
+    _route('/admin/quotidien', (_) => const EcranAdmin(section: 5)),
+    _route('/admin/ia', (_) => const EcranAdmin(section: 6)),
+    _route('/admin/utilisateurs', (_) => const EcranAdmin(section: 7)),
     _route(
       '/admin/utilisateurs/:id',
       (s) => EcranFicheUtilisateur(id: _p(s, 'id')),
     ),
-    _route('/admin/configuration', (_) => const EcranAdmin(section: 6)),
-    _route('/admin/validations', (_) => const EcranAdmin(section: 7)),
-    _route('/admin/journal', (_) => const EcranAdmin(section: 8)),
-    _route('/admin/equipe', (_) => const EcranAdmin(section: 9)),
+    _route('/admin/configuration', (_) => const EcranAdmin(section: 8)),
+    _route('/admin/validations', (_) => const EcranAdmin(section: 9)),
+    _route('/admin/journal', (_) => const EcranAdmin(section: 10)),
+    _route('/admin/equipe', (_) => const EcranAdmin(section: 11)),
     _route('/admin/connexion', (_) => const EcranConnexionAdmin()),
     _route('/scenarios', (_) => const EcranScenarios()),
   ],

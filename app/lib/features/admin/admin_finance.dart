@@ -181,7 +181,7 @@ class EcranFicheUtilisateur extends StatelessWidget {
       orElse: () => _utilisateurs.first,
     );
     return _CoqueAdmin(
-      section: 5,
+      section: 7,
       titre: u.$2,
       corps: DeuxColonnes(
         principale: [
@@ -309,7 +309,7 @@ class _Configuration extends StatelessWidget {
                 LigneMenu(
                   icone: Icons.tune_rounded,
                   titre: nom,
-                  valeur: valeur,
+                  detail: valeur,
                   onTap: () => _decider(
                     context,
                     'Modification soumise à double validation.',

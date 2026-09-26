@@ -225,7 +225,16 @@ Les maquettes sont dessinées au format téléphone, mais l'application **occupe
 3. **Bouton principal** : en bas de l'écran sur téléphone ; dans la colonne d'action (à droite) sur grand écran.
 4. **Même contenu, même ordre** sur toutes les tailles : seule la disposition change (aucune fonctionnalité réservée à une taille d'écran).
 5. **La barre latérale ne disparaît jamais** sur grand écran (révision du 25/09/2026) : toute page ouverte depuis un onglet (Mes ventes, Messages, relations, paiement…) garde la barre et y signale son onglet de rattachement. Seuls le back-office (qui a sa propre barre), la caméra, le lecteur de direct et le lecteur de cours occupent tout l'écran.
-6. **Démarrage sur ordinateur** : la marque et ses quatre promesses (argent protégé, vérification, Mobile Money, Live IA) à gauche, le formulaire à droite dans une colonne de 480 px au plus.
+6. **Démarrage sur ordinateur** : la marque et ses quatre promesses (argent protégé, vérification, Mobile Money, Live IA) à gauche, le formulaire à droite dans une colonne de 480 px au plus. Révision du 26/09/2026, sur le modèle de WhatsApp (application et Web), simple et propre :
+   - **Parcours, dans l'ordre de WhatsApp** : Accueil → Langue → Numéro (confirmation) → Code à 6 chiffres → Infos du profil → Code secret → Centres d'intérêt.
+   - **Accueil (`/bienvenue`), même page sur téléphone et ordinateur** : un cercle serré de dessins au trait (`MotifLive`, les espaces de Live, dans le bleu de Live) dans le haut de la page, le symbole de Live, en couleur, seul au centre (`LogoMotif`) ; au-delà, un voile très léger des mêmes dessins jusqu'aux bords. Sous le cercle, « Bienvenue sur Live » et une phrase ; en bas et centrés, « Commencer », « Découvrir sans compte », « Déjà un compte ? Se connecter », puis Conditions · Confidentialité · Aide.
+   - **Langue (`/langue`)** : comme au premier lancement de WhatsApp, la liste des langues (chacune écrite dans sa langue, puis en français) : français, anglais, espagnol, arabe, lingala, kituba, sango ; choix gardé sur l'appareil et modifiable dans Paramètres. L'interface reste en français pour le moment ; la langue choisie sert déjà aux sous-titres et à Live IA. L'arabe s'écrit en lettres latines tant que la police embarquée n'a pas l'alphabet arabe.
+   - **Pages suivantes sur ordinateur, sans carte** : comme WhatsApp, une page blanche, la flèche de retour tout en haut à gauche (pas de logo ni de nom), le contenu dans une colonne centrée de 460 px, le bouton compact en bas de la colonne ; en bas de page, l'autre chemin (se connecter ou créer un compte) et Conditions · Confidentialité · Aide. Sur téléphone, les mêmes pages en plein écran.
+   - **En-têtes** : titre centré dans le bleu de Live et une phrase, sans icône colorée ; pendant l'inscription, « Étape 1 sur 5 » discret au-dessus.
+   - **Numéro (`/telephone`, `/connexion`)** : le pays sur sa ligne (drapeau, nom ; la liste s'ouvre juste dessous, avec une recherche en tête et les pays rangés par région : 11 d'Afrique centrale dont la RD Congo, 10 d'Afrique de l'Ouest dont la Côte d'Ivoire, puis la France et la Chine, où l'on paie par carte ; `data/donnees_telephone.dart`), puis le numéro précédé de l'indicatif, groupé pendant la frappe, l'opérateur Mobile Money reconnu dessous ; « Suivant », puis « Vous avez saisi le numéro : … Est-il correct ? » (Modifier / OK) : un SMS envoyé à un numéro mal saisi est perdu et payé. Les cases de consentement restent (règle 12). Aucune bibliothèque externe.
+   - **Code (`/code`)** : « Vérifiez votre numéro », « Mauvais numéro ? Le modifier », six cases ; après le décompte, « Vous n'avez pas reçu le code ? » : renvoyer le SMS, recevoir un appel ou passer par WhatsApp.
+   - **Infos du profil (`/profil`)** : comme WhatsApp, un grand cercle photo au centre avec un badge appareil photo (prendre une photo, choisir dans la galerie, retirer), puis prénom, nom, ville et « J'ai 18 ans ou plus ».
+   - **Connexion par code QR sur ordinateur** (`/connexion/qr`, E-AUTH-09), scannée depuis Paramètres › Appareils connectés › Connecter un appareil ; pas de SMS à payer, code renouvelé toutes les 30 secondes.
 7. **Messages sur ordinateur** : deux panneaux, façon WhatsApp Web. La liste des conversations à gauche (400 px), la conversation ouverte à droite.
 8. **Barre latérale repliable** : le bouton « Replier » la réduit aux icônes (84 px), « Déplier » la rouvre ; le choix est gardé d'une page à l'autre, dans l'application comme dans le back-office.
 9. **Recherche dans l'en-tête** : sur les pages qui filtrent une liste (Explorer, Messages, Mes relations…), une **loupe** dans l'en-tête déploie le champ de saisie avec une animation ; la croix le referme et efface la saisie (composant `EnTeteRecherche`). Pas de barre de recherche permanente en haut de page.
@@ -312,3 +321,39 @@ Courbe de référence : démarrage vif, arrivée amortie (`cubic(0.2, 0.8, 0.2, 
 | 5 | **Inscription trop longue** pour tenir en 60 s. | Prénom, nom et ville seulement ; case « J'ai 18 ans ou plus » à la place de la date de naissance (vérifiée au KYC) ; centres d'intérêt facultatifs ; quartier et photo demandés plus tard (E-AUTH-02 à 05). |
 | 6 | **Consentement trop implicite** aux données personnelles. | Cases explicites à l'inscription (E-AUTH-02) et avant l'envoi des pièces d'identité (E-MOI-03). |
 | 7 | Les dessins en texte ne valident ni le visuel ni l'usage réel. | **Prototype cliquable Flutter** (`app/`) et test terrain avec 15 à 20 utilisateurs avant la construction complète. |
+
+## 10. Mode sombre (26/09/2026)
+
+Réglage **Paramètres › Préférences › Apparence** : « Comme le téléphone » (par défaut), « Clair », « Sombre » ; gardé sur l'appareil. En « Comme le téléphone », Live suit le réglage du système, y compris quand il change application ouverte.
+
+**Principe technique** : chaque couleur de Live est une `CouleurLive` qui porte sa valeur claire et sa valeur sombre ; le changement de mode reconstruit l'application. Les écrans n'écrivent jamais une couleur de fond en dur.
+
+| Jeton | Clair | Sombre | Usage |
+|---|---|---|---|
+| `surface` | #FFFFFF | #121A24 | pages, cartes, panneaux |
+| `champ` | #F3F5F8 | #1C2633 | champs, boutons tonals |
+| `voile` | #E6EBF2 | #243040 | puces, pistes, indicateurs |
+| `filet` / `bord` | #E4E8EE / #C3CAD4 | #2A3544 / #3A4656 | séparateurs, bordures |
+| `encre` | #041936 | #E8EDF4 | titres et textes forts |
+| `gris` | #5B6573 | #9AA6B5 | texte secondaire |
+| `bleu` | #13385C | #4180C0 | boutons, liens, navigation active |
+| teintes (vert, orange, ambre, rouge, crème, violet) | pastels | tons sombres | étiquettes, encadrés |
+
+Restent identiques dans les deux modes : l'orange et l'ambre de la marque, les fonds sombres de la marque (`nuit`, dégradés des cartes d'argent) et leur texte clair (`brumeClaire`), les couleurs des photos et des vidéos, les plans et la vue de rue (clairs, comme les cartes routières), les drapeaux, et les codes QR (toujours noirs sur blanc pour rester lisibles par l'appareil photo).
+
+Vérification : test automatique de tous les écrans en mode sombre à 360 et 1 280 px, puis revue visuelle des captures (`?apparence=sombre` dans l'adresse).
+
+## 11. Langues de l'interface (26/09/2026)
+
+Le choix de la langue se fait au démarrage (écran Langue, après « Commencer ») et dans **Paramètres › Préférences › Langue** ; il est gardé sur l'appareil et appliqué tout de suite.
+
+- **Mécanisme** : traductions de Flutter (`flutter_localizations`, fichiers ARB dans `app/lib/l10n/`, accès par `context.t`). Le français est la langue de référence ; les noms de pays, régions et centres d'intérêt passent par des sélections ICU.
+- **Traduit en anglais** (26/09/2026) : toute l'application utilisateur, soit environ 2 700 textes : démarrage, Accueil, Explorer et recherche, Market (fiche, commande, suivi, Mes ventes, assistant Vendre), Immo, Services, Publier, Messages et appels, Paiements et portefeuille, Moi, Paramètres, Live IA, Savoir, Opportunités, tontines, diaspora et Live Transfert, factures, Adresse Live, Live Plus, Offres Pro, publicité, séjours, directs, créateurs, relations, avis et réclamations, centre d'aide, composants partagés, et les libellés des modèles (règlements, types de biens, contenus, opportunités).
+- **Restent en français, par décision** :
+  - le **back-office** (`/admin`), outil interne de l'équipe Live, qui travaille en français ; à traduire le jour où l'équipe comptera des non-francophones ;
+  - le **texte des pages légales**, dont la version anglaise doit venir du juriste ; un bandeau l'indique en anglais ;
+  - les **données de démonstration** (noms, lieux, produits, messages et avis d'autres personnes) et le **contenu simulé des réponses de l'IA** (CV, lettre, business plan), que la vraie IA rédigera dans la langue choisie.
+- **Règles de traduction** : clé nommée par écran (`marketPrixNegociable`) avec une description pour les traducteurs ; mots communs partagés (`annuler`, `continuer`) ; valeurs enregistrées en français et affichage traduit (`etatAffiche`, `libelleDe(t)`) ; pluriels ICU. `test/textes_test.dart` vérifie la cohérence des deux langues et l'absence de texte écrit en dur ; `ecrans_test.dart` ouvre tous les écrans en anglais à 320 et 1 280 px.
+- **À faire avant le lancement** : relecture de l'anglais par un traducteur humain.
+- **Autres langues proposées** (espagnol, arabe, lingala, kituba, sango) : l'interface reste en français en attendant leur traduction ; l'arabe demandera aussi une police à l'alphabet arabe et la mise en page de droite à gauche.
+

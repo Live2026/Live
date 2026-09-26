@@ -10,7 +10,7 @@ Ces règles s'appliquent à tout le code de Live (prototype `app/` et applicatio
 - les éléments réutilisés vont dans `app/lib/shared/` (voir ci-dessous), jamais recopiés d'un écran à l'autre ;
 - les données de démonstration sont rangées par domaine (`app/lib/data/donnees_*.dart`).
 
-Vérification : `find app/lib app/test -name "*.dart" | xargs wc -l | sort -n | tail` ; le plus gros fichier doit rester sous 500 lignes.
+Vérification : `find app/lib app/test -name "*.dart" ! -name "*.g.dart" | xargs wc -l | sort -n | tail` ; le plus gros fichier doit rester sous 500 lignes. Seule exception : les fichiers générés (`*.g.dart`, Drift), qu'on ne modifie jamais à la main et qu'on régénère avec `dart run build_runner build`.
 
 ## Composants réutilisables
 
@@ -27,15 +27,26 @@ Tout écran se construit avec la bibliothèque `app/lib/shared/` (importer `widg
 | `cartes_savoirs.dart`, `cartes_divertissement.dart`, `panier.dart` | `CarteContenu`, `CarteOpportunite`, `CarteDirect`, `PastilleDirect`, `CarteSejour`, `BoutonPanier`, `BoutonNotifications`, `BoutonCommandes` |
 | `saisie.dart`, `frise.dart`, `medias.dart`, `animations.dart` | choix, clavier de code, frise, vignettes, animations |
 | `logo.dart`, `en_tete_recherche.dart` | `LogoLive` (le nom s'écrit « Live »), `EnTeteRecherche` (loupe qui déploie le champ dans l'en-tête) |
-| `champ_code.dart`, `demarrage.dart` | `ChampCode` (six cases animées), `SloganAnime`, `PastilleEspace`, `FondDemarrage`, `EnTeteDemarrage` |
+| `champ_code.dart`, `demarrage.dart`, `motif_live.dart` | `ChampCode` (six cases animées), `FondDemarrage`, `EnTeteDemarrage`, `DansCarte`, `MotifLive` (motif de fond dessiné, cercle de dessins façon WhatsApp), `LogoMotif` (logo assis dans le motif), `BarreDemarrage` |
 | `plan_ville.dart`, `carte_interactive.dart` | `PlanVille` (plan ou satellite, trajet, position), `CarteInteractive` (zoom, ma position, vue rue) |
 | `juste_prix.dart`, `ville.dart` | `JustePrix` (fourchette du marché, Live IA), `TexteVille` (ville choisie au lieu d'une ville écrite en dur) |
+| `features/messages/appels.dart` | `boutonsAppel` (appel vidéo et audio dans un en-tête), `routeAppel` (ouvrir `/appel`), `dureeAppel` |
+| `champ_telephone.dart`, `drapeau.dart` | `ChampTelephone` (pays sur sa ligne, liste dessous avec recherche, 23 pays par région ; numéro précédé de l'indicatif, mis en forme ; opérateur reconnu), `confirmerNumero` (« Vous avez saisi le numéro… »), `Drapeau` (dessiné, pas d'emoji) |
+
+## Données locales (Drift)
+
+- Les écrans et `LiveStore` passent par les **dépôts** de `app/lib/data/depots/depots.dart` (réglages, brouillons, favoris, file d'envoi), jamais directement par Drift.
+- Chaque dépôt a une version en mémoire (tests, par défaut) et une version Drift (`depots_drift.dart`), branchée dans `main.dart`.
+- Tables dans `app/lib/data/local/base_locale.dart` ; toute modification de table augmente `schemaVersion` et ajoute sa migration.
+- L'argent ne passe jamais par la base locale ni par la file d'envoi (docs/26, §3.2).
 
 ## Règles de design
 
 - **Même catégorie, même taille** : toutes les cartes d'une même catégorie ont la même taille (image au même format, textes dans des zones de hauteur fixe).
 - **Arrondi de 8 px** pour les boutons et les champs de saisie ; palette et contrastes dans `docs/ecrans/00`, section 9.
-- **Pleine largeur** : pas de cadre de téléphone sur ordinateur ; grilles adaptatives et deux colonnes sur grand écran. La barre latérale reste sur toutes les pages (`CadreOrdinateur`, `core/navigation.dart`) ; le démarrage utilise `CadreDemarrage` (docs/ecrans/00, section 8).
+- **Pleine largeur** : pas de cadre de téléphone sur ordinateur ; grilles adaptatives et deux colonnes sur grand écran. La barre latérale reste sur toutes les pages (`CadreOrdinateur`, `core/navigation.dart`) ; l'accueil (`/bienvenue`) est plein écran sur le motif de Live, façon WhatsApp (cercle de dessins avec le logo, titre dessous, boutons centrés en bas) ; les autres pages du démarrage utilisent `CadreDemarrage` : sur ordinateur, comme WhatsApp, page blanche sans carte, logo en haut à gauche, colonne centrée, liens en bas de page ; dans cette colonne (`DansCarte`), le bouton se fait compact et centré ; connexion par code QR (`/connexion/qr`) (docs/ecrans/00, section 8).
+- **Mode sombre** : jamais de couleur de fond écrite en dur. Utiliser les jetons de `LiveColors` (`surface`, `champ`, `voile`, `filet`, `bord`, teintes, `encre` pour le texte fort, `gris` pour le texte secondaire) : chacun a sa valeur claire et sombre (`CouleurLive`). `Colors.white` seulement pour un texte ou une icône posés sur une couleur, une photo ou une vidéo ; `LiveColors.nuit` et `brumeClaire` pour les fonds sombres de la marque et leur texte. Les codes QR restent noirs sur blanc. Test : tous les écrans en mode sombre (`ecrans_test.dart`) ; démonstration : `?apparence=sombre`.
+- **Langues** : tout nouveau texte d'interface passe par les fichiers de traduction (`app/lib/l10n/app_fr.arb`, référence, et `app_en.arb`) et s'affiche avec `context.t.cle` ; jamais de texte écrit en dur dans un nouvel écran. Régénérer avec `flutter gen-l10n` (automatique à la compilation). Langues traduites : français, anglais (toute l'application utilisateur ; le back-office reste en français par décision, docs/ecrans/00, §11) ; les autres langues proposées retombent sur le français. **Clés** : nom de sens préfixé par l'écran (`marketPrixNegociable`, `appelRaccrocher`), sans préfixe pour les textes communs (`annuler`, `fermer`) ; chaque clé porte une `description` qui dit où le texte apparaît, pour les traducteurs. `test/textes_test.dart` vérifie que l'anglais a les mêmes clés et variables, et qu'aucun texte n'est écrit en dur dans les écrans déjà traduits (liste à allonger à chaque écran traduit).
 - **Animations** douces (`courbeDouce`) et coupées quand l'utilisateur demande de réduire les animations.
 - **Où se paie chaque somme** : toute somme affichée porte son étiquette de règlement (docs/06, §4.4).
 - **Périmètre** : la navigation (Accueil, Explorer, Publier, IA, Moi) et les parcours suivent les cahiers des charges ; tous les espaces sont rassemblés dans l'application, chacun à sa place naturelle (docs/07, §10). Les phases du document 04 fixent l'ordre de construction, pas l'affichage.

@@ -107,11 +107,11 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
             prefixIcon: const Icon(Icons.search),
-            hintText: 'Ex. climatiseur, studio, plombier…',
+            hintText: context.t.explorerExClimatiseurStudioPlombier,
             suffixIcon: q.isEmpty
                 ? null
                 : IconButton(
-                    tooltip: 'Effacer',
+                    tooltip: context.t.explorerEffacer,
                     onPressed: () => setState(_champ.clear),
                     icon: const Icon(Icons.close_rounded),
                   ),
@@ -128,7 +128,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
     return ListView(
       padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
       children: [
-        const EnTeteSection('Recherches récentes'),
+        EnTeteSection(context.t.explorerRecherchesRecentes),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -141,7 +141,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
               ),
           ],
         ),
-        const EnTeteSection('Tendances près de chez vous'),
+        EnTeteSection(context.t.explorerTendancesPresDeChezVous),
         for (final (i, t) in _tendances.indexed)
           ListTile(
             contentPadding: EdgeInsets.zero,
@@ -157,7 +157,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
             trailing: const Icon(Icons.north_west_rounded, size: 18),
             onTap: () => _chercher(t),
           ),
-        const EnTeteSection('Parcourir'),
+        EnTeteSection(context.t.explorerParcourir),
         Wrap(
           children: [
             for (final (icone, nom) in categoriesMarket)
@@ -212,7 +212,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
             child: Text.rich(
               TextSpan(
                 children: [
-                  const TextSpan(text: 'Résultats pour '),
+                  TextSpan(text: context.t.explorerResultatsPour),
                   TextSpan(
                     text: '« $_corrigee »',
                     style: const TextStyle(
@@ -221,7 +221,9 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
                     ),
                   ),
                   TextSpan(
-                    text: '. Aucun résultat pour « ${_champ.text.trim()} ».',
+                    text: context.t.explorerAucunResultatPourPoint(
+                      _champ.text.trim(),
+                    ),
                   ),
                 ],
               ),
@@ -232,10 +234,10 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
           child: Row(
             children: [
               for (final (i, (nom, n)) in [
-                ('Tout', total),
-                ('Produits', prods.length),
-                ('Logements', logements.length),
-                ('Pros', pros.length),
+                (context.t.explorerTout, total),
+                (context.t.explorerProduits, prods.length),
+                (context.t.explorerLogements, logements.length),
+                (context.t.explorerPros, pros.length),
               ].indexed)
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
@@ -251,17 +253,15 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
         if (total == 0)
           EtatVide(
             icone: Icons.search_off_rounded,
-            texte:
-                'Aucun résultat pour « ${_champ.text} ». Créez une alerte : '
-                'nous vous prévenons dès qu’une annonce arrive.',
-            action: 'Créer une alerte',
+            texte: context.t.explorerAucunResultatAlerte(_champ.text),
+            action: context.t.explorerCreerUneAlerte,
             onTap: () {
               ref.read(liveProvider.notifier).ajouterAlerte(_champ.text.trim());
               context.push('/alertes');
             },
           ),
         if ((_onglet == 0 || _onglet == 1) && prods.isNotEmpty) ...[
-          const EnTeteSection('Produits'),
+          EnTeteSection(context.t.explorerProduits),
           GrilleAdaptative(
             largeurMax: context.grandEcran ? 220 : 180,
             espacement: 14,
@@ -275,7 +275,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
           ),
         ],
         if ((_onglet == 0 || _onglet == 2) && logements.isNotEmpty) ...[
-          const EnTeteSection('Logements'),
+          EnTeteSection(context.t.explorerLogements),
           GrilleAdaptative(
             largeurMax: context.grandEcran ? 280 : 200,
             espacement: 14,
@@ -283,7 +283,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
           ),
         ],
         if ((_onglet == 0 || _onglet == 3) && pros.isNotEmpty) ...[
-          const EnTeteSection('Professionnels'),
+          EnTeteSection(context.t.explorerProfessionnels),
           GrilleAdaptative(
             largeurMax: 460,
             espacement: 10,
@@ -298,7 +298,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
               context.push('/alertes');
             },
             icon: const Icon(Icons.notifications_active_outlined),
-            label: Text('Créer une alerte « ${_champ.text.trim()} »'),
+            label: Text(context.t.explorerCreerAlerteQ(_champ.text.trim())),
           ),
         ],
       ],
@@ -314,13 +314,12 @@ class EcranAlertes extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final alertes = ref.watch(liveProvider).alertes;
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes alertes')),
+      appBar: AppBar(title: Text(context.t.explorerMesAlertes)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const Text(
-            'Live vous prévient dès qu’une annonce correspond. Plus besoin de '
-            'chercher tous les jours.',
+          Text(
+            context.t.explorerAlertesIntro,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 12),
@@ -348,8 +347,10 @@ class EcranAlertes extends ConsumerWidget {
                           ),
                           Text(
                             i == 0
-                                ? '2 nouveaux résultats aujourd’hui'
-                                : 'Aucun nouveau résultat',
+                                ? context
+                                      .t
+                                      .explorerN2NouveauxResultatsAujourdHui
+                                : context.t.explorerAucunNouveauResultat,
                             style: const TextStyle(
                               color: LiveColors.gris,
                               fontSize: 12.5,
@@ -373,7 +374,7 @@ class EcranAlertes extends ConsumerWidget {
         child: FilledButton.icon(
           onPressed: () => context.push('/recherche'),
           icon: const Icon(Icons.add_rounded),
-          label: const Text('Nouvelle alerte'),
+          label: Text(context.t.explorerNouvelleAlerte),
         ),
       ),
     );

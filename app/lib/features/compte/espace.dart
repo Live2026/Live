@@ -1,29 +1,29 @@
 part of 'compte_screens.dart';
 
-const _typesEspace = [
+List<(TypeEspace, IconData, String, String)> _typesEspace(Textes t) => [
   (
     TypeEspace.boutique,
     Icons.storefront_rounded,
-    'Boutique',
-    'Catalogue, vidéos, livraison',
+    t.compteBoutique,
+    t.compteCatalogueVideosLivraison,
   ),
   (
     TypeEspace.agence,
     Icons.apartment_rounded,
-    'Agence immobilière',
-    'Biens, agents, visites',
+    t.compteAgenceImmobiliere,
+    t.compteBiensAgentsVisites,
   ),
   (
     TypeEspace.prestataire,
     Icons.handyman_rounded,
-    'Prestataire',
-    'Services, devis, agenda',
+    t.comptePrestataire,
+    t.compteServicesDevisAgenda,
   ),
   (
     TypeEspace.chaine,
     Icons.live_tv_rounded,
-    'Chaîne de créateur',
-    'Vidéos, fans, directs',
+    t.compteChaineDeCreateur,
+    t.compteVideosFansDirects,
   ),
 ];
 
@@ -42,10 +42,10 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
   var _cree = false;
 
   List<String> get _justificatifs => [
-    'RCCM (registre du commerce)',
-    'NIU (numéro d’identification unique)',
-    if (_type == TypeEspace.agence) 'Agrément d’agence immobilière',
-    'Justificatif d’adresse du local',
+    context.t.compteRccmRegistreDuCommerce,
+    context.t.compteNiuNumeroDIdentification,
+    if (_type == TypeEspace.agence) context.t.compteAgrementDAgenceImmobiliere,
+    context.t.compteJustificatifDAdresseDu,
   ];
 
   @override
@@ -57,13 +57,13 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
         _nom.text.trim().isNotEmpty &&
         _pieces.length == _justificatifs.length;
     return Scaffold(
-      appBar: AppBar(title: const Text('Créer un espace')),
+      appBar: AppBar(title: Text(context.t.compteCreerUnEspace)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           if (!etat.identiteVerifiee) ...[
             Bloc(
-              fond: const Color(0xFFFFF7EA),
+              fond: LiveColors.teinteCreme,
               child: Row(
                 children: [
                   const Icon(
@@ -71,22 +71,18 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
                     color: LiveColors.cuivre,
                   ),
                   const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      'Un espace pro demande d’abord la vérification de votre identité.',
-                    ),
-                  ),
+                  Expanded(child: Text(context.t.compteUnEspaceProDemande)),
                   TextButton(
                     onPressed: () => context.push('/verifier'),
-                    child: const Text('Vérifier'),
+                    child: Text(context.t.compteVerifier),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 16),
           ],
-          const Text(
-            'Quel espace ?',
+          Text(
+            context.t.compteQuelEspace,
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 10),
@@ -95,7 +91,9 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
             espacement: 10,
             hauteur: 120,
             enfants: [
-              for (final (type, icone, titre, detail) in _typesEspace)
+              for (final (type, icone, titre, detail) in _typesEspace(
+                context.t,
+              ))
                 Semantics(
                   button: true,
                   selected: _type == type,
@@ -111,13 +109,13 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: _type == type
-                            ? const Color(0xFFE6EBF2)
-                            : Colors.white,
+                            ? LiveColors.voile
+                            : LiveColors.surface,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: _type == type
                               ? LiveColors.bleu
-                              : const Color(0xFFE4E8EE),
+                              : LiveColors.filet,
                           width: _type == type ? 2 : 1,
                         ),
                       ),
@@ -150,16 +148,18 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
             const SizedBox(height: 20),
             TextField(
               controller: _nom,
-              decoration: const InputDecoration(labelText: 'Nom de l’espace'),
+              decoration: InputDecoration(
+                labelText: context.t.compteNomDeLEspace,
+              ),
               onChanged: (_) => setState(() {}),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Justificatifs',
+            Text(
+              context.t.compteJustificatifs,
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
             ),
-            const Text(
-              'Vérifiés par Live sous 48 h. Ils donnent droit au badge « Pro vérifié ».',
+            Text(
+              context.t.compteVerifiesParLiveSous,
               style: TextStyle(color: LiveColors.gris),
             ),
             const SizedBox(height: 8),
@@ -172,7 +172,9 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
                     ? LiveColors.succes
                     : LiveColors.bleu,
                 titre: j,
-                detail: _pieces.contains(j) ? 'Ajouté' : 'Photo ou PDF',
+                detail: _pieces.contains(j)
+                    ? context.t.compteAjoute
+                    : context.t.comptePhotoOuPdf,
                 onTap: () => setState(() => _pieces.add(j)),
               ),
           ],
@@ -188,7 +190,7 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
                   setState(() => _cree = true);
                 }
               : null,
-          child: const Text('Créer mon espace'),
+          child: Text(context.t.compteCreerMonEspace),
         ),
       ),
     );
@@ -205,7 +207,7 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
               const CocheAnimee(taille: 96),
               const SizedBox(height: 12),
               Text(
-                '${_nom.text} est créé',
+                context.t.compteEspaceCree(_nom.text),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 24,
@@ -213,9 +215,8 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
-                'Super-pouvoir débloqué : « Agence ou boutique ». Vous êtes au niveau N3 '
-                '(Pro vérifié) : équipe jusqu’à 5 membres, plafonds élevés, badge.',
+              Text(
+                context.t.compteSuperPouvoirDebloqueAgence,
                 textAlign: TextAlign.center,
               ),
               const Spacer(),
@@ -223,12 +224,12 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
                 width: double.infinity,
                 child: FilledButton(
                   onPressed: () => context.go('/moi'),
-                  child: const Text('Aller à mon espace'),
+                  child: Text(context.t.compteAllerAMonEspace),
                 ),
               ),
               TextButton(
                 onPressed: () => context.push('/espace/equipe'),
-                child: const Text('Inviter mon équipe'),
+                child: Text(context.t.compteInviterMonEquipe),
               ),
             ],
           ),
@@ -244,31 +245,45 @@ class EcranEquipe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const membres = [
-      ('Grâce Mabiala', 'Propriétaire', 'Tous les droits', Color(0xFF13385C)),
+    final membres = [
+      (
+        'Grâce Mabiala',
+        context.t.compteProprietaire,
+        context.t.compteTousLesDroits,
+        Color(0xFF13385C),
+      ),
       (
         'Christian N.',
-        'Gestionnaire',
-        'Annonces, visites, messages',
+        context.t.compteGestionnaire,
+        context.t.compteAnnoncesVisitesMessages,
         Color(0xFF166534),
       ),
-      ('Mireille O.', 'Agent', 'Visites et messages', Color(0xFF7E22CE)),
-      ('Junior K.', 'Agent', 'Visites et messages', Color(0xFF0369A1)),
+      (
+        'Mireille O.',
+        context.t.compteAgent,
+        context.t.compteVisitesEtMessages,
+        Color(0xFF7E22CE),
+      ),
+      (
+        'Junior K.',
+        context.t.compteAgent,
+        context.t.compteVisitesEtMessages,
+        Color(0xFF0369A1),
+      ),
       (
         'Estelle B.',
-        'Comptable',
-        'Consultation des finances',
+        context.t.compteComptable,
+        context.t.compteConsultationDesFinances,
         Color(0xFF9A3412),
       ),
     ];
     return Scaffold(
-      appBar: AppBar(title: const Text('Équipe')),
+      appBar: AppBar(title: Text(context.t.compteEquipe)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const Text(
-            '5 membres sur 5 gratuits. Chaque action est journalisée : qui a publié, '
-            'modifié ou remboursé.',
+          Text(
+            context.t.compteN5MembresSur5,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 8),
@@ -299,29 +314,22 @@ class EcranEquipe extends StatelessWidget {
                   ),
                   Etiquette(
                     role,
-                    fond: const Color(0xFFE6EBF2),
+                    fond: LiveColors.voile,
                     couleur: LiveColors.bleu,
                   ),
                 ],
               ),
             ),
           const SizedBox(height: 8),
-          const BandeauProtection(
-            'Seul le propriétaire peut retirer l’argent de l’espace.',
-          ),
+          BandeauProtection(context.t.compteSeulLeProprietairePeut),
         ],
       ),
       bottomNavigationBar: BarreAction(
         child: FilledButton.icon(
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'Au-delà de 5 membres : abonnement Pro Entreprise.',
-              ),
-            ),
-          ),
+          onPressed: () => ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(context.t.compteAuDelaDe5))),
           icon: const Icon(Icons.person_add_alt_1_outlined),
-          label: const Text('Inviter un membre'),
+          label: Text(context.t.compteInviterUnMembre),
         ),
       ),
     );

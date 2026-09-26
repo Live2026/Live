@@ -13,19 +13,18 @@ class EcranPouvoirs extends ConsumerWidget {
     final aDebloquer = pouvoirs.where((p) => !p.actifPour(etat)).toList();
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes super-pouvoirs')),
+      appBar: AppBar(title: Text(context.t.compteMesSuperPouvoirs)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 24),
         children: [
-          const Text(
-            'Sur Live, tout le monde commence comme utilisateur. Chaque '
-            'pouvoir débloqué vous permet de gagner de l’argent autrement.',
+          Text(
+            context.t.compteSurLiveToutLe,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 16),
           _Niveaux(niveau: etat.niveau, pro: etat.pro),
           if (aDebloquer.isNotEmpty) ...[
-            EnTeteSection('À débloquer (${aDebloquer.length})'),
+            EnTeteSection(context.t.compteADebloquerN(aDebloquer.length)),
             GrilleAdaptative(
               largeurMax: 360,
               espacement: 10,
@@ -39,7 +38,7 @@ class EcranPouvoirs extends ConsumerWidget {
               ],
             ),
           ],
-          EnTeteSection('Actifs (${actifs.length})'),
+          EnTeteSection(context.t.compteActifsN(actifs.length)),
           GrilleAdaptative(
             largeurMax: 360,
             espacement: 10,
@@ -67,10 +66,10 @@ class _Niveaux extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final etapes = [
-      ('N1', 'Téléphone', niveau >= 1),
-      ('N2', 'Identité', niveau >= 2),
-      ('N3', 'Pro vérifié', niveau >= 3),
-      ('Pro', 'Abonnement', pro),
+      ('N1', context.t.compteTelephone, niveau >= 1),
+      ('N2', context.t.compteIdentite, niveau >= 2),
+      ('N3', context.t.compteProVerifie, niveau >= 3),
+      ('Pro', context.t.compteAbonnement, pro),
     ];
     return Bloc(
       child: Row(
@@ -80,7 +79,7 @@ class _Niveaux extends StatelessWidget {
               Expanded(
                 child: Container(
                   height: 3,
-                  color: fait ? LiveColors.bleu : const Color(0xFFE4E8EE),
+                  color: fait ? LiveColors.bleu : LiveColors.filet,
                 ),
               ),
             Column(
@@ -92,9 +91,9 @@ class _Niveaux extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: fait ? LiveColors.bleu : Colors.white,
+                    color: fait ? LiveColors.bleu : LiveColors.surface,
                     border: Border.all(
-                      color: fait ? LiveColors.bleu : const Color(0xFFC3CAD4),
+                      color: fait ? LiveColors.bleu : LiveColors.bord,
                       width: 2,
                     ),
                   ),
@@ -128,14 +127,14 @@ class _CartePouvoir extends StatelessWidget {
     final p = pouvoir;
     return Semantics(
       button: true,
-      label: '${p.titre}. ${actif ? 'Actif' : p.pourDebloquer}',
+      label: '${p.titre}. ${actif ? context.t.compteActif : p.pourDebloquer}',
       excludeSemantics: true,
       child: Pressable(
         onTap: () =>
             context.push(actif ? (p.route ?? '/moi') : p.routeDeblocage),
         child: Bloc(
           padding: 14,
-          fond: actif ? Colors.white : const Color(0xFFFAFBFC),
+          fond: actif ? LiveColors.surface : LiveColors.champ,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -143,9 +142,7 @@ class _CartePouvoir extends StatelessWidget {
                 width: 46,
                 height: 46,
                 decoration: BoxDecoration(
-                  color: actif
-                      ? const Color(0xFFE6EBF2)
-                      : const Color(0xFFFFF1E0),
+                  color: actif ? LiveColors.voile : LiveColors.teinteOrange,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
@@ -216,31 +213,31 @@ class EcranPro extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pro = ref.watch(liveProvider.select((e) => e.pro));
-    const avantages = [
+    final avantages = [
       (
         Icons.insights_rounded,
-        'Statistiques détaillées',
-        'Vues, clics, ventes par jour et par quartier',
+        context.t.compteStatistiquesDetaillees,
+        context.t.compteVuesClicsVentesPar,
       ),
       (
         Icons.rocket_launch_outlined,
-        'Boosts à −30 %',
-        'Mettez vos annonces en tête du fil',
+        context.t.compteBoostsA30,
+        context.t.compteMettezVosAnnoncesEn,
       ),
       (
         Icons.quickreply_outlined,
-        'Réponses rapides',
-        'Répondez en un geste aux questions fréquentes',
+        context.t.compteReponsesRapides,
+        context.t.compteRepondezEnUnGeste,
       ),
       (
         Icons.workspace_premium_outlined,
-        'Badge Pro',
-        'Affiché sur vos annonces et votre profil',
+        context.t.compteBadgePro,
+        context.t.compteAfficheSurVosAnnonces,
       ),
       (
         Icons.support_agent_rounded,
-        'Assistance prioritaire',
-        'Un conseiller Live répond en moins d’une heure',
+        context.t.compteAssistancePrioritaire,
+        context.t.compteUnConseillerLiveRepond,
       ),
     ];
     return Scaffold(
@@ -256,7 +253,7 @@ class EcranPro extends ConsumerWidget {
                 colors: [LiveColors.nuit, LiveColors.bleu],
               ),
             ),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -268,7 +265,7 @@ class EcranPro extends ConsumerWidget {
                   ),
                 ),
                 Text(
-                  '5 000 FCFA / mois · sans engagement',
+                  context.t.compteN5000FcfaMois,
                   style: TextStyle(
                     color: LiveColors.ambreClair,
                     fontWeight: FontWeight.w700,
@@ -276,8 +273,8 @@ class EcranPro extends ConsumerWidget {
                 ),
                 SizedBox(height: 6),
                 Text(
-                  'Pour les vendeurs, agences et prestataires qui veulent aller plus loin.',
-                  style: TextStyle(color: Color(0xFFD7DCE4)),
+                  context.t.comptePourLesVendeursAgences,
+                  style: TextStyle(color: LiveColors.brumeClaire),
                 ),
               ],
             ),
@@ -295,10 +292,10 @@ class EcranPro extends ConsumerWidget {
                   ref
                       .read(liveProvider.notifier)
                       .preparerPaiement(
-                        const PaiementEnCours(
+                        PaiementEnCours(
                           type: TypePaiement.abonnement,
                           montant: 5000,
-                          libelle: 'Live Pro · 1 mois',
+                          libelle: context.t.compteLivePro1Mois,
                           beneficiaire: 'Live',
                           cibleId: 'pro',
                         ),
@@ -306,7 +303,9 @@ class EcranPro extends ConsumerWidget {
                   context.push('/payer');
                 },
           child: Text(
-            pro ? 'Live Pro est actif' : 'S’abonner · 5 000 FCFA / mois',
+            pro
+                ? context.t.compteLiveProEstActif
+                : context.t.compteSAbonner5000,
           ),
         ),
       ),

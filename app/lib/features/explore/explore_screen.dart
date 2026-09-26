@@ -11,6 +11,7 @@ import '../../data/mock.dart';
 import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'recherche.dart';
 part 'carte.dart';
@@ -19,166 +20,180 @@ part 'vue_rue.dart';
 
 /// Les espaces de Live, dans l'ordre de la barre de recherche mentale :
 /// acheter, se loger, se faire aider, se divertir, apprendre, travailler.
-const _espaces = [
+List<(IconData, String, String, String, Color)> _espaces(Textes t) => [
   (
     Icons.shopping_bag_rounded,
     'Market',
-    'Acheter et vendre',
+    t.explorerAcheterEtVendre,
     '/market',
     Color(0xFF13385C),
   ),
   (
     Icons.home_work_rounded,
     'Immo',
-    'Louer, acheter',
+    t.explorerLouerAcheter,
     '/immo',
     Color(0xFF166534),
   ),
   (
     Icons.king_bed_rounded,
-    'Séjours',
-    'À la nuit, meublé',
+    t.explorerSejours,
+    t.explorerALaNuitMeuble,
     '/sejours',
     Color(0xFF9D174D),
   ),
   (
     Icons.handyman_rounded,
-    'Services',
-    'Trouver un pro',
+    t.explorerServices,
+    t.explorerTrouverUnPro,
     '/services',
     Color(0xFF0369A1),
   ),
   (
     Icons.podcasts_rounded,
-    'Directs',
-    'Acheter en direct',
+    t.explorerDirects,
+    t.explorerAcheterEnDirect,
     '/directs',
     Color(0xFFDB2777),
   ),
   (
     Icons.auto_awesome_rounded,
     'Live IA',
-    'CV, exercices, business plan',
+    t.explorerCvExercicesBusinessPlan,
     '/ia',
     Color(0xFFB45309),
   ),
   (
     Icons.school_rounded,
-    'Savoir',
-    'Cours, PDF, vidéos',
+    t.explorerSavoir,
+    t.explorerCoursPdfVideos,
     '/apprendre',
     Color(0xFF6D28D9),
   ),
   (
     Icons.work_rounded,
-    'Emploi',
-    'Bourses, stages, emplois',
+    t.explorerEmploi,
+    t.explorerBoursesStagesEmplois,
     '/opportunites',
     Color(0xFF0F766E),
   ),
 ];
 
 /// Argent et quotidien : ce qu'on ouvre chaque semaine (docs/21).
-const _quotidien = [
+List<(IconData, String, String, String, Color)> _quotidien(Textes t) => [
+  (
+    Icons.account_balance_wallet_rounded,
+    t.explorerMonArgent,
+    t.explorerSoldeSequestreHistorique,
+    '/portefeuille',
+    Color(0xFF1D4ED8),
+  ),
   (
     Icons.diversity_3_rounded,
-    'Tontines',
-    'Cotiser et recevoir, sans retard',
+    t.explorerTontines,
+    t.explorerCotiserEtRecevoirSansRetard,
     '/tontines',
     Color(0xFFDB2777),
   ),
   (
     Icons.receipt_long_rounded,
-    'Factures et crédit',
-    'Électricité, eau, télé, recharge',
+    t.explorerFacturesEtCredit,
+    t.explorerElectriciteEauTeleRecharge,
     '/factures',
     Color(0xFFCA8A04),
   ),
   (
     Icons.flight_land_rounded,
-    'Diaspora',
-    'Payer pour un proche, envoyer',
+    t.explorerDiaspora,
+    t.explorerPayerPourUnProcheEnvoyer,
     '/diaspora',
     Color(0xFF0369A1),
   ),
   (
+    Icons.currency_exchange_rounded,
+    'Live Transfert',
+    t.explorerEnvoyerRecevoirToutesDevises,
+    '/transfert',
+    Color(0xFF0F766E),
+  ),
+  (
     Icons.groups_2_rounded,
-    'Achats groupés',
-    'À plusieurs, prix de gros',
+    t.explorerAchatsGroupes,
+    t.explorerAPlusieursPrixDeGros,
     '/achats-groupes',
     Color(0xFFB45309),
   ),
   (
     Icons.pin_drop_rounded,
-    'Adresse Live',
-    'Votre adresse en un code',
+    t.explorerAdresseLive,
+    t.explorerVotreAdresseEnUnCode,
     '/adresse',
     Color(0xFF1D4ED8),
   ),
   (
     Icons.storefront_rounded,
-    'Points relais',
-    'Colis, espèces en MoMo',
+    t.explorerPointsRelais,
+    t.explorerColisEspecesEnMomo,
     '/points-relais',
     Color(0xFF15803D),
   ),
 ];
 
 /// Outils de Live utiles à tous, rangés après les espaces.
-const _outils = [
+List<(IconData, String, String, String, Color)> _outils(Textes t) => [
   (
     Icons.groups_rounded,
-    'Groupes et canaux',
-    'Quartier, classe, passion',
+    t.explorerGroupesEtCanaux,
+    t.explorerQuartierClassePassion,
     '/groupe/g1',
     Color(0xFF1D4ED8),
   ),
   (
     Icons.two_wheeler_rounded,
     'Live Livraison',
-    'Courses à moto',
+    t.explorerCoursesAMoto,
     '/livraison/LV-00482',
     Color(0xFFC2410C),
   ),
   (
     Icons.insights_rounded,
-    'Studio créateur',
-    'Cadeaux, fans, statistiques',
+    t.explorerStudioCreateur,
+    t.explorerCadeauxFansStatistiques,
     '/studio',
     Color(0xFFDB2777),
   ),
   (
     Icons.bolt_rounded,
     'Live Plus',
-    'Crédits IA chaque mois',
+    t.explorerCreditsIaChaqueMois,
     '/live-plus',
     Color(0xFFB45309),
   ),
   (
     Icons.campaign_rounded,
-    'Publicité',
-    'Vidéo sponsorisée',
+    t.explorerPublicite,
+    t.explorerVideoSponsorisee,
     '/publicite',
     Color(0xFF13385C),
   ),
   (
     Icons.workspace_premium_rounded,
-    'Offres Pro',
-    'Vendeur, agence, pro',
+    t.explorerOffresPro,
+    t.explorerVendeurAgencePro,
     '/live-pro/offres',
     Color(0xFF166534),
   ),
   (
     Icons.account_balance_rounded,
-    'Services financiers',
-    '3 fois, épargne, crédit',
+    t.explorerServicesFinanciers,
+    t.explorerN3FoisEpargneCredit,
     '/finance',
     Color(0xFF0F766E),
   ),
   (
     Icons.volunteer_activism_rounded,
-    'Fonds Créateurs',
-    'Financé par la publicité',
+    t.explorerFondsCreateurs,
+    t.explorerFinanceParLaPublicite,
     '/fonds-createurs',
     Color(0xFF6D28D9),
   ),
@@ -190,6 +205,7 @@ class EcranExplorer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final t = context.t;
     final marge = context.grandEcran ? 24.0 : 16.0;
     final biblio = ref.watch(liveProvider.select((e) => e.bibliotheque));
     Widget titre(String texte, String route) => Padding(
@@ -223,24 +239,24 @@ class EcranExplorer extends ConsumerWidget {
     return Scaffold(
       appBar: EnTeteRecherche(
         titleSpacing: marge,
-        titre: const Text(
-          'Explorer',
+        titre: Text(
+          t.ongletExplorer,
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
         ),
-        indice: 'Rechercher sur Live…',
+        indice: t.explorerRechercherSurLive,
         onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: const [BoutonNotifications(), BoutonMessages()],
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 32),
         children: [
-          grille(_espaces),
+          grille(_espaces(context.t)),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Argent et quotidien'),
+            child: EnTeteSection(t.explorerArgentEtQuotidien),
           ),
-          grille(_quotidien),
-          titre('En direct maintenant', '/directs'),
+          grille(_quotidien(context.t)),
+          titre(t.explorerEnDirectMaintenant, '/directs'),
           Carrousel(
             largeur: 150,
             hauteur: 240,
@@ -250,7 +266,7 @@ class EcranExplorer extends ConsumerWidget {
                 CarteDirect(direct: d),
             ],
           ),
-          titre('Bonnes affaires près de vous', '/market'),
+          titre(t.explorerBonnesAffairesPresDeVous, '/market'),
           Carrousel(
             largeur: 160,
             hauteur: 250,
@@ -260,7 +276,7 @@ class EcranExplorer extends ConsumerWidget {
                 CarteProduit(produit: p, hero: false),
             ],
           ),
-          titre('Nouveaux logements vérifiés', '/immo'),
+          titre(t.explorerNouveauxLogementsVerifies, '/immo'),
           Carrousel(
             largeur: 230,
             hauteur: 276,
@@ -269,14 +285,14 @@ class EcranExplorer extends ConsumerWidget {
               for (final b in biens.take(8)) CarteBien(bien: b, hero: false),
             ],
           ),
-          titre('Pour quelques nuits', '/sejours'),
+          titre(t.explorerPourQuelquesNuits, '/sejours'),
           Carrousel(
             largeur: 230,
             hauteur: 250,
             marge: marge,
             enfants: [for (final s in sejours) CarteSejour(sejour: s)],
           ),
-          titre("Pros disponibles aujourd'hui", '/services'),
+          titre(t.explorerProsDisponiblesAujourdHui, '/services'),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: GrilleAdaptative(
@@ -285,7 +301,7 @@ class EcranExplorer extends ConsumerWidget {
               enfants: [for (final s in prestataires.take(4)) CartePro(pro: s)],
             ),
           ),
-          titre('Apprendre avec Live Savoir', '/apprendre'),
+          titre(t.explorerApprendreAvecLiveSavoir, '/apprendre'),
           Carrousel(
             largeur: 220,
             hauteur: 236,
@@ -295,7 +311,7 @@ class EcranExplorer extends ConsumerWidget {
                 CarteContenu(contenu: c, achete: biblio.contains(c.id)),
             ],
           ),
-          titre('Opportunités à saisir', '/opportunites'),
+          titre(t.explorerOpportunitesASaisir, '/opportunites'),
           Carrousel(
             largeur: 300,
             hauteur: 168,
@@ -306,9 +322,9 @@ class EcranExplorer extends ConsumerWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Outils et services Live'),
+            child: EnTeteSection(t.explorerOutilsEtServicesLive),
           ),
-          grille(_outils),
+          grille(_outils(context.t)),
         ],
       ),
     );

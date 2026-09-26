@@ -3,12 +3,12 @@ part of 'market_screens.dart';
 /// Blocs de « Mes ventes » : carte de commande, fiche détaillée (panneau du
 /// bas), refus avec motif, menu latéral des outils, annonces à gérer.
 
-(String, Color) _statutVente(StatutCommande s) => switch (s) {
+(String, Color) _statutVente(Textes t, StatutCommande s) => switch (s) {
   StatutCommande.payee ||
-  StatutCommande.reservee => ('Nouvelle', LiveColors.cuivre),
+  StatutCommande.reservee => (t.marketNouvelle, LiveColors.cuivre),
   StatutCommande.acceptee ||
-  StatutCommande.remise => ('À remettre', LiveColors.bleu),
-  StatutCommande.terminee => ('Terminée', LiveColors.succes),
+  StatutCommande.remise => (t.marketARemettre, LiveColors.bleu),
+  StatutCommande.terminee => (t.marketTerminee, LiveColors.succes),
 };
 
 int _net(Commande v) => v.total - commission(v.total, 0.06, minimum: 100);
@@ -25,7 +25,7 @@ class _CarteVente extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final v = vente;
-    final (statut, couleur) = _statutVente(v.statut);
+    final (statut, couleur) = _statutVente(context.t, v.statut);
     return Pressable(
       onTap: () => _ouvrirDetail(context, ref, v, onAcceptee),
       child: Bloc(
@@ -76,7 +76,13 @@ class _CarteVente extends ConsumerWidget {
                         style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        '${v.acheteur} · note 4,9 · ${v.mode == ModePaiement.avance ? 'payée, argent bloqué' : 'à payer à la remise'}',
+                        v.mode == ModePaiement.avance
+                            ? context.t.marketAcheteurNotePayee(
+                                v.acheteur ?? '',
+                              )
+                            : context.t.marketAcheteurNoteRemise(
+                                v.acheteur ?? '',
+                              ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -96,7 +102,7 @@ class _CarteVente extends ConsumerWidget {
                       style: const TextStyle(fontWeight: FontWeight.w800),
                     ),
                     Text(
-                      'net ${fcfa(_net(v))}',
+                      context.t.marketNetMontant(fcfa(_net(v))),
                       style: const TextStyle(
                         color: LiveColors.gris,
                         fontSize: 12,
@@ -138,7 +144,7 @@ class _ActionsVente extends ConsumerWidget {
               fermer?.call();
               _refuser(context, ref, v);
             },
-            child: const Text('Refuser'),
+            child: Text(context.t.marketRefuser),
           ),
           const SizedBox(width: 8),
           FilledButton(
@@ -148,7 +154,7 @@ class _ActionsVente extends ConsumerWidget {
               ref.read(liveProvider.notifier).accepterVente(v.id);
               onAcceptee?.call();
             },
-            child: const Text('Accepter'),
+            child: Text(context.t.marketAccepter),
           ),
         ],
       );
@@ -162,7 +168,7 @@ class _ActionsVente extends ConsumerWidget {
           context.push('/vente/${v.id}');
         },
         icon: const Icon(Icons.qr_code_scanner, size: 18),
-        label: const Text('Remettre le produit'),
+        label: Text(context.t.marketRemettreLeProduit),
       ),
     );
   }
@@ -175,7 +181,7 @@ void _ouvrirDetail(
   Commande v,
   VoidCallback? onAcceptee,
 ) {
-  final (statut, couleur) = _statutVente(v.statut);
+  final (statut, couleur) = _statutVente(context.t, v.statut);
   final etape = switch (v.statut) {
     StatutCommande.payee || StatutCommande.reservee => 0,
     StatutCommande.acceptee || StatutCommande.remise => 1,
@@ -185,7 +191,7 @@ void _ouvrirDetail(
     context: context,
     isScrollControlled: true,
     showDragHandle: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => DraggableScrollableSheet(
       expand: false,
       initialChildSize: 0.8,
@@ -198,7 +204,7 @@ void _ouvrirDetail(
             children: [
               Expanded(
                 child: Text(
-                  'Commande ${v.id}',
+                  context.t.marketCommandeNumero(v.id),
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
@@ -223,19 +229,19 @@ void _ouvrirDetail(
               rayon: 8,
             ),
             title: Text(v.produit.titre),
-            subtitle: Text('Quantité 1 · ${v.produit.etat}'),
+            subtitle: Text(context.t.marketQuantiteEtat(v.produit.etat)),
           ),
           ListTile(
             contentPadding: EdgeInsets.zero,
             leading: Avatar(
-              nom: v.acheteur ?? 'Client',
+              nom: v.acheteur ?? context.t.marketClient,
               couleur: LiveColors.bleu,
               taille: 44,
             ),
-            title: Text(v.acheteur ?? 'Client'),
-            subtitle: const Text('Note 4,9 · 12 achats · téléphone vérifié'),
+            title: Text(v.acheteur ?? context.t.marketClient),
+            subtitle: Text(context.t.marketNote4912),
             trailing: IconButton.outlined(
-              tooltip: 'Écrire à l’acheteur',
+              tooltip: context.t.marketEcrireALAcheteur,
               onPressed: () {
                 Navigator.pop(ctx);
                 context.push('/conversation');
@@ -244,13 +250,16 @@ void _ouvrirDetail(
             ),
           ),
           const Divider(height: 20),
-          const Text('Suivi', style: TextStyle(fontWeight: FontWeight.w800)),
+          Text(
+            context.t.marketSuivi,
+            style: TextStyle(fontWeight: FontWeight.w800),
+          ),
           const SizedBox(height: 8),
-          for (final (i, t) in const [
-            'Payée · argent bloqué par Live',
-            'Acceptée · remise à organiser',
-            'Remise · QR de l’acheteur scanné',
-            'Versée sur votre solde',
+          for (final (i, t) in [
+            context.t.marketPayeeArgentBloquePar,
+            context.t.marketAccepteeRemiseAOrganiser,
+            context.t.marketRemiseQrDeL,
+            context.t.marketVerseeSurVotreSolde,
           ].indexed)
             Row(
               children: [
@@ -259,7 +268,9 @@ void _ouvrirDetail(
                       ? Icons.check_circle_rounded
                       : Icons.radio_button_unchecked,
                   size: 20,
-                  color: i <= etape ? LiveColors.succes : LiveColors.brume,
+                  color: i <= etape
+                      ? LiveColors.succes
+                      : LiveColors.brumeClaire,
                 ),
                 const SizedBox(width: 8),
                 Expanded(
@@ -268,7 +279,7 @@ void _ouvrirDetail(
                     child: Text(
                       t,
                       style: TextStyle(
-                        color: i <= etape ? LiveColors.nuit : LiveColors.gris,
+                        color: i <= etape ? LiveColors.encre : LiveColors.gris,
                       ),
                     ),
                   ),
@@ -276,18 +287,18 @@ void _ouvrirDetail(
               ],
             ),
           const Divider(height: 24),
-          const LigneMenu(
+          LigneMenu(
             icone: Icons.handshake_outlined,
-            titre: 'Remise en main propre',
-            detail: 'Station Total Moungali · demain 10:00',
+            titre: context.t.marketRemiseEnMainPropre,
+            detail: context.t.marketStationTotalMoungaliDemain,
           ),
-          LigneMontant('Montant payé par l’acheteur', v.total),
+          LigneMontant(context.t.marketMontantPayeParL, v.total),
           LigneMontant(
-            'Commission Live (6 %)',
+            context.t.marketCommissionLive6,
             -commission(v.total, 0.06, minimum: 100),
           ),
           const Divider(),
-          LigneMontant('Vous recevez', _net(v), gras: true),
+          LigneMontant(context.t.marketVousRecevez, _net(v), gras: true),
           const SizedBox(height: 16),
           if (v.statut != StatutCommande.terminee)
             _ActionsVente(
@@ -308,26 +319,27 @@ void _refuser(BuildContext context, WidgetRef ref, Commande v) {
     context: context,
     builder: (ctx) => StatefulBuilder(
       builder: (ctx, maj) => AlertDialog(
-        title: const Text('Refuser la commande'),
+        title: Text(context.t.marketRefuserLaCommande),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${v.produit.titre} · ${v.acheteur}'),
+            Text(
+              context.t.marketTitreAcheteur(v.produit.titre, v.acheteur ?? ''),
+            ),
             const SizedBox(height: 8),
-            for (final m in const [
-              'Rupture de stock',
-              'Zone non desservie',
-              'Autre raison',
+            for (final m in [
+              context.t.marketRuptureDeStock,
+              context.t.marketZoneNonDesservie,
+              context.t.marketAutreRaison,
             ])
               Choix(
                 titre: m,
                 selectionne: motif == m,
                 onTap: () => maj(() => motif = m),
               ),
-            const Text(
-              'L’acheteur est remboursé immédiatement. Des refus répétés '
-              'baissent votre visibilité.',
+            Text(
+              context.t.marketLAcheteurEstRembourse,
               style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
             ),
           ],
@@ -335,7 +347,7 @@ void _refuser(BuildContext context, WidgetRef ref, Commande v) {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Annuler'),
+            child: Text(context.t.annuler),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: LiveColors.erreur),
@@ -347,12 +359,12 @@ void _refuser(BuildContext context, WidgetRef ref, Commande v) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          'Commande refusée · ${v.acheteur} est remboursé.',
+                          context.t.marketCommandeRefusee(v.acheteur ?? ''),
                         ),
                       ),
                     );
                   },
-            child: const Text('Refuser'),
+            child: Text(context.t.marketRefuser),
           ),
         ],
       ),

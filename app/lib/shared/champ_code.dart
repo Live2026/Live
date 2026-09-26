@@ -1,9 +1,12 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smart_auth/smart_auth.dart';
 
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 
 /// Saisie d'un code à usage unique : une case par chiffre, la case active
 /// s'allume, chaque chiffre apparaît avec un léger rebond. Le code complet
@@ -16,6 +19,7 @@ class ChampCode extends StatefulWidget {
     required this.onComplet,
     this.etat = EtatCode.saisie,
     this.masque = false,
+    this.lireSms = false,
   });
   final int longueur;
   final ValueChanged<String> onComplet;
@@ -23,6 +27,12 @@ class ChampCode extends StatefulWidget {
 
   /// Vrai pour un code secret : des points au lieu des chiffres.
   final bool masque;
+
+  /// Code reçu par SMS : sur Android, Live propose de le lire (API « SMS
+  /// User Consent » de Google, l'utilisateur accepte en un appui). Sur
+  /// iPhone et dans le navigateur, le clavier le propose seul
+  /// (`AutofillHints.oneTimeCode`).
+  final bool lireSms;
 
   @override
   State<ChampCode> createState() => _ChampCodeState();
@@ -40,6 +50,24 @@ class _ChampCodeState extends State<ChampCode>
   );
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.lireSms &&
+        !kIsWeb &&
+        defaultTargetPlatform == TargetPlatform.android) {
+      _ecouterSms();
+    }
+  }
+
+  Future<void> _ecouterSms() async {
+    final res = await SmartAuth.instance.getSmsWithUserConsentApi();
+    final code = res.data?.code;
+    if (!mounted || code == null || code.length != widget.longueur) return;
+    setState(() => _saisie.text = code);
+    widget.onComplet(code);
+  }
+
+  @override
   void didUpdateWidget(ChampCode ancien) {
     super.didUpdateWidget(ancien);
     if (widget.etat == EtatCode.erreur && ancien.etat != EtatCode.erreur) {
@@ -50,6 +78,11 @@ class _ChampCodeState extends State<ChampCode>
 
   @override
   void dispose() {
+    if (widget.lireSms &&
+        !kIsWeb &&
+        defaultTargetPlatform == TargetPlatform.android) {
+      SmartAuth.instance.removeUserConsentApiListener();
+    }
     _saisie.dispose();
     _focus.dispose();
     _tremblement.dispose();
@@ -99,7 +132,7 @@ class _ChampCodeState extends State<ChampCode>
                   ],
                   showCursor: false,
                   decoration: InputDecoration(
-                    labelText: 'Code à ${widget.longueur} chiffres',
+                    labelText: context.t.codeAChiffres(widget.longueur),
                   ),
                   enableInteractiveSelection: false,
                   onChanged: (v) {
@@ -179,15 +212,15 @@ class _Case extends StatelessWidget {
         color: colore
             ? accent.withValues(alpha: 0.1)
             : rempli
-            ? const Color(0xFFFFF4E5)
-            : const Color(0xFFF3F5F8),
+            ? LiveColors.teinteAmbre
+            : LiveColors.champ,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: active || colore
               ? accent
               : rempli
               ? const Color(0xFFFBCC6A)
-              : const Color(0xFFD7DCE4),
+              : LiveColors.brume,
           width: active || colore ? 2 : 1.2,
         ),
         boxShadow: active
@@ -203,7 +236,7 @@ class _Case extends StatelessWidget {
           style: TextStyle(
             fontSize: taille * 0.5,
             fontWeight: FontWeight.w800,
-            color: colore ? accent : LiveColors.nuit,
+            color: colore ? accent : LiveColors.encre,
           ),
         ),
       ),

@@ -16,12 +16,12 @@ class EcranMarket extends ConsumerWidget {
       appBar: EnTeteRecherche(
         titleSpacing: marge,
         toolbarHeight: 64,
-        titre: const Column(
+        titre: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Market'),
             Text(
-              'Paiement protégé',
+              context.t.marketPaiementProtege,
               style: TextStyle(
                 fontSize: 13,
                 color: LiveColors.gris,
@@ -30,7 +30,7 @@ class EcranMarket extends ConsumerWidget {
             ),
           ],
         ),
-        indice: 'Rechercher un produit, une boutique…',
+        indice: context.t.marketRechercherUnProduitUneBoutique,
         onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: [
           const BoutonCommandes(),
@@ -48,7 +48,7 @@ class EcranMarket extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
-              'Catégories populaires',
+              context.t.marketCategoriesPopulaires,
               onTap: () => context.push('/market/liste'),
             ),
           ),
@@ -72,7 +72,7 @@ class EcranMarket extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
-              'Recommandé pour vous',
+              context.t.marketRecommandePourVous,
               onTap: () => context.push('/market/liste'),
             ),
           ),
@@ -87,7 +87,7 @@ class EcranMarket extends ConsumerWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Vendeurs à la une'),
+            child: EnTeteSection(context.t.marketVendeursALaUne),
           ),
           Carrousel(
             largeur: 132,
@@ -98,7 +98,7 @@ class EcranMarket extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
-              'Nouveautés près de vous',
+              context.t.marketNouveautesPresDeVous,
               onTap: () => context.push('/market/liste?tri=1'),
             ),
           ),

@@ -21,22 +21,23 @@ class _EcranFacturesState extends ConsumerState<EcranFactures> {
     final marge = context.grandEcran ? 24.0 : 16.0;
     final aPayer = factures.where((f) => !payees.contains(f.id)).toList();
     return Scaffold(
-      appBar: AppBar(title: const Text('Factures et crédit')),
+      appBar: AppBar(title: Text(context.t.piliersFacturesEtCredit)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
           _Banniere(
             icone: Icons.receipt_long_rounded,
             titre: aPayer.isEmpty
-                ? 'Tout est payé'
-                : '${aPayer.length} facture${aPayer.length > 1 ? 's' : ''} à payer',
+                ? context.t.piliersToutEstPaye
+                : context.t.piliersFacturesAPayer(aPayer.length),
             texte: aPayer.isEmpty
-                ? 'Nous vous prévenons dès qu’une nouvelle facture arrive.'
-                : 'Total : ${fcfa(aPayer.fold(0, (s, f) => s + f.montant))} · '
-                      'sans frais, reçu du fournisseur immédiat.',
+                ? context.t.piliersNousVousPrevenonsDes
+                : context.t.piliersTotalSansFrais(
+                    fcfa(aPayer.fold(0, (s, f) => s + f.montant)),
+                  ),
             couleurs: const [Color(0xFFCA8A04), Color(0xFFB45309)],
           ),
-          const EnTeteSection('Mes factures'),
+          EnTeteSection(context.t.piliersMesFactures),
           GrilleAdaptative(
             largeurMax: 420,
             espacement: 10,
@@ -86,10 +87,10 @@ class _EcranFacturesState extends ConsumerState<EcranFactures> {
                           ),
                         ),
                         if (payees.contains(f.id))
-                          const Etiquette(
-                            'Payée',
+                          Etiquette(
+                            context.t.piliersPayee,
                             icone: Icons.check_rounded,
-                            fond: Color(0xFFE7F4EC),
+                            fond: LiveColors.teinteVerte,
                             couleur: LiveColors.succes,
                           )
                         else
@@ -106,7 +107,7 @@ class _EcranFacturesState extends ConsumerState<EcranFactures> {
                               f.id,
                               beneficiaire: f.fournisseur,
                             ),
-                            child: const Text('Payer'),
+                            child: Text(context.t.piliersPayer),
                           ),
                       ],
                     ),
@@ -116,14 +117,12 @@ class _EcranFacturesState extends ConsumerState<EcranFactures> {
           ),
           const SizedBox(height: 8),
           OutlinedButton.icon(
-            onPressed: () => informer(
-              context,
-              'Ajout d’un compteur ou d’un abonné : numéro de référence du fournisseur.',
-            ),
+            onPressed: () =>
+                informer(context, context.t.piliersAjoutDUnCompteur),
             icon: const Icon(Icons.add_rounded),
-            label: const Text('Ajouter un compteur ou un abonnement'),
+            label: Text(context.t.piliersAjouterUnCompteurOu),
           ),
-          const EnTeteSection('Crédit et forfaits'),
+          EnTeteSection(context.t.piliersCreditEtForfaits),
           Bloc(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -141,8 +140,8 @@ class _EcranFacturesState extends ConsumerState<EcranFactures> {
                 TextField(
                   controller: _numero,
                   keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                    labelText: 'Numéro à recharger',
+                  decoration: InputDecoration(
+                    labelText: context.t.piliersNumeroARecharger,
                     prefixText: '+242 ',
                   ),
                 ),
@@ -166,12 +165,14 @@ class _EcranFacturesState extends ConsumerState<EcranFactures> {
                     ref,
                     TypePaiement.recharge,
                     _recharge,
-                    'Crédit $_operateur · ${_numero.text}',
+                    context.t.piliersCreditOperateur(_operateur, _numero.text),
                     'recharge',
                     beneficiaire: _operateur,
                   ),
                   icon: const Icon(Icons.phone_android_rounded),
-                  label: Text('Recharger ${fcfa(_recharge)}'),
+                  label: Text(
+                    context.t.piliersRechargerMontant(fcfa(_recharge)),
+                  ),
                 ),
               ],
             ),

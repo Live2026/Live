@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../core/theme.dart';
 import 'plan_ville.dart';
+import '../l10n/textes.dart';
 
 /// Carte complète, sur le modèle de Google Maps : zoom et déplacement au
 /// doigt, plan ou satellite, « ma position » (GPS), vue rue. Dans
@@ -93,8 +94,8 @@ class _CarteInteractiveState extends State<CarteInteractive> {
                         ? Icons.satellite_alt_rounded
                         : Icons.map_rounded,
                     libelle: _mode == ModeCarte.plan
-                        ? 'Vue satellite'
-                        : 'Vue plan',
+                        ? context.t.vueSatellite
+                        : context.t.vuePlan,
                     onTap: () => setState(
                       () => _mode = _mode == ModeCarte.plan
                           ? ModeCarte.satellite
@@ -105,7 +106,7 @@ class _CarteInteractiveState extends State<CarteInteractive> {
                     const SizedBox(height: 8),
                     _BoutonCarte(
                       icone: Icons.streetview_rounded,
-                      libelle: 'Vue rue',
+                      libelle: context.t.vueRue,
                       onTap: () => context.push(
                         '/rue?lieu=${Uri.encodeComponent(widget.lieuVueRue!)}',
                       ),
@@ -114,7 +115,7 @@ class _CarteInteractiveState extends State<CarteInteractive> {
                   const SizedBox(height: 8),
                   _BoutonCarte(
                     icone: Icons.my_location_rounded,
-                    libelle: 'Ma position',
+                    libelle: context.t.maPosition,
                     couleur: const Color(0xFF1A73E8),
                     onTap: () => _recentrer(taille),
                   ),
@@ -133,7 +134,7 @@ class _BoutonCarte extends StatelessWidget {
     required this.icone,
     required this.libelle,
     required this.onTap,
-    this.couleur = LiveColors.nuit,
+    this.couleur = LiveColors.encre,
   });
   final IconData icone;
   final String libelle;
@@ -145,7 +146,7 @@ class _BoutonCarte extends StatelessWidget {
     return Tooltip(
       message: libelle,
       child: Material(
-        color: Colors.white,
+        color: LiveColors.surface,
         shape: const CircleBorder(),
         elevation: 3,
         child: InkWell(

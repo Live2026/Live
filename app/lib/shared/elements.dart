@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../core/format.dart';
 import '../core/theme.dart';
+import 'demarrage.dart';
+import '../l10n/textes.dart';
 
 /// Bouton « Écouter l'explication » (principe 11). Le prototype affiche le texte lu.
 class BoutonEcouter extends StatelessWidget {
@@ -22,12 +24,12 @@ class BoutonEcouter extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
                   Icon(Icons.volume_up, color: LiveColors.bleu),
                   SizedBox(width: 8),
                   Text(
-                    'Lecture audio (simulée)',
+                    context.t.lectureAudioSimulee,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -38,8 +40,8 @@ class BoutonEcouter extends StatelessWidget {
                 style: const TextStyle(fontSize: 16, height: 1.4),
               ),
               const SizedBox(height: 12),
-              const Text(
-                "Dans l'application réelle, ce texte est lu à voix haute en français, puis en lingala et en kituba.",
+              Text(
+                context.t.dansLApplicationReelle,
                 style: TextStyle(color: LiveColors.gris),
               ),
             ],
@@ -47,7 +49,7 @@ class BoutonEcouter extends StatelessWidget {
         ),
       ),
       icon: const Icon(Icons.play_circle_outline),
-      label: const Text("Écouter l'explication"),
+      label: Text(context.t.ecouterLExplication),
     );
   }
 }
@@ -91,26 +93,40 @@ class BarreAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Dans la carte du démarrage sur ordinateur : un bouton compact centré,
+    // sans filet ni fond (façon WhatsApp Web).
+    if (DansCarte.de(context)) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+        child: Center(
+          heightFactor: 1,
+          child: SizedBox(width: 260, child: child),
+        ),
+      );
+    }
     return SafeArea(
       top: false,
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: LiveColors.surface,
           border: Border(top: BorderSide(color: Colors.grey.shade200)),
         ),
-        // Sur grand écran, les actions restent compactes et alignées à droite
-        // au lieu de s'étirer sur toute la largeur.
-        child: MediaQuery.sizeOf(context).width >= 840
-            ? Align(
-                alignment: Alignment.centerRight,
-                heightFactor: 1,
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 440),
-                  child: child,
-                ),
-              )
-            : child,
+        // Sur une surface large, les actions restent compactes et alignées à
+        // droite au lieu de s'étirer ; dans une carte étroite (démarrage sur
+        // ordinateur), elles prennent toute la largeur de la carte.
+        child: LayoutBuilder(
+          builder: (context, c) => c.maxWidth >= 808
+              ? Align(
+                  alignment: Alignment.centerRight,
+                  heightFactor: 1,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 440),
+                    child: child,
+                  ),
+                )
+              : child,
+        ),
       ),
     );
   }
@@ -124,7 +140,7 @@ class BoutonMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      tooltip: 'Messages',
+      tooltip: context.t.messages,
       onPressed: () => context.push('/messages'),
       icon: Badge(
         label: const Text('1'),
@@ -146,8 +162,8 @@ class BoutonSimulation extends StatelessWidget {
     return OutlinedButton.icon(
       style: OutlinedButton.styleFrom(
         foregroundColor: LiveColors.gris,
-        side: const BorderSide(color: Color(0xFFE4E8EE)),
-        backgroundColor: const Color(0xFFF7F8FA),
+        side: const BorderSide(color: LiveColors.filet),
+        backgroundColor: LiveColors.champ,
       ),
       onPressed: onTap,
       icon: const Icon(Icons.science_outlined, size: 18),
@@ -193,7 +209,7 @@ class BoutonVerre extends StatelessWidget {
                 child: Icon(
                   icone,
                   size: 21,
-                  color: clair ? LiveColors.nuit : Colors.white,
+                  color: clair ? LiveColors.encre : LiveColors.surface,
                 ),
               ),
             ),
@@ -299,9 +315,9 @@ class Bloc extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        color: fond ?? Colors.white,
+        color: fond ?? LiveColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE4E8EE)),
+        border: Border.all(color: LiveColors.filet),
       ),
       child: child,
     );

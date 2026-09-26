@@ -44,10 +44,12 @@ Frais : **1 % de la cagnotte versée** ; aucun frais pour cotiser. Écrans : `/t
 | F-DIA-02 | **Live Transfert** : envoyer de l'argent ; le proche le reçoit en MTN MoMo, en Airtel Money ou sur son solde Live, **sans frais de retrait**. Frais affichés avant l'envoi (hypothèse : 2 %). |
 | F-DIA-03 | Taux fixe **1 € = 655,957 FCFA** (parité garantie) : aucune surprise de change depuis la zone euro. |
 | F-DIA-04 | Vérification d'identité de l'envoyeur et du bénéficiaire ; plafonds selon la réglementation CEMAC et celle du pays d'envoi. |
+| F-DIA-05 | **Toutes les devises de la diaspora** : euro, dollar américain, livre, dollar canadien, franc suisse, franc CFA d'Afrique de l'Ouest, yuan, dirham, rand, naira. L'envoyeur choisit sa devise ; taux fixe pour l'euro et le franc CFA ouest-africain, sinon taux du jour du partenaire **bloqué 30 minutes**. Paiement par carte, virement ou Mobile Money étranger. |
+| F-DIA-06 | **Recevoir de l'étranger** : numéro et lien de réception à partager ; transferts reçus en francs CFA sur le solde Live, retirés en MTN MoMo ou Airtel Money sans frais. |
 
 **Cadre légal (à valider avec l'avocat, D-16)** : garder de l'argent pour autrui et faire des transferts internationaux sont des activités réglementées (agrément COBAC d'établissement de paiement ou de monnaie électronique ; agrément de transfert dans le pays d'envoi). **Live n'émet pas de monnaie** : le solde Live et Live Transfert sont opérés par un **partenaire agréé** tant que Live n'a pas son propre agrément. « Payer pour un proche » est un achat de biens et services, plus simple à ouvrir en premier.
 
-Écrans : `/diaspora`, `/transfert`.
+Écrans : `/diaspora`, `/transfert` (Envoyer), `/transfert?sens=recevoir` (Recevoir). L'arrivée des fonds passe par l'API d'un partenaire de transfert international, à choisir : les écrans sont prêts, seul le branchement reste (document 26, §6).
 
 ## 5. Quotidien, livraison et cartes
 

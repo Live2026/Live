@@ -5,6 +5,7 @@ import 'donnees_opportunites.dart';
 import 'donnees_services.dart';
 import 'modeles.dart';
 
+export 'donnees_appels.dart';
 export 'donnees_apprendre.dart';
 export 'donnees_comptes.dart';
 export 'donnees_immo.dart';
@@ -12,6 +13,9 @@ export 'donnees_market.dart';
 export 'donnees_opportunites.dart';
 export 'donnees_piliers.dart';
 export 'donnees_createurs.dart';
+export 'donnees_devises.dart';
+export 'donnees_pays.dart';
+export 'donnees_telephone.dart';
 export 'donnees_services.dart';
 export 'donnees_social.dart';
 export 'modeles.dart';

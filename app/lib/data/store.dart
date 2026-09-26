@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -5,15 +7,19 @@ import '../core/format.dart';
 import 'etat.dart';
 import 'mock.dart';
 import 'paiement_reussi.dart';
+import 'store_local.dart';
 import 'ventes_initiales.dart';
 
 export 'etat.dart';
 
-class LiveStore extends Notifier<LiveState> {
+class LiveStore extends Notifier<LiveState> with PersistanceLocale {
   var _compteur = 482;
 
   @override
-  LiveState build() => LiveState(ventes: ventesInitiales());
+  LiveState build() {
+    chargerLocal();
+    return LiveState(ventes: ventesInitiales());
+  }
 
   String _numero(String prefixe) =>
       '$prefixe-${(_compteur++).toString().padLeft(5, '0')}';
@@ -249,11 +255,15 @@ class LiveStore extends Notifier<LiveState> {
   void basculerCloche(String id) =>
       state = state.copyWith(cloches: _bascule(state.cloches, id));
 
-  void basculerFavori(String id) => state = state.copyWith(
-    favoris: state.favoris.contains(id)
-        ? ({...state.favoris}..remove(id))
-        : {...state.favoris, id},
-  );
+  void basculerFavori(String id) {
+    final present = !state.favoris.contains(id);
+    state = state.copyWith(
+      favoris: present
+          ? {...state.favoris, id}
+          : ({...state.favoris}..remove(id)),
+    );
+    garderFavori(id, present: present);
+  }
 
   // ---- Confiance ----
 
@@ -297,11 +307,15 @@ class LiveStore extends Notifier<LiveState> {
   void ajouterAlerte(String libelle) =>
       state = state.copyWith(alertes: [(libelle, true), ...state.alertes]);
 
-  void choisirInterets(Set<String> interets) =>
-      state = state.copyWith(interets: interets);
+  void choisirInterets(Set<String> interets) {
+    state = state.copyWith(interets: interets);
+    garder('interets', interets.join('|'));
+  }
 
-  void basculerEconomieDonnees() =>
-      state = state.copyWith(economieDonnees: !state.economieDonnees);
+  void basculerEconomieDonnees() {
+    state = state.copyWith(economieDonnees: !state.economieDonnees);
+    garder('economie', state.economieDonnees ? '1' : '0');
+  }
 
   // ---- Publication ----
 
@@ -357,7 +371,46 @@ class LiveStore extends Notifier<LiveState> {
     return true;
   }
 
-  void choisirPays(String ville) => state = state.copyWith(pays: ville);
+  void choisirPays(String ville) {
+    state = state.copyWith(pays: ville);
+    garder('pays', ville);
+  }
+
+  void choisirDevise(String code) {
+    state = state.copyWith(devise: code);
+    garder('devise', code);
+  }
+
+  /// Photo de profil (octets de l'image), ou null pour la retirer.
+  void choisirPhoto(Uint8List? octets) {
+    state = octets == null
+        ? state.copyWith(retirerPhoto: true)
+        : state.copyWith(photoProfil: octets);
+  }
+
+  void choisirApparence(String apparence) {
+    state = state.copyWith(apparence: apparence);
+    garder('apparence', apparence);
+  }
+
+  void choisirLangue(String code) {
+    state = state.copyWith(langue: code);
+    garder('langue', code);
+  }
+
+  /// Demande au support Live ; renvoie son numéro (SP-…).
+  String ecrireSupport(String sujet, String message) {
+    final id = 'SP-${(10421 + state.demandesSupport.length)}';
+    state = state.copyWith(
+      demandesSupport: [(id, sujet, message), ...state.demandesSupport],
+    );
+    return id;
+  }
+
+  /// Transfert reçu de l'étranger, versé sur le compte Mobile Money.
+  void retirerTransfert(String id) => state = state.copyWith(
+    transfertsRetires: {...state.transfertsRetires, id},
+  );
 
   void reinitialiser() => state = LiveState(ventes: ventesInitiales());
 }

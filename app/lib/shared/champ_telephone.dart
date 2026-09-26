@@ -1,0 +1,442 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../core/theme.dart';
+import '../data/donnees_telephone.dart';
+import '../l10n/textes.dart';
+import 'drapeau.dart';
+
+/// Saisie du numéro, comme WhatsApp : le pays sur sa ligne (drapeau, nom ;
+/// la liste s'ouvre juste dessous), puis le numéro précédé de l'indicatif,
+/// mis en forme pendant la frappe, avec l'opérateur reconnu dessous.
+class ChampTelephone extends StatefulWidget {
+  const ChampTelephone({
+    super.key,
+    required this.controleur,
+    required this.pays,
+    required this.onPays,
+    this.onChanged,
+    this.onValider,
+    this.autofocus = false,
+  });
+
+  final TextEditingController controleur;
+
+  /// Rang dans `paysTelephone`.
+  final int pays;
+  final ValueChanged<int> onPays;
+  final VoidCallback? onChanged;
+
+  /// Touche Entrée (ordinateur) ou « OK » du clavier : passe à la suite.
+  final VoidCallback? onValider;
+  final bool autofocus;
+
+  @override
+  State<ChampTelephone> createState() => _ChampTelephoneState();
+}
+
+const _bord = LiveColors.bord2;
+
+BoxDecoration _cadre({required bool actif, bool alerte = false}) =>
+    BoxDecoration(
+      color: LiveColors.surface,
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(
+        color: alerte
+            ? LiveColors.cuivre
+            : actif
+            ? LiveColors.bleu
+            : _bord,
+        width: actif || alerte ? 2 : 1,
+      ),
+    );
+
+class _ChampTelephoneState extends State<ChampTelephone> {
+  final _focus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focus.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _focus.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final pays = paysTelephone[widget.pays];
+    final numero = widget.controleur.text;
+    final operateur = pays.operateur(numero);
+    final complet = pays.complet(numero);
+    final inconnu = pays.debutInconnu(numero);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _ChoixPays(
+          pays: widget.pays,
+          onPays: (i) {
+            widget.onPays(i);
+            widget.controleur.clear();
+            widget.onChanged?.call();
+          },
+        ),
+        const SizedBox(height: 12),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          decoration: _cadre(actif: _focus.hasFocus, alerte: inconnu),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 12),
+                child: Text(
+                  pays.indicatif,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              Container(width: 1, height: 26, color: _bord),
+              Expanded(
+                // Nœud propre au champ : le lecteur d'écran ne le confond
+                // pas avec la ligne du pays juste au-dessus.
+                child: Semantics(
+                  container: true,
+                  label: context.t.numeroDeTelephone,
+                  child: TextField(
+                    controller: widget.controleur,
+                    focusNode: _focus,
+                    autofocus: widget.autofocus,
+                    keyboardType: TextInputType.phone,
+                    autofillHints: const [
+                      AutofillHints.telephoneNumberNational,
+                    ],
+                    inputFormatters: [_FormatNumero(pays.groupes)],
+                    style: const TextStyle(
+                      fontSize: 17,
+                      letterSpacing: 0.8,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: pays.format,
+                      border: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      filled: false,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 15,
+                      ),
+                      suffixIcon: complet
+                          ? Icon(
+                              Icons.check_circle_rounded,
+                              color: LiveColors.succes,
+                              semanticLabel: context.t.numeroComplet,
+                            )
+                          : null,
+                    ),
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: (_) => widget.onValider?.call(),
+                    onChanged: (_) {
+                      setState(() {});
+                      widget.onChanged?.call();
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 220),
+          child: Text(
+            inconnu
+                ? context.t.debutInconnu(
+                    context.t.nomPays(pays.code),
+                    pays.debutsConnus,
+                  )
+                : operateur == null
+                ? context.t.chiffresComme(pays.chiffres, pays.format)
+                : pays.mobileMoney
+                ? context.t.mobileMoneyReconnu(operateur)
+                : context.t.numeroMobileCarte,
+            key: ValueKey(inconnu ? 'inconnu' : operateur ?? pays.code),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 12.5,
+              fontWeight: operateur != null || inconnu ? FontWeight.w700 : null,
+              color: inconnu
+                  ? LiveColors.cuivre
+                  : operateur != null
+                  ? LiveColors.succes
+                  : LiveColors.gris,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Ligne du pays : drapeau, nom et flèche. La liste s'ouvre juste dessous,
+/// à la largeur du champ, avec une recherche en tête (comme WhatsApp Web)
+/// et les pays rangés par région.
+class _ChoixPays extends StatefulWidget {
+  const _ChoixPays({required this.pays, required this.onPays});
+  final int pays;
+  final ValueChanged<int> onPays;
+
+  @override
+  State<_ChoixPays> createState() => _ChoixPaysState();
+}
+
+class _ChoixPaysState extends State<_ChoixPays> {
+  final _recherche = TextEditingController();
+
+  @override
+  void dispose() {
+    _recherche.dispose();
+    super.dispose();
+  }
+
+  static String _simple(String t) => t
+      .toLowerCase()
+      .replaceAll(RegExp('[éèêë]'), 'e')
+      .replaceAll(RegExp('[àâã]'), 'a')
+      .replaceAll(RegExp('[ôõ]'), 'o')
+      .replaceAll(RegExp('[íî]'), 'i')
+      .replaceAll(RegExp('[’\'-]'), ' ');
+
+  bool _garde(PaysTelephone p, Textes t) {
+    final q = _simple(_recherche.text.trim());
+    if (q.isEmpty) return true;
+    return _simple(p.nom).contains(q) ||
+        _simple(t.nomPays(p.code)).contains(q) ||
+        p.indicatif.contains(q);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final actuel = paysTelephone[widget.pays];
+    return LayoutBuilder(
+      builder: (context, c) {
+        final largeur = c.maxWidth.clamp(260.0, 480.0);
+        final trouves = [
+          for (final (i, p) in paysTelephone.indexed)
+            if (_garde(p, context.t)) (i, p),
+        ];
+        return MenuAnchor(
+          alignmentOffset: const Offset(0, 6),
+          onClose: () => setState(_recherche.clear),
+          style: MenuStyle(
+            backgroundColor: const WidgetStatePropertyAll(LiveColors.surface),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            maximumSize: WidgetStatePropertyAll(Size(largeur, 440)),
+          ),
+          menuChildren: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 6, 10, 4),
+              child: SizedBox(
+                width: largeur - 20,
+                child: TextField(
+                  controller: _recherche,
+                  autofocus: true,
+                  onChanged: (_) => setState(() {}),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    hintText: context.t.rechercherPays,
+                    prefixIcon: const Icon(Icons.search_rounded),
+                  ),
+                ),
+              ),
+            ),
+            if (trouves.isEmpty)
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  context.t.aucunPays,
+                  style: const TextStyle(color: LiveColors.gris),
+                ),
+              ),
+            for (final region in RegionTelephone.values)
+              if (trouves.any((t) => t.$2.region == region)) ...[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 4),
+                  child: Text(
+                    context.t.region(region.name).toUpperCase(),
+                    style: const TextStyle(
+                      color: LiveColors.gris,
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.6,
+                    ),
+                  ),
+                ),
+                for (final (i, p) in trouves)
+                  if (p.region == region)
+                    MenuItemButton(
+                      onPressed: () => widget.onPays(i),
+                      leadingIcon: Drapeau(p.code, largeur: 26),
+                      trailingIcon: i == widget.pays
+                          ? const Icon(
+                              Icons.check_rounded,
+                              color: LiveColors.bleu,
+                            )
+                          : Text(
+                              p.indicatif,
+                              style: const TextStyle(color: LiveColors.gris),
+                            ),
+                      child: SizedBox(
+                        width: largeur - 130,
+                        child: Text(
+                          context.t.nomPays(p.code),
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+              ],
+          ],
+          builder: (context, menu, _) => Semantics(
+            button: true,
+            container: true,
+            label: context.t.paysChanger(
+              context.t.nomPays(actuel.code),
+              actuel.indicatif,
+            ),
+            excludeSemantics: true,
+            onTap: () => menu.isOpen ? menu.close() : menu.open(),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: () => menu.isOpen ? menu.close() : menu.open(),
+              child: Ink(
+                decoration: _cadre(actif: menu.isOpen),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
+                child: Row(
+                  children: [
+                    Drapeau(actuel.code, largeur: 26),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        context.t.nomPays(actuel.code),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      menu.isOpen
+                          ? Icons.keyboard_arrow_up_rounded
+                          : Icons.keyboard_arrow_down_rounded,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// Garde les chiffres et les groupe comme le format du pays.
+class _FormatNumero extends TextInputFormatter {
+  _FormatNumero(this.groupes);
+  final List<int> groupes;
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue ancien,
+    TextEditingValue nouveau,
+  ) {
+    final max = groupes.fold(0, (s, n) => s + n);
+    var chiffres = nouveau.text.replaceAll(RegExp(r'\D'), '');
+    if (chiffres.length > max) chiffres = chiffres.substring(0, max);
+    final b = StringBuffer();
+    var i = 0;
+    for (final g in groupes) {
+      if (i >= chiffres.length) break;
+      if (b.isNotEmpty) b.write(' ');
+      final fin = (i + g).clamp(0, chiffres.length);
+      b.write(chiffres.substring(i, fin));
+      i = fin;
+    }
+    final texte = b.toString();
+    return TextEditingValue(
+      text: texte,
+      selection: TextSelection.collapsed(offset: texte.length),
+    );
+  }
+}
+
+/// Texte d'alerte pour [confirmerNumero] quand le début est inconnu.
+String? alerteNumero(BuildContext context, PaysTelephone pays, String numero) =>
+    pays.debutInconnu(numero)
+    ? context.t.alerteDebut(context.t.nomPays(pays.code), pays.debutsConnus)
+    : null;
+
+/// Avant d'envoyer le code, comme WhatsApp : on relit le numéro. Un SMS
+/// envoyé à un numéro mal saisi est perdu (et payé). [alerte] signale un
+/// début de numéro inconnu.
+
+Future<bool> confirmerNumero(
+  BuildContext context,
+  String numero, {
+  String? alerte,
+}) async {
+  final ok = await showDialog<bool>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(context.t.vousAvezSaisi),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            numero,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 0.5,
+            ),
+          ),
+          if (alerte != null) ...[
+            const SizedBox(height: 10),
+            Text(
+              alerte,
+              style: const TextStyle(
+                color: LiveColors.cuivre,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+          const SizedBox(height: 12),
+          Text(context.t.estIlCorrect),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, false),
+          child: Text(context.t.modifier),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.pop(ctx, true),
+          child: Text(context.t.ok),
+        ),
+      ],
+    ),
+  );
+  return ok ?? false;
+}

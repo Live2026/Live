@@ -13,12 +13,12 @@ class EcranProduit extends StatelessWidget {
     final surPlace = p.reglement == Reglement.surPlace;
     final entete = <Widget>[
       if (p.vues >= 1000)
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(bottom: 6),
           child: Etiquette(
-            'Meilleure vente',
+            context.t.marketMeilleureVente,
             icone: Icons.local_fire_department_rounded,
-            fond: Color(0xFFFFF1E0),
+            fond: LiveColors.teinteOrange,
             couleur: LiveColors.cuivre,
           ),
         ),
@@ -48,7 +48,7 @@ class EcranProduit extends StatelessWidget {
             const SizedBox(width: 8),
             const Icon(Icons.star_rounded, size: 15, color: LiveColors.ambre),
             Text(
-              ' ${note(p.vendeur.note).replaceAll('/5', '')} · ${p.vendeur.ventes} ventes',
+              ' ${context.t.marketNoteVentes(note(p.vendeur.note).replaceAll('/5', ''), p.vendeur.ventes)}',
               style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
             ),
           ],
@@ -65,20 +65,16 @@ class EcranProduit extends StatelessWidget {
         runSpacing: 6,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          Etiquette(
-            p.etat,
-            fond: const Color(0xFFE6EBF2),
-            couleur: LiveColors.bleu,
-          ),
+          Etiquette(p.etat, fond: LiveColors.voile, couleur: LiveColors.bleu),
           if (p.negociable)
-            const Etiquette(
-              'Prix négociable',
-              fond: Color(0xFFFFF1E0),
+            Etiquette(
+              context.t.marketPrixNegociable,
+              fond: LiveColors.teinteOrange,
               couleur: LiveColors.cuivre,
             ),
           PastilleReglement(p.reglement),
           Text(
-            '${p.quartier} · ${compact(p.vues)} vues',
+            context.t.marketQuartierVues(p.quartier, compact(p.vues)),
             style: const TextStyle(color: LiveColors.gris, fontSize: 13),
           ),
         ],
@@ -92,7 +88,7 @@ class EcranProduit extends StatelessWidget {
           children: [
             for (final e in p.details.entries)
               LigneMontant(e.key, 0, brut: e.value),
-            LigneMontant('Catégorie', 0, brut: p.categorie),
+            LigneMontant(context.t.marketCategorie, 0, brut: p.categorie),
           ],
         ),
       ),
@@ -104,35 +100,35 @@ class EcranProduit extends StatelessWidget {
             prix: p.prix,
             bas: bas,
             haut: haut,
-            base: 'Ventes récentes de « ${p.categorie} » comparables',
+            base: context.t.marketVentesComparables(p.categorie),
           );
         },
       ),
       const SizedBox(height: 14),
       _ReglementProduit(produit: p),
       const SizedBox(height: 14),
-      const Text(
-        'Remise',
+      Text(
+        context.t.marketRemise,
         style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
       ),
       LigneMenu(
         icone: Icons.handshake_outlined,
-        titre: 'En main propre à ${p.quartier}',
+        titre: context.t.marketEnMainPropreA(p.quartier),
         detail: surPlace
-            ? 'Dans un lieu public proposé par Live'
-            : 'Vous vérifiez, puis vous montrez votre QR',
-        valeur: 'Gratuit',
+            ? context.t.marketDansUnLieuPublicPropose
+            : context.t.marketVousVerifiezPuisVousMontrez,
+        valeur: context.t.marketGratuit,
       ),
       if (p.livraison > 0 && !surPlace)
         LigneMenu(
           icone: Icons.local_shipping_outlined,
-          titre: 'Livraison à Brazzaville',
-          detail: 'Par le vendeur, sous 24 à 48 h',
+          titre: context.t.marketLivraisonABrazzaville,
+          detail: context.t.marketParLeVendeurSous24,
           valeur: fcfa(p.livraison),
         ),
       const SizedBox(height: 8),
-      const Text(
-        'Description',
+      Text(
+        context.t.marketDescription,
         style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
       ),
       const SizedBox(height: 4),
@@ -143,15 +139,15 @@ class EcranProduit extends StatelessWidget {
       const SizedBox(height: 12),
       BandeauProtection(
         surPlace
-            ? 'Payez au rendez-vous par MoMo ou Airtel via Live : jamais d’avance.'
-            : 'Remboursé si vous ne recevez pas le produit.',
+            ? context.t.marketPayezAuRendezVousPar
+            : context.t.marketRembourseSiVousNeRecevez,
       ),
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: () => signaler(context, 'cette annonce'),
+          onPressed: () => signaler(context, context.t.marketCetteAnnonce),
           icon: const Icon(Icons.flag_outlined, size: 18),
-          label: const Text('Signaler l’annonce'),
+          label: Text(context.t.marketSignalerLAnnonce),
         ),
       ),
     ];
@@ -165,7 +161,7 @@ class EcranProduit extends StatelessWidget {
     final carrousel = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const EnTeteSection('Vous aimerez aussi'),
+        EnTeteSection(context.t.marketVousAimerezAussi),
         Carrousel(
           largeur: 160,
           hauteur: 250,
@@ -180,7 +176,7 @@ class EcranProduit extends StatelessWidget {
       child: Row(
         children: [
           IconButton.outlined(
-            tooltip: 'Écrire au vendeur',
+            tooltip: context.t.marketEcrireAuVendeur,
             style: IconButton.styleFrom(minimumSize: const Size(48, 48)),
             onPressed: () => context.push('/conversation'),
             icon: const Icon(Icons.chat_bubble_outline_rounded),
@@ -190,7 +186,7 @@ class EcranProduit extends StatelessWidget {
             Expanded(
               child: OutlinedButton(
                 onPressed: () => ouvrirOffre(context, p),
-                child: const Text('Négocier'),
+                child: Text(context.t.marketNegocier),
               ),
             ),
             const SizedBox(width: 8),
@@ -200,7 +196,12 @@ class EcranProduit extends StatelessWidget {
               onPressed: () => p.details.containsKey('Tailles')
                   ? ouvrirVariantes(context, p)
                   : context.push('/commande/${p.id}'),
-              child: Text(surPlace ? 'Rendez-vous' : 'Acheter'),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  surPlace ? context.t.marketVoirEtPayer : context.t.acheter,
+                ),
+              ),
             ),
           ),
         ],
@@ -211,7 +212,7 @@ class EcranProduit extends StatelessWidget {
         appBar: AppBar(
           actions: [
             IconButton(
-              tooltip: 'Partager',
+              tooltip: context.t.partager,
               onPressed: () => partager(context, p.titre),
               icon: const Icon(Icons.ios_share_rounded),
             ),
@@ -248,19 +249,19 @@ class EcranProduit extends StatelessWidget {
             expandedHeight: 340,
             pinned: true,
             stretch: true,
-            backgroundColor: Colors.white,
+            backgroundColor: LiveColors.surface,
             leading: Padding(
               padding: const EdgeInsets.all(8),
               child: BoutonVerre(
                 icone: Icons.arrow_back_rounded,
-                libelle: 'Retour',
+                libelle: context.t.retour,
                 onTap: () => context.pop(),
               ),
             ),
             actions: [
               BoutonVerre(
                 icone: Icons.ios_share_rounded,
-                libelle: 'Partager',
+                libelle: context.t.partager,
                 onTap: () => partager(context, p.titre),
               ),
               const SizedBox(width: 8),
@@ -339,7 +340,11 @@ class _CarteVendeur extends ConsumerWidget {
                   ),
                   BadgeVerifie(v.badge),
                   Text(
-                    '${note(v.note)} · ${v.ventes} ventes · répond en ${v.reponse}',
+                    context.t.marketNoteVentesReponse(
+                      note(v.note),
+                      v.ventes,
+                      v.reponse,
+                    ),
                     style: const TextStyle(
                       color: LiveColors.gris,
                       fontSize: 12.5,
@@ -352,7 +357,7 @@ class _CarteVendeur extends ConsumerWidget {
           TextButton(
             onPressed: () =>
                 ref.read(liveProvider.notifier).basculerSuivi(v.id),
-            child: Text(suivi ? 'Abonné' : 'Suivre'),
+            child: Text(suivi ? context.t.abonne : context.t.marketSuivre),
           ),
         ],
       ),
@@ -371,32 +376,29 @@ class _ReglementProduit extends StatelessWidget {
     final p = produit;
     if (p.reglement == Reglement.surPlace) {
       return BlocReglement(
-        titre: 'Voir avant de payer',
+        titre: context.t.marketVoirAvantDePayer,
         lignes: [
           LigneReglement(
-            'Prix',
+            context.t.marketPrix,
             Reglement.surPlace,
             montant: p.prix,
-            detail:
-                'Rien à payer maintenant. Au rendez-vous, vous vérifiez '
-                'l’objet puis vous validez la demande MoMo ou Airtel envoyée '
-                'par Live.',
+            detail: context.t.marketRienAPayerMaintenantAu,
           ),
         ],
-        note: 'Ne versez jamais d’avance pour un objet que vous n’avez pas vu.',
+        note: context.t.marketNeVersezJamaisDAvance,
       );
     }
     return BlocReglement(
       lignes: [
         LigneReglement(
-          'Prix',
+          context.t.marketPrix,
           Reglement.dansLive,
           montant: p.prix,
-          detail: 'Bloqué par Live jusqu’à la remise',
+          detail: context.t.marketBloqueParLiveJusquA,
         ),
         if (p.livraison > 0)
           LigneReglement(
-            'Livraison (si vous la choisissez)',
+            context.t.marketLivraisonSiVousLaChoisissez,
             Reglement.dansLive,
             montant: p.livraison,
           ),
@@ -416,19 +418,23 @@ class _TuilesProduit extends StatelessWidget {
     final p = produit;
     final surPlace = p.reglement == Reglement.surPlace;
     final tuiles = [
-      (Icons.new_releases_outlined, p.etat, 'État'),
+      (Icons.new_releases_outlined, p.etat, context.t.marketEtat),
       (
         Icons.local_shipping_outlined,
         p.livraison > 0 && !surPlace
-            ? 'Main propre ou livraison'
-            : 'Main propre',
-        'Remise',
+            ? context.t.marketMainPropreOuLivraison
+            : context.t.marketMainPropre,
+        context.t.marketRemise,
       ),
-      (p.reglement.icone, p.reglement.court, 'Paiement'),
+      (
+        p.reglement.icone,
+        p.reglement.courtDe(context.t),
+        context.t.marketPaiement,
+      ),
       (
         Icons.verified_user_outlined,
-        surPlace ? 'Pas d’avance' : 'Remboursé',
-        'Protection',
+        surPlace ? context.t.marketPasDAvance : context.t.marketRembourse,
+        context.t.marketProtection,
       ),
     ];
     return GrilleAdaptative(

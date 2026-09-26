@@ -80,4 +80,20 @@ void main() {
     expect(find.text('Rechercher une conversation'), findsOneWidget);
     expect(find.byType(TextField), findsNWidgets(2));
   });
+
+  testWidgets('même page, autre paramètre : l’onglet demandé s’affiche', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(400, 860);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    sansAnimations(tester);
+    routeur.go('/transfert');
+    await tester.pumpWidget(const ProviderScope(child: LiveApp()));
+    await tester.pumpAndSettle();
+    expect(find.text('Votre numéro de réception'), findsNothing);
+    routeur.go('/transfert?sens=recevoir');
+    await tester.pumpAndSettle();
+    expect(find.text('Votre numéro de réception'), findsOneWidget);
+  });
 }

@@ -39,14 +39,14 @@ class _EcranImmoState extends State<EcranImmo> {
     return Scaffold(
       appBar: EnTeteRecherche(
         titleSpacing: marge,
-        indice: 'Quartier, type de logement…',
+        indice: context.t.immoQuartierTypeDeLogement,
         onSubmitted: (q) => context.push('/recherche', extra: q),
-        titre: const Column(
+        titre: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Immo'),
             TexteVille(
-              '{ville} · logements vérifiés',
+              context.t.immoVilleVerifies('{ville}'),
               style: TextStyle(
                 fontSize: 12.5,
                 color: LiveColors.gris,
@@ -57,7 +57,7 @@ class _EcranImmoState extends State<EcranImmo> {
         ),
         actions: [
           IconButton(
-            tooltip: 'Voir sur la carte',
+            tooltip: context.t.immoVoirSurLaCarte,
             onPressed: () => context.push('/carte'),
             icon: const Icon(Icons.map_outlined),
           ),
@@ -75,9 +75,15 @@ class _EcranImmoState extends State<EcranImmo> {
                 Expanded(
                   child: SegmentedButton<bool>(
                     showSelectedIcon: false,
-                    segments: const [
-                      ButtonSegment(value: false, label: Text('Louer')),
-                      ButtonSegment(value: true, label: Text('Acheter')),
+                    segments: [
+                      ButtonSegment(
+                        value: false,
+                        label: Text(context.t.immoLouer),
+                      ),
+                      ButtonSegment(
+                        value: true,
+                        label: Text(context.t.immoAcheter),
+                      ),
                     ],
                     selected: {_vente},
                     onSelectionChanged: (s) => setState(() {
@@ -88,7 +94,7 @@ class _EcranImmoState extends State<EcranImmo> {
                 ),
                 const SizedBox(width: 10),
                 IconButton.outlined(
-                  tooltip: 'Filtres',
+                  tooltip: context.t.immoFiltres,
                   onPressed: _filtres,
                   icon: Badge(
                     isLabelVisible: _budget != null,
@@ -108,14 +114,14 @@ class _EcranImmoState extends State<EcranImmo> {
               children: [
                 PuceIcone(
                   icone: Icons.grid_view_rounded,
-                  texte: 'Tout',
+                  texte: context.t.immoTout,
                   active: _type == null,
                   onTap: () => setState(() => _type = null),
                 ),
                 for (final t in TypeBien.values)
                   PuceIcone(
                     icone: t.icone,
-                    texte: t.libelle.split(' ').first,
+                    texte: t.libelleDe(context.t).split(' ').first,
                     active: _type == t,
                     onTap: () => setState(() => _type = _type == t ? null : t),
                   ),
@@ -144,7 +150,7 @@ class _EcranImmoState extends State<EcranImmo> {
           if (!filtre) ...[
             Padding(
               padding: EdgeInsets.symmetric(horizontal: marge),
-              child: const EnTeteSection('À la une'),
+              child: EnTeteSection(context.t.immoALaUne),
             ),
             Carrousel(
               largeur: context.grandEcran ? 300 : 250,
@@ -157,14 +163,14 @@ class _EcranImmoState extends State<EcranImmo> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: marge),
               child: EnTeteSection(
-                'Agences vérifiées',
+                context.t.immoAgencesVerifiees,
                 onTap: () => context.push('/boutique/palmiers'),
               ),
             ),
             _Agences(marge: marge),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: marge),
-              child: const EnTeteSection('Visites en vidéo'),
+              child: EnTeteSection(context.t.immoVisitesEnVideo),
             ),
             Carrousel(
               largeur: 132,
@@ -175,7 +181,7 @@ class _EcranImmoState extends State<EcranImmo> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: marge),
               child: EnTeteSection(
-                'Séjours meublés à la nuit',
+                context.t.immoSejoursMeublesALa,
                 onTap: () => context.push('/sejours'),
               ),
             ),
@@ -189,7 +195,7 @@ class _EcranImmoState extends State<EcranImmo> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: marge),
                 child: EnTeteSection(
-                  'Visites en direct',
+                  context.t.immoVisitesEnDirect,
                   onTap: () => context.push('/directs'),
                 ),
               ),
@@ -208,11 +214,11 @@ class _EcranImmoState extends State<EcranImmo> {
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
               filtre
-                  ? '${liste.length} résultat${liste.length > 1 ? 's' : ''}'
+                  ? context.t.immoNResultats(liste.length)
                   : _vente
-                  ? 'Biens à vendre'
-                  : 'Tous les logements',
-              action: filtre ? 'Effacer' : null,
+                  ? context.t.immoBiensAVendre
+                  : context.t.immoTousLesLogements,
+              action: filtre ? context.t.immoEffacer : null,
               onTap: filtre
                   ? () => setState(() {
                       _type = null;
@@ -227,10 +233,8 @@ class _EcranImmoState extends State<EcranImmo> {
             child: liste.isEmpty
                 ? EtatVide(
                     icone: Icons.search_off_rounded,
-                    texte:
-                        'Aucun bien ne correspond. Créez une alerte : '
-                        'nous vous prévenons dès qu’un bien arrive.',
-                    action: 'Créer une alerte',
+                    texte: context.t.immoAucunBienNeCorrespond,
+                    action: context.t.immoCreerUneAlerte,
                     onTap: () => context.push('/alertes'),
                   )
                 : GrilleAdaptative(
@@ -289,7 +293,10 @@ class _Agences extends StatelessWidget {
                           style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          '${note(a.note)} · ${biensDe(a).length} biens',
+                          context.t.immoNoteBiens(
+                            note(a.note),
+                            biensDe(a).length,
+                          ),
                           style: const TextStyle(
                             color: LiveColors.gris,
                             fontSize: 12.5,
@@ -317,7 +324,7 @@ class _VisiteVideo extends StatelessWidget {
     final b = bien;
     return Semantics(
       button: true,
-      label: 'Visite vidéo ${b.titre}',
+      label: context.t.immoVisiteVideoDe(b.titre),
       child: Pressable(
         onTap: () => context.push('/bien/${b.id}'),
         child: Stack(
@@ -355,7 +362,7 @@ class _VisiteVideo extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${b.type.libelle} · ${b.quartier}',
+                    '${b.type.libelleDe(context.t)} · ${b.quartier}',
                     maxLines: 2,
                     style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),
@@ -385,12 +392,12 @@ class _AppelPublier extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Vous avez un bien à louer ?',
+                  context.t.immoVousAvezUnBien,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
@@ -399,9 +406,8 @@ class _AppelPublier extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  'Publication gratuite. Les frais de visite vous sont versés '
-                  'après chaque visite.',
-                  style: TextStyle(color: Color(0xFFD7DCE4), fontSize: 13),
+                  context.t.immoPublicationGratuiteLesFrais,
+                  style: TextStyle(color: LiveColors.brumeClaire, fontSize: 13),
                 ),
               ],
             ),
@@ -409,12 +415,12 @@ class _AppelPublier extends StatelessWidget {
           const SizedBox(width: 12),
           FilledButton(
             style: FilledButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: LiveColors.nuit,
+              backgroundColor: LiveColors.surface,
+              foregroundColor: LiveColors.encre,
               minimumSize: const Size(0, 44),
             ),
             onPressed: () => context.push('/publier/bien'),
-            child: const Text('Publier'),
+            child: Text(context.t.immoPublier),
           ),
         ],
       ),

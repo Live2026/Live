@@ -10,8 +10,11 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
+import 'appels.dart';
 
 part 'conversation.dart';
+part 'conversation_actions.dart';
 part 'bulles.dart';
 part 'groupe.dart';
 part 'messages_plus.dart';
@@ -54,17 +57,22 @@ class _EcranMessagesState extends State<EcranMessages> {
     final deuxPanneaux = context.taille == Taille.etendue;
     final listeConversations = Scaffold(
       appBar: EnTeteRecherche(
-        titre: const Text('Messages'),
-        indice: 'Rechercher une conversation',
+        titre: Text(context.t.messagesTitre),
+        indice: context.t.messagesRechercherUneConversation,
         onChanged: (v) => setState(() => _q = v),
         actions: [
           IconButton(
-            tooltip: 'Nouveau message',
+            tooltip: context.t.appelsTitre,
+            onPressed: () => context.push('/appels'),
+            icon: const Icon(Icons.call_outlined),
+          ),
+          IconButton(
+            tooltip: context.t.messagesNouveauMessage,
             onPressed: () => _nouveauMessage(context),
             icon: const Icon(Icons.edit_square),
           ),
           IconButton(
-            tooltip: 'Réglages des messages',
+            tooltip: context.t.messagesReglagesDesMessages,
             onPressed: () => context.push('/messages/parametres'),
             icon: const Icon(Icons.settings_outlined),
           ),
@@ -82,7 +90,12 @@ class _EcranMessagesState extends State<EcranMessages> {
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ChoiceChip(
-                      label: Text(f),
+                      label: Text(switch (f) {
+                        'Non lus' => context.t.messagesNonLus,
+                        'Groupes' => context.t.messagesGroupes,
+                        'Canaux' => context.t.messagesCanaux,
+                        _ => context.t.messagesTous,
+                      }),
                       selected: _filtre == f,
                       onSelected: (_) => setState(() => _filtre = f),
                     ),
@@ -93,14 +106,14 @@ class _EcranMessagesState extends State<EcranMessages> {
           if (_filtre == 'Tous') ...[
             _RangeeDossier(
               icone: Icons.mark_email_unread_outlined,
-              titre: 'Demandes de messages',
+              titre: context.t.messagesDemandesDeMessages,
               nombre: demandesMessages.length,
               route: '/messages/demandes',
               marge: marge,
             ),
             _RangeeDossier(
               icone: Icons.archive_outlined,
-              titre: 'Archivées',
+              titre: context.t.messagesArchivees,
               nombre: conversationsArchivees.length,
               route: '/messages/archives',
               marge: marge,
@@ -122,7 +135,7 @@ class _EcranMessagesState extends State<EcranMessages> {
             padding: const EdgeInsets.all(24),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Icon(
                   Icons.lock_outline_rounded,
                   size: 14,
@@ -131,7 +144,7 @@ class _EcranMessagesState extends State<EcranMessages> {
                 SizedBox(width: 6),
                 Flexible(
                   child: Text(
-                    'Vos messages sont chiffrés. Live ne vous demandera jamais votre code MoMo.',
+                    context.t.messagesVosMessagesSontChiffres,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: LiveColors.gris, fontSize: 12),
                   ),
@@ -191,7 +204,7 @@ class _LigneConversation extends StatelessWidget {
     final deMoi = c.dernier.startsWith('Vous :');
     final groupe = c.type != TypeConversation.privee;
     return Material(
-      color: selectionnee ? const Color(0xFFE6EBF2) : Colors.transparent,
+      color: selectionnee ? LiveColors.voile : Colors.transparent,
       child: InkWell(
         onTap:
             onOuvrir ??
@@ -265,7 +278,7 @@ class _LigneConversation extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              color: nonLu ? LiveColors.nuit : LiveColors.gris,
+                              color: nonLu ? LiveColors.encre : LiveColors.gris,
                               fontWeight: nonLu
                                   ? FontWeight.w600
                                   : FontWeight.w400,

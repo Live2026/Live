@@ -172,7 +172,7 @@ class _MaPositionState extends State<_MaPosition>
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Ma position',
+      label: context.t.maPosition,
       child: SizedBox(
         width: 44,
         height: 44,
@@ -196,7 +196,7 @@ class _MaPositionState extends State<_MaPosition>
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: const Color(0xFF1A73E8),
-                  border: Border.all(color: Colors.white, width: 3),
+                  border: Border.all(color: LiveColors.surface, width: 3),
                   boxShadow: const [
                     BoxShadow(color: Color(0x55000000), blurRadius: 4),
                   ],

@@ -39,7 +39,7 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
     final etat = ref.watch(liveProvider);
     if (_etape >= 3) return _resultat(context);
     return Scaffold(
-      appBar: AppBar(title: Text('Vérifier mon identité · ${_etape + 1}/3')),
+      appBar: AppBar(title: Text(context.t.compteVerifierEtape(_etape + 1))),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -51,15 +51,18 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
           const SizedBox(height: 20),
           ...switch (_etape) {
             0 => [
-              const _Titre(
-                'Votre pièce d’identité',
-                'CNI congolaise ou passeport, en cours de validité.',
+              _Titre(
+                context.t.compteVotrePieceDIdentite,
+                context.t.compteCniCongolaiseOuPasseport,
               ),
               SegmentedButton<String>(
                 showSelectedIcon: false,
-                segments: const [
-                  ButtonSegment(value: 'CNI', label: Text('CNI')),
-                  ButtonSegment(value: 'Passeport', label: Text('Passeport')),
+                segments: [
+                  ButtonSegment(value: 'CNI', label: Text(context.t.compteCni)),
+                  ButtonSegment(
+                    value: 'Passeport',
+                    label: Text(context.t.comptePasseport),
+                  ),
                 ],
                 selected: {_piece},
                 onSelectionChanged: (s) => setState(() => _piece = s.first),
@@ -67,8 +70,8 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
               const SizedBox(height: 16),
               _Capture(
                 libelle: _piece == 'CNI'
-                    ? 'Photo du recto'
-                    : 'Page avec la photo',
+                    ? context.t.comptePhotoDuRecto
+                    : context.t.comptePageAvecLaPhoto,
                 faite: _recto,
                 icone: Icons.badge_outlined,
                 onTap: () => setState(() => _recto = true),
@@ -76,7 +79,7 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
               if (_piece == 'CNI') ...[
                 const SizedBox(height: 10),
                 _Capture(
-                  libelle: 'Photo du verso',
+                  libelle: context.t.comptePhotoDuVerso,
                   faite: _verso,
                   icone: Icons.flip_outlined,
                   onTap: () => setState(() => _verso = true),
@@ -84,9 +87,9 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
               ],
             ],
             1 => [
-              const _Titre(
-                'Un selfie',
-                'Pour vérifier que la pièce est bien la vôtre. Retirez lunettes et chapeau.',
+              _Titre(
+                context.t.compteUnSelfie,
+                context.t.comptePourVerifierQueLa,
               ),
               Center(
                 child: Pressable(
@@ -101,7 +104,7 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
                         Radius.elliptical(100, 125),
                       ),
                       border: Border.all(
-                        color: _selfie ? LiveColors.succes : Colors.white,
+                        color: _selfie ? LiveColors.succes : LiveColors.surface,
                         width: 4,
                       ),
                     ),
@@ -120,14 +123,18 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
                 child: TextButton.icon(
                   onPressed: () => setState(() => _selfie = true),
                   icon: const Icon(Icons.photo_camera_outlined),
-                  label: Text(_selfie ? 'Selfie pris' : 'Prendre le selfie'),
+                  label: Text(
+                    _selfie
+                        ? context.t.compteSelfiePris
+                        : context.t.comptePrendreLeSelfie,
+                  ),
                 ),
               ),
             ],
             _ => [
-              const _Titre(
-                'Votre compte Mobile Money',
-                'Le nom du titulaire doit être le même que sur votre pièce.',
+              _Titre(
+                context.t.compteVotreCompteMobileMoney,
+                context.t.compteLeNomDuTitulaire,
               ),
               Bloc(
                 child: Column(
@@ -136,12 +143,13 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
                       icone: Icons.phone_android,
                       titre:
                           '${etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money'} · ${etat.telephone}',
-                      detail:
-                          'Nom chez l’opérateur : MABIALA ${etat.prenom.toUpperCase()}',
+                      detail: context.t.compteNomOperateur(
+                        etat.prenom.toUpperCase(),
+                      ),
                     ),
-                    const LigneMenu(
+                    LigneMenu(
                       icone: Icons.badge_outlined,
-                      titre: 'Nom sur la pièce',
+                      titre: context.t.compteNomSurLaPiece,
                       detail: 'MABIALA GRÂCE',
                       couleur: LiveColors.succes,
                     ),
@@ -149,9 +157,7 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
                 ),
               ),
               const SizedBox(height: 12),
-              const BandeauProtection(
-                'Vos documents sont chiffrés et vus uniquement par l’équipe de vérification.',
-              ),
+              BandeauProtection(context.t.compteVosDocumentsSontChiffres),
             ],
           },
         ],
@@ -159,7 +165,11 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: _peutContinuer ? _suivant : null,
-          child: Text(_etape == 2 ? 'Envoyer pour vérification' : 'Continuer'),
+          child: Text(
+            _etape == 2
+                ? context.t.compteEnvoyerPourVerification
+                : context.t.continuer,
+          ),
         ),
       ),
     );
@@ -170,56 +180,62 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
     final debloques = pouvoirs.where((p) => p.condition == Condition.identite);
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              const Spacer(),
-              if (valide)
-                const CocheAnimee(taille: 96)
-              else
-                const SizedBox(
-                  width: 72,
-                  height: 72,
-                  child: CircularProgressIndicator(strokeWidth: 5),
+        child: Etroit(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                const Spacer(),
+                if (valide)
+                  const CocheAnimee(taille: 96)
+                else
+                  const SizedBox(
+                    width: 72,
+                    height: 72,
+                    child: CircularProgressIndicator(strokeWidth: 5),
+                  ),
+                const SizedBox(height: 16),
+                Text(
+                  valide
+                      ? context.t.compteIdentiteVerifiee
+                      : context.t.compteVerificationEnCours,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
-              const SizedBox(height: 16),
-              Text(
-                valide ? 'Identité vérifiée' : 'Vérification en cours…',
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800,
+                const SizedBox(height: 8),
+                Text(
+                  valide
+                      ? context.t.compteNouveauxSuperPouvoirsDebloques
+                      : context.t.compteEnGeneralMoinsDe,
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                valide ? 'Nouveaux super-pouvoirs débloqués :' : 'En général moins de 10 minutes. Vous pouvez continuer à utiliser Live.',
-                textAlign: TextAlign.center,
-              ),
-              if (valide) ...[
-                const SizedBox(height: 12),
-                for (final p in debloques)
-                  Apparition(
-                    child: ListTile(
-                      leading: Icon(p.icone, color: LiveColors.bleu),
-                      title: Text(
-                        p.titre,
-                        style: const TextStyle(fontWeight: FontWeight.w700),
+                if (valide) ...[
+                  const SizedBox(height: 12),
+                  for (final p in debloques)
+                    Apparition(
+                      child: ListTile(
+                        leading: Icon(p.icone, color: LiveColors.bleu),
+                        title: Text(
+                          p.titre,
+                          style: const TextStyle(fontWeight: FontWeight.w700),
+                        ),
+                        subtitle: Text(p.gain),
                       ),
-                      subtitle: Text(p.gain),
+                    ),
+                ],
+                const Spacer(),
+                if (valide)
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: () => context.pop(),
+                      child: Text(context.t.continuer),
                     ),
                   ),
               ],
-              const Spacer(),
-              if (valide)
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    onPressed: () => context.pop(),
-                    child: const Text('Continuer'),
-                  ),
-                ),
-            ],
+            ),
           ),
         ),
       ),
@@ -276,10 +292,10 @@ class _Capture extends StatelessWidget {
           duration: const Duration(milliseconds: 250),
           height: 120,
           decoration: BoxDecoration(
-            color: faite ? const Color(0xFFE7F4EC) : const Color(0xFFF3F5F8),
+            color: faite ? LiveColors.teinteVerte : LiveColors.champ,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: faite ? LiveColors.succes : const Color(0xFFC3CAD4),
+              color: faite ? LiveColors.succes : LiveColors.bord,
             ),
           ),
           child: Column(
@@ -292,7 +308,7 @@ class _Capture extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                faite ? '$libelle : prise' : libelle,
+                faite ? context.t.comptePrise(libelle) : libelle,
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
             ],

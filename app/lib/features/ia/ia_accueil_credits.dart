@@ -8,7 +8,7 @@ class EcranIa extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final etat = ref.watch(liveProvider);
     final familles = <String>[];
-    for (final s in servicesIa) {
+    for (final s in servicesIa(context.t)) {
       if (!familles.contains(s.famille)) familles.add(s.famille);
     }
     return Scaffold(
@@ -34,7 +34,7 @@ class EcranIa extends ConsumerWidget {
                 ),
                 child: InkWell(
                   onTap: () => context.push('/ia/assistant'),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(18),
                     child: Row(
                       children: [
@@ -49,7 +49,7 @@ class EcranIa extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Assistant Live',
+                                context.t.iaAssistantLive,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -57,9 +57,7 @@ class EcranIa extends ConsumerWidget {
                                 ),
                               ),
                               Text(
-                                'Il cherche, réserve et paie pour vous. À '
-                                'l’écrit ou à la voix : français, lingala, '
-                                'kituba. Gratuit.',
+                                context.t.iaIlChercheReservePaie,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],
@@ -102,8 +100,8 @@ class EcranIa extends ConsumerWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Mes Crédits Live',
+                      Text(
+                        context.t.iaMesCreditsLive,
                         style: TextStyle(color: Color(0xCCFFFFFF)),
                       ),
                       const SizedBox(height: 4),
@@ -114,8 +112,8 @@ class EcranIa extends ConsumerWidget {
                         couleurIcone: LiveColors.orange,
                       ),
                       const SizedBox(height: 2),
-                      const Text(
-                        '1 crédit = 10 FCFA · valables 12 mois',
+                      Text(
+                        context.t.iaN1Credit10Fcfa,
                         style: TextStyle(
                           color: Color(0x99FFFFFF),
                           fontSize: 12,
@@ -126,12 +124,12 @@ class EcranIa extends ConsumerWidget {
                   FilledButton.icon(
                     style: FilledButton.styleFrom(
                       minimumSize: const Size(0, 44),
-                      backgroundColor: Colors.white,
+                      backgroundColor: LiveColors.surface,
                       foregroundColor: LiveColors.bleu,
                     ),
                     onPressed: () => context.push('/ia/credits'),
                     icon: const Icon(Icons.add, size: 20),
-                    label: const Text('Acheter des crédits'),
+                    label: Text(context.t.iaAcheterDesCredits),
                   ),
                 ],
               ),
@@ -153,7 +151,9 @@ class EcranIa extends ConsumerWidget {
               largeurMax: 380,
               hauteur: 84,
               enfants: [
-                for (final s in servicesIa.where((s) => s.famille == f))
+                for (final s in servicesIa(
+                  context.t,
+                ).where((s) => s.famille == f))
                   _CarteService(service: s),
               ],
             ),
@@ -162,7 +162,7 @@ class EcranIa extends ConsumerWidget {
           Card(
             child: ListTile(
               leading: const Icon(Icons.folder_open),
-              title: const Text('Mes documents'),
+              title: Text(context.t.iaMesDocuments),
               trailing: Text('${etat.documents.length}'),
               onTap: () => context.push('/ia/documents'),
             ),
@@ -190,9 +190,9 @@ class _CarteService extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  s.famille == 'Bientôt'
-                      ? '${s.titre} : disponible prochainement.'
-                      : '${s.titre} : non inclus dans ce prototype.',
+                  s.famille == context.t.iaBientot
+                      ? context.t.iaBientotDispo(s.titre)
+                      : context.t.iaNonInclus(s.titre),
                 ),
               ),
             );
@@ -262,20 +262,22 @@ class _EcranCreditsState extends ConsumerState<EcranCredits> {
               PaiementEnCours(
                 type: TypePaiement.credits,
                 montant: _pack.prix,
-                libelle: '${_pack.credits} Crédits Live',
+                libelle: context.t.iaNCreditsLive(_pack.credits),
                 beneficiaire: 'Live',
                 cibleId: _pack.id,
               ),
             );
         context.push('/payer');
       },
-      child: Text('Payer ${fcfa(_pack.prix)}'),
+      child: Text(context.t.iaPayerMontant(fcfa(_pack.prix))),
     );
     return Scaffold(
-      appBar: AppBar(title: const Text('Acheter des crédits')),
+      appBar: AppBar(title: Text(context.t.iaAcheterDesCredits)),
       body: DeuxColonnes(
         principale: [
-          Row(children: [const Text('Votre solde : '), Credits(etat.credits)]),
+          Row(
+            children: [Text(context.t.iaVotreSoldeDeux), Credits(etat.credits)],
+          ),
           const SizedBox(height: 12),
           GrilleAdaptative(
             largeurMax: 320,
@@ -290,25 +292,23 @@ class _EcranCreditsState extends ConsumerState<EcranCredits> {
           ),
         ],
         secondaire: [
-          const Text('Exemples', style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(
+            context.t.iaExemples,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 6),
-          const Text('1 CV = 20 crédits · 1 lettre = 10 · 1 exercice = 5'),
+          Text(context.t.iaN1Cv20Credits),
           const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(
-                  'Offrir des crédits : non inclus dans ce prototype.',
-                ),
-              ),
+              SnackBar(content: Text(context.t.iaOffrirDesCreditsNon)),
             ),
             icon: const Icon(Icons.card_giftcard),
-            label: const Text('Offrir des crédits à un proche'),
+            label: Text(context.t.iaOffrirDesCreditsA),
           ),
           const SizedBox(height: 12),
-          const Text(
-            'Crédits valables 12 mois, utilisables uniquement pour Live IA. '
-            'Non remboursables en argent.',
+          Text(
+            context.t.iaCreditsValables12Mois,
             style: TextStyle(color: LiveColors.gris),
           ),
           if (context.grandEcran) ...[const SizedBox(height: 16), bouton],
@@ -337,7 +337,7 @@ class _CartePack extends StatelessWidget {
     return Semantics(
       button: true,
       selected: selectionne,
-      label: '${pack.credits} crédits pour ${fcfa(pack.prix)}',
+      label: context.t.iaCreditsPour(pack.credits, fcfa(pack.prix)),
       excludeSemantics: true,
       child: Pressable(
         onTap: onTap,
@@ -346,7 +346,7 @@ class _CartePack extends StatelessWidget {
           curve: courbeDouce,
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: selectionne ? const Color(0xFFE6EBF2) : Colors.white,
+            color: selectionne ? LiveColors.voile : LiveColors.surface,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: selectionne ? LiveColors.bleu : LiveColors.brume,
@@ -388,7 +388,9 @@ class _CartePack extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
-                  pack.bonus == null ? 'Pack de base' : 'Bonus ${pack.bonus}',
+                  pack.bonus == null
+                      ? context.t.iaPackDeBase
+                      : context.t.iaBonus('${pack.bonus}'),
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -423,14 +425,14 @@ Future<bool> confirmerPrix(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _Ligne('Ce service coûte', prix),
-          _Ligne('Votre solde', solde),
-          if (suffisant) _Ligne('Après', solde - prix),
+          _Ligne(context.t.iaCeServiceCoute, prix),
+          _Ligne(context.t.iaVotreSolde, solde),
+          if (suffisant) _Ligne(context.t.iaApres, solde - prix),
           const SizedBox(height: 12),
           Text(
             suffisant
-                ? 'Une révision gratuite incluse. Recrédité si la génération échoue.'
-                : 'Solde insuffisant : il vous manque ${prix - solde} crédits.',
+                ? context.t.iaUneRevisionGratuiteIncluse
+                : context.t.iaSoldeInsuffisant(prix - solde),
             style: TextStyle(
               color: suffisant ? LiveColors.gris : LiveColors.erreur,
             ),
@@ -440,7 +442,7 @@ Future<bool> confirmerPrix(
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx, false),
-          child: const Text('Annuler'),
+          child: Text(context.t.annuler),
         ),
         FilledButton(
           style: FilledButton.styleFrom(minimumSize: const Size(140, 44)),
@@ -448,7 +450,9 @@ Future<bool> confirmerPrix(
             Navigator.pop(ctx, suffisant);
             if (!suffisant) context.push('/ia/credits');
           },
-          child: Text(suffisant ? 'Générer' : 'Acheter des crédits'),
+          child: Text(
+            suffisant ? context.t.iaGenerer : context.t.iaAcheterDesCredits,
+          ),
         ),
       ],
     ),
@@ -469,7 +473,7 @@ class _Ligne extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(libelle)),
-          Credits(n, couleur: Colors.black87),
+          Credits(n, couleur: LiveColors.encre),
         ],
       ),
     );

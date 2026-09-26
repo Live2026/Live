@@ -9,6 +9,7 @@ import '../data/store.dart';
 import 'animations.dart';
 import 'composants.dart';
 import 'medias.dart';
+import '../l10n/textes.dart';
 
 /// Cartes d'annonces. Règle : dans une même catégorie, toutes les cartes ont
 /// exactement la même taille (image au même format, texte dans des zones de
@@ -55,7 +56,7 @@ class BoutonFavori extends ConsumerWidget {
     return Semantics(
       button: true,
       selected: actif,
-      label: actif ? 'Retirer des favoris' : 'Enregistrer',
+      label: actif ? context.t.retirerDesFavoris : context.t.enregistrer,
       excludeSemantics: true,
       child: Pressable(
         echelle: 0.8,
@@ -115,20 +116,20 @@ class CarteProduit extends StatelessWidget {
                   ),
                   Positioned(right: 6, top: 6, child: BoutonFavori(id: p.id)),
                   if (p.etat == 'Neuf')
-                    const Positioned(
+                    Positioned(
                       left: 8,
                       bottom: 8,
-                      child: Etiquette('Neuf'),
+                      child: Etiquette(context.t.etatNeuf),
                     )
                   else if (p.reglement == Reglement.surPlace)
-                    const Positioned(
+                    Positioned(
                       left: 8,
                       bottom: 8,
                       right: 8,
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Etiquette(
-                          'À voir · payé à la remise',
+                          context.t.aVoirPayeA,
                           icone: Icons.handshake_rounded,
                         ),
                       ),
@@ -201,8 +202,8 @@ class CarteBien extends StatelessWidget {
             const SizedBox(height: 4),
             _Zone(
               b.vente
-                  ? 'Vente · ${b.annonceur.nom}'
-                  : "Entrée ${fcfa(b.coutEntree)}",
+                  ? context.t.carteVenteAnnonceur(b.annonceur.nom)
+                  : context.t.carteEntree(fcfa(b.coutEntree)),
               lignes: 1,
               style: _meta.copyWith(color: LiveColors.bleu),
             ),
@@ -257,18 +258,18 @@ class PhotoBien extends StatelessWidget {
             runSpacing: 4,
             children: [
               Etiquette(
-                b.agence ? 'Agence vérifiée' : 'Vérifié',
+                b.agence ? context.t.agenceVerifiee : context.t.verifie,
                 icone: Icons.verified,
               ),
               if (b.nouveau)
-                const Etiquette(
-                  'Nouveau',
+                Etiquette(
+                  context.t.nouveau,
                   fond: LiveColors.orangeVif,
                   couleur: Colors.white,
                 ),
               if (b.sponsorise)
-                const Etiquette(
-                  'Sponsorisé',
+                Etiquette(
+                  context.t.sponsorise,
                   fond: Color(0xB3041936),
                   couleur: Colors.white,
                 ),
@@ -312,7 +313,9 @@ class PrixBien extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.w800, fontSize: taille),
           ),
           TextSpan(
-            text: bien.vente ? ' · à vendre' : ' /mois',
+            text: bien.vente
+                ? context.t.carteAVendre
+                : context.t.carteParMoisCourt,
             style: const TextStyle(color: LiveColors.gris, fontSize: 13),
           ),
         ],
@@ -335,8 +338,9 @@ class SpecsBien extends StatelessWidget {
       if (b.chambres > 0) (Icons.bed_outlined, '${b.chambres}'),
       if (b.douches > 0) (Icons.shower_outlined, '${b.douches}'),
       if (b.surface > 0) (Icons.square_foot_rounded, '${b.surface} m²'),
-      if (b.meuble) (Icons.chair_outlined, 'Meublé'),
-      if (b.parking && !b.meuble) (Icons.local_parking_rounded, 'Parking'),
+      if (b.meuble) (Icons.chair_outlined, context.t.meuble),
+      if (b.parking && !b.meuble)
+        (Icons.local_parking_rounded, context.t.parking),
     ];
     return SizedBox(
       height: 18,
@@ -378,9 +382,9 @@ class CartePro extends StatelessWidget {
           height: 92,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: LiveColors.surface,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE4E8EE)),
+            border: Border.all(color: LiveColors.filet),
           ),
           child: Row(
             children: [
@@ -424,7 +428,7 @@ class CartePro extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text('dès', style: _meta),
+                  Text(context.t.des, style: _meta),
                   Text(
                     fcfa(s.prixDepuis),
                     style: const TextStyle(fontWeight: FontWeight.w800),

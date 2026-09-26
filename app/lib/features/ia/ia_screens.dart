@@ -8,6 +8,7 @@ import '../../core/theme.dart';
 import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'ia_catalogue.dart';
 part 'ia_accueil_credits.dart';
@@ -16,3 +17,7 @@ part 'ia_exercice_documents.dart';
 part 'ia_business_plan.dart';
 part 'ia_tuteur.dart';
 part 'ia_assistant.dart';
+part 'ia_assistant_donnees.dart';
+part 'ia_assistant_elements.dart';
+part 'ia_assistant_saisie.dart';
+part 'ia_assistant_vocal.dart';

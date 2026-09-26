@@ -3,26 +3,22 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../core/adaptatif.dart';
 import '../../core/theme.dart';
+import '../../data/mock.dart';
 import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'bienvenue.dart';
 part 'code_sms.dart';
 part 'connexion_interets.dart';
-
-/// Pays de la zone CEMAC : indicatif, exemple de numéro, opérateurs.
-const _paysCemac = [
-  ('Congo', '+242', '06 123 45 67', 'MTN, Airtel'),
-  ('Gabon', '+241', '077 12 34 56', 'Airtel, Moov'),
-  ('Cameroun', '+237', '6 71 23 45 67', 'MTN, Orange'),
-  ('Tchad', '+235', '66 12 34 56', 'Airtel, Moov'),
-  ('Centrafrique', '+236', '72 12 34 56', 'Orange, Telecel'),
-  ('Guinée équatoriale', '+240', '222 123 456', 'Muni, GETESA'),
-];
+part 'connexion_qr.dart';
+part 'langue.dart';
 
 /// E-AUTH-02 — Numéro de téléphone : pays, numéro, opérateur détecté,
 /// consentements explicites.
@@ -39,113 +35,42 @@ class _EcranTelephoneState extends State<EcranTelephone> {
   var _confidentialite = false;
   var _pays = 0;
 
-  String get _operateur {
-    if (_pays != 0) return '';
-    final n = _numero.text.replaceAll(' ', '');
-    if (n.startsWith('06')) return 'MTN';
-    if (n.startsWith('05') || n.startsWith('04')) return 'Airtel';
-    return '';
-  }
-
-  Future<void> _choisirPays() async {
-    final choix = await choisir<int>(
-      context,
-      titre: 'Votre pays',
-      actuel: _pays,
-      options: [
-        for (final (i, (nom, indicatif, _, operateurs)) in _paysCemac.indexed)
-          (i, '$nom  $indicatif', operateurs),
-      ],
-    );
-    if (choix != null) setState(() => _pays = choix);
+  Future<void> _suivant(PaysTelephone pays, String operateur) async {
+    final numero = '${pays.indicatif} ${_numero.text}';
+    if (await confirmerNumero(
+          context,
+          numero,
+          alerte: alerteNumero(context, pays, _numero.text),
+        ) &&
+        mounted) {
+      context.push('/code', extra: (numero, operateur));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final (nom, indicatif, exemple, _) = _paysCemac[_pays];
-    final valide =
-        _numero.text.replaceAll(' ', '').length >= 8 &&
-        _cgu &&
-        _confidentialite;
-    final operateur = _operateur;
+    final pays = paysTelephone[_pays];
+    final valide = pays.complet(_numero.text) && _cgu && _confidentialite;
+    final operateur = pays.operateur(_numero.text) ?? pays.operateurs.first;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
-          const EnTeteDemarrage(
+          EnTeteDemarrage(
             etape: 0,
-            icone: Icons.phone_iphone_rounded,
-            couleurs: [LiveColors.ambre, LiveColors.orangeVif],
-            titre: 'Votre numéro de téléphone',
-            texte:
-                'Il sert à vous connecter et à recevoir vos paiements '
-                'Mobile Money. Il n’est jamais affiché sur votre profil.',
+            titre: context.t.demarrageSaisissezNumero,
+            texte: context.t.demarrageSaisissezNumeroTexte,
           ),
-          Row(
-            children: [
-              Material(
-                color: const Color(0xFFF3F5F8),
-                borderRadius: BorderRadius.circular(8),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(8),
-                  onTap: _choisirPays,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 15,
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          indicatif,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const Icon(Icons.expand_more_rounded, size: 20),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: TextField(
-                  controller: _numero,
-                  keyboardType: TextInputType.phone,
-                  style: const TextStyle(fontSize: 17, letterSpacing: 1),
-                  decoration: InputDecoration(
-                    hintText: exemple,
-                    helperText: nom,
-                  ),
-                  onChanged: (_) => setState(() {}),
-                ),
-              ),
-            ],
-          ),
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 250),
-            child: operateur.isEmpty
-                ? const SizedBox(height: 8)
-                : Padding(
-                    key: ValueKey(operateur),
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Etiquette(
-                        '$operateur Mobile Money détecté',
-                        icone: Icons.check_circle_rounded,
-                        fond: operateur == 'MTN'
-                            ? const Color(0xFFFFF4C2)
-                            : const Color(0xFFFDE2E2),
-                        couleur: operateur == 'MTN'
-                            ? const Color(0xFF7A5A00)
-                            : const Color(0xFFB91C1C),
-                      ),
-                    ),
-                  ),
+          const SizedBox(height: 8),
+          ChampTelephone(
+            controleur: _numero,
+            pays: _pays,
+            onPays: (i) => setState(() => _pays = i),
+            onChanged: () => setState(() {}),
+            onValider: () {
+              if (valide) _suivant(pays, operateur);
+            },
           ),
           const SizedBox(height: 14),
           CheckboxListTile(
@@ -153,29 +78,31 @@ class _EcranTelephoneState extends State<EcranTelephone> {
             onChanged: (v) => setState(() => _cgu = v ?? false),
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,
-            title: const Text("J'accepte les Conditions d'utilisation"),
+            title: Text(context.t.demarrageAccepteConditions),
+            secondary: TextButton(
+              style: TextButton.styleFrom(minimumSize: const Size(0, 44)),
+              onPressed: () => context.push('/legal/cgu'),
+              child: Text(context.t.demarrageLire),
+            ),
           ),
           CheckboxListTile(
             value: _confidentialite,
             onChanged: (v) => setState(() => _confidentialite = v ?? false),
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,
-            title: const Text("J'accepte la Politique de confidentialité"),
+            title: Text(context.t.demarrageAccepteConfidentialite),
+            secondary: TextButton(
+              style: TextButton.styleFrom(minimumSize: const Size(0, 44)),
+              onPressed: () => context.push('/legal/confidentialite'),
+              child: Text(context.t.demarrageLire),
+            ),
           ),
         ],
       ),
       bottomNavigationBar: BarreAction(
         child: FilledButton(
-          onPressed: valide
-              ? () => context.push(
-                  '/code',
-                  extra: (
-                    '$indicatif ${_numero.text}',
-                    operateur.isEmpty ? 'MTN' : operateur,
-                  ),
-                )
-              : null,
-          child: const Text('Recevoir le code'),
+          onPressed: valide ? () => _suivant(pays, operateur) : null,
+          child: Text(context.t.suivant),
         ),
       ),
     );
@@ -217,67 +144,35 @@ class _EcranProfilState extends State<EcranProfil> {
   Widget build(BuildContext context) {
     final nomComplet = '${_prenom.text.trim()} ${_nom.text.trim()}'.trim();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
-          const EnTeteDemarrage(
+          EnTeteDemarrage(
             etape: 2,
-            icone: Icons.badge_rounded,
-            couleurs: [Color(0xFFA78BFA), Color(0xFF6D28D9)],
-            titre: 'Faisons connaissance',
-            texte:
-                'Votre prénom s’affiche sur vos annonces et dans vos '
-                'messages. Le reste peut attendre.',
+            titre: context.t.demarrageInfosProfil,
+            texte: context.t.demarrageInfosProfilTexte,
           ),
-          Row(
-            children: [
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 250),
-                child: Avatar(
-                  key: ValueKey(nomComplet.isEmpty ? '?' : nomComplet[0]),
-                  nom: nomComplet.isEmpty ? '?' : nomComplet,
-                  couleur: const Color(0xFF6D28D9),
-                  taille: 64,
-                ),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      nomComplet.isEmpty ? 'Votre nom ici' : nomComplet,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    Text(
-                      '$_ville · photo plus tard',
-                      style: const TextStyle(color: LiveColors.gris),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          Center(child: _PhotoProfil(nom: nomComplet)),
           const SizedBox(height: 18),
           TextField(
             controller: _prenom,
             textCapitalization: TextCapitalization.words,
-            decoration: const InputDecoration(labelText: 'Prénom'),
+            decoration: InputDecoration(labelText: context.t.demarragePrenom),
             onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 12),
           TextField(
             controller: _nom,
             textCapitalization: TextCapitalization.words,
-            decoration: const InputDecoration(labelText: 'Nom'),
+            decoration: InputDecoration(labelText: context.t.nom),
             onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 18),
-          const Text('Ville', style: TextStyle(fontWeight: FontWeight.w700)),
+          Text(
+            context.t.demarrageVille,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
@@ -285,7 +180,9 @@ class _EcranProfilState extends State<EcranProfil> {
             children: [
               for (final v in _villes)
                 ChoiceChip(
-                  label: Text(v),
+                  label: Text(
+                    v == 'Autre ville' ? context.t.demarrageAutreVille : v,
+                  ),
                   selected: _ville == v,
                   onSelected: (_) => setState(() => _ville = v),
                 ),
@@ -296,9 +193,11 @@ class _EcranProfilState extends State<EcranProfil> {
             value: _majeur,
             onChanged: (v) => setState(() => _majeur = v),
             contentPadding: EdgeInsets.zero,
-            title: const Text("J'ai 18 ans ou plus"),
+            title: Text(context.t.demarrageMajeur),
             subtitle: Text(
-              _majeur ? 'Acheter, vendre et payer dans Live.' : 'Compte en consultation seulement (achat et vente à partir de 18 ans).',
+              _majeur
+                  ? context.t.demarrageMajeurOui
+                  : context.t.demarrageMajeurNon,
             ),
           ),
         ],
@@ -315,7 +214,138 @@ class _EcranProfilState extends State<EcranProfil> {
                     widget.operateur,
                   ),
                 ),
-          child: const Text('Continuer'),
+          child: Text(context.t.continuer),
+        ),
+      ),
+    );
+  }
+}
+
+/// Photo de profil, comme WhatsApp : un grand cercle au centre, un badge
+/// appareil photo ; un appui propose de prendre ou de choisir une photo
+/// (sur ordinateur, le choix d'un fichier). Image réduite à 800 px.
+class _PhotoProfil extends ConsumerWidget {
+  const _PhotoProfil({required this.nom});
+  final String nom;
+
+  Future<void> _choisir(BuildContext context, WidgetRef ref) async {
+    final photo = ref.read(liveProvider).photoProfil;
+    final choix = await showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              context.t.demarragePhotoProfil,
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 8),
+            for (final (cle, icone, titre) in [
+              (
+                'camera',
+                Icons.photo_camera_outlined,
+                context.t.demarragePrendrePhoto,
+              ),
+              (
+                'galerie',
+                Icons.photo_library_outlined,
+                context.t.demarrageChoisirPhoto,
+              ),
+              if (photo != null)
+                (
+                  'retirer',
+                  Icons.delete_outline_rounded,
+                  context.t.demarrageRetirerPhoto,
+                ),
+            ])
+              ListTile(
+                leading: Icon(icone, color: LiveColors.bleu),
+                title: Text(titre),
+                onTap: () => Navigator.pop(ctx, cle),
+              ),
+          ],
+        ),
+      ),
+    );
+    if (choix == null) return;
+    final store = ref.read(liveProvider.notifier);
+    if (choix == 'retirer') return store.choisirPhoto(null);
+    try {
+      final fichier = await ImagePicker().pickImage(
+        source: choix == 'camera' ? ImageSource.camera : ImageSource.gallery,
+        maxWidth: 800,
+        imageQuality: 82,
+      );
+      if (fichier == null) return;
+      store.choisirPhoto(await fichier.readAsBytes());
+    } on Exception {
+      if (context.mounted) {
+        informer(context, context.t.demarragePhotoImpossible);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final photo = ref.watch(liveProvider.select((e) => e.photoProfil));
+    return Semantics(
+      button: true,
+      container: true,
+      label: photo != null
+          ? context.t.demarrageChangerPhoto
+          : context.t.demarrageAjouterPhoto,
+      excludeSemantics: true,
+      onTap: () => _choisir(context, ref),
+      child: GestureDetector(
+        onTap: () => _choisir(context, ref),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              child: photo != null
+                  ? Avatar(
+                      key: ValueKey(photo.length),
+                      nom: nom.isEmpty ? 'Live' : nom,
+                      couleur: LiveColors.orange,
+                      taille: 112,
+                      photo: photo,
+                    )
+                  : Container(
+                      key: const ValueKey('vide'),
+                      width: 112,
+                      height: 112,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: LiveColors.voile,
+                      ),
+                      child: const Icon(
+                        Icons.add_a_photo_outlined,
+                        size: 40,
+                        color: LiveColors.gris,
+                      ),
+                    ),
+            ),
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: LiveColors.bleu,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: LiveColors.surface, width: 3),
+                ),
+                child: const Icon(
+                  Icons.photo_camera_rounded,
+                  color: Colors.white,
+                  size: 18,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -373,33 +403,28 @@ class _EcranPinState extends ConsumerState<EcranPin> {
   Widget build(BuildContext context) {
     final confirmation = _premier != null;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
           EnTeteDemarrage(
             etape: 3,
-            icone: confirmation
-                ? Icons.verified_user_rounded
-                : Icons.lock_rounded,
-            couleurs: const [Color(0xFF34D399), Color(0xFF15803D)],
             titre: confirmation
-                ? 'Confirmez votre code'
-                : 'Bonjour ${widget.prenom}, créez votre code secret',
+                ? context.t.demarrageConfirmezCode
+                : context.t.demarrageCreezCode(widget.prenom),
             texte: confirmation
-                ? 'Tapez à nouveau les 4 chiffres.'
-                : 'Il protège votre compte et vos paiements. Ne le donnez '
-                      'jamais, même à un agent Live.',
+                ? context.t.demarrageRetapezCode
+                : context.t.demarrageCodeProtege,
           ),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             child: _erreur
-                ? const Padding(
+                ? Padding(
                     padding: EdgeInsets.only(bottom: 12),
                     child: Bloc(
-                      fond: Color(0xFFFDE2E2),
+                      fond: LiveColors.teinteRouge,
                       child: Text(
-                        'Les deux codes sont différents. Recommencez.',
+                        context.t.demarrageCodesDifferents,
                         style: TextStyle(color: LiveColors.erreur),
                       ),
                     ),
@@ -417,8 +442,8 @@ class _EcranPinState extends ConsumerState<EcranPin> {
               color: LiveColors.succes,
               size: 30,
             ),
-            title: const Text('Déverrouiller avec l’empreinte'),
-            subtitle: const Text('Ou le visage, selon votre téléphone'),
+            title: Text(context.t.demarrageEmpreinte),
+            subtitle: Text(context.t.demarrageEmpreinteTexte),
           ),
         ],
       ),

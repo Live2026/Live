@@ -19,16 +19,16 @@ class _EcranLecteurState extends State<EcranLecteur> {
     final c = contenuParId(widget.id);
     final document = c.type == TypeContenu.pdf || c.type == TypeContenu.livre;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       appBar: AppBar(
         title: Text(c.titre, maxLines: 1, overflow: TextOverflow.ellipsis),
-        actions: const [
+        actions: [
           Padding(
             padding: EdgeInsets.only(right: 12),
             child: Etiquette(
-              'Hors connexion',
+              context.t.apprendreHorsConnexion2,
               icone: Icons.offline_pin_rounded,
-              fond: Color(0xFFE7F4EC),
+              fond: LiveColors.teinteVerte,
               couleur: LiveColors.succes,
             ),
           ),
@@ -56,7 +56,17 @@ class _EcranLecteurState extends State<EcranLecteur> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              '${document ? 'Chapitre' : 'Leçon'} ${_lecon + 1} sur ${c.programme.length} · ${c.auteur.nom}',
+              document
+                  ? context.t.apprendreChapitreSur(
+                      _lecon + 1,
+                      c.programme.length,
+                      c.auteur.nom,
+                    )
+                  : context.t.apprendreLeconSur(
+                      _lecon + 1,
+                      c.programme.length,
+                      c.auteur.nom,
+                    ),
               style: const TextStyle(color: LiveColors.gris),
             ),
           ),
@@ -84,7 +94,7 @@ class _EcranLecteurState extends State<EcranLecteur> {
         child: Row(
           children: [
             IconButton.outlined(
-              tooltip: 'Poser une question à l’auteur',
+              tooltip: context.t.apprendrePoserUneQuestionA,
               style: IconButton.styleFrom(minimumSize: const Size(48, 48)),
               onPressed: () => context.push('/conversation'),
               icon: const Icon(Icons.forum_outlined),
@@ -98,7 +108,11 @@ class _EcranLecteurState extends State<EcranLecteur> {
                         _lecture = false;
                       })
                     : null,
-                child: Text(document ? 'Chapitre suivant' : 'Leçon suivante'),
+                child: Text(
+                  document
+                      ? context.t.apprendreChapitreSuivant
+                      : context.t.apprendreLeconSuivante,
+                ),
               ),
             ),
           ],
@@ -135,7 +149,9 @@ class _Video extends StatelessWidget {
               lecture ? Icons.pause_circle_filled : Icons.play_circle_fill,
               color: Colors.white,
               size: 64,
-              semanticLabel: lecture ? 'Pause' : 'Lire',
+              semanticLabel: lecture
+                  ? context.t.apprendrePause
+                  : context.t.apprendreLire,
             ),
           ),
           Positioned(
@@ -179,12 +195,12 @@ class _Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFFEFF2F6),
+      color: LiveColors.champ2,
       padding: const EdgeInsets.all(16),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: LiveColors.surface,
           borderRadius: BorderRadius.circular(4),
           boxShadow: const [BoxShadow(color: Color(0x22000000), blurRadius: 6)],
         ),
@@ -205,7 +221,7 @@ class _Page extends StatelessWidget {
                   height: 7,
                   margin: const EdgeInsets.only(bottom: 8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFDDE3EB),
+                    color: LiveColors.brume,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -214,7 +230,7 @@ class _Page extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                'Page ${page * 30 + 1}',
+                context.t.apprendrePageN(page * 30 + 1),
                 style: const TextStyle(color: LiveColors.gris, fontSize: 12),
               ),
             ),

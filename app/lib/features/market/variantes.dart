@@ -10,7 +10,7 @@ void ouvrirVariantes(BuildContext context, Produit p) {
   showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => StatefulBuilder(
       builder: (ctx, maj) => SafeArea(
         child: Padding(
@@ -46,8 +46,8 @@ void ouvrirVariantes(BuildContext context, Produit p) {
                         ),
                         Text(
                           stock <= 3
-                              ? 'Plus que $stock en stock'
-                              : '$stock en stock',
+                              ? context.t.marketPlusQueStock(stock)
+                              : context.t.marketNEnStock(stock),
                           style: TextStyle(
                             color: stock <= 3
                                 ? LiveColors.erreur
@@ -62,8 +62,8 @@ void ouvrirVariantes(BuildContext context, Produit p) {
                 ],
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Taille',
+              Text(
+                context.t.marketTaille,
                 style: TextStyle(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 6),
@@ -81,14 +81,14 @@ void ouvrirVariantes(BuildContext context, Produit p) {
               const SizedBox(height: 12),
               Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      'Quantité',
+                      context.t.marketQuantite,
                       style: TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
                   IconButton.outlined(
-                    tooltip: 'Moins',
+                    tooltip: context.t.marketMoins,
                     onPressed: quantite > 1
                         ? () => maj(() => quantite--)
                         : null,
@@ -106,7 +106,7 @@ void ouvrirVariantes(BuildContext context, Produit p) {
                     ),
                   ),
                   IconButton.outlined(
-                    tooltip: 'Plus',
+                    tooltip: context.t.plus,
                     onPressed: quantite < stock
                         ? () => maj(() => quantite++)
                         : null,
@@ -127,7 +127,9 @@ void ouvrirVariantes(BuildContext context, Produit p) {
                           );
                         },
                   child: Text(
-                    taille == null ? 'Choisissez une taille' : 'Continuer',
+                    taille == null
+                        ? context.t.marketChoisissezUneTaille
+                        : context.t.continuer,
                   ),
                 ),
               ),

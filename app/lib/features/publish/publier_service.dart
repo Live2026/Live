@@ -16,15 +16,17 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
   var _domicile = true;
   var _realisations = 0;
   var _publie = false;
-  final _titre = TextEditingController(text: 'Nattes collées');
+  late final _titre = TextEditingController(
+    text: context.t.publishNattesCollees,
+  );
   final _prix = TextEditingController(text: '8000');
 
   @override
   Widget build(BuildContext context) {
     if (!ref.watch(liveProvider).identiteVerifiee) {
-      return const _PouvoirManquant(
-        titre: 'Proposer un service',
-        pouvoir: 'Proposer ses services',
+      return _PouvoirManquant(
+        titre: context.t.publishProposerUnService,
+        pouvoir: context.t.publishProposerSesServices,
       );
     }
     if (_publie) {
@@ -37,14 +39,17 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
                 const Spacer(),
                 const CocheAnimee(taille: 96),
                 const SizedBox(height: 12),
-                const Text(
-                  'Votre service est en ligne',
+                Text(
+                  context.t.publishVotreServiceEstEn,
                   style: TextStyle(fontSize: 23, fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '${_titre.text} · $_metier. Vous recevrez les demandes de devis '
-                  'de ${_zones.join(', ')} directement dans Live.',
+                  context.t.publishServiceEnLigneTexte(
+                    _titre.text,
+                    _metier,
+                    _zones.join(', '),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const Spacer(),
@@ -52,12 +57,12 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
                   width: double.infinity,
                   child: FilledButton(
                     onPressed: () => context.go('/moi'),
-                    child: const Text('Terminer'),
+                    child: Text(context.t.publishTerminer),
                   ),
                 ),
                 TextButton(
                   onPressed: () => context.push('/pro/interventions'),
-                  child: const Text('Voir mes interventions'),
+                  child: Text(context.t.publishVoirMesInterventions),
                 ),
               ],
             ),
@@ -66,12 +71,12 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
       );
     }
     return Scaffold(
-      appBar: AppBar(title: const Text('Proposer un service')),
+      appBar: AppBar(title: Text(context.t.publishProposerUnService)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const Text(
-            'Votre métier',
+          Text(
+            context.t.publishVotreMetier,
             style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17),
           ),
           const SizedBox(height: 8),
@@ -90,14 +95,22 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
           const SizedBox(height: 18),
           TextField(
             controller: _titre,
-            decoration: const InputDecoration(labelText: 'Nom du service'),
+            decoration: InputDecoration(
+              labelText: context.t.publishNomDuService,
+            ),
           ),
           const SizedBox(height: 12),
           SegmentedButton<String>(
             showSelectedIcon: false,
-            segments: const [
-              ButtonSegment(value: 'Prix fixe', label: Text('Prix fixe')),
-              ButtonSegment(value: 'Sur devis', label: Text('Sur devis')),
+            segments: [
+              ButtonSegment(
+                value: 'Prix fixe',
+                label: Text(context.t.publishPrixFixe),
+              ),
+              ButtonSegment(
+                value: 'Sur devis',
+                label: Text(context.t.publishSurDevis),
+              ),
             ],
             selected: {_tarif},
             onSelectionChanged: (s) => setState(() => _tarif = s.first),
@@ -107,15 +120,15 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
             TextField(
               controller: _prix,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Prix',
+              decoration: InputDecoration(
+                labelText: context.t.publishPrix,
                 suffixText: 'FCFA',
               ),
             ),
           ],
           const SizedBox(height: 18),
-          const Text(
-            'Où intervenez-vous ?',
+          Text(
+            context.t.publishOuIntervenezVous,
             style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17),
           ),
           const SizedBox(height: 8),
@@ -134,17 +147,17 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text('Je me déplace à domicile'),
+            title: Text(context.t.publishJeMeDeplaceA),
             value: _domicile,
             onChanged: (v) => setState(() => _domicile = v),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Vos réalisations',
+          Text(
+            context.t.publishVosRealisations,
             style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17),
           ),
-          const Text(
-            'Photos et vidéos de vos travaux : c’est ce qui décide les clients.',
+          Text(
+            context.t.publishPhotosEtVideosDe,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 8),
@@ -166,16 +179,14 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
               if (_realisations < 8)
                 _Tuile(
                   icone: Icons.add_a_photo_outlined,
-                  texte: 'Ajouter',
+                  texte: context.t.publishAjouter,
                   actif: false,
                   onTap: () => setState(() => _realisations++),
                 ),
             ],
           ),
           const SizedBox(height: 12),
-          const BandeauProtection(
-            'Vos clients paient un acompte bloqué par Live : vous êtes sûr d’être payé.',
-          ),
+          BandeauProtection(context.t.publishVosClientsPaientUn),
         ],
       ),
       bottomNavigationBar: BarreAction(
@@ -188,7 +199,7 @@ class _EcranProposerServiceState extends ConsumerState<EcranProposerService> {
                       .publierService(_titre.text.trim());
                   setState(() => _publie = true);
                 },
-          child: const Text('Publier mon service'),
+          child: Text(context.t.publishPublierMonService),
         ),
       ),
     );

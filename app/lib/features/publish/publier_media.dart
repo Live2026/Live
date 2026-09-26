@@ -118,7 +118,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                   children: [
                     _BoutonCamera(
                       icone: Icons.close_rounded,
-                      libelle: 'Fermer',
+                      libelle: context.t.fermer,
                       onTap: () => context.pop(),
                     ),
                     const Spacer(),
@@ -128,7 +128,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                       child: InkWell(
                         borderRadius: BorderRadius.circular(20),
                         onTap: () => _choisirSon(context),
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 14,
                             vertical: 8,
@@ -143,7 +143,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                               ),
                               SizedBox(width: 6),
                               Text(
-                                'Ajouter un son',
+                                context.t.publishAjouterUnSon,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
@@ -171,7 +171,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
               children: [
                 _OutilCamera(
                   icone: Icons.flip_camera_ios_rounded,
-                  libelle: 'Retourner',
+                  libelle: context.t.publishRetourner,
                   onTap: () => setState(() => _avant = !_avant),
                 ),
                 _OutilCamera(
@@ -188,7 +188,11 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                 ),
                 _OutilCamera(
                   icone: Icons.auto_fix_high_rounded,
-                  libelle: _filtre,
+                  libelle: switch (_filtre) {
+                    'Lumineux' => context.t.publishFiltreLumineux,
+                    'Chaud' => context.t.publishFiltreChaud,
+                    _ => context.t.publishFiltreOriginal,
+                  },
                   onTap: () => setState(
                     () => _filtre = switch (_filtre) {
                       'Original' => 'Lumineux',
@@ -197,17 +201,20 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                     },
                   ),
                 ),
-                const _OutilCamera(icone: Icons.timer_outlined, libelle: '3 s'),
+                _OutilCamera(
+                  icone: Icons.timer_outlined,
+                  libelle: context.t.publishN3S,
+                ),
                 _OutilCamera(
                   icone: _flash
                       ? Icons.flash_on_rounded
                       : Icons.flash_off_rounded,
-                  libelle: 'Flash',
+                  libelle: context.t.publishFlash,
                   onTap: () => setState(() => _flash = !_flash),
                 ),
-                const _OutilCamera(
+                _OutilCamera(
                   icone: Icons.text_fields_rounded,
-                  libelle: 'Texte',
+                  libelle: context.t.publishTexte,
                 ),
               ],
             ),
@@ -227,8 +234,8 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                   AnimatedOpacity(
                     opacity: _enCours || _secondes > 0 ? 0 : 1,
                     duration: const Duration(milliseconds: 250),
-                    child: const Etiquette(
-                      'Filmez l’objet de près, en pleine lumière, 30 s suffisent',
+                    child: Etiquette(
+                      context.t.publishFilmezLObjetDe,
                       icone: Icons.lightbulb_outline_rounded,
                       fond: Colors.black45,
                       couleur: Colors.white,
@@ -280,7 +287,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                                     ),
                                     onPressed: () =>
                                         setState(() => _legende = true),
-                                    child: const Text('Suivant'),
+                                    child: Text(context.t.suivant),
                                   )
                                 : const SizedBox(key: ValueKey('vide')),
                           ),
@@ -309,20 +316,20 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            for (final (titre, auteur) in const [
-              ('Son original', 'Votre voix'),
-              ('Ndombolo 2026', 'Tendance près de chez vous'),
-              ('Rumba douce', 'Musique libre de droits'),
-              ('Afro beat', 'Musique libre de droits'),
+            for (final (titre, auteur) in [
+              (context.t.publishSonOriginal, context.t.publishVotreVoix),
+              ('Ndombolo 2026', context.t.publishTendance),
+              ('Rumba douce', context.t.publishLibreDroits),
+              ('Afro beat', context.t.publishLibreDroits),
             ])
               ListTile(
                 leading: const CircleAvatar(
-                  backgroundColor: Color(0xFFEFF2F6),
+                  backgroundColor: LiveColors.champ2,
                   child: Icon(Icons.music_note_rounded, color: LiveColors.bleu),
                 ),
                 title: Text(titre),
@@ -341,7 +348,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, maj) => SafeArea(
           child: Padding(
@@ -352,9 +359,9 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
               children: [
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'Galerie',
+                        context.t.publishGalerie,
                         style: TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.w800,
@@ -362,7 +369,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                       ),
                     ),
                     Text(
-                      '${_choisis.length} / 10 + 1 vidéo',
+                      context.t.publishChoisisVideo(_choisis.length),
                       style: const TextStyle(color: LiveColors.gris),
                     ),
                   ],
@@ -380,7 +387,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                       Semantics(
                         button: true,
                         selected: _choisis.contains(i),
-                        label: 'Média ${i + 1}',
+                        label: context.t.publishMediaN(i + 1),
                         excludeSemantics: true,
                         child: GestureDetector(
                           onTap: () {
@@ -439,7 +446,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                   width: double.infinity,
                   child: FilledButton(
                     onPressed: () => Navigator.pop(ctx),
-                    child: const Text('Valider'),
+                    child: Text(context.t.valider),
                   ),
                 ),
               ],

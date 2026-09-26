@@ -21,7 +21,7 @@ class EcranReclamation extends ConsumerWidget {
         );
     final decidee = r.etape >= 3;
     return Scaffold(
-      appBar: AppBar(title: Text('Réclamation ${r.id}')),
+      appBar: AppBar(title: Text(context.t.confianceReclamationN(r.id))),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -34,7 +34,7 @@ class EcranReclamation extends ConsumerWidget {
                   style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  'Motif : ${r.motif}',
+                  context.t.confianceMotif(r.motif),
                   style: const TextStyle(color: LiveColors.gris),
                 ),
                 const SizedBox(height: 8),
@@ -51,8 +51,8 @@ class EcranReclamation extends ConsumerWidget {
                     Expanded(
                       child: Text(
                         decidee
-                            ? '${fcfa(r.montant)} remboursés sur votre MoMo'
-                            : '${fcfa(r.montant)} bloqués par Live',
+                            ? context.t.confianceRemboursesMomo(fcfa(r.montant))
+                            : context.t.confianceBloquesLive(fcfa(r.montant)),
                         style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
                     ),
@@ -64,43 +64,43 @@ class EcranReclamation extends ConsumerWidget {
           const SizedBox(height: 20),
           Frise(
             etapes: [
-              const EtapeFrise(
-                'Réclamation ouverte',
-                'Aujourd’hui 11:02 · preuves reçues',
+              EtapeFrise(
+                context.t.confianceReclamationOuverte,
+                context.t.confianceAujourdHui1102,
                 true,
               ),
               EtapeFrise(
-                'Réponse du vendeur',
+                context.t.confianceReponseDuVendeur,
                 r.etape >= 2
-                    ? '« Je propose de reprendre le téléphone. »'
-                    : 'Il a jusqu’à demain 11:02',
+                    ? context.t.confianceJeProposeDeReprendre
+                    : context.t.confianceIlAJusquA,
                 r.etape >= 2,
               ),
               EtapeFrise(
-                'Décision de Live',
+                context.t.confianceDecisionDeLive,
                 decidee
-                    ? 'Remboursement total accordé'
-                    : 'Un médiateur examine le dossier',
+                    ? context.t.confianceRemboursementTotalAccorde
+                    : context.t.confianceUnMediateurExamineLe,
                 decidee,
               ),
             ],
           ),
-          const EnTeteSection('Échanges'),
-          const _Bulle(
-            'Vous',
-            'Le téléphone reçu n’est pas un iPhone 11 mais un iPhone 8.',
+          EnTeteSection(context.t.confianceEchanges),
+          _Bulle(
+            context.t.confianceVous,
+            context.t.confianceLeTelephoneRecuN,
             true,
           ),
           if (r.etape >= 2)
-            const _Bulle(
+            _Bulle(
               'Grâce Mode',
-              'Désolée, erreur de colis. Je reprends le téléphone et je rembourse.',
+              context.t.confianceDesoleeErreurDeColis,
               false,
             ),
           if (decidee)
-            const _Bulle(
-              'Médiateur Live',
-              'Décision : remboursement total. Le vendeur récupère le téléphone lors d’un rendez-vous.',
+            _Bulle(
+              context.t.confianceMediateurLive,
+              context.t.confianceDecisionRemboursementTotalLe,
               false,
               live: true,
             ),
@@ -108,15 +108,15 @@ class EcranReclamation extends ConsumerWidget {
           if (!decidee)
             BoutonSimulation(
               texte: r.etape == 1
-                  ? 'Simuler : le vendeur répond'
-                  : 'Simuler : Live décide',
+                  ? context.t.confianceSimulerLeVendeurRepond
+                  : context.t.confianceSimulerLiveDecide,
               onTap: () =>
                   ref.read(liveProvider.notifier).avancerReclamation(r.id),
             ),
           if (decidee)
             FilledButton(
               onPressed: () => context.go('/moi'),
-              child: const Text('Terminer'),
+              child: Text(context.t.confianceTerminer),
             ),
         ],
       ),
@@ -141,10 +141,10 @@ class _Bulle extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: live
-              ? const Color(0xFFE6EBF2)
+              ? LiveColors.voile
               : moi
-              ? const Color(0xFFDCF3E4)
-              : const Color(0xFFF3F5F8),
+              ? LiveColors.teinteVerte
+              : LiveColors.champ,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(

@@ -34,13 +34,13 @@ class _Quartier extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${bien.quartier}, Brazzaville',
+                  context.t.compteQuartierVille(bien.quartier),
                   style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
-                Text('Repère : ${bien.repere}'),
+                Text(context.t.immoRepere(bien.repere)),
                 const SizedBox(height: 4),
-                const Text(
-                  'Adresse exacte visible après le paiement de la visite.',
+                Text(
+                  context.t.immoAdresseExacteVisibleApres,
                   style: TextStyle(color: LiveColors.gris, fontSize: 13),
                 ),
                 const SizedBox(height: 10),
@@ -53,10 +53,10 @@ class _Quartier extends StatelessWidget {
                         minimumSize: const Size(0, 40),
                       ),
                       onPressed: () => context.push(
-                        '/rue?lieu=${Uri.encodeComponent('${bien.quartier}, Brazzaville')}',
+                        '/rue?lieu=${Uri.encodeComponent(context.t.compteQuartierVille(bien.quartier))}',
                       ),
                       icon: const Icon(Icons.streetview_rounded, size: 18),
-                      label: const Text('Vue rue'),
+                      label: Text(context.t.immoVueRue),
                     ),
                     OutlinedButton.icon(
                       style: OutlinedButton.styleFrom(
@@ -64,7 +64,7 @@ class _Quartier extends StatelessWidget {
                       ),
                       onPressed: () => context.push('/carte'),
                       icon: const Icon(Icons.map_outlined, size: 18),
-                      label: const Text('Sur la carte'),
+                      label: Text(context.t.immoSurLaCarte),
                     ),
                   ],
                 ),
@@ -142,7 +142,11 @@ class _Annonceur extends ConsumerWidget {
                       ),
                       BadgeVerifie(v.badge),
                       Text(
-                        '${note(v.note)} · ${v.ventes} locations via Live · répond en ${v.reponse}',
+                        context.t.immoNoteLocations(
+                          note(v.note),
+                          v.ventes,
+                          v.reponse,
+                        ),
                         style: const TextStyle(
                           color: LiveColors.gris,
                           fontSize: 12.5,
@@ -161,9 +165,9 @@ class _Annonceur extends ConsumerWidget {
                 child: OutlinedButton(
                   onPressed: () => context.push('/boutique/${v.id}'),
                   child: Text(
-                    v.badge.startsWith('Agence')
-                        ? "Voir l'agence"
-                        : 'Voir le profil',
+                    v.badge.startsWith(context.t.immoAgence)
+                        ? context.t.immoVoirLAgence
+                        : context.t.immoVoirLeProfil,
                   ),
                 ),
               ),
@@ -173,12 +177,12 @@ class _Annonceur extends ConsumerWidget {
                     ? OutlinedButton(
                         onPressed: () =>
                             ref.read(liveProvider.notifier).basculerSuivi(v.id),
-                        child: const Text('Suivi'),
+                        child: Text(context.t.immoSuivi),
                       )
                     : FilledButton.tonal(
                         onPressed: () =>
                             ref.read(liveProvider.notifier).basculerSuivi(v.id),
-                        child: const Text('Suivre'),
+                        child: Text(context.t.immoSuivre),
                       ),
               ),
             ],
@@ -199,7 +203,7 @@ class _Similaires extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const EnTeteSection('Biens similaires'),
+        EnTeteSection(context.t.immoBiensSimilaires),
         Carrousel(
           largeur: 220,
           hauteur: 262,
@@ -220,39 +224,39 @@ class _ReglementBien extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final b = bien;
-    final qui = b.agence ? "l'agence" : 'le propriétaire';
+    final qui = b.agence ? context.t.immoLagence : context.t.immoLeProprietaire;
     return BlocReglement(
       lignes: [
         LigneReglement(
-          'Frais de visite',
+          context.t.immoFraisDeVisite,
           Reglement.dansLive,
           montant: b.fraisVisite,
-          detail: 'Bloqués jusqu’à la visite, remboursés si elle n’a pas lieu',
+          detail: context.t.immoBloquesJusquALa,
         ),
         LigneReglement(
-          'Acompte de réservation (facultatif)',
+          context.t.immoAcompteDeReservationFacultatif,
           Reglement.dansLive,
-          detail: 'Après la visite, pour bloquer le bien',
+          detail: context.t.immoApresLaVisitePour,
         ),
         if (b.vente)
           LigneReglement(
-            'Prix de vente',
+            context.t.immoPrixDeVente,
             Reglement.direct,
             montant: b.loyer,
-            detail: 'Chez le notaire, à la signature de l’acte',
+            detail: context.t.immoChezLeNotaireA,
           )
         else ...[
           LigneReglement(
-            'Avance, caution et commission',
+            context.t.immoAvanceCautionEtCommission,
             Reglement.direct,
             montant: b.coutEntree,
-            detail: 'À $qui, à la signature du bail, contre reçu',
+            detail: context.t.immoALaSignature(qui),
           ),
           LigneReglement(
-            'Loyer mensuel',
+            context.t.immoLoyerMensuel,
             Reglement.direct,
             montant: b.loyer,
-            detail: 'Chaque mois, à $qui',
+            detail: context.t.immoChaqueMois(qui),
           ),
         ],
       ],

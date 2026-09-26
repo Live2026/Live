@@ -1,6 +1,6 @@
 part of 'messages_screens.dart';
 
-const _vertMoi = Color(0xFFDCEBFA);
+const _vertMoi = LiveColors.bulleMoi;
 
 /// Forme de bulle avec une petite pointe du côté de l'auteur.
 BorderRadius _forme(bool moi) => BorderRadius.only(
@@ -56,7 +56,7 @@ class _Conteneur extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(10, 7, 10, 5),
         constraints: const BoxConstraints(maxWidth: 360),
         decoration: BoxDecoration(
-          color: moi ? _vertMoi : Colors.white,
+          color: moi ? _vertMoi : LiveColors.surface,
           borderRadius: _forme(moi),
           boxShadow: const [
             BoxShadow(
@@ -174,7 +174,7 @@ class _BulleLieu extends StatelessWidget {
             height: 90,
             width: 240,
             decoration: BoxDecoration(
-              color: const Color(0xFFD9E6F2),
+              color: LiveColors.bulleVoile,
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(
@@ -185,11 +185,11 @@ class _BulleLieu extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Rendez-vous : ${m.lieu}',
+            context.t.messagesRendezVous(m.lieu),
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
-          const Text(
-            'Lieu public recommandé par Live',
+          Text(
+            context.t.messagesLieuPublicRecommandePar,
             style: TextStyle(fontSize: 12.5, color: LiveColors.gris),
           ),
           Align(
@@ -261,7 +261,7 @@ class _Pastille extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: LiveColors.surface,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
@@ -286,7 +286,7 @@ class _Info extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 420),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: const Color(0xFFE6EBF2),
+          color: LiveColors.voile,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -317,20 +317,16 @@ class _AlerteArnaque extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFF4E0),
+        color: LiveColors.teinteAmbre,
         border: Border.all(color: LiveColors.ambreClair),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(Icons.warning_amber_rounded, color: LiveColors.cuivre),
           SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              "Attention : ce message propose un paiement en dehors de Live. Si vous payez hors de l'application, vous n'êtes PAS protégé et ne pourrez pas être remboursé.",
-            ),
-          ),
+          Expanded(child: Text(context.t.messagesAttentionCeMessagePropose)),
         ],
       ),
     );
@@ -341,7 +337,7 @@ class _AlerteArnaque extends StatelessWidget {
 class _MotifFond extends CustomPainter {
   @override
   void paint(Canvas canvas, Size s) {
-    final p = Paint()..color = const Color(0xFFDDE3EB);
+    final p = Paint()..color = LiveColors.brume;
     for (double y = 10; y < s.height; y += 28) {
       for (double x = (y ~/ 28).isEven ? 10 : 24; x < s.width; x += 28) {
         canvas.drawCircle(Offset(x, y), 1.4, p);

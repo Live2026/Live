@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'mock.dart';
 
 /// État du prototype, gardé en mémoire (tout est perdu au redémarrage).
@@ -259,6 +261,12 @@ class LiveState {
     this.groupes = const {},
     this.facturesPayees = const {},
     this.envois = const [],
+    this.devise = 'EUR',
+    this.langue = 'fr',
+    this.apparence = 'systeme',
+    this.photoProfil,
+    this.demandesSupport = const [],
+    this.transfertsRetires = const {},
     this.sejoursReserves = const [],
     this.publicites = const [],
     this.formulePlus,
@@ -339,6 +347,23 @@ class LiveState {
 
   /// Paiements pour un proche et transferts envoyés (libellés).
   final List<String> envois;
+
+  /// Devise d'envoi choisie (Live Transfert, diaspora) ; transferts reçus
+  /// déjà retirés en Mobile Money.
+  final String devise;
+
+  /// Langue de l'interface, choisie au démarrage (code : fr, en, ln…).
+  final String langue;
+
+  /// Apparence : « systeme » (suit le téléphone), « clair » ou « sombre ».
+  final String apparence;
+
+  /// Photo de profil choisie au démarrage ou dans le profil.
+  final Uint8List? photoProfil;
+
+  /// Demandes écrites au support : (numéro, sujet, message).
+  final List<(String, String, String)> demandesSupport;
+  final Set<String> transfertsRetires;
   final List<String> sejoursReserves;
   final List<String> publicites;
   final String? formulePlus;
@@ -393,6 +418,13 @@ class LiveState {
     Set<String>? groupes,
     Set<String>? facturesPayees,
     List<String>? envois,
+    String? devise,
+    String? langue,
+    String? apparence,
+    Uint8List? photoProfil,
+    bool retirerPhoto = false,
+    List<(String, String, String)>? demandesSupport,
+    Set<String>? transfertsRetires,
     List<String>? sejoursReserves,
     List<String>? publicites,
     String? formulePlus,
@@ -441,6 +473,12 @@ class LiveState {
       groupes: groupes ?? this.groupes,
       facturesPayees: facturesPayees ?? this.facturesPayees,
       envois: envois ?? this.envois,
+      devise: devise ?? this.devise,
+      langue: langue ?? this.langue,
+      apparence: apparence ?? this.apparence,
+      photoProfil: retirerPhoto ? null : photoProfil ?? this.photoProfil,
+      demandesSupport: demandesSupport ?? this.demandesSupport,
+      transfertsRetires: transfertsRetires ?? this.transfertsRetires,
       sejoursReserves: sejoursReserves ?? this.sejoursReserves,
       publicites: publicites ?? this.publicites,
       formulePlus: formulePlus ?? this.formulePlus,

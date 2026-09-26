@@ -16,13 +16,13 @@ class EcranProfilPrestataire extends ConsumerWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            tooltip: 'Partager',
+            tooltip: context.t.partager,
             onPressed: () => partager(context, '${p.nom} · ${p.metier}'),
             icon: const Icon(Icons.ios_share_rounded),
           ),
           IconButton(
-            tooltip: 'Signaler',
-            onPressed: () => signaler(context, 'ce prestataire'),
+            tooltip: context.t.servicesSignaler,
+            onPressed: () => signaler(context, context.t.servicesCePrestataire),
             icon: const Icon(Icons.more_horiz_rounded),
           ),
         ],
@@ -51,7 +51,7 @@ class EcranProfilPrestataire extends ConsumerWidget {
                       ),
                     ),
                     Text(p.metier, style: const TextStyle(fontSize: 16)),
-                    const BadgeVerifie('Identité vérifiée'),
+                    BadgeVerifie(context.t.servicesIdentiteVerifiee),
                   ],
                 ),
               ),
@@ -60,10 +60,13 @@ class EcranProfilPrestataire extends ConsumerWidget {
           const SizedBox(height: 14),
           Row(
             children: [
-              _Chiffre(note(p.note).replaceAll('/5', ''), '${p.avis} avis'),
-              _Chiffre('${p.interventions}', 'interventions'),
-              const _Chiffre('98 %', 'à l’heure'),
-              const _Chiffre('15 min', 'répond en'),
+              _Chiffre(
+                note(p.note).replaceAll('/5', ''),
+                context.t.servicesNAvis(p.avis),
+              ),
+              _Chiffre('${p.interventions}', context.t.servicesInterventions),
+              _Chiffre('98 %', context.t.servicesALHeure),
+              _Chiffre('15 min', context.t.servicesRepondEn),
             ],
           ),
           const SizedBox(height: 14),
@@ -93,35 +96,48 @@ class EcranProfilPrestataire extends ConsumerWidget {
                     ? OutlinedButton(
                         onPressed: () =>
                             ref.read(liveProvider.notifier).basculerSuivi(p.id),
-                        child: const Text('Abonné'),
+                        child: Text(context.t.servicesAbonne),
                       )
                     : OutlinedButton(
                         onPressed: () =>
                             ref.read(liveProvider.notifier).basculerSuivi(p.id),
-                        child: const Text('Suivre'),
+                        child: Text(context.t.servicesSuivre),
                       ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton(
                   onPressed: () => context.push('/conversation'),
-                  child: const Text('Écrire'),
+                  child: Text(context.t.servicesEcrire),
                 ),
+              ),
+              const SizedBox(width: 8),
+              // Appel par Live : le numéro du pro n'est jamais montré.
+              IconButton.outlined(
+                tooltip: context.t.appelsAppelAudio,
+                onPressed: () => context.push(routeAppel(avec: p.nom)),
+                icon: const Icon(Icons.call_outlined),
+              ),
+              IconButton.outlined(
+                tooltip: context.t.appelsAppelVideo,
+                onPressed: () =>
+                    context.push(routeAppel(avec: p.nom, video: true)),
+                icon: const Icon(Icons.videocam_outlined),
               ),
             ],
           ),
           if (p.services.isNotEmpty) ...[
-            const EnTeteSection('Services à prix fixe'),
+            EnTeteSection(context.t.servicesServicesAPrixFixe),
             for (final s in p.services)
               LigneMenu(
                 icone: Icons.bolt_rounded,
                 titre: s.titre,
-                detail: 'Environ ${s.duree}',
+                detail: context.t.servicesEnviron(s.duree),
                 valeur: fcfa(s.prix),
                 onTap: () => context.push('/pro/${p.id}/reserver/${s.id}'),
               ),
           ],
-          const EnTeteSection('Réalisations'),
+          EnTeteSection(context.t.servicesRealisations),
           GrilleAdaptative(
             largeurMax: 140,
             espacement: 6,
@@ -141,7 +157,7 @@ class EcranProfilPrestataire extends ConsumerWidget {
           ),
         ],
         secondaire: [
-          const EnTeteSection('Avis vérifiés'),
+          EnTeteSection(context.t.servicesAvisVerifies),
           for (final (nom, n, texte) in const [
             ('Grâce M.', 5.0, 'Fuite réparée en 30 minutes, très propre.'),
             ('Rodrigue O.', 5.0, 'Ponctuel et prix respecté.'),
@@ -169,15 +185,13 @@ class EcranProfilPrestataire extends ConsumerWidget {
                 ),
               ),
             ),
-          const BandeauProtection(
-            'Acompte bloqué par Live, garantie 72 h après les travaux.',
-          ),
+          BandeauProtection(context.t.servicesAcompteBloqueParLive),
         ],
       ),
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: () => context.push('/services/demande'),
-          child: Text('Demander un devis à ${p.nom}'),
+          child: Text(context.t.servicesDemanderDevisA(p.nom)),
         ),
       ),
     );
@@ -237,7 +251,7 @@ class _EcranServiceFixeState extends ConsumerState<EcranServiceFixe> {
       orElse: () => p.services.first,
     );
     return Scaffold(
-      appBar: AppBar(title: const Text('Réserver')),
+      appBar: AppBar(title: Text(context.t.servicesReserver)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -255,7 +269,11 @@ class _EcranServiceFixeState extends ConsumerState<EcranServiceFixe> {
                         style: const TextStyle(fontWeight: FontWeight.w800),
                       ),
                       Text(
-                        '${p.nom} · ${p.metier} · environ ${s.duree}',
+                        context.t.servicesProMetierDuree(
+                          p.nom,
+                          p.metier,
+                          s.duree,
+                        ),
                         style: const TextStyle(color: LiveColors.gris),
                       ),
                     ],
@@ -269,14 +287,21 @@ class _EcranServiceFixeState extends ConsumerState<EcranServiceFixe> {
             ),
           ),
           const SizedBox(height: 18),
-          const Text('Quand ?', style: TextStyle(fontWeight: FontWeight.w700)),
+          Text(
+            context.t.servicesQuand,
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
             children: [
               for (final j in const ["Aujourd'hui", 'Demain', 'Samedi'])
                 ChoiceChip(
-                  label: Text(j),
+                  label: Text(switch (j) {
+                    'Demain' => context.t.servicesJourDemain,
+                    'Samedi' => context.t.servicesJourSamedi,
+                    _ => context.t.servicesJourAujourdhui,
+                  }),
                   selected: _jour == j,
                   onSelected: (_) => setState(() => _jour = j),
                 ),
@@ -302,24 +327,25 @@ class _EcranServiceFixeState extends ConsumerState<EcranServiceFixe> {
             ],
           ),
           const SizedBox(height: 18),
-          const Text('Où ?', style: TextStyle(fontWeight: FontWeight.w700)),
+          Text(
+            context.t.servicesOu,
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           TextFormField(
             initialValue: _adresse,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               prefixIcon: Icon(Icons.location_on_outlined),
-              labelText: 'Adresse',
+              labelText: context.t.servicesAdresse,
             ),
             onChanged: (v) => _adresse = v,
           ),
           const SizedBox(height: 18),
-          LigneMontant('Prix du service', s.prix),
-          const LigneMontant('Déplacement', 0),
-          LigneMontant('Total', s.prix, gras: true),
+          LigneMontant(context.t.servicesPrixDuService, s.prix),
+          LigneMontant(context.t.servicesDeplacement, 0),
+          LigneMontant(context.t.servicesTotal, s.prix, gras: true),
           const SizedBox(height: 8),
-          const BandeauProtection(
-            'Payé maintenant, versé au prestataire quand vous confirmez la fin du service.',
-          ),
+          BandeauProtection(context.t.servicesPayeMaintenantVerseAu),
         ],
       ),
       bottomNavigationBar: BarreAction(
@@ -343,8 +369,8 @@ class _EcranServiceFixeState extends ConsumerState<EcranServiceFixe> {
                 },
           child: Text(
             _heure == null
-                ? 'Choisissez une heure'
-                : 'Réserver · ${fcfa(s.prix)}',
+                ? context.t.servicesChoisissezUneHeure
+                : context.t.servicesReserverMontant(fcfa(s.prix)),
           ),
         ),
       ),

@@ -10,6 +10,8 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../messages/appels.dart';
+import '../../l10n/textes.dart';
 
 part 'immo_accueil.dart';
 part 'immo_fiche.dart';

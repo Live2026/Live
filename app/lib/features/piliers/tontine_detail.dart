@@ -23,15 +23,15 @@ class EcranTontine extends ConsumerWidget {
         title: Text(t.nom),
         actions: [
           IconButton(
-            tooltip: 'Discussion du groupe',
+            tooltip: context.t.piliersDiscussionDuGroupe,
             onPressed: () => context.push('/groupe/g1'),
             icon: const Icon(Icons.forum_outlined),
           ),
           IconButton(
-            tooltip: 'Inviter',
+            tooltip: context.t.piliersInviter,
             onPressed: () => partager(
               context,
-              'Rejoins la tontine « ${t.nom} » sur Live : live.africa/t/${t.id}',
+              context.t.piliersRejoinsTontine(t.nom, 'live.africa/t/${t.id}'),
             ),
             icon: const Icon(Icons.person_add_alt_1_outlined),
           ),
@@ -42,11 +42,13 @@ class EcranTontine extends ConsumerWidget {
         children: [
           _Banniere(
             icone: Icons.savings_rounded,
-            titre: 'Cagnotte : ${fcfa(t.cagnotte)}',
-            texte:
-                'Tour ${t.tour + 1} sur ${t.membres.length} · pour '
-                '${t.tour == t.moi ? 'vous' : t.beneficiaire} · versée '
-                '${t.prochaine.toLowerCase()} à 18 h.',
+            titre: context.t.piliersCagnotteMontant(fcfa(t.cagnotte)),
+            texte: context.t.piliersTourSur(
+              t.tour + 1,
+              t.membres.length,
+              t.tour == t.moi ? context.t.piliersVous : t.beneficiaire,
+              t.prochaine.toLowerCase(),
+            ),
             couleurs: [t.couleur, LiveColors.nuit],
             enfant: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +67,7 @@ class EcranTontine extends ConsumerWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  '$ont / ${membres.length} cotisations reçues',
+                  context.t.piliersCotisationsRecues(ont, membres.length),
                   style: const TextStyle(color: Colors.white),
                 ),
               ],
@@ -73,15 +75,13 @@ class EcranTontine extends ConsumerWidget {
           ),
           const SizedBox(height: 14),
           if (payee)
-            const Bloc(
-              fond: Color(0xFFE7F4EC),
+            Bloc(
+              fond: LiveColors.teinteVerte,
               child: Row(
                 children: [
                   Icon(Icons.check_circle_rounded, color: LiveColors.succes),
                   SizedBox(width: 10),
-                  Expanded(
-                    child: Text('Votre cotisation de ce tour est payée.'),
-                  ),
+                  Expanded(child: Text(context.t.piliersVotreCotisationDeCe)),
                 ],
               ),
             )
@@ -92,14 +92,14 @@ class EcranTontine extends ConsumerWidget {
                 ref,
                 TypePaiement.cotisation,
                 t.montant,
-                'Cotisation · ${t.nom}',
+                context.t.piliersCotisationDe(t.nom),
                 t.id,
-                beneficiaire: 'Tontine ${t.nom}',
+                beneficiaire: context.t.piliersTontineNom(t.nom),
               ),
               icon: const Icon(Icons.payments_rounded),
-              label: Text('Cotiser ${fcfa(t.montant)}'),
+              label: Text(context.t.piliersCotiserMontant(fcfa(t.montant))),
             ),
-          const EnTeteSection('Ordre des tours'),
+          EnTeteSection(context.t.piliersOrdreDesTours),
           Bloc(
             padding: 0,
             child: Column(
@@ -108,48 +108,53 @@ class EcranTontine extends ConsumerWidget {
                   ListTile(
                     leading: CircleAvatar(
                       backgroundColor: i < t.tour
-                          ? const Color(0xFFE7F4EC)
+                          ? LiveColors.teinteVerte
                           : i == t.tour
                           ? t.couleur
-                          : const Color(0xFFF3F5F8),
+                          : LiveColors.champ,
                       child: Text(
                         '${i + 1}',
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
-                          color: i == t.tour ? Colors.white : LiveColors.nuit,
+                          color: i == t.tour ? Colors.white : LiveColors.encre,
                         ),
                       ),
                     ),
                     title: Text(
-                      i == t.moi ? '$nom (vous)' : nom,
+                      i == t.moi ? context.t.piliersNomVous(nom) : nom,
                       style: TextStyle(
                         fontWeight: i == t.tour ? FontWeight.w800 : null,
                       ),
                     ),
                     subtitle: Text(
                       i < t.tour
-                          ? 'A reçu sa cagnotte'
+                          ? context.t.piliersARecuSaCagnotte
                           : i == t.tour
-                          ? 'Reçoit la cagnotte ce tour-ci'
-                          : 'Tour ${i + 1}',
+                          ? context.t.piliersRecoitLaCagnotteCe
+                          : context.t.piliersTourN(i + 1),
                     ),
                     trailing: Icon(
                       a ? Icons.check_circle_rounded : Icons.schedule_rounded,
                       color: a ? LiveColors.succes : LiveColors.cuivre,
-                      semanticLabel: a ? 'A cotisé' : 'Pas encore cotisé',
+                      semanticLabel: a
+                          ? context.t.piliersACotise
+                          : context.t.piliersPasEncoreCotise,
                     ),
                   ),
               ],
             ),
           ),
-          const EnTeteSection('Historique'),
+          EnTeteSection(context.t.piliersHistorique),
           for (final (quand, texte) in [
             (
-              '20 sept.',
-              'Cagnotte de ${fcfa(t.cagnotte)} versée à ${t.membres[t.tour > 0 ? t.tour - 1 : 0].$1}',
+              context.t.piliersN20Sept,
+              context.t.piliersCagnotteVerseeA(
+                fcfa(t.cagnotte),
+                t.membres[t.tour > 0 ? t.tour - 1 : 0].$1,
+              ),
             ),
-            ('13 sept.', 'Tous les membres ont cotisé'),
-            ('6 sept.', 'Rappel envoyé à 2 membres en retard'),
+            (context.t.piliersN13Sept, context.t.piliersTousLesMembresOnt),
+            (context.t.piliersN6Sept, context.t.piliersRappelEnvoyeA2),
           ])
             LigneMenu(
               icone: Icons.history_rounded,
@@ -157,9 +162,8 @@ class EcranTontine extends ConsumerWidget {
               detail: quand,
             ),
           const SizedBox(height: 8),
-          const Text(
-            'Live garde les cotisations sur un compte séparé et verse la '
-            'cagnotte automatiquement. Frais : 1 % de la cagnotte versée.',
+          Text(
+            context.t.piliersLiveGardeLesCotisations,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
         ],

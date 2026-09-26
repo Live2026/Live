@@ -11,15 +11,15 @@ class EcranSejour extends ConsumerStatefulWidget {
 }
 
 class _EcranSejourState extends ConsumerState<EcranSejour> {
-  static const _jours = [
-    'Ven 3',
-    'Sam 4',
-    'Dim 5',
-    'Lun 6',
-    'Mar 7',
-    'Mer 8',
-    'Jeu 9',
-    'Ven 10',
+  late final _jours = [
+    context.t.croissanceVen3,
+    context.t.croissanceSam4,
+    context.t.croissanceDim5,
+    context.t.croissanceLun6,
+    context.t.croissanceMar7,
+    context.t.croissanceMer8,
+    context.t.croissanceJeu9,
+    context.t.croissanceVen10,
   ];
   var _arrivee = 0;
   var _nuits = 2;
@@ -51,7 +51,7 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
           ),
           Text(
-            '${s.quartier} · hôte ${s.hote.nom} · ${note(s.note)}',
+            context.t.croissanceHoteNote(s.quartier, s.hote.nom, note(s.note)),
             style: const TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 10),
@@ -63,12 +63,12 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
                 Etiquette(
                   e,
                   icone: Icons.check_rounded,
-                  fond: const Color(0xFFE6EBF2),
+                  fond: LiveColors.voile,
                   couleur: LiveColors.bleu,
                 ),
             ],
           ),
-          const EnTeteSection('Arrivée'),
+          EnTeteSection(context.t.croissanceArrivee),
           SizedBox(
             height: 64,
             child: ListView.separated(
@@ -87,14 +87,14 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
           ),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Nuits',
+                  context.t.croissanceNuits,
                   style: TextStyle(fontWeight: FontWeight.w700),
                 ),
               ),
               IconButton.outlined(
-                tooltip: 'Une nuit de moins',
+                tooltip: context.t.croissanceUneNuitDeMoins,
                 onPressed: _nuits > 1 ? () => setState(() => _nuits--) : null,
                 icon: const Icon(Icons.remove),
               ),
@@ -110,7 +110,7 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
                 ),
               ),
               IconButton.outlined(
-                tooltip: 'Une nuit de plus',
+                tooltip: context.t.croissanceUneNuitDePlus,
                 onPressed: _nuits < 7 ? () => setState(() => _nuits++) : null,
                 icon: const Icon(Icons.add),
               ),
@@ -118,14 +118,14 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
           ),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Voyageurs',
+                  context.t.croissanceVoyageurs,
                   style: TextStyle(fontWeight: FontWeight.w700),
                 ),
               ),
               IconButton.outlined(
-                tooltip: 'Un voyageur de moins',
+                tooltip: context.t.croissanceUnVoyageurDeMoins,
                 onPressed: _voyageurs > 1
                     ? () => setState(() => _voyageurs--)
                     : null,
@@ -143,7 +143,7 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
                 ),
               ),
               IconButton.outlined(
-                tooltip: 'Un voyageur de plus',
+                tooltip: context.t.croissanceUnVoyageurDePlus,
                 onPressed: _voyageurs < s.voyageurs
                     ? () => setState(() => _voyageurs++)
                     : null,
@@ -158,7 +158,7 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Du ${_jours[_arrivee]} au ${_jours[depart]}',
+                  context.t.croissanceDuAu(_jours[_arrivee], _jours[depart]),
                   style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w800,
@@ -166,23 +166,20 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
                 ),
                 const SizedBox(height: 8),
                 LigneMontant(
-                  '${fcfa(s.nuit)} × $_nuits nuit${_nuits > 1 ? 's' : ''}',
+                  context.t.croissanceNuitsCalc(fcfa(s.nuit), _nuits),
                   s.nuit * _nuits,
                 ),
-                LigneMontant('Frais de service (5 %)', frais),
+                LigneMontant(context.t.croissanceFraisDeService5, frais),
                 const Divider(),
-                LigneMontant('Total', total, gras: true),
+                LigneMontant(context.t.croissanceTotal, total, gras: true),
               ],
             ),
           ),
           const SizedBox(height: 12),
-          const BandeauProtection(
-            'Payé dans Live : l’hôte est payé après votre arrivée. Logement non conforme : remboursé.',
-          ),
+          BandeauProtection(context.t.croissancePayeDansLiveL),
           const SizedBox(height: 8),
-          const Text(
-            'Annulation gratuite jusqu’à 48 h avant l’arrivée ; ensuite, la '
-            'première nuit est retenue.',
+          Text(
+            context.t.croissanceAnnulationGratuiteJusquA,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
         ],
@@ -194,11 +191,11 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
             ref,
             TypePaiement.sejour,
             total,
-            '${s.titre} · $_nuits nuit${_nuits > 1 ? 's' : ''}',
+            context.t.croissanceTitreNuits(s.titre, _nuits),
             s.id,
             beneficiaire: s.hote.nom,
           ),
-          child: Text('Réserver · ${fcfa(total)}'),
+          child: Text(context.t.croissanceReserverMontant(fcfa(total))),
         ),
       ),
     );

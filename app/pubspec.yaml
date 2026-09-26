@@ -37,6 +37,14 @@ dependencies:
   go_router: ^18.0.1
   flutter_riverpod: ^3.4.3
   qr_flutter: ^4.1.0
+  drift: ^2.35.0
+  drift_flutter: ^0.3.1
+  flutter_native_splash: ^2.4.8
+  image_picker: ^1.2.3
+  smart_auth: ^3.2.0
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -48,12 +56,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
+  drift_dev: ^2.35.0
+  build_runner: ^2.16.1
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -76,7 +82,9 @@ flutter:
           weight: 900
 
   assets:
-    - assets/images/logo.png
+    # Tout le dossier : logo, et image de fond du démarrage sur ordinateur
+    # (fond_demarrage.jpg, facultative).
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -108,3 +116,15 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# Écran de lancement natif (avant Flutter), comme l'ouverture de WhatsApp :
+# fond blanc, le logo seul au centre. Régénérer après modification :
+#   dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/images/logo.png
+  android_12:
+    color: "#FFFFFF"
+    image: splash/splash_android12.png
+  web: true
+  fullscreen: false

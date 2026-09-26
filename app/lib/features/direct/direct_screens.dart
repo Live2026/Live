@@ -12,6 +12,7 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'direct_lecteur.dart';
 part 'direct_blocs.dart';
@@ -36,7 +37,7 @@ class _EcranDirectsState extends ConsumerState<EcranDirects> {
     final aVenir = directs.where((d) => !d.enCours).toList();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Directs'),
+        title: Text(context.t.directDirects),
         actions: const [BoutonNotifications(), BoutonMessages()],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -44,7 +45,7 @@ class _EcranDirectsState extends ConsumerState<EcranDirects> {
         backgroundColor: const Color(0xFFFE2C55),
         foregroundColor: Colors.white,
         icon: const Icon(Icons.videocam_rounded),
-        label: const Text('Lancer un direct'),
+        label: Text(context.t.directLancerUnDirect),
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 96),
@@ -52,7 +53,7 @@ class _EcranDirectsState extends ConsumerState<EcranDirects> {
           const SizedBox(height: 8),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('En direct maintenant'),
+            child: EnTeteSection(context.t.directEnDirectMaintenant),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
@@ -71,7 +72,7 @@ class _EcranDirectsState extends ConsumerState<EcranDirects> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('À venir'),
+            child: EnTeteSection(context.t.directAVenir),
           ),
           for (final d in aVenir)
             Padding(
@@ -110,8 +111,8 @@ class _EcranDirectsState extends ConsumerState<EcranDirects> {
                     const SizedBox(width: 8),
                     IconButton.filledTonal(
                       tooltip: _rappels.contains(d.id)
-                          ? 'Rappel activé'
-                          : 'Me rappeler',
+                          ? context.t.directRappelActive
+                          : context.t.directMeRappeler,
                       onPressed: () {
                         setState(
                           () => _rappels.contains(d.id)
@@ -119,10 +120,7 @@ class _EcranDirectsState extends ConsumerState<EcranDirects> {
                               : _rappels.add(d.id),
                         );
                         if (_rappels.contains(d.id)) {
-                          informer(
-                            context,
-                            'Vous serez prévenu au début du direct.',
-                          );
+                          informer(context, context.t.directVousSerezPrevenuAu);
                         }
                       },
                       icon: Icon(

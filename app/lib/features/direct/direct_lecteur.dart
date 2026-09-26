@@ -71,7 +71,13 @@ class _EcranDirectState extends ConsumerState<EcranDirect> {
 
   void _cadeauEnvoye(Cadeau c) {
     setState(() {
-      _evenements.add(_Evenement('Vous', 'a envoyé ${c.nom}', cadeau: c));
+      _evenements.add(
+        _Evenement(
+          context.t.appelVous,
+          context.t.directAEnvoye(c.nom),
+          cadeau: c,
+        ),
+      );
       _grandCadeau = c;
     });
     Future<void>.delayed(const Duration(milliseconds: 1600), () {
@@ -146,7 +152,9 @@ class _EcranDirectState extends ConsumerState<EcranDirect> {
                                     ),
                                   ),
                                   Text(
-                                    '${compact(d.hote.abonnes)} abonnés',
+                                    context.t.directNAbonnes(
+                                      compact(d.hote.abonnes),
+                                    ),
                                     style: const TextStyle(
                                       color: Colors.white70,
                                       fontSize: 11,
@@ -168,7 +176,7 @@ class _EcranDirectState extends ConsumerState<EcranDirect> {
                                 onPressed: () => ref
                                     .read(liveProvider.notifier)
                                     .basculerSuivi(d.hote.id),
-                                child: const Text('Suivre'),
+                                child: Text(context.t.directSuivre),
                               ),
                           ],
                         ),
@@ -177,7 +185,7 @@ class _EcranDirectState extends ConsumerState<EcranDirect> {
                   ),
                   PastilleDirect(spectateurs: d.spectateurs),
                   IconButton(
-                    tooltip: 'Quitter le direct',
+                    tooltip: context.t.directQuitterLeDirect,
                     onPressed: () => context.pop(),
                     icon: const Icon(Icons.close_rounded, color: Colors.white),
                   ),
@@ -197,18 +205,18 @@ class _EcranDirectState extends ConsumerState<EcranDirect> {
             children: [
               _ActionDirect(
                 icone: Icons.favorite_rounded,
-                libelle: 'J’aime',
+                libelle: context.t.directJAime,
                 onTap: _aimer,
               ),
               _ActionDirect(
                 icone: Icons.card_giftcard_rounded,
-                libelle: 'Cadeau',
+                libelle: context.t.directCadeau,
                 couleur: LiveColors.ambre,
                 onTap: () => _ouvrirCadeaux(context, ref, d, _cadeauEnvoye),
               ),
               _ActionDirect(
                 icone: Icons.ios_share_rounded,
-                libelle: 'Partager',
+                libelle: context.t.partager,
                 onTap: () => partager(context, d.titre),
               ),
             ],
@@ -243,7 +251,7 @@ class _EcranDirectState extends ConsumerState<EcranDirect> {
                           controller: _saisie,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                            hintText: 'Commenter…',
+                            hintText: context.t.directCommenter,
                             hintStyle: const TextStyle(color: Colors.white70),
                             filled: true,
                             fillColor: Colors.white24,
@@ -262,8 +270,9 @@ class _EcranDirectState extends ConsumerState<EcranDirect> {
                           onSubmitted: (t) {
                             if (t.trim().isEmpty) return;
                             setState(
-                              () =>
-                                  _evenements.add(_Evenement('Vous', t.trim())),
+                              () => _evenements.add(
+                                _Evenement(context.t.appelVous, t.trim()),
+                              ),
                             );
                             _saisie.clear();
                           },

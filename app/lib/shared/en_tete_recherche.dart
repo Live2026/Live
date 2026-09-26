@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 
 /// En-tête avec une loupe : la page reste propre, et le champ de recherche
 /// se déploie dans l'en-tête quand on touche la loupe (sur téléphone comme
@@ -9,7 +10,7 @@ class EnTeteRecherche extends StatefulWidget implements PreferredSizeWidget {
   const EnTeteRecherche({
     super.key,
     required this.titre,
-    this.indice = 'Rechercher',
+    this.indice,
     this.onChanged,
     this.onSubmitted,
     this.actions = const [],
@@ -19,7 +20,9 @@ class EnTeteRecherche extends StatefulWidget implements PreferredSizeWidget {
   });
 
   final Widget titre;
-  final String indice;
+
+  /// Texte d'aide du champ ; « Rechercher » par défaut.
+  final String? indice;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
 
@@ -92,7 +95,7 @@ class _EnTeteRechercheState extends State<EnTeteRecherche> {
                 onChanged: widget.onChanged,
                 onSubmitted: widget.onSubmitted,
                 decoration: InputDecoration(
-                  hintText: widget.indice,
+                  hintText: widget.indice ?? context.t.rechercher,
                   isDense: true,
                   prefixIcon: const Icon(
                     Icons.search_rounded,
@@ -108,7 +111,7 @@ class _EnTeteRechercheState extends State<EnTeteRecherche> {
       ),
       actions: [
         IconButton(
-          tooltip: _ouvert ? 'Fermer la recherche' : 'Rechercher',
+          tooltip: _ouvert ? context.t.fermerLaRecherche : context.t.rechercher,
           onPressed: _basculer,
           icon: AnimatedSwitcher(
             duration: duree,

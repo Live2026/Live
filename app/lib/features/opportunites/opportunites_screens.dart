@@ -10,6 +10,7 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'opportunite_fiche.dart';
 part 'postuler.dart';
@@ -23,13 +24,10 @@ void publierOpportunite(BuildContext context, WidgetRef ref) {
   }
   pouvoirRequis(
     context,
-    titre: 'Vérification requise',
-    raison:
-        '« Publier une opportunité » est un super-pouvoir. Il se débloque '
-        'quand Live a vérifié votre identité : c’est ce qui protège les '
-        'candidats des fausses offres.',
+    titre: context.t.opportunitesVerificationRequise,
+    raison: context.t.opportunitesPublierUneOpportuniteEst,
     route: '/verifier',
-    action: 'Vérifier mon identité',
+    action: context.t.opportunitesVerifierMonIdentite,
   );
 }
 
@@ -53,12 +51,12 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
         .toList();
     return Scaffold(
       appBar: EnTeteRecherche(
-        titre: const Text('Opportunités'),
-        indice: 'Rechercher une bourse, un stage…',
+        titre: Text(context.t.opportunitesOpportunites),
+        indice: context.t.opportunitesRechercherUneBourseUn,
         onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: [
           IconButton(
-            tooltip: 'Mes candidatures',
+            tooltip: context.t.opportunitesMesCandidatures,
             onPressed: () => context.push('/mes-candidatures'),
             icon: const Icon(Icons.work_history_outlined),
           ),
@@ -67,7 +65,7 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => publierOpportunite(context, ref),
         icon: const Icon(Icons.add_rounded),
-        label: const Text('Publier'),
+        label: Text(context.t.opportunitesPublier),
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 96),
@@ -82,7 +80,9 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: ChoiceChip(
-                    label: Text('Toutes (${opportunites.length})'),
+                    label: Text(
+                      context.t.opportunitesToutesN(opportunites.length),
+                    ),
                     selected: _type == null,
                     onSelected: (_) => setState(() => _type = null),
                   ),
@@ -106,17 +106,14 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
           Padding(
             padding: EdgeInsets.fromLTRB(marge, 8, marge, 0),
             child: Bloc(
-              fond: const Color(0xFFE7F4EC),
+              fond: LiveColors.teinteVerte,
               padding: 12,
-              child: const Row(
+              child: Row(
                 children: [
                   Icon(Icons.verified_user_rounded, color: LiveColors.succes),
                   SizedBox(width: 10),
                   Expanded(
-                    child: Text(
-                      'Postuler sur Live est toujours gratuit. Les frais '
-                      'officiels éventuels sont affichés avant de postuler.',
-                    ),
+                    child: Text(context.t.opportunitesPostulerSurLiveEst),
                   ),
                 ],
               ),
@@ -125,7 +122,9 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
-              _type == null ? 'À ne pas manquer' : _type!.libelle,
+              _type == null
+                  ? context.t.opportunitesANePasManquer
+                  : _type!.libelle,
             ),
           ),
           Padding(
@@ -145,7 +144,7 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Préparer sa candidature'),
+            child: EnTeteSection(context.t.opportunitesPreparerSaCandidature),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
@@ -153,20 +152,20 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
               children: [
                 LigneMenu(
                   icone: Icons.description_outlined,
-                  titre: 'Faire mon CV avec Live IA',
-                  detail: 'Prêt en 1 minute, au format des recruteurs',
+                  titre: context.t.opportunitesFaireMonCvAvec,
+                  detail: context.t.opportunitesPretEn1Minute,
                   onTap: () => context.push('/ia/service/cv'),
                 ),
                 LigneMenu(
                   icone: Icons.quiz_outlined,
-                  titre: 'S’entraîner aux concours',
-                  detail: '1 200 QCM corrigés et chronométrés',
+                  titre: context.t.opportunitesSEntrainerAuxConcours,
+                  detail: context.t.opportunitesN1200QcmCorriges,
                   onTap: () => context.push('/contenu/n6'),
                 ),
                 LigneMenu(
                   icone: Icons.notifications_active_outlined,
-                  titre: 'Créer une alerte',
-                  detail: 'Être prévenu des nouvelles bourses et stages',
+                  titre: context.t.opportunitesCreerUneAlerte,
+                  detail: context.t.opportunitesEtrePrevenuDesNouvelles,
                   onTap: () => context.push('/alertes'),
                 ),
               ],

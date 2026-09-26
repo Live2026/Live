@@ -22,7 +22,7 @@ class EcranAdresseLive extends StatelessWidget {
           reperes: [
             Repere(
               position: _position,
-              libelle: 'Chez moi',
+              libelle: context.t.piliersChezMoi,
               selectionne: true,
               onTap: () {},
             ),
@@ -36,8 +36,8 @@ class EcranAdresseLive extends StatelessWidget {
         Bloc(
           child: Column(
             children: [
-              const Text(
-                'Mon Adresse Live',
+              Text(
+                context.t.piliersMonAdresseLive,
                 style: TextStyle(color: LiveColors.gris),
               ),
               const Text(
@@ -54,9 +54,10 @@ class EcranAdresseLive extends StatelessWidget {
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () => informer(context, 'Code copié : $_code'),
+                      onPressed: () =>
+                          informer(context, context.t.piliersCodeCopie(_code)),
                       icon: const Icon(Icons.copy_rounded),
-                      label: const Text('Copier'),
+                      label: Text(context.t.piliersCopier),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -64,10 +65,13 @@ class EcranAdresseLive extends StatelessWidget {
                     child: FilledButton.icon(
                       onPressed: () => partager(
                         context,
-                        'Mon Adresse Live : $_code · live.africa/a/$_code',
+                        context.t.piliersMonAdresseLien(
+                          _code,
+                          'live.africa/a/$_code',
+                        ),
                       ),
                       icon: const Icon(Icons.share_rounded),
-                      label: const Text('Partager'),
+                      label: Text(context.t.partager),
                     ),
                   ),
                 ],
@@ -76,7 +80,7 @@ class EcranAdresseLive extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        const Bloc(
+        Bloc(
           child: Row(
             children: [
               SizedBox(
@@ -93,13 +97,10 @@ class EcranAdresseLive extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Repère',
+                      context.t.piliersRepere,
                       style: TextStyle(fontWeight: FontWeight.w800),
                     ),
-                    Text(
-                      'Derrière le marché Total, portail bleu, 3e maison '
-                      'après la boutique Chez Ya Mado.',
-                    ),
+                    Text(context.t.piliersDerriereLeMarcheTotal),
                   ],
                 ),
               ),
@@ -107,25 +108,19 @@ class EcranAdresseLive extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        for (final (icone, texte) in const [
-          (
-            Icons.two_wheeler_rounded,
-            'Le livreur voit l’itinéraire et la photo du portail',
-          ),
-          (
-            Icons.home_work_rounded,
-            'Vos visiteurs et vos pros trouvent sans appeler',
-          ),
+        for (final (icone, texte) in [
+          (Icons.two_wheeler_rounded, context.t.piliersLeLivreurVoitL),
+          (Icons.home_work_rounded, context.t.piliersVosVisiteursEtVos),
           (
             Icons.lock_outline_rounded,
-            'Visible seulement par ceux à qui vous l’envoyez',
+            context.t.piliersVisibleSeulementParCeux,
           ),
         ])
           LigneMenu(icone: icone, titre: texte),
       ],
     );
     return Scaffold(
-      appBar: AppBar(title: const Text('Adresse Live')),
+      appBar: AppBar(title: Text(context.t.piliersAdresseLive)),
       body: ListView(
         padding: EdgeInsets.all(grand ? 24 : 16),
         children: [
@@ -164,7 +159,7 @@ class _EcranPointsRelaisState extends State<EcranPointsRelais> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Points relais')),
+      appBar: AppBar(title: Text(context.t.piliersPointsRelais)),
       body: ListView(
         padding: EdgeInsets.all(context.grandEcran ? 24 : 16),
         children: [
@@ -198,12 +193,10 @@ class _EcranPointsRelaisState extends State<EcranPointsRelais> {
                   duration: const Duration(milliseconds: 200),
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: LiveColors.surface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: i == _choix
-                          ? LiveColors.succes
-                          : const Color(0xFFE4E8EE),
+                      color: i == _choix ? LiveColors.succes : LiveColors.filet,
                       width: i == _choix ? 2 : 1,
                     ),
                   ),
@@ -219,17 +212,20 @@ class _EcranPointsRelaisState extends State<EcranPointsRelais> {
                         style: const TextStyle(color: LiveColors.gris),
                       ),
                       const SizedBox(height: 8),
-                      const Wrap(
+                      Wrap(
                         spacing: 6,
                         runSpacing: 6,
                         children: [
                           Etiquette(
-                            'Dépôt de colis',
+                            context.t.piliersDepotDeColis,
                             icone: Icons.inventory_2_rounded,
                           ),
-                          Etiquette('Retrait', icone: Icons.qr_code_2_rounded),
                           Etiquette(
-                            'Espèces en MoMo',
+                            context.t.piliersRetrait,
+                            icone: Icons.qr_code_2_rounded,
+                          ),
+                          Etiquette(
+                            context.t.piliersEspecesEnMomo,
                             icone: Icons.payments_rounded,
                           ),
                         ],
@@ -239,9 +235,8 @@ class _EcranPointsRelaisState extends State<EcranPointsRelais> {
                 ),
               ),
             ),
-          const Text(
-            'Au point relais, le colis est remis contre votre QR ; les '
-            'espèces sont converties en Mobile Money par un agent agréé.',
+          Text(
+            context.t.piliersAuPointRelaisLe,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
         ],

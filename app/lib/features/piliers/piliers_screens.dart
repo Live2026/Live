@@ -10,12 +10,14 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'tontines.dart';
 part 'tontine_detail.dart';
 part 'achats_groupes.dart';
 part 'diaspora.dart';
 part 'transfert.dart';
+part 'transfert_recevoir.dart';
 part 'factures.dart';
 part 'adresse_points.dart';
 

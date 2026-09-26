@@ -20,7 +20,7 @@ class _EcranFinanceState extends State<EcranFinance> {
     const objectif = 150000;
     const epargne = 62000;
     return Scaffold(
-      appBar: AppBar(title: const Text('Services financiers')),
+      appBar: AppBar(title: Text(context.t.expansionServicesFinanciers)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
@@ -30,28 +30,36 @@ class _EcranFinanceState extends State<EcranFinance> {
             enfants: [
               _Service(
                 icone: Icons.splitscreen_rounded,
-                titre: 'Payer en 3 fois',
-                texte:
-                    'Un téléphone à ${fcfa(prix)} : 3 × ${fcfa((prix / 3).ceil())}, sans frais cachés.',
-                enfant: const ProgressionEtapes(
-                  etapes: ['Aujourd’hui', 'Dans 1 mois', 'Dans 2 mois'],
+                titre: context.t.expansionPayerEn3Fois,
+                texte: context.t.expansionTroisFois(
+                  fcfa(prix),
+                  fcfa((prix / 3).ceil()),
+                ),
+                enfant: ProgressionEtapes(
+                  etapes: [
+                    context.t.appelsAujourdhui,
+                    context.t.expansionDans1Mois,
+                    context.t.expansionDans2Mois,
+                  ],
                   actuelle: 0,
                 ),
-                action: 'Voir les produits éligibles',
+                action: context.t.expansionVoirLesProduitsEligibles,
                 onTap: () => context.push(
                   '/market/liste?categorie=T%C3%A9l%C3%A9phones',
                 ),
               ),
               _Service(
                 icone: Icons.savings_rounded,
-                titre: 'Tirelire Live',
-                texte:
-                    'Mettez de côté une part de chaque vente, automatiquement.',
+                titre: context.t.expansionTirelireLive,
+                texte: context.t.expansionMettezDeCoteUne,
                 enfant: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${fcfa(epargne)} sur ${fcfa(objectif)} · nouvelle moto',
+                      context.t.expansionEpargneObjectif(
+                        fcfa(epargne),
+                        fcfa(objectif),
+                      ),
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 6),
@@ -64,11 +72,11 @@ class _EcranFinanceState extends State<EcranFinance> {
                         minHeight: 8,
                         borderRadius: BorderRadius.circular(4),
                         color: LiveColors.succes,
-                        backgroundColor: const Color(0xFFE4E8EE),
+                        backgroundColor: LiveColors.filet,
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Text('${_epargne.round()} % de chaque vente'),
+                    Text(context.t.expansionPartVente(_epargne.round())),
                     Slider(
                       value: _epargne,
                       min: 0,
@@ -79,18 +87,17 @@ class _EcranFinanceState extends State<EcranFinance> {
                     ),
                   ],
                 ),
-                action: 'Mettre à jour',
+                action: context.t.expansionMettreAJour,
                 onTap: () => informer(
                   context,
-                  'Tirelire : ${_epargne.round()} % de chaque vente.',
+                  context.t.expansionTirelirePart(_epargne.round()),
                 ),
               ),
               _Service(
                 icone: Icons.account_balance_rounded,
-                titre: 'Micro-crédit vendeur',
-                texte:
-                    'Grâce à vos ventes dans Live, jusqu’à ${fcfa(300000)} pour votre stock, remboursés sur vos ventes.',
-                enfant: const Row(
+                titre: context.t.expansionMicroCreditVendeur,
+                texte: context.t.expansionMicroCredit(fcfa(300000)),
+                enfant: Row(
                   children: [
                     Icon(
                       Icons.verified_rounded,
@@ -99,23 +106,21 @@ class _EcranFinanceState extends State<EcranFinance> {
                     ),
                     SizedBox(width: 6),
                     Expanded(
-                      child: Text('Éligible : 214 ventes, note 4,8, 0 litige'),
+                      child: Text(context.t.expansionEligible214VentesNote),
                     ),
                   ],
                 ),
-                action: 'Simuler un crédit',
+                action: context.t.expansionSimulerUnCredit,
                 onTap: () => informer(
                   context,
-                  'Simulation : ${fcfa(200000)} sur 6 mois, remboursés par 10 % de vos ventes.',
+                  context.t.expansionSimulationCredit(fcfa(200000)),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 12),
-          const Text(
-            'Ces services sont fournis par des établissements agréés par la '
-            'COBAC. Live transmet votre demande, avec votre accord ; il ne '
-            'prête pas lui-même.',
+          Text(
+            context.t.expansionCesServicesSontFournis,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
         ],
@@ -152,7 +157,7 @@ class _Service extends StatelessWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFF1E0),
+                  color: LiveColors.teinteOrange,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(icone, color: LiveColors.orangeVif),

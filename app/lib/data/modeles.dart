@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/textes.dart';
+
 /// Modèles de données du prototype (docs/21 pour le modèle réel).
 
 enum Verticale { market, immo, services }
@@ -26,6 +28,20 @@ extension InfoReglement on Reglement {
     Reglement.dansLive => 'Payé dans Live',
     Reglement.surPlace => 'Voir puis payer à la remise',
     Reglement.direct => 'Payé en direct',
+  };
+
+  /// Libellés dans la langue choisie (les getters ci-dessus restent la valeur
+  /// enregistrée, en français).
+  String libelleDe(Textes t) => switch (this) {
+    Reglement.dansLive => t.reglementDansLive,
+    Reglement.surPlace => t.reglementSurPlace,
+    Reglement.direct => t.reglementDirect,
+  };
+
+  String courtDe(Textes t) => switch (this) {
+    Reglement.dansLive => t.reglementDansLiveCourt,
+    Reglement.surPlace => t.reglementSurPlaceCourt,
+    Reglement.direct => t.reglementDirectCourt,
   };
 
   String get court => switch (this) {
@@ -137,6 +153,17 @@ extension LibelleTypeBien on TypeBien {
     TypeBien.villa => 'Villa',
     TypeBien.local => 'Local commercial',
     TypeBien.terrain => 'Terrain',
+  };
+
+  /// Libellé dans la langue choisie.
+  String libelleDe(Textes t) => switch (this) {
+    TypeBien.appartement => t.bienAppartement,
+    TypeBien.maison => t.bienMaison,
+    TypeBien.studio => t.bienStudio,
+    TypeBien.chambre => t.bienChambre,
+    TypeBien.villa => t.bienVilla,
+    TypeBien.local => t.bienLocal,
+    TypeBien.terrain => t.bienTerrain,
   };
 
   IconData get icone => switch (this) {

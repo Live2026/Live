@@ -63,7 +63,7 @@
 | Gestion d'état | **Riverpod** | Testable, adapté à une grosse application modulaire |
 | Navigation et liens profonds | **go_router** + **Android App Links / iOS Universal Links** sur le domaine de Live | Les liens `live.xx/p/123` ouvrent directement l'annonce |
 | Client backend | **supabase_flutter** | Auth, requêtes, Realtime, Storage |
-| Base locale | **drift** (SQLite) | Brouillons hors ligne, cache, file d'envoi |
+| Base locale | **drift** (SQLite) | Brouillons hors ligne, cache, file d'envoi (détail : document 26) |
 | Lecture vidéo | Lecteur HLS natif (**video_player** ; `media_kit` à évaluer) | Lecture adaptative |
 | Compression vidéo et image sur l'appareil | Plugin de compression natif (Android MediaCodec / iOS AVFoundation) ; WebP pour les images | Diviser la taille des envois (voir section 6.3) |
 | Envoi de fichiers reprenable | Protocole **tus** | Reprise après coupure réseau |
@@ -268,7 +268,7 @@ Hypothèses de tarifs publics de Cloudflare Stream : **environ 5 $ par 1 000 min
 | Direct d'un vendeur ou d'un créateur vers de nombreux spectateurs | **Cloudflare Stream Live** (envoi RTMPS ou WebRTC depuis le téléphone, lecture HLS basse latence), même fournisseur que la vidéo à la demande |
 | Chat, cadeaux, produits épinglés pendant le direct | **Supabase Realtime** (canaux par direct) |
 | Achat pendant le direct | Carte produit épinglée, avec le paiement Live Market standard |
-| Visite immobilière vidéo en tête-à-tête, appel vidéo acheteur-vendeur | **WebRTC** via un service géré (**LiveKit Cloud** ou **Agora**), à comparer en P2 |
+| Appels audio, vidéo et en groupe de la messagerie, visite immobilière en vidéo, appel à un pro | **WebRTC** via un service géré : **LiveKit** retenu en premier choix, Agora en second (document 07, §13). Mux ne sert pas aux appels |
 | Rediffusion | Enregistrement automatique du direct, devenant une vidéo à la demande (soumise aux règles de purge) |
 
 ### 6.8 Modération de la vidéo
@@ -395,7 +395,7 @@ Toutes les notifications passent par une **file** (`pgmq`) et une Edge Function 
 ## 14. Dépendances
 
 - Document 06 (paiements) : grand livre, agrégateur, webhooks.
-- Document 21 (modèle de données) : détail des tables de chaque schéma.
+- Document 26 (back-end) : détail des tables de chaque schéma, base locale Drift, synchronisation, ordre de construction.
 - Document 22 (sécurité et conformité) : localisation des données, conservation, chiffrement.
 - Documents 10, 11, 12 : règles métier implémentées dans les fonctions PostgreSQL.
 

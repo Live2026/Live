@@ -9,6 +9,7 @@ import '../../data/mock.dart';
 import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'fans.dart';
 
@@ -35,13 +36,13 @@ class _EcranStudioState extends ConsumerState<EcranStudio> {
     final facteur = _periode == 7 ? 1 : 4;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Studio créateur'),
+        title: Text(context.t.createursStudioCreateur),
         actions: [
           for (final p in const [7, 28])
             Padding(
               padding: const EdgeInsets.only(right: 6),
               child: ChoiceChip(
-                label: Text('$p j'),
+                label: Text(context.t.createursNJours(p)),
                 selected: _periode == p,
                 onSelected: (_) => setState(() => _periode = p),
               ),
@@ -58,47 +59,67 @@ class _EcranStudioState extends ConsumerState<EcranStudio> {
             hauteur: 112,
             enfants: [
               TuileChiffre(
-                libelle: 'Vues',
+                libelle: context.t.createursVues,
                 valeur: compact(3100 * facteur),
                 icone: Icons.visibility_outlined,
-                detail: '+12 % sur la période',
+                detail: context.t.createursN12SurLaPeriode,
               ),
               TuileChiffre(
-                libelle: 'Temps de visionnage',
+                libelle: context.t.createursTempsDeVisionnage,
                 valeur: '${42 * facteur} h',
                 icone: Icons.schedule_rounded,
-                detail: 'moyenne 38 s par vidéo',
+                detail: context.t.createursMoyenne38SPar,
               ),
               TuileChiffre(
-                libelle: 'Nouveaux abonnés',
+                libelle: context.t.createursNouveauxAbonnes,
                 valeur: '+${9 * facteur}',
                 icone: Icons.person_add_alt_1_outlined,
-                detail: 'grâce à vos directs',
+                detail: context.t.createursGraceAVosDirects,
                 couleur: LiveColors.succes,
               ),
               TuileChiffre(
-                libelle: 'Cadeaux reçus',
+                libelle: context.t.createursCadeauxRecus,
                 valeur: '0 FCFA',
                 icone: Icons.card_giftcard_rounded,
-                detail: 'dès $seuilCreateur abonnés',
+                detail: context.t.createursDesAbonnes(seuilCreateur),
                 couleur: LiveColors.cuivre,
               ),
             ],
           ),
           const SizedBox(height: 14),
           _CarteMonetisation(abonnes: abonnes, identite: etat.identiteVerifiee),
-          const EnTeteSection('Outils de création'),
+          EnTeteSection(context.t.createursOutilsDeCreation),
           GrilleAdaptative(
             largeurMax: 130,
             espacement: 8,
             hauteur: 92,
             enfants: [
-              for (final (icone, libelle, route) in const [
-                (Icons.videocam_rounded, 'Vidéo', '/publier/media'),
-                (Icons.podcasts_rounded, 'Direct', '/direct/lancer'),
-                (Icons.school_rounded, 'Cours', '/apprendre/vendre'),
-                (Icons.poll_rounded, 'Sondage', '/publier/media'),
-                (Icons.event_rounded, 'Programmer', '/publier/media'),
+              for (final (icone, libelle, route) in [
+                (
+                  Icons.videocam_rounded,
+                  context.t.createursVideo,
+                  '/publier/media',
+                ),
+                (
+                  Icons.podcasts_rounded,
+                  context.t.createursDirect,
+                  '/direct/lancer',
+                ),
+                (
+                  Icons.school_rounded,
+                  context.t.createursCours,
+                  '/apprendre/vendre',
+                ),
+                (
+                  Icons.poll_rounded,
+                  context.t.createursSondage,
+                  '/publier/media',
+                ),
+                (
+                  Icons.event_rounded,
+                  context.t.createursProgrammer,
+                  '/publier/media',
+                ),
               ])
                 Semantics(
                   button: true,
@@ -124,41 +145,40 @@ class _EcranStudioState extends ConsumerState<EcranStudio> {
                 ),
             ],
           ),
-          const EnTeteSection('Comment les créateurs gagnent'),
-          for (final (icone, titre, texte) in const [
+          EnTeteSection(context.t.createursCommentLesCreateursGagnent),
+          for (final (icone, titre, texte) in [
             (
               Icons.card_giftcard_rounded,
-              'Cadeaux',
-              'Offerts par les fans pendant les directs et sous les vidéos.',
+              context.t.createursCadeaux,
+              context.t.createursOffertsParLesFans,
             ),
             (
               Icons.star_rounded,
-              'Abonnements de fans',
-              '500 ou 1 500 FCFA par mois : badge et contenus réservés.',
+              context.t.createursAbonnementsDeFans,
+              context.t.createursN500Ou1500,
             ),
             (
               Icons.shopping_bag_rounded,
-              'Live shopping',
-              'Vos produits, ou ceux d’une boutique partenaire, vendus en direct.',
+              context.t.createursLiveShopping,
+              context.t.createursVosProduitsOuCeux,
             ),
             (
               Icons.handshake_rounded,
-              'Partenariats de marques',
-              'Contrats signés dans Live, paiement garanti.',
+              context.t.createursPartenariatsDeMarques,
+              context.t.createursContratsSignesDansLive,
             ),
           ])
             LigneMenu(icone: icone, titre: titre, detail: texte),
           const SizedBox(height: 8),
-          const Text(
-            'Vous gardez 75 % des cadeaux et des abonnements de fans ; Live '
-            'garde 25 % (document 02). Retrait sur MoMo ou Airtel Money.',
+          Text(
+            context.t.createursVousGardez75Des,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: () => context.push('/fans/kimbembe'),
             icon: const Icon(Icons.visibility_outlined),
-            label: const Text('Voir la page fans d’un créateur'),
+            label: Text(context.t.createursVoirLaPageFans),
           ),
         ],
       ),
@@ -220,8 +240,8 @@ class _CarteMonetisation extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Programme Créateurs',
+                Text(
+                  context.t.createursProgrammeCreateurs,
                   style: TextStyle(
                     color: LiveColors.ambreClair,
                     fontWeight: FontWeight.w900,
@@ -230,19 +250,25 @@ class _CarteMonetisation extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '$abonnes / $seuilCreateur abonnés · il en manque ${seuilCreateur - abonnes}',
+                  context.t.createursIlEnManque(
+                    abonnes,
+                    seuilCreateur,
+                    seuilCreateur - abonnes,
+                  ),
                   style: const TextStyle(color: Colors.white),
                 ),
                 Text(
-                  identite ? 'Identité vérifiée' : 'Identité à vérifier',
+                  identite
+                      ? context.t.createursIdentiteVerifiee
+                      : context.t.createursIdentiteAVerifier,
                   style: TextStyle(
                     color: identite ? const Color(0xFF86EFAC) : Colors.white70,
                     fontSize: 12.5,
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'Ensuite : cadeaux, abonnements de fans et partenariats.',
+                Text(
+                  context.t.createursEnsuiteCadeauxAbonnementsDe,
                   style: TextStyle(color: Colors.white70, fontSize: 12.5),
                 ),
               ],

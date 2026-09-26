@@ -6,6 +6,7 @@ import '../../core/format.dart';
 import '../../core/theme.dart';
 import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'fonds.dart';
 part 'finance.dart';
@@ -40,12 +41,12 @@ class EcranLivraison extends StatelessWidget {
                 reperes: [
                   Repere(
                     position: _boutique,
-                    libelle: 'Boutique',
+                    libelle: context.t.expansionBoutique,
                     onTap: () => context.push('/boutique/grace'),
                   ),
                   Repere(
                     position: _client,
-                    libelle: 'Vous',
+                    libelle: context.t.expansionVous,
                     couleur: LiveColors.succes,
                     onTap: () {},
                   ),
@@ -67,7 +68,7 @@ class EcranLivraison extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: BoutonVerre(
                   icone: Icons.arrow_back_rounded,
-                  libelle: 'Retour',
+                  libelle: context.t.retour,
                   onTap: () => context.pop(),
                 ),
               ),
@@ -80,7 +81,7 @@ class EcranLivraison extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: LiveColors.surface,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                 boxShadow: [
                   BoxShadow(color: Color(0x33041936), blurRadius: 16),
@@ -92,11 +93,11 @@ class EcranLivraison extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Expanded(
                           child: Text(
-                            'Arrivée dans 12 min',
+                            context.t.expansionArriveeDans12Min,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w900,
@@ -104,16 +105,21 @@ class EcranLivraison extends StatelessWidget {
                           ),
                         ),
                         Etiquette(
-                          'En route',
+                          context.t.expansionEnRoute,
                           icone: Icons.two_wheeler_rounded,
-                          fond: Color(0xFFFFF1E0),
+                          fond: LiveColors.teinteOrange,
                           couleur: LiveColors.cuivre,
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
-                    const ProgressionEtapes(
-                      etapes: ['Prête', 'Récupérée', 'En route', 'Livrée'],
+                    ProgressionEtapes(
+                      etapes: [
+                        context.t.expansionPrete,
+                        context.t.expansionRecuperee,
+                        context.t.expansionEnRoute,
+                        context.t.expansionLivree,
+                      ],
                       actuelle: 2,
                     ),
                     const SizedBox(height: 12),
@@ -126,16 +132,16 @@ class EcranLivraison extends StatelessWidget {
                           verifie: true,
                         ),
                         const SizedBox(width: 10),
-                        const Expanded(
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Armel · livreur vérifié',
+                                context.t.expansionArmelLivreurVerifie,
                                 style: TextStyle(fontWeight: FontWeight.w700),
                               ),
                               Text(
-                                'Moto · 4,9/5 · 1 240 courses',
+                                context.t.expansionMoto495,
                                 style: TextStyle(
                                   color: LiveColors.gris,
                                   fontSize: 12.5,
@@ -145,28 +151,26 @@ class EcranLivraison extends StatelessWidget {
                           ),
                         ),
                         IconButton.filledTonal(
-                          tooltip: 'Appeler le livreur',
+                          tooltip: context.t.expansionAppelerLeLivreur,
                           onPressed: () => informer(
                             context,
-                            'Appel par numéro masqué (simulation).',
+                            context.t.expansionAppelParNumeroMasque,
                           ),
                           icon: const Icon(Icons.call_rounded),
                         ),
                         IconButton.filledTonal(
-                          tooltip: 'Écrire au livreur',
+                          tooltip: context.t.expansionEcrireAuLivreur,
                           onPressed: () => context.push('/conversation'),
                           icon: const Icon(Icons.chat_bubble_outline_rounded),
                         ),
                       ],
                     ),
                     const Divider(height: 20),
-                    const Row(
+                    Row(
                       children: [
                         Icon(Icons.pin_rounded, color: LiveColors.bleu),
                         SizedBox(width: 8),
-                        Expanded(
-                          child: Text('Code de remise à donner au livreur'),
-                        ),
+                        Expanded(child: Text(context.t.expansionCodeDeRemiseA)),
                         Text(
                           'LV-L4821',
                           style: TextStyle(
@@ -178,7 +182,7 @@ class EcranLivraison extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Course ${fcfa(1500)} · payée dans Live, versée au livreur à la remise.',
+                      context.t.expansionCourse(fcfa(1500)),
                       style: const TextStyle(
                         color: LiveColors.gris,
                         fontSize: 12.5,

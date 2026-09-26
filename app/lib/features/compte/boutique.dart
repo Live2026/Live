@@ -21,16 +21,19 @@ class EcranBoutique extends StatelessWidget {
       badge: v.badge,
       bio: v.bio,
       stats: [
-        (compact(v.abonnes), 'Abonnés'),
-        ('${v.ventes}', lesBiens.isEmpty ? 'Ventes' : 'Locations'),
-        (note(v.note).replaceAll('/5', ''), 'Note'),
-        (v.reponse, 'Répond en'),
+        (compact(v.abonnes), context.t.compteAbonnes),
+        (
+          '${v.ventes}',
+          lesBiens.isEmpty ? context.t.compteVentes : context.t.compteLocations,
+        ),
+        (note(v.note).replaceAll('/5', ''), context.t.compteNote),
+        (v.reponse, context.t.compteRepondEn),
       ],
       idSuivi: v.id,
       onglets: [
         if (savoirs.isNotEmpty)
           (
-            'Contenus',
+            context.t.compteContenus,
             GrilleAdaptative(
               largeurMax: 260,
               espacement: 12,
@@ -39,7 +42,7 @@ class EcranBoutique extends StatelessWidget {
           )
         else if (offres.isNotEmpty)
           (
-            'Opportunités',
+            context.t.compteOpportunites,
             GrilleAdaptative(
               largeurMax: 420,
               espacement: 12,
@@ -50,7 +53,7 @@ class EcranBoutique extends StatelessWidget {
           )
         else
           (
-            lesBiens.isEmpty ? 'Produits' : 'Biens',
+            lesBiens.isEmpty ? context.t.compteProduits : context.t.compteBiens,
             lesBiens.isEmpty
                 ? GrilleAdaptative(
                     largeurMax: 200,
@@ -63,13 +66,16 @@ class EcranBoutique extends StatelessWidget {
                     enfants: [for (final b in lesBiens) CarteBien(bien: b)],
                   ),
           ),
-        ('Vidéos', _GrilleVideos(couleur: v.couleur)),
-        ('Avis', const _ListeAvis()),
+        (context.t.compteVideos, _GrilleVideos(couleur: v.couleur)),
+        (context.t.compteAvis, const _ListeAvis()),
       ],
       infos: [
-        (Icons.location_on_outlined, '${v.quartier}, Brazzaville'),
-        (Icons.calendar_month_outlined, 'Sur Live depuis ${v.depuis}'),
-        (Icons.local_shipping_outlined, 'Livraison ou remise en main propre'),
+        (Icons.location_on_outlined, context.t.compteQuartierVille(v.quartier)),
+        (
+          Icons.calendar_month_outlined,
+          context.t.compteSurLiveDepuis(v.depuis),
+        ),
+        (Icons.local_shipping_outlined, context.t.compteLivraisonOuRemiseEn),
       ],
     );
   }

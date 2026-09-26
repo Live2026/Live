@@ -7,7 +7,7 @@ Future<void> ouvrirOffre(BuildContext context, Produit p) {
     isScrollControlled: true,
     showDragHandle: true,
     useSafeArea: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
@@ -41,12 +41,12 @@ class _FeuilleOffreState extends State<_FeuilleOffre> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Faire une offre',
+          Text(
+            context.t.marketFaireUneOffre,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
           ),
           Text(
-            '${p.titre} · prix demandé ${fcfa(p.prix)}',
+            context.t.marketTitrePrixDemande(p.titre, fcfa(p.prix)),
             style: const TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 20),
@@ -59,7 +59,9 @@ class _FeuilleOffreState extends State<_FeuilleOffre> {
           ),
           Center(
             child: Text(
-              remise > 0 ? '$remise % sous le prix demandé' : 'Prix demandé',
+              remise > 0
+                  ? context.t.marketPourcentSousPrix(remise)
+                  : context.t.marketPrixDemande,
               style: TextStyle(
                 color: remise > 20 ? LiveColors.erreur : LiveColors.gris,
               ),
@@ -86,9 +88,8 @@ class _FeuilleOffreState extends State<_FeuilleOffre> {
             ],
           ),
           const SizedBox(height: 12),
-          const Text(
-            'Si le vendeur accepte, vous recevez un lien de paiement sécurisé '
-            'dans la conversation. Offre valable 24 h.',
+          Text(
+            context.t.marketSiLeVendeurAccepteVous,
             style: TextStyle(color: LiveColors.gris, fontSize: 13),
           ),
           const SizedBox(height: 16),
@@ -100,13 +101,16 @@ class _FeuilleOffreState extends State<_FeuilleOffre> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      'Offre de ${fcfa(_montant)} envoyée à ${p.vendeur.nom}.',
+                      context.t.marketOffreEnvoyee(
+                        fcfa(_montant),
+                        p.vendeur.nom,
+                      ),
                     ),
                   ),
                 );
                 context.push('/conversation');
               },
-              child: Text('Envoyer mon offre · ${fcfa(_montant)}'),
+              child: Text(context.t.marketEnvoyerOffre(fcfa(_montant))),
             ),
           ),
         ],
@@ -136,7 +140,7 @@ class _EcranQrPaiementState extends ConsumerState<EcranQrPaiement> {
       orElse: () => ventes.first,
     );
     return Scaffold(
-      appBar: AppBar(title: const Text('Encaisser à la remise')),
+      appBar: AppBar(title: Text(context.t.marketEncaisserALaRemise)),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
@@ -146,7 +150,7 @@ class _EcranQrPaiementState extends ConsumerState<EcranQrPaiement> {
             style: const TextStyle(fontSize: 34, fontWeight: FontWeight.w900),
           ),
           Text(
-            '${v.produit.titre} · ${v.acheteur ?? 'Acheteur'}',
+            '${v.produit.titre} · ${v.acheteur ?? context.t.marketAcheteur}',
             textAlign: TextAlign.center,
             style: const TextStyle(color: LiveColors.gris),
           ),
@@ -154,41 +158,41 @@ class _EcranQrPaiementState extends ConsumerState<EcranQrPaiement> {
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 400),
             child: _paye
-                ? const Column(
+                ? Column(
                     key: ValueKey('paye'),
                     children: [
                       CocheAnimee(taille: 96),
                       Text(
-                        'Paiement reçu',
+                        context.t.marketPaiementRecu,
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                       Text(
-                        'Versé sur votre solde après 24 h sans réclamation.',
+                        context.t.marketVerseSurVotreSoldeApres,
                         textAlign: TextAlign.center,
                       ),
                     ],
                   )
                 : CarteQr(
                     key: const ValueKey('qr'),
-                    titre: 'Scanner pour payer',
+                    titre: context.t.marketScannerPourPayer,
                     donnee: 'live://payer/${v.id}',
                     codeSecours: 'LV-P7731',
-                    consigne: "L'acheteur scanne ce QR avec Live, puis valide avec son code MoMo ou Airtel.",
+                    consigne: context.t.marketLAcheteurScanneCeQr,
                   ),
           ),
           const SizedBox(height: 16),
           if (!_paye)
             BoutonSimulation(
-              texte: "Simuler : l'acheteur paie",
+              texte: context.t.marketSimulerLAcheteurPaie,
               onTap: () => setState(() => _paye = true),
             )
           else
             FilledButton(
               onPressed: () => context.go('/mes-ventes'),
-              child: const Text('Retour à mes ventes'),
+              child: Text(context.t.marketRetourAMesVentes),
             ),
         ],
       ),
@@ -199,15 +203,15 @@ class _EcranQrPaiementState extends ConsumerState<EcranQrPaiement> {
 /// F-PRO-01 — Booster une annonce : visibilité payée par Mobile Money.
 Future<void> ouvrirBoost(BuildContext context, WidgetRef ref, String titre) {
   final pro = ref.read(liveProvider).pro;
-  const offres = [
-    ('24 heures', 1000, 'env. 1 500 vues'),
-    ('3 jours', 2500, 'env. 5 000 vues'),
-    ('7 jours', 5000, 'env. 12 000 vues'),
+  final offres = [
+    (context.t.marketN24Heures, 1000, context.t.marketEnv1500Vues),
+    (context.t.marketN3Jours, 2500, context.t.marketEnv5000Vues),
+    (context.t.marketN7Jours, 5000, context.t.marketEnv12000Vues),
   ];
   return showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
@@ -215,12 +219,12 @@ Future<void> ouvrirBoost(BuildContext context, WidgetRef ref, String titre) {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Booster une annonce',
+            Text(
+              context.t.marketBoosterUneAnnonce,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
             ),
             Text(
-              '$titre · en tête du fil et des recherches à Brazzaville.'
+              '${context.t.marketBoostTitre(titre)}'
               '${pro ? ' Live Pro : −30 %.' : ''}',
               style: const TextStyle(color: LiveColors.gris),
             ),
@@ -240,7 +244,7 @@ Future<void> ouvrirBoost(BuildContext context, WidgetRef ref, String titre) {
                         PaiementEnCours(
                           type: TypePaiement.boost,
                           montant: pro ? (prix * 0.7).round() : prix,
-                          libelle: 'Boost $duree · $titre',
+                          libelle: context.t.marketBoostLibelle(duree, titre),
                           beneficiaire: 'Live',
                           cibleId: 'boost',
                         ),
@@ -249,8 +253,8 @@ Future<void> ouvrirBoost(BuildContext context, WidgetRef ref, String titre) {
                 },
               ),
             const SizedBox(height: 4),
-            const Text(
-              'Les annonces boostées portent la mention « Sponsorisé ».',
+            Text(
+              context.t.marketLesAnnoncesBoosteesPortentLa,
               style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
             ),
           ],

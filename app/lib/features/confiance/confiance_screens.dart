@@ -7,11 +7,17 @@ import '../../core/theme.dart';
 import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'reclamation.dart';
 
 /// Objet d'une transaction à noter ou à contester, selon son type.
-(String, String, int) objetTransaction(WidgetRef ref, String type, String id) {
+(String, String, int) objetTransaction(
+  Textes t,
+  WidgetRef ref,
+  String type,
+  String id,
+) {
   final e = ref.read(liveProvider);
   return switch (type) {
     'commande' => () {
@@ -25,7 +31,7 @@ part 'reclamation.dart';
     'visite' => () {
       final v = e.visites.where((v) => v.id == id).firstOrNull;
       return (
-        'Visite · ${v?.bien.titre ?? 'Appartement 2 chambres'}',
+        t.confianceVisiteDe(v?.bien.titre ?? t.confianceAppartement2Chambres),
         v?.bien.annonceur.nom ?? 'Agence Les Palmiers',
         v?.bien.fraisVisite ?? 2000,
       );
@@ -33,7 +39,7 @@ part 'reclamation.dart';
     _ => () {
       final p = e.prestations.where((p) => p.id == id).firstOrNull;
       return (
-        'Réparation fuite',
+        t.confianceReparationFuite,
         p?.devis.prestataire.nom ?? 'Serge',
         p?.devis.total ?? 25000,
       );
@@ -57,23 +63,28 @@ class _EcranAvisState extends ConsumerState<EcranAvis> {
   final _texte = TextEditingController();
   var _envoye = false;
 
-  static const _pointsPositifs = [
-    'Conforme aux photos',
-    'Ponctuel',
-    'Aimable',
-    'Bon prix',
-    'Bien emballé',
+  late final _pointsPositifs = [
+    context.t.confianceConformeAuxPhotos,
+    context.t.confiancePonctuel,
+    context.t.confianceAimable,
+    context.t.confianceBonPrix,
+    context.t.confianceBienEmballe,
   ];
-  static const _pointsNegatifs = [
-    'Pas conforme',
-    'En retard',
-    'Pas joignable',
-    'Trop cher',
+  late final _pointsNegatifs = [
+    context.t.confiancePasConforme,
+    context.t.confianceEnRetard,
+    context.t.confiancePasJoignable,
+    context.t.confianceTropCher,
   ];
 
   @override
   Widget build(BuildContext context) {
-    final (objet, pour, _) = objetTransaction(ref, widget.type, widget.id);
+    final (objet, pour, _) = objetTransaction(
+      context.t,
+      ref,
+      widget.type,
+      widget.id,
+    );
     if (_envoye) {
       return Scaffold(
         body: SafeArea(
@@ -84,13 +95,13 @@ class _EcranAvisState extends ConsumerState<EcranAvis> {
                 const Spacer(),
                 const CocheAnimee(taille: 96),
                 const SizedBox(height: 12),
-                const Text(
-                  'Merci pour votre avis',
+                Text(
+                  context.t.confianceMerciPourVotreAvis,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Il aide toute la communauté à choisir $pour en confiance.',
+                  context.t.confianceAideCommunaute(pour),
                   textAlign: TextAlign.center,
                 ),
                 const Spacer(),
@@ -98,7 +109,7 @@ class _EcranAvisState extends ConsumerState<EcranAvis> {
                   width: double.infinity,
                   child: FilledButton(
                     onPressed: () => context.go('/accueil'),
-                    child: const Text('Terminer'),
+                    child: Text(context.t.confianceTerminer),
                   ),
                 ),
               ],
@@ -109,7 +120,7 @@ class _EcranAvisState extends ConsumerState<EcranAvis> {
     }
     final points = _note >= 4 || _note == 0 ? _pointsPositifs : _pointsNegatifs;
     return Scaffold(
-      appBar: AppBar(title: const Text('Laisser un avis')),
+      appBar: AppBar(title: Text(context.t.confianceLaisserUnAvis)),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
@@ -123,7 +134,7 @@ class _EcranAvisState extends ConsumerState<EcranAvis> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Comment s’est passé votre échange avec $pour ?',
+            context.t.confianceCommentEchange(pour),
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
@@ -139,13 +150,13 @@ class _EcranAvisState extends ConsumerState<EcranAvis> {
           ),
           Center(
             child: Text(
-              const [
-                'Touchez une étoile',
-                'Très mauvais',
-                'Mauvais',
-                'Correct',
-                'Bien',
-                'Excellent',
+              [
+                context.t.confianceTouchezUneEtoile,
+                context.t.confianceTresMauvais,
+                context.t.confianceMauvais,
+                context.t.confianceCorrect,
+                context.t.confianceBien,
+                context.t.confianceExcellent,
               ][_note],
               style: const TextStyle(color: LiveColors.gris),
             ),
@@ -173,13 +184,13 @@ class _EcranAvisState extends ConsumerState<EcranAvis> {
           TextField(
             controller: _texte,
             maxLines: 3,
-            decoration: const InputDecoration(
-              labelText: 'Votre commentaire (facultatif)',
+            decoration: InputDecoration(
+              labelText: context.t.confianceVotreCommentaireFacultatif,
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Seuls les clients ayant payé dans Live peuvent noter : les avis sont donc vérifiés.',
+          Text(
+            context.t.confianceSeulsLesClientsAyant,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
         ],
@@ -194,7 +205,7 @@ class _EcranAvisState extends ConsumerState<EcranAvis> {
                       .donnerAvis('${widget.type}-${widget.id}');
                   setState(() => _envoye = true);
                 },
-          child: const Text('Publier mon avis'),
+          child: Text(context.t.confiancePublierMonAvis),
         ),
       ),
     );
@@ -214,39 +225,40 @@ class EcranProbleme extends ConsumerStatefulWidget {
 class _EcranProblemeState extends ConsumerState<EcranProbleme> {
   String? _motif;
   var _photos = 0;
-  var _souhait = 'Remboursement total';
+  late var _souhait = context.t.confianceRemboursementTotal;
   final _texte = TextEditingController();
 
   List<String> get _motifs => switch (widget.type) {
     'commande' => [
-      'Je n’ai rien reçu',
-      'Produit différent de l’annonce',
-      'Produit abîmé ou en panne',
-      'Il manque des articles',
+      context.t.confianceJeNAiRien,
+      context.t.confianceProduitDifferentDeL,
+      context.t.confianceProduitAbimeOuEn,
+      context.t.confianceIlManqueDesArticles,
     ],
     'visite' => [
-      'Le bien ne correspond pas',
-      'L’agent n’est pas venu',
-      'Le bien est déjà loué',
-      'On m’a demandé de l’argent en plus',
+      context.t.confianceLeBienNeCorrespond,
+      context.t.confianceLAgentNEst,
+      context.t.confianceLeBienEstDeja,
+      context.t.confianceOnMADemande,
     ],
     _ => [
-      'Travail mal fait',
-      'Le prestataire n’est pas venu',
-      'Travail non terminé',
-      'Dégâts causés',
+      context.t.confianceTravailMalFait,
+      context.t.confianceLePrestataireNEst,
+      context.t.confianceTravailNonTermine,
+      context.t.confianceDegatsCauses,
     ],
   };
 
   @override
   Widget build(BuildContext context) {
     final (objet, pour, montant) = objetTransaction(
+      context.t,
       ref,
       widget.type,
       widget.id,
     );
     return Scaffold(
-      appBar: AppBar(title: const Text('Signaler un problème')),
+      appBar: AppBar(title: Text(context.t.confianceSignalerUnProbleme)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -257,15 +269,15 @@ class _EcranProblemeState extends ConsumerState<EcranProbleme> {
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    '$objet · $pour\n${fcfa(montant)} restent bloqués par Live pendant l’examen.',
+                    context.t.confianceObjetBloques(objet, pour, fcfa(montant)),
                   ),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Que s’est-il passé ?',
+          Text(
+            context.t.confianceQueSEstIl,
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 6),
@@ -279,13 +291,13 @@ class _EcranProblemeState extends ConsumerState<EcranProbleme> {
           TextField(
             controller: _texte,
             maxLines: 3,
-            decoration: const InputDecoration(
-              labelText: 'Expliquez en quelques mots',
+            decoration: InputDecoration(
+              labelText: context.t.confianceExpliquezEnQuelquesMots,
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Preuves',
+          Text(
+            context.t.confiancePreuves,
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
@@ -317,18 +329,18 @@ class _EcranProblemeState extends ConsumerState<EcranProbleme> {
             ],
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Ce que vous demandez',
+          Text(
+            context.t.confianceCeQueVousDemandez,
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
             children: [
-              for (final s in const [
-                'Remboursement total',
-                'Remboursement partiel',
-                'Échange ou reprise',
+              for (final s in [
+                context.t.confianceRemboursementTotal,
+                context.t.confianceRemboursementPartiel,
+                context.t.confianceEchangeOuReprise,
               ])
                 ChoiceChip(
                   label: Text(s),
@@ -338,9 +350,7 @@ class _EcranProblemeState extends ConsumerState<EcranProbleme> {
             ],
           ),
           const SizedBox(height: 16),
-          const BandeauProtection(
-            'L’autre partie a 48 h pour répondre. Sinon, Live décide sur la base de vos preuves.',
-          ),
+          BandeauProtection(context.t.confianceLAutrePartieA),
         ],
       ),
       bottomNavigationBar: BarreAction(
@@ -353,7 +363,7 @@ class _EcranProblemeState extends ConsumerState<EcranProbleme> {
                       .ouvrirReclamation('$objet · $pour', _motif!, montant);
                   context.pushReplacement('/reclamation/$id');
                 },
-          child: const Text('Envoyer ma réclamation'),
+          child: Text(context.t.confianceEnvoyerMaReclamation),
         ),
       ),
     );

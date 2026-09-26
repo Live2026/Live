@@ -33,7 +33,7 @@ class _BarreLaterale extends StatelessWidget {
           curve: Curves.easeOutCubic,
           width: large ? 232 : 84,
           child: Material(
-            color: Colors.white,
+            color: LiveColors.surface,
             child: SafeArea(
               right: false,
               child: ClipRect(
@@ -77,9 +77,11 @@ class _BarreLaterale extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
             child: Tooltip(
-              message: replie ? 'Déplier le menu' : 'Replier le menu',
+              message: replie
+                  ? context.t.deplierLeMenu
+                  : context.t.replierLeMenu,
               child: Material(
-                color: const Color(0xFFF3F5F8),
+                color: LiveColors.champ,
                 borderRadius: BorderRadius.circular(8),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(8),
@@ -94,14 +96,14 @@ class _BarreLaterale extends StatelessWidget {
                           duration: const Duration(milliseconds: 260),
                           child: const Icon(
                             Icons.keyboard_double_arrow_left_rounded,
-                            color: Color(0xFF5B6573),
+                            color: LiveColors.gris,
                           ),
                         ),
                         if (large) ...[
                           const SizedBox(width: 8),
-                          const Text(
-                            'Replier',
-                            style: TextStyle(color: Color(0xFF5B6573)),
+                          Text(
+                            context.t.replier,
+                            style: TextStyle(color: LiveColors.gris),
                           ),
                         ],
                       ],
@@ -135,18 +137,16 @@ class _Entree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final teinte = active ? couleur : const Color(0xFF5B6573);
+    final teinte = active ? couleur : LiveColors.gris;
     final style = TextStyle(
       fontSize: large ? 15 : 12,
       fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-      color: active || large
-          ? (active ? couleur : const Color(0xFF041936))
-          : teinte,
+      color: active || large ? (active ? couleur : LiveColors.encre) : teinte,
     );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
       child: Material(
-        color: active ? const Color(0xFFE6EBF2) : Colors.transparent,
+        color: active ? LiveColors.voile : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         child: InkWell(
           borderRadius: BorderRadius.circular(8),

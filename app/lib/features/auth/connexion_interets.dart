@@ -11,44 +11,50 @@ class EcranConnexion extends ConsumerStatefulWidget {
 class _EcranConnexionState extends ConsumerState<EcranConnexion> {
   var _etape = 0; // 0 numéro, 1 code SMS, 2 code secret
   final _tel = TextEditingController(text: '06 123 45 67');
+  var _pays = 0;
+
+  /// Relit le numéro avec l'utilisateur, puis passe au code SMS.
+  Future<void> _envoyer() async {
+    final pays = paysTelephone[_pays];
+    if (!pays.complet(_tel.text)) return;
+    if (await confirmerNumero(
+          context,
+          '${pays.indicatif} ${_tel.text}',
+          alerte: alerteNumero(context, pays, _tel.text),
+        ) &&
+        mounted) {
+      setState(() => _etape = 1);
+    }
+  }
 
   Future<void> _oublie() async {
     if (await confirmer(
       context,
-      titre: 'Code secret oublié',
-      texte:
-          'Nous envoyons un code par SMS à votre numéro. Vous pourrez '
-          'ensuite choisir un nouveau code secret.',
-      action: 'Recevoir le code',
+      titre: context.t.demarrageCodeSecretOublie,
+      texte: context.t.demarrageCodeSecretOublieTexte,
+      action: context.t.demarrageRecevoirCode,
     )) {
-      if (mounted) informer(context, 'Code envoyé par SMS.');
+      if (mounted) informer(context, context.t.demarrageCodeEnvoyeSms);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final (icone, couleurs, titre, texte) = switch (_etape) {
-      0 => (
-        Icons.waving_hand_rounded,
-        const [LiveColors.ambre, LiveColors.orangeVif],
-        'Bon retour sur Live',
-        'Entrez le numéro de votre compte : nous vous envoyons un code.',
-      ),
+    final (titre, texte) = switch (_etape) {
+      0 => (context.t.demarrageBonRetour, context.t.demarrageBonRetourTexte),
       1 => (
-        Icons.sms_rounded,
-        const [Color(0xFF38BDF8), Color(0xFF0369A1)],
-        'Code reçu par SMS',
-        'Envoyé au +242 ${_tel.text}. Prototype : 6 chiffres au choix.',
+        context.t.demarrageCodeRecuSms,
+        context.t.demarrageEnvoyeAu(
+          '${paysTelephone[_pays].indicatif} ${_tel.text}',
+        ),
       ),
       _ => (
-        Icons.lock_rounded,
-        const [Color(0xFF34D399), Color(0xFF15803D)],
-        'Votre code secret',
-        'Pour protéger votre compte sur cet appareil.',
+        context.t.demarrageVotreCodeSecret,
+        context.t.demarrageProtegerAppareil,
       ),
     };
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
@@ -56,24 +62,35 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
             duration: const Duration(milliseconds: 300),
             child: EnTeteDemarrage(
               key: ValueKey(_etape),
-              icone: icone,
-              couleurs: couleurs,
               titre: titre,
               texte: texte,
             ),
           ),
-          if (_etape == 0)
-            TextField(
-              controller: _tel,
-              keyboardType: TextInputType.phone,
-              style: const TextStyle(fontSize: 17, letterSpacing: 1),
-              decoration: const InputDecoration(
-                prefixText: '+242 ',
-                labelText: 'Numéro de téléphone',
+          if (_etape == 0) ...[
+            ChampTelephone(
+              controleur: _tel,
+              pays: _pays,
+              onPays: (i) => setState(() => _pays = i),
+              onChanged: () => setState(() {}),
+              onValider: _envoyer,
+            ),
+            // Sur ordinateur, comme WhatsApp Web : le téléphone déjà
+            // connecté suffit, sans SMS.
+            if (context.taille == Taille.etendue) ...[
+              const SizedBox(height: 16),
+              Center(
+                child: TextButton.icon(
+                  onPressed: () => context.go('/connexion/qr'),
+                  icon: const Icon(Icons.qr_code_2_rounded),
+                  label: Text(context.t.demarrageConnexionQr),
+                ),
               ),
+            ],
+          ] else if (_etape == 1)
+            ChampCode(
+              lireSms: true,
+              onComplet: (_) => setState(() => _etape = 2),
             )
-          else if (_etape == 1)
-            ChampCode(onComplet: (_) => setState(() => _etape = 2))
           else ...[
             ClavierPin(
               onComplet: (_) {
@@ -82,7 +99,9 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
                     .connecter(
                       prenom: 'Grâce',
                       telephone: _tel.text,
-                      operateur: 'MTN',
+                      operateur:
+                          paysTelephone[_pays].operateur(_tel.text) ??
+                          paysTelephone[_pays].operateurs.first,
                     );
                 context.go('/accueil');
               },
@@ -91,7 +110,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
             Center(
               child: TextButton(
                 onPressed: _oublie,
-                child: const Text('Code secret oublié ?'),
+                child: Text(context.t.demarrageCodeSecretOublieQ),
               ),
             ),
           ],
@@ -100,8 +119,10 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
       bottomNavigationBar: _etape == 0
           ? BarreAction(
               child: FilledButton(
-                onPressed: () => setState(() => _etape = 1),
-                child: const Text('Recevoir le code'),
+                onPressed: paysTelephone[_pays].complet(_tel.text)
+                    ? _envoyer
+                    : null,
+                child: Text(context.t.suivant),
               ),
             )
           : null,
@@ -144,22 +165,18 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: BarreDemarrage(
         actions: [
-          TextButton(onPressed: _terminer, child: const Text('Passer')),
+          TextButton(onPressed: _terminer, child: Text(context.t.passer)),
         ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          const EnTeteDemarrage(
+          EnTeteDemarrage(
             etape: 4,
-            icone: Icons.interests_rounded,
-            couleurs: [Color(0xFFF472B6), Color(0xFFDB2777)],
-            titre: 'Qu’est-ce qui vous intéresse ?',
-            texte:
-                'Choisissez-en au moins 3 : votre fil sera utile dès '
-                'maintenant. Vous pourrez changer plus tard.',
+            titre: context.t.demarrageInteretsTitre,
+            texte: context.t.demarrageInteretsTexte,
           ),
           GrilleAdaptative(
             largeurMax: 120,
@@ -188,7 +205,7 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: _choix.length >= 3 ? _terminer : null,
-          child: Text('Continuer · ${_choix.length} choisis'),
+          child: Text(context.t.demarrageContinuerChoisis(_choix.length)),
         ),
       ),
     );
@@ -250,12 +267,18 @@ class _TuileInteret extends StatelessWidget {
                       Icon(icone, color: choisi ? Colors.white : couleur),
                       const SizedBox(height: 6),
                       Text(
-                        nom,
+                        // Clé sans accent ni tiret pour la traduction.
+                        context.t.demarrageInteret(
+                          nom
+                              .replaceAll('é', 'e')
+                              .replaceAll('É', 'E')
+                              .replaceAll('-', ''),
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          color: choisi ? Colors.white : LiveColors.nuit,
+                          color: choisi ? Colors.white : LiveColors.encre,
                         ),
                       ),
                     ],

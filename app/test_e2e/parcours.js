@@ -74,17 +74,19 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
   p.on('console', m => { if (m.type() === 'error') erreurs.push(m.text()); });
   p.on('requestfailed', r => erreurs.push('Échec réseau : ' + r.url()));
   try {
-    await p.goto(BASE, { waitUntil: 'networkidle' });
+    // Pas de « networkidle » : le worker de la base locale (Drift) reste actif.
+    await p.goto(BASE, { waitUntil: 'load' }); await p.waitForSelector('flutter-view, flt-glass-pane', { timeout: 30000 });
     await p.waitForTimeout(700); await ecran('splash');
     await p.waitForTimeout(2500); await sem();
 
     // 0. Inscription
     await ecran('bienvenue');
     await bouton('Commencer'); await sem();
+    await ecran('langue'); await bouton('Suivant'); await sem();
     await saisir(0, '06 123 45 67');
     for (const c of await p.getByRole('checkbox').all()) await c.click();
     await ecran('inscription_telephone');
-    await bouton('Recevoir le code');
+    await bouton('Suivant'); await ecran('inscription_confirmer_numero'); await bouton('OK', { exact: true });
     await ecran('code_sms_vide');
     await saisir('Code à 6 chiffres', '123456'); await p.waitForTimeout(800);
     await saisir('Prénom', 'Grâce'); await ecran('inscription_profil');
@@ -179,6 +181,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     const fermer = async () => { await p.keyboard.press('Escape'); await p.waitForTimeout(700); };
     const TOUR = [
       ['connexion', 'connexion'],
+      ['connexion/qr', 'connexion_qr'],
       ['accueil', 'fil_retour'],
       ['accueil', 'fil_commentaires', async () => { await bouton('84', { exact: true }); }],
       ['accueil', 'fil_partage', async () => { await fermer(); await bouton('210', { exact: true }); }],
@@ -226,6 +229,11 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['messages/demandes', 'messages_demandes'],
       ['messages/archives', 'messages_archives'],
       ['messages/parametres', 'messages_reglages'],
+      ['appels', 'appels'],
+      ['appel?avec=Gr%C3%A2ce%20Mode', 'appel_audio'],
+      ['appel?avec=Gr%C3%A2ce%20Mode&video=1', 'appel_video', async () => { await p.waitForTimeout(3500); }],
+      ['appel?avec=Terminale%20C&video=1&groupe=g1', 'appel_groupe', async () => { await p.waitForTimeout(3500); }],
+      ['appel?avec=Gr%C3%A2ce%20Mode&video=1&entrant=1', 'appel_entrant'],
       ['abonnes/moi', 'abonnes'],
       ['abonnes/moi?onglet=1', 'abonnements'],
       ['abonnes/moi?onglet=2', 'suggestions'],
@@ -314,14 +322,30 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['partenaires', 'partenaires'],
       ['vendre', 'vendre_photo_ia', async () => { await bouton('Une photo, et c’est prêt'); await p.waitForTimeout(2800); }],
       ['ia/assistant', 'ia_assistant'],
-      ['ia/assistant', 'ia_assistant_reponse', async () => { await bouton('Un 2 pièces à Moungali à moins de 100 000'); await p.waitForTimeout(1600); }],
+      ['ia/assistant', 'ia_assistant_joindre', async () => { await bouton('Joindre un fichier'); await bouton('PDF, Word, Excel'); }],
+      ['ia/assistant', 'ia_assistant_fichier', async () => { await bouton('Contrat_bail_Moungali.pdf'); await bouton('Envoyer'); await p.waitForTimeout(1200); }],
+      ['ia/assistant', 'ia_assistant_lecture', async () => { await bouton('Lire pour 5 crédits'); await p.waitForTimeout(1600); }],
+      ['ia/assistant', 'ia_assistant_reponse', async () => { await bouton('Nouvelle conversation'); await bouton('Un 2 pièces à Moungali à moins de 100 000'); await p.waitForTimeout(1600); }],
+      ['ia/assistant', 'ia_mode_vocal', async () => { await bouton('Nouvelle conversation'); await bouton('Mode vocal'); await bouton('Parler'); await p.waitForTimeout(1400); }],
       ['produit/p1', 'juste_prix', async () => { await defiler(4); }],
       ['mes-ventes', 'coach_vendeur', async () => { await defiler(10); }],
       ['tontines', 'tontines'],
       ['tontine/t1', 'tontine'],
       ['achats-groupes', 'achats_groupes'],
+      ['portefeuille', 'mon_argent'],
+      ['aide', 'centre_aide'],
+      ['aide/ecrire', 'aide_ecrire', async () => { await bouton('Commande', { exact: true }); }],
+      ['aide/demandes', 'aide_demandes'],
+      ['legal/cgu', 'conditions'],
+      ['legal/confidentialite', 'confidentialite'],
+      ['donnees', 'hors_connexion', async () => { await bouton('Simuler une coupure du réseau'); }],
+      ['market', 'market_hors_connexion'],
+      ['market', 'reseau_retabli', async () => { await bouton('Réessayer'); }],
       ['diaspora', 'diaspora'],
       ['transfert', 'transfert'],
+      ['transfert', 'transfert_devises', async () => { await bouton('Devise : Euro. Changer'); }],
+      ['transfert', 'transfert_dollar', async () => { await fermer(); await bouton('Devise : Euro. Changer'); await bouton('Dollar américain'); }],
+      ['transfert?sens=recevoir', 'transfert_recevoir'],
       ['factures', 'factures'],
       ['adresse', 'adresse_live'],
       ['points-relais', 'points_relais'],
@@ -329,6 +353,8 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
       ['rue?lieu=Moungali%2C%20Brazzaville', 'vue_rue'],
       // Ordinateur : barres latérales repliées puis dépliées.
       ...(LARGEUR > 700 ? [
+        ['admin/quotidien', 'admin_quotidien'],
+        ['admin/ia', 'admin_ia'],
         ['admin', 'admin_replie', async () => { await bouton('Replier le menu'); }],
         ['studio', 'barre_repliee'],
         ['studio', 'barre_depliee', async () => { await bouton('Déplier le menu'); }],

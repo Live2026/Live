@@ -35,11 +35,11 @@ class Frise extends StatelessWidget {
                         height: 22,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: e.faite ? LiveColors.bleu : Colors.white,
+                          color: e.faite ? LiveColors.bleu : LiveColors.surface,
                           border: Border.all(
                             color: e.faite || i == encours
                                 ? LiveColors.bleu
-                                : const Color(0xFFC3CAD4),
+                                : LiveColors.bord,
                             width: 2,
                           ),
                         ),
@@ -56,9 +56,7 @@ class Frise extends StatelessWidget {
                           child: Container(
                             width: 2,
                             margin: const EdgeInsets.symmetric(vertical: 2),
-                            color: e.faite
-                                ? LiveColors.bleu
-                                : const Color(0xFFE4E8EE),
+                            color: e.faite ? LiveColors.bleu : LiveColors.filet,
                           ),
                         ),
                     ],
@@ -78,7 +76,7 @@ class Frise extends StatelessWidget {
                                 ? FontWeight.w600
                                 : FontWeight.w400,
                             color: e.faite || i == encours
-                                ? LiveColors.nuit
+                                ? LiveColors.encre
                                 : LiveColors.gris,
                           ),
                         ),
@@ -125,9 +123,7 @@ class ProgressionEtapes extends StatelessWidget {
                   height: 5,
                   margin: const EdgeInsets.symmetric(horizontal: 2),
                   decoration: BoxDecoration(
-                    color: i <= actuelle
-                        ? LiveColors.succes
-                        : const Color(0xFFE4E8EE),
+                    color: i <= actuelle ? LiveColors.succes : LiveColors.filet,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -138,7 +134,7 @@ class ProgressionEtapes extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 11.5,
-                    color: i <= actuelle ? LiveColors.nuit : LiveColors.gris,
+                    color: i <= actuelle ? LiveColors.encre : LiveColors.gris,
                     fontWeight: i == actuelle ? FontWeight.w700 : null,
                   ),
                 ),

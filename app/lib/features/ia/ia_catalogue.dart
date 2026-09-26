@@ -48,128 +48,138 @@ const _profil = {
   'entreprise': 'Société Congolaise de Distribution',
 };
 
-const servicesIa = <ServiceIa>[
+List<ServiceIa> servicesIa(Textes t) => [
   ServiceIa(
     id: 'exercice',
-    titre: 'Exercice par photo',
-    description: 'Comprendre étape par étape',
+    titre: t.iaExerciceParPhoto,
+    description: t.iaComprendreEtapeParEtape,
     prix: 5,
     icone: Icons.photo_camera,
-    famille: "Réussir à l'école",
+    famille: t.iaReussirALEcole,
     route: '/ia/exercice',
   ),
   ServiceIa(
     id: 'resume',
-    titre: 'Résumer un cours',
-    description: 'Photo ou PDF, en quelques points',
+    titre: t.iaResumerUnCours,
+    description: t.iaPhotoOuPdfEn,
     prix: 5,
     icone: Icons.summarize,
-    famille: "Réussir à l'école",
+    famille: t.iaReussirALEcole,
     disponible: false,
   ),
   ServiceIa(
     id: 'cv',
-    titre: 'CV complet',
-    description: 'Mis en page, PDF et Word',
+    titre: t.iaCvComplet,
+    description: t.iaMisEnPagePdf,
     prix: 20,
     icone: Icons.badge,
-    famille: 'Trouver un emploi',
+    famille: t.iaTrouverUnEmploi,
     champs: [
-      ChampIa('poste', 'Poste visé', exemple: 'Comptable'),
-      ChampIa('nom', 'Nom complet'),
-      ChampIa('telephone', 'Téléphone'),
-      ChampIa('ville', 'Ville'),
-      ChampIa('experiences', 'Expériences', lignes: 3),
-      ChampIa('formation', 'Formation'),
-      ChampIa('competences', 'Compétences'),
-      ChampIa('langues', 'Langues'),
+      ChampIa('poste', t.iaPosteVise, exemple: 'Comptable'),
+      ChampIa('nom', t.iaNomComplet),
+      ChampIa('telephone', t.iaTelephone),
+      ChampIa('ville', t.iaVille),
+      ChampIa('experiences', t.iaExperiences, lignes: 3),
+      ChampIa('formation', t.iaFormation),
+      ChampIa('competences', t.iaCompetences),
+      ChampIa('langues', t.iaLangues),
     ],
   ),
   ServiceIa(
     id: 'lettre',
-    titre: 'Lettre de motivation',
-    description: 'Adaptée à une offre précise',
+    titre: t.iaLettreDeMotivation,
+    description: t.iaAdapteeAUneOffre,
     prix: 10,
     icone: Icons.mail,
-    famille: 'Trouver un emploi',
+    famille: t.iaTrouverUnEmploi,
     champs: [
-      ChampIa('poste', 'Poste visé'),
-      ChampIa('entreprise', 'Entreprise'),
-      ChampIa('nom', 'Votre nom'),
-      ChampIa('experiences', 'Votre expérience en quelques mots', lignes: 3),
+      ChampIa('poste', t.iaPosteVise),
+      ChampIa('entreprise', t.iaEntreprise),
+      ChampIa('nom', t.iaVotreNom),
+      ChampIa('experiences', t.iaVotreExperienceEnQuelques, lignes: 3),
     ],
   ),
   ServiceIa(
     id: 'candidature',
-    titre: 'Pack candidature',
-    description: 'CV + lettre + message',
+    titre: t.iaPackCandidature,
+    description: t.iaCvLettreMessage,
     prix: 25,
     icone: Icons.work,
-    famille: 'Trouver un emploi',
+    famille: t.iaTrouverUnEmploi,
     disponible: false,
   ),
   ServiceIa(
     id: 'bp_express',
-    titre: 'Business plan express',
-    description: '5 à 6 pages, budget de démarrage',
+    titre: t.iaBusinessPlanExpress,
+    description: t.iaN5A6Pages,
     prix: 50,
     icone: Icons.storefront,
-    famille: 'Lancer mon activité',
+    famille: t.iaLancerMonActivite,
     champs: [
-      ChampIa('activite', 'Votre activité', exemple: 'Boulangerie de quartier'),
-      ChampIa('ville', 'Ville et quartier', exemple: 'Brazzaville, Moungali'),
+      ChampIa(
+        'activite',
+        t.iaVotreActivite,
+        exemple: t.iaBoulangerieDeQuartier,
+      ),
+      ChampIa('ville', t.iaVilleEtQuartier, exemple: 'Brazzaville, Moungali'),
       ChampIa(
         'clients',
-        'Vos clients',
-        exemple: 'Familles et petits commerces du quartier',
+        t.iaVosClients,
+        exemple: t.iaFamillesEtPetitsCommerces,
       ),
-      ChampIa('prix', 'Prix moyen d\'une vente (FCFA)', exemple: '2500'),
-      ChampIa('ventes', 'Ventes espérées par mois', exemple: '300'),
-      ChampIa('apport', 'Votre apport (FCFA)', exemple: '1500000'),
+      ChampIa('prix', t.iaPrixMoyenDUne, exemple: '2500'),
+      ChampIa('ventes', t.iaVentesEspereesParMois, exemple: '300'),
+      ChampIa('apport', t.iaVotreApportFcfa, exemple: '1500000'),
     ],
   ),
   ServiceIa(
     id: 'bp_complet',
-    titre: 'Business plan complet',
-    description: 'Assistant en 6 étapes, prévisionnel 3 ans',
+    titre: t.iaBusinessPlanComplet,
+    description: t.iaAssistantEn6Etapes,
     prix: 150,
     icone: Icons.account_balance,
-    famille: 'Lancer mon activité',
+    famille: t.iaLancerMonActivite,
     route: '/ia/business-plan',
     champs: [
-      ChampIa('activite', 'Votre activité', exemple: 'Boulangerie de quartier'),
-      ChampIa('ville', 'Ville et quartier', exemple: 'Brazzaville, Moungali'),
-      ChampIa('forme', 'Forme juridique envisagée', exemple: 'SARL'),
+      ChampIa(
+        'activite',
+        t.iaVotreActivite,
+        exemple: t.iaBoulangerieDeQuartier,
+      ),
+      ChampIa('ville', t.iaVilleEtQuartier, exemple: 'Brazzaville, Moungali'),
+      ChampIa('forme', t.iaFormeJuridiqueEnvisagee, exemple: 'SARL'),
       ChampIa(
         'clients',
-        'Vos clients',
-        exemple: 'Familles et petits commerces du quartier',
+        t.iaVosClients,
+        exemple: t.iaFamillesEtPetitsCommerces,
       ),
       ChampIa(
         'concurrents',
-        'Vos concurrents',
-        exemple: 'Deux boulangeries à 1 km',
+        t.iaVosConcurrents,
+        exemple: t.iaDeuxBoulangeriesA1,
       ),
-      ChampIa('prix', 'Prix moyen d\'une vente (FCFA)', exemple: '2500'),
-      ChampIa('ventes', 'Ventes espérées par mois', exemple: '300'),
-      ChampIa('apport', 'Votre apport (FCFA)', exemple: '1500000'),
-      ChampIa('pret', 'Prêt recherché (FCFA)', exemple: '3000000'),
+      ChampIa('prix', t.iaPrixMoyenDUne, exemple: '2500'),
+      ChampIa('ventes', t.iaVentesEspereesParMois, exemple: '300'),
+      ChampIa('apport', t.iaVotreApportFcfa, exemple: '1500000'),
+      ChampIa('pret', t.iaPretRechercheFcfa, exemple: '3000000'),
     ],
   ),
   ServiceIa(
     id: 'vocal',
-    titre: 'Tuteur vocal',
-    description: 'Réviser, préparer un entretien',
+    titre: t.iaTuteurVocal,
+    description: t.iaReviserPreparerUnEntretien,
     prix: 5,
     unite: '/min',
     icone: Icons.record_voice_over,
-    famille: 'Réussir à l\'école',
+    famille: t.iaReussirALEcole,
     route: '/ia/tuteur',
   ),
 ];
 
-ServiceIa serviceParId(String id) =>
-    servicesIa.firstWhere((s) => s.id == id, orElse: () => servicesIa.first);
+ServiceIa serviceParId(Textes t, String id) {
+  final tous = servicesIa(t);
+  return tous.firstWhere((s) => s.id == id, orElse: () => tous.first);
+}
 
 /// Pastille « 50 ✦ » : le symbole des crédits est une icône embarquée.
 class Credits extends StatelessWidget {
@@ -189,8 +199,8 @@ class Credits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Nombre en bleu nuit (lisible), symbole des crédits en orange (accent).
-    final c = couleur ?? LiveColors.nuit;
+    // Nombre dans la couleur du texte (lisible dans les deux modes), symbole des crédits en orange (accent).
+    final c = couleur ?? LiveColors.encre;
     final icone = couleurIcone ?? couleur ?? LiveColors.orange;
     return Row(
       mainAxisSize: MainAxisSize.min,

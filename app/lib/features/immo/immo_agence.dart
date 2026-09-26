@@ -24,10 +24,10 @@ class _EcranAgenceState extends State<EcranAgence> {
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Espace agence'),
+        title: Text(context.t.immoEspaceAgence),
         actions: [
           IconButton(
-            tooltip: 'Publier un bien',
+            tooltip: context.t.immoPublierUnBien,
             onPressed: () => context.push('/publier/bien'),
             icon: const Icon(Icons.add_home_outlined),
           ),
@@ -58,9 +58,13 @@ class _EcranAgenceState extends State<EcranAgence> {
                         fontWeight: FontWeight.w800,
                       ),
                     ),
-                    const BadgeVerifie('Agence vérifiée · agrément 0231'),
+                    BadgeVerifie(context.t.immoAgenceVerifieeAgrement0231),
                     Text(
-                      '${agentsPalmiers.length} agents · ${note(palmiers.note)} · ${compact(palmiers.abonnes)} abonnés',
+                      context.t.immoAgentsNote(
+                        agentsPalmiers.length,
+                        note(palmiers.note),
+                        compact(palmiers.abonnes),
+                      ),
                       style: const TextStyle(
                         color: LiveColors.gris,
                         fontSize: 13,
@@ -77,29 +81,29 @@ class _EcranAgenceState extends State<EcranAgence> {
             espacement: 10,
             enfants: [
               TuileChiffre(
-                libelle: "Visites aujourd'hui",
+                libelle: context.t.immoVisitesAujourdHui,
                 valeur: '${aujourdhui.length}',
                 icone: Icons.event_available_rounded,
-                detail: 'Prochaine à 10:30',
+                detail: context.t.immoProchaineA1030,
               ),
               TuileChiffre(
-                libelle: 'Nouvelles demandes',
+                libelle: context.t.immoNouvellesDemandes,
                 valeur: '${nouvelles.length}',
                 icone: Icons.mark_email_unread_outlined,
-                detail: 'À attribuer',
+                detail: context.t.immoAAttribuer,
                 couleur: LiveColors.orangeVif,
               ),
               TuileChiffre(
-                libelle: 'Biens en ligne',
+                libelle: context.t.immoBiensEnLigne,
                 valeur: '${mesBiens.length}',
                 icone: Icons.home_work_outlined,
-                detail: '1 à reconfirmer',
+                detail: context.t.immoN1AReconfirmer,
               ),
-              const TuileChiffre(
-                libelle: 'Encaissé ce mois',
+              TuileChiffre(
+                libelle: context.t.immoEncaisseCeMois,
                 valeur: '186 000',
                 icone: Icons.payments_outlined,
-                detail: 'FCFA · frais de visite',
+                detail: context.t.immoFcfaFraisDeVisite,
                 couleur: LiveColors.succes,
               ),
             ],
@@ -110,10 +114,10 @@ class _EcranAgenceState extends State<EcranAgence> {
             child: Row(
               children: [
                 for (final (i, nom) in [
-                  "Aujourd'hui · ${aujourdhui.length}",
-                  'Demandes · ${nouvelles.length}',
-                  'Biens · ${mesBiens.length}',
-                  'Équipe · ${agentsPalmiers.length}',
+                  context.t.immoOngletAujourdhui(aujourdhui.length),
+                  context.t.immoOngletDemandes(nouvelles.length),
+                  context.t.immoOngletBiens(mesBiens.length),
+                  context.t.immoOngletEquipe(agentsPalmiers.length),
                 ].indexed)
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
@@ -140,14 +144,14 @@ class _EcranAgenceState extends State<EcranAgence> {
                   icone: Icons.badge_outlined,
                   titre: a,
                   detail: i == 0
-                      ? 'Gestionnaire · 12 visites ce mois'
-                      : 'Agent · ${8 - i * 2} visites ce mois',
+                      ? context.t.immoGestionnaire12VisitesCe
+                      : context.t.immoAgentVisites(8 - i * 2),
                   onTap: () => context.push('/espace/equipe'),
                 ),
               TextButton.icon(
                 onPressed: () => context.push('/espace/equipe'),
                 icon: const Icon(Icons.person_add_alt_1_outlined),
-                label: const Text('Ajouter un membre'),
+                label: Text(context.t.immoAjouterUnMembre),
               ),
             ],
           },
@@ -193,12 +197,12 @@ class _CarteDemande extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.w800),
                       ),
                       Text(
-                        '${b.titre} · ${b.quartier}',
+                        context.t.immoTitreQuartier(b.titre, b.quartier),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        '${d.visiteur} · agent : ${d.agent}',
+                        context.t.immoVisiteurAgent(d.visiteur, d.agent),
                         style: const TextStyle(
                           color: LiveColors.gris,
                           fontSize: 12.5,
@@ -208,10 +212,12 @@ class _CarteDemande extends StatelessWidget {
                   ),
                 ),
                 Etiquette(
-                  d.statut == 'Nouvelle' ? 'Nouvelle' : 'Frais payés',
+                  d.statut == 'Nouvelle'
+                      ? context.t.immoNouvelle
+                      : context.t.immoFraisPayes,
                   fond: d.statut == 'Nouvelle'
-                      ? const Color(0xFFFFF1E0)
-                      : const Color(0xFFE7F4EC),
+                      ? LiveColors.teinteOrange
+                      : LiveColors.teinteVerte,
                   couleur: d.statut == 'Nouvelle'
                       ? LiveColors.cuivre
                       : LiveColors.succes,
@@ -227,7 +233,7 @@ class _CarteDemande extends StatelessWidget {
                       minimumSize: const Size(0, 40),
                     ),
                     onPressed: () => context.push('/conversation'),
-                    child: const Text('Écrire'),
+                    child: Text(context.t.immoEcrire),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -238,12 +244,16 @@ class _CarteDemande extends StatelessWidget {
                     ),
                     onPressed: attribuer
                         ? () => ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Visite attribuée à Christian.'),
+                            SnackBar(
+                              content: Text(
+                                context.t.immoVisiteAttribueeAChristian,
+                              ),
                             ),
                           )
                         : () => context.push('/agence/visite/${d.id}'),
-                    child: Text(attribuer ? 'Attribuer' : 'Valider'),
+                    child: Text(
+                      attribuer ? context.t.immoAttribuer : context.t.valider,
+                    ),
                   ),
                 ),
               ],
@@ -284,13 +294,17 @@ class _LigneBienAgence extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${b.titre} · ${b.quartier}',
+                    context.t.immoTitreQuartier(b.titre, b.quartier),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    '${fcfaCourt(b.loyer)} · ${b.photos * 37} vues · ${b.photos ~/ 3} visites',
+                    context.t.immoStatsBien(
+                      fcfaCourt(b.loyer),
+                      b.photos * 37,
+                      b.photos ~/ 3,
+                    ),
                     style: const TextStyle(
                       color: LiveColors.gris,
                       fontSize: 12.5,
@@ -303,13 +317,13 @@ class _LigneBienAgence extends StatelessWidget {
                 ? TextButton(
                     onPressed: () => informer(
                       context,
-                      'Disponibilité reconfirmée : l’annonce reste en ligne 30 jours.',
+                      context.t.immoDisponibiliteReconfirmeeLAnnonce,
                     ),
-                    child: const Text('Reconfirmer'),
+                    child: Text(context.t.immoReconfirmer),
                   )
-                : const Etiquette(
-                    'En ligne',
-                    fond: Color(0xFFE7F4EC),
+                : Etiquette(
+                    context.t.immoEnLigne,
+                    fond: LiveColors.teinteVerte,
                     couleur: LiveColors.succes,
                   ),
           ],
@@ -339,7 +353,7 @@ class _EcranValiderVisiteState extends State<EcranValiderVisite> {
     );
     final b = bienParId(d.bienId);
     return Scaffold(
-      appBar: AppBar(title: const Text('Valider la visite')),
+      appBar: AppBar(title: Text(context.t.immoValiderLaVisite)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -361,7 +375,7 @@ class _EcranValiderVisiteState extends State<EcranValiderVisite> {
                         d.visiteur,
                         style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
-                      Text('${b.titre} · ${b.quartier}'),
+                      Text(context.t.immoTitreQuartier(b.titre, b.quartier)),
                       Text(
                         d.creneau,
                         style: const TextStyle(color: LiveColors.gris),
@@ -376,7 +390,7 @@ class _EcranValiderVisiteState extends State<EcranValiderVisite> {
           if (_validee) ...[
             const CocheAnimee(taille: 72),
             Text(
-              'Visite validée. ${fcfa(b.fraisVisite)} seront versés sur le solde de l’agence.',
+              context.t.immoVisiteValidee(fcfa(b.fraisVisite)),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
@@ -384,63 +398,57 @@ class _EcranValiderVisiteState extends State<EcranValiderVisite> {
             FilledButton(
               onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(
-                    'Offre de réservation envoyée à ${d.visiteur}.',
-                  ),
+                  content: Text(context.t.immoOffreEnvoyeeA(d.visiteur)),
                 ),
               ),
-              child: const Text('Envoyer une offre de réservation'),
+              child: Text(context.t.immoEnvoyerUneOffreDe),
             ),
             TextButton(
               onPressed: () => context.pop(),
-              child: const Text('Retour au tableau de bord'),
+              child: Text(context.t.immoRetourAuTableauDe),
             ),
           ] else ...[
-            const Text(
-              'Sur place, demandez au visiteur d’ouvrir sa visite dans Live et scannez son QR. '
-              'C’est ce qui déclenche le versement des frais de visite.',
-              textAlign: TextAlign.center,
-            ),
+            Text(context.t.immoSurPlaceDemandezAu, textAlign: TextAlign.center),
             const SizedBox(height: 16),
             FilledButton.icon(
               onPressed: () async {
-                final ok = await simulerScan(context, quoi: 'du visiteur');
+                final ok = await simulerScan(
+                  context,
+                  quoi: context.t.immoDuVisiteur,
+                );
                 if (ok) setState(() => _validee = true);
               },
               icon: const Icon(Icons.qr_code_scanner_rounded),
-              label: const Text('Scanner le QR du visiteur'),
+              label: Text(context.t.immoScannerLeQrDu),
             ),
             TextButton(
               onPressed: () async {
                 final code = await saisirCode(
                   context,
-                  titre: 'Code du visiteur',
+                  titre: context.t.immoCodeDuVisiteur,
                 );
                 if (code != null) setState(() => _validee = true);
               },
-              child: const Text('Saisir le code LV- à la place'),
+              child: Text(context.t.immoSaisirLeCodeLv),
             ),
             const SizedBox(height: 8),
             OutlinedButton(
               onPressed: () async {
                 if (await confirmer(
                   context,
-                  titre: 'Visiteur absent',
-                  texte:
-                      'Après 30 minutes d’attente, les frais de visite '
-                      '(${fcfa(b.fraisVisite)}) vous sont versés, moins la '
-                      'commission de 15 %. Le visiteur est prévenu.',
-                  action: 'Déclarer l’absence',
+                  titre: context.t.immoVisiteurAbsent,
+                  texte: context.t.immoAbsenceTexte(fcfa(b.fraisVisite)),
+                  action: context.t.immoDeclarerLAbsence,
                 )) {
                   if (context.mounted) {
                     informer(
                       context,
-                      'Absence enregistrée : frais versés à l’agence.',
+                      context.t.immoAbsenceEnregistreeFraisVerses,
                     );
                   }
                 }
               },
-              child: const Text('Le visiteur ne s’est pas présenté'),
+              child: Text(context.t.immoLeVisiteurNeS),
             ),
           ],
         ],

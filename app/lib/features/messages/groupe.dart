@@ -105,7 +105,7 @@ class _EcranGroupeState extends State<EcranGroupe> {
       ..._envoyes,
     ];
     return Scaffold(
-      backgroundColor: const Color(0xFFEEF1F5),
+      backgroundColor: LiveColors.fondConversation,
       appBar: AppBar(
         titleSpacing: 0,
         title: Row(
@@ -127,8 +127,8 @@ class _EcranGroupeState extends State<EcranGroupe> {
                   ),
                   Text(
                     canal
-                        ? 'Canal · ${compact(c.membres)} abonnés'
-                        : 'Groupe · ${c.membres} membres',
+                        ? context.t.messagesCanalAbonnes(compact(c.membres))
+                        : context.t.messagesGroupeMembres(c.membres),
                     style: const TextStyle(
                       fontSize: 12,
                       color: LiveColors.gris,
@@ -140,10 +140,13 @@ class _EcranGroupeState extends State<EcranGroupe> {
           ],
         ),
         actions: [
+          if (!canal) ...boutonsAppel(context, c.nom, groupe: c.id),
           IconButton(
-            tooltip: 'Options',
-            onPressed: () =>
-                signaler(context, canal ? 'ce canal' : 'ce groupe'),
+            tooltip: context.t.messagesOptions,
+            onPressed: () => signaler(
+              context,
+              canal ? context.t.messagesCeCanal : context.t.messagesCeGroupe,
+            ),
             icon: const Icon(Icons.more_vert_rounded),
           ),
         ],
@@ -151,20 +154,20 @@ class _EcranGroupeState extends State<EcranGroupe> {
       body: Column(
         children: [
           Material(
-            color: Colors.white,
+            color: LiveColors.surface,
             child: ListTile(
               dense: true,
               leading: const Icon(
                 Icons.push_pin_rounded,
                 color: LiveColors.orangeVif,
               ),
-              title: const Text(
-                'Message épinglé',
+              title: Text(
+                context.t.messagesMessageEpingle,
                 style: TextStyle(fontWeight: FontWeight.w700),
               ),
               subtitle: Text(
                 canal
-                    ? 'Postuler sur Live est toujours gratuit.'
+                    ? context.t.messagesPostulerSurLiveEst
                     : 'Révision samedi 10 h, salle 4. Apportez les annales.',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -177,7 +180,7 @@ class _EcranGroupeState extends State<EcranGroupe> {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
                 children: [
-                  const _Pastille('Aujourd’hui'),
+                  _Pastille(context.t.messagesAujourdHui),
                   for (final m in messages) _BulleGroupe(m: m, canal: canal),
                 ],
               ),
@@ -188,11 +191,10 @@ class _EcranGroupeState extends State<EcranGroupe> {
               top: false,
               child: Container(
                 width: double.infinity,
-                color: Colors.white,
+                color: LiveColors.surface,
                 padding: const EdgeInsets.all(14),
-                child: const Text(
-                  'Seuls les administrateurs publient. Réagissez aux messages '
-                  'avec un appui long.',
+                child: Text(
+                  context.t.messagesSeulsLesAdministrateursPublient,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: LiveColors.gris),
                 ),
@@ -208,15 +210,15 @@ class _EcranGroupeState extends State<EcranGroupe> {
                     Expanded(
                       child: TextField(
                         controller: _saisie,
-                        decoration: const InputDecoration(
-                          hintText: 'Message au groupe',
+                        decoration: InputDecoration(
+                          hintText: context.t.messagesMessageAuGroupe,
                           prefixIcon: Icon(Icons.attach_file_rounded),
                         ),
                       ),
                     ),
                     const SizedBox(width: 6),
                     IconButton.filled(
-                      tooltip: 'Envoyer',
+                      tooltip: context.t.messagesEnvoyer,
                       style: IconButton.styleFrom(
                         minimumSize: const Size(48, 48),
                       ),
@@ -225,7 +227,7 @@ class _EcranGroupeState extends State<EcranGroupe> {
                         setState(
                           () => _envoyes.add(
                             _MessageGroupe(
-                              'Vous',
+                              context.t.appelVous,
                               LiveColors.bleu,
                               _saisie.text.trim(),
                               'maintenant',
@@ -290,9 +292,9 @@ class _BulleGroupe extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: LiveColors.surface,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFE4E8EE)),
+                border: Border.all(color: LiveColors.filet),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -325,7 +327,7 @@ class _Pdf extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 6),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: const Color(0xFFF3F5F8),
+        color: LiveColors.champ,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -355,10 +357,10 @@ class _Pdf extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 6),
-          const Icon(
+          Icon(
             Icons.download_rounded,
             color: LiveColors.bleu,
-            semanticLabel: 'Télécharger',
+            semanticLabel: context.t.messagesTelecharger,
           ),
         ],
       ),

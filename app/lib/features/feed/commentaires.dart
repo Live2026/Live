@@ -6,7 +6,7 @@ Future<void> ouvrirCommentaires(BuildContext context, Publication p) {
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
@@ -48,13 +48,13 @@ class _FeuilleCommentairesState extends State<_FeuilleCommentaires> {
             children: [
               Expanded(
                 child: Text(
-                  '${widget.pub.commentaires} commentaires',
+                  context.t.accueilNCommentaires(widget.pub.commentaires),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontWeight: FontWeight.w800),
                 ),
               ),
               IconButton(
-                tooltip: 'Fermer',
+                tooltip: context.t.fermer,
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(Icons.close_rounded),
               ),
@@ -90,14 +90,14 @@ class _FeuilleCommentairesState extends State<_FeuilleCommentaires> {
                 Expanded(
                   child: TextField(
                     controller: _saisie,
-                    decoration: const InputDecoration(
-                      hintText: 'Ajouter un commentaire…',
+                    decoration: InputDecoration(
+                      hintText: context.t.accueilAjouterCommentaire,
                     ),
                     onSubmitted: (_) => _publier(),
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Publier',
+                  tooltip: context.t.accueilPublier,
                   onPressed: _publier,
                   icon: const Icon(Icons.send_rounded, color: LiveColors.bleu),
                 ),
@@ -165,9 +165,9 @@ class _LigneCommentaireState extends State<LigneCommentaire> {
                     ),
                     if (c.vendeur) ...[
                       const SizedBox(width: 6),
-                      const Etiquette(
-                        'Vendeur',
-                        fond: Color(0xFFE6EBF2),
+                      Etiquette(
+                        context.t.accueilVendeur,
+                        fond: LiveColors.voile,
                         couleur: LiveColors.bleu,
                       ),
                     ],
@@ -175,7 +175,7 @@ class _LigneCommentaireState extends State<LigneCommentaire> {
                 ),
                 Text(c.texte),
                 Text(
-                  '${c.quand} · Répondre',
+                  context.t.accueilRepondreQuand(c.quand),
                   style: const TextStyle(fontSize: 12, color: LiveColors.gris),
                 ),
               ],
@@ -183,7 +183,7 @@ class _LigneCommentaireState extends State<LigneCommentaire> {
           ),
           Semantics(
             button: true,
-            label: 'J’aime ce commentaire',
+            label: context.t.accueilAimeCommentaire,
             excludeSemantics: true,
             child: GestureDetector(
               onTap: () => setState(() => _aime = !_aime),

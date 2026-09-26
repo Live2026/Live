@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
 import 'saisie.dart';
+import '../l10n/textes.dart';
 
 /// Fenêtres et panneaux courts réutilisés partout : confirmer, saisir un
 /// code, choisir une option, informer.
@@ -15,7 +16,7 @@ Future<bool> confirmer(
   BuildContext context, {
   required String titre,
   required String texte,
-  String action = 'Confirmer',
+  String? action,
   bool danger = false,
 }) async {
   final ok = await showDialog<bool>(
@@ -26,14 +27,14 @@ Future<bool> confirmer(
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx, false),
-          child: const Text('Annuler'),
+          child: Text(context.t.annuler),
         ),
         FilledButton(
           style: danger
               ? FilledButton.styleFrom(backgroundColor: LiveColors.erreur)
               : null,
           onPressed: () => Navigator.pop(ctx, true),
-          child: Text(action),
+          child: Text(action ?? context.t.confirmer),
         ),
       ],
     ),
@@ -45,7 +46,7 @@ Future<bool> confirmer(
 Future<String?> saisirCode(
   BuildContext context, {
   required String titre,
-  String consigne = 'Code affiché sous le QR de l’autre personne.',
+  String? consigne,
 }) {
   final champ = TextEditingController(text: 'LV-');
   return showDialog<String>(
@@ -56,7 +57,10 @@ Future<String?> saisirCode(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(consigne, style: const TextStyle(color: LiveColors.gris)),
+          Text(
+            consigne ?? context.t.codeSousQr,
+            style: const TextStyle(color: LiveColors.gris),
+          ),
           const SizedBox(height: 12),
           TextField(
             controller: champ,
@@ -70,14 +74,14 @@ Future<String?> saisirCode(
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Annuler'),
+          child: Text(context.t.annuler),
         ),
         FilledButton(
           onPressed: () => Navigator.pop(
             ctx,
             champ.text.trim().length >= 7 ? champ.text.trim() : 'LV-V3915',
           ),
-          child: const Text('Valider'),
+          child: Text(context.t.valider),
         ),
       ],
     ),
@@ -97,7 +101,7 @@ Future<T?> choisir<T>(
   return showModalBottomSheet<T>(
     context: context,
     showDragHandle: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
@@ -135,7 +139,7 @@ Future<bool> changerCode(BuildContext context, {required String titre}) async {
     context: context,
     showDragHandle: true,
     isScrollControlled: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
@@ -146,8 +150,8 @@ Future<bool> changerCode(BuildContext context, {required String titre}) async {
               titre,
               style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
             ),
-            const Text(
-              'Choisissez 4 chiffres que vous seul connaissez.',
+            Text(
+              context.t.choisissez4ChiffresQue,
               style: TextStyle(color: LiveColors.gris),
             ),
             ClavierPin(onComplet: (_) => Navigator.pop(ctx, true)),
