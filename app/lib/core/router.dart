@@ -31,7 +31,6 @@ import 'navigation.dart';
 /// Démarrage sur ordinateur : une carte centrée façon WhatsApp Web.
 /// Hauteur de la carte de chaque page, pour qu'elle épouse son contenu.
 const _demarrage = {
-  '/bienvenue': 480.0,
   '/telephone': 440.0,
   '/connexion': 410.0,
   '/connexion/qr': 450.0,
@@ -41,11 +40,13 @@ const _demarrage = {
   '/pin': 700.0,
 };
 
-/// Pages qui occupent tout l'écran, même sur ordinateur : back-office (qui a
-/// sa propre barre), caméra, direct et lecteur.
+/// Pages qui occupent tout l'écran, même sur ordinateur : accueil (motif
+/// plein écran), back-office (qui a sa propre barre), caméra, direct et
+/// lecteur.
 bool _pleinEcran(String chemin) =>
     const {
       '/demarrage',
+      '/bienvenue',
       '/publier/media',
       '/direct/:id',
       '/lecteur/:id',

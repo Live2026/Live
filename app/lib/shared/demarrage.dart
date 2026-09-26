@@ -1,11 +1,6 @@
-import 'dart:async';
-
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
-import 'logo.dart';
 
 /// Posé par `CadreDemarrage` : la page s'affiche dans la carte du démarrage
 /// sur ordinateur, en version simple et centrée (façon WhatsApp Web).
@@ -17,205 +12,6 @@ class DansCarte extends InheritedWidget {
 
   @override
   bool updateShouldNotify(DansCarte ancien) => false;
-}
-
-/// Illustration d'accueil, à la manière du cercle de dessins de WhatsApp :
-/// le logo au centre, les espaces de Live au trait tout autour.
-class IllustrationLive extends StatelessWidget {
-  const IllustrationLive({super.key, this.taille = 200});
-  final double taille;
-
-  static const _traits = [
-    Icons.shopping_bag_outlined,
-    Icons.home_work_outlined,
-    Icons.handyman_outlined,
-    Icons.podcasts_outlined,
-    Icons.school_outlined,
-    Icons.auto_awesome_outlined,
-    Icons.local_shipping_outlined,
-    Icons.qr_code_2_rounded,
-    Icons.chat_bubble_outline_rounded,
-    Icons.verified_user_outlined,
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    final r = taille / 2;
-    return ExcludeSemantics(
-      child: SizedBox.square(
-        dimension: taille,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0x0F13385C),
-              ),
-            ),
-            for (final (i, icone) in _traits.indexed)
-              Transform.translate(
-                offset: Offset(
-                  cos(-pi / 2 + i * 2 * pi / _traits.length) * r * 0.7,
-                  sin(-pi / 2 + i * 2 * pi / _traits.length) * r * 0.7,
-                ),
-                child: Icon(
-                  icone,
-                  size: taille * 0.13,
-                  color: i.isEven ? LiveColors.bleu : LiveColors.orange,
-                ),
-              ),
-            LogoLive(taille: taille * 0.26, nom: false),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// Ce que l'on fait sur Live : un verbe par espace, avec sa couleur.
-const versLive = [
-  ('Achetez', Color(0xFFFB9618)),
-  ('Vendez', Color(0xFFFCAF20)),
-  ('Louez', Color(0xFF34D399)),
-  ('Réservez', Color(0xFFF472B6)),
-  ('Apprenez', Color(0xFFA78BFA)),
-  ('Gagnez', Color(0xFF60A5FA)),
-];
-
-/// Les espaces de Live, en pastilles colorées (écrans de démarrage).
-const espacesLive = [
-  (Icons.shopping_bag_rounded, 'Market', Color(0xFFFB9618)),
-  (Icons.home_work_rounded, 'Immo', Color(0xFF22C55E)),
-  (Icons.handyman_rounded, 'Services', Color(0xFF38BDF8)),
-  (Icons.podcasts_rounded, 'Directs', Color(0xFFF472B6)),
-  (Icons.school_rounded, 'Savoir', Color(0xFFA78BFA)),
-  (Icons.auto_awesome_rounded, 'Live IA', Color(0xFFFCAF20)),
-];
-
-/// Slogan dont le verbe change toutes les deux secondes : « Achetez »,
-/// « Vendez », « Louez »… Fixe quand les animations sont réduites.
-class SloganAnime extends StatefulWidget {
-  const SloganAnime({super.key, this.taille = 34, this.couleur = Colors.white});
-  final double taille;
-  final Color couleur;
-
-  @override
-  State<SloganAnime> createState() => _SloganAnimeState();
-}
-
-class _SloganAnimeState extends State<SloganAnime> {
-  var _rang = 0;
-  Timer? _minuteur;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _minuteur?.cancel();
-    if (!MediaQuery.disableAnimationsOf(context)) {
-      _minuteur = Timer.periodic(
-        const Duration(milliseconds: 2000),
-        (_) => setState(() => _rang = (_rang + 1) % versLive.length),
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    _minuteur?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final (verbe, couleur) = versLive[_rang];
-    final style = TextStyle(
-      fontSize: widget.taille,
-      height: 1.12,
-      fontWeight: FontWeight.w900,
-      color: widget.couleur,
-    );
-    return Semantics(
-      label: 'Achetez, vendez, louez, apprenez et gagnez, en toute confiance.',
-      excludeSemantics: true,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 450),
-            reverseDuration: const Duration(milliseconds: 120),
-            switchInCurve: courbeSortie,
-            transitionBuilder: (enfant, animation) => FadeTransition(
-              opacity: animation,
-              child: SlideTransition(
-                position: Tween(
-                  begin: const Offset(0, 0.35),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: enfant,
-              ),
-            ),
-            child: Text(
-              verbe,
-              key: ValueKey(verbe),
-              style: style.copyWith(color: couleur),
-            ),
-          ),
-          Text('en toute confiance.', style: style),
-        ],
-      ),
-    );
-  }
-}
-
-/// Courbe d'arrivée des éléments du démarrage.
-const courbeSortie = Curves.easeOutCubic;
-
-/// Pastille d'un espace : icône colorée et nom, sur fond sombre.
-class PastilleEspace extends StatelessWidget {
-  const PastilleEspace({
-    super.key,
-    required this.icone,
-    required this.nom,
-    required this.couleur,
-  });
-  final IconData icone;
-  final String nom;
-  final Color couleur;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(8, 6, 12, 6),
-      decoration: BoxDecoration(
-        color: const Color(0x1AFFFFFF),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0x26FFFFFF)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 26,
-            height: 26,
-            decoration: BoxDecoration(
-              color: couleur.withValues(alpha: 0.2),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(icone, size: 16, color: couleur),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            nom,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 /// Fond du démarrage : dégradé nuit et halos de couleur qui respirent.
@@ -316,6 +112,9 @@ class _Halo extends StatelessWidget {
     );
   }
 }
+
+/// Courbe d'arrivée des éléments du démarrage.
+const courbeSortie = Curves.easeOutCubic;
 
 /// Étapes de l'inscription, pour la barre de progression.
 const etapesInscription = [

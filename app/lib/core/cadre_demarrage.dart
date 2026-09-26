@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import '../shared/animations.dart';
 import '../shared/demarrage.dart';
 import '../shared/logo.dart';
+import '../shared/motif_live.dart';
 import 'adaptatif.dart';
 import 'theme.dart';
 
@@ -16,18 +16,8 @@ import 'theme.dart';
 /// ne détourne l'attention du formulaire. Sur téléphone et tablette, la page
 /// seule.
 ///
-/// Image de fond facultative : déposer `assets/images/fond_demarrage.jpg`
-/// (consignes dans docs/ecrans/00, section 8). Sans elle, le fond crème.
-const imageFondDemarrage = 'assets/images/fond_demarrage.jpg';
-
-/// L'image n'est demandée que si elle figure parmi les ressources : pas de
-/// requête en échec (404) tant qu'elle n'a pas été déposée.
-final Future<bool> _imagePresente =
-    AssetManifest.loadFromAssetBundle(rootBundle).then(
-      (m) => m.listAssets().contains(imageFondDemarrage),
-      onError: (_) => false,
-    );
-
+/// Fond : le motif de Live (`MotifLive`), plus discret que sur l'accueil
+/// pour que la carte ressorte.
 class CadreDemarrage extends StatelessWidget {
   const CadreDemarrage({
     super.key,
@@ -45,7 +35,7 @@ class CadreDemarrage extends StatelessWidget {
   final double largeur;
 
   /// Fond crème très léger : chaleureux, accordé à l'orange de Live.
-  static const fond = Color(0xFFF8F5EF);
+  static const fond = Color(0xFFFBF8F3);
 
   @override
   Widget build(BuildContext context) {
@@ -72,19 +62,7 @@ class CadreDemarrage extends StatelessWidget {
       color: fond,
       child: Stack(
         fit: StackFit.expand,
-        children: [
-          FutureBuilder<bool>(
-            future: _imagePresente,
-            builder: (context, s) => s.data == true
-                ? Image.asset(
-                    imageFondDemarrage,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                  )
-                : const SizedBox.shrink(),
-          ),
-          _contenu(page),
-        ],
+        children: [const MotifLive(intensite: 0.5), _contenu(page)],
       ),
     );
   }

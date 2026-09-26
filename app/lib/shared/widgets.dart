@@ -10,6 +10,7 @@ export 'champ_code.dart';
 export 'composants.dart';
 export 'confiance.dart';
 export 'demarrage.dart';
+export 'motif_live.dart';
 export 'dialogues.dart';
 export 'elements.dart';
 export 'en_tete_recherche.dart';
