@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../shared/animations.dart';
@@ -9,9 +11,18 @@ import 'theme.dart';
 /// Démarrage sur ordinateur (docs/ecrans/00, section 8) : à gauche, Live
 /// se présente (slogan animé, espaces, promesses) ; à droite, le formulaire
 /// dans une carte avec le logo. Sur téléphone et tablette, la page seule.
+/// Image de fond du démarrage sur ordinateur : déposer le fichier à cet
+/// emplacement (dossier déclaré dans pubspec.yaml). Sans image, le fond animé
+/// de Live s'affiche.
+const imageFondDemarrage = 'assets/images/fond_demarrage.jpg';
+
 class CadreDemarrage extends StatelessWidget {
-  const CadreDemarrage({super.key, required this.child});
+  const CadreDemarrage({super.key, required this.child, this.hauteur = 620});
   final Widget child;
+
+  /// Hauteur de la carte, adaptée au contenu de chaque page (router.dart) :
+  /// la carte ne prend jamais toute la hauteur, le fond reste visible.
+  final double hauteur;
 
   static const _promesses = [
     (
@@ -35,53 +46,97 @@ class CadreDemarrage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (context.taille != Taille.etendue) return child;
     return Material(
-      color: const Color(0xFFF3F5F8),
-      child: Row(
+      color: LiveColors.nuit,
+      child: Stack(
+        fit: StackFit.expand,
         children: [
-          const Expanded(flex: 6, child: _Presentation()),
-          Expanded(
-            flex: 5,
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(32),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: 460,
-                    maxHeight: 760,
-                  ),
-                  child: Apparition(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0x1A041936),
-                            blurRadius: 40,
-                            offset: Offset(0, 16),
-                          ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(24),
-                        child: Column(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(top: 28, bottom: 4),
-                              child: LogoLive(taille: 40),
-                            ),
-                            Expanded(child: child),
-                          ],
-                        ),
+          const _Fond(),
+          Row(
+            children: [
+              const Expanded(flex: 6, child: _Presentation()),
+              Expanded(
+                flex: 5,
+                child: LayoutBuilder(
+                  builder: (context, c) => Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: SizedBox(
+                        width: 440,
+                        height: min(hauteur, c.maxHeight - 64),
+                        child: Apparition(child: _Carte(child: child)),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
+    );
+  }
+}
+
+/// La carte du formulaire : logo en tête, page dessous.
+class _Carte extends StatelessWidget {
+  const _Carte({required this.child});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x40000000),
+            blurRadius: 48,
+            offset: Offset(0, 20),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 22, bottom: 2),
+              child: LogoLive(taille: 34),
+            ),
+            Expanded(child: child),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Fond de toute la page : l'image si elle est fournie, sinon le fond animé ;
+/// un voile à gauche garde le texte lisible.
+class _Fond extends StatelessWidget {
+  const _Fond();
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.asset(
+          imageFondDemarrage,
+          fit: BoxFit.cover,
+          errorBuilder: (_, _, _) =>
+              const FondDemarrage(child: SizedBox.expand()),
+        ),
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xCC041936), Color(0x33041936)],
+              stops: [0.35, 1],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -91,7 +146,8 @@ class _Presentation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FondDemarrage(
+    return Material(
+      type: MaterialType.transparency,
       child: SafeArea(
         child: LayoutBuilder(
           builder: (context, c) => SingleChildScrollView(

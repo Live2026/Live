@@ -256,7 +256,9 @@ class LiveStore extends Notifier<LiveState> with PersistanceLocale {
   void basculerFavori(String id) {
     final present = !state.favoris.contains(id);
     state = state.copyWith(
-      favoris: present ? {...state.favoris, id} : ({...state.favoris}..remove(id)),
+      favoris: present
+          ? {...state.favoris, id}
+          : ({...state.favoris}..remove(id)),
     );
     garderFavori(id, present: present);
   }

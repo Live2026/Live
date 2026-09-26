@@ -145,7 +145,9 @@ class _EcranCodeState extends State<EcranCode> {
                   color: LiveColors.bleu,
                 ),
                 title: const Text('Contacter l’assistance Live'),
-                subtitle: const Text('Un agent répond en moins de 2 h, 7 j / 7'),
+                subtitle: const Text(
+                  'Un agent répond en moins de 2 h, 7 j / 7',
+                ),
                 onTap: () {
                   Navigator.pop(ctx);
                   context.push('/aide/ecrire?sujet=Compte');

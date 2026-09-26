@@ -212,58 +212,65 @@ class EcranBienvenue extends ConsumerWidget {
 
   Widget _bienvenueCarte(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Bienvenue sur Live',
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900),
+      body: LayoutBuilder(
+        builder: (context, c) => SingleChildScrollView(
+          padding: const EdgeInsets.all(32),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: (c.maxHeight - 64).clamp(0, double.infinity),
             ),
-            const SizedBox(height: 8),
-            const Text(
-              'Créez votre compte avec votre numéro de téléphone, ou '
-              'découvrez l’application sans compte.',
-              style: TextStyle(color: LiveColors.gris, fontSize: 15),
-            ),
-            const SizedBox(height: 28),
-            FilledButton(
-              style: FilledButton.styleFrom(
-                minimumSize: const Size.fromHeight(50),
-              ),
-              onPressed: () => context.push('/telephone'),
-              child: const Text('Commencer'),
-            ),
-            const SizedBox(height: 10),
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size.fromHeight(48),
-              ),
-              onPressed: () => _decouvrir(context, ref),
-              child: const Text('Découvrir sans compte'),
-            ),
-            const SizedBox(height: 18),
-            const Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(child: Divider()),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    'Déjà inscrit ?',
-                    style: TextStyle(color: LiveColors.gris),
-                  ),
+                const Text(
+                  'Bienvenue sur Live',
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900),
                 ),
-                Expanded(child: Divider()),
+                const SizedBox(height: 8),
+                const Text(
+                  'Créez votre compte avec votre numéro de téléphone, ou '
+                  'découvrez l’application sans compte.',
+                  style: TextStyle(color: LiveColors.gris, fontSize: 15),
+                ),
+                const SizedBox(height: 28),
+                FilledButton(
+                  style: FilledButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50),
+                  ),
+                  onPressed: () => context.push('/telephone'),
+                  child: const Text('Commencer'),
+                ),
+                const SizedBox(height: 10),
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(48),
+                  ),
+                  onPressed: () => _decouvrir(context, ref),
+                  child: const Text('Découvrir sans compte'),
+                ),
+                const SizedBox(height: 18),
+                const Row(
+                  children: [
+                    Expanded(child: Divider()),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        'Déjà inscrit ?',
+                        style: TextStyle(color: LiveColors.gris),
+                      ),
+                    ),
+                    Expanded(child: Divider()),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () => context.push('/connexion'),
+                  child: const Text("J'ai déjà un compte"),
+                ),
               ],
             ),
-            const SizedBox(height: 10),
-            TextButton(
-              onPressed: () => context.push('/connexion'),
-              child: const Text("J'ai déjà un compte"),
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -31,11 +31,7 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
 
   static const _sources = [
     ('Carte bancaire', 'Visa, Mastercard', Icons.credit_card_rounded),
-    (
-      'Virement bancaire',
-      'SEPA, ACH, Interac…',
-      Icons.account_balance_rounded,
-    ),
+    ('Virement bancaire', 'SEPA, ACH, Interac…', Icons.account_balance_rounded),
     (
       'Mobile Money à l’étranger',
       'Orange Money, Wave, M-Pesa…',
@@ -111,10 +107,7 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
                   ),
                 ),
                 const SizedBox(width: 8),
-                _BoutonDevise(
-                  devise: d,
-                  onTap: () => _choisirDevise(context),
-                ),
+                _BoutonDevise(devise: d, onTap: () => _choisirDevise(context)),
               ],
             ),
             Slider(

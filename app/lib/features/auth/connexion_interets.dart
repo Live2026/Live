@@ -11,6 +11,7 @@ class EcranConnexion extends ConsumerStatefulWidget {
 class _EcranConnexionState extends ConsumerState<EcranConnexion> {
   var _etape = 0; // 0 numéro, 1 code SMS, 2 code secret
   final _tel = TextEditingController(text: '06 123 45 67');
+  var _pays = 0;
 
   Future<void> _oublie() async {
     if (await confirmer(
@@ -38,7 +39,8 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
         Icons.sms_rounded,
         const [Color(0xFF38BDF8), Color(0xFF0369A1)],
         'Code reçu par SMS',
-        'Envoyé au +242 ${_tel.text}. Prototype : 6 chiffres au choix.',
+        'Envoyé au ${paysTelephone[_pays].indicatif} ${_tel.text}. '
+            'Prototype : 6 chiffres au choix.',
       ),
       _ => (
         Icons.lock_rounded,
@@ -63,14 +65,11 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
             ),
           ),
           if (_etape == 0)
-            TextField(
-              controller: _tel,
-              keyboardType: TextInputType.phone,
-              style: const TextStyle(fontSize: 17, letterSpacing: 1),
-              decoration: const InputDecoration(
-                prefixText: '+242 ',
-                labelText: 'Numéro de téléphone',
-              ),
+            ChampTelephone(
+              controleur: _tel,
+              pays: _pays,
+              onPays: (i) => setState(() => _pays = i),
+              onChanged: () => setState(() {}),
             )
           else if (_etape == 1)
             ChampCode(onComplet: (_) => setState(() => _etape = 2))
@@ -82,7 +81,9 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
                     .connecter(
                       prenom: 'Grâce',
                       telephone: _tel.text,
-                      operateur: 'MTN',
+                      operateur:
+                          paysTelephone[_pays].operateur(_tel.text) ??
+                          paysTelephone[_pays].operateurs.first,
                     );
                 context.go('/accueil');
               },
@@ -100,7 +101,9 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
       bottomNavigationBar: _etape == 0
           ? BarreAction(
               child: FilledButton(
-                onPressed: () => setState(() => _etape = 1),
+                onPressed: paysTelephone[_pays].complet(_tel.text)
+                    ? () => setState(() => _etape = 1)
+                    : null,
                 child: const Text('Recevoir le code'),
               ),
             )

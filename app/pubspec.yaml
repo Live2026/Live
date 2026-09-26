@@ -80,7 +80,9 @@ flutter:
           weight: 900
 
   assets:
-    - assets/images/logo.png
+    # Tout le dossier : logo, et image de fond du démarrage sur ordinateur
+    # (fond_demarrage.jpg, facultative).
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -193,7 +193,9 @@ class _ModeVocalState extends State<_ModeVocal>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton.filledTonal(
-                    tooltip: _micCoupe ? 'Rétablir le micro' : 'Couper le micro',
+                    tooltip: _micCoupe
+                        ? 'Rétablir le micro'
+                        : 'Couper le micro',
                     iconSize: 30,
                     onPressed: () => setState(() => _micCoupe = !_micCoupe),
                     icon: Icon(

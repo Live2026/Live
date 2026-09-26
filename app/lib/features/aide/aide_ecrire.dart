@@ -49,10 +49,7 @@ class _EcranEcrireState extends ConsumerState<EcranEcrireSupport> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
           children: [
-            const Text(
-              'Sujet',
-              style: TextStyle(fontWeight: FontWeight.w700),
-            ),
+            const Text('Sujet', style: TextStyle(fontWeight: FontWeight.w700)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,

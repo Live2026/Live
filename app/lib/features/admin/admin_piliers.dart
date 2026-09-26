@@ -117,7 +117,8 @@ class _ArgentQuotidien extends StatelessWidget {
                 _etat(e == 'À jour' ? 'Actif' : 'En attente'),
               ],
           ],
-          onTap: (_) => _decider(context, 'Relance envoyée au membre en retard.'),
+          onTap: (_) =>
+              _decider(context, 'Relance envoyée au membre en retard.'),
         ),
         const SizedBox(height: 8),
         const Text(

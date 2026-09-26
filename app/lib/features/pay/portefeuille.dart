@@ -23,7 +23,8 @@ class _EcranPortefeuilleState extends ConsumerState<EcranPortefeuille> {
     final etat = ref.watch(liveProvider);
     final bloques = [
       for (final a in etat.achats)
-        if (a.mode == ModePaiement.avance && a.statut != StatutCommande.terminee)
+        if (a.mode == ModePaiement.avance &&
+            a.statut != StatutCommande.terminee)
           a,
     ];
     return Scaffold(
@@ -70,7 +71,8 @@ class _EcranPortefeuilleState extends ConsumerState<EcranPortefeuille> {
           const EnTeteSection('Mes moyens de paiement'),
           LigneMenu(
             icone: Icons.phone_android_rounded,
-            titre: '${etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money'}'
+            titre:
+                '${etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money'}'
                 ' · ${etat.telephone}',
             detail: 'Principal · retraits vers ce numéro, à votre nom',
             couleur: LiveColors.succes,
@@ -197,11 +199,7 @@ class _CarteSolde extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: _Montant(
-                  'Bloqué',
-                  m(totalBloque),
-                  'pour mes achats',
-                ),
+                child: _Montant('Bloqué', m(totalBloque), 'pour mes achats'),
               ),
             ],
           ),

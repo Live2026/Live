@@ -29,14 +29,15 @@ import 'cadre_demarrage.dart';
 import 'navigation.dart';
 
 /// Démarrage : marque à gauche, formulaire à droite sur ordinateur.
+/// Hauteur de la carte de chaque page, pour qu'elle épouse son contenu.
 const _demarrage = {
-  '/bienvenue',
-  '/telephone',
-  '/connexion',
-  '/code',
-  '/profil',
-  '/interets',
-  '/pin',
+  '/bienvenue': 560.0,
+  '/telephone': 700.0,
+  '/connexion': 520.0,
+  '/code': 600.0,
+  '/profil': 700.0,
+  '/interets': 720.0,
+  '/pin': 700.0,
 };
 
 /// Pages qui occupent tout l'écran, même sur ordinateur : back-office (qui a
@@ -56,8 +57,8 @@ GoRoute _route(
   bool cadre = true,
 }) => GoRoute(
   path: chemin,
-  builder: (_, s) => _demarrage.contains(chemin)
-      ? CadreDemarrage(child: ecran(s))
+  builder: (_, s) => _demarrage.containsKey(chemin)
+      ? CadreDemarrage(hauteur: _demarrage[chemin]!, child: ecran(s))
       : !cadre || _pleinEcran(chemin)
       ? ecran(s)
       : CadreOrdinateur(chemin: s.uri.path, child: ecran(s)),
@@ -191,9 +192,8 @@ final routeur = GoRouter(
     _route('/diaspora', (_) => const EcranDiaspora()),
     _route(
       '/transfert',
-      (s) => EcranTransfert(
-        recevoir: s.uri.queryParameters['sens'] == 'recevoir',
-      ),
+      (s) =>
+          EcranTransfert(recevoir: s.uri.queryParameters['sens'] == 'recevoir'),
     ),
     _route('/factures', (_) => const EcranFactures()),
     _route('/adresse', (_) => const EcranAdresseLive()),

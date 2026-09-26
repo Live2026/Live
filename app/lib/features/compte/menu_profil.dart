@@ -163,11 +163,7 @@ class _MenuProfil extends ConsumerWidget {
             ),
             ligne(Icons.hub_outlined, 'API partenaires', '/partenaires'),
             section('Aide et confiance'),
-            ligne(
-              Icons.support_agent_rounded,
-              'Centre d’aide',
-              '/aide',
-            ),
+            ligne(Icons.support_agent_rounded, 'Centre d’aide', '/aide'),
             ligne(
               Icons.payments_outlined,
               'Ce qui se paie dans Live',

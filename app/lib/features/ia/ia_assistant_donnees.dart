@@ -134,7 +134,8 @@ _Reponse _repondre(String texte) {
         'iPhone 11, 64 Go, Poto-Poto : 85 000 FCFA, au juste prix',
         'iPhone XR, 128 Go, Bacongo : 78 000 FCFA, batterie à 81 %',
       ],
-      note: 'Payez dans Live : l’argent est versé au vendeur quand vous '
+      note:
+          'Payez dans Live : l’argent est versé au vendeur quand vous '
           'confirmez la réception.',
       type: 'produit',
     );
@@ -160,7 +161,8 @@ _Reponse _repondre(String texte) {
         'Avenue de la Paix : 95 000 FCFA, compteur E2C individuel',
         'Près du marché : 75 000 FCFA, à rafraîchir',
       ],
-      note: 'Frais de visite payés dans Live, remboursés si la visite n’a '
+      note:
+          'Frais de visite payés dans Live, remboursés si la visite n’a '
           'pas lieu.',
       type: 'logement',
     );
@@ -241,7 +243,8 @@ _Reponse _lire(_Fichier f) => switch (f.extension) {
       'Point d’attention : hausse de 10 % par an (article 6)',
       'Les réparations du toit sont à la charge du bailleur',
     ],
-    note: 'Le loyer et la caution se paient en direct au bailleur, contre '
+    note:
+        'Le loyer et la caution se paient en direct au bailleur, contre '
         'reçu.',
     type: 'logement',
   ),

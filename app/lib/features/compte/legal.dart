@@ -199,9 +199,8 @@ class EcranLegal extends StatelessWidget {
             ],
             const SizedBox(height: 20),
             OutlinedButton.icon(
-              onPressed: () => context.push(
-                cgu ? '/legal/confidentialite' : '/legal/cgu',
-              ),
+              onPressed: () =>
+                  context.push(cgu ? '/legal/confidentialite' : '/legal/cgu'),
               icon: const Icon(Icons.description_outlined),
               label: Text(
                 cgu

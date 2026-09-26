@@ -31,21 +31,20 @@ class DepotBrouillonsDrift implements DepotBrouillons {
 
   @override
   Stream<List<BrouillonLocal>> observer() =>
-      (_base.select(_base.brouillons)
-            ..orderBy([(b) => OrderingTerm.desc(b.misAJour)]))
-          .watch()
-          .map(
-            (lignes) => [
-              for (final b in lignes)
-                BrouillonLocal(
-                  id: b.id,
-                  type: b.type,
-                  titre: b.titre,
-                  contenu: b.contenu,
-                  misAJour: b.misAJour,
-                ),
-            ],
-          );
+      (_base.select(
+        _base.brouillons,
+      )..orderBy([(b) => OrderingTerm.desc(b.misAJour)])).watch().map(
+        (lignes) => [
+          for (final b in lignes)
+            BrouillonLocal(
+              id: b.id,
+              type: b.type,
+              titre: b.titre,
+              contenu: b.contenu,
+              misAJour: b.misAJour,
+            ),
+        ],
+      );
 
   @override
   Future<void> enregistrer(BrouillonLocal b) => _base
@@ -136,9 +135,7 @@ class DepotFileEnvoiDrift implements DepotFileEnvoi {
       _base.fileEnvoi,
     )..where((e) => e.id.equals(id))).getSingle();
     final n = e.tentatives + 1;
-    await (_base.update(
-      _base.fileEnvoi,
-    )..where((x) => x.id.equals(id))).write(
+    await (_base.update(_base.fileEnvoi)..where((x) => x.id.equals(id))).write(
       FileEnvoiCompanion(
         tentatives: Value(n),
         etat: Value(n >= 3 ? 'echec' : 'en_attente'),

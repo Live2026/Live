@@ -20,6 +20,8 @@ export 'medias.dart';
 export 'panier.dart';
 export 'plan_ville.dart';
 export 'reglement.dart';
+export 'champ_telephone.dart';
+export 'drapeau.dart';
 export 'hors_connexion.dart';
 export 'saisie.dart';
 export 'ville.dart';
