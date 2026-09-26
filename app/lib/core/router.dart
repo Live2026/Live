@@ -31,11 +31,11 @@ import 'navigation.dart';
 /// Démarrage sur ordinateur : une carte centrée façon WhatsApp Web.
 /// Hauteur de la carte de chaque page, pour qu'elle épouse son contenu.
 const _demarrage = {
-  '/bienvenue': 430.0,
-  '/telephone': 600.0,
-  '/connexion': 470.0,
+  '/bienvenue': 480.0,
+  '/telephone': 440.0,
+  '/connexion': 410.0,
   '/connexion/qr': 450.0,
-  '/code': 500.0,
+  '/code': 370.0,
   '/profil': 700.0,
   '/interets': 720.0,
   '/pin': 700.0,

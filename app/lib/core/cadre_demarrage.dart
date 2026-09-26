@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import '../shared/animations.dart';
+import '../shared/demarrage.dart';
 import '../shared/logo.dart';
 import 'adaptatif.dart';
 import 'theme.dart';
@@ -13,6 +15,19 @@ import 'theme.dart';
 /// hauteur de son contenu, puis les liens utiles sous la carte. Rien d'autre
 /// ne détourne l'attention du formulaire. Sur téléphone et tablette, la page
 /// seule.
+///
+/// Image de fond facultative : déposer `assets/images/fond_demarrage.jpg`
+/// (consignes dans docs/ecrans/00, section 8). Sans elle, le fond crème.
+const imageFondDemarrage = 'assets/images/fond_demarrage.jpg';
+
+/// L'image n'est demandée que si elle figure parmi les ressources : pas de
+/// requête en échec (404) tant qu'elle n'a pas été déposée.
+final Future<bool> _imagePresente =
+    AssetManifest.loadFromAssetBundle(rootBundle).then(
+      (m) => m.listAssets().contains(imageFondDemarrage),
+      onError: (_) => false,
+    );
+
 class CadreDemarrage extends StatelessWidget {
   const CadreDemarrage({
     super.key,
@@ -35,33 +50,70 @@ class CadreDemarrage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (context.taille != Taille.etendue) return child;
+    final theme = Theme.of(context);
+    final page = DansCarte(
+      child: Theme(
+        data: theme.copyWith(
+          appBarTheme: theme.appBarTheme.copyWith(
+            toolbarHeight: 48,
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
+          ),
+          scaffoldBackgroundColor: Colors.white,
+          listTileTheme: const ListTileThemeData(
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        child: child,
+      ),
+    );
     return Material(
       color: fond,
-      child: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, c) => SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: c.maxHeight),
-              child: Column(
-                children: [
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 22, 32, 0),
-                      child: LogoLive(taille: 30),
-                    ),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          FutureBuilder<bool>(
+            future: _imagePresente,
+            builder: (context, s) => s.data == true
+                ? Image.asset(
+                    imageFondDemarrage,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                  )
+                : const SizedBox.shrink(),
+          ),
+          _contenu(page),
+        ],
+      ),
+    );
+  }
+
+  Widget _contenu(Widget page) {
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, c) => SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: c.maxHeight),
+            child: Column(
+              children: [
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(32, 22, 32, 0),
+                    child: LogoLive(taille: 30),
                   ),
-                  const SizedBox(height: 28),
-                  SizedBox(
-                    width: min(largeur, c.maxWidth - 48),
-                    height: min(hauteur, max(420.0, c.maxHeight - 190)),
-                    child: Apparition(child: _Carte(child: child)),
-                  ),
-                  const SizedBox(height: 22),
-                  _PiedCarte(chemin: chemin),
-                  const SizedBox(height: 28),
-                ],
-              ),
+                ),
+                const SizedBox(height: 28),
+                SizedBox(
+                  width: min(largeur, c.maxWidth - 48),
+                  height: min(hauteur, max(420.0, c.maxHeight - 190)),
+                  child: Apparition(child: _Carte(child: page)),
+                ),
+                const SizedBox(height: 22),
+                _PiedCarte(chemin: chemin),
+                const SizedBox(height: 28),
+              ],
             ),
           ),
         ),
@@ -81,19 +133,12 @@ class _Carte extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFCBD2DC)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0F041936),
-            blurRadius: 24,
-            offset: Offset(0, 8),
-          ),
-        ],
+        border: Border.all(color: const Color(0xFFC5CCD6)),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(23),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: child,
         ),
       ),
@@ -110,6 +155,7 @@ class _PiedCarte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lien = switch (chemin) {
+      '/bienvenue' ||
       '/telephone' => ('Déjà un compte Live ?', 'Se connecter', '/connexion'),
       '/connexion' || '/connexion/qr' => (
         'Pas encore de compte ?',

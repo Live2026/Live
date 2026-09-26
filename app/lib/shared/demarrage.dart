@@ -1,8 +1,77 @@
 import 'dart:async';
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
+import 'logo.dart';
+
+/// Posé par `CadreDemarrage` : la page s'affiche dans la carte du démarrage
+/// sur ordinateur, en version simple et centrée (façon WhatsApp Web).
+class DansCarte extends InheritedWidget {
+  const DansCarte({super.key, required super.child});
+
+  static bool de(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<DansCarte>() != null;
+
+  @override
+  bool updateShouldNotify(DansCarte ancien) => false;
+}
+
+/// Illustration d'accueil, à la manière du cercle de dessins de WhatsApp :
+/// le logo au centre, les espaces de Live au trait tout autour.
+class IllustrationLive extends StatelessWidget {
+  const IllustrationLive({super.key, this.taille = 200});
+  final double taille;
+
+  static const _traits = [
+    Icons.shopping_bag_outlined,
+    Icons.home_work_outlined,
+    Icons.handyman_outlined,
+    Icons.podcasts_outlined,
+    Icons.school_outlined,
+    Icons.auto_awesome_outlined,
+    Icons.local_shipping_outlined,
+    Icons.qr_code_2_rounded,
+    Icons.chat_bubble_outline_rounded,
+    Icons.verified_user_outlined,
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final r = taille / 2;
+    return ExcludeSemantics(
+      child: SizedBox.square(
+        dimension: taille,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0x0F13385C),
+              ),
+            ),
+            for (final (i, icone) in _traits.indexed)
+              Transform.translate(
+                offset: Offset(
+                  cos(-pi / 2 + i * 2 * pi / _traits.length) * r * 0.7,
+                  sin(-pi / 2 + i * 2 * pi / _traits.length) * r * 0.7,
+                ),
+                child: Icon(
+                  icone,
+                  size: taille * 0.13,
+                  color: i.isEven ? LiveColors.bleu : LiveColors.orange,
+                ),
+              ),
+            LogoLive(taille: taille * 0.26, nom: false),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 /// Ce que l'on fait sur Live : un verbe par espace, avec sa couleur.
 const versLive = [
@@ -280,6 +349,31 @@ class EnTeteDemarrage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Dans la carte d'ordinateur : titre et texte centrés, rien d'autre.
+    if (DansCarte.de(context)) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 26),
+        child: Column(
+          children: [
+            Text(
+              titre,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              texte,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: LiveColors.gris,
+                fontSize: 15,
+                height: 1.4,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
     final reduit = MediaQuery.disableAnimationsOf(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

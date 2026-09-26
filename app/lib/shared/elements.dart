@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../core/format.dart';
 import '../core/theme.dart';
+import 'demarrage.dart';
 
 /// Bouton « Écouter l'explication » (principe 11). Le prototype affiche le texte lu.
 class BoutonEcouter extends StatelessWidget {
@@ -91,6 +92,17 @@ class BarreAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Dans la carte du démarrage sur ordinateur : un bouton compact centré,
+    // sans filet ni fond (façon WhatsApp Web).
+    if (DansCarte.de(context)) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+        child: Center(
+          heightFactor: 1,
+          child: SizedBox(width: 260, child: child),
+        ),
+      );
+    }
     return SafeArea(
       top: false,
       child: Container(

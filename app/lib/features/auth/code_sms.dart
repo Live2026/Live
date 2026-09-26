@@ -173,26 +173,29 @@ class _EcranCodeState extends State<EcranCode> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
         children: [
-          Center(
-            child: Apparition(
-              child: Container(
-                width: 84,
-                height: 84,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [LiveColors.ambre, LiveColors.orangeVif],
+          // Dans la carte d'ordinateur, pas d'icône : titre et code seuls.
+          if (!DansCarte.de(context)) ...[
+            Center(
+              child: Apparition(
+                child: Container(
+                  width: 84,
+                  height: 84,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [LiveColors.ambre, LiveColors.orangeVif],
+                    ),
                   ),
+                  child: Icon(iconeCanal, color: Colors.white, size: 40),
                 ),
-                child: Icon(iconeCanal, color: Colors.white, size: 40),
               ),
             ),
-          ),
-          const SizedBox(height: 18),
+            const SizedBox(height: 18),
+          ],
           const Text(
             'Vérifiez votre numéro',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
           Text.rich(

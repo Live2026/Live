@@ -214,59 +214,41 @@ class EcranBienvenue extends ConsumerWidget {
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, c) => SingleChildScrollView(
-          padding: const EdgeInsets.all(32),
+          padding: const EdgeInsets.all(24),
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              minHeight: (c.maxHeight - 64).clamp(0, double.infinity),
+              minHeight: (c.maxHeight - 48).clamp(0, double.infinity),
             ),
+            // Comme l'accueil de WhatsApp : une illustration, un titre, un
+            // bouton. « Se connecter » est sous la carte (CadreDemarrage).
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const IllustrationLive(),
+                const SizedBox(height: 28),
                 const Text(
                   'Bienvenue sur Live',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Créez votre compte avec votre numéro de téléphone, ou '
-                  'découvrez l’application sans compte.',
+                  'Achetez, vendez, louez et payez en toute confiance.',
+                  textAlign: TextAlign.center,
                   style: TextStyle(color: LiveColors.gris, fontSize: 15),
                 ),
                 const SizedBox(height: 28),
-                FilledButton(
-                  style: FilledButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
+                SizedBox(
+                  width: 260,
+                  child: FilledButton(
+                    onPressed: () => context.push('/telephone'),
+                    child: const Text('Commencer'),
                   ),
-                  onPressed: () => context.push('/telephone'),
-                  child: const Text('Commencer'),
                 ),
-                const SizedBox(height: 10),
-                OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(48),
-                  ),
+                const SizedBox(height: 8),
+                TextButton(
                   onPressed: () => _decouvrir(context, ref),
                   child: const Text('Découvrir sans compte'),
-                ),
-                const SizedBox(height: 18),
-                const Row(
-                  children: [
-                    Expanded(child: Divider()),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        'Déjà inscrit ?',
-                        style: TextStyle(color: LiveColors.gris),
-                      ),
-                    ),
-                    Expanded(child: Divider()),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                TextButton(
-                  onPressed: () => context.push('/connexion'),
-                  child: const Text("J'ai déjà un compte"),
                 ),
               ],
             ),
