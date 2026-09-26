@@ -6863,5 +6863,538 @@
   "servicesDansLApplicationReelle": "Dans l'application réelle : le solde est payé par MoMo ou Airtel, le prestataire est payé, puis vous pouvez laisser un avis.",
   "@servicesDansLApplicationReelle": {
     "description": "Écran : services_suivi"
+  },
+  "@publishPouvoirVerrou": {
+    "description": "Écran : publier_bien",
+    "placeholders": {
+      "pouvoir": {
+        "type": "String"
+      }
+    }
+  },
+  "publishPouvoirVerrou": "« {pouvoir} » est un super-pouvoir. Il se débloque quand Live a vérifié votre identité (pièce d’identité et selfie, 2 minutes). C’est ce qui rassure vos futurs clients.",
+  "@publishBienEtape": {
+    "description": "Écran : publier_bien",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "publishBienEtape": "Publier un bien · {n}/5",
+  "@publishNMois": {
+    "description": "Écran : publier_bien",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "publishNMois": "{n} mois",
+  "@publishPhotosMin": {
+    "description": "Écran : publier_bien",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "video": {
+        "type": "String"
+      }
+    }
+  },
+  "publishPhotosMin": "Au moins 5 photos et 1 vidéo de visite ({n}/5 photos{video}).",
+  "@publishVideoAjouteeSuffixe": {
+    "description": "Écran : publier_bien"
+  },
+  "publishVideoAjouteeSuffixe": ", vidéo ajoutée",
+  "@publishBienEnvoyeTexte": {
+    "description": "Écran : publier_bien",
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "quartier": {
+        "type": "String"
+      },
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "publishBienEnvoyeTexte": "{type} à {quartier} · {prix}.\nEn ligne sous 2 h après contrôle des photos. Pensez à confirmer la disponibilité tous les 30 jours.",
+  "@publishLeBien": {
+    "description": "Écran : publier_bien"
+  },
+  "publishLeBien": "Le bien",
+  "@publishOu": {
+    "description": "Écran : publier_bien"
+  },
+  "publishOu": "Où ?",
+  "@publishPrix": {
+    "description": "Écran : publier_service"
+  },
+  "publishPrix": "Prix",
+  "@publishDetails": {
+    "description": "Écran : publier_bien"
+  },
+  "publishDetails": "Détails",
+  "@publishPhotos": {
+    "description": "Écran : publier_bien"
+  },
+  "publishPhotos": "Photos",
+  "publishVerifierMonIdentite": "Vérifier mon identité",
+  "@publishVerifierMonIdentite": {
+    "description": "Écran : publish_screen"
+  },
+  "publishPublierUnBien": "Publier un bien",
+  "@publishPublierUnBien": {
+    "description": "Écran : publier_bien"
+  },
+  "publishLouerOuVendreUn": "Louer ou vendre un bien",
+  "@publishLouerOuVendreUn": {
+    "description": "Écran : publish_screen"
+  },
+  "publishPublierLeBien": "Publier le bien",
+  "@publishPublierLeBien": {
+    "description": "Écran : publier_bien"
+  },
+  "publishALouer": "À louer",
+  "@publishALouer": {
+    "description": "Écran : publier_bien"
+  },
+  "publishAVendre": "À vendre",
+  "@publishAVendre": {
+    "description": "Écran : publier_bien"
+  },
+  "publishRepereConnu": "Repère connu",
+  "@publishRepereConnu": {
+    "description": "Écran : publier_bien"
+  },
+  "publishExDerriereLeMarche": "Ex. derrière le marché Total",
+  "@publishExDerriereLeMarche": {
+    "description": "Écran : publier_bien"
+  },
+  "publishAdresseExacte": "Adresse exacte",
+  "@publishAdresseExacte": {
+    "description": "Écran : publier_bien"
+  },
+  "publishDonneeSeulementApresLe": "Donnée seulement après le paiement de la visite",
+  "@publishDonneeSeulementApresLe": {
+    "description": "Écran : publier_bien"
+  },
+  "publishPrixDeVente": "Prix de vente",
+  "@publishPrixDeVente": {
+    "description": "Écran : publier_bien"
+  },
+  "publishLoyerParMois": "Loyer par mois",
+  "@publishLoyerParMois": {
+    "description": "Écran : publier_bien"
+  },
+  "publishAvance": "Avance",
+  "@publishAvance": {
+    "description": "Écran : publier_bien"
+  },
+  "publishCaution": "Caution",
+  "@publishCaution": {
+    "description": "Écran : publier_bien"
+  },
+  "publishCommission": "Commission",
+  "@publishCommission": {
+    "description": "Écran : publier_bien"
+  },
+  "publishFraisDeVisite": "Frais de visite",
+  "@publishFraisDeVisite": {
+    "description": "Écran : publier_bien"
+  },
+  "publishPrixAffiche": "Prix affiché",
+  "@publishPrixAffiche": {
+    "description": "Écran : publier_bien"
+  },
+  "publishCoutDEntreeAffiche": "Coût d’entrée affiché",
+  "@publishCoutDEntreeAffiche": {
+    "description": "Écran : publier_bien"
+  },
+  "publishLeCoutDEntree": "Le coût d’entrée est affiché en entier aux visiteurs : pas de mauvaise surprise.",
+  "@publishLeCoutDEntree": {
+    "description": "Écran : publier_bien"
+  },
+  "publishChambres": "Chambres",
+  "@publishChambres": {
+    "description": "Écran : publier_bien"
+  },
+  "publishDouches": "Douches",
+  "@publishDouches": {
+    "description": "Écran : publier_bien"
+  },
+  "publishMeuble": "Meublé",
+  "@publishMeuble": {
+    "description": "Écran : publier_bien"
+  },
+  "publishParking": "Parking",
+  "@publishParking": {
+    "description": "Écran : publier_bien"
+  },
+  "publishEauDeForage": "Eau de forage",
+  "@publishEauDeForage": {
+    "description": "Écran : publier_bien"
+  },
+  "publishVideoAjoutee": "Vidéo ajoutée",
+  "@publishVideoAjoutee": {
+    "description": "Écran : publier_bien"
+  },
+  "publishVideoDeVisite": "Vidéo de visite",
+  "@publishVideoDeVisite": {
+    "description": "Écran : publier_bien"
+  },
+  "publishAjouter": "Ajouter",
+  "@publishAjouter": {
+    "description": "Écran : publier_service"
+  },
+  "publishLiveVerifieQueVos": "Live vérifie que vos photos ne sont pas déjà utilisées ailleurs.",
+  "@publishLiveVerifieQueVos": {
+    "description": "Écran : publier_bien"
+  },
+  "publishBienEnvoyeEnVerification": "Bien envoyé en vérification",
+  "@publishBienEnvoyeEnVerification": {
+    "description": "Écran : publier_bien"
+  },
+  "publishTerminer": "Terminer",
+  "@publishTerminer": {
+    "description": "Écran : publier_service"
+  },
+  "publishMoins": "Moins",
+  "@publishMoins": {
+    "description": "Écran : publier_bien"
+  },
+  "publishPlus": "Plus",
+  "@publishPlus": {
+    "description": "Écran : publier_bien"
+  },
+  "publishEnvoisEnCours": "Envois en cours",
+  "@publishEnvoisEnCours": {
+    "description": "Écran : publish_screen"
+  },
+  "publishCompressionPourReseauMobile": "Compression pour réseau mobile",
+  "@publishCompressionPourReseauMobile": {
+    "description": "Écran : publier_envois"
+  },
+  "publishPublieIlYA": "Publié il y a 2 min",
+  "@publishPublieIlYA": {
+    "description": "Écran : publier_envois"
+  },
+  "publishVisiteDuStudio": "Visite du studio",
+  "@publishVisiteDuStudio": {
+    "description": "Écran : publier_envois"
+  },
+  "publishRepriseDeLEnvoi": "Reprise de l’envoi…",
+  "@publishRepriseDeLEnvoi": {
+    "description": "Écran : publier_envois"
+  },
+  "publishConnexionPerdueA48": "Connexion perdue à 48 %",
+  "@publishConnexionPerdueA48": {
+    "description": "Écran : publier_envois"
+  },
+  "publishEnvoyerSeulementEnWi": "Envoyer seulement en Wi-Fi",
+  "@publishEnvoyerSeulementEnWi": {
+    "description": "Écran : publier_envois"
+  },
+  "publishLesVideosAttendentUne": "Les vidéos attendent une connexion Wi-Fi pour économiser vos données.",
+  "@publishLesVideosAttendentUne": {
+    "description": "Écran : publier_envois"
+  },
+  "publishLEnvoiReprendLa": "L’envoi reprend là où il s’est arrêté si la connexion coupe : rien n’est perdu.",
+  "@publishLEnvoiReprendLa": {
+    "description": "Écran : publier_envois"
+  },
+  "publishReprendre": "Reprendre",
+  "@publishReprendre": {
+    "description": "Écran : publier_envois"
+  },
+  "publishRobeWaxLonguePhotos": "Robe wax longue · photos",
+  "@publishRobeWaxLonguePhotos": {
+    "description": "Écran : publier_envois"
+  },
+  "@publishPouvoirVerifiez": {
+    "description": "Écran : publish_screen",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "publishPouvoirVerifiez": "« {titre} » est un super-pouvoir. Vérifiez votre identité (pièce + selfie) : c’est ce qui rassure vos futurs clients.",
+  "publishVideoOuPhoto": "Vidéo ou photo",
+  "@publishVideoOuPhoto": {
+    "description": "Écran : publish_screen"
+  },
+  "publishPartagerDansLeFil": "Partager dans le fil, comme sur TikTok",
+  "@publishPartagerDansLeFil": {
+    "description": "Écran : publish_screen"
+  },
+  "publishVendreUnProduit": "Vendre un produit",
+  "@publishVendreUnProduit": {
+    "description": "Écran : publish_screen"
+  },
+  "publishTelephoneModeMaison0": "Téléphone, mode, maison… 0 % pendant 3 mois",
+  "@publishTelephoneModeMaison0": {
+    "description": "Écran : publish_screen"
+  },
+  "publishAppartementMaisonTerrainLocal": "Appartement, maison, terrain, local",
+  "@publishAppartementMaisonTerrainLocal": {
+    "description": "Écran : publish_screen"
+  },
+  "publishProposerUnService": "Proposer un service",
+  "@publishProposerUnService": {
+    "description": "Écran : publier_service"
+  },
+  "publishArtisanBeauteCoursEvenement": "Artisan, beauté, cours, événement",
+  "@publishArtisanBeauteCoursEvenement": {
+    "description": "Écran : publish_screen"
+  },
+  "publishPublier": "Publier",
+  "@publishPublier": {
+    "description": "Écran : publier_legende"
+  },
+  "publishToutLeMondePeut": "Tout le monde peut publier. Certaines publications demandent un super-pouvoir : il se débloque en 2 minutes.",
+  "@publishToutLeMondePeut": {
+    "description": "Écran : publish_screen"
+  },
+  "publishVerificationRequise": "Vérification requise",
+  "@publishVerificationRequise": {
+    "description": "Écran : publish_screen"
+  },
+  "publishVoirTousMesSuper": "Voir tous mes super-pouvoirs et ce qu’ils rapportent.",
+  "@publishVoirTousMesSuper": {
+    "description": "Écran : publish_screen"
+  },
+  "publishVoir": "Voir",
+  "@publishVoir": {
+    "description": "Écran : publish_screen"
+  },
+  "@publishLegendeDemo": {
+    "description": "Écran : publier_legende"
+  },
+  "publishLegendeDemo": "Nouvel arrivage ! Livraison 24 h à Brazzaville. #wax #moungali",
+  "@publishNPhotos": {
+    "description": "Écran : publier_legende",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "publishNPhotos": "{n, plural, =1{1 photo} other{{n} photos}}",
+  "@publishToutLeMonde": {
+    "description": "Écran : publier_legende"
+  },
+  "publishToutLeMonde": "Tout le monde",
+  "@publishMesAbonnes": {
+    "description": "Écran : publier_legende"
+  },
+  "publishMesAbonnes": "Mes abonnés",
+  "@publishAucune": {
+    "description": "Écran : publier_legende"
+  },
+  "publishAucune": "Aucune",
+  "publishGalerie": "Galerie",
+  "@publishGalerie": {
+    "description": "Écran : publier_media"
+  },
+  "publishArreter": "Arrêter",
+  "@publishArreter": {
+    "description": "Écran : publier_legende"
+  },
+  "@enregistrer": {
+    "description": "Écran : commun"
+  },
+  "enregistrer": "Enregistrer",
+  "publishRetourALaCamera": "Retour à la caméra",
+  "@publishRetourALaCamera": {
+    "description": "Écran : publier_legende"
+  },
+  "publishNouvellePublication": "Nouvelle publication",
+  "@publishNouvellePublication": {
+    "description": "Écran : publier_legende"
+  },
+  "publishBrouillonEnregistre": "Brouillon enregistré.",
+  "@publishBrouillonEnregistre": {
+    "description": "Écran : publier_legende"
+  },
+  "publishBrouillon": "Brouillon",
+  "@publishBrouillon": {
+    "description": "Écran : publier_legende"
+  },
+  "publishDecrivezVotreVideoAjoutez": "Décrivez votre vidéo, ajoutez des #hashtags",
+  "@publishDecrivezVotreVideoAjoutez": {
+    "description": "Écran : publier_legende"
+  },
+  "publishLierAUneAnnonce": "Lier à une annonce",
+  "@publishLierAUneAnnonce": {
+    "description": "Écran : publier_legende"
+  },
+  "publishUnBoutonAcheterApparait": "Un bouton « Acheter » apparaît sur la vidéo.",
+  "@publishUnBoutonAcheterApparait": {
+    "description": "Écran : publier_legende"
+  },
+  "publishQuiPeutVoir": "Qui peut voir",
+  "@publishQuiPeutVoir": {
+    "description": "Écran : publier_legende"
+  },
+  "publishLieu": "Lieu",
+  "@publishLieu": {
+    "description": "Écran : publier_legende"
+  },
+  "publishAutoriserLesCommentaires": "Autoriser les commentaires",
+  "@publishAutoriserLesCommentaires": {
+    "description": "Écran : publier_legende"
+  },
+  "publishPartagerAussiEnStatut": "Partager aussi en statut WhatsApp",
+  "@publishPartagerAussiEnStatut": {
+    "description": "Écran : publier_legende"
+  },
+  "publishLaVideoEstCompressee": "La vidéo est compressée sur votre téléphone (720p) avant l’envoi : moins de données, envoi repris si la connexion coupe.",
+  "@publishLaVideoEstCompressee": {
+    "description": "Écran : publier_legende"
+  },
+  "@publishFiltreOriginal": {
+    "description": "Écran : publier_media (filtre)"
+  },
+  "publishFiltreOriginal": "Original",
+  "@publishFiltreLumineux": {
+    "description": "Écran : publier_media (filtre)"
+  },
+  "publishFiltreLumineux": "Lumineux",
+  "@publishFiltreChaud": {
+    "description": "Écran : publier_media (filtre)"
+  },
+  "publishFiltreChaud": "Chaud",
+  "@publishChoisisVideo": {
+    "description": "Écran : publier_media",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "publishChoisisVideo": "{n} / 10 + 1 vidéo",
+  "@publishMediaN": {
+    "description": "Écran : publier_media",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "publishMediaN": "Média {n}",
+  "@publishSonOriginal": {
+    "description": "Écran : publier_media"
+  },
+  "publishSonOriginal": "Son original",
+  "@publishVotreVoix": {
+    "description": "Écran : publier_media"
+  },
+  "publishVotreVoix": "Votre voix",
+  "@publishTendance": {
+    "description": "Écran : publier_media"
+  },
+  "publishTendance": "Tendance près de chez vous",
+  "@publishLibreDroits": {
+    "description": "Écran : publier_media"
+  },
+  "publishLibreDroits": "Musique libre de droits",
+  "publishAjouterUnSon": "Ajouter un son",
+  "@publishAjouterUnSon": {
+    "description": "Écran : publier_media"
+  },
+  "publishRetourner": "Retourner",
+  "@publishRetourner": {
+    "description": "Écran : publier_media"
+  },
+  "publishN3S": "3 s",
+  "@publishN3S": {
+    "description": "Écran : publier_media"
+  },
+  "publishFlash": "Flash",
+  "@publishFlash": {
+    "description": "Écran : publier_media"
+  },
+  "publishTexte": "Texte",
+  "@publishTexte": {
+    "description": "Écran : publier_media"
+  },
+  "publishFilmezLObjetDe": "Filmez l’objet de près, en pleine lumière, 30 s suffisent",
+  "@publishFilmezLObjetDe": {
+    "description": "Écran : publier_media"
+  },
+  "@publishServiceEnLigneTexte": {
+    "description": "Écran : publier_service",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      },
+      "metier": {
+        "type": "String"
+      },
+      "zones": {
+        "type": "String"
+      }
+    }
+  },
+  "publishServiceEnLigneTexte": "{titre} · {metier}. Vous recevrez les demandes de devis de {zones} directement dans Live.",
+  "@publishPrixFixe": {
+    "description": "Écran : publier_service"
+  },
+  "publishPrixFixe": "Prix fixe",
+  "@publishSurDevis": {
+    "description": "Écran : publier_service"
+  },
+  "publishSurDevis": "Sur devis",
+  "@publishNattesCollees": {
+    "description": "Écran : publier_service"
+  },
+  "publishNattesCollees": "Nattes collées",
+  "publishProposerSesServices": "Proposer ses services",
+  "@publishProposerSesServices": {
+    "description": "Écran : publier_service"
+  },
+  "publishVotreServiceEstEn": "Votre service est en ligne",
+  "@publishVotreServiceEstEn": {
+    "description": "Écran : publier_service"
+  },
+  "publishVoirMesInterventions": "Voir mes interventions",
+  "@publishVoirMesInterventions": {
+    "description": "Écran : publier_service"
+  },
+  "publishVotreMetier": "Votre métier",
+  "@publishVotreMetier": {
+    "description": "Écran : publier_service"
+  },
+  "publishNomDuService": "Nom du service",
+  "@publishNomDuService": {
+    "description": "Écran : publier_service"
+  },
+  "publishOuIntervenezVous": "Où intervenez-vous ?",
+  "@publishOuIntervenezVous": {
+    "description": "Écran : publier_service"
+  },
+  "publishJeMeDeplaceA": "Je me déplace à domicile",
+  "@publishJeMeDeplaceA": {
+    "description": "Écran : publier_service"
+  },
+  "publishVosRealisations": "Vos réalisations",
+  "@publishVosRealisations": {
+    "description": "Écran : publier_service"
+  },
+  "publishPhotosEtVideosDe": "Photos et vidéos de vos travaux : c’est ce qui décide les clients.",
+  "@publishPhotosEtVideosDe": {
+    "description": "Écran : publier_service"
+  },
+  "publishVosClientsPaientUn": "Vos clients paient un acompte bloqué par Live : vous êtes sûr d’être payé.",
+  "@publishVosClientsPaientUn": {
+    "description": "Écran : publier_service"
+  },
+  "publishPublierMonService": "Publier mon service",
+  "@publishPublierMonService": {
+    "description": "Écran : publier_service"
   }
 }

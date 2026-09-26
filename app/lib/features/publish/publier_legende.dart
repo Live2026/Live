@@ -82,7 +82,7 @@ class _MiniatureGalerie extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      label: 'Galerie',
+      label: context.t.publishGalerie,
       excludeSemantics: true,
       child: Pressable(
         onTap: onTap,
@@ -108,8 +108,8 @@ class _MiniatureGalerie extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            const Text(
-              'Galerie',
+            Text(
+              context.t.publishGalerie,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 12,
@@ -139,7 +139,7 @@ class _BoutonEnregistrer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      label: enCours ? 'Arrêter' : 'Enregistrer',
+      label: enCours ? context.t.publishArreter : context.t.enregistrer,
       excludeSemantics: true,
       child: GestureDetector(
         onTap: onTap,
@@ -194,8 +194,8 @@ class _EtapeLegende extends StatefulWidget {
 }
 
 class _EtapeLegendeState extends State<_EtapeLegende> {
-  final _legende = TextEditingController(
-    text: 'Nouvel arrivage ! Livraison 24 h à Brazzaville. #wax #moungali',
+  late final _legende = TextEditingController(
+    text: context.t.publishLegendeDemo,
   );
   var _lien = 'Robe wax longue';
   var _qui = 'Tout le monde';
@@ -208,17 +208,17 @@ class _EtapeLegendeState extends State<_EtapeLegende> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          tooltip: 'Retour à la caméra',
+          tooltip: context.t.publishRetourALaCamera,
           onPressed: widget.onRetour,
           icon: const Icon(Icons.arrow_back_rounded),
         ),
-        title: const Text('Nouvelle publication'),
+        title: Text(context.t.publishNouvellePublication),
         actions: [
           TextButton(
             onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Brouillon enregistré.')),
+              SnackBar(content: Text(context.t.publishBrouillonEnregistre)),
             ),
-            child: const Text('Brouillon'),
+            child: Text(context.t.publishBrouillon),
           ),
         ],
       ),
@@ -245,7 +245,7 @@ class _EtapeLegendeState extends State<_EtapeLegende> {
                       child: Etiquette(
                         widget.duree > 0
                             ? '0:${widget.duree.toString().padLeft(2, '0')}'
-                            : '${widget.photos} photo${widget.photos > 1 ? 's' : ''}',
+                            : context.t.publishNPhotos(widget.photos),
                       ),
                     ),
                   ],
@@ -258,16 +258,16 @@ class _EtapeLegendeState extends State<_EtapeLegende> {
                   minLines: 6,
                   maxLines: 8,
                   maxLength: 300,
-                  decoration: const InputDecoration(
-                    hintText: 'Décrivez votre vidéo, ajoutez des #hashtags',
+                  decoration: InputDecoration(
+                    hintText: context.t.publishDecrivezVotreVideoAjoutez,
                   ),
                 ),
               ),
             ],
           ),
-          const EnTeteSection('Lier à une annonce'),
-          const Text(
-            'Un bouton « Acheter » apparaît sur la vidéo.',
+          EnTeteSection(context.t.publishLierAUneAnnonce),
+          Text(
+            context.t.publishUnBoutonAcheterApparait,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 8),
@@ -282,7 +282,7 @@ class _EtapeLegendeState extends State<_EtapeLegende> {
                 'Sac à main cuir',
               ])
                 ChoiceChip(
-                  label: Text(l),
+                  label: Text(l == 'Aucune' ? context.t.publishAucune : l),
                   selected: _lien == l,
                   onSelected: (_) => setState(() => _lien = l),
                 ),
@@ -291,35 +291,36 @@ class _EtapeLegendeState extends State<_EtapeLegende> {
           const SizedBox(height: 12),
           LigneMenu(
             icone: Icons.public_rounded,
-            titre: 'Qui peut voir',
-            valeur: _qui,
+            titre: context.t.publishQuiPeutVoir,
+            valeur: _qui == 'Tout le monde'
+                ? context.t.publishToutLeMonde
+                : context.t.publishMesAbonnes,
             onTap: () => setState(
               () => _qui = _qui == 'Tout le monde'
                   ? 'Mes abonnés'
                   : 'Tout le monde',
             ),
           ),
-          const LigneMenu(
+          LigneMenu(
             icone: Icons.location_on_outlined,
-            titre: 'Lieu',
+            titre: context.t.publishLieu,
             valeur: 'Moungali',
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             value: _commentaires,
             onChanged: (v) => setState(() => _commentaires = v),
-            title: const Text('Autoriser les commentaires'),
+            title: Text(context.t.publishAutoriserLesCommentaires),
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             value: _whatsapp,
             onChanged: (v) => setState(() => _whatsapp = v),
-            title: const Text('Partager aussi en statut WhatsApp'),
+            title: Text(context.t.publishPartagerAussiEnStatut),
           ),
           const SizedBox(height: 4),
-          const Text(
-            'La vidéo est compressée sur votre téléphone (720p) avant l’envoi : '
-            'moins de données, envoi repris si la connexion coupe.',
+          Text(
+            context.t.publishLaVideoEstCompressee,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
         ],
@@ -327,7 +328,7 @@ class _EtapeLegendeState extends State<_EtapeLegende> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: () => context.pushReplacement('/publier/envois'),
-          child: const Text('Publier'),
+          child: Text(context.t.publishPublier),
         ),
       ),
     );

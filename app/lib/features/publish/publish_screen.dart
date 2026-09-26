@@ -10,6 +10,7 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'publier_media.dart';
 part 'publier_legende.dart';
@@ -29,49 +30,48 @@ class EcranPublier extends ConsumerWidget {
     final options = [
       (
         Icons.videocam_rounded,
-        'Vidéo ou photo',
-        'Partager dans le fil, comme sur TikTok',
+        context.t.publishVideoOuPhoto,
+        context.t.publishPartagerDansLeFil,
         '/publier/media',
         true,
       ),
       (
         Icons.sell_rounded,
-        'Vendre un produit',
-        'Téléphone, mode, maison… 0 % pendant 3 mois',
+        context.t.publishVendreUnProduit,
+        context.t.publishTelephoneModeMaison0,
         '/vendre',
         true,
       ),
       (
         Icons.home_work_rounded,
-        'Louer ou vendre un bien',
-        'Appartement, maison, terrain, local',
+        context.t.publishLouerOuVendreUn,
+        context.t.publishAppartementMaisonTerrainLocal,
         '/publier/bien',
         etat.identiteVerifiee,
       ),
       (
         Icons.handyman_rounded,
-        'Proposer un service',
-        'Artisan, beauté, cours, événement',
+        context.t.publishProposerUnService,
+        context.t.publishArtisanBeauteCoursEvenement,
         '/publier/service',
         etat.identiteVerifiee,
       ),
     ];
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Publier'),
+        title: Text(context.t.publishPublier),
         actions: [
           TextButton(
             onPressed: () => context.push('/publier/envois'),
-            child: const Text('Envois en cours'),
+            child: Text(context.t.publishEnvoisEnCours),
           ),
         ],
       ),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 24),
         children: [
-          const Text(
-            'Tout le monde peut publier. Certaines publications demandent un '
-            'super-pouvoir : il se débloque en 2 minutes.',
+          Text(
+            context.t.publishToutLeMondePeut,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 12),
@@ -93,13 +93,10 @@ class EcranPublier extends ConsumerWidget {
                         ? () => context.push(route)
                         : () => pouvoirRequis(
                             context,
-                            titre: 'Vérification requise',
-                            raison:
-                                '« $titre » est un super-pouvoir. Vérifiez votre '
-                                'identité (pièce + selfie) : c’est ce qui rassure '
-                                'vos futurs clients.',
+                            titre: context.t.publishVerificationRequise,
+                            raison: context.t.publishPouvoirVerifiez(titre),
                             route: '/verifier',
-                            action: 'Vérifier mon identité',
+                            action: context.t.publishVerifierMonIdentite,
                           ),
                   ),
                 ),
@@ -112,14 +109,10 @@ class EcranPublier extends ConsumerWidget {
               children: [
                 const Icon(Icons.bolt_rounded, color: LiveColors.orangeVif),
                 const SizedBox(width: 10),
-                const Expanded(
-                  child: Text(
-                    'Voir tous mes super-pouvoirs et ce qu’ils rapportent.',
-                  ),
-                ),
+                Expanded(child: Text(context.t.publishVoirTousMesSuper)),
                 TextButton(
                   onPressed: () => context.push('/pouvoirs'),
-                  child: const Text('Voir'),
+                  child: Text(context.t.publishVoir),
                 ),
               ],
             ),

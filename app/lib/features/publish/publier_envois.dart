@@ -15,25 +15,27 @@ class _EcranEnvoisState extends State<EcranEnvois> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Envois en cours')),
+      appBar: AppBar(title: Text(context.t.publishEnvoisEnCours)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const _Envoi(
+          _Envoi(
             titre: 'Nouvel arrivage ! Livraison 24 h…',
-            etape: 'Compression pour réseau mobile',
+            etape: context.t.publishCompressionPourReseauMobile,
             progression: 0.62,
             couleur: Color(0xFFB45309),
           ),
-          const _Envoi(
-            titre: 'Robe wax longue · photos',
-            etape: 'Publié il y a 2 min',
+          _Envoi(
+            titre: context.t.publishRobeWaxLonguePhotos,
+            etape: context.t.publishPublieIlYA,
             progression: 1,
             couleur: Color(0xFF9A3412),
           ),
           _Envoi(
-            titre: 'Visite du studio',
-            etape: _repris ? 'Reprise de l’envoi…' : 'Connexion perdue à 48 %',
+            titre: context.t.publishVisiteDuStudio,
+            etape: _repris
+                ? context.t.publishRepriseDeLEnvoi
+                : context.t.publishConnexionPerdueA48,
             progression: _repris ? 0.55 : 0.48,
             couleur: const Color(0xFF334155),
             erreur: !_repris,
@@ -42,15 +44,13 @@ class _EcranEnvoisState extends State<EcranEnvois> {
           const SizedBox(height: 12),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text('Envoyer seulement en Wi-Fi'),
-            subtitle: const Text(
-              'Les vidéos attendent une connexion Wi-Fi pour économiser vos données.',
-            ),
+            title: Text(context.t.publishEnvoyerSeulementEnWi),
+            subtitle: Text(context.t.publishLesVideosAttendentUne),
             value: _wifi,
             onChanged: (v) => setState(() => _wifi = v),
           ),
-          const Text(
-            'L’envoi reprend là où il s’est arrêté si la connexion coupe : rien n’est perdu.',
+          Text(
+            context.t.publishLEnvoiReprendLa,
             style: TextStyle(color: LiveColors.gris, fontSize: 13),
           ),
         ],
@@ -136,7 +136,7 @@ class _Envoi extends StatelessWidget {
             ),
             if (erreur)
               IconButton(
-                tooltip: 'Reprendre',
+                tooltip: context.t.publishReprendre,
                 onPressed: onReprendre,
                 icon: const Icon(Icons.refresh_rounded),
               )
