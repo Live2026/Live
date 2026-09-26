@@ -45,7 +45,7 @@ class _EcranSplashState extends State<EcranSplash> {
                     opacity: t,
                     child: Transform.scale(scale: 0.9 + 0.1 * t, child: enfant),
                   ),
-                  child: const LogoLive(taille: 88, nom: false),
+                  child: const LogoLive(taille: 128, nom: false),
                 ),
               ),
             ),
