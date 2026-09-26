@@ -111,14 +111,14 @@ class _ActionsParametres {
     final choix = await choisir<String>(
       context,
       titre: 'Langue',
-      actuel: 'fr',
-      options: const [
-        ('fr', 'Français', null),
-        ('ln', 'Lingala', 'Interface, sous-titres et Live IA'),
-        ('kt', 'Kituba', 'Interface, sous-titres et Live IA'),
+      actuel: _etat.langue,
+      options: [
+        for (final (code, nom, francais) in languesLive)
+          (code, nom, nom == francais ? null : francais),
       ],
     );
     if (choix != null && context.mounted) {
+      ref.read(liveProvider.notifier).choisirLangue(choix);
       informer(context, 'Langue enregistrée.');
     }
   }

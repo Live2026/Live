@@ -140,11 +140,12 @@ class _PeintreMotif extends CustomPainter {
 }
 
 /// Rayon réservé au logo au centre du cercle.
-double rayonLogoMotif(Size s) => (geometrieMotif(s).$2 * 0.3).clamp(36, 64);
+double rayonLogoMotif(Size s) => (geometrieMotif(s).$2 * 0.42).clamp(46, 96);
 
-/// Le logo assis dans le motif, comme le téléphone au centre des dessins de
-/// WhatsApp : même couleur que les dessins, au centre du cercle. À
-/// poser dans le même `Stack` que [MotifLive], sur toute sa surface.
+/// Le vrai logo de Live (symbole et nom, comme en haut à gauche), assis au
+/// centre du cercle de dessins, comme le téléphone au centre des dessins de
+/// WhatsApp. À poser dans le même `Stack` que [MotifLive], sur toute sa
+/// surface.
 class LogoMotif extends StatelessWidget {
   const LogoMotif({super.key});
 
@@ -162,14 +163,9 @@ class LogoMotif extends StatelessWidget {
               width: r * 2,
               height: r * 2,
               child: Center(
-                child: ExcludeSemantics(
-                  child: ColorFiltered(
-                    colorFilter: const ColorFilter.mode(
-                      couleurMotif,
-                      BlendMode.srcIn,
-                    ),
-                    child: LogoLive(taille: r * 1.5, nom: false),
-                  ),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: LogoLive(taille: r * 0.66),
                 ),
               ),
             ),

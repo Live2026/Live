@@ -28,16 +28,17 @@ import '../features/test/scenarios_screen.dart';
 import 'cadre_demarrage.dart';
 import 'navigation.dart';
 
-/// Démarrage sur ordinateur : une carte centrée façon WhatsApp Web.
-/// Hauteur de la carte de chaque page, pour qu'elle épouse son contenu.
+/// Démarrage : sur ordinateur, page blanche et colonne centrée façon
+/// WhatsApp (CadreDemarrage).
 const _demarrage = {
-  '/telephone': 600.0,
-  '/connexion': 470.0,
-  '/connexion/qr': 450.0,
-  '/code': 370.0,
-  '/profil': 700.0,
-  '/interets': 720.0,
-  '/pin': 700.0,
+  '/langue',
+  '/telephone',
+  '/connexion',
+  '/connexion/qr',
+  '/code',
+  '/profil',
+  '/interets',
+  '/pin',
 };
 
 /// Pages qui occupent tout l'écran, même sur ordinateur : accueil (motif
@@ -59,11 +60,10 @@ GoRoute _route(
   bool cadre = true,
 }) => GoRoute(
   path: chemin,
-  builder: (_, s) => _demarrage.containsKey(chemin)
+  builder: (_, s) => _demarrage.contains(chemin)
       ? CadreDemarrage(
           chemin: chemin,
-          hauteur: _demarrage[chemin]!,
-          largeur: chemin == '/connexion/qr' ? 760 : 560,
+          largeur: chemin == '/connexion/qr' ? 760 : 460,
           child: ecran(s),
         )
       : !cadre || _pleinEcran(chemin)
@@ -79,6 +79,7 @@ final routeur = GoRouter(
     // Démarrage et compte
     _route('/demarrage', (_) => const EcranSplash()),
     _route('/bienvenue', (_) => const EcranBienvenue()),
+    _route('/langue', (_) => const EcranLangue()),
     _route('/telephone', (_) => const EcranTelephone()),
     _route('/connexion/qr', (_) => const EcranConnexionQr()),
     _route('/connexion', (_) => const EcranConnexion()),

@@ -379,6 +379,11 @@ class LiveStore extends Notifier<LiveState> with PersistanceLocale {
     garder('devise', code);
   }
 
+  void choisirLangue(String code) {
+    state = state.copyWith(langue: code);
+    garder('langue', code);
+  }
+
   /// Demande au support Live ; renvoie son numéro (SP-…).
   String ecrireSupport(String sujet, String message) {
     final id = 'SP-${(10421 + state.demandesSupport.length)}';

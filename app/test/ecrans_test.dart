@@ -10,6 +10,7 @@ import 'outils.dart';
 const routes = [
   '/demarrage',
   '/bienvenue',
+  '/langue',
   '/telephone',
   '/connexion',
   '/connexion/qr',

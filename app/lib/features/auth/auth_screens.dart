@@ -16,6 +16,7 @@ part 'bienvenue.dart';
 part 'code_sms.dart';
 part 'connexion_interets.dart';
 part 'connexion_qr.dart';
+part 'langue.dart';
 
 /// E-AUTH-02 — Numéro de téléphone : pays, numéro, opérateur détecté,
 /// consentements explicites.
@@ -121,6 +122,7 @@ class _EcranProfilState extends State<EcranProfil> {
   final _nom = TextEditingController();
   var _ville = 'Brazzaville';
   var _majeur = true;
+  var _photo = false;
 
   static const _villes = [
     'Brazzaville',
@@ -142,42 +144,17 @@ class _EcranProfilState extends State<EcranProfil> {
         children: [
           const EnTeteDemarrage(
             etape: 2,
-            titre: 'Faisons connaissance',
+            titre: 'Infos du profil',
             texte:
-                'Votre prénom s’affiche sur vos annonces et dans vos '
-                'messages. Le reste peut attendre.',
+                'Indiquez votre nom et, si vous voulez, une photo. Votre '
+                'prénom s’affiche sur vos annonces et vos messages.',
           ),
-          Row(
-            children: [
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 250),
-                child: Avatar(
-                  key: ValueKey(nomComplet.isEmpty ? '?' : nomComplet[0]),
-                  nom: nomComplet.isEmpty ? '?' : nomComplet,
-                  couleur: const Color(0xFF6D28D9),
-                  taille: 64,
-                ),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      nomComplet.isEmpty ? 'Votre nom ici' : nomComplet,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    Text(
-                      '$_ville · photo plus tard',
-                      style: const TextStyle(color: LiveColors.gris),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          Center(
+            child: _PhotoProfil(
+              nom: nomComplet,
+              photo: _photo,
+              onPhoto: (v) => setState(() => _photo = v),
+            ),
           ),
           const SizedBox(height: 18),
           TextField(
@@ -233,6 +210,112 @@ class _EcranProfilState extends State<EcranProfil> {
                   ),
                 ),
           child: const Text('Continuer'),
+        ),
+      ),
+    );
+  }
+}
+
+/// Photo de profil, comme WhatsApp : un grand cercle au centre, un badge
+/// appareil photo ; un appui propose de prendre ou de choisir une photo.
+class _PhotoProfil extends StatelessWidget {
+  const _PhotoProfil({
+    required this.nom,
+    required this.photo,
+    required this.onPhoto,
+  });
+  final String nom;
+  final bool photo;
+  final ValueChanged<bool> onPhoto;
+
+  Future<void> _choisir(BuildContext context) async {
+    final choix = await showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: Colors.white,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Photo de profil',
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 8),
+            for (final (icone, titre) in [
+              (Icons.photo_camera_outlined, 'Prendre une photo'),
+              (Icons.photo_library_outlined, 'Choisir dans la galerie'),
+              if (photo) (Icons.delete_outline_rounded, 'Retirer la photo'),
+            ])
+              ListTile(
+                leading: Icon(icone, color: LiveColors.bleu),
+                title: Text(titre),
+                onTap: () => Navigator.pop(ctx, titre),
+              ),
+          ],
+        ),
+      ),
+    );
+    if (choix != null) onPhoto(choix != 'Retirer la photo');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      container: true,
+      label: photo
+          ? 'Changer la photo de profil'
+          : 'Ajouter une photo de profil',
+      excludeSemantics: true,
+      onTap: () => _choisir(context),
+      child: GestureDetector(
+        onTap: () => _choisir(context),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              child: photo
+                  ? Avatar(
+                      key: ValueKey('photo$nom'),
+                      nom: nom.isEmpty ? 'Live' : nom,
+                      couleur: LiveColors.orange,
+                      taille: 112,
+                    )
+                  : Container(
+                      key: const ValueKey('vide'),
+                      width: 112,
+                      height: 112,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xFFE6EBF2),
+                      ),
+                      child: const Icon(
+                        Icons.add_a_photo_outlined,
+                        size: 40,
+                        color: LiveColors.gris,
+                      ),
+                    ),
+            ),
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: LiveColors.bleu,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 3),
+                ),
+                child: const Icon(
+                  Icons.photo_camera_rounded,
+                  color: Colors.white,
+                  size: 18,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

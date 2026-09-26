@@ -146,3 +146,17 @@ const paysTelephone = [
     prefixes: [('222', 'GETESA'), ('555', 'Muni')],
   ),
 ];
+
+/// Langues proposées au démarrage et dans Paramètres, comme WhatsApp : le
+/// nom dans la langue elle-même, puis en français. Langues officielles et
+/// langues les plus parlées de la zone CEMAC.
+const languesLive = [
+  ('fr', 'Français', 'Français'),
+  ('en', 'English', 'Anglais'),
+  ('es', 'Español', 'Espagnol'),
+  // Écrit en lettres latines : la police embarquée n'a pas l'alphabet arabe.
+  ('ar', 'Arabe', 'Arabe'),
+  ('ln', 'Lingála', 'Lingala'),
+  ('kg', 'Kituba', 'Kituba (munukutuba)'),
+  ('sg', 'Sängö', 'Sango'),
+];

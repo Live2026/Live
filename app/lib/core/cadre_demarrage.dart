@@ -3,39 +3,28 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../shared/animations.dart';
 import '../shared/demarrage.dart';
 import '../shared/logo.dart';
-import '../shared/motif_live.dart';
 import 'adaptatif.dart';
 import 'theme.dart';
 
-/// Démarrage sur ordinateur (docs/ecrans/00, section 8), inspiré de WhatsApp
-/// Web : fond clair et calme, logo en haut à gauche, une carte centrée à
-/// hauteur de son contenu, puis les liens utiles sous la carte. Rien d'autre
-/// ne détourne l'attention du formulaire. Sur téléphone et tablette, la page
-/// seule.
-///
-/// Fond : le motif de Live (`MotifLive`), plus discret que sur l'accueil
-/// pour que la carte ressorte.
+/// Démarrage sur ordinateur (docs/ecrans/00, section 8), comme les écrans de
+/// WhatsApp : une page blanche, le logo en haut à gauche, le contenu dans une
+/// colonne centrée (sans carte), le bouton en bas de la colonne, puis les
+/// liens utiles. Sur téléphone et tablette, la page seule.
 class CadreDemarrage extends StatelessWidget {
   const CadreDemarrage({
     super.key,
     required this.chemin,
     required this.child,
-    this.hauteur = 620,
-    this.largeur = 560,
+    this.largeur = 460,
   });
 
   final String chemin;
   final Widget child;
 
-  /// Hauteur de la carte, adaptée au contenu de chaque page (router.dart).
-  final double hauteur;
+  /// Largeur de la colonne (plus large pour la connexion par code QR).
   final double largeur;
-
-  /// Fond crème très léger : chaleureux, accordé à l'orange de Live.
-  static const fond = Color(0xFFFBF8F3);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +34,6 @@ class CadreDemarrage extends StatelessWidget {
       child: Theme(
         data: theme.copyWith(
           appBarTheme: theme.appBarTheme.copyWith(
-            toolbarHeight: 48,
             backgroundColor: Colors.white,
             surfaceTintColor: Colors.white,
           ),
@@ -59,40 +47,29 @@ class CadreDemarrage extends StatelessWidget {
       ),
     );
     return Material(
-      color: fond,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [const MotifLive(intensite: 0.5), _contenu(page)],
-      ),
-    );
-  }
-
-  Widget _contenu(Widget page) {
-    return SafeArea(
-      child: LayoutBuilder(
-        builder: (context, c) => SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: c.maxHeight),
-            child: Column(
-              children: [
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(32, 22, 32, 0),
-                    child: LogoLive(taille: 30),
+      color: Colors.white,
+      child: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, c) => Column(
+            children: [
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(32, 22, 32, 0),
+                  child: LogoLive(taille: 30),
+                ),
+              ),
+              Expanded(
+                child: Center(
+                  child: SizedBox(
+                    width: min(largeur, c.maxWidth - 48),
+                    child: page,
                   ),
                 ),
-                const SizedBox(height: 28),
-                SizedBox(
-                  width: min(largeur, c.maxWidth - 48),
-                  height: min(hauteur, max(420.0, c.maxHeight - 190)),
-                  child: Apparition(child: _Carte(child: page)),
-                ),
-                const SizedBox(height: 22),
-                _PiedCarte(chemin: chemin),
-                const SizedBox(height: 28),
-              ],
-            ),
+              ),
+              _Pied(chemin: chemin),
+              const SizedBox(height: 14),
+            ],
           ),
         ),
       ),
@@ -100,104 +77,50 @@ class CadreDemarrage extends StatelessWidget {
   }
 }
 
-/// La carte : bord fin, grand arrondi, ombre à peine visible.
-class _Carte extends StatelessWidget {
-  const _Carte({required this.child});
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFC5CCD6)),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(23),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          child: child,
-        ),
-      ),
-    );
-  }
-}
-
-/// Sous la carte : l'autre chemin (se connecter ou créer un compte), la
-/// promesse de protection, puis les liens légaux et l'aide.
-class _PiedCarte extends StatelessWidget {
-  const _PiedCarte({required this.chemin});
+/// Bas de page : l'autre chemin (se connecter ou créer un compte), puis les
+/// liens légaux et l'aide.
+class _Pied extends StatelessWidget {
+  const _Pied({required this.chemin});
   final String chemin;
 
   @override
   Widget build(BuildContext context) {
     final lien = switch (chemin) {
-      '/bienvenue' ||
+      '/langue' ||
       '/telephone' => ('Déjà un compte Live ?', 'Se connecter', '/connexion'),
       '/connexion' || '/connexion/qr' => (
         'Pas encore de compte ?',
         'Créer un compte',
-        '/telephone',
+        '/langue',
       ),
       _ => null,
     };
-    return Column(
+    return Wrap(
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         if (lien != null) ...[
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(lien.$1, style: const TextStyle(fontSize: 15)),
-              TextButton(
-                onPressed: () => context.go(lien.$3),
-                child: Text(
-                  lien.$2,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    decoration: TextDecoration.underline,
-                    decorationColor: LiveColors.orange,
-                  ),
-                ),
-              ),
-            ],
+          Text(lien.$1, style: const TextStyle(color: LiveColors.gris)),
+          TextButton(
+            onPressed: () => context.go(lien.$3),
+            child: Text(lien.$2),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(width: 16),
         ],
-        const Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.lock_outline_rounded, size: 16, color: LiveColors.gris),
-            SizedBox(width: 6),
-            Text(
-              'Votre argent reste protégé par Live jusqu’à la remise',
-              style: TextStyle(color: LiveColors.gris),
+        for (final (nom, route) in const [
+          ('Conditions d’utilisation', '/legal/cgu'),
+          ('Confidentialité', '/legal/confidentialite'),
+          ('Aide', '/aide'),
+        ])
+          TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: LiveColors.gris,
+              textStyle: const TextStyle(fontSize: 12.5),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
             ),
-          ],
-        ),
-        const SizedBox(height: 6),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (final (i, (nom, route)) in const [
-              ('Conditions d’utilisation', '/legal/cgu'),
-              ('Confidentialité', '/legal/confidentialite'),
-              ('Aide', '/aide'),
-            ].indexed) ...[
-              if (i > 0)
-                const Text('·', style: TextStyle(color: LiveColors.gris)),
-              TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: LiveColors.gris,
-                  textStyle: const TextStyle(fontSize: 12.5),
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                ),
-                onPressed: () => context.push(route),
-                child: Text(nom),
-              ),
-            ],
-          ],
-        ),
+            onPressed: () => context.push(route),
+            child: Text(nom),
+          ),
       ],
     );
   }

@@ -109,7 +109,6 @@ class EcranBienvenue extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final grand = context.taille == Taille.etendue;
     return Scaffold(
       backgroundColor: fondMotif,
       body: Stack(
@@ -117,12 +116,6 @@ class EcranBienvenue extends ConsumerWidget {
         children: [
           const MotifLive(rayonnant: true),
           const Apparition(child: LogoMotif()),
-          if (grand)
-            const Positioned(
-              left: 32,
-              top: 22,
-              child: SafeArea(child: LogoLive(taille: 30)),
-            ),
           LayoutBuilder(
             builder: (context, c) {
               final (centre, rayon) = geometrieMotif(c.biggest);
@@ -208,7 +201,7 @@ class _Actions extends StatelessWidget {
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
               ),
-              onPressed: () => context.push('/telephone'),
+              onPressed: () => context.push('/langue'),
               child: const Text('Commencer'),
             ),
             const SizedBox(height: 10),

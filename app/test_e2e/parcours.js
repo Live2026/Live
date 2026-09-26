@@ -82,6 +82,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     // 0. Inscription
     await ecran('bienvenue');
     await bouton('Commencer'); await sem();
+    await ecran('langue'); await bouton('Suivant'); await sem();
     await saisir(0, '06 123 45 67');
     for (const c of await p.getByRole('checkbox').all()) await c.click();
     await ecran('inscription_telephone');
