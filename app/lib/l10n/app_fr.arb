@@ -7396,5 +7396,9 @@
   "publishPublierMonService": "Publier mon service",
   "@publishPublierMonService": {
     "description": "Écran : publier_service"
+  },
+  "publishNouvelArrivageLivraison24": "Nouvel arrivage ! Livraison 24 h…",
+  "@publishNouvelArrivageLivraison24": {
+    "description": "Écran : publier_envois"
   }
 }

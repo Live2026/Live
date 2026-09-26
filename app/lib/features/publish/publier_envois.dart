@@ -20,7 +20,7 @@ class _EcranEnvoisState extends State<EcranEnvois> {
         padding: const EdgeInsets.all(16),
         children: [
           _Envoi(
-            titre: 'Nouvel arrivage ! Livraison 24 h…',
+            titre: context.t.publishNouvelArrivageLivraison24,
             etape: context.t.publishCompressionPourReseauMobile,
             progression: 0.62,
             couleur: Color(0xFFB45309),
