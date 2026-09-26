@@ -27,7 +27,7 @@ class EcranGains extends ConsumerWidget {
               children: [
                 const Text(
                   'Disponible',
-                  style: TextStyle(color: Color(0xFFD7DCE4)),
+                  style: TextStyle(color: LiveColors.brume),
                 ),
                 ChiffreAnime(
                   valeur: etat.disponible,
@@ -41,13 +41,13 @@ class EcranGains extends ConsumerWidget {
                 const SizedBox(height: 4),
                 const Text(
                   'En attente : 96 000 FCFA (ventes non confirmées)',
-                  style: TextStyle(color: Color(0xFFD7DCE4), fontSize: 13),
+                  style: TextStyle(color: LiveColors.brume, fontSize: 13),
                 ),
                 const SizedBox(height: 16),
                 FilledButton.icon(
                   style: FilledButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: LiveColors.nuit,
+                    backgroundColor: LiveColors.surface,
+                    foregroundColor: LiveColors.encre,
                     minimumSize: const Size(0, 44),
                   ),
                   onPressed: () => context.push('/retirer'),
@@ -65,7 +65,7 @@ class EcranGains extends ConsumerWidget {
           if (!etat.identiteVerifiee) ...[
             const SizedBox(height: 12),
             Bloc(
-              fond: const Color(0xFFFFF7EA),
+              fond: LiveColors.teinteCreme,
               child: Row(
                 children: [
                   const Icon(Icons.bolt_rounded, color: LiveColors.orangeVif),

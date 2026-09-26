@@ -24,7 +24,7 @@ class EcranTontines extends ConsumerWidget {
             couleurs: const [Color(0xFFDB2777), Color(0xFF7C3AED)],
             enfant: FilledButton.icon(
               style: FilledButton.styleFrom(
-                backgroundColor: Colors.white,
+                backgroundColor: LiveColors.surface,
                 foregroundColor: const Color(0xFF7C3AED),
                 minimumSize: const Size(0, 44),
               ),
@@ -91,7 +91,7 @@ class EcranTontines extends ConsumerWidget {
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, maj) => SafeArea(
           child: ListView(
@@ -220,7 +220,7 @@ class _CarteTontine extends StatelessWidget {
               minHeight: 8,
               borderRadius: BorderRadius.circular(4),
               color: t.couleur,
-              backgroundColor: const Color(0xFFE6EBF2),
+              backgroundColor: LiveColors.voile,
             ),
             const SizedBox(height: 6),
             Text(
@@ -234,7 +234,7 @@ class _CarteTontine extends StatelessWidget {
               icone: payee
                   ? Icons.check_circle_rounded
                   : Icons.schedule_rounded,
-              fond: payee ? const Color(0xFFE7F4EC) : const Color(0xFFFFF4E0),
+              fond: payee ? LiveColors.teinteVerte : LiveColors.teinteAmbre,
               couleur: payee ? LiveColors.succes : LiveColors.cuivre,
             ),
           ],

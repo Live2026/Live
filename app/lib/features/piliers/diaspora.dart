@@ -39,7 +39,7 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
@@ -111,7 +111,7 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
             enfant: FilledButton.icon(
               style: FilledButton.styleFrom(
                 backgroundColor: LiveColors.orange,
-                foregroundColor: LiveColors.nuit,
+                foregroundColor: LiveColors.encre,
                 minimumSize: const Size(0, 44),
               ),
               onPressed: () => context.push('/transfert'),

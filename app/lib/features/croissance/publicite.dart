@@ -65,7 +65,7 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
                     const SizedBox(height: 6),
                     const Etiquette(
                       'Sponsorisé',
-                      fond: Color(0xFFE6EBF2),
+                      fond: LiveColors.voile,
                       couleur: LiveColors.bleu,
                     ),
                     TextButton(

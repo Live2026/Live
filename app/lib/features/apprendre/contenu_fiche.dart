@@ -67,20 +67,16 @@ class EcranContenu extends ConsumerWidget {
           Etiquette(
             '${note(c.note)} · ${compact(c.avis)} avis',
             icone: Icons.star_rounded,
-            fond: const Color(0xFFFFF1E0),
+            fond: LiveColors.teinteOrange,
             couleur: LiveColors.cuivre,
           ),
           Etiquette(
             '${compact(c.ventes)} élèves',
             icone: Icons.people_alt_outlined,
-            fond: const Color(0xFFE6EBF2),
+            fond: LiveColors.voile,
             couleur: LiveColors.bleu,
           ),
-          Etiquette(
-            c.niveau,
-            fond: const Color(0xFFE6EBF2),
-            couleur: LiveColors.bleu,
-          ),
+          Etiquette(c.niveau, fond: LiveColors.voile, couleur: LiveColors.bleu),
         ],
       ),
       const SizedBox(height: 12),
@@ -116,7 +112,7 @@ class EcranContenu extends ConsumerWidget {
           dense: true,
           leading: CircleAvatar(
             radius: 16,
-            backgroundColor: const Color(0xFFEFF2F6),
+            backgroundColor: LiveColors.champ2,
             child: Text(
               '${i + 1}',
               style: const TextStyle(fontWeight: FontWeight.w700),

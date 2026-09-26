@@ -10,7 +10,7 @@ void ouvrirVariantes(BuildContext context, Produit p) {
   showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => StatefulBuilder(
       builder: (ctx, maj) => SafeArea(
         child: Padding(

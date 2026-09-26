@@ -89,7 +89,7 @@ class _EcranFacturesState extends ConsumerState<EcranFactures> {
                           const Etiquette(
                             'Payée',
                             icone: Icons.check_rounded,
-                            fond: Color(0xFFE7F4EC),
+                            fond: LiveColors.teinteVerte,
                             couleur: LiveColors.succes,
                           )
                         else

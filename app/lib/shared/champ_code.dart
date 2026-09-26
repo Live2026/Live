@@ -212,14 +212,14 @@ class _Case extends StatelessWidget {
             ? accent.withValues(alpha: 0.1)
             : rempli
             ? const Color(0xFFFFF4E5)
-            : const Color(0xFFF3F5F8),
+            : LiveColors.champ,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: active || colore
               ? accent
               : rempli
               ? const Color(0xFFFBCC6A)
-              : const Color(0xFFD7DCE4),
+              : LiveColors.brume,
           width: active || colore ? 2 : 1.2,
         ),
         boxShadow: active

@@ -122,7 +122,7 @@ class _EcranDemandesState extends State<EcranDemandes> {
                       const Etiquette(
                         'Arnaque probable : demande d’argent',
                         icone: Icons.warning_amber_rounded,
-                        fond: Color(0xFFFDECEC),
+                        fond: LiveColors.teinteRouge,
                         couleur: LiveColors.erreur,
                       ),
                     ],
@@ -277,7 +277,7 @@ void _nouveauMessage(BuildContext context) {
     context: context,
     showDragHandle: true,
     isScrollControlled: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => SafeArea(
       child: ListView(
         shrinkWrap: true,
@@ -298,7 +298,7 @@ void _nouveauMessage(BuildContext context) {
           ListTile(
             contentPadding: EdgeInsets.zero,
             leading: const CircleAvatar(
-              backgroundColor: Color(0xFFE6EBF2),
+              backgroundColor: LiveColors.voile,
               child: Icon(Icons.group_add_rounded, color: LiveColors.bleu),
             ),
             title: const Text('Nouveau groupe'),

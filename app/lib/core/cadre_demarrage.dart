@@ -30,7 +30,7 @@ class CadreDemarrage extends StatelessWidget {
     // Tablette : la même page, dans une colonne lisible plutôt qu'étirée.
     if (context.taille == Taille.moyenne) {
       return ColoredBox(
-        color: Colors.white,
+        color: LiveColors.surface,
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 520),
@@ -45,10 +45,10 @@ class CadreDemarrage extends StatelessWidget {
       child: Theme(
         data: theme.copyWith(
           appBarTheme: theme.appBarTheme.copyWith(
-            backgroundColor: Colors.white,
-            surfaceTintColor: Colors.white,
+            backgroundColor: LiveColors.surface,
+            surfaceTintColor: LiveColors.surface,
           ),
-          scaffoldBackgroundColor: Colors.white,
+          scaffoldBackgroundColor: LiveColors.surface,
           listTileTheme: const ListTileThemeData(
             dense: true,
             visualDensity: VisualDensity.compact,
@@ -58,7 +58,7 @@ class CadreDemarrage extends StatelessWidget {
       ),
     );
     return Material(
-      color: Colors.white,
+      color: LiveColors.surface,
       child: SafeArea(
         child: LayoutBuilder(
           builder: (context, c) => Column(

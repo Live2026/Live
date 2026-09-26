@@ -200,7 +200,7 @@ class Avatar extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(2),
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: LiveColors.surface,
                     shape: BoxShape.circle,
                   ),
                   child: rond,
@@ -213,7 +213,7 @@ class Avatar extends StatelessWidget {
             bottom: -2,
             child: Container(
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: LiveColors.surface,
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -233,7 +233,7 @@ class Avatar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color(0xFF22C55E),
                 shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
+                border: Border.all(color: LiveColors.surface, width: 2),
               ),
             ),
           ),
@@ -335,7 +335,7 @@ class EtatVide extends StatelessWidget {
             width: 72,
             height: 72,
             decoration: const BoxDecoration(
-              color: Color(0xFFEFF2F6),
+              color: LiveColors.champ2,
               shape: BoxShape.circle,
             ),
             child: Icon(icone, size: 34, color: LiveColors.gris),
@@ -378,9 +378,9 @@ class TuileChiffre extends StatelessWidget {
       height: 112,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: LiveColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE4E8EE)),
+        border: Border.all(color: LiveColors.filet),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -450,7 +450,7 @@ class PuceIcone extends StatelessWidget {
                 width: 56,
                 height: 56,
                 decoration: BoxDecoration(
-                  color: active ? LiveColors.bleu : const Color(0xFFEFF2F6),
+                  color: active ? LiveColors.bleu : LiveColors.champ2,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Icon(

@@ -106,7 +106,7 @@ class _EcranOpportunitesState extends ConsumerState<EcranOpportunites> {
           Padding(
             padding: EdgeInsets.fromLTRB(marge, 8, marge, 0),
             child: Bloc(
-              fond: const Color(0xFFE7F4EC),
+              fond: LiveColors.teinteVerte,
               padding: 12,
               child: const Row(
                 children: [

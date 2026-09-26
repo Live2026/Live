@@ -401,7 +401,7 @@ class _AppelPublier extends StatelessWidget {
                 Text(
                   'Publication gratuite. Les frais de visite vous sont versés '
                   'après chaque visite.',
-                  style: TextStyle(color: Color(0xFFD7DCE4), fontSize: 13),
+                  style: TextStyle(color: LiveColors.brume, fontSize: 13),
                 ),
               ],
             ),
@@ -409,8 +409,8 @@ class _AppelPublier extends StatelessWidget {
           const SizedBox(width: 12),
           FilledButton(
             style: FilledButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: LiveColors.nuit,
+              backgroundColor: LiveColors.surface,
+              foregroundColor: LiveColors.encre,
               minimumSize: const Size(0, 44),
             ),
             onPressed: () => context.push('/publier/bien'),

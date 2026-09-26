@@ -56,7 +56,7 @@ class _Conteneur extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(10, 7, 10, 5),
         constraints: const BoxConstraints(maxWidth: 360),
         decoration: BoxDecoration(
-          color: moi ? _vertMoi : Colors.white,
+          color: moi ? _vertMoi : LiveColors.surface,
           borderRadius: _forme(moi),
           boxShadow: const [
             BoxShadow(
@@ -261,7 +261,7 @@ class _Pastille extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: LiveColors.surface,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
@@ -286,7 +286,7 @@ class _Info extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 420),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: const Color(0xFFE6EBF2),
+          color: LiveColors.voile,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -317,7 +317,7 @@ class _AlerteArnaque extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFF4E0),
+        color: LiveColors.teinteAmbre,
         border: Border.all(color: LiveColors.ambreClair),
         borderRadius: BorderRadius.circular(10),
       ),

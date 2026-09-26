@@ -98,7 +98,7 @@ class _MiniatureGalerie extends StatelessWidget {
                 height: 44,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.white, width: 2),
+                  border: Border.all(color: LiveColors.surface, width: 2),
                 ),
                 child: Vignette(
                   couleur: couleur,

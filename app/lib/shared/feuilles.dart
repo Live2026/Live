@@ -12,7 +12,7 @@ Future<T?> _feuille<T>(BuildContext context, Widget contenu) =>
       isScrollControlled: true,
       showDragHandle: true,
       useSafeArea: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -80,7 +80,7 @@ Future<void> partager(BuildContext context, String titre) {
     (Icons.chat_rounded, 'WhatsApp', Color(0xFF25D366)),
     (Icons.facebook_rounded, 'Facebook', Color(0xFF1877F2)),
     (Icons.sms_rounded, 'SMS', Color(0xFF13385C)),
-    (Icons.link_rounded, 'Copier le lien', Color(0xFF5B6573)),
+    (Icons.link_rounded, 'Copier le lien', LiveColors.gris),
     (Icons.send_rounded, 'Dans Live', Color(0xFFFB9618)),
   ];
   return _feuille<void>(
@@ -97,7 +97,7 @@ Future<void> partager(BuildContext context, String titre) {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: const Color(0xFFF3F5F8),
+            color: LiveColors.champ,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -181,12 +181,12 @@ Future<void> optionsPublication(BuildContext context, String auteur) {
           ListTile(
             leading: Icon(
               icone,
-              color: action == null ? LiveColors.nuit : LiveColors.erreur,
+              color: action == null ? LiveColors.encre : LiveColors.erreur,
             ),
             title: Text(
               texte,
               style: TextStyle(
-                color: action == null ? LiveColors.nuit : LiveColors.erreur,
+                color: action == null ? LiveColors.encre : LiveColors.erreur,
               ),
             ),
             onTap: () {
@@ -309,7 +309,7 @@ Future<void> pouvoirRequis(
           height: 72,
           margin: const EdgeInsets.only(bottom: 12),
           decoration: const BoxDecoration(
-            color: Color(0xFFFFF1E0),
+            color: LiveColors.teinteOrange,
             shape: BoxShape.circle,
           ),
           child: const Icon(

@@ -7,6 +7,7 @@ import 'core/theme.dart';
 import 'data/depots/depots.dart';
 import 'data/depots/depots_drift.dart';
 import 'data/local/base_locale.dart';
+import 'data/store.dart';
 import 'shared/hors_connexion.dart';
 
 /// Au démarrage, les dépôts passent de la mémoire à la base locale Drift
@@ -32,15 +33,56 @@ void main() {
   );
 }
 
-class LiveApp extends StatelessWidget {
+/// L'application. Le mode sombre suit le réglage « Apparence » (Système,
+/// Clair, Sombre) ; en « Système », il suit le téléphone. Au changement de
+/// mode, toute l'application est reconstruite avec les couleurs du mode.
+class LiveApp extends ConsumerStatefulWidget {
   const LiveApp({super.key});
 
   @override
+  ConsumerState<LiveApp> createState() => _LiveAppState();
+}
+
+class _LiveAppState extends ConsumerState<LiveApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // Démonstration et tests : « ?apparence=sombre » dans l'adresse.
+    final demande = Uri.base.queryParameters['apparence'];
+    if (const {'systeme', 'clair', 'sombre'}.contains(demande)) {
+      Future.microtask(
+        () => ref.read(liveProvider.notifier).choisirApparence(demande!),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  // Le téléphone passe en mode sombre ou clair : on suit, en « Système ».
+  @override
+  void didChangePlatformBrightness() => setState(() {});
+
+  @override
   Widget build(BuildContext context) {
+    final apparence = ref.watch(liveProvider.select((e) => e.apparence));
+    final sombre = switch (apparence) {
+      'sombre' => true,
+      'clair' => false,
+      _ =>
+        WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+            Brightness.dark,
+    };
+    LiveColors.sombre = sombre;
     return MaterialApp.router(
+      key: ValueKey(sombre),
       title: 'Live — prototype',
       debugShowCheckedModeBanner: false,
-      theme: liveTheme(),
+      theme: liveTheme(sombre: sombre),
       routerConfig: routeur,
       builder: (context, child) => _BandeauPrototype(child: child!),
     );

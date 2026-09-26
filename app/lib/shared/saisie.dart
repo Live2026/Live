@@ -25,7 +25,7 @@ class Choix extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Material(
-        color: selectionne ? LiveColors.fondProtection : Colors.white,
+        color: selectionne ? LiveColors.fondProtection : LiveColors.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
           side: BorderSide(

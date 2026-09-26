@@ -100,7 +100,7 @@ class _EcranPartenairesState extends State<EcranPartenaires> {
                           width: 42,
                           height: 42,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE6EBF2),
+                            color: LiveColors.voile,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(icone, color: LiveColors.bleu),

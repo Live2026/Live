@@ -99,7 +99,7 @@ class _EcranPortefeuilleState extends ConsumerState<EcranPortefeuille> {
           for (final m in etat.historique) _LigneMouvement(m, masque: _masque),
           const SizedBox(height: 12),
           const Bloc(
-            fond: Color(0xFFE6EBF2),
+            fond: LiveColors.voile,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -162,10 +162,10 @@ class _CarteSolde extends StatelessWidget {
               const Expanded(
                 child: Text(
                   'Solde disponible',
-                  style: TextStyle(color: Color(0xFFD7DCE4)),
+                  style: TextStyle(color: LiveColors.brume),
                 ),
               ),
-              const LogoLive(taille: 22, couleur: Colors.white),
+              const LogoLive(taille: 22, couleur: LiveColors.surface),
             ],
           ),
           const SizedBox(height: 4),
@@ -215,7 +215,7 @@ class _CarteSolde extends StatelessWidget {
             etat.identiteVerifiee
                 ? 'Retrait vers votre numéro jusqu’à 2 M FCFA par mois'
                 : 'Retrait après vérification de votre identité',
-            style: const TextStyle(color: Color(0xFFD7DCE4), fontSize: 12),
+            style: const TextStyle(color: LiveColors.brume, fontSize: 12),
           ),
         ],
       ),
@@ -234,7 +234,7 @@ class _Montant extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(titre, style: const TextStyle(color: Color(0xFFD7DCE4))),
+        Text(titre, style: const TextStyle(color: LiveColors.brume)),
         Text(
           valeur,
           style: const TextStyle(
@@ -283,7 +283,7 @@ class _ActionsArgent extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 24,
-                        backgroundColor: const Color(0xFFE6EBF2),
+                        backgroundColor: LiveColors.voile,
                         child: Icon(icone, color: LiveColors.bleu),
                       ),
                       const SizedBox(height: 6),
@@ -386,9 +386,7 @@ class _LigneMouvement extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       onTap: () => context.push('/recu/${m.libelle.hashCode.abs()}'),
       leading: CircleAvatar(
-        backgroundColor: entree
-            ? const Color(0xFFE7F4EC)
-            : const Color(0xFFF3F5F8),
+        backgroundColor: entree ? LiveColors.teinteVerte : LiveColors.champ,
         child: Icon(
           entree ? Icons.south_west : Icons.north_east,
           color: entree ? LiveColors.succes : LiveColors.nuit,

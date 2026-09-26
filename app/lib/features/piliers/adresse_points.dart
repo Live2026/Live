@@ -198,12 +198,10 @@ class _EcranPointsRelaisState extends State<EcranPointsRelais> {
                   duration: const Duration(milliseconds: 200),
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: LiveColors.surface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: i == _choix
-                          ? LiveColors.succes
-                          : const Color(0xFFE4E8EE),
+                      color: i == _choix ? LiveColors.succes : LiveColors.filet,
                       width: i == _choix ? 2 : 1,
                     ),
                   ),

@@ -141,10 +141,10 @@ class _Bulle extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: live
-              ? const Color(0xFFE6EBF2)
+              ? LiveColors.voile
               : moi
               ? const Color(0xFFDCF3E4)
-              : const Color(0xFFF3F5F8),
+              : LiveColors.champ,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(

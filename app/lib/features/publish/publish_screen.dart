@@ -107,7 +107,7 @@ class EcranPublier extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           Bloc(
-            fond: const Color(0xFFF3F5F8),
+            fond: LiveColors.champ,
             child: Row(
               children: [
                 const Icon(Icons.bolt_rounded, color: LiveColors.orangeVif),
@@ -160,7 +160,7 @@ class _Option extends StatelessWidget {
                 width: 52,
                 height: 52,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6EBF2),
+                  color: LiveColors.voile,
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Icon(icone, color: LiveColors.bleu, size: 26),

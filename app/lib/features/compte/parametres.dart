@@ -72,8 +72,23 @@ class EcranParametres extends ConsumerWidget {
           LigneMenu(
             icone: Icons.translate_rounded,
             titre: 'Langue',
-            valeur: 'Français',
+            valeur: languesLive
+                .firstWhere(
+                  (l) => l.$1 == etat.langue,
+                  orElse: () => languesLive.first,
+                )
+                .$2,
             onTap: a.langue,
+          ),
+          LigneMenu(
+            icone: Icons.dark_mode_outlined,
+            titre: 'Apparence',
+            valeur: switch (etat.apparence) {
+              'clair' => 'Clair',
+              'sombre' => 'Sombre',
+              _ => 'Comme le téléphone',
+            },
+            onTap: a.apparence,
           ),
           LigneMenu(
             icone: Icons.public_rounded,
@@ -159,7 +174,9 @@ class EcranNotifications extends StatelessWidget {
             Apparition(
               rang: i,
               child: Material(
-                color: n.nouvelle ? const Color(0xFFF1F5FA) : Colors.white,
+                color: n.nouvelle
+                    ? const Color(0xFFF1F5FA)
+                    : LiveColors.surface,
                 child: InkWell(
                   onTap: () => context.push(n.route),
                   child: Padding(
@@ -172,7 +189,7 @@ class EcranNotifications extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 22,
-                          backgroundColor: const Color(0xFFE6EBF2),
+                          backgroundColor: LiveColors.voile,
                           child: Icon(
                             n.icone,
                             color: LiveColors.bleu,

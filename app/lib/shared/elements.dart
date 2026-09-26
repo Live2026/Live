@@ -108,7 +108,7 @@ class BarreAction extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: LiveColors.surface,
           border: Border(top: BorderSide(color: Colors.grey.shade200)),
         ),
         // Sur une surface large, les actions restent compactes et alignées à
@@ -161,7 +161,7 @@ class BoutonSimulation extends StatelessWidget {
     return OutlinedButton.icon(
       style: OutlinedButton.styleFrom(
         foregroundColor: LiveColors.gris,
-        side: const BorderSide(color: Color(0xFFE4E8EE)),
+        side: const BorderSide(color: LiveColors.filet),
         backgroundColor: const Color(0xFFF7F8FA),
       ),
       onPressed: onTap,
@@ -208,7 +208,7 @@ class BoutonVerre extends StatelessWidget {
                 child: Icon(
                   icone,
                   size: 21,
-                  color: clair ? LiveColors.nuit : Colors.white,
+                  color: clair ? LiveColors.encre : LiveColors.surface,
                 ),
               ),
             ),
@@ -314,9 +314,9 @@ class Bloc extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        color: fond ?? Colors.white,
+        color: fond ?? LiveColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE4E8EE)),
+        border: Border.all(color: LiveColors.filet),
       ),
       child: child,
     );

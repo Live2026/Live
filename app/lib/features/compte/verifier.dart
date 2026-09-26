@@ -101,7 +101,7 @@ class _EcranVerifierState extends ConsumerState<EcranVerifier> {
                         Radius.elliptical(100, 125),
                       ),
                       border: Border.all(
-                        color: _selfie ? LiveColors.succes : Colors.white,
+                        color: _selfie ? LiveColors.succes : LiveColors.surface,
                         width: 4,
                       ),
                     ),
@@ -278,10 +278,10 @@ class _Capture extends StatelessWidget {
           duration: const Duration(milliseconds: 250),
           height: 120,
           decoration: BoxDecoration(
-            color: faite ? const Color(0xFFE7F4EC) : const Color(0xFFF3F5F8),
+            color: faite ? LiveColors.teinteVerte : LiveColors.champ,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: faite ? LiveColors.succes : const Color(0xFFC3CAD4),
+              color: faite ? LiveColors.succes : LiveColors.bord,
             ),
           ),
           child: Column(

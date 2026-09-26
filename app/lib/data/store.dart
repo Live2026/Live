@@ -388,6 +388,11 @@ class LiveStore extends Notifier<LiveState> with PersistanceLocale {
         : state.copyWith(photoProfil: octets);
   }
 
+  void choisirApparence(String apparence) {
+    state = state.copyWith(apparence: apparence);
+    garder('apparence', apparence);
+  }
+
   void choisirLangue(String code) {
     state = state.copyWith(langue: code);
     garder('langue', code);

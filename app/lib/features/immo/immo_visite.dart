@@ -87,12 +87,10 @@ class _EcranReserverVisiteState extends ConsumerState<EcranReserverVisite> {
                       duration: const Duration(milliseconds: 200),
                       width: 60,
                       decoration: BoxDecoration(
-                        color: actif ? LiveColors.bleu : Colors.white,
+                        color: actif ? LiveColors.bleu : LiveColors.surface,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: actif
-                              ? LiveColors.bleu
-                              : const Color(0xFFE4E8EE),
+                          color: actif ? LiveColors.bleu : LiveColors.filet,
                         ),
                       ),
                       child: Column(

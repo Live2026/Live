@@ -54,11 +54,7 @@ class EcranOpportunite extends ConsumerWidget {
             fond: t.couleur.withValues(alpha: 0.12),
             couleur: t.couleur,
           ),
-          Etiquette(
-            o.niveau,
-            fond: const Color(0xFFE6EBF2),
-            couleur: LiveColors.bleu,
-          ),
+          Etiquette(o.niveau, fond: LiveColors.voile, couleur: LiveColors.bleu),
         ],
       ),
       const SizedBox(height: 6),
@@ -140,7 +136,7 @@ class EcranOpportunite extends ConsumerWidget {
             Etiquette(
               a,
               icone: Icons.star_rounded,
-              fond: const Color(0xFFFFF1E0),
+              fond: LiveColors.teinteOrange,
               couleur: LiveColors.cuivre,
             ),
         ],

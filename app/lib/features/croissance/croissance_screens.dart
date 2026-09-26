@@ -65,7 +65,7 @@ class EcranSejours extends ConsumerWidget {
           if (reserves.isNotEmpty) ...[
             const SizedBox(height: 12),
             Bloc(
-              fond: const Color(0xFFE7F4EC),
+              fond: LiveColors.teinteVerte,
               child: Row(
                 children: [
                   const Icon(

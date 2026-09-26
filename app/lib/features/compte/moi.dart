@@ -65,7 +65,7 @@ class EcranMoi extends ConsumerWidget {
                     Etiquette(
                       'N${etat.niveau} · ${libelleNiveau(etat.niveau)}',
                       icone: Icons.verified_user_outlined,
-                      fond: const Color(0xFFE6EBF2),
+                      fond: LiveColors.voile,
                       couleur: LiveColors.bleu,
                     ),
                   ],
@@ -401,7 +401,7 @@ class _CartePouvoirs extends StatelessWidget {
                     Text(
                       '$actifs sur $total actifs · gagnez de l’argent en débloquant les autres',
                       style: const TextStyle(
-                        color: Color(0xFFD7DCE4),
+                        color: LiveColors.brume,
                         fontSize: 13,
                       ),
                     ),

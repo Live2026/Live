@@ -47,7 +47,7 @@ class EcranRecu extends ConsumerWidget {
                 const Etiquette(
                   'Payé · argent protégé',
                   icone: Icons.verified_user,
-                  fond: Color(0xFFE7F4EC),
+                  fond: LiveColors.teinteVerte,
                   couleur: LiveColors.succes,
                 ),
                 const Divider(height: 32),

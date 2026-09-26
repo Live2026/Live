@@ -254,7 +254,7 @@ class _OngletsRelations extends StatelessWidget {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                child: Container(height: 1, color: const Color(0xFFE4E8EE)),
+                child: Container(height: 1, color: LiveColors.filet),
               ),
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 260),
@@ -291,7 +291,7 @@ class _OngletsRelations extends StatelessWidget {
                                   fontSize: 17,
                                   fontWeight: FontWeight.w800,
                                   color: actif == i
-                                      ? LiveColors.nuit
+                                      ? LiveColors.encre
                                       : LiveColors.gris,
                                 ),
                               ),
@@ -300,7 +300,7 @@ class _OngletsRelations extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 12.5,
                                   color: actif == i
-                                      ? LiveColors.nuit
+                                      ? LiveColors.encre
                                       : LiveColors.gris,
                                   fontWeight: actif == i
                                       ? FontWeight.w700

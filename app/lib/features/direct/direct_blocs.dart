@@ -77,7 +77,7 @@ class _ActionDirect extends StatelessWidget {
     required this.icone,
     required this.libelle,
     required this.onTap,
-    this.couleur = Colors.white,
+    this.couleur = LiveColors.surface,
   });
   final IconData icone;
   final String libelle;
@@ -191,7 +191,7 @@ class _ProduitEpingle extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: LiveColors.surface,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -259,7 +259,7 @@ class _BienEpingle extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: LiveColors.surface,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -303,7 +303,7 @@ void _ouvrirCadeaux(
   showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => StatefulBuilder(
       builder: (ctx, maj) {
         final solde = ref.read(liveProvider).disponible;
@@ -353,7 +353,7 @@ void _ouvrirCadeaux(
                             decoration: BoxDecoration(
                               color: choisi == c
                                   ? c.couleur.withValues(alpha: 0.12)
-                                  : const Color(0xFFF3F5F8),
+                                  : LiveColors.champ,
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                 color: choisi == c

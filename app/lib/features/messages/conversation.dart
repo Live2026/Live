@@ -109,7 +109,7 @@ class _EcranConversationState extends State<EcranConversation> {
       body: Column(
         children: [
           Material(
-            color: Colors.white,
+            color: LiveColors.surface,
             child: InkWell(
               onTap: () => context.push('/produit/p1'),
               child: Padding(
@@ -247,7 +247,7 @@ class _EcranConversationState extends State<EcranConversation> {
                   Padding(
                     padding: const EdgeInsets.only(right: 6),
                     child: ActionChip(
-                      backgroundColor: Colors.white,
+                      backgroundColor: LiveColors.surface,
                       label: Text(r),
                       onPressed: () =>
                           _envoyer(_Texte(r, 'maintenant', moi: true)),
@@ -266,7 +266,7 @@ class _EcranConversationState extends State<EcranConversation> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: LiveColors.surface,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Row(
@@ -370,7 +370,7 @@ class _EcranConversationState extends State<EcranConversation> {
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -439,7 +439,7 @@ class _EcranConversationState extends State<EcranConversation> {
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
@@ -465,7 +465,7 @@ class _EcranConversationState extends State<EcranConversation> {
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   leading: const CircleAvatar(
-                    backgroundColor: Color(0xFFE7F4EC),
+                    backgroundColor: LiveColors.teinteVerte,
                     child: Icon(
                       Icons.verified_user_outlined,
                       color: LiveColors.succes,

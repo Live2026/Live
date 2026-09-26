@@ -63,7 +63,7 @@ class _EcranSejourState extends ConsumerState<EcranSejour> {
                 Etiquette(
                   e,
                   icone: Icons.check_rounded,
-                  fond: const Color(0xFFE6EBF2),
+                  fond: LiveColors.voile,
                   couleur: LiveColors.bleu,
                 ),
             ],

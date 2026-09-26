@@ -185,7 +185,7 @@ void _ouvrirDetail(
     context: context,
     isScrollControlled: true,
     showDragHandle: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => DraggableScrollableSheet(
       expand: false,
       initialChildSize: 0.8,
@@ -268,7 +268,7 @@ void _ouvrirDetail(
                     child: Text(
                       t,
                       style: TextStyle(
-                        color: i <= etape ? LiveColors.nuit : LiveColors.gris,
+                        color: i <= etape ? LiveColors.encre : LiveColors.gris,
                       ),
                     ),
                   ),

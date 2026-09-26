@@ -31,7 +31,7 @@ class EtapesGeneration extends StatelessWidget {
                     CircularProgressIndicator(
                       value: progression,
                       strokeWidth: 6,
-                      backgroundColor: const Color(0xFFE6EBF2),
+                      backgroundColor: LiveColors.voile,
                       constraints: const BoxConstraints.expand(),
                     ),
                     const Icon(
@@ -263,7 +263,7 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
                 monnaie: false,
               ),
               Bloc(
-                fond: const Color(0xFFF3F5F8),
+                fond: LiveColors.champ,
                 child: LigneMontant(
                   'Chiffre d’affaires mensuel',
                   _caMensuel,

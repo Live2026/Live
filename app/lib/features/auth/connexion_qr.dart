@@ -71,7 +71,7 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
       label: const Text('Se connecter avec un numéro'),
     );
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       appBar: large ? null : const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(28, 28, 28, 16),
@@ -207,7 +207,7 @@ class _CodeQr extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.all(4),
-                  color: Colors.white,
+                  color: LiveColors.surface,
                   child: const LogoLive(taille: 34, nom: false),
                 ),
               ],

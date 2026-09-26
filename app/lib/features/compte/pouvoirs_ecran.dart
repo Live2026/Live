@@ -80,7 +80,7 @@ class _Niveaux extends StatelessWidget {
               Expanded(
                 child: Container(
                   height: 3,
-                  color: fait ? LiveColors.bleu : const Color(0xFFE4E8EE),
+                  color: fait ? LiveColors.bleu : LiveColors.filet,
                 ),
               ),
             Column(
@@ -92,9 +92,9 @@ class _Niveaux extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: fait ? LiveColors.bleu : Colors.white,
+                    color: fait ? LiveColors.bleu : LiveColors.surface,
                     border: Border.all(
-                      color: fait ? LiveColors.bleu : const Color(0xFFC3CAD4),
+                      color: fait ? LiveColors.bleu : LiveColors.bord,
                       width: 2,
                     ),
                   ),
@@ -135,7 +135,7 @@ class _CartePouvoir extends StatelessWidget {
             context.push(actif ? (p.route ?? '/moi') : p.routeDeblocage),
         child: Bloc(
           padding: 14,
-          fond: actif ? Colors.white : const Color(0xFFFAFBFC),
+          fond: actif ? LiveColors.surface : const Color(0xFFFAFBFC),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -143,9 +143,7 @@ class _CartePouvoir extends StatelessWidget {
                 width: 46,
                 height: 46,
                 decoration: BoxDecoration(
-                  color: actif
-                      ? const Color(0xFFE6EBF2)
-                      : const Color(0xFFFFF1E0),
+                  color: actif ? LiveColors.voile : LiveColors.teinteOrange,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
@@ -277,7 +275,7 @@ class EcranPro extends ConsumerWidget {
                 SizedBox(height: 6),
                 Text(
                   'Pour les vendeurs, agences et prestataires qui veulent aller plus loin.',
-                  style: TextStyle(color: Color(0xFFD7DCE4)),
+                  style: TextStyle(color: LiveColors.brume),
                 ),
               ],
             ),

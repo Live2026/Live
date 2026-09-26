@@ -95,7 +95,7 @@ class _EcranCodeState extends State<EcranCode> {
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
@@ -232,7 +232,7 @@ class _EcranCodeState extends State<EcranCode> {
                           value: _reste / (45 + 15 * _envois),
                           strokeWidth: 2.5,
                           color: LiveColors.orange,
-                          backgroundColor: const Color(0xFFE6EBF2),
+                          backgroundColor: LiveColors.voile,
                         ),
                       ),
                       const SizedBox(width: 10),

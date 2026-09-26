@@ -110,7 +110,7 @@ class EcranIa extends ConsumerWidget {
                       Credits(
                         etat.credits,
                         taille: 34,
-                        couleur: Colors.white,
+                        couleur: LiveColors.surface,
                         couleurIcone: LiveColors.orange,
                       ),
                       const SizedBox(height: 2),
@@ -126,7 +126,7 @@ class EcranIa extends ConsumerWidget {
                   FilledButton.icon(
                     style: FilledButton.styleFrom(
                       minimumSize: const Size(0, 44),
-                      backgroundColor: Colors.white,
+                      backgroundColor: LiveColors.surface,
                       foregroundColor: LiveColors.bleu,
                     ),
                     onPressed: () => context.push('/ia/credits'),
@@ -346,7 +346,7 @@ class _CartePack extends StatelessWidget {
           curve: courbeDouce,
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: selectionne ? const Color(0xFFE6EBF2) : Colors.white,
+            color: selectionne ? LiveColors.voile : LiveColors.surface,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: selectionne ? LiveColors.bleu : LiveColors.brume,

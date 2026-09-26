@@ -4,7 +4,7 @@ import 'depots/depots.dart';
 import 'etat.dart';
 
 /// Garde sur l'appareil les réglages et les favoris de `LiveStore` (docs/26,
-/// §3.1) : ville, devise, langue, économie de données, centres d'intérêt, annonces
+/// §3.1) : ville, devise, langue, apparence, économie de données, centres d'intérêt, annonces
 /// enregistrées. Lus au démarrage, écrits à chaque changement.
 mixin PersistanceLocale on Notifier<LiveState> {
   /// Clés modifiées depuis le démarrage : la lecture tardive ne les écrase pas.
@@ -20,6 +20,7 @@ mixin PersistanceLocale on Notifier<LiveState> {
         final pays = await p.lire('pays');
         final devise = await p.lire('devise');
         final langue = await p.lire('langue');
+        final apparence = await p.lire('apparence');
         final economie = await p.lire('economie');
         final interets = await p.lire('interets');
         // Favoris suivis seulement après un premier changement : sinon on
@@ -31,6 +32,7 @@ mixin PersistanceLocale on Notifier<LiveState> {
           pays: _modifiees.contains('pays') ? null : pays,
           devise: _modifiees.contains('devise') ? null : devise,
           langue: _modifiees.contains('langue') ? null : langue,
+          apparence: _modifiees.contains('apparence') ? null : apparence,
           economieDonnees: economie == null || _modifiees.contains('economie')
               ? null
               : economie == '1',

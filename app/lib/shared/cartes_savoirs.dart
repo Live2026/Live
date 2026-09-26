@@ -63,7 +63,7 @@ class CarteContenu extends StatelessWidget {
                       child: Etiquette(
                         'Nouveau',
                         fond: LiveColors.orangeVif,
-                        couleur: Colors.white,
+                        couleur: LiveColors.surface,
                       ),
                     ),
                   Positioned(
@@ -134,9 +134,9 @@ class CarteOpportunite extends StatelessWidget {
           height: 168,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: LiveColors.surface,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE4E8EE)),
+            border: Border.all(color: LiveColors.filet),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

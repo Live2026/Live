@@ -55,7 +55,7 @@ class _ActionsParametres {
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -120,6 +120,27 @@ class _ActionsParametres {
     if (choix != null && context.mounted) {
       ref.read(liveProvider.notifier).choisirLangue(choix);
       informer(context, 'Langue enregistrée.');
+    }
+  }
+
+  /// Mode clair ou sombre ; « Comme le téléphone » suit le réglage du système.
+  Future<void> apparence() async {
+    final choix = await choisir<String>(
+      context,
+      titre: 'Apparence',
+      actuel: _etat.apparence,
+      options: const [
+        (
+          'systeme',
+          'Comme le téléphone',
+          'Clair le jour, sombre si le téléphone l’est',
+        ),
+        ('clair', 'Clair', null),
+        ('sombre', 'Sombre', 'Repose les yeux la nuit, économise la batterie'),
+      ],
+    );
+    if (choix != null && context.mounted) {
+      ref.read(liveProvider.notifier).choisirApparence(choix);
     }
   }
 

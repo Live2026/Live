@@ -31,7 +31,7 @@ class _EcranSplashState extends State<EcranSplash> {
     // la signature en bas. Sobre et rapide.
     final reduit = MediaQuery.disableAnimationsOf(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       body: SafeArea(
         child: Column(
           children: [
@@ -195,7 +195,7 @@ class _Actions extends StatelessWidget {
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size.fromHeight(48),
-                backgroundColor: Colors.white,
+                backgroundColor: LiveColors.surface,
               ),
               onPressed: onDecouvrir,
               child: const Text('Découvrir sans compte'),

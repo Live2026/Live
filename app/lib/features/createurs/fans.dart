@@ -75,7 +75,7 @@ class _EcranFansState extends ConsumerState<EcranFans> {
               children: [
                 if (fan)
                   const Bloc(
-                    fond: Color(0xFFE7F4EC),
+                    fond: LiveColors.teinteVerte,
                     child: Row(
                       children: [
                         Icon(Icons.star_rounded, color: LiveColors.succes),
@@ -105,12 +105,12 @@ class _EcranFansState extends ConsumerState<EcranFans> {
                           decoration: BoxDecoration(
                             color: _offre == i
                                 ? LiveColors.fondProtection
-                                : Colors.white,
+                                : LiveColors.surface,
                             borderRadius: BorderRadius.circular(14),
                             border: Border.all(
                               color: _offre == i
                                   ? LiveColors.bleu
-                                  : const Color(0xFFE4E8EE),
+                                  : LiveColors.filet,
                               width: _offre == i ? 2 : 1,
                             ),
                           ),

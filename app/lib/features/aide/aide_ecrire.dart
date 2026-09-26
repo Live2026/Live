@@ -66,7 +66,7 @@ class _EcranEcrireState extends ConsumerState<EcranEcrireSupport> {
             if (_sujet == 'Arnaque') ...[
               const SizedBox(height: 12),
               const Bloc(
-                fond: Color(0xFFFDECEC),
+                fond: LiveColors.teinteRouge,
                 child: Text(
                   'Ne payez rien et ne donnez aucun code. Indiquez le numéro ou '
                   'le compte qui vous a contacté : il est examiné en priorité.',
@@ -196,8 +196,8 @@ class _CarteDemande extends StatelessWidget {
                 Etiquette(
                   resolue ? 'Résolue' : 'En cours',
                   fond: resolue
-                      ? const Color(0xFFE7F4EC)
-                      : const Color(0xFFFFF4E0),
+                      ? LiveColors.teinteVerte
+                      : LiveColors.teinteAmbre,
                   couleur: resolue ? LiveColors.succes : LiveColors.cuivre,
                 ),
               ],

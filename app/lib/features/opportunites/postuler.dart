@@ -185,9 +185,7 @@ class _Progression extends StatelessWidget {
                   height: 5,
                   margin: const EdgeInsets.symmetric(horizontal: 2),
                   decoration: BoxDecoration(
-                    color: i <= etape
-                        ? LiveColors.succes
-                        : const Color(0xFFE4E8EE),
+                    color: i <= etape ? LiveColors.succes : LiveColors.filet,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -198,7 +196,7 @@ class _Progression extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 11.5,
-                    color: i <= etape ? LiveColors.nuit : LiveColors.gris,
+                    color: i <= etape ? LiveColors.encre : LiveColors.gris,
                     fontWeight: i == etape ? FontWeight.w700 : null,
                   ),
                 ),

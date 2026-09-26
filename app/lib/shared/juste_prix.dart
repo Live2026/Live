@@ -43,9 +43,9 @@ class JustePrix extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: LiveColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE4E8EE)),
+        border: Border.all(color: LiveColors.filet),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -43,7 +43,7 @@ class _ValidationsState extends State<_Validations> {
       padding: const EdgeInsets.all(20),
       children: [
         const Bloc(
-          fond: Color(0xFFFFF4E0),
+          fond: LiveColors.teinteAmbre,
           child: Row(
             children: [
               Icon(Icons.visibility_rounded, color: LiveColors.cuivre),
@@ -84,7 +84,7 @@ class _ValidationsState extends State<_Validations> {
                           Etiquette(
                             _traitees[i]! ? 'Validée' : 'Refusée',
                             fond: _traitees[i]!
-                                ? const Color(0xFFE7F4EC)
+                                ? LiveColors.teinteVerte
                                 : const Color(0xFFFDE2E2),
                             couleur: _traitees[i]!
                                 ? LiveColors.succes

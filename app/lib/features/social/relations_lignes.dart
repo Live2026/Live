@@ -78,13 +78,13 @@ class _LigneCompte extends ConsumerWidget {
                     const Etiquette(
                       'Vous vous suivez',
                       icone: Icons.sync_alt_rounded,
-                      fond: Color(0xFFE7F4EC),
+                      fond: LiveColors.teinteVerte,
                       couleur: LiveColors.succes,
                     )
                   else if (abonne && !ongletAbonnes)
                     const Etiquette(
                       'Vous suit',
-                      fond: Color(0xFFE6EBF2),
+                      fond: LiveColors.voile,
                       couleur: LiveColors.bleu,
                     )
                   else
@@ -153,7 +153,7 @@ void _menuCompte(
   showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) {
       void action(VoidCallback f) {
         Navigator.pop(ctx);

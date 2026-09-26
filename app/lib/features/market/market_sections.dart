@@ -419,7 +419,7 @@ class _PaiementsSecurises extends StatelessWidget {
                         width: 44,
                         height: 44,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEFF2F6),
+                          color: LiveColors.champ2,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(icone, color: LiveColors.bleu),

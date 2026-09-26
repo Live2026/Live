@@ -143,7 +143,7 @@ class _Onglet extends StatelessWidget {
             texte,
             style: TextStyle(
               fontWeight: actif ? FontWeight.w800 : FontWeight.w500,
-              color: actif ? LiveColors.nuit : LiveColors.gris,
+              color: actif ? LiveColors.encre : LiveColors.gris,
             ),
           ),
         ),

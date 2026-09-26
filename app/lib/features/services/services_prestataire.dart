@@ -71,7 +71,7 @@ class _EcranInterventionsState extends State<EcranInterventions> {
                     ),
                     Etiquette(
                       'Il y a 12 min',
-                      fond: Color(0xFFFFF1E0),
+                      fond: LiveColors.teinteOrange,
                       couleur: LiveColors.cuivre,
                     ),
                   ],

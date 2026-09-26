@@ -90,7 +90,7 @@ class _EcranCarteState extends State<EcranCarte> {
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: LiveColors.surface,
                           borderRadius: BorderRadius.circular(24),
                           boxShadow: const [
                             BoxShadow(color: Color(0x22041936), blurRadius: 8),
@@ -220,7 +220,7 @@ class _FicheCarte extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: LiveColors.surface,
           borderRadius: BorderRadius.circular(14),
           boxShadow: const [
             BoxShadow(color: Color(0x2A041936), blurRadius: 10),

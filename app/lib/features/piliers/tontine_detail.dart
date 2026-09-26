@@ -74,7 +74,7 @@ class EcranTontine extends ConsumerWidget {
           const SizedBox(height: 14),
           if (payee)
             const Bloc(
-              fond: Color(0xFFE7F4EC),
+              fond: LiveColors.teinteVerte,
               child: Row(
                 children: [
                   Icon(Icons.check_circle_rounded, color: LiveColors.succes),
@@ -108,10 +108,10 @@ class EcranTontine extends ConsumerWidget {
                   ListTile(
                     leading: CircleAvatar(
                       backgroundColor: i < t.tour
-                          ? const Color(0xFFE7F4EC)
+                          ? LiveColors.teinteVerte
                           : i == t.tour
                           ? t.couleur
-                          : const Color(0xFFF3F5F8),
+                          : LiveColors.champ,
                       child: Text(
                         '${i + 1}',
                         style: TextStyle(

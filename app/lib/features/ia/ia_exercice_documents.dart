@@ -92,7 +92,7 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
               child: _photo
                   ? Container(
                       padding: const EdgeInsets.all(16),
-                      color: Colors.white,
+                      color: LiveColors.surface,
                       child: const Text(
                         'Exercice 3 : Résoudre 2x + 3 = 11',
                         style: TextStyle(fontSize: 20),

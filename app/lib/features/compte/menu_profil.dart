@@ -42,7 +42,7 @@ class _MenuProfil extends ConsumerWidget {
     );
 
     return Drawer(
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       child: SafeArea(
         child: ListView(
           padding: const EdgeInsets.only(bottom: 16),

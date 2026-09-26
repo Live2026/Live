@@ -7,7 +7,7 @@ Future<void> ouvrirOffre(BuildContext context, Produit p) {
     isScrollControlled: true,
     showDragHandle: true,
     useSafeArea: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
@@ -207,7 +207,7 @@ Future<void> ouvrirBoost(BuildContext context, WidgetRef ref, String titre) {
   return showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     builder: (ctx) => SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),

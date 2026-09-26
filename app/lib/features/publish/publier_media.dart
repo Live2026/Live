@@ -231,7 +231,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                       'Filmez l’objet de près, en pleine lumière, 30 s suffisent',
                       icone: Icons.lightbulb_outline_rounded,
                       fond: Colors.black45,
-                      couleur: Colors.white,
+                      couleur: LiveColors.surface,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -309,7 +309,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -322,7 +322,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
             ])
               ListTile(
                 leading: const CircleAvatar(
-                  backgroundColor: Color(0xFFEFF2F6),
+                  backgroundColor: LiveColors.champ2,
                   child: Icon(Icons.music_note_rounded, color: LiveColors.bleu),
                 ),
                 title: Text(titre),
@@ -341,7 +341,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, maj) => SafeArea(
           child: Padding(

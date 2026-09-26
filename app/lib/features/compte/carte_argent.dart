@@ -34,7 +34,7 @@ class _CarteArgent extends StatelessWidget {
                     children: [
                       const Text(
                         'Mon argent Live',
-                        style: TextStyle(color: Color(0xFFD7DCE4)),
+                        style: TextStyle(color: LiveColors.brume),
                       ),
                       ChiffreAnime(
                         valeur: etat.disponible,
@@ -59,7 +59,7 @@ class _CarteArgent extends StatelessWidget {
               FilledButton(
                 style: FilledButton.styleFrom(
                   backgroundColor: LiveColors.orange,
-                  foregroundColor: LiveColors.nuit,
+                  foregroundColor: LiveColors.encre,
                   minimumSize: const Size(0, 44),
                 ),
                 onPressed: () => context.push('/retirer'),

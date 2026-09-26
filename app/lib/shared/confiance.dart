@@ -62,8 +62,8 @@ class CarteQr extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: const Color(0xFFE4E8EE)),
+        color: LiveColors.surface,
+        border: Border.all(color: LiveColors.filet),
         borderRadius: BorderRadius.circular(12),
         boxShadow: const [
           BoxShadow(
@@ -85,7 +85,7 @@ class CarteQr extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Container(
-            color: Colors.white,
+            color: LiveColors.surface,
             padding: const EdgeInsets.all(8),
             child: QrImageView(data: donnee, size: 170),
           ),
@@ -192,7 +192,7 @@ class _DialogueScanState extends State<_DialogueScan> {
                       width: 140,
                       height: 140,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 3),
+                        border: Border.all(color: LiveColors.surface, width: 3),
                       ),
                     ),
                     const SizedBox(height: 8),

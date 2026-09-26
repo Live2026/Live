@@ -32,9 +32,9 @@ class _Saisie extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(12, 4, 12, 10),
             padding: const EdgeInsets.fromLTRB(12, 8, 8, 6),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: LiveColors.surface,
               borderRadius: BorderRadius.circular(22),
-              border: Border.all(color: const Color(0xFFD7DCE4)),
+              border: Border.all(color: LiveColors.brume),
               boxShadow: const [
                 BoxShadow(
                   color: Color(0x14000000),
@@ -124,7 +124,7 @@ class _Saisie extends StatelessWidget {
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
@@ -183,7 +183,7 @@ class _Saisie extends StatelessWidget {
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: ConstrainedBox(
           constraints: BoxConstraints(

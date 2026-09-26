@@ -103,7 +103,7 @@ class _PageProfilState extends ConsumerState<_PageProfil> {
         slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor: Colors.white,
+            backgroundColor: LiveColors.surface,
             actions: [
               IconButton(
                 tooltip: 'Partager',
@@ -146,7 +146,7 @@ class _PageProfilState extends ConsumerState<_PageProfil> {
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: const BoxDecoration(
-                          color: Colors.white,
+                          color: LiveColors.surface,
                           shape: BoxShape.circle,
                         ),
                         child: Avatar(

@@ -80,12 +80,14 @@ class _EcranFilState extends State<EcranFil> {
         const Positioned(
           top: 4,
           right: 4,
-          child: SafeArea(child: BoutonMessages(couleur: Colors.white)),
+          child: SafeArea(child: BoutonMessages(couleur: LiveColors.surface)),
         ),
         const Positioned(
           top: 4,
           left: 4,
-          child: SafeArea(child: BoutonNotifications(couleur: Colors.white)),
+          child: SafeArea(
+            child: BoutonNotifications(couleur: LiveColors.surface),
+          ),
         ),
         Positioned(
           top: 56,
@@ -120,7 +122,7 @@ class _EcranFilState extends State<EcranFil> {
           Expanded(
             flex: 2,
             child: ColoredBox(
-              color: Colors.white,
+              color: LiveColors.surface,
               child: _PanneauAnnonce(
                 pub: liste[_page.clamp(0, liste.length - 1)],
               ),

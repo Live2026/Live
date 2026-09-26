@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../shared/logo.dart';
 import 'adaptatif.dart';
+import 'theme.dart';
 
 part 'barre_laterale.dart';
 

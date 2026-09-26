@@ -313,7 +313,7 @@ class EcranDocument extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: LiveColors.surface,
               border: Border.all(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(8),
               boxShadow: const [

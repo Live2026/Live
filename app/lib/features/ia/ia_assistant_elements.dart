@@ -39,7 +39,7 @@ class _VueMessage extends StatelessWidget {
                     vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6EBF2),
+                    color: LiveColors.voile,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text(m.texte),
@@ -54,7 +54,7 @@ class _VueMessage extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: Bloc(
-          fond: const Color(0xFFFFF7EA),
+          fond: LiveColors.teinteCreme,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -99,7 +99,7 @@ class _VueMessage extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 14,
-            backgroundColor: Color(0xFFFFF1E0),
+            backgroundColor: LiveColors.teinteOrange,
             child: Icon(
               Icons.auto_awesome_rounded,
               size: 16,
@@ -233,8 +233,8 @@ class _PuceFichier extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 300),
       padding: const EdgeInsets.fromLTRB(8, 6, 4, 6),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: const Color(0xFFD7DCE4)),
+        color: LiveColors.surface,
+        border: Border.all(color: LiveColors.brume),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(

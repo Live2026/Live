@@ -206,7 +206,7 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -286,7 +286,7 @@ class _BoutonDevise extends StatelessWidget {
       onTap: onTap,
       excludeSemantics: true,
       child: Material(
-        color: Colors.white,
+        color: LiveColors.surface,
         borderRadius: BorderRadius.circular(24),
         child: InkWell(
           borderRadius: BorderRadius.circular(24),
@@ -320,7 +320,7 @@ class _NoteAgrement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Bloc(
-      fond: Color(0xFFE6EBF2),
+      fond: LiveColors.voile,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -101,7 +101,7 @@ class _EcranVueRueState extends State<EcranVueRue> {
                       child: Transform.rotate(
                         angle: -_cap * math.pi / 180,
                         child: const CircleAvatar(
-                          backgroundColor: Colors.white,
+                          backgroundColor: LiveColors.surface,
                           child: Icon(
                             Icons.navigation_rounded,
                             color: LiveColors.erreur,
@@ -121,8 +121,8 @@ class _EcranVueRueState extends State<EcranVueRue> {
             child: Center(
               child: FilledButton.icon(
                 style: FilledButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: LiveColors.nuit,
+                  backgroundColor: LiveColors.surface,
+                  foregroundColor: LiveColors.encre,
                   minimumSize: const Size(0, 48),
                 ),
                 onPressed: () => setState(() => _pas++),

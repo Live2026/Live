@@ -19,7 +19,7 @@ class _EcranLecteurState extends State<EcranLecteur> {
     final c = contenuParId(widget.id);
     final document = c.type == TypeContenu.pdf || c.type == TypeContenu.livre;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       appBar: AppBar(
         title: Text(c.titre, maxLines: 1, overflow: TextOverflow.ellipsis),
         actions: const [
@@ -28,7 +28,7 @@ class _EcranLecteurState extends State<EcranLecteur> {
             child: Etiquette(
               'Hors connexion',
               icone: Icons.offline_pin_rounded,
-              fond: Color(0xFFE7F4EC),
+              fond: LiveColors.teinteVerte,
               couleur: LiveColors.succes,
             ),
           ),
@@ -179,12 +179,12 @@ class _Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFFEFF2F6),
+      color: LiveColors.champ2,
       padding: const EdgeInsets.all(16),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: LiveColors.surface,
           borderRadius: BorderRadius.circular(4),
           boxShadow: const [BoxShadow(color: Color(0x22000000), blurRadius: 6)],
         ),

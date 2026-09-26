@@ -191,7 +191,7 @@ class _LigneConversation extends StatelessWidget {
     final deMoi = c.dernier.startsWith('Vous :');
     final groupe = c.type != TypeConversation.privee;
     return Material(
-      color: selectionnee ? const Color(0xFFE6EBF2) : Colors.transparent,
+      color: selectionnee ? LiveColors.voile : Colors.transparent,
       child: InkWell(
         onTap:
             onOuvrir ??
@@ -265,7 +265,7 @@ class _LigneConversation extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              color: nonLu ? LiveColors.nuit : LiveColors.gris,
+                              color: nonLu ? LiveColors.encre : LiveColors.gris,
                               fontWeight: nonLu
                                   ? FontWeight.w600
                                   : FontWeight.w400,

@@ -52,7 +52,7 @@ class MotifLive extends StatelessWidget {
 const couleurMotif = LiveColors.bleu;
 
 /// Fond du motif : blanc cassé chaud.
-const fondMotif = Color(0xFFFBF8F3);
+const fondMotif = LiveColors.fondMotif;
 
 class _PeintreMotif extends CustomPainter {
   _PeintreMotif(this.intensite, this.rayonnant);

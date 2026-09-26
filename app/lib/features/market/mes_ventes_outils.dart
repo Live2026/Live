@@ -12,7 +12,7 @@ class _OutilsVendeur extends StatelessWidget {
     }
 
     return Drawer(
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       child: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

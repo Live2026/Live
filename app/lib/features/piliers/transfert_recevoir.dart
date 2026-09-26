@@ -39,7 +39,7 @@ class _Recevoir extends ConsumerWidget {
               FilledButton.icon(
                 style: FilledButton.styleFrom(
                   backgroundColor: LiveColors.orange,
-                  foregroundColor: LiveColors.nuit,
+                  foregroundColor: LiveColors.encre,
                   minimumSize: const Size(0, 44),
                 ),
                 onPressed: () => partager(
@@ -128,7 +128,7 @@ class _CarteRecu extends ConsumerWidget {
             Etiquette(
               'Versé sur votre compte $compte',
               icone: Icons.check_circle_rounded,
-              fond: const Color(0xFFE7F4EC),
+              fond: LiveColors.teinteVerte,
               couleur: LiveColors.succes,
             )
           else
@@ -140,7 +140,7 @@ class _CarteRecu extends ConsumerWidget {
                 const Etiquette(
                   'Sur votre solde Live',
                   icone: Icons.account_balance_wallet_rounded,
-                  fond: Color(0xFFFFF4E0),
+                  fond: LiveColors.teinteAmbre,
                   couleur: LiveColors.cuivre,
                 ),
                 FilledButton.icon(

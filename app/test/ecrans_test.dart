@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:live/core/router.dart';
+import 'package:live/core/theme.dart';
+import 'package:live/data/store.dart';
 import 'package:live/main.dart';
 
 import 'outils.dart';
@@ -239,5 +241,38 @@ void main() {
         expect(erreurs, isEmpty, reason: erreurs.join('\n'));
       },
     );
+  }
+
+  // Mode sombre : tous les écrans, sur téléphone et sur ordinateur.
+  for (final largeur in [360.0, 1280.0]) {
+    testWidgets('tous les écrans en mode sombre à ${largeur.toInt()} px', (
+      tester,
+    ) async {
+      tester.view.physicalSize = Size(largeur, largeur > 600 ? 800 : 780);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      addTearDown(() => LiveColors.sombre = false);
+      sansAnimations(tester);
+      routeur.go('/bienvenue');
+      await tester.pumpWidget(const ProviderScope(child: LiveApp()));
+      ProviderScope.containerOf(tester.element(find.byType(LiveApp)))
+          .read(liveProvider.notifier)
+          .choisirApparence('sombre');
+      await tester.pumpAndSettle();
+      expect(LiveColors.sombre, isTrue);
+      expect(
+        Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+        Brightness.dark,
+      );
+      final erreurs = <String>[];
+      for (final r in routes) {
+        routeur.go(r);
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 600));
+        final e = tester.takeException();
+        if (e != null) erreurs.add('$r : ${e.toString().split('\n').first}');
+      }
+      expect(erreurs, isEmpty, reason: erreurs.join('\n'));
+    });
   }
 }

@@ -144,7 +144,7 @@ class _EcranAideState extends ConsumerState<EcranAide> {
             ),
             const SizedBox(height: 12),
             Bloc(
-              fond: const Color(0xFFFDECEC),
+              fond: LiveColors.teinteRouge,
               child: Row(
                 children: [
                   const Icon(

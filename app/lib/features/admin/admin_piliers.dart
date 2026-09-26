@@ -57,7 +57,7 @@ class _ArgentQuotidien extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Bloc(
-          fond: const Color(0xFFE6EBF2),
+          fond: LiveColors.voile,
           child: const Row(
             children: [
               Icon(Icons.account_balance_rounded, color: LiveColors.bleu),

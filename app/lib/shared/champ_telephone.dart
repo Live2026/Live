@@ -34,11 +34,11 @@ class ChampTelephone extends StatefulWidget {
   State<ChampTelephone> createState() => _ChampTelephoneState();
 }
 
-const _bord = Color(0xFFC5CCD6);
+const _bord = LiveColors.bord2;
 
 BoxDecoration _cadre({required bool actif, bool alerte = false}) =>
     BoxDecoration(
-      color: Colors.white,
+      color: LiveColors.surface,
       borderRadius: BorderRadius.circular(8),
       border: Border.all(
         color: alerte
@@ -229,7 +229,7 @@ class _ChoixPaysState extends State<_ChoixPays> {
           alignmentOffset: const Offset(0, 6),
           onClose: () => setState(_recherche.clear),
           style: MenuStyle(
-            backgroundColor: const WidgetStatePropertyAll(Colors.white),
+            backgroundColor: const WidgetStatePropertyAll(LiveColors.surface),
             shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),

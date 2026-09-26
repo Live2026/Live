@@ -44,7 +44,7 @@ class BoutonFavori extends ConsumerWidget {
   const BoutonFavori({
     super.key,
     required this.id,
-    this.couleur = Colors.white,
+    this.couleur = LiveColors.surface,
   });
   final String id;
   final Color couleur;
@@ -264,13 +264,13 @@ class PhotoBien extends StatelessWidget {
                 const Etiquette(
                   'Nouveau',
                   fond: LiveColors.orangeVif,
-                  couleur: Colors.white,
+                  couleur: LiveColors.surface,
                 ),
               if (b.sponsorise)
                 const Etiquette(
                   'Sponsorisé',
                   fond: Color(0xB3041936),
-                  couleur: Colors.white,
+                  couleur: LiveColors.surface,
                 ),
             ],
           ),
@@ -283,7 +283,7 @@ class PhotoBien extends StatelessWidget {
             '${b.photos}',
             icone: Icons.photo_library_outlined,
             fond: const Color(0x99041936),
-            couleur: Colors.white,
+            couleur: LiveColors.surface,
           ),
         ),
         const Positioned(
@@ -378,9 +378,9 @@ class CartePro extends StatelessWidget {
           height: 92,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: LiveColors.surface,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE4E8EE)),
+            border: Border.all(color: LiveColors.filet),
           ),
           child: Row(
             children: [

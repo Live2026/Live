@@ -18,7 +18,7 @@ class EcranProduit extends StatelessWidget {
           child: Etiquette(
             'Meilleure vente',
             icone: Icons.local_fire_department_rounded,
-            fond: Color(0xFFFFF1E0),
+            fond: LiveColors.teinteOrange,
             couleur: LiveColors.cuivre,
           ),
         ),
@@ -65,15 +65,11 @@ class EcranProduit extends StatelessWidget {
         runSpacing: 6,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          Etiquette(
-            p.etat,
-            fond: const Color(0xFFE6EBF2),
-            couleur: LiveColors.bleu,
-          ),
+          Etiquette(p.etat, fond: LiveColors.voile, couleur: LiveColors.bleu),
           if (p.negociable)
             const Etiquette(
               'Prix négociable',
-              fond: Color(0xFFFFF1E0),
+              fond: LiveColors.teinteOrange,
               couleur: LiveColors.cuivre,
             ),
           PastilleReglement(p.reglement),
@@ -251,7 +247,7 @@ class EcranProduit extends StatelessWidget {
             expandedHeight: 340,
             pinned: true,
             stretch: true,
-            backgroundColor: Colors.white,
+            backgroundColor: LiveColors.surface,
             leading: Padding(
               padding: const EdgeInsets.all(8),
               child: BoutonVerre(

@@ -105,7 +105,7 @@ class _EcranConnexionAdminState extends State<EcranConnexionAdmin> {
       ),
     );
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F5F8),
+      backgroundColor: LiveColors.champ,
       body: Row(
         children: [
           if (context.taille == Taille.etendue)
@@ -118,7 +118,7 @@ class _EcranConnexionAdminState extends State<EcranConnexionAdmin> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      LogoLive(taille: 44, couleur: Colors.white),
+                      LogoLive(taille: 44, couleur: LiveColors.surface),
                       SizedBox(height: 24),
                       Text(
                         'Back-office',

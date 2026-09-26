@@ -6,7 +6,7 @@ Future<void> ouvrirCommentaires(BuildContext context, Publication p) {
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
-    backgroundColor: Colors.white,
+    backgroundColor: LiveColors.surface,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
@@ -167,7 +167,7 @@ class _LigneCommentaireState extends State<LigneCommentaire> {
                       const SizedBox(width: 6),
                       const Etiquette(
                         'Vendeur',
-                        fond: Color(0xFFE6EBF2),
+                        fond: LiveColors.voile,
                         couleur: LiveColors.bleu,
                       ),
                     ],

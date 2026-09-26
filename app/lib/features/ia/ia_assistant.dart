@@ -183,7 +183,7 @@ class _EcranAssistantState extends ConsumerState<EcranAssistant> {
           children: [
             CircleAvatar(
               radius: 16,
-              backgroundColor: Color(0xFFFFF1E0),
+              backgroundColor: LiveColors.teinteOrange,
               child: Icon(
                 Icons.auto_awesome_rounded,
                 size: 18,
@@ -246,7 +246,7 @@ class _EcranAssistantState extends ConsumerState<EcranAssistant> {
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => SafeArea(
         child: _ListeConversations(
           onNouvelle: () {

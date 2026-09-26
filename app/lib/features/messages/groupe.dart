@@ -151,7 +151,7 @@ class _EcranGroupeState extends State<EcranGroupe> {
       body: Column(
         children: [
           Material(
-            color: Colors.white,
+            color: LiveColors.surface,
             child: ListTile(
               dense: true,
               leading: const Icon(
@@ -188,7 +188,7 @@ class _EcranGroupeState extends State<EcranGroupe> {
               top: false,
               child: Container(
                 width: double.infinity,
-                color: Colors.white,
+                color: LiveColors.surface,
                 padding: const EdgeInsets.all(14),
                 child: const Text(
                   'Seuls les administrateurs publient. Réagissez aux messages '
@@ -290,9 +290,9 @@ class _BulleGroupe extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: LiveColors.surface,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFE4E8EE)),
+                border: Border.all(color: LiveColors.filet),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -325,7 +325,7 @@ class _Pdf extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 6),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: const Color(0xFFF3F5F8),
+        color: LiveColors.champ,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

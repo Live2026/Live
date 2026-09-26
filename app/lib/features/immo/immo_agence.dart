@@ -210,8 +210,8 @@ class _CarteDemande extends StatelessWidget {
                 Etiquette(
                   d.statut == 'Nouvelle' ? 'Nouvelle' : 'Frais payés',
                   fond: d.statut == 'Nouvelle'
-                      ? const Color(0xFFFFF1E0)
-                      : const Color(0xFFE7F4EC),
+                      ? LiveColors.teinteOrange
+                      : LiveColors.teinteVerte,
                   couleur: d.statut == 'Nouvelle'
                       ? LiveColors.cuivre
                       : LiveColors.succes,
@@ -309,7 +309,7 @@ class _LigneBienAgence extends StatelessWidget {
                   )
                 : const Etiquette(
                     'En ligne',
-                    fond: Color(0xFFE7F4EC),
+                    fond: LiveColors.teinteVerte,
                     couleur: LiveColors.succes,
                   ),
           ],

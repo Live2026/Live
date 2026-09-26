@@ -230,7 +230,7 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Material(
-          color: const Color(0xFFF3F5F8),
+          color: LiveColors.champ,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
             side: const BorderSide(color: LiveColors.brume, width: 2),
@@ -336,10 +336,10 @@ class _TuileChoix extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: actif ? LiveColors.fondProtection : Colors.white,
+            color: actif ? LiveColors.fondProtection : LiveColors.surface,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: actif ? LiveColors.bleu : const Color(0xFFE4E8EE),
+              color: actif ? LiveColors.bleu : LiveColors.filet,
               width: actif ? 2 : 1,
             ),
           ),

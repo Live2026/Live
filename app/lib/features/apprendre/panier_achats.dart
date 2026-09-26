@@ -208,7 +208,7 @@ class _EcranMesAchatsState extends ConsumerState<EcranMesAchats> {
           ),
           const SizedBox(height: 8),
           Bloc(
-            fond: const Color(0xFFE7F4EC),
+            fond: LiveColors.teinteVerte,
             padding: 12,
             child: const Row(
               children: [
@@ -236,7 +236,7 @@ class _EcranMesAchatsState extends ConsumerState<EcranMesAchats> {
                 child: LinearProgressIndicator(
                   value: c.id == 'n2' ? 0.45 : 0.0,
                   minHeight: 5,
-                  backgroundColor: const Color(0xFFE4E8EE),
+                  backgroundColor: LiveColors.filet,
                 ),
               ),
               fin: _enCours.contains(c.id)

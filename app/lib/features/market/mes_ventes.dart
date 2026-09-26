@@ -396,7 +396,7 @@ class _OngletsVentes extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: const Color(0xFFEFF2F6),
+        color: LiveColors.champ2,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -419,7 +419,9 @@ class _OngletsVentes extends StatelessWidget {
                     curve: courbeDouce,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: actif == i ? Colors.white : Colors.transparent,
+                      color: actif == i
+                          ? LiveColors.surface
+                          : Colors.transparent,
                       borderRadius: BorderRadius.circular(9),
                       boxShadow: actif == i
                           ? const [
@@ -444,7 +446,7 @@ class _OngletsVentes extends StatelessWidget {
                                   ? FontWeight.w800
                                   : FontWeight.w500,
                               color: actif == i
-                                  ? LiveColors.nuit
+                                  ? LiveColors.encre
                                   : LiveColors.gris,
                             ),
                           ),

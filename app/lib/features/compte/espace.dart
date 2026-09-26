@@ -63,7 +63,7 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
         children: [
           if (!etat.identiteVerifiee) ...[
             Bloc(
-              fond: const Color(0xFFFFF7EA),
+              fond: LiveColors.teinteCreme,
               child: Row(
                 children: [
                   const Icon(
@@ -111,13 +111,13 @@ class _EcranCreerEspaceState extends ConsumerState<EcranCreerEspace> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: _type == type
-                            ? const Color(0xFFE6EBF2)
-                            : Colors.white,
+                            ? LiveColors.voile
+                            : LiveColors.surface,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: _type == type
                               ? LiveColors.bleu
-                              : const Color(0xFFE4E8EE),
+                              : LiveColors.filet,
                           width: _type == type ? 2 : 1,
                         ),
                       ),
@@ -299,7 +299,7 @@ class EcranEquipe extends StatelessWidget {
                   ),
                   Etiquette(
                     role,
-                    fond: const Color(0xFFE6EBF2),
+                    fond: LiveColors.voile,
                     couleur: LiveColors.bleu,
                   ),
                 ],

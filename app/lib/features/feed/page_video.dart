@@ -119,7 +119,7 @@ class _PageVideoState extends State<_PageVideo> with TickerProviderStateMixin {
                       ? Icons.favorite_rounded
                       : Icons.favorite_border_rounded,
                   texte: p.likes,
-                  couleur: _aime ? const Color(0xFFFF4D67) : Colors.white,
+                  couleur: _aime ? const Color(0xFFFF4D67) : LiveColors.surface,
                   actif: _aime,
                   onTap: () => setState(() => _aime = !_aime),
                 ),
@@ -133,7 +133,7 @@ class _PageVideoState extends State<_PageVideo> with TickerProviderStateMixin {
                       ? Icons.bookmark_rounded
                       : Icons.bookmark_border_rounded,
                   texte: 'Garder',
-                  couleur: _enregistre ? LiveColors.ambre : Colors.white,
+                  couleur: _enregistre ? LiveColors.ambre : LiveColors.surface,
                   actif: _enregistre,
                   onTap: () => setState(() => _enregistre = !_enregistre),
                 ),
@@ -296,7 +296,7 @@ class _Auteur extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(2),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: LiveColors.surface,
                 shape: BoxShape.circle,
               ),
               child: Avatar(nom: pub.auteur, couleur: pub.couleur, taille: 44),
@@ -315,7 +315,7 @@ class _Auteur extends StatelessWidget {
                   width: 22,
                   height: 22,
                   decoration: BoxDecoration(
-                    color: suivi ? Colors.white : const Color(0xFFFF4D67),
+                    color: suivi ? LiveColors.surface : const Color(0xFFFF4D67),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -421,7 +421,7 @@ class _Action extends StatelessWidget {
     required this.icone,
     required this.texte,
     required this.onTap,
-    this.couleur = Colors.white,
+    this.couleur = LiveColors.surface,
     this.actif = false,
     this.miroir = false,
   });

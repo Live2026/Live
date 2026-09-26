@@ -104,7 +104,7 @@ class _CarteGroupe extends StatelessWidget {
               ),
               Etiquette(
                 '−$economie %',
-                fond: const Color(0xFFE7F4EC),
+                fond: LiveColors.teinteVerte,
                 couleur: LiveColors.succes,
               ),
             ],
@@ -137,7 +137,7 @@ class _CarteGroupe extends StatelessWidget {
             minHeight: 8,
             borderRadius: BorderRadius.circular(4),
             color: a.couleur,
-            backgroundColor: const Color(0xFFE6EBF2),
+            backgroundColor: LiveColors.voile,
           ),
           const SizedBox(height: 6),
           Text(
@@ -149,7 +149,7 @@ class _CarteGroupe extends StatelessWidget {
             const Etiquette(
               'Vous participez · remboursé si l’objectif échoue',
               icone: Icons.check_circle_rounded,
-              fond: Color(0xFFE7F4EC),
+              fond: LiveColors.teinteVerte,
               couleur: LiveColors.succes,
             )
           else

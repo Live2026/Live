@@ -9,7 +9,7 @@ extension _VendreAvecIa on _EcranVendreState {
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (_) => const _AnalysePhoto(),
     );
     if (remplir != true) return;

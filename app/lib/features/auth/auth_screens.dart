@@ -307,7 +307,7 @@ class _PhotoProfil extends ConsumerWidget {
                       height: 112,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Color(0xFFE6EBF2),
+                        color: LiveColors.voile,
                       ),
                       child: const Icon(
                         Icons.add_a_photo_outlined,
@@ -324,7 +324,7 @@ class _PhotoProfil extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color: LiveColors.bleu,
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 3),
+                  border: Border.all(color: LiveColors.surface, width: 3),
                 ),
                 child: const Icon(
                   Icons.photo_camera_rounded,

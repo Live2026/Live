@@ -145,7 +145,7 @@ class _BoutonCarte extends StatelessWidget {
     return Tooltip(
       message: libelle,
       child: Material(
-        color: Colors.white,
+        color: LiveColors.surface,
         shape: const CircleBorder(),
         elevation: 3,
         child: InkWell(

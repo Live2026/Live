@@ -111,7 +111,7 @@ class EcranBien extends ConsumerWidget {
             expandedHeight: 300,
             pinned: true,
             stretch: true,
-            backgroundColor: Colors.white,
+            backgroundColor: LiveColors.surface,
             leading: Padding(
               padding: const EdgeInsets.all(8),
               child: BoutonVerre(
@@ -218,7 +218,7 @@ class _TuilesSpecs extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF3F5F8),
+              color: LiveColors.champ,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
@@ -372,7 +372,7 @@ class _Equipements extends StatelessWidget {
                   vertical: 7,
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFE4E8EE)),
+                  border: Border.all(color: LiveColors.filet),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(

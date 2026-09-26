@@ -179,7 +179,7 @@ class _SectionsApprendreState extends ConsumerState<SectionsApprendre> {
         Padding(
           padding: EdgeInsets.fromLTRB(marge, 20, marge, 0),
           child: Bloc(
-            fond: const Color(0xFFF3F5F8),
+            fond: LiveColors.champ,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

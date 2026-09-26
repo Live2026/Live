@@ -64,7 +64,7 @@ class _EcranFinanceState extends State<EcranFinance> {
                         minHeight: 8,
                         borderRadius: BorderRadius.circular(4),
                         color: LiveColors.succes,
-                        backgroundColor: const Color(0xFFE4E8EE),
+                        backgroundColor: LiveColors.filet,
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -152,7 +152,7 @@ class _Service extends StatelessWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFF1E0),
+                  color: LiveColors.teinteOrange,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(icone, color: LiveColors.orangeVif),

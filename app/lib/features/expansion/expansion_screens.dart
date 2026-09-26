@@ -80,7 +80,7 @@ class EcranLivraison extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: LiveColors.surface,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                 boxShadow: [
                   BoxShadow(color: Color(0x33041936), blurRadius: 16),
@@ -106,7 +106,7 @@ class EcranLivraison extends StatelessWidget {
                         Etiquette(
                           'En route',
                           icone: Icons.two_wheeler_rounded,
-                          fond: Color(0xFFFFF1E0),
+                          fond: LiveColors.teinteOrange,
                           couleur: LiveColors.cuivre,
                         ),
                       ],

@@ -48,10 +48,10 @@ class _CoqueAdmin extends StatelessWidget {
   Widget build(BuildContext context) {
     final grand = context.grandEcran;
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F5F8),
+      backgroundColor: LiveColors.champ,
       drawer: grand ? null : Drawer(child: _MenuAdmin(section: section)),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: LiveColors.surface,
         title: Text(titre),
         actions: [
           Padding(
@@ -119,7 +119,7 @@ class _MenuAdmin extends StatelessWidget {
 
   Widget _contenu(BuildContext context, bool large, bool replie) {
     Widget entree(IconData icone, String nom, bool actif, VoidCallback onTap) {
-      final teinte = actif ? Colors.white : const Color(0xFF9AA7B8);
+      final teinte = actif ? LiveColors.surface : const Color(0xFF9AA7B8);
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
         child: Tooltip(
@@ -155,9 +155,7 @@ class _MenuAdmin extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            color: actif
-                                ? Colors.white
-                                : const Color(0xFFD7DCE4),
+                            color: actif ? Colors.white : LiveColors.brume,
                             fontWeight: actif
                                 ? FontWeight.w700
                                 : FontWeight.w500,
@@ -188,7 +186,7 @@ class _MenuAdmin extends StatelessWidget {
                   child: large
                       ? const Row(
                           children: [
-                            LogoLive(taille: 30, couleur: Colors.white),
+                            LogoLive(taille: 30, couleur: LiveColors.surface),
                             SizedBox(width: 8),
                             Flexible(
                               child: Text(
@@ -318,7 +316,7 @@ class _Tableau extends StatelessWidget {
                   vertical: 12,
                 ),
                 decoration: const BoxDecoration(
-                  border: Border(top: BorderSide(color: Color(0xFFE4E8EE))),
+                  border: Border(top: BorderSide(color: LiveColors.filet)),
                 ),
                 child: Row(
                   children: [
@@ -340,12 +338,12 @@ Widget _etat(String texte) {
     'Urgent' ||
     'Bloqué' ||
     'Écart' ||
-    'Rejeté' => (const Color(0xFFFDECEC), LiveColors.erreur),
+    'Rejeté' => (LiveColors.teinteRouge, LiveColors.erreur),
     'Validé' ||
     'Réconcilié' ||
     'Actif' ||
-    'Résolu' => (const Color(0xFFE7F4EC), LiveColors.succes),
-    _ => (const Color(0xFFFFF4E0), LiveColors.cuivre),
+    'Résolu' => (LiveColors.teinteVerte, LiveColors.succes),
+    _ => (LiveColors.teinteAmbre, LiveColors.cuivre),
   };
   return Align(
     alignment: Alignment.centerLeft,

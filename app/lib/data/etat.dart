@@ -263,6 +263,7 @@ class LiveState {
     this.envois = const [],
     this.devise = 'EUR',
     this.langue = 'fr',
+    this.apparence = 'systeme',
     this.photoProfil,
     this.demandesSupport = const [],
     this.transfertsRetires = const {},
@@ -354,6 +355,9 @@ class LiveState {
   /// Langue de l'interface, choisie au démarrage (code : fr, en, ln…).
   final String langue;
 
+  /// Apparence : « systeme » (suit le téléphone), « clair » ou « sombre ».
+  final String apparence;
+
   /// Photo de profil choisie au démarrage ou dans le profil.
   final Uint8List? photoProfil;
 
@@ -416,6 +420,7 @@ class LiveState {
     List<String>? envois,
     String? devise,
     String? langue,
+    String? apparence,
     Uint8List? photoProfil,
     bool retirerPhoto = false,
     List<(String, String, String)>? demandesSupport,
@@ -470,6 +475,7 @@ class LiveState {
       envois: envois ?? this.envois,
       devise: devise ?? this.devise,
       langue: langue ?? this.langue,
+      apparence: apparence ?? this.apparence,
       photoProfil: retirerPhoto ? null : photoProfil ?? this.photoProfil,
       demandesSupport: demandesSupport ?? this.demandesSupport,
       transfertsRetires: transfertsRetires ?? this.transfertsRetires,

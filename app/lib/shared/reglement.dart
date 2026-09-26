@@ -78,9 +78,9 @@ class BlocReglement extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: LiveColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE4E8EE)),
+        border: Border.all(color: LiveColors.filet),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,9 +182,7 @@ class EtapesAssistant extends StatelessWidget {
                   height: 5,
                   margin: const EdgeInsets.symmetric(horizontal: 2),
                   decoration: BoxDecoration(
-                    color: i <= etape
-                        ? LiveColors.bleu
-                        : const Color(0xFFE4E8EE),
+                    color: i <= etape ? LiveColors.bleu : LiveColors.filet,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),

@@ -46,7 +46,7 @@ class _EquipeLive extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: LiveColors.surface,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, maj) => SafeArea(
           child: ListView(
@@ -179,7 +179,7 @@ class _EquipeLive extends StatelessWidget {
               FilledButton.icon(
                 style: FilledButton.styleFrom(
                   backgroundColor: LiveColors.orange,
-                  foregroundColor: LiveColors.nuit,
+                  foregroundColor: LiveColors.encre,
                   minimumSize: const Size(0, 44),
                 ),
                 onPressed: () => _inviter(context),
@@ -218,9 +218,7 @@ class _EquipeLive extends StatelessWidget {
                 ),
                 Etiquette(
                   _fonctions[f].$1,
-                  fond: f == 0
-                      ? const Color(0xFFFFF1E0)
-                      : const Color(0xFFE6EBF2),
+                  fond: f == 0 ? LiveColors.teinteOrange : LiveColors.voile,
                   couleur: f == 0 ? LiveColors.cuivre : LiveColors.bleu,
                 ),
                 Icon(
@@ -261,7 +259,7 @@ class _EquipeLive extends StatelessWidget {
                           size: 18,
                           color: qui.contains(i)
                               ? LiveColors.succes
-                              : const Color(0xFFD7DCE4),
+                              : LiveColors.brume,
                         ),
                       ),
                   ],

@@ -90,9 +90,7 @@ class _EcranPublierBienState extends ConsumerState<EcranPublierBien> {
                     height: 5,
                     margin: const EdgeInsets.symmetric(horizontal: 2),
                     decoration: BoxDecoration(
-                      color: i <= _etape
-                          ? LiveColors.bleu
-                          : const Color(0xFFE4E8EE),
+                      color: i <= _etape ? LiveColors.bleu : LiveColors.filet,
                       borderRadius: BorderRadius.circular(3),
                     ),
                   ),
@@ -256,7 +254,7 @@ class _EcranPublierBienState extends ConsumerState<EcranPublierBien> {
             ),
             const SizedBox(height: 12),
             Bloc(
-              fond: const Color(0xFFF3F5F8),
+              fond: LiveColors.champ,
               child: LigneMontant(
                 _vente ? 'Prix affiché' : 'Coût d’entrée affiché',
                 _entree,
@@ -418,10 +416,10 @@ class _Tuile extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: actif ? const Color(0xFFE6EBF2) : Colors.white,
+            color: actif ? LiveColors.voile : LiveColors.surface,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: actif ? LiveColors.bleu : const Color(0xFFE4E8EE),
+              color: actif ? LiveColors.bleu : LiveColors.filet,
               width: actif ? 2 : 1,
             ),
           ),
