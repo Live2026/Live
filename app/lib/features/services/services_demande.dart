@@ -15,12 +15,12 @@ class EcranServices extends ConsumerWidget {
     ];
     return Scaffold(
       appBar: EnTeteRecherche(
-        titre: const Text('Services'),
-        indice: 'Plombier, coiffure, cours…',
+        titre: Text(context.t.explorerServices),
+        indice: context.t.servicesPlombierCoiffureCours,
         onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: [
           IconButton(
-            tooltip: 'Voir sur la carte',
+            tooltip: context.t.servicesVoirSurLaCarte,
             onPressed: () => context.push('/carte?espace=services'),
             icon: const Icon(Icons.map_outlined),
           ),
@@ -46,8 +46,8 @@ class EcranServices extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Un problème à la maison ?',
+                  Text(
+                    context.t.servicesUnProblemeALa,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -55,9 +55,8 @@ class EcranServices extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    'Décrivez-le en 30 secondes, recevez des devis de pros vérifiés. '
-                    'Votre acompte est protégé par Live.',
+                  Text(
+                    context.t.servicesDecrivezLeEn30,
                     style: TextStyle(color: LiveColors.brumeClaire),
                   ),
                   const SizedBox(height: 14),
@@ -68,7 +67,7 @@ class EcranServices extends ConsumerWidget {
                       minimumSize: const Size(0, 44),
                     ),
                     onPressed: () => context.push('/services/demande'),
-                    child: const Text('Demander des devis'),
+                    child: Text(context.t.servicesDemanderDesDevis),
                   ),
                 ],
               ),
@@ -87,8 +86,8 @@ class EcranServices extends ConsumerWidget {
                       color: LiveColors.bleu,
                     ),
                   ),
-                  title: const Text("Fuite d'eau cuisine"),
-                  subtitle: const Text('3 devis reçus · expire dans 61 h'),
+                  title: Text(context.t.servicesFuiteDEauCuisine),
+                  subtitle: Text(context.t.servicesN3DevisRecusExpire),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => context.push('/services/devis'),
                 ),
@@ -96,7 +95,7 @@ class EcranServices extends ConsumerWidget {
             ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Métiers'),
+            child: EnTeteSection(context.t.servicesMetiers),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge - 8),
@@ -116,7 +115,7 @@ class EcranServices extends ConsumerWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Réservez à prix fixe'),
+            child: EnTeteSection(context.t.servicesReservezAPrixFixe),
           ),
           Carrousel(
             largeur: 200,
@@ -128,7 +127,7 @@ class EcranServices extends ConsumerWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: const EnTeteSection('Disponibles maintenant'),
+            child: EnTeteSection(context.t.servicesDisponiblesMaintenant),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
@@ -145,15 +144,12 @@ class EcranServices extends ConsumerWidget {
                 children: [
                   const Icon(Icons.handyman_rounded, color: LiveColors.bleu),
                   const SizedBox(width: 12),
-                  const Expanded(
-                    child: Text(
-                      'Vous êtes plombier, coiffeuse, traiteur ? Proposez vos services '
-                      'et recevez des demandes près de chez vous.',
-                    ),
+                  Expanded(
+                    child: Text(context.t.servicesVousEtesPlombierCoiffeuse),
                   ),
                   TextButton(
                     onPressed: () => context.push('/publier/service'),
-                    child: const Text('Proposer'),
+                    child: Text(context.t.servicesProposer),
                   ),
                 ],
               ),
@@ -175,7 +171,11 @@ class _CarteServiceFixe extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      label: '${service.titre} par ${pro.nom}, ${fcfa(service.prix)}',
+      label: context.t.servicesServiceParPro(
+        service.titre,
+        pro.nom,
+        fcfa(service.prix),
+      ),
       excludeSemantics: true,
       child: Pressable(
         onTap: () => context.push('/pro/${pro.id}/reserver/${service.id}'),
@@ -247,8 +247,8 @@ class EcranDemandeDevis extends ConsumerStatefulWidget {
 }
 
 class _EcranDemandeDevisState extends ConsumerState<EcranDemandeDevis> {
-  final _description = TextEditingController(
-    text: "Fuite sous l'évier de la cuisine, l'eau coule en continu.",
+  late final _description = TextEditingController(
+    text: context.t.servicesFuiteSousLEvier,
   );
   var _metier = 'Plomberie';
   var _photos = 1;
@@ -257,22 +257,25 @@ class _EcranDemandeDevisState extends ConsumerState<EcranDemandeDevis> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Demander des devis')),
+      appBar: AppBar(title: Text(context.t.servicesDemanderDesDevis)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           DropdownButtonFormField<String>(
             initialValue: _metier,
-            decoration: const InputDecoration(labelText: 'Métier'),
-            items: const [
-              DropdownMenuItem(value: 'Plomberie', child: Text('Plomberie')),
+            decoration: InputDecoration(labelText: context.t.servicesMetier),
+            items: [
+              DropdownMenuItem(
+                value: 'Plomberie',
+                child: Text(context.t.servicesPlomberie),
+              ),
               DropdownMenuItem(
                 value: 'Électricité',
-                child: Text('Électricité'),
+                child: Text(context.t.servicesElectricite),
               ),
               DropdownMenuItem(
                 value: 'Climatisation',
-                child: Text('Climatisation'),
+                child: Text(context.t.servicesClimatisation),
               ),
             ],
             onChanged: (v) => setState(() => _metier = v ?? _metier),
@@ -281,12 +284,12 @@ class _EcranDemandeDevisState extends ConsumerState<EcranDemandeDevis> {
           TextField(
             controller: _description,
             maxLines: 3,
-            decoration: const InputDecoration(
-              labelText: 'Décrivez le problème',
+            decoration: InputDecoration(
+              labelText: context.t.servicesDecrivezLeProbleme,
             ),
           ),
           const SizedBox(height: 12),
-          const Text('Photos (recommandé)'),
+          Text(context.t.servicesPhotosRecommande),
           const SizedBox(height: 6),
           Row(
             children: [
@@ -302,32 +305,32 @@ class _EcranDemandeDevisState extends ConsumerState<EcranDemandeDevis> {
                   ),
                 ),
               IconButton.outlined(
-                tooltip: 'Ajouter une photo',
+                tooltip: context.t.servicesAjouterUnePhoto,
                 onPressed: () => setState(() => _photos++),
                 icon: const Icon(Icons.add_a_photo),
               ),
             ],
           ),
           const SizedBox(height: 12),
-          const TextField(
+          TextField(
             decoration: InputDecoration(
-              labelText: 'Quartier',
+              labelText: context.t.servicesQuartier,
               hintText: 'Moungali',
             ),
           ),
           const SizedBox(height: 12),
           Choix(
-            titre: 'Dès que possible',
+            titre: context.t.servicesDesQuePossible,
             selectionne: _urgent,
             onTap: () => setState(() => _urgent = true),
           ),
           Choix(
-            titre: 'À une date précise',
+            titre: context.t.servicesAUneDatePrecise,
             selectionne: !_urgent,
             onTap: () => setState(() => _urgent = false),
           ),
-          const Text(
-            "Votre adresse exacte n'est donnée qu'au prestataire que vous choisirez.",
+          Text(
+            context.t.servicesVotreAdresseExacteN,
             style: TextStyle(color: LiveColors.gris),
           ),
         ],
@@ -339,10 +342,8 @@ class _EcranDemandeDevisState extends ConsumerState<EcranDemandeDevis> {
             showDialog<void>(
               context: context,
               builder: (ctx) => AlertDialog(
-                title: const Text('Demande envoyée'),
-                content: const Text(
-                  'Envoyée à 12 pros vérifiés de votre quartier.\n\nPour le test : 3 devis sont arrivés.',
-                ),
+                title: Text(context.t.servicesDemandeEnvoyee),
+                content: Text(context.t.servicesEnvoyeeA12Pros),
                 actions: [
                   FilledButton(
                     style: FilledButton.styleFrom(
@@ -352,13 +353,13 @@ class _EcranDemandeDevisState extends ConsumerState<EcranDemandeDevis> {
                       Navigator.pop(ctx);
                       context.pushReplacement('/services/devis');
                     },
-                    child: const Text('Voir les devis'),
+                    child: Text(context.t.servicesVoirLesDevis),
                   ),
                 ],
               ),
             );
           },
-          child: const Text('Envoyer à des pros vérifiés'),
+          child: Text(context.t.servicesEnvoyerADesPros),
         ),
       ),
     );
@@ -372,12 +373,12 @@ class EcranDevisRecus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Fuite d'eau cuisine")),
+      appBar: AppBar(title: Text(context.t.servicesFuiteDEauCuisine)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const Text(
-            '3 devis reçus · expire dans 61 h',
+          Text(
+            context.t.servicesN3DevisRecusExpire,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 8),
@@ -414,8 +415,10 @@ class EcranDevisRecus extends StatelessWidget {
                                 Text(d.quand),
                                 Text(
                                   d.acompte == 0
-                                      ? 'Payer à la fin'
-                                      : 'Acompte ${fcfa(d.acompte)}',
+                                      ? context.t.servicesPayerALaFin
+                                      : context.t.servicesAcompteMontant(
+                                          fcfa(d.acompte),
+                                        ),
                                   style: const TextStyle(
                                     color: LiveColors.gris,
                                   ),

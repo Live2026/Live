@@ -17,85 +17,83 @@ class _EcranInterventionsState extends State<EcranInterventions> {
     final liste = interventions.where((i) => i.$5 == _onglet).toList();
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes interventions')),
+      appBar: AppBar(title: Text(context.t.servicesMesInterventions)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
         children: [
           GrilleAdaptative(
             largeurMax: 200,
             espacement: 10,
-            enfants: const [
+            enfants: [
               TuileChiffre(
-                libelle: 'Cette semaine',
+                libelle: context.t.servicesCetteSemaine,
                 valeur: '7',
                 icone: Icons.event_note_outlined,
-                detail: 'interventions',
+                detail: context.t.servicesInterventions,
               ),
               TuileChiffre(
-                libelle: 'Encaissé ce mois',
+                libelle: context.t.servicesEncaisseCeMois,
                 valeur: '312 000',
                 icone: Icons.payments_outlined,
                 detail: 'FCFA',
                 couleur: LiveColors.succes,
               ),
               TuileChiffre(
-                libelle: 'Note',
+                libelle: context.t.servicesNote,
                 valeur: '4,9',
                 icone: Icons.star_rounded,
-                detail: '71 avis',
+                detail: context.t.servicesN71Avis,
                 couleur: LiveColors.cuivre,
               ),
               TuileChiffre(
-                libelle: 'Demandes près de vous',
+                libelle: context.t.servicesDemandesPresDeVous,
                 valeur: '4',
                 icone: Icons.mark_email_unread_outlined,
-                detail: 'à chiffrer',
+                detail: context.t.servicesAChiffrer,
                 couleur: LiveColors.orangeVif,
               ),
             ],
           ),
-          const EnTeteSection('Demandes à chiffrer'),
+          EnTeteSection(context.t.servicesDemandesAChiffrer),
           Bloc(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Row(
+                Row(
                   children: [
                     Icon(Icons.water_drop_outlined, color: LiveColors.bleu),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Fuite d’eau cuisine',
+                        context.t.servicesFuiteDEauCuisine2,
                         style: TextStyle(fontWeight: FontWeight.w700),
                       ),
                     ),
                     Etiquette(
-                      'Il y a 12 min',
+                      context.t.servicesIlYA12,
                       fond: LiveColors.teinteOrange,
                       couleur: LiveColors.cuivre,
                     ),
                   ],
                 ),
                 const SizedBox(height: 6),
-                const Text(
-                  '« Fuite sous l’évier de la cuisine, l’eau coule en continu. » · Moungali · dès que possible',
-                ),
+                Text(context.t.servicesFuiteSousLEvier2),
                 const SizedBox(height: 10),
                 Row(
                   children: [
                     TextButton(
                       onPressed: () => informer(
                         context,
-                        'Demande ignorée : le client est orienté vers d’autres pros.',
+                        context.t.servicesDemandeIgnoreeLeClient,
                       ),
-                      child: const Text('Ignorer'),
+                      child: Text(context.t.servicesIgnorer),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
                       flex: 2,
                       child: FilledButton(
                         onPressed: () => context.push('/pro/devis/nouveau'),
-                        child: const Text('Faire un devis'),
+                        child: Text(context.t.servicesFaireUnDevis),
                       ),
                     ),
                   ],
@@ -106,10 +104,19 @@ class _EcranInterventionsState extends State<EcranInterventions> {
           const SizedBox(height: 18),
           SegmentedButton<String>(
             showSelectedIcon: false,
-            segments: const [
-              ButtonSegment(value: 'À venir', label: Text('À venir')),
-              ButtonSegment(value: 'En cours', label: Text('En cours')),
-              ButtonSegment(value: 'Terminée', label: Text('Terminées')),
+            segments: [
+              ButtonSegment(
+                value: 'À venir',
+                label: Text(context.t.servicesAVenir),
+              ),
+              ButtonSegment(
+                value: 'En cours',
+                label: Text(context.t.servicesEnCours),
+              ),
+              ButtonSegment(
+                value: 'Terminée',
+                label: Text(context.t.servicesTerminees),
+              ),
             ],
             selected: {_onglet},
             onSelectionChanged: (s) => setState(() => _onglet = s.first),
@@ -158,17 +165,21 @@ class _EcranInterventionsState extends State<EcranInterventions> {
                             style: TextButton.styleFrom(
                               minimumSize: const Size(0, 32),
                             ),
-                            onPressed: () =>
-                                simulerScan(context, quoi: 'du client'),
+                            onPressed: () => simulerScan(
+                              context,
+                              quoi: context.t.servicesDuClient,
+                            ),
                             icon: const Icon(
                               Icons.qr_code_scanner_rounded,
                               size: 16,
                             ),
-                            label: const Text('Démarrer'),
+                            label: Text(context.t.servicesDemarrer),
                           )
                         else
                           Text(
-                            statut == 'En cours' ? 'Matériel versé' : 'Payé',
+                            statut == 'En cours'
+                                ? context.t.servicesMaterielVerse
+                                : context.t.servicesPaye,
                             style: const TextStyle(
                               color: LiveColors.succes,
                               fontSize: 12.5,
@@ -215,12 +226,14 @@ class _EcranCreerDevisState extends State<EcranCreerDevis> {
                 const Spacer(),
                 const CocheAnimee(taille: 96),
                 const SizedBox(height: 12),
-                const Text(
-                  'Devis envoyé',
+                Text(
+                  context.t.servicesDevisEnvoye,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
                 ),
                 Text(
-                  'Grâce M. le reçoit comme une carte payable. Vous êtes prévenu dès qu’elle paie l’acompte de ${fcfa(_total * _acompte ~/ 100)}.',
+                  context.t.servicesDevisEnvoyeTexte(
+                    fcfa(_total * _acompte ~/ 100),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const Spacer(),
@@ -228,7 +241,7 @@ class _EcranCreerDevisState extends State<EcranCreerDevis> {
                   width: double.infinity,
                   child: FilledButton(
                     onPressed: () => context.pop(),
-                    child: const Text('Retour à mes interventions'),
+                    child: Text(context.t.servicesRetourAMesInterventions),
                   ),
                 ),
               ],
@@ -238,20 +251,20 @@ class _EcranCreerDevisState extends State<EcranCreerDevis> {
       );
     }
     return Scaffold(
-      appBar: AppBar(title: const Text('Nouveau devis')),
+      appBar: AppBar(title: Text(context.t.servicesNouveauDevis)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const Bloc(
+          Bloc(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Fuite d’eau cuisine · Grâce M.',
+                  context.t.servicesFuiteDEauCuisine3,
                   style: TextStyle(fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  'Moungali · dès que possible · 1 photo',
+                  context.t.servicesMoungaliDesQuePossible,
                   style: TextStyle(color: LiveColors.gris),
                 ),
               ],
@@ -259,16 +272,20 @@ class _EcranCreerDevisState extends State<EcranCreerDevis> {
           ),
           const SizedBox(height: 16),
           _Montant(
-            'Main-d’œuvre',
+            context.t.servicesMainDUvre,
             _mainOeuvre,
             (v) => setState(() => _mainOeuvre = v),
           ),
-          _Montant('Matériel', _materiel, (v) => setState(() => _materiel = v)),
+          _Montant(
+            context.t.servicesMateriel,
+            _materiel,
+            (v) => setState(() => _materiel = v),
+          ),
           const Divider(height: 24),
-          LigneMontant('Total du devis', _total, gras: true),
+          LigneMontant(context.t.servicesTotalDuDevis, _total, gras: true),
           const SizedBox(height: 16),
           Text(
-            'Acompte demandé : $_acompte %',
+            context.t.servicesAcompteDemande(_acompte),
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
           Slider(
@@ -280,12 +297,14 @@ class _EcranCreerDevisState extends State<EcranCreerDevis> {
             onChanged: (v) => setState(() => _acompte = v.round()),
           ),
           Text(
-            'Acompte ${fcfa(_total * _acompte ~/ 100)} · la part matériel vous est versée au démarrage.',
+            context.t.servicesAcomptePartMateriel(
+              fcfa(_total * _acompte ~/ 100),
+            ),
             style: const TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Quand pouvez-vous venir ?',
+          Text(
+            context.t.servicesQuandPouvezVousVenir,
             style: TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
@@ -298,15 +317,19 @@ class _EcranCreerDevisState extends State<EcranCreerDevis> {
                 'Demain 14:00',
               ])
                 ChoiceChip(
-                  label: Text(q),
+                  label: Text(switch (q) {
+                    'Demain 09:00' => context.t.servicesDemain09,
+                    'Demain 14:00' => context.t.servicesDemain14,
+                    _ => context.t.servicesAujourdhui16,
+                  }),
                   selected: _quand == q,
                   onSelected: (_) => setState(() => _quand = q),
                 ),
             ],
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Commission Live : 8 % prélevés à la fin des travaux (0 % pendant l’offre de lancement).',
+          Text(
+            context.t.servicesCommissionLive8Preleves,
             style: TextStyle(color: LiveColors.gris, fontSize: 13),
           ),
         ],
@@ -314,7 +337,7 @@ class _EcranCreerDevisState extends State<EcranCreerDevis> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: _total > 0 ? () => setState(() => _envoye = true) : null,
-          child: Text('Envoyer le devis · ${fcfa(_total)}'),
+          child: Text(context.t.servicesEnvoyerDevis(fcfa(_total))),
         ),
       ),
     );
@@ -336,7 +359,7 @@ class _Montant extends StatelessWidget {
         children: [
           Expanded(child: Text(libelle)),
           IconButton.outlined(
-            tooltip: 'Moins 1 000',
+            tooltip: context.t.servicesMoins1000,
             onPressed: valeur >= 1000 ? () => onChange(valeur - 1000) : null,
             icon: const Icon(Icons.remove_rounded, size: 18),
           ),
@@ -349,7 +372,7 @@ class _Montant extends StatelessWidget {
             ),
           ),
           IconButton.outlined(
-            tooltip: 'Plus 1 000',
+            tooltip: context.t.servicesPlus1000,
             onPressed: () => onChange(valeur + 1000),
             icon: const Icon(Icons.add_rounded, size: 18),
           ),

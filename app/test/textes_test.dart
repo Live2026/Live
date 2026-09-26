@@ -50,6 +50,7 @@ void main() {
     'lib/features/messages',
     'lib/features/pay',
     'lib/features/immo',
+    'lib/features/services',
   ];
   final enDur = RegExp(
     r'''(?:Text\(|titre: |texte: |label: |tooltip: |hintText: |labelText: )\s*(?:const )?'[A-ZÀ-Ý][a-zà-ÿ’']+ [a-zà-ÿ]''',

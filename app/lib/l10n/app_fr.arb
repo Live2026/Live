@@ -6199,5 +6199,669 @@
   "immoLeVisiteurNeS": "Le visiteur ne s’est pas présenté",
   "@immoLeVisiteurNeS": {
     "description": "Écran : immo_agence"
+  },
+  "@servicesServiceParPro": {
+    "description": "Écran : services_demande",
+    "placeholders": {
+      "service": {
+        "type": "String"
+      },
+      "pro": {
+        "type": "String"
+      },
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesServiceParPro": "{service} par {pro}, {prix}",
+  "@servicesAcompteMontant": {
+    "description": "Écran : services_demande",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesAcompteMontant": "Acompte {montant}",
+  "@servicesPlomberie": {
+    "description": "Écran : services_demande (métier)"
+  },
+  "servicesPlomberie": "Plomberie",
+  "@servicesElectricite": {
+    "description": "Écran : services_demande (métier)"
+  },
+  "servicesElectricite": "Électricité",
+  "@servicesClimatisation": {
+    "description": "Écran : services_demande (métier)"
+  },
+  "servicesClimatisation": "Climatisation",
+  "servicesPlombierCoiffureCours": "Plombier, coiffure, cours…",
+  "@servicesPlombierCoiffureCours": {
+    "description": "Écran : services_demande"
+  },
+  "servicesVoirSurLaCarte": "Voir sur la carte",
+  "@servicesVoirSurLaCarte": {
+    "description": "Écran : services_demande"
+  },
+  "servicesUnProblemeALa": "Un problème à la maison ?",
+  "@servicesUnProblemeALa": {
+    "description": "Écran : services_demande"
+  },
+  "servicesDecrivezLeEn30": "Décrivez-le en 30 secondes, recevez des devis de pros vérifiés. Votre acompte est protégé par Live.",
+  "@servicesDecrivezLeEn30": {
+    "description": "Écran : services_demande"
+  },
+  "servicesDemanderDesDevis": "Demander des devis",
+  "@servicesDemanderDesDevis": {
+    "description": "Écran : services_demande"
+  },
+  "servicesFuiteDEauCuisine": "Fuite d'eau cuisine",
+  "@servicesFuiteDEauCuisine": {
+    "description": "Écran : services_demande"
+  },
+  "servicesN3DevisRecusExpire": "3 devis reçus · expire dans 61 h",
+  "@servicesN3DevisRecusExpire": {
+    "description": "Écran : services_demande"
+  },
+  "servicesMetiers": "Métiers",
+  "@servicesMetiers": {
+    "description": "Écran : services_demande"
+  },
+  "servicesReservezAPrixFixe": "Réservez à prix fixe",
+  "@servicesReservezAPrixFixe": {
+    "description": "Écran : services_demande"
+  },
+  "servicesDisponiblesMaintenant": "Disponibles maintenant",
+  "@servicesDisponiblesMaintenant": {
+    "description": "Écran : services_demande"
+  },
+  "servicesVousEtesPlombierCoiffeuse": "Vous êtes plombier, coiffeuse, traiteur ? Proposez vos services et recevez des demandes près de chez vous.",
+  "@servicesVousEtesPlombierCoiffeuse": {
+    "description": "Écran : services_demande"
+  },
+  "servicesProposer": "Proposer",
+  "@servicesProposer": {
+    "description": "Écran : services_demande"
+  },
+  "servicesFuiteSousLEvier": "Fuite sous l'évier de la cuisine, l'eau coule en continu.",
+  "@servicesFuiteSousLEvier": {
+    "description": "Écran : services_demande"
+  },
+  "servicesMetier": "Métier",
+  "@servicesMetier": {
+    "description": "Écran : services_demande"
+  },
+  "servicesDecrivezLeProbleme": "Décrivez le problème",
+  "@servicesDecrivezLeProbleme": {
+    "description": "Écran : services_demande"
+  },
+  "servicesPhotosRecommande": "Photos (recommandé)",
+  "@servicesPhotosRecommande": {
+    "description": "Écran : services_demande"
+  },
+  "servicesAjouterUnePhoto": "Ajouter une photo",
+  "@servicesAjouterUnePhoto": {
+    "description": "Écran : services_demande"
+  },
+  "servicesQuartier": "Quartier",
+  "@servicesQuartier": {
+    "description": "Écran : services_demande"
+  },
+  "servicesDesQuePossible": "Dès que possible",
+  "@servicesDesQuePossible": {
+    "description": "Écran : services_demande"
+  },
+  "servicesAUneDatePrecise": "À une date précise",
+  "@servicesAUneDatePrecise": {
+    "description": "Écran : services_demande"
+  },
+  "servicesVotreAdresseExacteN": "Votre adresse exacte n'est donnée qu'au prestataire que vous choisirez.",
+  "@servicesVotreAdresseExacteN": {
+    "description": "Écran : services_demande"
+  },
+  "servicesDemandeEnvoyee": "Demande envoyée",
+  "@servicesDemandeEnvoyee": {
+    "description": "Écran : services_demande"
+  },
+  "servicesEnvoyeeA12Pros": "Envoyée à 12 pros vérifiés de votre quartier.\n\nPour le test : 3 devis sont arrivés.",
+  "@servicesEnvoyeeA12Pros": {
+    "description": "Écran : services_demande"
+  },
+  "servicesVoirLesDevis": "Voir les devis",
+  "@servicesVoirLesDevis": {
+    "description": "Écran : services_demande"
+  },
+  "servicesEnvoyerADesPros": "Envoyer à des pros vérifiés",
+  "@servicesEnvoyerADesPros": {
+    "description": "Écran : services_demande"
+  },
+  "servicesPayerALaFin": "Payer à la fin",
+  "@servicesPayerALaFin": {
+    "description": "Écran : services_demande"
+  },
+  "@servicesDevisEnvoyeTexte": {
+    "description": "Écran : services_prestataire",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesDevisEnvoyeTexte": "Grâce M. le reçoit comme une carte payable. Vous êtes prévenu dès qu’elle paie l’acompte de {montant}.",
+  "@servicesAcompteDemande": {
+    "description": "Écran : services_prestataire",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "servicesAcompteDemande": "Acompte demandé : {n} %",
+  "@servicesAcomptePartMateriel": {
+    "description": "Écran : services_prestataire",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesAcomptePartMateriel": "Acompte {montant} · la part matériel vous est versée au démarrage.",
+  "@servicesEnvoyerDevis": {
+    "description": "Écran : services_prestataire",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesEnvoyerDevis": "Envoyer le devis · {montant}",
+  "@servicesAVenir": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesAVenir": "À venir",
+  "@servicesEnCours": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesEnCours": "En cours",
+  "@servicesTerminees": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesTerminees": "Terminées",
+  "@servicesAujourdhui16": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesAujourdhui16": "Aujourd’hui 16:00",
+  "@servicesDemain09": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesDemain09": "Demain 09:00",
+  "@servicesDemain14": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesDemain14": "Demain 14:00",
+  "@servicesMaterielVerse": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesMaterielVerse": "Matériel versé",
+  "@servicesPaye": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesPaye": "Payé",
+  "@servicesInterventions": {
+    "description": "Écran : services_prestataire, services_pro"
+  },
+  "servicesInterventions": "interventions",
+  "servicesMesInterventions": "Mes interventions",
+  "@servicesMesInterventions": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesCetteSemaine": "Cette semaine",
+  "@servicesCetteSemaine": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesEncaisseCeMois": "Encaissé ce mois",
+  "@servicesEncaisseCeMois": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesNote": "Note",
+  "@servicesNote": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesN71Avis": "71 avis",
+  "@servicesN71Avis": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesDemandesPresDeVous": "Demandes près de vous",
+  "@servicesDemandesPresDeVous": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesAChiffrer": "à chiffrer",
+  "@servicesAChiffrer": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesDemandesAChiffrer": "Demandes à chiffrer",
+  "@servicesDemandesAChiffrer": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesFuiteDEauCuisine2": "Fuite d’eau cuisine",
+  "@servicesFuiteDEauCuisine2": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesIlYA12": "Il y a 12 min",
+  "@servicesIlYA12": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesFuiteSousLEvier2": "« Fuite sous l’évier de la cuisine, l’eau coule en continu. » · Moungali · dès que possible",
+  "@servicesFuiteSousLEvier2": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesDemandeIgnoreeLeClient": "Demande ignorée : le client est orienté vers d’autres pros.",
+  "@servicesDemandeIgnoreeLeClient": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesIgnorer": "Ignorer",
+  "@servicesIgnorer": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesFaireUnDevis": "Faire un devis",
+  "@servicesFaireUnDevis": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesDuClient": "du client",
+  "@servicesDuClient": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesDemarrer": "Démarrer",
+  "@servicesDemarrer": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesDevisEnvoye": "Devis envoyé",
+  "@servicesDevisEnvoye": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesRetourAMesInterventions": "Retour à mes interventions",
+  "@servicesRetourAMesInterventions": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesNouveauDevis": "Nouveau devis",
+  "@servicesNouveauDevis": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesFuiteDEauCuisine3": "Fuite d’eau cuisine · Grâce M.",
+  "@servicesFuiteDEauCuisine3": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesMoungaliDesQuePossible": "Moungali · dès que possible · 1 photo",
+  "@servicesMoungaliDesQuePossible": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesMainDUvre": "Main-d’œuvre",
+  "@servicesMainDUvre": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesMateriel": "Matériel",
+  "@servicesMateriel": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesTotalDuDevis": "Total du devis",
+  "@servicesTotalDuDevis": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesQuandPouvezVousVenir": "Quand pouvez-vous venir ?",
+  "@servicesQuandPouvezVousVenir": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesCommissionLive8Preleves": "Commission Live : 8 % prélevés à la fin des travaux (0 % pendant l’offre de lancement).",
+  "@servicesCommissionLive8Preleves": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesMoins1000": "Moins 1 000",
+  "@servicesMoins1000": {
+    "description": "Écran : services_prestataire"
+  },
+  "servicesPlus1000": "Plus 1 000",
+  "@servicesPlus1000": {
+    "description": "Écran : services_prestataire"
+  },
+  "@servicesNAvis": {
+    "description": "Écran : services_pro",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "servicesNAvis": "{n} avis",
+  "@servicesEnviron": {
+    "description": "Écran : services_pro",
+    "placeholders": {
+      "duree": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesEnviron": "Environ {duree}",
+  "@servicesDemanderDevisA": {
+    "description": "Écran : services_pro",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesDemanderDevisA": "Demander un devis à {qui}",
+  "@servicesProMetierDuree": {
+    "description": "Écran : services_pro",
+    "placeholders": {
+      "pro": {
+        "type": "String"
+      },
+      "metier": {
+        "type": "String"
+      },
+      "duree": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesProMetierDuree": "{pro} · {metier} · environ {duree}",
+  "@servicesReserverMontant": {
+    "description": "Écran : services_pro",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesReserverMontant": "Réserver · {montant}",
+  "@servicesJourAujourdhui": {
+    "description": "Écran : services_pro"
+  },
+  "servicesJourAujourdhui": "Aujourd’hui",
+  "@servicesJourDemain": {
+    "description": "Écran : services_pro"
+  },
+  "servicesJourDemain": "Demain",
+  "@servicesJourSamedi": {
+    "description": "Écran : services_pro"
+  },
+  "servicesJourSamedi": "Samedi",
+  "servicesSignaler": "Signaler",
+  "@servicesSignaler": {
+    "description": "Écran : services_pro"
+  },
+  "servicesCePrestataire": "ce prestataire",
+  "@servicesCePrestataire": {
+    "description": "Écran : services_pro"
+  },
+  "servicesIdentiteVerifiee": "Identité vérifiée",
+  "@servicesIdentiteVerifiee": {
+    "description": "Écran : services_pro"
+  },
+  "servicesALHeure": "à l’heure",
+  "@servicesALHeure": {
+    "description": "Écran : services_pro"
+  },
+  "servicesRepondEn": "répond en",
+  "@servicesRepondEn": {
+    "description": "Écran : services_pro"
+  },
+  "servicesAbonne": "Abonné",
+  "@servicesAbonne": {
+    "description": "Écran : services_pro"
+  },
+  "servicesSuivre": "Suivre",
+  "@servicesSuivre": {
+    "description": "Écran : services_pro"
+  },
+  "servicesEcrire": "Écrire",
+  "@servicesEcrire": {
+    "description": "Écran : services_pro"
+  },
+  "servicesServicesAPrixFixe": "Services à prix fixe",
+  "@servicesServicesAPrixFixe": {
+    "description": "Écran : services_pro"
+  },
+  "servicesRealisations": "Réalisations",
+  "@servicesRealisations": {
+    "description": "Écran : services_pro"
+  },
+  "servicesAvisVerifies": "Avis vérifiés",
+  "@servicesAvisVerifies": {
+    "description": "Écran : services_pro"
+  },
+  "servicesAcompteBloqueParLive": "Acompte bloqué par Live, garantie 72 h après les travaux.",
+  "@servicesAcompteBloqueParLive": {
+    "description": "Écran : services_pro"
+  },
+  "servicesReserver": "Réserver",
+  "@servicesReserver": {
+    "description": "Écran : services_pro"
+  },
+  "servicesQuand": "Quand ?",
+  "@servicesQuand": {
+    "description": "Écran : services_pro"
+  },
+  "servicesOu": "Où ?",
+  "@servicesOu": {
+    "description": "Écran : services_pro"
+  },
+  "servicesAdresse": "Adresse",
+  "@servicesAdresse": {
+    "description": "Écran : services_pro"
+  },
+  "servicesPrixDuService": "Prix du service",
+  "@servicesPrixDuService": {
+    "description": "Écran : services_pro"
+  },
+  "servicesDeplacement": "Déplacement",
+  "@servicesDeplacement": {
+    "description": "Écran : services_pro"
+  },
+  "servicesTotal": "Total",
+  "@servicesTotal": {
+    "description": "Écran : services_pro"
+  },
+  "servicesPayeMaintenantVerseAu": "Payé maintenant, versé au prestataire quand vous confirmez la fin du service.",
+  "@servicesPayeMaintenantVerseAu": {
+    "description": "Écran : services_pro"
+  },
+  "servicesChoisissezUneHeure": "Choisissez une heure",
+  "@servicesChoisissezUneHeure": {
+    "description": "Écran : services_pro"
+  },
+  "@servicesDevisDe": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      },
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesDevisDe": "Devis de {qui} · {note}",
+  "@servicesQuandDuree": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "quand": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesQuandDuree": "{quand} · environ 1 h 30",
+  "@servicesAccepterPayer": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesAccepterPayer": "Accepter et payer {montant}",
+  "@servicesPrestationDe": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesPrestationDe": "Prestation · {qui}",
+  "@servicesReparationQuand": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "quand": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesReparationQuand": "Réparation fuite · {quand}",
+  "@servicesAcomptePayeBloques": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesAcomptePayeBloques": "Acompte payé ({montant} bloqués)",
+  "@servicesMontrerMateriel": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      },
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesMontrerMateriel": "À montrer quand {qui} commence : il reçoit {montant} (matériel).",
+  "@servicesMontrerQuand": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesMontrerQuand": "À montrer quand {qui} commence.",
+  "@servicesScanneQr": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesScanneQr": "{qui} scanne votre QR",
+  "@servicesDeclareFin": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesDeclareFin": "{qui} déclare la fin (avec photos)",
+  "@servicesResteAPayer": {
+    "description": "Écran : services_suivi",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "servicesResteAPayer": "Travaux terminés. Reste à payer : {montant}",
+  "@servicesGarantieAnnulation": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesGarantieAnnulation": "Garantie 72 h · annulation gratuite jusqu’à 2 h avant.",
+  "servicesReparationFuiteEvierCuisine": "Réparation fuite évier cuisine",
+  "@servicesReparationFuiteEvierCuisine": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesMainDUvre2": "Main-d'œuvre",
+  "@servicesMainDUvre2": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesTotal2": "TOTAL",
+  "@servicesTotal2": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesRienAPayerMaintenant": "Rien à payer maintenant : vous payez à la fin, par MoMo ou Airtel.",
+  "@servicesRienAPayerMaintenant": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesMaintenantAcompte": "Maintenant (acompte)",
+  "@servicesMaintenantAcompte": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesApresLesTravaux": "Après les travaux",
+  "@servicesApresLesTravaux": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesLAcompteEstGarde": "L'acompte est gardé par Live. Au démarrage des travaux, vous montrez votre QR au plombier : il reçoit alors la part matériel. Le reste lui est versé à la fin. Si le travail est mal fait, vous avez 72 heures pour le signaler.",
+  "@servicesLAcompteEstGarde": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesMaterielPayeAuDemarrage": "Matériel payé au démarrage, le reste à la fin.",
+  "@servicesMaterielPayeAuDemarrage": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesAcompteDevis": "Acompte devis",
+  "@servicesAcompteDevis": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesAccepterLeDevis": "Accepter le devis",
+  "@servicesAccepterLeDevis": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesDevisAcceptePayerA": "Devis accepté (payer à la fin)",
+  "@servicesDevisAcceptePayerA": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesTravauxDemarres": "Travaux démarrés",
+  "@servicesTravauxDemarres": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesTravauxTermines": "Travaux terminés",
+  "@servicesTravauxTermines": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesDemarrerLesTravaux": "Démarrer les travaux",
+  "@servicesDemarrerLesTravaux": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesPartagerAvecUnProche": "Partager avec un proche",
+  "@servicesPartagerAvecUnProche": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesTravauxEnCours": "Travaux en cours…",
+  "@servicesTravauxEnCours": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesGarantie72HPour": "Garantie : 72 h pour signaler un problème.",
+  "@servicesGarantie72HPour": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesTravauxConformes": "Travaux conformes",
+  "@servicesTravauxConformes": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesSignalerUnProbleme": "Signaler un problème",
+  "@servicesSignalerUnProbleme": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesMerci": "Merci !",
+  "@servicesMerci": {
+    "description": "Écran : services_suivi"
+  },
+  "servicesDansLApplicationReelle": "Dans l'application réelle : le solde est payé par MoMo ou Airtel, le prestataire est payé, puis vous pouvez laisser un avis.",
+  "@servicesDansLApplicationReelle": {
+    "description": "Écran : services_suivi"
   }
 }
