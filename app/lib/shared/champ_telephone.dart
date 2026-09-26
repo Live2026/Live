@@ -91,7 +91,10 @@ class _ChampTelephoneState extends State<ChampTelephone> {
               ),
               Container(width: 1, height: 26, color: _bord),
               Expanded(
+                // Nœud propre au champ : le lecteur d'écran ne le confond
+                // pas avec la ligne du pays juste au-dessus.
                 child: Semantics(
+                  container: true,
                   label: 'Numéro de téléphone',
                   child: TextField(
                     controller: widget.controleur,
