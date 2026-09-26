@@ -44,9 +44,14 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
       0 => (context.t.demarrageBonRetour, context.t.demarrageBonRetourTexte),
       1 => (
         context.t.demarrageCodeRecuSms,
-        context.t.demarrageEnvoyeAu('${paysTelephone[_pays].indicatif} ${_tel.text}'),
+        context.t.demarrageEnvoyeAu(
+          '${paysTelephone[_pays].indicatif} ${_tel.text}',
+        ),
       ),
-      _ => (context.t.demarrageVotreCodeSecret, context.t.demarrageProtegerAppareil),
+      _ => (
+        context.t.demarrageVotreCodeSecret,
+        context.t.demarrageProtegerAppareil,
+      ),
     };
     return Scaffold(
       appBar: const BarreDemarrage(),
@@ -162,7 +167,10 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
     return Scaffold(
       appBar: BarreDemarrage(
         actions: [
-          TextButton(onPressed: _terminer, child: Text(context.t.demarragePasser)),
+          TextButton(
+            onPressed: _terminer,
+            child: Text(context.t.demarragePasser),
+          ),
         ],
       ),
       body: ListView(

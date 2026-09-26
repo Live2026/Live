@@ -221,7 +221,9 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
                     ),
                   ),
                   TextSpan(
-                    text: context.t.explorerAucunResultatPourPoint(_champ.text.trim()),
+                    text: context.t.explorerAucunResultatPourPoint(
+                      _champ.text.trim(),
+                    ),
                   ),
                 ],
               ),
@@ -345,7 +347,9 @@ class EcranAlertes extends ConsumerWidget {
                           ),
                           Text(
                             i == 0
-                                ? context.t.explorerN2NouveauxResultatsAujourdHui
+                                ? context
+                                      .t
+                                      .explorerN2NouveauxResultatsAujourdHui
                                 : context.t.explorerAucunNouveauResultat,
                             style: const TextStyle(
                               color: LiveColors.gris,

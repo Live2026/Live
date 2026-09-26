@@ -306,7 +306,9 @@ class _Auteur extends StatelessWidget {
             bottom: 0,
             child: Semantics(
               button: true,
-              label: suivi ? context.t.abonne : context.t.accueilSuivreQui(pub.auteur),
+              label: suivi
+                  ? context.t.abonne
+                  : context.t.accueilSuivreQui(pub.auteur),
               excludeSemantics: true,
               child: GestureDetector(
                 onTap: onSuivre,

@@ -13,3 +13,13 @@ extension TextesLive on BuildContext {
 
 /// Langues dont l'interface est traduite.
 const languesTraduites = {'fr', 'en'};
+
+/// État d'un objet : la valeur enregistrée reste en français, l'affichage
+/// suit la langue.
+String etatAffiche(Textes t, String etat) => switch (etat) {
+  'Neuf' => t.etatNeuf,
+  'Très bon état' => t.etatTresBon,
+  'Bon état' => t.etatBon,
+  'À réparer' => t.etatAReparer,
+  _ => etat,
+};

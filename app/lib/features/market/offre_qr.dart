@@ -101,7 +101,10 @@ class _FeuilleOffreState extends State<_FeuilleOffre> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      context.t.marketOffreEnvoyee(fcfa(_montant), p.vendeur.nom),
+                      context.t.marketOffreEnvoyee(
+                        fcfa(_montant),
+                        p.vendeur.nom,
+                      ),
                     ),
                   ),
                 );

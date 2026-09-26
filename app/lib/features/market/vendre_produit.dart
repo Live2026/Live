@@ -29,13 +29,13 @@ class EcranVendre extends ConsumerStatefulWidget {
 }
 
 class _EcranVendreState extends ConsumerState<EcranVendre> {
-  static const _titres = [
-    'Que vendez-vous ?',
-    'Photos et vidéo',
-    'Informations',
-    'Prix et stock',
-    'Remise et paiement',
-    'Aperçu',
+  late final _titres = [
+    context.t.marketQueVendezVous,
+    context.t.marketPhotosEtVideo,
+    context.t.marketInformations,
+    context.t.marketPrixEtStock,
+    context.t.marketRemiseEtPaiement,
+    context.t.marketApercu,
   ];
 
   var _etape = 0;
@@ -77,17 +77,20 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
   /// F-MKT-07 : objets interdits (armes, médicaments, faux documents…).
   String? get _interdit {
     final t = '${_titre.text} ${_description.text}'.toLowerCase();
-    for (final (mots, motif) in const [
-      (['arme', 'pistolet', 'fusil', 'munition'], 'les armes'),
+    for (final (mots, motif) in [
+      (['arme', 'pistolet', 'fusil', 'munition'], context.t.marketLesArmes),
       (
         ['médicament', 'medicament', 'amoxicilline', 'comprimé'],
-        'les médicaments',
+        context.t.marketLesMedicaments,
       ),
       (
         ['faux diplôme', 'faux papier', 'fausse carte', 'faux document'],
-        'les faux documents',
+        context.t.marketLesFauxDocuments,
       ),
-      (['ivoire', 'pangolin', 'viande de brousse'], 'les espèces protégées'),
+      (
+        ['ivoire', 'pangolin', 'viande de brousse'],
+        context.t.marketLesEspecesProtegees,
+      ),
     ]) {
       if (mots.any(t.contains)) return motif;
     }
@@ -120,14 +123,12 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
   void _rediger() => setState(() {
     if (_titre.text.trim().isEmpty) {
       _titre.text = switch (_categorie) {
-        'Mode' => 'Robe wax longue, taille M',
-        'Électroménager' => 'Climatiseur 1 CV, très bon état',
+        'Mode' => context.t.marketRobeWaxLongueTaille,
+        'Électroménager' => context.t.marketClimatiseur1CvTres,
         _ => 'Samsung Galaxy A10 32 Go',
       };
     }
-    _description.text =
-        'Très bon état, fonctionne parfaitement, vendu avec ses accessoires. '
-        'Remise en main propre à $_quartier ou livraison à Brazzaville.';
+    _description.text = context.t.marketDescriptionRedigee(_quartier);
   });
 
   @override
@@ -136,11 +137,11 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vendre un produit'),
+        title: Text(context.t.marketVendreUnProduit),
         actions: [
           TextButton(
             onPressed: _enregistrerBrouillon,
-            child: const Text('Brouillon'),
+            child: Text(context.t.marketBrouillon),
           ),
         ],
       ),
@@ -159,7 +160,7 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
         child: BoutonsAssistant(
           etape: _etape,
           derniere: _etape == _titres.length - 1,
-          libelleFin: "Publier l'annonce",
+          libelleFin: context.t.marketPublierLAnnonce,
           onRetour: () => setState(() => _etape--),
           onSuivant: _valide ? _suivant : null,
         ),
@@ -205,19 +206,14 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
           ],
         ),
         const SizedBox(height: 12),
-        const Bloc(
+        Bloc(
           fond: LiveColors.teinteViolette,
           padding: 12,
           child: Row(
             children: [
               Icon(Icons.percent_rounded, color: Color(0xFF6D28D9)),
               SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  '0 % de commission pendant 3 mois. Votre argent est garanti '
-                  'avant la remise.',
-                ),
-              ),
+              Expanded(child: Text(context.t.marketN0DeCommissionPendant)),
             ],
           ),
         ),
@@ -238,7 +234,7 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
           child: InkWell(
             borderRadius: BorderRadius.circular(12),
             onTap: () => setState(() => _photos = (_photos + 1).clamp(0, 10)),
-            child: const SizedBox(
+            child: SizedBox(
               height: 120,
               width: double.infinity,
               child: Column(
@@ -251,11 +247,11 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    'Ajouter une photo',
+                    context.t.marketAjouterUnePhoto,
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    'Jusqu’à 10 photos · la première sert de couverture',
+                    context.t.marketJusquA10Photos,
                     style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
                   ),
                 ],
@@ -282,10 +278,10 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
                       ),
                     ),
                     if (i == 0)
-                      const Positioned(
+                      Positioned(
                         left: 4,
                         bottom: 4,
-                        child: Etiquette('Couverture'),
+                        child: Etiquette(context.t.marketCouverture),
                       ),
                   ],
                 ),
@@ -295,14 +291,11 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
           contentPadding: EdgeInsets.zero,
           value: _video,
           onChanged: (v) => setState(() => _video = v),
-          title: const Text('Ajouter une vidéo de 60 s'),
-          subtitle: const Text(
-            'Publiée aussi dans le fil avec le bouton « Acheter » : 3 fois plus de vues.',
-          ),
+          title: Text(context.t.marketAjouterUneVideoDe),
+          subtitle: Text(context.t.marketPublieeAussiDansLe),
         ),
-        const Text(
-          'Conseil : de près, en pleine lumière, sur un fond uni. Prototype : '
-          'chaque appui ajoute une photo fictive.',
+        Text(
+          context.t.marketConseilDePresEn,
           style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
         ),
       ],

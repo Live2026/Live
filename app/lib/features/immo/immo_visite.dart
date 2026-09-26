@@ -67,9 +67,8 @@ class _EcranReserverVisiteState extends ConsumerState<EcranReserverVisite> {
             icone: Icons.videocam_outlined,
             titre: context.t.appelVisiteVideo,
             detail: context.t.appelVisiteVideoTexte,
-            onTap: () => context.push(
-              routeAppel(avec: b.annonceur.nom, video: true),
-            ),
+            onTap: () =>
+                context.push(routeAppel(avec: b.annonceur.nom, video: true)),
           ),
           const SizedBox(height: 20),
           const Text(

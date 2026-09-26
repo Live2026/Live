@@ -47,7 +47,10 @@ class EcranRemise extends ConsumerWidget {
               const SizedBox(height: 16),
               FilledButton.icon(
                 onPressed: () async {
-                  if (await simulerScan(context, quoi: context.t.marketDeLAcheteur)) {
+                  if (await simulerScan(
+                    context,
+                    quoi: context.t.marketDeLAcheteur,
+                  )) {
                     ref.read(liveProvider.notifier).remettreVente(v.id);
                   }
                 },
@@ -60,7 +63,10 @@ class EcranRemise extends ConsumerWidget {
               ),
               if (v.mode == ModePaiement.remise) ...[
                 const Divider(height: 32),
-                Text(context.t.marketLAcheteurPaieALa, textAlign: TextAlign.center),
+                Text(
+                  context.t.marketLAcheteurPaieALa,
+                  textAlign: TextAlign.center,
+                ),
                 TextButton.icon(
                   onPressed: () => context.push('/vente/${v.id}/qr'),
                   icon: const Icon(Icons.qr_code_2_rounded),

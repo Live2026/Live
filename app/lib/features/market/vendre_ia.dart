@@ -21,9 +21,7 @@ extension _VendreAvecIa on _EcranVendreState {
         ..['Marque'] = 'Samsung'
         ..['Stockage'] = '32 Go';
       _etat = 'Très bon état';
-      _description.text =
-          'Écran sans rayure, batterie à 86 %, vendu avec chargeur. '
-          'Remise en main propre à $_quartier.';
+      _description.text = context.t.marketDescriptionIa(_quartier);
       _prix.text = '30000';
       _etape = 2;
     });
@@ -48,7 +46,7 @@ class _BanniereIa extends StatelessWidget {
         ),
         child: InkWell(
           onTap: onTap,
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.all(14),
             child: Row(
               children: [
@@ -59,7 +57,7 @@ class _BanniereIa extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Une photo, et c’est prêt',
+                        context.t.marketUnePhotoEtC,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -67,8 +65,7 @@ class _BanniereIa extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Live IA reconnaît l’objet et remplit l’annonce, '
-                        'prix conseillé compris. Gratuit.',
+                        context.t.marketLiveIaReconnaitL,
                         style: TextStyle(color: Colors.white70),
                       ),
                     ],
@@ -93,11 +90,19 @@ class _AnalysePhoto extends StatefulWidget {
 }
 
 class _AnalysePhotoState extends State<_AnalysePhoto> {
-  static const _etapes = [
-    (Icons.center_focus_strong_rounded, 'Objet reconnu', 'Samsung Galaxy A10'),
-    (Icons.category_rounded, 'Catégorie', 'Téléphones · 32 Go'),
-    (Icons.verified_rounded, 'État estimé', 'Très bon état'),
-    (Icons.sell_rounded, 'Prix conseillé', '28 000 à 34 000 FCFA'),
+  late final _etapes = [
+    (
+      Icons.center_focus_strong_rounded,
+      context.t.marketObjetReconnu,
+      'Samsung Galaxy A10',
+    ),
+    (Icons.category_rounded, context.t.marketCategorie, 'Téléphones · 32 Go'),
+    (Icons.verified_rounded, context.t.marketEtatEstime, 'Très bon état'),
+    (
+      Icons.sell_rounded,
+      context.t.marketPrixConseille,
+      context.t.marketN28000A34,
+    ),
   ];
   var _faites = 0;
   Timer? _minuteur;
@@ -139,7 +144,9 @@ class _AnalysePhotoState extends State<_AnalysePhoto> {
             ),
             const SizedBox(height: 14),
             Text(
-              fini ? 'Annonce prête à vérifier' : 'Live IA analyse la photo…',
+              fini
+                  ? context.t.marketAnnoncePreteAVerifier
+                  : context.t.marketLiveIaAnalyseLa,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 8),
@@ -165,12 +172,11 @@ class _AnalysePhotoState extends State<_AnalysePhoto> {
             FilledButton.icon(
               onPressed: fini ? () => Navigator.pop(context, true) : null,
               icon: const Icon(Icons.auto_awesome_rounded),
-              label: const Text('Remplir l’annonce'),
+              label: Text(context.t.marketRemplirLAnnonce),
             ),
             const SizedBox(height: 6),
-            const Text(
-              'Vous vérifiez tout avant de publier. La photo n’est pas '
-              'conservée si vous abandonnez.',
+            Text(
+              context.t.marketVousVerifiezToutAvant,
               textAlign: TextAlign.center,
               style: TextStyle(color: LiveColors.gris, fontSize: 12),
             ),

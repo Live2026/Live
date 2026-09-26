@@ -180,7 +180,9 @@ class _EcranProfilState extends State<EcranProfil> {
             children: [
               for (final v in _villes)
                 ChoiceChip(
-                  label: Text(v == 'Autre ville' ? context.t.demarrageAutreVille : v),
+                  label: Text(
+                    v == 'Autre ville' ? context.t.demarrageAutreVille : v,
+                  ),
                   selected: _ville == v,
                   onSelected: (_) => setState(() => _ville = v),
                 ),
@@ -192,7 +194,11 @@ class _EcranProfilState extends State<EcranProfil> {
             onChanged: (v) => setState(() => _majeur = v),
             contentPadding: EdgeInsets.zero,
             title: Text(context.t.demarrageMajeur),
-            subtitle: Text(_majeur ? context.t.demarrageMajeurOui : context.t.demarrageMajeurNon),
+            subtitle: Text(
+              _majeur
+                  ? context.t.demarrageMajeurOui
+                  : context.t.demarrageMajeurNon,
+            ),
           ),
         ],
       ),
@@ -237,8 +243,16 @@ class _PhotoProfil extends ConsumerWidget {
             ),
             const SizedBox(height: 8),
             for (final (cle, icone, titre) in [
-              ('camera', Icons.photo_camera_outlined, context.t.demarragePrendrePhoto),
-              ('galerie', Icons.photo_library_outlined, context.t.demarrageChoisirPhoto),
+              (
+                'camera',
+                Icons.photo_camera_outlined,
+                context.t.demarragePrendrePhoto,
+              ),
+              (
+                'galerie',
+                Icons.photo_library_outlined,
+                context.t.demarrageChoisirPhoto,
+              ),
               if (photo != null)
                 (
                   'retirer',
@@ -279,7 +293,9 @@ class _PhotoProfil extends ConsumerWidget {
     return Semantics(
       button: true,
       container: true,
-      label: photo != null ? context.t.demarrageChangerPhoto : context.t.demarrageAjouterPhoto,
+      label: photo != null
+          ? context.t.demarrageChangerPhoto
+          : context.t.demarrageAjouterPhoto,
       excludeSemantics: true,
       onTap: () => _choisir(context, ref),
       child: GestureDetector(
@@ -396,7 +412,9 @@ class _EcranPinState extends ConsumerState<EcranPin> {
             titre: confirmation
                 ? context.t.demarrageConfirmezCode
                 : context.t.demarrageCreezCode(widget.prenom),
-            texte: confirmation ? context.t.demarrageRetapezCode : context.t.demarrageCodeProtege,
+            texte: confirmation
+                ? context.t.demarrageRetapezCode
+                : context.t.demarrageCodeProtege,
           ),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),

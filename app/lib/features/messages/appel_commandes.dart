@@ -42,11 +42,13 @@ class _BoutonRond extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          Text(
-            libelle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: Colors.white, fontSize: 12),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              libelle,
+              maxLines: 1,
+              style: const TextStyle(color: Colors.white, fontSize: 12),
+            ),
           ),
         ],
       ),

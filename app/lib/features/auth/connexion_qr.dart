@@ -38,7 +38,8 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
   }
 
   Future<void> _scanner() async {
-    if (!await simulerScan(context, quoi: context.t.demarrageLeCodeConnexion)) return;
+    final t = context.t;
+    if (!await simulerScan(context, quoi: t.demarrageLeCodeConnexion)) return;
     ref
         .read(liveProvider.notifier)
         .connecter(
@@ -117,7 +118,11 @@ class _Etapes extends StatelessWidget {
   const _Etapes({required this.onAide});
   final VoidCallback onAide;
 
-  static List<String> _textes(Textes t) => [t.demarrageQrEtape1, t.demarrageQrEtape2, t.demarrageQrEtape3];
+  static List<String> _textes(Textes t) => [
+    t.demarrageQrEtape1,
+    t.demarrageQrEtape2,
+    t.demarrageQrEtape3,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +221,10 @@ class _CodeQr extends StatelessWidget {
           context.t.demarrageNouveauCodeDans(reste),
           style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
         ),
-        TextButton(onPressed: onScan, child: Text(context.t.demarrageSimulerScan)),
+        TextButton(
+          onPressed: onScan,
+          child: Text(context.t.demarrageSimulerScan),
+        ),
       ],
     );
   }

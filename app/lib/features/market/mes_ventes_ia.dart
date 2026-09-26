@@ -5,29 +5,30 @@ part of 'market_screens.dart';
 class _CoachIa extends StatelessWidget {
   const _CoachIa();
 
-  static const _conseils = [
-    (
-      Icons.trending_down_rounded,
-      'Samsung A10 : 5 % sous le marché',
-      'À 28 500 FCFA, il se vendrait deux fois plus vite (38 ventes comparables).',
-      'Ajuster le prix',
-      '/vendre',
-    ),
-    (
-      Icons.wb_sunny_rounded,
-      'Robe wax : photo trop sombre',
-      'Les annonces à la lumière du jour reçoivent 3 fois plus de contacts.',
-      'Refaire la photo',
-      '/publier/media',
-    ),
-    (
-      Icons.schedule_rounded,
-      'Publiez vers 19 h',
-      'C’est l’heure où vos acheteurs regardent le plus, surtout le samedi.',
-      'Programmer une vidéo',
-      '/publier/media',
-    ),
-  ];
+  static List<(IconData, String, String, String, String)> _conseils(Textes t) =>
+      [
+        (
+          Icons.trending_down_rounded,
+          t.marketSamsungA105Sous,
+          t.marketA28500Fcfa,
+          t.marketAjusterLePrix,
+          '/vendre',
+        ),
+        (
+          Icons.wb_sunny_rounded,
+          t.marketRobeWaxPhotoTrop,
+          t.marketLesAnnoncesALa,
+          t.marketRefaireLaPhoto,
+          '/publier/media',
+        ),
+        (
+          Icons.schedule_rounded,
+          t.marketPubliezVers19H,
+          t.marketCEstLHeure,
+          t.marketProgrammerUneVideo,
+          '/publier/media',
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,21 +44,23 @@ class _CoachIa extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               children: [
                 Icon(Icons.auto_awesome_rounded, color: LiveColors.orangeVif),
                 SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'Conseils de Live IA',
+                    context.t.marketConseilsDeLiveIa,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                   ),
                 ),
-                Etiquette('Gratuit'),
+                Etiquette(context.t.marketGratuit),
               ],
             ),
             const SizedBox(height: 6),
-            for (final (icone, titre, texte, action, route) in _conseils)
+            for (final (icone, titre, texte, action, route) in _conseils(
+              context.t,
+            ))
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Row(

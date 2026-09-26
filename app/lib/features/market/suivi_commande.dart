@@ -37,8 +37,12 @@ class EcranSuiviCommande extends ConsumerWidget {
         true,
       ),
       EtapeFrise(
-        remise ? context.t.marketPayeeALaRemise : context.t.marketReceptionConfirmee,
-        termine ? context.t.marketALInstant : context.t.marketEnAttenteDeLaRemise,
+        remise
+            ? context.t.marketPayeeALaRemise
+            : context.t.marketReceptionConfirmee,
+        termine
+            ? context.t.marketALInstant
+            : context.t.marketEnAttenteDeLaRemise,
         termine,
       ),
     ];
@@ -114,7 +118,9 @@ class EcranSuiviCommande extends ConsumerWidget {
           if (!termine && !remise)
             Apparition(
               rang: 2,
-              child: BandeauProtection(context.t.marketVotreArgentEstBloqueJusqu),
+              child: BandeauProtection(
+                context.t.marketVotreArgentEstBloqueJusqu,
+              ),
             ),
         ],
         secondaire: [
@@ -189,7 +195,9 @@ class EcranSuiviCommande extends ConsumerWidget {
                     );
                 context.push('/payer');
               },
-              child: Text(context.t.marketPayerMaintenantMontant(fcfa(c.total))),
+              child: Text(
+                context.t.marketPayerMaintenantMontant(fcfa(c.total)),
+              ),
             ),
           ],
         ],

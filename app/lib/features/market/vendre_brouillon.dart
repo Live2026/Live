@@ -31,13 +31,15 @@ extension _BrouillonVente on _EcranVendreState {
           BrouillonLocal(
             id: _idBrouillon,
             type: 'produit',
-            titre: titre.isEmpty ? 'Annonce · $_categorie' : titre,
+            titre: titre.isEmpty
+                ? context.t.marketAnnonceCategorie(_categorie ?? '')
+                : titre,
             contenu: jsonEncode(_formulaire),
             misAJour: DateTime.now(),
           ),
         );
     if (!silencieux && mounted) {
-      informer(context, 'Brouillon enregistré sur ce téléphone.');
+      informer(context, context.t.marketBrouillonEnregistreSurCe);
     }
   }
 
@@ -77,8 +79,12 @@ extension _BrouillonVente on _EcranVendreState {
   /// Bandeau « Reprendre votre brouillon », en tête de l'assistant.
   Widget _bandeauBrouillon(BrouillonLocal b) {
     final h = b.misAJour;
-    final quand =
-        '${h.day}/${h.month} à ${h.hour} h ${h.minute.toString().padLeft(2, '0')}';
+    final quand = context.t.marketDateHeure(
+      h.day,
+      h.month,
+      h.hour,
+      h.minute.toString().padLeft(2, '0'),
+    );
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Bloc(
@@ -87,7 +93,7 @@ extension _BrouillonVente on _EcranVendreState {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Brouillon du $quand',
+              context.t.marketBrouillonDu(quand),
               style: const TextStyle(fontWeight: FontWeight.w800),
             ),
             Text('« ${b.titre} »'),
@@ -99,14 +105,14 @@ extension _BrouillonVente on _EcranVendreState {
                 FilledButton(
                   style: FilledButton.styleFrom(minimumSize: const Size(0, 44)),
                   onPressed: () => _reprendre(b),
-                  child: const Text('Reprendre le brouillon'),
+                  child: Text(context.t.marketReprendreLeBrouillon),
                 ),
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size(0, 44),
                   ),
                   onPressed: _oublierBrouillon,
-                  child: const Text('Recommencer'),
+                  child: Text(context.t.marketRecommencer),
                 ),
               ],
             ),

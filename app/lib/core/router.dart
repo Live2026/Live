@@ -294,6 +294,8 @@ final routeur = GoRouter(
     _route('/appel', (s) {
       final q = s.uri.queryParameters;
       return EcranAppel(
+        // Un autre appel est un nouvel écran, pas le même mis à jour.
+        key: ValueKey(s.uri.toString()),
         avec: q['avec'] ?? 'Grâce Mode',
         video: q['video'] == '1',
         groupe: q['groupe'],

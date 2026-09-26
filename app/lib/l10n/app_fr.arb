@@ -1269,7 +1269,7 @@
   },
   "marketVendreUnProduit": "Vendre un produit",
   "@marketVendreUnProduit": {
-    "description": "Écran : market_sections"
+    "description": "Écran : vendre_produit"
   },
   "marketPaiementsSecurises": "Paiements sécurisés",
   "@marketPaiementsSecurises": {
@@ -1301,7 +1301,7 @@
   },
   "marketSignalerUnProbleme": "Signaler un problème",
   "@marketSignalerUnProbleme": {
-    "description": "Écran : market_sections, suivi_commande"
+    "description": "Écran : mes_ventes_outils"
   },
   "marketProduitNonRecuNonConforme": "Produit non reçu, non conforme",
   "@marketProduitNonRecuNonConforme": {
@@ -1387,15 +1387,15 @@
   },
   "marketPrixNegociable": "Prix négociable",
   "@marketPrixNegociable": {
-    "description": "Écran : produit_commande"
+    "description": "Écran : vendre_etapes"
   },
   "marketCategorie": "Catégorie",
   "@marketCategorie": {
-    "description": "Écran : produit_commande"
+    "description": "Écran : vendre_ia"
   },
   "marketRemise": "Remise",
   "@marketRemise": {
-    "description": "Écran : commande, produit_commande"
+    "description": "Écran : vendre_etapes"
   },
   "marketDansUnLieuPublicPropose": "Dans un lieu public proposé par Live",
   "@marketDansUnLieuPublicPropose": {
@@ -1407,7 +1407,7 @@
   },
   "marketGratuit": "Gratuit",
   "@marketGratuit": {
-    "description": "Écran : produit_commande"
+    "description": "Écran : mes_ventes_ia"
   },
   "marketLivraisonABrazzaville": "Livraison à Brazzaville",
   "@marketLivraisonABrazzaville": {
@@ -1419,7 +1419,7 @@
   },
   "marketDescription": "Description",
   "@marketDescription": {
-    "description": "Écran : produit_commande"
+    "description": "Écran : vendre_etapes"
   },
   "marketPayezAuRendezVousPar": "Payez au rendez-vous par MoMo ou Airtel via Live : jamais d’avance.",
   "@marketPayezAuRendezVousPar": {
@@ -1463,7 +1463,7 @@
   },
   "marketPrix": "Prix",
   "@marketPrix": {
-    "description": "Écran : produit_commande"
+    "description": "Écran : vendre_etapes"
   },
   "marketRienAPayerMaintenantAu": "Rien à payer maintenant. Au rendez-vous, vous vérifiez l’objet puis vous validez la demande MoMo ou Airtel envoyée par Live.",
   "@marketRienAPayerMaintenantAu": {
@@ -1483,7 +1483,7 @@
   },
   "marketEtat": "État",
   "@marketEtat": {
-    "description": "Écran : produit_commande"
+    "description": "Écran : vendre_etapes"
   },
   "marketMainPropreOuLivraison": "Main propre ou livraison",
   "@marketMainPropreOuLivraison": {
@@ -1495,7 +1495,7 @@
   },
   "marketPaiement": "Paiement",
   "@marketPaiement": {
-    "description": "Écran : commande, produit_commande"
+    "description": "Écran : vendre_etapes"
   },
   "marketPasDAvance": "Pas d’avance",
   "@marketPasDAvance": {
@@ -1631,7 +1631,7 @@
   },
   "marketMoins": "Moins",
   "@marketMoins": {
-    "description": "Écran : variantes"
+    "description": "Écran : vendre_etapes"
   },
   "marketChoisissezUneTaille": "Choisissez une taille",
   "@marketChoisissezUneTaille": {
@@ -1879,7 +1879,7 @@
   },
   "marketBoosterUneAnnonce": "Booster une annonce",
   "@marketBoosterUneAnnonce": {
-    "description": "Écran : offre_qr"
+    "description": "Écran : mes_ventes"
   },
   "marketLesAnnoncesBoosteesPortentLa": "Les annonces boostées portent la mention « Sponsorisé ».",
   "@marketLesAnnoncesBoosteesPortentLa": {
@@ -2174,5 +2174,807 @@
   "@appelVisiteVideoTexte": {
     "description": "Écran : fiche du bien"
   },
-  "appelVisiteVideoTexte": "L’agent vous fait visiter en direct, sans vous déplacer."
+  "appelVisiteVideoTexte": "L’agent vous fait visiter en direct, sans vous déplacer.",
+  "@marketTotalSurJours": {
+    "description": "Écran : mes_ventes",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "marketTotalSurJours": "{total} sur {n} jours",
+  "@marketNJours": {
+    "description": "Écran : mes_ventes",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "marketNJours": "{n} j",
+  "@marketCommandesAAccepter": {
+    "description": "Écran : mes_ventes",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "marketCommandesAAccepter": "{n, plural, =1{1 commande à accepter} other{{n} commandes à accepter}} avant 23 h 12. Sans réponse, l’acheteur est remboursé.",
+  "marketMesVentes": "Mes ventes",
+  "@marketMesVentes": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketOutilsDuVendeur": "Outils du vendeur",
+  "@marketOutilsDuVendeur": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketVues": "Vues",
+  "@marketVues": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketN12CetteSemaine": "+12 % cette semaine",
+  "@marketN12CetteSemaine": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketContacts": "Contacts",
+  "@marketContacts": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketMessagesEtOffres": "messages et offres",
+  "@marketMessagesEtOffres": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketConversion": "Conversion",
+  "@marketConversion": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketDesVuesAuxVentes": "des vues aux ventes",
+  "@marketDesVuesAuxVentes": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketNoteClients": "Note clients",
+  "@marketNoteClients": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketN37Avis": "37 avis",
+  "@marketN37Avis": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketAucuneCommandeATraiter": "Aucune commande à traiter.",
+  "@marketAucuneCommandeATraiter": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketRienIciPourLe": "Rien ici pour le moment.",
+  "@marketRienIciPourLe": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketPublierUneAnnonce": "Publier une annonce",
+  "@marketPublierUneAnnonce": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketMesAnnonces": "Mes annonces",
+  "@marketMesAnnonces": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketVenduCeMois": "Vendu ce mois",
+  "@marketVenduCeMois": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketN18VsAout": "+18 % vs août",
+  "@marketN18VsAout": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketDisponible": "Disponible",
+  "@marketDisponible": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketBloqueParLive": "Bloqué par Live",
+  "@marketBloqueParLive": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketRetirer": "Retirer",
+  "@marketRetirer": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketCommandes": "Commandes",
+  "@marketCommandes": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketATraiter": "À traiter",
+  "@marketATraiter": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketEnCours": "En cours",
+  "@marketEnCours": {
+    "description": "Écran : mes_ventes"
+  },
+  "marketTerminees": "Terminées",
+  "@marketTerminees": {
+    "description": "Écran : mes_ventes"
+  },
+  "@marketNouvelle": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketNouvelle": "Nouvelle",
+  "@marketARemettre": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketARemettre": "À remettre",
+  "@marketAcheteurNotePayee": {
+    "description": "Écran : mes_ventes_blocs",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "marketAcheteurNotePayee": "{qui} · note 4,9 · payée, argent bloqué",
+  "@marketAcheteurNoteRemise": {
+    "description": "Écran : mes_ventes_blocs",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "marketAcheteurNoteRemise": "{qui} · note 4,9 · à payer à la remise",
+  "@marketNetMontant": {
+    "description": "Écran : mes_ventes_blocs",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "marketNetMontant": "net {montant}",
+  "@marketQuantiteEtat": {
+    "description": "Écran : mes_ventes_blocs",
+    "placeholders": {
+      "etat": {
+        "type": "String"
+      }
+    }
+  },
+  "marketQuantiteEtat": "Quantité 1 · {etat}",
+  "@marketTitreAcheteur": {
+    "description": "Écran : mes_ventes_blocs",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      },
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "marketTitreAcheteur": "{titre} · {qui}",
+  "@marketCommandeRefusee": {
+    "description": "Écran : mes_ventes_blocs",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "marketCommandeRefusee": "Commande refusée · {qui} est remboursé.",
+  "marketRefuser": "Refuser",
+  "@marketRefuser": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketAccepter": "Accepter",
+  "@marketAccepter": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketRemettreLeProduit": "Remettre le produit",
+  "@marketRemettreLeProduit": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketClient": "Client",
+  "@marketClient": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketNote4912": "Note 4,9 · 12 achats · téléphone vérifié",
+  "@marketNote4912": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketEcrireALAcheteur": "Écrire à l’acheteur",
+  "@marketEcrireALAcheteur": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketSuivi": "Suivi",
+  "@marketSuivi": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketPayeeArgentBloquePar": "Payée · argent bloqué par Live",
+  "@marketPayeeArgentBloquePar": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketAccepteeRemiseAOrganiser": "Acceptée · remise à organiser",
+  "@marketAccepteeRemiseAOrganiser": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketRemiseQrDeL": "Remise · QR de l’acheteur scanné",
+  "@marketRemiseQrDeL": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketVerseeSurVotreSolde": "Versée sur votre solde",
+  "@marketVerseeSurVotreSolde": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketRemiseEnMainPropre": "Remise en main propre",
+  "@marketRemiseEnMainPropre": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketStationTotalMoungaliDemain": "Station Total Moungali · demain 10:00",
+  "@marketStationTotalMoungaliDemain": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketMontantPayeParL": "Montant payé par l’acheteur",
+  "@marketMontantPayeParL": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketCommissionLive6": "Commission Live (6 %)",
+  "@marketCommissionLive6": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketVousRecevez": "Vous recevez",
+  "@marketVousRecevez": {
+    "description": "Écran : vendre_felicitations"
+  },
+  "marketRefuserLaCommande": "Refuser la commande",
+  "@marketRefuserLaCommande": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketRuptureDeStock": "Rupture de stock",
+  "@marketRuptureDeStock": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketZoneNonDesservie": "Zone non desservie",
+  "@marketZoneNonDesservie": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketAutreRaison": "Autre raison",
+  "@marketAutreRaison": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketLAcheteurEstRembourse": "L’acheteur est remboursé immédiatement. Des refus répétés baissent votre visibilité.",
+  "@marketLAcheteurEstRembourse": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketAnnuler": "Annuler",
+  "@marketAnnuler": {
+    "description": "Écran : mes_ventes_blocs"
+  },
+  "marketSamsungA105Sous": "Samsung A10 : 5 % sous le marché",
+  "@marketSamsungA105Sous": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "marketA28500Fcfa": "À 28 500 FCFA, il se vendrait deux fois plus vite (38 ventes comparables).",
+  "@marketA28500Fcfa": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "marketAjusterLePrix": "Ajuster le prix",
+  "@marketAjusterLePrix": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "marketRobeWaxPhotoTrop": "Robe wax : photo trop sombre",
+  "@marketRobeWaxPhotoTrop": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "marketLesAnnoncesALa": "Les annonces à la lumière du jour reçoivent 3 fois plus de contacts.",
+  "@marketLesAnnoncesALa": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "marketRefaireLaPhoto": "Refaire la photo",
+  "@marketRefaireLaPhoto": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "marketPubliezVers19H": "Publiez vers 19 h",
+  "@marketPubliezVers19H": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "marketCEstLHeure": "C’est l’heure où vos acheteurs regardent le plus, surtout le samedi.",
+  "@marketCEstLHeure": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "marketProgrammerUneVideo": "Programmer une vidéo",
+  "@marketProgrammerUneVideo": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "marketConseilsDeLiveIa": "Conseils de Live IA",
+  "@marketConseilsDeLiveIa": {
+    "description": "Écran : mes_ventes_ia"
+  },
+  "@marketPrixVues": {
+    "description": "Écran : mes_ventes_outils",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      },
+      "vues": {
+        "type": "String"
+      }
+    }
+  },
+  "marketPrixVues": "{prix} · {vues} vues",
+  "@marketEnLigneStock": {
+    "description": "Écran : mes_ventes_outils",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "marketEnLigneStock": "En ligne · stock {n}",
+  "@marketCopieCreee": {
+    "description": "Écran : mes_ventes_outils",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "marketCopieCreee": "Copie créée : « {titre} » en brouillon.",
+  "marketBoutiqueVerifieeMoungali": "Boutique vérifiée · Moungali",
+  "@marketBoutiqueVerifieeMoungali": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketQrDePaiementA": "QR de paiement à la remise",
+  "@marketQrDePaiementA": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketGainsEtRetraits": "Gains et retraits",
+  "@marketGainsEtRetraits": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketStatistiquesAvanceesLivePro": "Statistiques avancées (Live Pro)",
+  "@marketStatistiquesAvanceesLivePro": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketAvisDesClients": "Avis des clients",
+  "@marketAvisDesClients": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketEquipeDeLaBoutique": "Équipe de la boutique",
+  "@marketEquipeDeLaBoutique": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketCeQuiSePaie": "Ce qui se paie dans Live",
+  "@marketCeQuiSePaie": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketOffreDeLancement0": "Offre de lancement : 0 % de commission jusqu’au 31 décembre.",
+  "@marketOffreDeLancement0": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketVendu": "Vendu",
+  "@marketVendu": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketMasquee": "Masquée",
+  "@marketMasquee": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketGererLAnnonce": "Gérer l’annonce",
+  "@marketGererLAnnonce": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketModifier": "Modifier",
+  "@marketModifier": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketDupliquer": "Dupliquer",
+  "@marketDupliquer": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketBooster": "Booster",
+  "@marketBooster": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketRemettreEnLigne": "Remettre en ligne",
+  "@marketRemettreEnLigne": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketMasquer": "Masquer",
+  "@marketMasquer": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "marketMarquerCommeVendu": "Marquer comme vendu",
+  "@marketMarquerCommeVendu": {
+    "description": "Écran : mes_ventes_outils"
+  },
+  "@marketAnnonceCategorie": {
+    "description": "Écran : vendre_brouillon",
+    "placeholders": {
+      "categorie": {
+        "type": "String"
+      }
+    }
+  },
+  "marketAnnonceCategorie": "Annonce · {categorie}",
+  "@marketDateHeure": {
+    "description": "Écran : vendre_brouillon",
+    "placeholders": {
+      "jour": {
+        "type": "int"
+      },
+      "mois": {
+        "type": "int"
+      },
+      "heure": {
+        "type": "int"
+      },
+      "minute": {
+        "type": "String"
+      }
+    }
+  },
+  "marketDateHeure": "{jour}/{mois} à {heure} h {minute}",
+  "@marketBrouillonDu": {
+    "description": "Écran : vendre_brouillon",
+    "placeholders": {
+      "quand": {
+        "type": "String"
+      }
+    }
+  },
+  "marketBrouillonDu": "Brouillon du {quand}",
+  "marketBrouillonEnregistreSurCe": "Brouillon enregistré sur ce téléphone.",
+  "@marketBrouillonEnregistreSurCe": {
+    "description": "Écran : vendre_brouillon"
+  },
+  "marketReprendreLeBrouillon": "Reprendre le brouillon",
+  "@marketReprendreLeBrouillon": {
+    "description": "Écran : vendre_brouillon"
+  },
+  "marketRecommencer": "Recommencer",
+  "@marketRecommencer": {
+    "description": "Écran : vendre_brouillon"
+  },
+  "@marketInterdit": {
+    "description": "Écran : vendre_etapes",
+    "placeholders": {
+      "quoi": {
+        "type": "String"
+      }
+    }
+  },
+  "marketInterdit": "Live n’accepte pas {quoi} (liste des objets interdits, conditions d’utilisation).",
+  "@marketAncienPrix": {
+    "description": "Écran : vendre_etapes",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "marketAncienPrix": "Ancien prix {prix} · −{n} % affiché",
+  "@marketFraisBrazzaville": {
+    "description": "Écran : vendre_etapes",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "marketFraisBrazzaville": "{prix} à Brazzaville",
+  "@marketVideo": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketVideo": "vidéo",
+  "@marketMainPropreMin": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketMainPropreMin": "main propre",
+  "@marketLivraisonMin": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketLivraisonMin": "livraison",
+  "@marketDavance": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketDavance": "d’avance",
+  "@marketDavanceOuRemise": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketDavanceOuRemise": "d’avance ou à la remise",
+  "marketRedigerAvecLiveIa": "Rédiger avec Live IA · gratuit",
+  "@marketRedigerAvecLiveIa": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketTitre": "Titre",
+  "@marketTitre": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketExIphone1164": "Ex. iPhone 11 64 Go",
+  "@marketExIphone1164": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketRetirezLeNumeroDe": "Retirez le numéro de téléphone : les échanges se font dans la messagerie de Live, pour votre sécurité.",
+  "@marketRetirezLeNumeroDe": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketN38VentesDeCe": "38 ventes de ce modèle ces 3 derniers mois, dans votre ville",
+  "@marketN38VentesDeCe": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketLesAcheteursPeuventFaire": "Les acheteurs peuvent faire une offre",
+  "@marketLesAcheteursPeuventFaire": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketPromotion": "Promotion",
+  "@marketPromotion": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketAfficherLAncienPrix": "Afficher l’ancien prix barré",
+  "@marketAfficherLAncienPrix": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketQuantiteEnStock": "Quantité en stock",
+  "@marketQuantiteEnStock": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketPlus": "Plus",
+  "@marketPlus": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketQuartier": "Quartier",
+  "@marketQuartier": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketDansUnLieuPublic": "Dans un lieu public, confirmée par QR",
+  "@marketDansUnLieuPublic": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketLivraisonParVosSoins": "Livraison par vos soins",
+  "@marketLivraisonParVosSoins": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketNonProposee": "Non proposée",
+  "@marketNonProposee": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketDAvanceOuA": "D’avance ou à la remise",
+  "@marketDAvanceOuA": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketRecommandePourLOccasion": "Recommandé pour l’occasion : l’acheteur voit l’objet, puis paie par MoMo via Live.",
+  "@marketRecommandePourLOccasion": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketLAcheteurChoisitVous": "L’acheteur choisit. Vous êtes payé dans tous les cas via Live.",
+  "@marketLAcheteurChoisitVous": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketExigerLePaiementD": "Exiger le paiement d’avance",
+  "@marketExigerLePaiementD": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketArgentBloqueParLive": "Argent bloqué par Live jusqu’au QR de remise.",
+  "@marketArgentBloqueParLive": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketVoiciVotreAnnonceDans": "Voici votre annonce dans le Market :",
+  "@marketVoiciVotreAnnonceDans": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketPhotos": "Photos",
+  "@marketPhotos": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketStock": "Stock",
+  "@marketStock": {
+    "description": "Écran : vendre_etapes"
+  },
+  "marketJeCertifieQueCet": "Je certifie que cet objet m’appartient et respecte les règles de Live.",
+  "@marketJeCertifieQueCet": {
+    "description": "Écran : vendre_etapes"
+  },
+  "@marketCentPourcentOffre": {
+    "description": "Écran : vendre_felicitations",
+    "placeholders": {
+      "net": {
+        "type": "String"
+      }
+    }
+  },
+  "marketCentPourcentOffre": "100 % pendant l’offre de lancement, puis {net} (6 %).",
+  "marketFelicitations": "Félicitations !",
+  "@marketFelicitations": {
+    "description": "Écran : vendre_felicitations"
+  },
+  "marketVotreAnnonceEstEn": "Votre annonce est en ligne",
+  "@marketVotreAnnonceEstEn": {
+    "description": "Écran : vendre_felicitations"
+  },
+  "marketPartagezVotreAnnonce": "Partagez votre annonce",
+  "@marketPartagezVotreAnnonce": {
+    "description": "Écran : vendre_felicitations"
+  },
+  "marketStatut": "Statut",
+  "@marketStatut": {
+    "description": "Écran : vendre_felicitations"
+  },
+  "marketCopierLeLien": "Copier le lien",
+  "@marketCopierLeLien": {
+    "description": "Écran : vendre_felicitations"
+  },
+  "marketPourLeTestUne": "Pour le test : une acheteuse (Merveille) vient de commander et de payer.",
+  "@marketPourLeTestUne": {
+    "description": "Écran : vendre_felicitations"
+  },
+  "marketVoirMesVentes": "Voir mes ventes",
+  "@marketVoirMesVentes": {
+    "description": "Écran : vendre_felicitations"
+  },
+  "marketVendreUnAutreObjet": "Vendre un autre objet",
+  "@marketVendreUnAutreObjet": {
+    "description": "Écran : vendre_felicitations"
+  },
+  "@marketDescriptionIa": {
+    "description": "Écran : vendre_ia",
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      }
+    }
+  },
+  "marketDescriptionIa": "Écran sans rayure, batterie à 86 %, vendu avec chargeur. Remise en main propre à {quartier}.",
+  "marketUnePhotoEtC": "Une photo, et c’est prêt",
+  "@marketUnePhotoEtC": {
+    "description": "Écran : vendre_ia"
+  },
+  "marketLiveIaReconnaitL": "Live IA reconnaît l’objet et remplit l’annonce, prix conseillé compris. Gratuit.",
+  "@marketLiveIaReconnaitL": {
+    "description": "Écran : vendre_ia"
+  },
+  "marketObjetReconnu": "Objet reconnu",
+  "@marketObjetReconnu": {
+    "description": "Écran : vendre_ia"
+  },
+  "marketEtatEstime": "État estimé",
+  "@marketEtatEstime": {
+    "description": "Écran : vendre_ia"
+  },
+  "marketPrixConseille": "Prix conseillé",
+  "@marketPrixConseille": {
+    "description": "Écran : vendre_ia"
+  },
+  "marketN28000A34": "28 000 à 34 000 FCFA",
+  "@marketN28000A34": {
+    "description": "Écran : vendre_ia"
+  },
+  "marketAnnoncePreteAVerifier": "Annonce prête à vérifier",
+  "@marketAnnoncePreteAVerifier": {
+    "description": "Écran : vendre_ia"
+  },
+  "marketLiveIaAnalyseLa": "Live IA analyse la photo…",
+  "@marketLiveIaAnalyseLa": {
+    "description": "Écran : vendre_ia"
+  },
+  "marketRemplirLAnnonce": "Remplir l’annonce",
+  "@marketRemplirLAnnonce": {
+    "description": "Écran : vendre_ia"
+  },
+  "marketVousVerifiezToutAvant": "Vous vérifiez tout avant de publier. La photo n’est pas conservée si vous abandonnez.",
+  "@marketVousVerifiezToutAvant": {
+    "description": "Écran : vendre_ia"
+  },
+  "@marketLesArmes": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketLesArmes": "les armes",
+  "@marketLesMedicaments": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketLesMedicaments": "les médicaments",
+  "@marketLesFauxDocuments": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketLesFauxDocuments": "les faux documents",
+  "@marketLesEspecesProtegees": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketLesEspecesProtegees": "les espèces protégées",
+  "@marketDescriptionRedigee": {
+    "description": "Écran : vendre_produit",
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      }
+    }
+  },
+  "marketDescriptionRedigee": "Très bon état, fonctionne parfaitement, vendu avec ses accessoires. Remise en main propre à {quartier} ou livraison à Brazzaville.",
+  "marketQueVendezVous": "Que vendez-vous ?",
+  "@marketQueVendezVous": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketPhotosEtVideo": "Photos et vidéo",
+  "@marketPhotosEtVideo": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketInformations": "Informations",
+  "@marketInformations": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketPrixEtStock": "Prix et stock",
+  "@marketPrixEtStock": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketRemiseEtPaiement": "Remise et paiement",
+  "@marketRemiseEtPaiement": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketApercu": "Aperçu",
+  "@marketApercu": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketRobeWaxLongueTaille": "Robe wax longue, taille M",
+  "@marketRobeWaxLongueTaille": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketClimatiseur1CvTres": "Climatiseur 1 CV, très bon état",
+  "@marketClimatiseur1CvTres": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketBrouillon": "Brouillon",
+  "@marketBrouillon": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketPublierLAnnonce": "Publier l'annonce",
+  "@marketPublierLAnnonce": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketN0DeCommissionPendant": "0 % de commission pendant 3 mois. Votre argent est garanti avant la remise.",
+  "@marketN0DeCommissionPendant": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketAjouterUnePhoto": "Ajouter une photo",
+  "@marketAjouterUnePhoto": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketJusquA10Photos": "Jusqu’à 10 photos · la première sert de couverture",
+  "@marketJusquA10Photos": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketCouverture": "Couverture",
+  "@marketCouverture": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketAjouterUneVideoDe": "Ajouter une vidéo de 60 s",
+  "@marketAjouterUneVideoDe": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketPublieeAussiDansLe": "Publiée aussi dans le fil avec le bouton « Acheter » : 3 fois plus de vues.",
+  "@marketPublieeAussiDansLe": {
+    "description": "Écran : vendre_produit"
+  },
+  "marketConseilDePresEn": "Conseil : de près, en pleine lumière, sur un fond uni. Prototype : chaque appui ajoute une photo fictive.",
+  "@marketConseilDePresEn": {
+    "description": "Écran : vendre_produit"
+  },
+  "@etatNeuf": {
+    "description": "Écran : commun (état d’un objet)"
+  },
+  "etatNeuf": "Neuf",
+  "@etatTresBon": {
+    "description": "Écran : commun (état d’un objet)"
+  },
+  "etatTresBon": "Très bon état",
+  "@etatBon": {
+    "description": "Écran : commun (état d’un objet)"
+  },
+  "etatBon": "Bon état",
+  "@etatAReparer": {
+    "description": "Écran : commun (état d’un objet)"
+  },
+  "etatAReparer": "À réparer"
 }

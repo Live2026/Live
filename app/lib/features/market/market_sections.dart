@@ -406,7 +406,10 @@ class _PaiementsSecurises extends StatelessWidget {
           Row(
             children: [
               for (final (icone, texte) in [
-                (Icons.account_balance_wallet_rounded, context.t.marketSoldeLive),
+                (
+                  Icons.account_balance_wallet_rounded,
+                  context.t.marketSoldeLive,
+                ),
                 (Icons.phone_android_rounded, 'MoMo · Airtel'),
                 (Icons.credit_card_rounded, 'Visa'),
                 (Icons.handshake_rounded, context.t.marketALaRemise),

@@ -28,7 +28,13 @@ List<(IconData, String, String, String, Color)> _espaces(Textes t) => [
     '/market',
     Color(0xFF13385C),
   ),
-  (Icons.home_work_rounded, 'Immo', t.explorerLouerAcheter, '/immo', Color(0xFF166534)),
+  (
+    Icons.home_work_rounded,
+    'Immo',
+    t.explorerLouerAcheter,
+    '/immo',
+    Color(0xFF166534),
+  ),
   (
     Icons.king_bed_rounded,
     t.explorerSejours,

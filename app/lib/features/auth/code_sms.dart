@@ -6,9 +6,21 @@ enum _Canal { sms, appel, whatsapp }
 
 extension on _Canal {
   (IconData, String, String) infos(Textes t) => switch (this) {
-    _Canal.sms => (Icons.sms_rounded, t.demarrageRenvoyerSms, t.demarrageNouveauCodeSms),
-    _Canal.appel => (Icons.call_rounded, t.demarrageMAppeler, t.demarrageAppelDicte),
-    _Canal.whatsapp => (Icons.chat_rounded, t.demarrageRecevoirWhatsapp, t.demarrageSiWhatsapp),
+    _Canal.sms => (
+      Icons.sms_rounded,
+      t.demarrageRenvoyerSms,
+      t.demarrageNouveauCodeSms,
+    ),
+    _Canal.appel => (
+      Icons.call_rounded,
+      t.demarrageMAppeler,
+      t.demarrageAppelDicte,
+    ),
+    _Canal.whatsapp => (
+      Icons.chat_rounded,
+      t.demarrageRecevoirWhatsapp,
+      t.demarrageSiWhatsapp,
+    ),
   };
 }
 
@@ -67,7 +79,9 @@ class _EcranCodeState extends State<EcranCode> {
     informer(context, switch (canal) {
       _Canal.sms => context.t.demarrageNouveauCodeEnvoye(widget.telephone),
       _Canal.appel => context.t.demarrageAppelEnCours(widget.telephone),
-      _Canal.whatsapp => context.t.demarrageCodeWhatsappEnvoye(widget.telephone),
+      _Canal.whatsapp => context.t.demarrageCodeWhatsappEnvoye(
+        widget.telephone,
+      ),
     });
   }
 
@@ -97,7 +111,10 @@ class _EcranCodeState extends State<EcranCode> {
               ),
               const SizedBox(height: 10),
               for (final (icone, texte) in [
-                (Icons.signal_cellular_alt_rounded, context.t.demarrageVerifiezReseau),
+                (
+                  Icons.signal_cellular_alt_rounded,
+                  context.t.demarrageVerifiezReseau,
+                ),
                 (Icons.dialpad_rounded, context.t.demarrageVerifiezNumero),
                 (Icons.inbox_rounded, context.t.demarrageRegardezSms),
                 (Icons.schedule_rounded, context.t.demarrageSmsDeuxMinutes),
