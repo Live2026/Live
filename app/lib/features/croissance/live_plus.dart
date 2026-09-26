@@ -12,16 +12,16 @@ class EcranLivePlus extends ConsumerStatefulWidget {
 class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
   var _formule = 'eleve';
 
-  static const _formules = [
+  late final _formules = [
     (
       'eleve',
-      'Live Plus Élève',
+      context.t.croissanceLivePlusEleve,
       1500,
       200,
       [
-        '200 crédits chaque mois',
-        'Exercices en mode apprentissage illimités',
-        'Idéal pour le BAC et le BEPC',
+        context.t.croissanceN200CreditsChaqueMois,
+        context.t.croissanceExercicesEnModeApprentissage,
+        context.t.croissanceIdealPourLeBac,
       ],
     ),
     (
@@ -30,9 +30,9 @@ class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
       3500,
       500,
       [
-        '500 crédits chaque mois',
-        'Priorité de génération',
-        'Modèles de documents premium',
+        context.t.croissanceN500CreditsChaqueMois,
+        context.t.croissancePrioriteDeGeneration,
+        context.t.croissanceModelesDeDocumentsPremium,
       ],
     ),
   ];
@@ -43,19 +43,23 @@ class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
     final marge = context.grandEcran ? 24.0 : 16.0;
     final choisie = _formules.firstWhere((f) => f.$1 == _formule);
     return Scaffold(
-      appBar: AppBar(title: const Text('Live Plus')),
+      appBar: AppBar(title: Text(context.t.croissanceLivePlus)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const Text(
-            'Vos crédits Live IA chaque mois, moins cher qu’à l’unité',
+          Text(
+            context.t.croissanceVosCreditsLiveIa,
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 4),
           Text(
             etat.formulePlus == null
-                ? 'Solde actuel : ${etat.credits} crédits'
-                : 'Formule active : ${etat.formulePlus == 'pro' ? 'Live Plus Pro' : 'Live Plus Élève'}',
+                ? context.t.croissanceSoldeActuel(etat.credits)
+                : context.t.croissanceFormuleActive(
+                    etat.formulePlus == 'pro'
+                        ? 'Live Plus Pro'
+                        : context.t.croissanceLivePlusEleve,
+                  ),
             style: const TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 16),
@@ -102,8 +106,8 @@ class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
                                 ),
                               ),
                               if (id == 'pro')
-                                const Etiquette(
-                                  'Le plus complet',
+                                Etiquette(
+                                  context.t.croissanceLePlusComplet,
                                   fond: LiveColors.orangeVif,
                                   couleur: Colors.white,
                                 ),
@@ -120,12 +124,16 @@ class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
-                                const TextSpan(text: ' / mois'),
+                                TextSpan(text: context.t.croissanceParMois),
                               ],
                             ),
                           ),
                           Text(
-                            'soit ${(prix * 10 / credits).toStringAsFixed(1).replaceAll('.', ',')} FCFA le crédit au lieu de 10',
+                            context.t.croissancePrixCredit(
+                              (prix * 10 / credits)
+                                  .toStringAsFixed(1)
+                                  .replaceAll('.', ','),
+                            ),
                             style: TextStyle(
                               fontSize: 12.5,
                               color: _formule == id
@@ -159,9 +167,8 @@ class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
             ],
           ),
           const SizedBox(height: 12),
-          const Text(
-            'Sans engagement : arrêtez quand vous voulez. Les crédits non utilisés '
-            'restent valables 3 mois.',
+          Text(
+            context.t.croissanceSansEngagementArretezQuand,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
         ],
@@ -173,10 +180,10 @@ class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
             ref,
             TypePaiement.livePlus,
             choisie.$3,
-            '${choisie.$2} · 1 mois',
+            context.t.croissanceUnMois(choisie.$2),
             choisie.$1,
           ),
-          child: Text('S’abonner · ${fcfa(choisie.$3)} / mois'),
+          child: Text(context.t.croissanceSabonner(fcfa(choisie.$3))),
         ),
       ),
     );

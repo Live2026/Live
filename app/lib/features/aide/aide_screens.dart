@@ -6,94 +6,38 @@ import '../../core/adaptatif.dart';
 import '../../core/theme.dart';
 import '../../data/store.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'aide_ecrire.dart';
 
 /// Thèmes du centre d'aide, avec leur icône.
-const _themes = [
-  (Icons.payments_rounded, 'Paiements'),
-  (Icons.local_shipping_rounded, 'Commandes'),
-  (Icons.home_work_rounded, 'Logement'),
-  (Icons.handyman_rounded, 'Services'),
-  (Icons.verified_user_rounded, 'Compte'),
+List<(IconData, String)> _themes(Textes t) => [
+  (Icons.payments_rounded, t.aidePaiements),
+  (Icons.local_shipping_rounded, t.aideCommandes),
+  (Icons.home_work_rounded, t.aideLogement),
+  (Icons.handyman_rounded, t.aideServices),
+  (Icons.verified_user_rounded, t.aideCompte),
   (Icons.auto_awesome_rounded, 'Live IA'),
 ];
 
 /// Questions fréquentes : (thème, question, réponse).
-const _faq = [
+List<(String, String, String)> _faq(Textes t) => [
+  (t.aidePaiements, t.aideMonArgentEstIl, t.aideOuiCeQuiSe),
+  (t.aidePaiements, t.aideOnMeDemandeMon, t.aideCEstUneArnaque),
+  (t.aidePaiements, t.aideJAiPayeMais, t.aideLOperateurPeutMettre),
   (
-    'Paiements',
-    'Mon argent est-il protégé ?',
-    'Oui. Ce qui se paie « dans Live » reste bloqué jusqu’à votre '
-        'confirmation (QR, « J’ai reçu », fin du service). Sans confirmation, '
-        'vous êtes remboursé.',
+    t.aidePaiements,
+    t.aideCommentRetirerMesGains,
+    t.aideVerifiezVotreIdentiteUne,
   ),
-  (
-    'Paiements',
-    'On me demande mon code MoMo',
-    'C’est une arnaque. Live ne demande jamais votre code secret Mobile '
-        'Money, ni par message ni par appel. Signalez le message.',
-  ),
-  (
-    'Paiements',
-    'J’ai payé mais rien ne s’affiche',
-    'L’opérateur peut mettre jusqu’à 3 minutes à confirmer. Vous n’êtes '
-        'jamais débité deux fois ; sans confirmation, l’argent revient seul.',
-  ),
-  (
-    'Paiements',
-    'Comment retirer mes gains ?',
-    'Vérifiez votre identité une fois, puis Moi › Mon argent › Retirer, vers '
-        'votre numéro Mobile Money, sans frais.',
-  ),
-  (
-    'Commandes',
-    'Le produit reçu n’est pas conforme',
-    'Ne confirmez pas la réception. Ouvrez « Signaler un problème » sur la '
-        'commande : l’argent reste bloqué pendant l’examen.',
-  ),
-  (
-    'Commandes',
-    'Le vendeur ne répond pas',
-    'Sans acceptation sous 24 heures, la commande est annulée et vous êtes '
-        'remboursé automatiquement.',
-  ),
-  (
-    'Logement',
-    'Que se paie en dehors de Live ?',
-    'Loyers, caution et prix d’un bien se paient en direct, contre reçu. '
-        'Les frais de visite et l’acompte de réservation passent par Live.',
-  ),
-  (
-    'Logement',
-    'L’agent n’est pas venu à la visite',
-    'Signalez l’absence depuis la visite : vos frais sont remboursés en '
-        'totalité.',
-  ),
-  (
-    'Services',
-    'Le travail n’est pas terminé',
-    'Ne validez pas la fin des travaux. Signalez le problème : la part '
-        'restante reste bloquée.',
-  ),
-  (
-    'Compte',
-    'J’ai changé de numéro',
-    'Paramètres › Numéro de téléphone : un code est envoyé au nouveau '
-        'numéro, puis l’ancien est désactivé.',
-  ),
-  (
-    'Compte',
-    'Mon compte est suspendu',
-    'Le motif est dans vos notifications. Répondez depuis « Écrire au '
-        'support » : un agent réexamine sous 24 heures.',
-  ),
-  (
-    'Live IA',
-    'Mes crédits ont été débités sans résultat',
-    'Un échec est recrédité automatiquement. Sinon, écrivez au support avec '
-        'le nom du service.',
-  ),
+  (t.aideCommandes, t.aideLeProduitRecuN, t.aideNeConfirmezPasLa),
+  (t.aideCommandes, t.aideLeVendeurNeRepond, t.aideSansAcceptationSous24),
+  (t.aideLogement, t.aideQueSePaieEn, t.aideLoyersCautionEtPrix),
+  (t.aideLogement, t.aideLAgentNEst, t.aideSignalezLAbsenceDepuis),
+  (t.aideServices, t.aideLeTravailNEst, t.aideNeValidezPasLa),
+  (t.aideCompte, t.aideJAiChangeDe, t.aideParametresNumeroDeTelephone),
+  (t.aideCompte, t.aideMonCompteEstSuspendu, t.aideLeMotifEstDans),
+  ('Live IA', t.aideMesCreditsOntEte, t.aideUnEchecEstRecredite),
 ];
 
 /// E-AIDE-01 — Centre d'aide : recherche, thèmes, questions fréquentes,
@@ -120,7 +64,7 @@ class _EcranAideState extends ConsumerState<EcranAide> {
     final demandes = ref.watch(liveProvider.select((e) => e.demandesSupport));
     final q = _recherche.text.trim().toLowerCase();
     final questions = [
-      for (final f in _faq)
+      for (final f in _faq(context.t))
         if ((_theme == null || f.$1 == _theme) &&
             (q.isEmpty ||
                 f.$2.toLowerCase().contains(q) ||
@@ -128,7 +72,7 @@ class _EcranAideState extends ConsumerState<EcranAide> {
           f,
     ];
     return Scaffold(
-      appBar: AppBar(title: const Text('Centre d’aide')),
+      appBar: AppBar(title: Text(context.t.aideCentreDAide)),
       body: Etroit(
         largeur: 820,
         child: ListView(
@@ -137,8 +81,8 @@ class _EcranAideState extends ConsumerState<EcranAide> {
             TextField(
               controller: _recherche,
               onChanged: (_) => setState(() {}),
-              decoration: const InputDecoration(
-                hintText: 'Rechercher : remboursement, retrait, visite…',
+              decoration: InputDecoration(
+                hintText: context.t.aideRechercherRemboursementRetraitVisite,
                 prefixIcon: Icon(Icons.search_rounded),
               ),
             ),
@@ -152,25 +96,20 @@ class _EcranAideState extends ConsumerState<EcranAide> {
                     color: LiveColors.erreur,
                   ),
                   const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      'On vous demande votre code MoMo ou de payer hors de '
-                      'Live ? C’est une arnaque.',
-                    ),
-                  ),
+                  Expanded(child: Text(context.t.aideOnVousDemandeVotre)),
                   TextButton(
                     onPressed: () => context.push('/aide/ecrire?sujet=Arnaque'),
-                    child: const Text('Signaler'),
+                    child: Text(context.t.aideSignaler),
                   ),
                 ],
               ),
             ),
-            const EnTeteSection('Thèmes'),
+            EnTeteSection(context.t.aideThemes),
             Wrap(
               spacing: 8,
               runSpacing: 8,
               children: [
-                for (final (icone, nom) in _themes)
+                for (final (icone, nom) in _themes(context.t))
                   FilterChip(
                     avatar: Icon(icone, size: 18),
                     label: Text(nom),
@@ -179,10 +118,10 @@ class _EcranAideState extends ConsumerState<EcranAide> {
                   ),
               ],
             ),
-            const EnTeteSection('Questions fréquentes'),
+            EnTeteSection(context.t.aideQuestionsFrequentes),
             if (questions.isEmpty)
-              const Text(
-                'Aucune réponse trouvée : écrivez-nous, un agent vous répond.',
+              Text(
+                context.t.aideAucuneReponseTrouveeEcrivez,
                 style: TextStyle(color: LiveColors.gris),
               ),
             for (final (_, question, reponse) in questions)
@@ -202,34 +141,31 @@ class _EcranAideState extends ConsumerState<EcranAide> {
                   ),
                 ],
               ),
-            const EnTeteSection('Besoin d’un agent ?'),
+            EnTeteSection(context.t.aideBesoinDUnAgent),
             Bloc(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Row(
+                  Row(
                     children: [
                       Icon(Icons.support_agent_rounded, color: LiveColors.bleu),
                       SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          'Réponse en moins de 2 heures, 7 jours sur 7, de 7 h '
-                          'à 22 h. En français, lingala ou kituba.',
-                        ),
-                      ),
+                      Expanded(child: Text(context.t.aideReponseEnMoinsDe)),
                     ],
                   ),
                   const SizedBox(height: 12),
                   FilledButton.icon(
                     onPressed: () => context.push('/aide/ecrire'),
                     icon: const Icon(Icons.edit_rounded),
-                    label: const Text('Écrire au support'),
+                    label: Text(context.t.aideEcrireAuSupport),
                   ),
                   const SizedBox(height: 8),
                   OutlinedButton.icon(
                     onPressed: () => context.push('/aide/demandes'),
                     icon: const Icon(Icons.inbox_rounded),
-                    label: Text('Mes demandes (${demandes.length + 1})'),
+                    label: Text(
+                      context.t.aideMesDemandesN(demandes.length + 1),
+                    ),
                   ),
                 ],
               ),
@@ -237,18 +173,18 @@ class _EcranAideState extends ConsumerState<EcranAide> {
             const SizedBox(height: 8),
             LigneMenu(
               icone: Icons.payments_outlined,
-              titre: 'Ce qui se paie dans Live',
-              detail: 'Payé dans Live, à la remise ou en direct',
+              titre: context.t.aideCeQuiSePaie,
+              detail: context.t.aidePayeDansLiveA,
               onTap: () => context.push('/paiements'),
             ),
             LigneMenu(
               icone: Icons.description_outlined,
-              titre: 'Conditions d’utilisation',
+              titre: context.t.aideConditionsDUtilisation,
               onTap: () => context.push('/legal/cgu'),
             ),
             LigneMenu(
               icone: Icons.policy_outlined,
-              titre: 'Politique de confidentialité',
+              titre: context.t.aidePolitiqueDeConfidentialite,
               onTap: () => context.push('/legal/confidentialite'),
             ),
           ],
@@ -257,3 +193,16 @@ class _EcranAideState extends ConsumerState<EcranAide> {
     );
   }
 }
+
+/// Sujet d'une demande au support dans la langue choisie (la valeur
+/// enregistrée reste en français).
+String _sujetAffiche(Textes t, String sujet) => switch (sujet) {
+  'Paiement' => t.aideSujetPaiement,
+  'Commande' => t.aideSujetCommande,
+  'Logement' => t.aideSujetLogement,
+  'Service' => t.aideSujetService,
+  'Compte' => t.aideSujetCompte,
+  'Arnaque' => t.aideSujetArnaque,
+  'Autre' => t.aideSujetAutre,
+  _ => sujet,
+};

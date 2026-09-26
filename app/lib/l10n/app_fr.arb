@@ -10264,5 +10264,1179 @@
   "opportunitesVoirLesOpportunites": "Voir les opportunités",
   "@opportunitesVoirLesOpportunites": {
     "description": "Écran : publier_opportunite"
+  },
+  "@croissanceReservationConfirmee": {
+    "description": "Écran : croissance_screens",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceReservationConfirmee": "Réservation {nom} confirmée. Le code d’accès arrive la veille par message.",
+  "croissanceSejoursMeubles": "Séjours meublés",
+  "@croissanceSejoursMeubles": {
+    "description": "Écran : croissance_screens"
+  },
+  "croissanceVoirSurLaCarte": "Voir sur la carte",
+  "@croissanceVoirSurLaCarte": {
+    "description": "Écran : croissance_screens"
+  },
+  "croissancePourQuelquesNuits": "Pour quelques nuits",
+  "@croissancePourQuelquesNuits": {
+    "description": "Écran : croissance_screens"
+  },
+  "croissanceNuitsReservees": "Nuits réservées",
+  "@croissanceNuitsReservees": {
+    "description": "Écran : croissance_screens"
+  },
+  "croissanceVerseesALHote": "Versées à l’hôte après votre arrivée (QR à l’entrée)",
+  "@croissanceVerseesALHote": {
+    "description": "Écran : croissance_screens"
+  },
+  "croissanceCautionEventuelle": "Caution éventuelle",
+  "@croissanceCautionEventuelle": {
+    "description": "Écran : croissance_screens"
+  },
+  "croissanceRemiseALHote": "Remise à l’hôte, rendue au départ",
+  "@croissanceRemiseALHote": {
+    "description": "Écran : croissance_screens"
+  },
+  "@croissanceSoldeActuel": {
+    "description": "Écran : live_plus",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "croissanceSoldeActuel": "Solde actuel : {n} crédits",
+  "@croissanceFormuleActive": {
+    "description": "Écran : live_plus",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceFormuleActive": "Formule active : {nom}",
+  "@croissanceParMois": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceParMois": " / mois",
+  "@croissancePrixCredit": {
+    "description": "Écran : live_plus",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "croissancePrixCredit": "soit {prix} FCFA le crédit au lieu de 10",
+  "@croissanceUnMois": {
+    "description": "Écran : live_plus, offres_pro",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceUnMois": "{nom} · 1 mois",
+  "@croissanceSabonner": {
+    "description": "Écran : live_plus",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceSabonner": "S’abonner · {montant} / mois",
+  "@croissanceLivePlusEleve": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceLivePlusEleve": "Live Plus Élève",
+  "croissanceN200CreditsChaqueMois": "200 crédits chaque mois",
+  "@croissanceN200CreditsChaqueMois": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceExercicesEnModeApprentissage": "Exercices en mode apprentissage illimités",
+  "@croissanceExercicesEnModeApprentissage": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceIdealPourLeBac": "Idéal pour le BAC et le BEPC",
+  "@croissanceIdealPourLeBac": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceN500CreditsChaqueMois": "500 crédits chaque mois",
+  "@croissanceN500CreditsChaqueMois": {
+    "description": "Écran : live_plus"
+  },
+  "croissancePrioriteDeGeneration": "Priorité de génération",
+  "@croissancePrioriteDeGeneration": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceModelesDeDocumentsPremium": "Modèles de documents premium",
+  "@croissanceModelesDeDocumentsPremium": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceLivePlus": "Live Plus",
+  "@croissanceLivePlus": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceVosCreditsLiveIa": "Vos crédits Live IA chaque mois, moins cher qu’à l’unité",
+  "@croissanceVosCreditsLiveIa": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceLePlusComplet": "Le plus complet",
+  "@croissanceLePlusComplet": {
+    "description": "Écran : live_plus"
+  },
+  "croissanceSansEngagementArretezQuand": "Sans engagement : arrêtez quand vous voulez. Les crédits non utilisés restent valables 3 mois.",
+  "@croissanceSansEngagementArretezQuand": {
+    "description": "Écran : live_plus"
+  },
+  "@croissancePrixPeriode": {
+    "description": "Écran : offres_pro",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      },
+      "periode": {
+        "type": "String"
+      }
+    }
+  },
+  "croissancePrixPeriode": "{prix} / {periode}",
+  "@croissanceAn": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceAn": "an",
+  "@croissanceMois": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceMois": "mois",
+  "@croissanceUnAn": {
+    "description": "Écran : offres_pro",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceUnAn": "{nom} · 1 an",
+  "@croissanceChoisir": {
+    "description": "Écran : offres_pro",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceChoisir": "Choisir {nom}",
+  "croissanceAnnoncesIllimitees": "Annonces illimitées",
+  "@croissanceAnnoncesIllimitees": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceStatistiquesDetaillees": "Statistiques détaillées",
+  "@croissanceStatistiquesDetaillees": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceN2BoostsInclusPar": "2 boosts inclus par mois",
+  "@croissanceN2BoostsInclusPar": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceCommissionReduiteA5": "Commission réduite à 5 %",
+  "@croissanceCommissionReduiteA5": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceBadgePro": "Badge Pro",
+  "@croissanceBadgePro": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceJusquA10Agents": "Jusqu’à 10 agents",
+  "@croissanceJusquA10Agents": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceGestionDesVisitesEt": "Gestion des visites et du calendrier",
+  "@croissanceGestionDesVisitesEt": {
+    "description": "Écran : offres_pro"
+  },
+  "croissancePageAgenceVerifiee": "Page agence vérifiée",
+  "@croissancePageAgenceVerifiee": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceAgendaDeReservation": "Agenda de réservation",
+  "@croissanceAgendaDeReservation": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceDevisIllimites": "Devis illimités",
+  "@croissanceDevisIllimites": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceMiseEnAvantPar": "Mise en avant par quartier",
+  "@croissanceMiseEnAvantPar": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceEntreprise": "Entreprise",
+  "@croissanceEntreprise": {
+    "description": "Écran : offres_pro"
+  },
+  "croissancePlusieursGestionnaires": "Plusieurs gestionnaires",
+  "@croissancePlusieursGestionnaires": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceAccesALApi": "Accès à l’API partenaires",
+  "@croissanceAccesALApi": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceFacturationMensuelle": "Facturation mensuelle",
+  "@croissanceFacturationMensuelle": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceAccompagnementDedie": "Accompagnement dédié",
+  "@croissanceAccompagnementDedie": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceOffresLivePro": "Offres Live Pro",
+  "@croissanceOffresLivePro": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceChoisissezSelonVotreActivite": "Choisissez selon votre activité",
+  "@croissanceChoisissezSelonVotreActivite": {
+    "description": "Écran : offres_pro"
+  },
+  "croissancePaiementAnnuel": "Paiement annuel",
+  "@croissancePaiementAnnuel": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceN2MoisOfferts": "2 mois offerts",
+  "@croissanceN2MoisOfferts": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceSurDevis": "Sur devis",
+  "@croissanceSurDevis": {
+    "description": "Écran : offres_pro"
+  },
+  "croissanceNousContacter": "Nous contacter",
+  "@croissanceNousContacter": {
+    "description": "Écran : offres_pro"
+  },
+  "croissancePaiementParMobileMoney": "Paiement par Mobile Money, sans engagement. L’espace agence reste gratuit pendant le MVP (D-26).",
+  "@croissancePaiementParMobileMoney": {
+    "description": "Écran : offres_pro"
+  },
+  "@croissanceNJours": {
+    "description": "Écran : publicite",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "croissanceNJours": "{n, plural, =1{1 jour} other{{n} jours}}",
+  "@croissanceNPersonnes": {
+    "description": "Écran : publicite",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceNPersonnes": "{n} personnes",
+  "@croissanceSurJoursObjectif": {
+    "description": "Écran : publicite",
+    "placeholders": {
+      "jours": {
+        "type": "String"
+      },
+      "objectif": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceSurJoursObjectif": "sur {jours} · objectif : {objectif}",
+  "@croissanceCampagne": {
+    "description": "Écran : publicite",
+    "placeholders": {
+      "objectif": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "croissanceCampagne": "Campagne « {objectif} » · {n} j",
+  "@croissanceLancerCampagne": {
+    "description": "Écran : publicite",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceLancerCampagne": "Lancer la campagne · {montant}",
+  "@croissanceObjVentes": {
+    "description": "Écran : publicite"
+  },
+  "croissanceObjVentes": "Ventes",
+  "@croissanceObjVisites": {
+    "description": "Écran : publicite"
+  },
+  "croissanceObjVisites": "Visites de la boutique",
+  "@croissanceObjAbonnes": {
+    "description": "Écran : publicite"
+  },
+  "croissanceObjAbonnes": "Abonnés",
+  "@croissanceObjMessages": {
+    "description": "Écran : publicite"
+  },
+  "croissanceObjMessages": "Messages",
+  "croissancePublicite": "Publicité",
+  "@croissancePublicite": {
+    "description": "Écran : publicite"
+  },
+  "croissanceMesCampagnes": "Mes campagnes",
+  "@croissanceMesCampagnes": {
+    "description": "Écran : publicite"
+  },
+  "croissanceEnVerificationDiffusionSous": "En vérification · diffusion sous 2 h",
+  "@croissanceEnVerificationDiffusionSous": {
+    "description": "Écran : publicite"
+  },
+  "croissanceVotrePublicite": "Votre publicité",
+  "@croissanceVotrePublicite": {
+    "description": "Écran : publicite"
+  },
+  "croissanceNouvelArrivageDeRobes": "Nouvel arrivage de robes en wax",
+  "@croissanceNouvelArrivageDeRobes": {
+    "description": "Écran : publicite"
+  },
+  "croissanceVideoPublieeIlY": "Vidéo publiée il y a 2 jours",
+  "@croissanceVideoPublieeIlY": {
+    "description": "Écran : publicite"
+  },
+  "croissanceSponsorise": "Sponsorisé",
+  "@croissanceSponsorise": {
+    "description": "Écran : publicite"
+  },
+  "croissanceChoisirUneAutreVideo": "Choisir une autre vidéo",
+  "@croissanceChoisirUneAutreVideo": {
+    "description": "Écran : publicite"
+  },
+  "croissanceObjectif": "Objectif",
+  "@croissanceObjectif": {
+    "description": "Écran : publicite"
+  },
+  "croissanceQuiLaVoit": "Qui la voit",
+  "@croissanceQuiLaVoit": {
+    "description": "Écran : publicite"
+  },
+  "croissanceBudgetEtDuree": "Budget et durée",
+  "@croissanceBudgetEtDuree": {
+    "description": "Écran : publicite"
+  },
+  "croissancePorteeEstimee": "Portée estimée",
+  "@croissancePorteeEstimee": {
+    "description": "Écran : publicite"
+  },
+  "@croissanceDuAu": {
+    "description": "Écran : sejour",
+    "placeholders": {
+      "debut": {
+        "type": "String"
+      },
+      "fin": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceDuAu": "Du {debut} au {fin}",
+  "@croissanceNuitsCalc": {
+    "description": "Écran : sejour",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "croissanceNuitsCalc": "{prix} × {n, plural, =1{1 nuit} other{{n} nuits}}",
+  "@croissanceTitreNuits": {
+    "description": "Écran : sejour",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "croissanceTitreNuits": "{titre} · {n, plural, =1{1 nuit} other{{n} nuits}}",
+  "@croissanceReserverMontant": {
+    "description": "Écran : sejour",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceReserverMontant": "Réserver · {montant}",
+  "@croissanceHoteNote": {
+    "description": "Écran : sejour",
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      },
+      "hote": {
+        "type": "String"
+      },
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "croissanceHoteNote": "{quartier} · hôte {hote} · {note}",
+  "croissanceVen3": "Ven 3",
+  "@croissanceVen3": {
+    "description": "Écran : sejour"
+  },
+  "croissanceSam4": "Sam 4",
+  "@croissanceSam4": {
+    "description": "Écran : sejour"
+  },
+  "croissanceDim5": "Dim 5",
+  "@croissanceDim5": {
+    "description": "Écran : sejour"
+  },
+  "croissanceLun6": "Lun 6",
+  "@croissanceLun6": {
+    "description": "Écran : sejour"
+  },
+  "croissanceMar7": "Mar 7",
+  "@croissanceMar7": {
+    "description": "Écran : sejour"
+  },
+  "croissanceMer8": "Mer 8",
+  "@croissanceMer8": {
+    "description": "Écran : sejour"
+  },
+  "croissanceJeu9": "Jeu 9",
+  "@croissanceJeu9": {
+    "description": "Écran : sejour"
+  },
+  "croissanceVen10": "Ven 10",
+  "@croissanceVen10": {
+    "description": "Écran : sejour"
+  },
+  "croissanceArrivee": "Arrivée",
+  "@croissanceArrivee": {
+    "description": "Écran : sejour"
+  },
+  "croissanceNuits": "Nuits",
+  "@croissanceNuits": {
+    "description": "Écran : sejour"
+  },
+  "croissanceUneNuitDeMoins": "Une nuit de moins",
+  "@croissanceUneNuitDeMoins": {
+    "description": "Écran : sejour"
+  },
+  "croissanceUneNuitDePlus": "Une nuit de plus",
+  "@croissanceUneNuitDePlus": {
+    "description": "Écran : sejour"
+  },
+  "croissanceVoyageurs": "Voyageurs",
+  "@croissanceVoyageurs": {
+    "description": "Écran : sejour"
+  },
+  "croissanceUnVoyageurDeMoins": "Un voyageur de moins",
+  "@croissanceUnVoyageurDeMoins": {
+    "description": "Écran : sejour"
+  },
+  "croissanceUnVoyageurDePlus": "Un voyageur de plus",
+  "@croissanceUnVoyageurDePlus": {
+    "description": "Écran : sejour"
+  },
+  "croissanceFraisDeService5": "Frais de service (5 %)",
+  "@croissanceFraisDeService5": {
+    "description": "Écran : sejour"
+  },
+  "croissanceTotal": "Total",
+  "@croissanceTotal": {
+    "description": "Écran : sejour"
+  },
+  "croissancePayeDansLiveL": "Payé dans Live : l’hôte est payé après votre arrivée. Logement non conforme : remboursé.",
+  "@croissancePayeDansLiveL": {
+    "description": "Écran : sejour"
+  },
+  "croissanceAnnulationGratuiteJusquA": "Annulation gratuite jusqu’à 48 h avant l’arrivée ; ensuite, la première nuit est retenue.",
+  "@croissanceAnnulationGratuiteJusquA": {
+    "description": "Écran : sejour"
+  },
+  "@expansionCourse": {
+    "description": "Écran : expansion_screens",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "expansionCourse": "Course {montant} · payée dans Live, versée au livreur à la remise.",
+  "@expansionPrete": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionPrete": "Prête",
+  "@expansionRecuperee": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionRecuperee": "Récupérée",
+  "@expansionLivree": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionLivree": "Livrée",
+  "expansionBoutique": "Boutique",
+  "@expansionBoutique": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionVous": "Vous",
+  "@expansionVous": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionArriveeDans12Min": "Arrivée dans 12 min",
+  "@expansionArriveeDans12Min": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionEnRoute": "En route",
+  "@expansionEnRoute": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionArmelLivreurVerifie": "Armel · livreur vérifié",
+  "@expansionArmelLivreurVerifie": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionMoto495": "Moto · 4,9/5 · 1 240 courses",
+  "@expansionMoto495": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionAppelerLeLivreur": "Appeler le livreur",
+  "@expansionAppelerLeLivreur": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionAppelParNumeroMasque": "Appel par numéro masqué (simulation).",
+  "@expansionAppelParNumeroMasque": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionEcrireAuLivreur": "Écrire au livreur",
+  "@expansionEcrireAuLivreur": {
+    "description": "Écran : expansion_screens"
+  },
+  "expansionCodeDeRemiseA": "Code de remise à donner au livreur",
+  "@expansionCodeDeRemiseA": {
+    "description": "Écran : expansion_screens"
+  },
+  "@expansionTroisFois": {
+    "description": "Écran : finance",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      },
+      "part": {
+        "type": "String"
+      }
+    }
+  },
+  "expansionTroisFois": "Un téléphone à {prix} : 3 × {part}, sans frais cachés.",
+  "@expansionEpargneObjectif": {
+    "description": "Écran : finance",
+    "placeholders": {
+      "epargne": {
+        "type": "String"
+      },
+      "objectif": {
+        "type": "String"
+      }
+    }
+  },
+  "expansionEpargneObjectif": "{epargne} sur {objectif} · nouvelle moto",
+  "@expansionPartVente": {
+    "description": "Écran : finance",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "expansionPartVente": "{n} % de chaque vente",
+  "@expansionTirelirePart": {
+    "description": "Écran : finance",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "expansionTirelirePart": "Tirelire : {n} % de chaque vente.",
+  "@expansionMicroCredit": {
+    "description": "Écran : finance",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "expansionMicroCredit": "Grâce à vos ventes dans Live, jusqu’à {montant} pour votre stock, remboursés sur vos ventes.",
+  "@expansionSimulationCredit": {
+    "description": "Écran : finance",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "expansionSimulationCredit": "Simulation : {montant} sur 6 mois, remboursés par 10 % de vos ventes.",
+  "@expansionDans1Mois": {
+    "description": "Écran : finance"
+  },
+  "expansionDans1Mois": "Dans 1 mois",
+  "@expansionDans2Mois": {
+    "description": "Écran : finance"
+  },
+  "expansionDans2Mois": "Dans 2 mois",
+  "expansionServicesFinanciers": "Services financiers",
+  "@expansionServicesFinanciers": {
+    "description": "Écran : finance"
+  },
+  "expansionPayerEn3Fois": "Payer en 3 fois",
+  "@expansionPayerEn3Fois": {
+    "description": "Écran : finance"
+  },
+  "expansionVoirLesProduitsEligibles": "Voir les produits éligibles",
+  "@expansionVoirLesProduitsEligibles": {
+    "description": "Écran : finance"
+  },
+  "expansionTirelireLive": "Tirelire Live",
+  "@expansionTirelireLive": {
+    "description": "Écran : finance"
+  },
+  "expansionMettezDeCoteUne": "Mettez de côté une part de chaque vente, automatiquement.",
+  "@expansionMettezDeCoteUne": {
+    "description": "Écran : finance"
+  },
+  "expansionMettreAJour": "Mettre à jour",
+  "@expansionMettreAJour": {
+    "description": "Écran : finance"
+  },
+  "expansionMicroCreditVendeur": "Micro-crédit vendeur",
+  "@expansionMicroCreditVendeur": {
+    "description": "Écran : finance"
+  },
+  "expansionEligible214VentesNote": "Éligible : 214 ventes, note 4,8, 0 litige",
+  "@expansionEligible214VentesNote": {
+    "description": "Écran : finance"
+  },
+  "expansionSimulerUnCredit": "Simuler un crédit",
+  "@expansionSimulerUnCredit": {
+    "description": "Écran : finance"
+  },
+  "expansionCesServicesSontFournis": "Ces services sont fournis par des établissements agréés par la COBAC. Live transmet votre demande, avec votre accord ; il ne prête pas lui-même.",
+  "@expansionCesServicesSontFournis": {
+    "description": "Écran : finance"
+  },
+  "expansionFondsCreateurs": "Fonds Créateurs",
+  "@expansionFondsCreateurs": {
+    "description": "Écran : fonds"
+  },
+  "expansionFondsDuMois": "Fonds du mois",
+  "@expansionFondsDuMois": {
+    "description": "Écran : fonds"
+  },
+  "expansionN30DesRevenusPublicitaires": "30 % des revenus publicitaires de septembre",
+  "@expansionN30DesRevenusPublicitaires": {
+    "description": "Écran : fonds"
+  },
+  "expansionCreateursEligibles": "créateurs éligibles",
+  "@expansionCreateursEligibles": {
+    "description": "Écran : fonds"
+  },
+  "expansionFcfaEnMoyenne": "FCFA en moyenne",
+  "@expansionFcfaEnMoyenne": {
+    "description": "Écran : fonds"
+  },
+  "expansionN5Oct": "5 oct.",
+  "@expansionN5Oct": {
+    "description": "Écran : fonds"
+  },
+  "expansionCommentLaPartEst": "Comment la part est calculée",
+  "@expansionCommentLaPartEst": {
+    "description": "Écran : fonds"
+  },
+  "expansionEngagementReel": "Engagement réel",
+  "@expansionEngagementReel": {
+    "description": "Écran : fonds"
+  },
+  "expansionTempsDeVisionnagePartages": "Temps de visionnage, partages, commentaires de comptes vérifiés.",
+  "@expansionTempsDeVisionnagePartages": {
+    "description": "Écran : fonds"
+  },
+  "expansionQualiteEtOriginalite": "Qualité et originalité",
+  "@expansionQualiteEtOriginalite": {
+    "description": "Écran : fonds"
+  },
+  "expansionContenusOriginauxUtilesEn": "Contenus originaux, utiles, en français, lingala ou kituba.",
+  "@expansionContenusOriginauxUtilesEn": {
+    "description": "Écran : fonds"
+  },
+  "expansionRespectDesRegles": "Respect des règles",
+  "@expansionRespectDesRegles": {
+    "description": "Écran : fonds"
+  },
+  "expansionAucunAvertissementDeModeration": "Aucun avertissement de modération sur la période.",
+  "@expansionAucunAvertissementDeModeration": {
+    "description": "Écran : fonds"
+  },
+  "expansionPasDeFraude": "Pas de fraude",
+  "@expansionPasDeFraude": {
+    "description": "Écran : fonds"
+  },
+  "expansionVuesAcheteesOuComptes": "Vues achetées ou comptes multiples : exclusion du fonds.",
+  "@expansionVuesAcheteesOuComptes": {
+    "description": "Écran : fonds"
+  },
+  "expansionConditionsPourYParticiper": "Conditions pour y participer",
+  "@expansionConditionsPourYParticiper": {
+    "description": "Écran : fonds"
+  },
+  "expansionIdentiteVerifiee": "Identité vérifiée",
+  "@expansionIdentiteVerifiee": {
+    "description": "Écran : fonds"
+  },
+  "expansionN500AbonnesVousEn": "500 abonnés (vous en avez 128)",
+  "@expansionN500AbonnesVousEn": {
+    "description": "Écran : fonds"
+  },
+  "expansionN10000MinutesDe": "10 000 minutes de visionnage sur 28 jours",
+  "@expansionN10000MinutesDe": {
+    "description": "Écran : fonds"
+  },
+  "expansionAuMoins4Videos": "Au moins 4 vidéos originales par mois",
+  "@expansionAuMoins4Videos": {
+    "description": "Écran : fonds"
+  },
+  "expansionLeconDeLaV1": "Leçon de la v1 : payer les vues avant d’avoir des revenus publicitaires ruine la plateforme et attire la fraude. Le fonds n’existe que s’il est financé par la publicité.",
+  "@expansionLeconDeLaV1": {
+    "description": "Écran : fonds"
+  },
+  "expansionVoirMesStatistiquesDe": "Voir mes statistiques de créateur",
+  "@expansionVoirMesStatistiquesDe": {
+    "description": "Écran : fonds"
+  },
+  "expansionCatalogue": "Catalogue",
+  "@expansionCatalogue": {
+    "description": "Écran : partenaires"
+  },
+  "expansionPublierEtMettreA": "Publier et mettre à jour annonces, prix et stock depuis votre logiciel.",
+  "@expansionPublierEtMettreA": {
+    "description": "Écran : partenaires"
+  },
+  "expansionCommandes": "Commandes",
+  "@expansionCommandes": {
+    "description": "Écran : partenaires"
+  },
+  "expansionRecevoirLesCommandesLes": "Recevoir les commandes, les accepter, suivre la remise par QR.",
+  "@expansionRecevoirLesCommandesLes": {
+    "description": "Écran : partenaires"
+  },
+  "expansionLivePayEtSequestre": "Live Pay et séquestre",
+  "@expansionLivePayEtSequestre": {
+    "description": "Écran : partenaires"
+  },
+  "expansionEncaisserMomoAirtelMoney": "Encaisser MoMo, Airtel Money et Visa ; argent bloqué jusqu’à la remise.",
+  "@expansionEncaisserMomoAirtelMoney": {
+    "description": "Écran : partenaires"
+  },
+  "expansionLivraison": "Livraison",
+  "@expansionLivraison": {
+    "description": "Écran : partenaires"
+  },
+  "expansionRecevoirDesCoursesEnvoyer": "Recevoir des courses, envoyer la position du livreur et le code de remise.",
+  "@expansionRecevoirDesCoursesEnvoyer": {
+    "description": "Écran : partenaires"
+  },
+  "expansionVerification": "Vérification",
+  "@expansionVerification": {
+    "description": "Écran : partenaires"
+  },
+  "expansionSavoirSiUnVendeur": "Savoir si un vendeur ou une agence est vérifié, avec son accord.",
+  "@expansionSavoirSiUnVendeur": {
+    "description": "Écran : partenaires"
+  },
+  "expansionApiPartenaires": "API partenaires",
+  "@expansionApiPartenaires": {
+    "description": "Écran : partenaires"
+  },
+  "expansionBranchezVotreActiviteSur": "Branchez votre activité sur Live",
+  "@expansionBranchezVotreActiviteSur": {
+    "description": "Écran : partenaires"
+  },
+  "expansionPourLesBanquesLivreurs": "Pour les banques, livreurs, agences, écoles et grandes boutiques. Réservé aux espaces Pro vérifiés.",
+  "@expansionPourLesBanquesLivreurs": {
+    "description": "Écran : partenaires"
+  },
+  "expansionCeQueVousPouvez": "Ce que vous pouvez faire",
+  "@expansionCeQueVousPouvez": {
+    "description": "Écran : partenaires"
+  },
+  "expansionMesCles": "Mes clés",
+  "@expansionMesCles": {
+    "description": "Écran : partenaires"
+  },
+  "expansionMasquerLaCle": "Masquer la clé",
+  "@expansionMasquerLaCle": {
+    "description": "Écran : partenaires"
+  },
+  "expansionAfficherLaCle": "Afficher la clé",
+  "@expansionAfficherLaCle": {
+    "description": "Écran : partenaires"
+  },
+  "expansionNeLaPartagezJamais": "Ne la partagez jamais : elle donne accès à vos commandes et paiements.",
+  "@expansionNeLaPartagezJamais": {
+    "description": "Écran : partenaires"
+  },
+  "expansionAfficher": "Afficher",
+  "@expansionAfficher": {
+    "description": "Écran : partenaires"
+  },
+  "expansionProductionVraiesTransactionsAfficher": "Production : vraies transactions. Afficher la clé demande votre code Live.",
+  "@expansionProductionVraiesTransactionsAfficher": {
+    "description": "Écran : partenaires"
+  },
+  "expansionTestPaiementsSimulesAucun": "Test : paiements simulés, aucun argent réel ne circule.",
+  "@expansionTestPaiementsSimulesAucun": {
+    "description": "Écran : partenaires"
+  },
+  "expansionUtilisationCeMoisCi": "Utilisation ce mois-ci",
+  "@expansionUtilisationCeMoisCi": {
+    "description": "Écran : partenaires"
+  },
+  "expansionAppels": "Appels",
+  "@expansionAppels": {
+    "description": "Écran : partenaires"
+  },
+  "expansionReussis": "Réussis",
+  "@expansionReussis": {
+    "description": "Écran : partenaires"
+  },
+  "expansionAppelsGratuitsParMois": "Appels gratuits par mois",
+  "@expansionAppelsGratuitsParMois": {
+    "description": "Écran : partenaires"
+  },
+  "expansionAdresseDeNotificationWebhook": "Adresse de notification (webhook)",
+  "@expansionAdresseDeNotificationWebhook": {
+    "description": "Écran : partenaires"
+  },
+  "expansionNotificationDeTestEnvoyee": "Notification de test envoyée.",
+  "@expansionNotificationDeTestEnvoyee": {
+    "description": "Écran : partenaires"
+  },
+  "expansionDocumentation": "Documentation",
+  "@expansionDocumentation": {
+    "description": "Écran : partenaires"
+  },
+  "expansionExemplesEnJavascriptPhp": "Exemples en JavaScript, PHP et Python",
+  "@expansionExemplesEnJavascriptPhp": {
+    "description": "Écran : partenaires"
+  },
+  "expansionDocumentationDeveloppeursLiveAfrica": "Documentation : developpeurs.live.africa",
+  "@expansionDocumentationDeveloppeursLiveAfrica": {
+    "description": "Écran : partenaires"
+  },
+  "expansionDemandeEnvoyeeUnConseiller": "Demande envoyée : un conseiller Live vous rappelle sous 48 h.",
+  "@expansionDemandeEnvoyeeUnConseiller": {
+    "description": "Écran : partenaires"
+  },
+  "expansionDevenirPartenaire": "Devenir partenaire",
+  "@expansionDevenirPartenaire": {
+    "description": "Écran : partenaires"
+  },
+  "aidePaiements": "Paiements",
+  "@aidePaiements": {
+    "description": "Écran : aide_screens"
+  },
+  "aideCommandes": "Commandes",
+  "@aideCommandes": {
+    "description": "Écran : aide_screens"
+  },
+  "aideLogement": "Logement",
+  "@aideLogement": {
+    "description": "Écran : aide_screens"
+  },
+  "aideServices": "Services",
+  "@aideServices": {
+    "description": "Écran : aide_screens"
+  },
+  "aideCompte": "Compte",
+  "@aideCompte": {
+    "description": "Écran : aide_screens"
+  },
+  "aideMonArgentEstIl": "Mon argent est-il protégé ?",
+  "@aideMonArgentEstIl": {
+    "description": "Écran : aide_screens"
+  },
+  "aideOuiCeQuiSe": "Oui. Ce qui se paie « dans Live » reste bloqué jusqu’à votre confirmation (QR, « J’ai reçu », fin du service). Sans confirmation, vous êtes remboursé.",
+  "@aideOuiCeQuiSe": {
+    "description": "Écran : aide_screens"
+  },
+  "aideOnMeDemandeMon": "On me demande mon code MoMo",
+  "@aideOnMeDemandeMon": {
+    "description": "Écran : aide_screens"
+  },
+  "aideCEstUneArnaque": "C’est une arnaque. Live ne demande jamais votre code secret Mobile Money, ni par message ni par appel. Signalez le message.",
+  "@aideCEstUneArnaque": {
+    "description": "Écran : aide_screens"
+  },
+  "aideJAiPayeMais": "J’ai payé mais rien ne s’affiche",
+  "@aideJAiPayeMais": {
+    "description": "Écran : aide_screens"
+  },
+  "aideLOperateurPeutMettre": "L’opérateur peut mettre jusqu’à 3 minutes à confirmer. Vous n’êtes jamais débité deux fois ; sans confirmation, l’argent revient seul.",
+  "@aideLOperateurPeutMettre": {
+    "description": "Écran : aide_screens"
+  },
+  "aideCommentRetirerMesGains": "Comment retirer mes gains ?",
+  "@aideCommentRetirerMesGains": {
+    "description": "Écran : aide_screens"
+  },
+  "aideVerifiezVotreIdentiteUne": "Vérifiez votre identité une fois, puis Moi › Mon argent › Retirer, vers votre numéro Mobile Money, sans frais.",
+  "@aideVerifiezVotreIdentiteUne": {
+    "description": "Écran : aide_screens"
+  },
+  "aideLeProduitRecuN": "Le produit reçu n’est pas conforme",
+  "@aideLeProduitRecuN": {
+    "description": "Écran : aide_screens"
+  },
+  "aideNeConfirmezPasLa": "Ne confirmez pas la réception. Ouvrez « Signaler un problème » sur la commande : l’argent reste bloqué pendant l’examen.",
+  "@aideNeConfirmezPasLa": {
+    "description": "Écran : aide_screens"
+  },
+  "aideLeVendeurNeRepond": "Le vendeur ne répond pas",
+  "@aideLeVendeurNeRepond": {
+    "description": "Écran : aide_screens"
+  },
+  "aideSansAcceptationSous24": "Sans acceptation sous 24 heures, la commande est annulée et vous êtes remboursé automatiquement.",
+  "@aideSansAcceptationSous24": {
+    "description": "Écran : aide_screens"
+  },
+  "aideQueSePaieEn": "Que se paie en dehors de Live ?",
+  "@aideQueSePaieEn": {
+    "description": "Écran : aide_screens"
+  },
+  "aideLoyersCautionEtPrix": "Loyers, caution et prix d’un bien se paient en direct, contre reçu. Les frais de visite et l’acompte de réservation passent par Live.",
+  "@aideLoyersCautionEtPrix": {
+    "description": "Écran : aide_screens"
+  },
+  "aideLAgentNEst": "L’agent n’est pas venu à la visite",
+  "@aideLAgentNEst": {
+    "description": "Écran : aide_screens"
+  },
+  "aideSignalezLAbsenceDepuis": "Signalez l’absence depuis la visite : vos frais sont remboursés en totalité.",
+  "@aideSignalezLAbsenceDepuis": {
+    "description": "Écran : aide_screens"
+  },
+  "aideLeTravailNEst": "Le travail n’est pas terminé",
+  "@aideLeTravailNEst": {
+    "description": "Écran : aide_screens"
+  },
+  "aideNeValidezPasLa": "Ne validez pas la fin des travaux. Signalez le problème : la part restante reste bloquée.",
+  "@aideNeValidezPasLa": {
+    "description": "Écran : aide_screens"
+  },
+  "aideJAiChangeDe": "J’ai changé de numéro",
+  "@aideJAiChangeDe": {
+    "description": "Écran : aide_screens"
+  },
+  "aideParametresNumeroDeTelephone": "Paramètres › Numéro de téléphone : un code est envoyé au nouveau numéro, puis l’ancien est désactivé.",
+  "@aideParametresNumeroDeTelephone": {
+    "description": "Écran : aide_screens"
+  },
+  "aideMonCompteEstSuspendu": "Mon compte est suspendu",
+  "@aideMonCompteEstSuspendu": {
+    "description": "Écran : aide_screens"
+  },
+  "aideLeMotifEstDans": "Le motif est dans vos notifications. Répondez depuis « Écrire au support » : un agent réexamine sous 24 heures.",
+  "@aideLeMotifEstDans": {
+    "description": "Écran : aide_screens"
+  },
+  "aideMesCreditsOntEte": "Mes crédits ont été débités sans résultat",
+  "@aideMesCreditsOntEte": {
+    "description": "Écran : aide_screens"
+  },
+  "aideUnEchecEstRecredite": "Un échec est recrédité automatiquement. Sinon, écrivez au support avec le nom du service.",
+  "@aideUnEchecEstRecredite": {
+    "description": "Écran : aide_screens"
+  },
+  "@aideMesDemandesN": {
+    "description": "Écran : aide_screens",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "aideMesDemandesN": "Mes demandes ({n})",
+  "aideCentreDAide": "Centre d’aide",
+  "@aideCentreDAide": {
+    "description": "Écran : aide_screens"
+  },
+  "aideRechercherRemboursementRetraitVisite": "Rechercher : remboursement, retrait, visite…",
+  "@aideRechercherRemboursementRetraitVisite": {
+    "description": "Écran : aide_screens"
+  },
+  "aideOnVousDemandeVotre": "On vous demande votre code MoMo ou de payer hors de Live ? C’est une arnaque.",
+  "@aideOnVousDemandeVotre": {
+    "description": "Écran : aide_screens"
+  },
+  "aideSignaler": "Signaler",
+  "@aideSignaler": {
+    "description": "Écran : aide_screens"
+  },
+  "aideThemes": "Thèmes",
+  "@aideThemes": {
+    "description": "Écran : aide_screens"
+  },
+  "aideQuestionsFrequentes": "Questions fréquentes",
+  "@aideQuestionsFrequentes": {
+    "description": "Écran : aide_screens"
+  },
+  "aideAucuneReponseTrouveeEcrivez": "Aucune réponse trouvée : écrivez-nous, un agent vous répond.",
+  "@aideAucuneReponseTrouveeEcrivez": {
+    "description": "Écran : aide_screens"
+  },
+  "aideBesoinDUnAgent": "Besoin d’un agent ?",
+  "@aideBesoinDUnAgent": {
+    "description": "Écran : aide_screens"
+  },
+  "aideReponseEnMoinsDe": "Réponse en moins de 2 heures, 7 jours sur 7, de 7 h à 22 h. En français, lingala ou kituba.",
+  "@aideReponseEnMoinsDe": {
+    "description": "Écran : aide_screens"
+  },
+  "aideEcrireAuSupport": "Écrire au support",
+  "@aideEcrireAuSupport": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideCeQuiSePaie": "Ce qui se paie dans Live",
+  "@aideCeQuiSePaie": {
+    "description": "Écran : aide_screens"
+  },
+  "aidePayeDansLiveA": "Payé dans Live, à la remise ou en direct",
+  "@aidePayeDansLiveA": {
+    "description": "Écran : aide_screens"
+  },
+  "aideConditionsDUtilisation": "Conditions d’utilisation",
+  "@aideConditionsDUtilisation": {
+    "description": "Écran : aide_screens"
+  },
+  "aidePolitiqueDeConfidentialite": "Politique de confidentialité",
+  "@aidePolitiqueDeConfidentialite": {
+    "description": "Écran : aide_screens"
+  },
+  "@aideSujetPaiement": {
+    "description": "Écran : aide_ecrire (sujet)"
+  },
+  "aideSujetPaiement": "Paiement",
+  "@aideSujetCommande": {
+    "description": "Écran : aide_ecrire (sujet)"
+  },
+  "aideSujetCommande": "Commande",
+  "@aideSujetLogement": {
+    "description": "Écran : aide_ecrire (sujet)"
+  },
+  "aideSujetLogement": "Logement",
+  "@aideSujetService": {
+    "description": "Écran : aide_ecrire (sujet)"
+  },
+  "aideSujetService": "Service",
+  "@aideSujetCompte": {
+    "description": "Écran : aide_ecrire (sujet)"
+  },
+  "aideSujetCompte": "Compte",
+  "@aideSujetArnaque": {
+    "description": "Écran : aide_ecrire (sujet)"
+  },
+  "aideSujetArnaque": "Arnaque",
+  "@aideSujetAutre": {
+    "description": "Écran : aide_ecrire (sujet)"
+  },
+  "aideSujetAutre": "Autre",
+  "@aideDemandeEnvoyee": {
+    "description": "Écran : aide_ecrire",
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "aideDemandeEnvoyee": "Demande {id} envoyée au support.",
+  "aideSujet": "Sujet",
+  "@aideSujet": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideNePayezRienEt": "Ne payez rien et ne donnez aucun code. Indiquez le numéro ou le compte qui vous a contacté : il est examiné en priorité.",
+  "@aideNePayezRienEt": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideQueSePasseT": "Que se passe-t-il ?",
+  "@aideQueSePasseT": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideNumeroDeCommandeDate": "Numéro de commande, date, ce que vous attendiez…",
+  "@aideNumeroDeCommandeDate": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideCaptureJointe": "Capture jointe",
+  "@aideCaptureJointe": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideJoindreUneCaptureD": "Joindre une capture d’écran",
+  "@aideJoindreUneCaptureD": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideUnAgentVousRepond": "Un agent vous répond ici et par notification. Il ne vous demandera jamais votre code secret.",
+  "@aideUnAgentVousRepond": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideEnvoyerAuSupport": "Envoyer au support",
+  "@aideEnvoyerAuSupport": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideMesDemandes": "Mes demandes",
+  "@aideMesDemandes": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideRecueUnAgentVous": "Reçue · un agent vous répond sous 2 h",
+  "@aideRecueUnAgentVous": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aidePaiementMomoDebiteMais": "Paiement MoMo débité mais commande non affichée.",
+  "@aidePaiementMomoDebiteMais": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideResoluePaiementConfirmePar": "Résolue · paiement confirmé par l’opérateur",
+  "@aideResoluePaiementConfirmePar": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideNouvelleDemande": "Nouvelle demande",
+  "@aideNouvelleDemande": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideResolue": "Résolue",
+  "@aideResolue": {
+    "description": "Écran : aide_ecrire"
+  },
+  "aideEnCours": "En cours",
+  "@aideEnCours": {
+    "description": "Écran : aide_ecrire"
   }
 }

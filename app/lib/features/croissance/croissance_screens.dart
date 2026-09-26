@@ -9,6 +9,7 @@ import '../../data/mock.dart';
 import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'sejour.dart';
 part 'live_plus.dart';
@@ -50,10 +51,10 @@ class EcranSejours extends ConsumerWidget {
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Séjours meublés'),
+        title: Text(context.t.croissanceSejoursMeubles),
         actions: [
           IconButton(
-            tooltip: 'Voir sur la carte',
+            tooltip: context.t.croissanceVoirSurLaCarte,
             onPressed: () => context.push('/carte'),
             icon: const Icon(Icons.map_outlined),
           ),
@@ -75,15 +76,14 @@ class EcranSejours extends ConsumerWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      'Réservation ${reserves.first} confirmée. Le code d’accès '
-                      'arrive la veille par message.',
+                      context.t.croissanceReservationConfirmee(reserves.first),
                     ),
                   ),
                 ],
               ),
             ),
           ],
-          const EnTeteSection('Pour quelques nuits'),
+          EnTeteSection(context.t.croissancePourQuelquesNuits),
           GrilleAdaptative(
             largeurMax: 320,
             espacement: 14,
@@ -96,17 +96,17 @@ class EcranSejours extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 16),
-          const BlocReglement(
+          BlocReglement(
             lignes: [
               LigneReglement(
-                'Nuits réservées',
+                context.t.croissanceNuitsReservees,
                 Reglement.dansLive,
-                detail: 'Versées à l’hôte après votre arrivée (QR à l’entrée)',
+                detail: context.t.croissanceVerseesALHote,
               ),
               LigneReglement(
-                'Caution éventuelle',
+                context.t.croissanceCautionEventuelle,
                 Reglement.direct,
-                detail: 'Remise à l’hôte, rendue au départ',
+                detail: context.t.croissanceRemiseALHote,
               ),
             ],
           ),

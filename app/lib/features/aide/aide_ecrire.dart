@@ -43,13 +43,16 @@ class _EcranEcrireState extends ConsumerState<EcranEcrireSupport> {
   Widget build(BuildContext context) {
     final pret = _sujet != null && _message.text.trim().length >= 10;
     return Scaffold(
-      appBar: AppBar(title: const Text('Écrire au support')),
+      appBar: AppBar(title: Text(context.t.aideEcrireAuSupport)),
       body: Etroit(
         largeur: 720,
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
           children: [
-            const Text('Sujet', style: TextStyle(fontWeight: FontWeight.w700)),
+            Text(
+              context.t.aideSujet,
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -57,7 +60,7 @@ class _EcranEcrireState extends ConsumerState<EcranEcrireSupport> {
               children: [
                 for (final s in _sujets)
                   ChoiceChip(
-                    label: Text(s),
+                    label: Text(_sujetAffiche(context.t, s)),
                     selected: _sujet == s,
                     onSelected: (_) => setState(() => _sujet = s),
                   ),
@@ -65,12 +68,9 @@ class _EcranEcrireState extends ConsumerState<EcranEcrireSupport> {
             ),
             if (_sujet == 'Arnaque') ...[
               const SizedBox(height: 12),
-              const Bloc(
+              Bloc(
                 fond: LiveColors.teinteRouge,
-                child: Text(
-                  'Ne payez rien et ne donnez aucun code. Indiquez le numéro ou '
-                  'le compte qui vous a contacté : il est examiné en priorité.',
-                ),
+                child: Text(context.t.aideNePayezRienEt),
               ),
             ],
             const SizedBox(height: 16),
@@ -78,9 +78,9 @@ class _EcranEcrireState extends ConsumerState<EcranEcrireSupport> {
               controller: _message,
               minLines: 4,
               maxLines: 8,
-              decoration: const InputDecoration(
-                labelText: 'Que se passe-t-il ?',
-                hintText: 'Numéro de commande, date, ce que vous attendiez…',
+              decoration: InputDecoration(
+                labelText: context.t.aideQueSePasseT,
+                hintText: context.t.aideNumeroDeCommandeDate,
                 alignLabelWithHint: true,
               ),
             ),
@@ -91,13 +91,14 @@ class _EcranEcrireState extends ConsumerState<EcranEcrireSupport> {
                 _capture ? Icons.check_circle_rounded : Icons.image_outlined,
               ),
               label: Text(
-                _capture ? 'Capture jointe' : 'Joindre une capture d’écran',
+                _capture
+                    ? context.t.aideCaptureJointe
+                    : context.t.aideJoindreUneCaptureD,
               ),
             ),
             const SizedBox(height: 12),
-            const Text(
-              'Un agent vous répond ici et par notification. Il ne vous '
-              'demandera jamais votre code secret.',
+            Text(
+              context.t.aideUnAgentVousRepond,
               style: TextStyle(color: LiveColors.gris),
             ),
           ],
@@ -110,11 +111,11 @@ class _EcranEcrireState extends ConsumerState<EcranEcrireSupport> {
                   final id = ref
                       .read(liveProvider.notifier)
                       .ecrireSupport(_sujet!, _message.text.trim());
-                  informer(context, 'Demande $id envoyée au support.');
+                  informer(context, context.t.aideDemandeEnvoyee(id));
                   context.pushReplacement('/aide/demandes');
                 }
               : null,
-          child: const Text('Envoyer au support'),
+          child: Text(context.t.aideEnvoyerAuSupport),
         ),
       ),
     );
@@ -129,7 +130,7 @@ class EcranDemandesSupport extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final demandes = ref.watch(liveProvider.select((e) => e.demandesSupport));
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes demandes')),
+      appBar: AppBar(title: Text(context.t.aideMesDemandes)),
       body: Etroit(
         largeur: 720,
         child: ListView(
@@ -140,21 +141,21 @@ class EcranDemandesSupport extends ConsumerWidget {
                 id: id,
                 sujet: sujet,
                 message: message,
-                etat: 'Reçue · un agent vous répond sous 2 h',
+                etat: context.t.aideRecueUnAgentVous,
                 resolue: false,
               ),
-            const _CarteDemande(
+            _CarteDemande(
               id: 'SP-10388',
               sujet: 'Paiement',
-              message: 'Paiement MoMo débité mais commande non affichée.',
-              etat: 'Résolue · paiement confirmé par l’opérateur',
+              message: context.t.aidePaiementMomoDebiteMais,
+              etat: context.t.aideResoluePaiementConfirmePar,
               resolue: true,
             ),
             const SizedBox(height: 8),
             OutlinedButton.icon(
               onPressed: () => context.push('/aide/ecrire'),
               icon: const Icon(Icons.add_rounded),
-              label: const Text('Nouvelle demande'),
+              label: Text(context.t.aideNouvelleDemande),
             ),
           ],
         ),
@@ -189,12 +190,12 @@ class _CarteDemande extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    '$sujet · $id',
+                    '${_sujetAffiche(context.t, sujet)} · $id',
                     style: const TextStyle(fontWeight: FontWeight.w800),
                   ),
                 ),
                 Etiquette(
-                  resolue ? 'Résolue' : 'En cours',
+                  resolue ? context.t.aideResolue : context.t.aideEnCours,
                   fond: resolue
                       ? LiveColors.teinteVerte
                       : LiveColors.teinteAmbre,

@@ -11,7 +11,7 @@ class EcranPublicite extends ConsumerStatefulWidget {
 }
 
 class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
-  var _objectif = 'Ventes';
+  late var _objectif = context.t.croissanceObjVentes;
   final _quartiers = <String>{'Moungali', 'Poto-Poto'};
   final _interets = <String>{'Mode'};
   var _budget = 10000.0;
@@ -24,21 +24,21 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
     final budget = (_budget / 1000).round() * 1000;
     final portee = (budget / 1000 * 900 * (1 + _quartiers.length / 4)).round();
     return Scaffold(
-      appBar: AppBar(title: const Text('Publicité')),
+      appBar: AppBar(title: Text(context.t.croissancePublicite)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
           if (campagnes.isNotEmpty) ...[
-            const EnTeteSection('Mes campagnes'),
+            EnTeteSection(context.t.croissanceMesCampagnes),
             for (final c in campagnes)
               LigneMenu(
                 icone: Icons.campaign_rounded,
                 titre: c,
-                detail: 'En vérification · diffusion sous 2 h',
+                detail: context.t.croissanceEnVerificationDiffusionSous,
                 couleur: LiveColors.cuivre,
               ),
           ],
-          const EnTeteSection('Votre publicité'),
+          EnTeteSection(context.t.croissanceVotrePublicite),
           Row(
             children: [
               const SizedBox(
@@ -54,40 +54,40 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Nouvel arrivage de robes en wax',
+                    Text(
+                      context.t.croissanceNouvelArrivageDeRobes,
                       style: TextStyle(fontWeight: FontWeight.w700),
                     ),
-                    const Text(
-                      'Vidéo publiée il y a 2 jours',
+                    Text(
+                      context.t.croissanceVideoPublieeIlY,
                       style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
                     ),
                     const SizedBox(height: 6),
-                    const Etiquette(
-                      'Sponsorisé',
+                    Etiquette(
+                      context.t.croissanceSponsorise,
                       fond: LiveColors.voile,
                       couleur: LiveColors.bleu,
                     ),
                     TextButton(
                       style: TextButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () => context.push('/publier/media'),
-                      child: const Text('Choisir une autre vidéo'),
+                      child: Text(context.t.croissanceChoisirUneAutreVideo),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          const EnTeteSection('Objectif'),
+          EnTeteSection(context.t.croissanceObjectif),
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: [
-              for (final o in const [
-                'Ventes',
-                'Visites de la boutique',
-                'Abonnés',
-                'Messages',
+              for (final o in [
+                context.t.croissanceObjVentes,
+                context.t.croissanceObjVisites,
+                context.t.croissanceObjAbonnes,
+                context.t.croissanceObjMessages,
               ])
                 ChoiceChip(
                   label: Text(o),
@@ -96,7 +96,7 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
                 ),
             ],
           ),
-          const EnTeteSection('Qui la voit'),
+          EnTeteSection(context.t.croissanceQuiLaVoit),
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -126,7 +126,7 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
                 ),
             ],
           ),
-          const EnTeteSection('Budget et durée'),
+          EnTeteSection(context.t.croissanceBudgetEtDuree),
           Text(
             fcfa(budget),
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
@@ -144,7 +144,7 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
             children: [
               for (final j in const [1, 3, 7, 14])
                 ChoiceChip(
-                  label: Text('$j jour${j > 1 ? 's' : ''}'),
+                  label: Text(context.t.croissanceNJours(j)),
                   selected: _jours == j,
                   onSelected: (_) => setState(() => _jours = j),
                 ),
@@ -171,13 +171,15 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Portée estimée',
+                      Text(
+                        context.t.croissancePorteeEstimee,
                         style: TextStyle(color: Colors.white70),
                       ),
                       ChiffreAnime(
                         valeur: portee,
-                        format: (n) => '${fcfa(n, devise: false)} personnes',
+                        format: (n) => context.t.croissanceNPersonnes(
+                          fcfa(n, devise: false),
+                        ),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -185,7 +187,10 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
                         ),
                       ),
                       Text(
-                        'sur $_jours jour${_jours > 1 ? 's' : ''} · objectif : ${_objectif.toLowerCase()}',
+                        context.t.croissanceSurJoursObjectif(
+                          context.t.croissanceNJours(_jours),
+                          _objectif.toLowerCase(),
+                        ),
                         style: const TextStyle(
                           color: Colors.white70,
                           fontSize: 12.5,
@@ -208,10 +213,10 @@ class _EcranPubliciteState extends ConsumerState<EcranPublicite> {
                   ref,
                   TypePaiement.publicite,
                   budget,
-                  'Campagne « $_objectif » · $_jours j',
+                  context.t.croissanceCampagne(_objectif, _jours),
                   'pub',
                 ),
-          child: Text('Lancer la campagne · ${fcfa(budget)}'),
+          child: Text(context.t.croissanceLancerCampagne(fcfa(budget))),
         ),
       ),
     );

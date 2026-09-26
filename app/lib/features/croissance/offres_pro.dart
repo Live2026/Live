@@ -13,17 +13,17 @@ class EcranOffresPro extends ConsumerStatefulWidget {
 class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
   var _annuel = false;
 
-  static const _offres = [
+  late final _offres = [
     (
       'Pro Vendeur',
       Icons.storefront_rounded,
       5000,
       [
-        'Annonces illimitées',
-        'Statistiques détaillées',
-        '2 boosts inclus par mois',
-        'Commission réduite à 5 %',
-        'Badge Pro',
+        context.t.croissanceAnnoncesIllimitees,
+        context.t.croissanceStatistiquesDetaillees,
+        context.t.croissanceN2BoostsInclusPar,
+        context.t.croissanceCommissionReduiteA5,
+        context.t.croissanceBadgePro,
       ],
     ),
     (
@@ -31,10 +31,10 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
       Icons.apartment_rounded,
       15000,
       [
-        'Jusqu’à 10 agents',
-        'Gestion des visites et du calendrier',
-        'Annonces illimitées',
-        'Page agence vérifiée',
+        context.t.croissanceJusquA10Agents,
+        context.t.croissanceGestionDesVisitesEt,
+        context.t.croissanceAnnoncesIllimitees,
+        context.t.croissancePageAgenceVerifiee,
       ],
     ),
     (
@@ -42,21 +42,21 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
       Icons.handyman_rounded,
       4000,
       [
-        'Agenda de réservation',
-        'Devis illimités',
-        'Mise en avant par quartier',
-        'Badge Pro',
+        context.t.croissanceAgendaDeReservation,
+        context.t.croissanceDevisIllimites,
+        context.t.croissanceMiseEnAvantPar,
+        context.t.croissanceBadgePro,
       ],
     ),
     (
-      'Entreprise',
+      context.t.croissanceEntreprise,
       Icons.business_rounded,
       0,
       [
-        'Plusieurs gestionnaires',
-        'Accès à l’API partenaires',
-        'Facturation mensuelle',
-        'Accompagnement dédié',
+        context.t.croissancePlusieursGestionnaires,
+        context.t.croissanceAccesALApi,
+        context.t.croissanceFacturationMensuelle,
+        context.t.croissanceAccompagnementDedie,
       ],
     ),
   ];
@@ -65,20 +65,20 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
   Widget build(BuildContext context) {
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Offres Live Pro')),
+      appBar: AppBar(title: Text(context.t.croissanceOffresLivePro)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const Text(
-            'Choisissez selon votre activité',
+          Text(
+            context.t.croissanceChoisissezSelonVotreActivite,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             value: _annuel,
             onChanged: (v) => setState(() => _annuel = v),
-            title: const Text('Paiement annuel'),
-            subtitle: const Text('2 mois offerts'),
+            title: Text(context.t.croissancePaiementAnnuel),
+            subtitle: Text(context.t.croissanceN2MoisOfferts),
           ),
           const SizedBox(height: 8),
           GrilleAdaptative(
@@ -110,8 +110,13 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
                         const SizedBox(height: 6),
                         Text(
                           prix == 0
-                              ? 'Sur devis'
-                              : '${fcfa(_annuel ? prix * 10 : prix)} / ${_annuel ? 'an' : 'mois'}',
+                              ? context.t.croissanceSurDevis
+                              : context.t.croissancePrixPeriode(
+                                  fcfa(_annuel ? prix * 10 : prix),
+                                  _annuel
+                                      ? context.t.croissanceAn
+                                      : context.t.croissanceMois,
+                                ),
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w900,
@@ -146,7 +151,9 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
                               ? OutlinedButton(
                                   onPressed: () =>
                                       context.push('/conversation'),
-                                  child: const Text('Nous contacter'),
+                                  child: Text(
+                                    context.t.croissanceNousContacter,
+                                  ),
                                 )
                               : FilledButton(
                                   onPressed: () => _payer(
@@ -154,10 +161,12 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
                                     ref,
                                     TypePaiement.abonnement,
                                     _annuel ? prix * 10 : prix,
-                                    '$nom · ${_annuel ? '1 an' : '1 mois'}',
+                                    _annuel
+                                        ? context.t.croissanceUnAn(nom)
+                                        : context.t.croissanceUnMois(nom),
                                     'pro',
                                   ),
-                                  child: Text('Choisir $nom'),
+                                  child: Text(context.t.croissanceChoisir(nom)),
                                 ),
                         ),
                       ],
@@ -167,9 +176,8 @@ class _EcranOffresProState extends ConsumerState<EcranOffresPro> {
             ],
           ),
           const SizedBox(height: 12),
-          const Text(
-            'Paiement par Mobile Money, sans engagement. L’espace agence reste '
-            'gratuit pendant le MVP (D-26).',
+          Text(
+            context.t.croissancePaiementParMobileMoney,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
         ],

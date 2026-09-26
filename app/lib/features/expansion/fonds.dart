@@ -10,7 +10,7 @@ class EcranFondsCreateurs extends StatelessWidget {
   Widget build(BuildContext context) {
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Fonds Créateurs')),
+      appBar: AppBar(title: Text(context.t.expansionFondsCreateurs)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
@@ -27,8 +27,8 @@ class EcranFondsCreateurs extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Fonds du mois',
+                Text(
+                  context.t.expansionFondsDuMois,
                   style: TextStyle(color: Colors.white70),
                 ),
                 ChiffreAnime(
@@ -40,51 +40,63 @@ class EcranFondsCreateurs extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                   ),
                 ),
-                const Text(
-                  '30 % des revenus publicitaires de septembre',
+                Text(
+                  context.t.expansionN30DesRevenusPublicitaires,
                   style: TextStyle(color: LiveColors.ambreClair),
                 ),
                 const SizedBox(height: 12),
-                const Row(
+                Row(
                   children: [
-                    Expanded(child: _Chiffre('412', 'créateurs éligibles')),
-                    Expanded(child: _Chiffre('6 070', 'FCFA en moyenne')),
-                    Expanded(child: _Chiffre('5 oct.', 'versement')),
+                    Expanded(
+                      child: _Chiffre(
+                        '412',
+                        context.t.expansionCreateursEligibles,
+                      ),
+                    ),
+                    Expanded(
+                      child: _Chiffre(
+                        '6 070',
+                        context.t.expansionFcfaEnMoyenne,
+                      ),
+                    ),
+                    Expanded(
+                      child: _Chiffre(context.t.expansionN5Oct, 'versement'),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          const EnTeteSection('Comment la part est calculée'),
-          for (final (icone, titre, texte) in const [
+          EnTeteSection(context.t.expansionCommentLaPartEst),
+          for (final (icone, titre, texte) in [
             (
               Icons.favorite_rounded,
-              'Engagement réel',
-              'Temps de visionnage, partages, commentaires de comptes vérifiés.',
+              context.t.expansionEngagementReel,
+              context.t.expansionTempsDeVisionnagePartages,
             ),
             (
               Icons.auto_awesome_rounded,
-              'Qualité et originalité',
-              'Contenus originaux, utiles, en français, lingala ou kituba.',
+              context.t.expansionQualiteEtOriginalite,
+              context.t.expansionContenusOriginauxUtilesEn,
             ),
             (
               Icons.verified_user_rounded,
-              'Respect des règles',
-              'Aucun avertissement de modération sur la période.',
+              context.t.expansionRespectDesRegles,
+              context.t.expansionAucunAvertissementDeModeration,
             ),
             (
               Icons.block_rounded,
-              'Pas de fraude',
-              'Vues achetées ou comptes multiples : exclusion du fonds.',
+              context.t.expansionPasDeFraude,
+              context.t.expansionVuesAcheteesOuComptes,
             ),
           ])
             LigneMenu(icone: icone, titre: titre, detail: texte),
-          const EnTeteSection('Conditions pour y participer'),
-          for (final (ok, texte) in const [
-            (true, 'Identité vérifiée'),
-            (false, '500 abonnés (vous en avez 128)'),
-            (false, '10 000 minutes de visionnage sur 28 jours'),
-            (true, 'Au moins 4 vidéos originales par mois'),
+          EnTeteSection(context.t.expansionConditionsPourYParticiper),
+          for (final (ok, texte) in [
+            (true, context.t.expansionIdentiteVerifiee),
+            (false, context.t.expansionN500AbonnesVousEn),
+            (false, context.t.expansionN10000MinutesDe),
+            (true, context.t.expansionAuMoins4Videos),
           ])
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
@@ -102,19 +114,15 @@ class EcranFondsCreateurs extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 12),
-          const Bloc(
+          Bloc(
             fond: LiveColors.fondAlerte,
-            child: Text(
-              'Leçon de la v1 : payer les vues avant d’avoir des revenus '
-              'publicitaires ruine la plateforme et attire la fraude. Le fonds '
-              'n’existe que s’il est financé par la publicité.',
-            ),
+            child: Text(context.t.expansionLeconDeLaV1),
           ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: () => context.push('/studio'),
             icon: const Icon(Icons.insights_rounded),
-            label: const Text('Voir mes statistiques de créateur'),
+            label: Text(context.t.expansionVoirMesStatistiquesDe),
           ),
         ],
       ),
