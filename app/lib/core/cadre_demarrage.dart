@@ -27,6 +27,18 @@ class CadreDemarrage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Tablette : la même page, dans une colonne lisible plutôt qu'étirée.
+    if (context.taille == Taille.moyenne) {
+      return ColoredBox(
+        color: Colors.white,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 520),
+            child: child,
+          ),
+        ),
+      );
+    }
     if (context.taille != Taille.etendue) return child;
     final theme = Theme.of(context);
     final page = DansCarte(

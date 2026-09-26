@@ -15,6 +15,7 @@ class ChampTelephone extends StatefulWidget {
     required this.pays,
     required this.onPays,
     this.onChanged,
+    this.onValider,
     this.autofocus = false,
   });
 
@@ -24,6 +25,9 @@ class ChampTelephone extends StatefulWidget {
   final int pays;
   final ValueChanged<int> onPays;
   final VoidCallback? onChanged;
+
+  /// Touche Entrée (ordinateur) ou « OK » du clavier : passe à la suite.
+  final VoidCallback? onValider;
   final bool autofocus;
 
   @override
@@ -128,6 +132,8 @@ class _ChampTelephoneState extends State<ChampTelephone> {
                             )
                           : null,
                     ),
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: (_) => widget.onValider?.call(),
                     onChanged: (_) {
                       setState(() {});
                       widget.onChanged?.call();

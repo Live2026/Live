@@ -13,6 +13,16 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
   final _tel = TextEditingController(text: '06 123 45 67');
   var _pays = 0;
 
+  /// Relit le numéro avec l'utilisateur, puis passe au code SMS.
+  Future<void> _envoyer() async {
+    final pays = paysTelephone[_pays];
+    if (!pays.complet(_tel.text)) return;
+    if (await confirmerNumero(context, '${pays.indicatif} ${_tel.text}') &&
+        mounted) {
+      setState(() => _etape = 1);
+    }
+  }
+
   Future<void> _oublie() async {
     if (await confirmer(
       context,
@@ -62,6 +72,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
               pays: _pays,
               onPays: (i) => setState(() => _pays = i),
               onChanged: () => setState(() {}),
+              onValider: _envoyer,
             ),
             // Sur ordinateur, comme WhatsApp Web : le téléphone déjà
             // connecté suffit, sans SMS.
@@ -106,15 +117,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
           ? BarreAction(
               child: FilledButton(
                 onPressed: paysTelephone[_pays].complet(_tel.text)
-                    ? () async {
-                        if (await confirmerNumero(
-                              context,
-                              '${paysTelephone[_pays].indicatif} ${_tel.text}',
-                            ) &&
-                            mounted) {
-                          setState(() => _etape = 1);
-                        }
-                      }
+                    ? _envoyer
                     : null,
                 child: const Text('Suivant'),
               ),

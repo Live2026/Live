@@ -14,7 +14,7 @@ class _EcranSplashState extends State<EcranSplash> {
   @override
   void initState() {
     super.initState();
-    _suite = Timer(const Duration(milliseconds: 1800), () {
+    _suite = Timer(const Duration(milliseconds: 1500), () {
       if (mounted) context.go('/bienvenue');
     });
   }
@@ -27,65 +27,52 @@ class _EcranSplashState extends State<EcranSplash> {
 
   @override
   Widget build(BuildContext context) {
+    // Comme l'ouverture de WhatsApp : fond blanc, le logo seul au centre,
+    // la signature en bas. Sobre et rapide.
     final reduit = MediaQuery.disableAnimationsOf(context);
     return Scaffold(
-      body: FondDemarrage(
-        child: Center(
-          child: TweenAnimationBuilder<double>(
-            tween: Tween(begin: reduit ? 1 : 0, end: 1),
-            duration: const Duration(milliseconds: 900),
-            curve: Curves.easeOutBack,
-            builder: (context, t, enfant) => Opacity(
-              opacity: t.clamp(0, 1),
-              child: Transform.scale(scale: 0.6 + 0.4 * t, child: enfant),
-            ),
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _LogoHalo(taille: 116),
-                SizedBox(height: 18),
-                Text(
-                  'Live',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 44,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -1,
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: reduit ? 1 : 0, end: 1),
+                  duration: const Duration(milliseconds: 700),
+                  curve: Curves.easeOutCubic,
+                  builder: (context, t, enfant) => Opacity(
+                    opacity: t,
+                    child: Transform.scale(scale: 0.9 + 0.1 * t, child: enfant),
                   ),
+                  child: const LogoLive(taille: 88, nom: false),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  'La place de marché sociale',
-                  style: TextStyle(color: LiveColors.ambreClair, fontSize: 15),
-                ),
-              ],
+              ),
             ),
-          ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 28),
+              child: Column(
+                children: [
+                  Text(
+                    'Live',
+                    style: TextStyle(
+                      color: LiveColors.bleu,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.4,
+                    ),
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    'La place de marché sociale',
+                    style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
-    );
-  }
-}
-
-/// Logo posé sur un disque blanc lumineux.
-class _LogoHalo extends StatelessWidget {
-  const _LogoHalo({required this.taille});
-  final double taille;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: taille,
-      height: taille,
-      padding: EdgeInsets.all(taille * 0.16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(taille * 0.3),
-        boxShadow: const [
-          BoxShadow(color: Color(0x66FB9618), blurRadius: 40, spreadRadius: 2),
-        ],
-      ),
-      child: LogoLive(taille: taille, nom: false),
     );
   }
 }

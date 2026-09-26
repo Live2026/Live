@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/router.dart';
@@ -23,6 +24,11 @@ void main() {
       ],
       child: const LiveApp(),
     ),
+  );
+  // Écran de lancement natif (blanc, logo au centre) retiré dès la première
+  // image de Flutter, qui affiche le même logo : pas de saut visible.
+  WidgetsBinding.instance.addPostFrameCallback(
+    (_) => FlutterNativeSplash.remove(),
   );
 }
 

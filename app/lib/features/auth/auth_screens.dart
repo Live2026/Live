@@ -33,6 +33,13 @@ class _EcranTelephoneState extends State<EcranTelephone> {
   var _confidentialite = false;
   var _pays = 0;
 
+  Future<void> _suivant(PaysTelephone pays, String operateur) async {
+    final numero = '${pays.indicatif} ${_numero.text}';
+    if (await confirmerNumero(context, numero) && mounted) {
+      context.push('/code', extra: (numero, operateur));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final pays = paysTelephone[_pays];
@@ -56,6 +63,9 @@ class _EcranTelephoneState extends State<EcranTelephone> {
             pays: _pays,
             onPays: (i) => setState(() => _pays = i),
             onChanged: () => setState(() {}),
+            onValider: () {
+              if (valide) _suivant(pays, operateur);
+            },
           ),
           const SizedBox(height: 14),
           CheckboxListTile(
@@ -86,15 +96,7 @@ class _EcranTelephoneState extends State<EcranTelephone> {
       ),
       bottomNavigationBar: BarreAction(
         child: FilledButton(
-          onPressed: valide
-              ? () async {
-                  final numero = '${pays.indicatif} ${_numero.text}';
-                  if (await confirmerNumero(context, numero) &&
-                      context.mounted) {
-                    context.push('/code', extra: (numero, operateur));
-                  }
-                }
-              : null,
+          onPressed: valide ? () => _suivant(pays, operateur) : null,
           child: const Text('Suivant'),
         ),
       ),
