@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../shared/animations.dart';
 import '../shared/demarrage.dart';
@@ -114,6 +115,22 @@ class _Carte extends StatelessWidget {
 
 /// Fond de toute la page : l'image si elle est fournie, sinon le fond animé ;
 /// un voile à gauche garde le texte lisible.
+/// L'image n'est demandée que si elle figure parmi les ressources : pas de
+/// requête en échec (404) tant qu'elle n'a pas été déposée.
+final Future<bool> _imagePresente =
+    AssetManifest.loadFromAssetBundle(rootBundle).then(
+      (m) => m.listAssets().contains(imageFondDemarrage),
+      onError: (_) => false,
+    );
+
+class _FondAnime extends StatelessWidget {
+  const _FondAnime();
+
+  @override
+  Widget build(BuildContext context) =>
+      const FondDemarrage(child: SizedBox.expand());
+}
+
 class _Fond extends StatelessWidget {
   const _Fond();
 
@@ -122,11 +139,15 @@ class _Fond extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image.asset(
-          imageFondDemarrage,
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) =>
-              const FondDemarrage(child: SizedBox.expand()),
+        FutureBuilder<bool>(
+          future: _imagePresente,
+          builder: (context, s) => s.data == true
+              ? Image.asset(
+                  imageFondDemarrage,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) => const _FondAnime(),
+                )
+              : const _FondAnime(),
         ),
         const DecoratedBox(
           decoration: BoxDecoration(
