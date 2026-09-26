@@ -45,10 +45,10 @@ class _EcranConversationState extends State<EcranConversation> {
   var _offreAcceptee = false;
   final _envoyes = <_Element>[];
 
-  static const _rapides = [
-    'Toujours disponible ?',
-    'Dernier prix ?',
-    'Où se rencontrer ?',
+  late final _rapides = [
+    context.t.messagesToujoursDisponible,
+    context.t.messagesDernierPrix,
+    context.t.messagesOuSeRencontrer,
   ];
 
   void _envoyer(_Element e) {
@@ -73,7 +73,7 @@ class _EcranConversationState extends State<EcranConversation> {
         titleSpacing: 0,
         title: InkWell(
           onTap: () => context.push('/boutique/grace'),
-          child: const Row(
+          child: Row(
             children: [
               Avatar(
                 nom: 'Grâce Mode',
@@ -90,7 +90,7 @@ class _EcranConversationState extends State<EcranConversation> {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    'en ligne · Pro vérifié',
+                    context.t.messagesEnLigneProVerifie,
                     style: TextStyle(fontSize: 12, color: LiveColors.succes),
                   ),
                 ],
@@ -101,7 +101,7 @@ class _EcranConversationState extends State<EcranConversation> {
         actions: [
           ...boutonsAppel(context, 'Grâce Mode'),
           IconButton(
-            tooltip: 'Options',
+            tooltip: context.t.messagesOptions,
             onPressed: () => _options(context),
             icon: const Icon(Icons.more_vert_rounded),
           ),
@@ -150,7 +150,7 @@ class _EcranConversationState extends State<EcranConversation> {
                         minimumSize: const Size(0, 36),
                       ),
                       onPressed: () => context.push('/commande/p1'),
-                      child: const Text('Payer'),
+                      child: Text(context.t.messagesPayer),
                     ),
                   ],
                 ),
@@ -164,10 +164,8 @@ class _EcranConversationState extends State<EcranConversation> {
                 controller: _defilement,
                 padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
                 children: [
-                  const _Pastille('Aujourd’hui'),
-                  const _Info(
-                    'Payez toujours avec le bouton Payer : votre argent reste bloqué par Live jusqu’à la remise.',
-                  ),
+                  _Pastille(context.t.messagesAujourdHui),
+                  _Info(context.t.messagesPayezToujoursAvecLe),
                   const _BulleTexte(
                     _Texte(
                       'Bonjour, toujours disponible ?',
@@ -182,9 +180,9 @@ class _EcranConversationState extends State<EcranConversation> {
                     ),
                   ),
                   const _BulleVocale(_Vocal('0:12', '10:15')),
-                  const _CarteOffre(
-                    titre: 'OFFRE · Vous proposez 75 000 FCFA',
-                    detail: 'Refusée par Grâce',
+                  _CarteOffre(
+                    titre: context.t.messagesOffreVousProposez75,
+                    detail: context.t.messagesRefuseeParGrace,
                     moi: true,
                   ),
                   const _BulleTexte(
@@ -195,25 +193,25 @@ class _EcranConversationState extends State<EcranConversation> {
                   ),
                   const _AlerteArnaque(),
                   _CarteOffre(
-                    titre: 'CONTRE-OFFRE · Grâce : 80 000 FCFA',
+                    titre: context.t.messagesContreOffreGrace80,
                     detail: _offreAcceptee
-                        ? 'Offre acceptée · lien de paiement prêt'
-                        : "Valable jusqu'à demain 10:30",
+                        ? context.t.messagesOffreAccepteeLienDe
+                        : context.t.messagesValableJusquADemain,
                     action: _offreAcceptee
                         ? FilledButton(
                             onPressed: () => context.push('/commande/p1'),
-                            child: const Text('Payer 80 000 FCFA dans Live'),
+                            child: Text(context.t.messagesPayer80000Fcfa),
                           )
                         : Row(
                             children: [
                               Expanded(
                                 child: OutlinedButton(
                                   onPressed: () => _envoyer(
-                                    const _Systeme(
-                                      'Vous avez refusé la contre-offre.',
+                                    _Systeme(
+                                      context.t.messagesVousAvezRefuseLa,
                                     ),
                                   ),
-                                  child: const Text('Refuser'),
+                                  child: Text(context.t.messagesRefuser),
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -221,7 +219,7 @@ class _EcranConversationState extends State<EcranConversation> {
                                 child: FilledButton(
                                   onPressed: () =>
                                       setState(() => _offreAcceptee = true),
-                                  child: const Text('Accepter'),
+                                  child: Text(context.t.messagesAccepter),
                                 ),
                               ),
                             ],
@@ -273,7 +271,7 @@ class _EcranConversationState extends State<EcranConversation> {
                       child: Row(
                         children: [
                           IconButton(
-                            tooltip: 'Joindre',
+                            tooltip: context.t.messagesJoindre,
                             onPressed: () => _joindre(context),
                             icon: const Icon(
                               Icons.add_rounded,
@@ -286,8 +284,8 @@ class _EcranConversationState extends State<EcranConversation> {
                               minLines: 1,
                               maxLines: 4,
                               onChanged: (_) => setState(() {}),
-                              decoration: const InputDecoration(
-                                hintText: 'Message',
+                              decoration: InputDecoration(
+                                hintText: context.t.messagesMessage,
                                 filled: false,
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -299,9 +297,11 @@ class _EcranConversationState extends State<EcranConversation> {
                             ),
                           ),
                           IconButton(
-                            tooltip: 'Photo',
+                            tooltip: context.t.messagesPhoto,
                             onPressed: () => _envoyer(
-                              const _Systeme('Photo envoyée (simulation).'),
+                              _Systeme(
+                                context.t.messagesPhotoEnvoyeeSimulation,
+                              ),
                             ),
                             icon: const Icon(
                               Icons.photo_camera_outlined,
@@ -315,7 +315,9 @@ class _EcranConversationState extends State<EcranConversation> {
                   const SizedBox(width: 6),
                   Semantics(
                     button: true,
-                    label: vide ? 'Note vocale' : 'Envoyer',
+                    label: vide
+                        ? context.t.messagesNoteVocale
+                        : context.t.messagesEnvoyer,
                     excludeSemantics: true,
                     child: Pressable(
                       echelle: 0.9,
@@ -378,7 +380,7 @@ class _EcranConversationState extends State<EcranConversation> {
           children: [
             ListTile(
               leading: const Icon(Icons.storefront_outlined),
-              title: const Text('Voir la boutique'),
+              title: Text(context.t.messagesVoirLaBoutique),
               onTap: () {
                 Navigator.pop(ctx);
                 context.push('/boutique/grace');
@@ -386,7 +388,7 @@ class _EcranConversationState extends State<EcranConversation> {
             ),
             ListTile(
               leading: const Icon(Icons.archive_outlined),
-              title: const Text('Archiver la conversation'),
+              title: Text(context.t.messagesArchiverLaConversation),
               onTap: () {
                 Navigator.pop(ctx);
                 context.pop();
@@ -397,20 +399,18 @@ class _EcranConversationState extends State<EcranConversation> {
                 Icons.block_rounded,
                 color: LiveColors.erreur,
               ),
-              title: const Text(
-                'Bloquer',
+              title: Text(
+                context.t.messagesBloquer,
                 style: TextStyle(color: LiveColors.erreur),
               ),
-              subtitle: const Text(
-                'Il ne pourra plus vous écrire ni voir vos annonces',
-              ),
+              subtitle: Text(context.t.messagesIlNePourraPlus),
               onTap: () {
                 Navigator.pop(ctx);
                 ProviderScope.containerOf(context)
                     .read(liveProvider.notifier)
                     .bloquer('grace');
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Grâce Mode est bloqué.')),
+                  SnackBar(content: Text(context.t.messagesGraceModeEstBloque)),
                 );
                 context.pop();
               },
@@ -420,13 +420,13 @@ class _EcranConversationState extends State<EcranConversation> {
                 Icons.flag_outlined,
                 color: LiveColors.erreur,
               ),
-              title: const Text(
-                'Signaler',
+              title: Text(
+                context.t.messagesSignaler,
                 style: TextStyle(color: LiveColors.erreur),
               ),
               onTap: () {
                 Navigator.pop(ctx);
-                signaler(context, 'cette conversation');
+                signaler(context, context.t.messagesCetteConversation);
               },
             ),
           ],
@@ -448,20 +448,29 @@ class _EcranConversationState extends State<EcranConversation> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Proposer un lieu de rendez-vous',
+              Text(
+                context.t.messagesProposerUnLieuDe,
                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
               ),
-              const Text(
-                'Lieux publics et fréquentés, recommandés pour les remises en main propre.',
+              Text(
+                context.t.messagesLieuxPublicsEtFrequentes,
                 style: TextStyle(color: LiveColors.gris),
               ),
               const SizedBox(height: 8),
-              for (final (lieu, detail) in const [
-                ('Station Total Moungali', 'Éclairée, gardiennée · à 600 m'),
-                ('Marché Total', 'Entrée principale · à 1,1 km'),
-                ('Centre commercial Plateau', 'Parking surveillé · à 3,4 km'),
-                ('Commissariat de Moungali', 'Point de remise sûr · à 900 m'),
+              for (final (lieu, detail) in [
+                (
+                  'Station Total Moungali',
+                  context.t.messagesEclaireeGardienneeA600,
+                ),
+                ('Marché Total', context.t.messagesEntreePrincipaleA1),
+                (
+                  'Centre commercial Plateau',
+                  context.t.messagesParkingSurveilleA3,
+                ),
+                (
+                  'Commissariat de Moungali',
+                  context.t.messagesPointDeRemiseSur,
+                ),
               ])
                 ListTile(
                   contentPadding: EdgeInsets.zero,

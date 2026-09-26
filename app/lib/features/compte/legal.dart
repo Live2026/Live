@@ -162,7 +162,9 @@ class EcranLegal extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          cgu ? context.t.compteConditionsDUtilisation : context.t.comptePolitiqueDeConfidentialite,
+          cgu
+              ? context.t.compteConditionsDUtilisation
+              : context.t.comptePolitiqueDeConfidentialite,
         ),
       ),
       body: Etroit(

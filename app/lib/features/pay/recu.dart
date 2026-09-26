@@ -9,16 +9,16 @@ class EcranRecu extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final etat = ref.watch(liveProvider);
     final achat = etat.achats.where((c) => c.id == id).firstOrNull;
-    final libelle = achat?.produit.titre ?? 'Paiement Live';
+    final libelle = achat?.produit.titre ?? context.t.payPaiementLive;
     final montant = achat?.total ?? 30000;
     final reference = 'LV-P-2026-${id.hashCode.abs() % 100000}';
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reçu'),
+        title: Text(context.t.payRecu),
         actions: [
           IconButton(
-            tooltip: 'Partager le reçu',
-            onPressed: () => partager(context, 'Reçu $reference'),
+            tooltip: context.t.payPartagerLeRecu,
+            onPressed: () => partager(context, context.t.payRecuRef(reference)),
             icon: const Icon(Icons.ios_share_rounded),
           ),
         ],
@@ -32,8 +32,8 @@ class EcranRecu extends ConsumerWidget {
               children: [
                 const LogoLive(taille: 30),
                 const SizedBox(height: 4),
-                const Text(
-                  'Reçu de paiement',
+                Text(
+                  context.t.payRecuDePaiement,
                   style: TextStyle(color: LiveColors.gris),
                 ),
                 const SizedBox(height: 16),
@@ -44,30 +44,35 @@ class EcranRecu extends ConsumerWidget {
                     fontWeight: FontWeight.w900,
                   ),
                 ),
-                const Etiquette(
-                  'Payé · argent protégé',
+                Etiquette(
+                  context.t.payPayeArgentProtege,
                   icone: Icons.verified_user,
                   fond: LiveColors.teinteVerte,
                   couleur: LiveColors.succes,
                 ),
                 const Divider(height: 32),
-                _Ligne('Objet', libelle),
-                _Ligne('Référence', reference),
-                const _Ligne('Date', '25 sept. 2026 · 10:21'),
+                _Ligne(context.t.payObjet, libelle),
+                _Ligne(context.t.payReference2, reference),
+                _Ligne(context.t.payDate, context.t.payN25Sept202610),
                 _Ligne(
-                  'Moyen',
-                  '${etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money'} · ${etat.telephone}',
+                  context.t.payMoyen,
+                  context.t.payOperateurTel(
+                    etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money',
+                    etat.telephone,
+                  ),
                 ),
-                const _Ligne('Opérateur', 'Réf. opérateur MP260925.1021.C4412'),
-                _Ligne('Payé par', etat.prenom),
+                _Ligne(
+                  context.t.payOperateur,
+                  context.t.payRefOperateurMp2609251021,
+                ),
+                _Ligne(context.t.payPayePar, etat.prenom),
                 const Divider(height: 32),
-                LigneMontant('Montant', montant),
-                const LigneMontant('Frais pour l’acheteur', 0),
-                LigneMontant('Total', montant, gras: true),
+                LigneMontant(context.t.payMontant, montant),
+                LigneMontant(context.t.payFraisPourLAcheteur, 0),
+                LigneMontant(context.t.payTotal, montant, gras: true),
                 const SizedBox(height: 12),
-                const Text(
-                  'Live Congo SAS · RCCM CG-BZV-01-2026-B12-00000 · '
-                  'fonds détenus sur compte de séquestre bancaire.',
+                Text(
+                  context.t.payLiveCongoSasRccm,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: LiveColors.gris, fontSize: 11.5),
                 ),
@@ -77,12 +82,10 @@ class EcranRecu extends ConsumerWidget {
           const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Reçu enregistré en PDF (simulation).'),
-              ),
+              SnackBar(content: Text(context.t.payRecuEnregistreEnPdf)),
             ),
             icon: const Icon(Icons.picture_as_pdf_outlined),
-            label: const Text('Télécharger en PDF'),
+            label: Text(context.t.payTelechargerEnPdf),
           ),
         ],
       ),

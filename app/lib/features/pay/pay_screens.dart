@@ -12,6 +12,7 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'paiement.dart';
 part 'gains_retrait.dart';
@@ -28,3 +29,11 @@ extension on Moyen {
     Moyen.visa => 'Carte Visa',
   };
 }
+
+/// Nom d'un moyen de paiement dans la langue choisie (la valeur enregistrée
+/// reste la même).
+String moyenAffiche(Textes t, String moyen) => switch (moyen) {
+  'Solde Live' => t.paySoldeLive,
+  'Carte Visa' => t.payCarteVisa,
+  _ => moyen,
+};

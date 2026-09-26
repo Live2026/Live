@@ -8,7 +8,7 @@ class EcranGains extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final etat = ref.watch(liveProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes gains')),
+      appBar: AppBar(title: Text(context.t.payMesGains)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -25,8 +25,8 @@ class EcranGains extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Disponible',
+                Text(
+                  context.t.payDisponible2,
                   style: TextStyle(color: LiveColors.brumeClaire),
                 ),
                 ChiffreAnime(
@@ -39,8 +39,8 @@ class EcranGains extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'En attente : 96 000 FCFA (ventes non confirmées)',
+                Text(
+                  context.t.payEnAttente96000,
                   style: TextStyle(color: LiveColors.brumeClaire, fontSize: 13),
                 ),
                 const SizedBox(height: 16),
@@ -57,7 +57,7 @@ class EcranGains extends ConsumerWidget {
                         : Icons.lock_outline_rounded,
                     size: 18,
                   ),
-                  label: const Text('Retirer'),
+                  label: Text(context.t.payRetirer),
                 ),
               ],
             ),
@@ -70,21 +70,16 @@ class EcranGains extends ConsumerWidget {
                 children: [
                   const Icon(Icons.bolt_rounded, color: LiveColors.orangeVif),
                   const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      'Pour retirer, débloquez le super-pouvoir « Retirer ses gains » '
-                      'en vérifiant votre identité (2 minutes).',
-                    ),
-                  ),
+                  Expanded(child: Text(context.t.payPourRetirerDebloquezLe)),
                   TextButton(
                     onPressed: () => context.push('/verifier'),
-                    child: const Text('Vérifier'),
+                    child: Text(context.t.payVerifier),
                   ),
                 ],
               ),
             ),
           ],
-          const EnTeteSection('Historique'),
+          EnTeteSection(context.t.payHistorique),
           for (final m in etat.historique) _LigneMouvement(m),
         ],
       ),
@@ -111,20 +106,17 @@ class _EcranRetraitState extends ConsumerState<EcranRetrait> {
     final valide = montant >= 1000 && montant <= etat.disponible;
     if (!etat.identiteVerifiee) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Retirer mes gains')),
+        appBar: AppBar(title: Text(context.t.payRetirerMesGains)),
         body: ListView(
           padding: const EdgeInsets.all(24),
           children: [
             const SizedBox(height: 24),
-            const EtatVide(
+            EtatVide(
               icone: Icons.lock_outline_rounded,
-              texte:
-                  'Retirer ses gains est un super-pouvoir. Il se débloque '
-                  'quand Live a vérifié votre identité : la loi l’exige pour '
-                  'protéger votre argent.',
+              texte: context.t.payRetirerSesGainsEst,
             ),
             Text(
-              'Disponible : ${fcfa(etat.disponible)}',
+              context.t.payDisponible(fcfa(etat.disponible)),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
             ),
@@ -133,7 +125,7 @@ class _EcranRetraitState extends ConsumerState<EcranRetrait> {
         bottomNavigationBar: BarreAction(
           child: FilledButton(
             onPressed: () => context.push('/verifier'),
-            child: const Text('Vérifier mon identité'),
+            child: Text(context.t.payVerifierMonIdentite),
           ),
         ),
       );
@@ -149,24 +141,27 @@ class _EcranRetraitState extends ConsumerState<EcranRetrait> {
                   const Spacer(),
                   const CocheAnimee(taille: 96),
                   Text(
-                    '${fcfa(montant)} envoyés',
+                    context.t.payEnvoyes(fcfa(montant)),
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'sur ${etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money'} ${etat.telephone}',
+                    context.t.paySurNumero(
+                      etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money',
+                      etat.telephone,
+                    ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Vous allez recevoir un SMS de votre opérateur.',
+                  Text(
+                    context.t.payVousAllezRecevoirUn,
                     style: TextStyle(color: LiveColors.gris),
                   ),
                   const Spacer(),
                   FilledButton(
                     onPressed: () => context.go('/gains'),
-                    child: const Text('Retour à mes gains'),
+                    child: Text(context.t.payRetourAMesGains),
                   ),
                 ],
               ),
@@ -176,12 +171,12 @@ class _EcranRetraitState extends ConsumerState<EcranRetrait> {
       );
     }
     return Scaffold(
-      appBar: AppBar(title: const Text('Retirer mes gains')),
+      appBar: AppBar(title: Text(context.t.payRetirerMesGains)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           Text(
-            'Disponible : ${fcfa(etat.disponible)}',
+            context.t.payDisponible(fcfa(etat.disponible)),
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 12),
@@ -189,8 +184,8 @@ class _EcranRetraitState extends ConsumerState<EcranRetrait> {
             TextField(
               controller: _montant,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Montant',
+              decoration: InputDecoration(
+                labelText: context.t.payMontant,
                 suffixText: 'FCFA',
               ),
               onChanged: (_) => setState(() {}),
@@ -198,37 +193,42 @@ class _EcranRetraitState extends ConsumerState<EcranRetrait> {
             TextButton(
               onPressed: () =>
                   setState(() => _montant.text = '${etat.disponible}'),
-              child: const Text('Tout retirer'),
+              child: Text(context.t.payToutRetirer),
             ),
             const SizedBox(height: 8),
             Choix(
-              titre:
-                  '${etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money'} · ${etat.telephone}',
-              sousTitre: '${etat.prenom} (identité vérifiée)',
+              titre: context.t.payOperateurTel(
+                etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money',
+                etat.telephone,
+              ),
+              sousTitre: context.t.payIdentiteVerifieeDe(etat.prenom),
               icone: Icons.phone_android,
               selectionne: true,
               onTap: () {},
             ),
             const SizedBox(height: 8),
-            LigneMontant('Frais de retrait', 0),
-            LigneMontant('Vous recevez', montant, gras: true),
+            LigneMontant(context.t.payFraisDeRetrait, 0),
+            LigneMontant(context.t.payVousRecevez, montant, gras: true),
             if (montant > etat.disponible)
-              const Text(
-                'Montant supérieur à vos gains disponibles.',
+              Text(
+                context.t.payMontantSuperieurAVos,
                 style: TextStyle(color: LiveColors.erreur),
               ),
             if (montant > 0 && montant < 1000)
-              const Text(
-                'Minimum : 1 000 FCFA.',
+              Text(
+                context.t.payMinimum1000Fcfa,
                 style: TextStyle(color: LiveColors.erreur),
               ),
           ] else ...[
             Text(
-              'Retirer ${fcfa(montant)}',
+              context.t.payRetirerMontant(fcfa(montant)),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            const Text('Code secret de paiement', textAlign: TextAlign.center),
+            Text(
+              context.t.payCodeSecretDePaiement,
+              textAlign: TextAlign.center,
+            ),
             ClavierPin(
               onComplet: (_) {
                 if (ref.read(liveProvider.notifier).retirer(montant)) {
@@ -243,7 +243,11 @@ class _EcranRetraitState extends ConsumerState<EcranRetrait> {
           ? BarreAction(
               child: FilledButton(
                 onPressed: valide ? () => setState(() => _etape = 1) : null,
-                child: Text(valide ? 'Retirer ${fcfa(montant)}' : 'Retirer'),
+                child: Text(
+                  valide
+                      ? context.t.payRetirerMontant(fcfa(montant))
+                      : context.t.payRetirer,
+                ),
               ),
             )
           : null,

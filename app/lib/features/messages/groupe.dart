@@ -127,8 +127,8 @@ class _EcranGroupeState extends State<EcranGroupe> {
                   ),
                   Text(
                     canal
-                        ? 'Canal · ${compact(c.membres)} abonnés'
-                        : 'Groupe · ${c.membres} membres',
+                        ? context.t.messagesCanalAbonnes(compact(c.membres))
+                        : context.t.messagesGroupeMembres(c.membres),
                     style: const TextStyle(
                       fontSize: 12,
                       color: LiveColors.gris,
@@ -142,9 +142,11 @@ class _EcranGroupeState extends State<EcranGroupe> {
         actions: [
           if (!canal) ...boutonsAppel(context, c.nom, groupe: c.id),
           IconButton(
-            tooltip: 'Options',
-            onPressed: () =>
-                signaler(context, canal ? 'ce canal' : 'ce groupe'),
+            tooltip: context.t.messagesOptions,
+            onPressed: () => signaler(
+              context,
+              canal ? context.t.messagesCeCanal : context.t.messagesCeGroupe,
+            ),
             icon: const Icon(Icons.more_vert_rounded),
           ),
         ],
@@ -159,13 +161,13 @@ class _EcranGroupeState extends State<EcranGroupe> {
                 Icons.push_pin_rounded,
                 color: LiveColors.orangeVif,
               ),
-              title: const Text(
-                'Message épinglé',
+              title: Text(
+                context.t.messagesMessageEpingle,
                 style: TextStyle(fontWeight: FontWeight.w700),
               ),
               subtitle: Text(
                 canal
-                    ? 'Postuler sur Live est toujours gratuit.'
+                    ? context.t.messagesPostulerSurLiveEst
                     : 'Révision samedi 10 h, salle 4. Apportez les annales.',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -178,7 +180,7 @@ class _EcranGroupeState extends State<EcranGroupe> {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
                 children: [
-                  const _Pastille('Aujourd’hui'),
+                  _Pastille(context.t.messagesAujourdHui),
                   for (final m in messages) _BulleGroupe(m: m, canal: canal),
                 ],
               ),
@@ -191,9 +193,8 @@ class _EcranGroupeState extends State<EcranGroupe> {
                 width: double.infinity,
                 color: LiveColors.surface,
                 padding: const EdgeInsets.all(14),
-                child: const Text(
-                  'Seuls les administrateurs publient. Réagissez aux messages '
-                  'avec un appui long.',
+                child: Text(
+                  context.t.messagesSeulsLesAdministrateursPublient,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: LiveColors.gris),
                 ),
@@ -209,15 +210,15 @@ class _EcranGroupeState extends State<EcranGroupe> {
                     Expanded(
                       child: TextField(
                         controller: _saisie,
-                        decoration: const InputDecoration(
-                          hintText: 'Message au groupe',
+                        decoration: InputDecoration(
+                          hintText: context.t.messagesMessageAuGroupe,
                           prefixIcon: Icon(Icons.attach_file_rounded),
                         ),
                       ),
                     ),
                     const SizedBox(width: 6),
                     IconButton.filled(
-                      tooltip: 'Envoyer',
+                      tooltip: context.t.messagesEnvoyer,
                       style: IconButton.styleFrom(
                         minimumSize: const Size(48, 48),
                       ),
@@ -226,7 +227,7 @@ class _EcranGroupeState extends State<EcranGroupe> {
                         setState(
                           () => _envoyes.add(
                             _MessageGroupe(
-                              'Vous',
+                              context.t.appelVous,
                               LiveColors.bleu,
                               _saisie.text.trim(),
                               'maintenant',
@@ -356,10 +357,10 @@ class _Pdf extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 6),
-          const Icon(
+          Icon(
             Icons.download_rounded,
             color: LiveColors.bleu,
-            semanticLabel: 'Télécharger',
+            semanticLabel: context.t.messagesTelecharger,
           ),
         ],
       ),

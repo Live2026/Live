@@ -185,11 +185,11 @@ class _BulleLieu extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Rendez-vous : ${m.lieu}',
+            context.t.messagesRendezVous(m.lieu),
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
-          const Text(
-            'Lieu public recommandé par Live',
+          Text(
+            context.t.messagesLieuPublicRecommandePar,
             style: TextStyle(fontSize: 12.5, color: LiveColors.gris),
           ),
           Align(
@@ -321,16 +321,12 @@ class _AlerteArnaque extends StatelessWidget {
         border: Border.all(color: LiveColors.ambreClair),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(Icons.warning_amber_rounded, color: LiveColors.cuivre),
           SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              "Attention : ce message propose un paiement en dehors de Live. Si vous payez hors de l'application, vous n'êtes PAS protégé et ne pourrez pas être remboursé.",
-            ),
-          ),
+          Expanded(child: Text(context.t.messagesAttentionCeMessagePropose)),
         ],
       ),
     );

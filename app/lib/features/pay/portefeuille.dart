@@ -29,10 +29,12 @@ class _EcranPortefeuilleState extends ConsumerState<EcranPortefeuille> {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mon argent Live'),
+        title: Text(context.t.payMonArgentLive),
         actions: [
           IconButton(
-            tooltip: _masque ? 'Afficher les montants' : 'Masquer les montants',
+            tooltip: _masque
+                ? context.t.payAfficherLesMontants
+                : context.t.payMasquerLesMontants,
             onPressed: () => setState(() => _masque = !_masque),
             icon: Icon(
               _masque
@@ -47,13 +49,12 @@ class _EcranPortefeuilleState extends ConsumerState<EcranPortefeuille> {
           _CarteSolde(etat: etat, masque: _masque, bloque: bloques),
           const SizedBox(height: 14),
           const _ActionsArgent(),
-          const EnTeteSection('Mes dépenses de septembre'),
+          EnTeteSection(context.t.payMesDepensesDeSeptembre),
           _Depenses(masque: _masque),
-          const EnTeteSection('Argent bloqué pour mes achats'),
+          EnTeteSection(context.t.payArgentBloquePourMes),
           if (bloques.isEmpty)
-            const Text(
-              'Aucun achat en cours. Quand vous payez dans Live, l’argent '
-              'reste bloqué jusqu’à ce que vous confirmiez la réception.',
+            Text(
+              context.t.payAucunAchatEnCours,
               style: TextStyle(color: LiveColors.gris),
             )
           else
@@ -61,58 +62,48 @@ class _EcranPortefeuilleState extends ConsumerState<EcranPortefeuille> {
               LigneMenu(
                 icone: Icons.lock_clock_rounded,
                 titre: a.produit.titre,
-                detail:
-                    '${_masque ? '•••' : fcfa(a.total)} · versé au vendeur '
-                    'quand vous confirmez la réception',
+                detail: context.t.payVerseAuVendeur(
+                  _masque ? '•••' : fcfa(a.total),
+                ),
                 onTap: () => context.push('/suivi/${a.id}'),
               ),
         ],
         secondaire: [
-          const EnTeteSection('Mes moyens de paiement'),
+          EnTeteSection(context.t.payMesMoyensDePaiement),
           LigneMenu(
             icone: Icons.phone_android_rounded,
-            titre:
-                '${etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money'}'
-                ' · ${etat.telephone}',
-            detail: 'Principal · retraits vers ce numéro, à votre nom',
+            titre: context.t.payOperateurTel(
+              etat.operateur == 'MTN' ? 'MTN MoMo' : 'Airtel Money',
+              etat.telephone,
+            ),
+            detail: context.t.payPrincipalRetraitsVersCe,
             couleur: LiveColors.succes,
           ),
           LigneMenu(
             icone: Icons.add_circle_outline_rounded,
             titre: etat.operateur == 'MTN'
-                ? 'Ajouter Airtel Money'
-                : 'Ajouter MTN MoMo',
-            detail: 'Un second numéro à votre nom',
-            onTap: () => informer(
-              context,
-              'Code de vérification envoyé au nouveau numéro.',
-            ),
+                ? context.t.payAjouterAirtelMoney
+                : context.t.payAjouterMtnMomo,
+            detail: context.t.payUnSecondNumeroA,
+            onTap: () =>
+                informer(context, context.t.payCodeDeVerificationEnvoye),
           ),
-          const LigneMenu(
+          LigneMenu(
             icone: Icons.credit_card_rounded,
-            titre: 'Carte Visa',
-            detail:
-                'Saisie sur la page sécurisée de la banque à chaque paiement : '
-                'Live n’enregistre aucune carte',
+            titre: context.t.payCarteVisa,
+            detail: context.t.paySaisieSurLaPage,
           ),
-          const EnTeteSection('Historique'),
+          EnTeteSection(context.t.payHistorique),
           for (final m in etat.historique) _LigneMouvement(m, masque: _masque),
           const SizedBox(height: 12),
-          const Bloc(
+          Bloc(
             fond: LiveColors.voile,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(Icons.info_outline_rounded, color: LiveColors.bleu),
                 SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    'Votre solde se remplit par vos ventes, vos remboursements '
-                    'et l’argent reçu de l’étranger. Il sert à payer dans Live '
-                    'ou se retire sans frais vers votre numéro. Les dépôts '
-                    'libres arriveront avec notre partenaire agréé.',
-                  ),
-                ),
+                Expanded(child: Text(context.t.payVotreSoldeSeRemplit)),
               ],
             ),
           ),
@@ -159,9 +150,9 @@ class _CarteSolde extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Solde disponible',
+                  context.t.paySoldeDisponible,
                   style: TextStyle(color: LiveColors.brumeClaire),
                 ),
               ),
@@ -193,19 +184,23 @@ class _CarteSolde extends StatelessWidget {
             children: [
               Expanded(
                 child: _Montant(
-                  'En attente',
+                  context.t.payEnAttente,
                   m(etat.enAttente > 0 ? etat.enAttente : 96000),
-                  'ventes non confirmées',
+                  context.t.payVentesNonConfirmees,
                 ),
               ),
               Expanded(
-                child: _Montant('Bloqué', m(totalBloque), 'pour mes achats'),
+                child: _Montant(
+                  context.t.payBloque,
+                  m(totalBloque),
+                  context.t.payPourMesAchats,
+                ),
               ),
             ],
           ),
           const SizedBox(height: 14),
           Text(
-            '${etat.prenom} Mabiala · N${etat.niveau}',
+            context.t.payNomNiveau(etat.prenom, etat.niveau),
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w700,
@@ -213,8 +208,8 @@ class _CarteSolde extends StatelessWidget {
           ),
           Text(
             etat.identiteVerifiee
-                ? 'Retrait vers votre numéro jusqu’à 2 M FCFA par mois'
-                : 'Retrait après vérification de votre identité',
+                ? context.t.payRetraitVersVotreNumero
+                : context.t.payRetraitApresVerificationDe,
             style: const TextStyle(color: LiveColors.brumeClaire, fontSize: 12),
           ),
         ],
@@ -258,11 +253,11 @@ class _ActionsArgent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const actions = [
-      (Icons.north_east_rounded, 'Retirer', '/retirer'),
-      (Icons.public_rounded, 'Recevoir', '/transfert?sens=recevoir'),
-      (Icons.storefront_rounded, 'Mes gains', '/gains'),
-      (Icons.receipt_long_rounded, 'Factures', '/factures'),
+    final actions = [
+      (Icons.north_east_rounded, context.t.payRetirer, '/retirer'),
+      (Icons.public_rounded, context.t.payRecevoir, '/transfert?sens=recevoir'),
+      (Icons.storefront_rounded, context.t.payMesGains, '/gains'),
+      (Icons.receipt_long_rounded, context.t.payFactures, '/factures'),
     ];
     return Row(
       children: [
@@ -309,23 +304,23 @@ class _Depenses extends StatelessWidget {
   const _Depenses({required this.masque});
   final bool masque;
 
-  static const _postes = [
+  static List<(String, int, Color)> _postes(Textes t) => [
     ('Live Market', 64500, LiveColors.orangeVif),
-    ('Logement et visites', 5000, Color(0xFF0369A1)),
-    ('Services', 25000, Color(0xFF15803D)),
-    ('Factures et crédit', 18450, Color(0xFFCA8A04)),
+    (t.payLogementEtVisites, 5000, Color(0xFF0369A1)),
+    (t.payServices, 25000, Color(0xFF15803D)),
+    (t.payFacturesEtCredit, 18450, Color(0xFFCA8A04)),
     ('Live IA', 1000, Color(0xFF7C3AED)),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final total = _postes.fold(0, (s, p) => s + p.$2);
+    final total = _postes(context.t).fold(0, (s, p) => s + p.$2);
     return Bloc(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            masque ? '••• FCFA dépensés' : '${fcfa(total)} dépensés',
+            context.t.payDepenses(masque ? '••• FCFA' : fcfa(total)),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 10),
@@ -333,7 +328,7 @@ class _Depenses extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
             child: Row(
               children: [
-                for (final (_, v, c) in _postes)
+                for (final (_, v, c) in _postes(context.t))
                   Expanded(
                     flex: v,
                     child: Container(height: 12, color: c),
@@ -342,7 +337,7 @@ class _Depenses extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          for (final (nom, v, c) in _postes)
+          for (final (nom, v, c) in _postes(context.t))
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 3),
               child: Row(
@@ -394,7 +389,9 @@ class _LigneMouvement extends StatelessWidget {
         ),
       ),
       title: Text(m.libelle),
-      subtitle: Text(m.enAttente ? '${m.quand} · en attente' : m.quand),
+      subtitle: Text(
+        m.enAttente ? context.t.payQuandEnAttente(m.quand) : m.quand,
+      ),
       trailing: Text(
         masque ? '•••' : '${entree ? '+' : ''}${fcfa(m.montant)}',
         style: TextStyle(

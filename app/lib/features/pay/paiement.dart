@@ -16,8 +16,8 @@ class _EcranPaiementState extends ConsumerState<EcranPaiement> {
     final etat = ref.watch(liveProvider);
     final p = etat.paiement;
     if (p == null) {
-      return const Scaffold(
-        body: Center(child: Text('Aucun paiement en cours.')),
+      return Scaffold(
+        body: Center(child: Text(context.t.payAucunPaiementEnCours)),
       );
     }
     final operateurs = villeLive(etat.pays).operateurs;
@@ -26,24 +26,24 @@ class _EcranPaiementState extends ConsumerState<EcranPaiement> {
       orElse: () => operateurs.first,
     );
     return Scaffold(
-      appBar: AppBar(title: const Text('Paiement')),
+      appBar: AppBar(title: Text(context.t.payPaiement)),
       body: DeuxColonnes(
         principale: [
           Text(
             '${p.libelle} · ${p.beneficiaire}',
             style: const TextStyle(color: LiveColors.gris),
           ),
-          LigneMontant('Total à payer', p.montant, gras: true),
+          LigneMontant(context.t.payTotalAPayer, p.montant, gras: true),
           const SizedBox(height: 16),
-          const Text(
-            'Payer avec',
+          Text(
+            context.t.payPayerAvec,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 8),
           if (etat.disponible >= p.montant)
             Choix(
-              titre: Moyen.solde.nom,
-              sousTitre: 'Disponible : ${fcfa(etat.disponible)}',
+              titre: moyenAffiche(context.t, Moyen.solde.nom),
+              sousTitre: context.t.payDisponible(fcfa(etat.disponible)),
               icone: Icons.account_balance_wallet_rounded,
               selectionne: _moyen == Moyen.solde.nom,
               onTap: () => setState(() => _moyen = Moyen.solde.nom),
@@ -54,14 +54,14 @@ class _EcranPaiementState extends ConsumerState<EcranPaiement> {
               titre: o,
               sousTitre: o.startsWith(etat.operateur)
                   ? etat.telephone
-                  : 'Demande envoyée sur votre téléphone',
+                  : context.t.payDemandeEnvoyeeSurVotre,
               icone: Icons.phone_android,
               selectionne: _moyen == o,
               onTap: () => setState(() => _moyen = o),
             ),
           Choix(
-            titre: Moyen.visa.nom,
-            sousTitre: 'Page sécurisée 3-D Secure',
+            titre: moyenAffiche(context.t, Moyen.visa.nom),
+            sousTitre: context.t.payPageSecurisee3D,
             icone: Icons.credit_card,
             selectionne: _moyen == Moyen.visa.nom,
             onTap: () => setState(() => _moyen = Moyen.visa.nom),
@@ -70,21 +70,19 @@ class _EcranPaiementState extends ConsumerState<EcranPaiement> {
         secondaire: [
           const SizedBox(height: 8),
           BandeauProtection(switch (p.type) {
-            TypePaiement.credits =>
-              'Crédits ajoutés dès la confirmation du paiement.',
+            TypePaiement.credits => context.t.payCreditsAjoutesDesLa,
             _ when p.modeCommande == ModePaiement.remise =>
-              'Paiement de la commande que vous avez en main.',
-            _ =>
-              "${fcfa(p.montant)} bloqués jusqu'à votre confirmation. Remboursés sinon.",
+              context.t.payPaiementDeLaCommande,
+            _ => context.t.payBloquesJusqua(fcfa(p.montant)),
           }),
           const SizedBox(height: 20),
-          const Text(
-            'Code secret de paiement',
+          Text(
+            context.t.payCodeSecretDePaiement,
             textAlign: TextAlign.center,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          const Text(
-            '(prototype : 4 chiffres au choix)',
+          Text(
+            context.t.payPrototype4ChiffresAu,
             textAlign: TextAlign.center,
             style: TextStyle(color: LiveColors.gris, fontSize: 12),
           ),
@@ -92,11 +90,7 @@ class _EcranPaiementState extends ConsumerState<EcranPaiement> {
             onComplet: (_) {
               // L'argent exige le réseau : pas de file d'envoi (docs/26 §4).
               if (horsConnexion.value) {
-                informer(
-                  context,
-                  'Pas de réseau : le paiement partira quand vous serez '
-                  'reconnecté. Rien n’a été débité.',
-                );
+                informer(context, context.t.payPasDeReseauLe);
                 return;
               }
               context.push('/payer/attente', extra: _moyen!);
@@ -169,10 +163,10 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
                   const Spacer(),
                   Text(
                     solde
-                        ? 'Paiement avec votre solde Live'
+                        ? context.t.payPaiementAvecVotreSolde
                         : visa
-                        ? 'Page de paiement sécurisée'
-                        : 'Validez sur votre téléphone',
+                        ? context.t.payPageDePaiementSecurisee
+                        : context.t.payValidezSurVotreTelephone,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 24,
@@ -182,22 +176,26 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
                   const SizedBox(height: 12),
                   if (p != null)
                     Text(
-                      '${fcfa(p.montant)} · ${widget.moyen}',
+                      '${fcfa(p.montant)} · ${moyenAffiche(context.t, widget.moyen)}',
                       style: const TextStyle(fontSize: 18),
                     ),
                   if (!visa && !solde) Text(etat.telephone),
                   const SizedBox(height: 20),
                   if (solde)
-                    const Text(
-                      'Le montant est prélevé sur vos gains disponibles.\nAucun frais.',
+                    Text(
+                      context.t.payLeMontantEstPreleve,
                       textAlign: TextAlign.center,
                     )
                   else if (!visa) ...[
-                    Text('1. Ouvrez la demande de ${widget.moyen}'),
-                    const Text('2. Tapez votre code secret Mobile Money'),
+                    Text(
+                      context.t.payOuvrezDemande(
+                        moyenAffiche(context.t, widget.moyen),
+                      ),
+                    ),
+                    Text(context.t.payN2TapezVotreCode),
                   ] else
-                    const Text(
-                      'Saisie de la carte chez le prestataire de paiement.\nLive ne voit jamais votre carte.',
+                    Text(
+                      context.t.paySaisieDeLaCarte,
                       textAlign: TextAlign.center,
                     ),
                   const SizedBox(height: 24),
@@ -206,12 +204,10 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
                   Text(
                     '${_secondes ~/ 60}:${(_secondes % 60).toString().padLeft(2, '0')}',
                   ),
-                  const BoutonEcouter(
-                    "Votre téléphone va afficher une demande de paiement de votre opérateur. Tapez votre code secret Mobile Money sur cette demande, pas dans Live. Live ne vous demandera jamais ce code.",
-                  ),
+                  BoutonEcouter(context.t.payVotreTelephoneVaAfficher),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Live ne vous demandera JAMAIS votre code secret MoMo.',
+                  Text(
+                    context.t.payLiveNeVousDemandera,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -221,11 +217,11 @@ class _EcranAttenteState extends ConsumerState<EcranAttente> {
                   const Spacer(),
                   OutlinedButton(
                     onPressed: () => _rienRecu(context),
-                    child: const Text("Je n'ai rien reçu"),
+                    child: Text(context.t.payJeNAiRien),
                   ),
                   TextButton(
                     onPressed: () => context.pop(),
-                    child: const Text('Annuler'),
+                    child: Text(context.t.annuler),
                   ),
                 ],
               ),
@@ -253,100 +249,98 @@ class EcranPaiementReussi extends StatelessWidget {
   Widget build(BuildContext context) {
     final (message, bouton, route) = switch (type) {
       TypePaiement.commande => (
-        "L'argent est bloqué par Live jusqu'à ce que vous confirmiez la réception.",
-        'Suivre ma commande',
+        context.t.payLArgentEstBloque,
+        context.t.paySuivreMaCommande,
         '/suivi/$id',
       ),
       TypePaiement.visite => (
-        "Les frais sont bloqués jusqu'à la visite. L'adresse exacte est maintenant visible.",
-        'Voir ma visite',
+        context.t.payLesFraisSontBloques,
+        context.t.payVoirMaVisite,
         '/visite/$id',
       ),
       TypePaiement.acompte => (
-        "L'acompte est bloqué. La part matériel sera versée au démarrage des travaux.",
-        'Suivre la prestation',
+        context.t.payLAcompteEstBloque,
+        context.t.paySuivreLaPrestation,
         '/prestation/$id',
       ),
       TypePaiement.credits => (
-        'Vos Crédits Live sont disponibles immédiatement.',
-        'Utiliser mes crédits',
+        context.t.payVosCreditsLiveSont,
+        context.t.payUtiliserMesCredits,
         '/ia',
       ),
       TypePaiement.reservation => (
-        "L'acompte est bloqué par Live jusqu'à la signature du bail et la remise des clés.",
-        'Voir ma réservation',
+        context.t.payLAcompteEstBloque2,
+        context.t.payVoirMaReservation,
         '/visite/$id',
       ),
       TypePaiement.service => (
-        'Le prestataire est prévenu. Il est payé quand vous confirmez la fin du service.',
-        'Suivre la prestation',
+        context.t.payLePrestataireEstPrevenu,
+        context.t.paySuivreLaPrestation,
         '/prestation/$id',
       ),
       TypePaiement.abonnement => (
-        'Live Pro est actif : statistiques détaillées et boosts à −30 %.',
-        'Voir mes super-pouvoirs',
+        context.t.payLiveProEstActif,
+        context.t.payVoirMesSuperPouvoirs,
         '/pouvoirs',
       ),
       TypePaiement.numerique => (
-        'Vos contenus sont dans « Mes achats ». Téléchargez-les pour les '
-            'ouvrir sans connexion.',
-        'Ouvrir mes achats',
+        context.t.payVosContenusSontDans,
+        context.t.payOuvrirMesAchats,
         '/mes-achats',
       ),
       TypePaiement.fan => (
-        'Vous êtes fan : badge dans les commentaires et vidéos réservées débloquées.',
-        'Voir le créateur',
+        context.t.payVousEtesFanBadge,
+        context.t.payVoirLeCreateur,
         '/fans/$id',
       ),
       TypePaiement.sejour => (
-        'Séjour réservé. Le paiement est versé à l’hôte après votre arrivée.',
-        'Voir ma réservation',
+        context.t.paySejourReserveLePaiement,
+        context.t.payVoirMaReservation,
         '/sejours',
       ),
       TypePaiement.publicite => (
-        'Campagne en vérification. Elle sera diffusée avec la mention « Sponsorisé ».',
-        'Voir mes campagnes',
+        context.t.payCampagneEnVerificationElle,
+        context.t.payVoirMesCampagnes,
         '/publicite',
       ),
       TypePaiement.livePlus => (
-        'Live Plus est actif : vos crédits du mois sont ajoutés.',
-        'Utiliser mes crédits',
+        context.t.payLivePlusEstActif,
+        context.t.payUtiliserMesCredits,
         '/ia',
       ),
       TypePaiement.cotisation => (
-        'Cotisation reçue. Live la garde et verse la cagnotte au bénéficiaire le jour du tour.',
-        'Voir la tontine',
+        context.t.payCotisationRecueLiveLa,
+        context.t.payVoirLaTontine,
         '/tontine/t1',
       ),
       TypePaiement.achatGroupe => (
-        'Vous participez. Si l’objectif n’est pas atteint, vous êtes remboursé automatiquement.',
-        'Voir les achats groupés',
+        context.t.payVousParticipezSiL,
+        context.t.payVoirLesAchatsGroupes,
         '/achats-groupes',
       ),
       TypePaiement.facture => (
-        'Facture réglée. Le reçu du fournisseur est dans vos paiements.',
-        'Mes factures',
+        context.t.payFactureRegleeLeRecu,
+        context.t.payMesFactures,
         '/factures',
       ),
       TypePaiement.recharge => (
-        'Crédit envoyé sur le numéro choisi.',
-        'Mes factures',
+        context.t.payCreditEnvoyeSurLe,
+        context.t.payMesFactures,
         '/factures',
       ),
       TypePaiement.pourUnProche => (
-        'Votre proche est prévenu par SMS. Il montre son QR à la remise ; vous recevez la confirmation.',
-        'Mes envois',
+        context.t.payVotreProcheEstPrevenu,
+        context.t.payMesEnvois,
         '/diaspora',
       ),
       TypePaiement.transfert => (
-        'Transfert envoyé. Votre proche le retire en MTN MoMo ou Airtel Money, sans frais de retrait.',
-        'Mes envois',
+        context.t.payTransfertEnvoyeVotreProche,
+        context.t.payMesEnvois,
         '/diaspora',
       ),
       TypePaiement.boost => (
-        'Votre annonce passe en tête du fil et des recherches de votre ville, '
-            'avec la mention « Sponsorisé ».',
-        'Voir mes ventes',
+        context.t.payVotreAnnoncePasseEn,
+        context.t.payVoirMesVentes,
         '/mes-ventes',
       ),
     };
@@ -361,13 +355,16 @@ class EcranPaiementReussi extends StatelessWidget {
                 children: [
                   const Spacer(),
                   const CocheAnimee(taille: 96),
-                  const Text(
-                    'Paiement réussi',
+                  Text(
+                    context.t.payPaiementReussi,
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '$moyen · Réf. LV-P-2026-${id.hashCode.abs() % 100000}',
+                    context.t.payReference(
+                      moyenAffiche(context.t, moyen),
+                      'LV-P-2026-${id.hashCode.abs() % 100000}',
+                    ),
                     style: const TextStyle(color: LiveColors.gris),
                   ),
                   const SizedBox(height: 16),
@@ -383,7 +380,7 @@ class EcranPaiementReussi extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () => context.push('/recu/$id'),
-                    child: const Text('Voir le reçu'),
+                    child: Text(context.t.payVoirLeRecu),
                   ),
                 ],
               ),
@@ -409,32 +406,24 @@ void _rienRecu(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'En attente de l’opérateur',
+            Text(
+              context.t.payEnAttenteDeL,
               style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 6),
-            const Text(
-              'La demande peut mettre jusqu’à 2 minutes à arriver. Vérifiez que '
-              'votre téléphone a du réseau et du crédit Mobile Money.',
-            ),
+            Text(context.t.payLaDemandePeutMettre),
             const SizedBox(height: 10),
-            const BandeauProtection(
-              'Aucun double débit : une seule demande peut être validée.',
-            ),
+            BandeauProtection(context.t.payAucunDoubleDebitUne),
             const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: FilledButton.icon(
                 onPressed: () {
                   Navigator.pop(ctx);
-                  informer(
-                    context,
-                    'Nouvelle demande envoyée à votre téléphone.',
-                  );
+                  informer(context, context.t.payNouvelleDemandeEnvoyeeA);
                 },
                 icon: const Icon(Icons.refresh_rounded),
-                label: const Text('Renvoyer la demande'),
+                label: Text(context.t.payRenvoyerLaDemande),
               ),
             ),
             const SizedBox(height: 8),
@@ -445,7 +434,7 @@ void _rienRecu(BuildContext context) {
                   Navigator.pop(ctx);
                   context.pop();
                 },
-                child: const Text('Changer de moyen de paiement'),
+                child: Text(context.t.payChangerDeMoyenDe),
               ),
             ),
           ],

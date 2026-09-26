@@ -47,10 +47,8 @@ void main() {
     'lib/features/explore',
     'lib/features/market',
     'lib/features/compte',
-    'lib/features/messages/appels.dart',
-    'lib/features/messages/appel_en_cours.dart',
-    'lib/features/messages/appel_vues.dart',
-    'lib/features/messages/appel_commandes.dart',
+    'lib/features/messages',
+    'lib/features/pay',
   ];
   final enDur = RegExp(
     r'''(?:Text\(|titre: |texte: |label: |tooltip: |hintText: |labelText: )\s*(?:const )?'[A-ZÀ-Ý][a-zà-ÿ’']+ [a-zà-ÿ]''',

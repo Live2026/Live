@@ -4323,5 +4323,994 @@
   "@compteLegalVersionFrancaise": {
     "description": "Écran : legal (bandeau, anglais seulement)"
   },
-  "compteLegalVersionFrancaise": ""
+  "compteLegalVersionFrancaise": "",
+  "@payDisponible": {
+    "description": "Écran : gains_retrait, paiement",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "payDisponible": "Disponible : {montant}",
+  "@payEnvoyes": {
+    "description": "Écran : gains_retrait",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "payEnvoyes": "{montant} envoyés",
+  "@paySurNumero": {
+    "description": "Écran : gains_retrait",
+    "placeholders": {
+      "operateur": {
+        "type": "String"
+      },
+      "tel": {
+        "type": "String"
+      }
+    }
+  },
+  "paySurNumero": "sur {operateur} {tel}",
+  "@payOperateurTel": {
+    "description": "Écran : gains_retrait, portefeuille, recu",
+    "placeholders": {
+      "operateur": {
+        "type": "String"
+      },
+      "tel": {
+        "type": "String"
+      }
+    }
+  },
+  "payOperateurTel": "{operateur} · {tel}",
+  "@payIdentiteVerifieeDe": {
+    "description": "Écran : gains_retrait",
+    "placeholders": {
+      "prenom": {
+        "type": "String"
+      }
+    }
+  },
+  "payIdentiteVerifieeDe": "{prenom} (identité vérifiée)",
+  "@payRetirerMontant": {
+    "description": "Écran : gains_retrait",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "payRetirerMontant": "Retirer {montant}",
+  "payMesGains": "Mes gains",
+  "@payMesGains": {
+    "description": "Écran : portefeuille"
+  },
+  "payDisponible2": "Disponible",
+  "@payDisponible2": {
+    "description": "Écran : gains_retrait"
+  },
+  "payEnAttente96000": "En attente : 96 000 FCFA (ventes non confirmées)",
+  "@payEnAttente96000": {
+    "description": "Écran : gains_retrait"
+  },
+  "payRetirer": "Retirer",
+  "@payRetirer": {
+    "description": "Écran : portefeuille"
+  },
+  "payPourRetirerDebloquezLe": "Pour retirer, débloquez le super-pouvoir « Retirer ses gains » en vérifiant votre identité (2 minutes).",
+  "@payPourRetirerDebloquezLe": {
+    "description": "Écran : gains_retrait"
+  },
+  "payVerifier": "Vérifier",
+  "@payVerifier": {
+    "description": "Écran : gains_retrait"
+  },
+  "payHistorique": "Historique",
+  "@payHistorique": {
+    "description": "Écran : portefeuille"
+  },
+  "payRetirerMesGains": "Retirer mes gains",
+  "@payRetirerMesGains": {
+    "description": "Écran : gains_retrait"
+  },
+  "payRetirerSesGainsEst": "Retirer ses gains est un super-pouvoir. Il se débloque quand Live a vérifié votre identité : la loi l’exige pour protéger votre argent.",
+  "@payRetirerSesGainsEst": {
+    "description": "Écran : gains_retrait"
+  },
+  "payVerifierMonIdentite": "Vérifier mon identité",
+  "@payVerifierMonIdentite": {
+    "description": "Écran : gains_retrait"
+  },
+  "payVousAllezRecevoirUn": "Vous allez recevoir un SMS de votre opérateur.",
+  "@payVousAllezRecevoirUn": {
+    "description": "Écran : gains_retrait"
+  },
+  "payRetourAMesGains": "Retour à mes gains",
+  "@payRetourAMesGains": {
+    "description": "Écran : gains_retrait"
+  },
+  "payMontant": "Montant",
+  "@payMontant": {
+    "description": "Écran : recu"
+  },
+  "payToutRetirer": "Tout retirer",
+  "@payToutRetirer": {
+    "description": "Écran : gains_retrait"
+  },
+  "payFraisDeRetrait": "Frais de retrait",
+  "@payFraisDeRetrait": {
+    "description": "Écran : gains_retrait"
+  },
+  "payVousRecevez": "Vous recevez",
+  "@payVousRecevez": {
+    "description": "Écran : gains_retrait"
+  },
+  "payMontantSuperieurAVos": "Montant supérieur à vos gains disponibles.",
+  "@payMontantSuperieurAVos": {
+    "description": "Écran : gains_retrait"
+  },
+  "payMinimum1000Fcfa": "Minimum : 1 000 FCFA.",
+  "@payMinimum1000Fcfa": {
+    "description": "Écran : gains_retrait"
+  },
+  "payCodeSecretDePaiement": "Code secret de paiement",
+  "@payCodeSecretDePaiement": {
+    "description": "Écran : paiement"
+  },
+  "@payBloquesJusqua": {
+    "description": "Écran : paiement",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "payBloquesJusqua": "{montant} bloqués jusqu’à votre confirmation. Remboursés sinon.",
+  "@payOuvrezDemande": {
+    "description": "Écran : paiement",
+    "placeholders": {
+      "moyen": {
+        "type": "String"
+      }
+    }
+  },
+  "payOuvrezDemande": "1. Ouvrez la demande de {moyen}",
+  "@payReference": {
+    "description": "Écran : paiement",
+    "placeholders": {
+      "moyen": {
+        "type": "String"
+      },
+      "ref": {
+        "type": "String"
+      }
+    }
+  },
+  "payReference": "{moyen} · Réf. {ref}",
+  "payAucunPaiementEnCours": "Aucun paiement en cours.",
+  "@payAucunPaiementEnCours": {
+    "description": "Écran : paiement"
+  },
+  "payPaiement": "Paiement",
+  "@payPaiement": {
+    "description": "Écran : paiement"
+  },
+  "payTotalAPayer": "Total à payer",
+  "@payTotalAPayer": {
+    "description": "Écran : paiement"
+  },
+  "payPayerAvec": "Payer avec",
+  "@payPayerAvec": {
+    "description": "Écran : paiement"
+  },
+  "payDemandeEnvoyeeSurVotre": "Demande envoyée sur votre téléphone",
+  "@payDemandeEnvoyeeSurVotre": {
+    "description": "Écran : paiement"
+  },
+  "payPageSecurisee3D": "Page sécurisée 3-D Secure",
+  "@payPageSecurisee3D": {
+    "description": "Écran : paiement"
+  },
+  "payCreditsAjoutesDesLa": "Crédits ajoutés dès la confirmation du paiement.",
+  "@payCreditsAjoutesDesLa": {
+    "description": "Écran : paiement"
+  },
+  "payPaiementDeLaCommande": "Paiement de la commande que vous avez en main.",
+  "@payPaiementDeLaCommande": {
+    "description": "Écran : paiement"
+  },
+  "payPrototype4ChiffresAu": "(prototype : 4 chiffres au choix)",
+  "@payPrototype4ChiffresAu": {
+    "description": "Écran : paiement"
+  },
+  "payPasDeReseauLe": "Pas de réseau : le paiement partira quand vous serez reconnecté. Rien n’a été débité.",
+  "@payPasDeReseauLe": {
+    "description": "Écran : paiement"
+  },
+  "payPaiementAvecVotreSolde": "Paiement avec votre solde Live",
+  "@payPaiementAvecVotreSolde": {
+    "description": "Écran : paiement"
+  },
+  "payPageDePaiementSecurisee": "Page de paiement sécurisée",
+  "@payPageDePaiementSecurisee": {
+    "description": "Écran : paiement"
+  },
+  "payValidezSurVotreTelephone": "Validez sur votre téléphone",
+  "@payValidezSurVotreTelephone": {
+    "description": "Écran : paiement"
+  },
+  "payLeMontantEstPreleve": "Le montant est prélevé sur vos gains disponibles.\nAucun frais.",
+  "@payLeMontantEstPreleve": {
+    "description": "Écran : paiement"
+  },
+  "payN2TapezVotreCode": "2. Tapez votre code secret Mobile Money",
+  "@payN2TapezVotreCode": {
+    "description": "Écran : paiement"
+  },
+  "paySaisieDeLaCarte": "Saisie de la carte chez le prestataire de paiement.\nLive ne voit jamais votre carte.",
+  "@paySaisieDeLaCarte": {
+    "description": "Écran : paiement"
+  },
+  "payVotreTelephoneVaAfficher": "Votre téléphone va afficher une demande de paiement de votre opérateur. Tapez votre code secret Mobile Money sur cette demande, pas dans Live. Live ne vous demandera jamais ce code.",
+  "@payVotreTelephoneVaAfficher": {
+    "description": "Écran : paiement"
+  },
+  "payLiveNeVousDemandera": "Live ne vous demandera JAMAIS votre code secret MoMo.",
+  "@payLiveNeVousDemandera": {
+    "description": "Écran : paiement"
+  },
+  "payJeNAiRien": "Je n'ai rien reçu",
+  "@payJeNAiRien": {
+    "description": "Écran : paiement"
+  },
+  "payLArgentEstBloque": "L'argent est bloqué par Live jusqu'à ce que vous confirmiez la réception.",
+  "@payLArgentEstBloque": {
+    "description": "Écran : paiement"
+  },
+  "paySuivreMaCommande": "Suivre ma commande",
+  "@paySuivreMaCommande": {
+    "description": "Écran : paiement"
+  },
+  "payLesFraisSontBloques": "Les frais sont bloqués jusqu'à la visite. L'adresse exacte est maintenant visible.",
+  "@payLesFraisSontBloques": {
+    "description": "Écran : paiement"
+  },
+  "payVoirMaVisite": "Voir ma visite",
+  "@payVoirMaVisite": {
+    "description": "Écran : paiement"
+  },
+  "payLAcompteEstBloque": "L'acompte est bloqué. La part matériel sera versée au démarrage des travaux.",
+  "@payLAcompteEstBloque": {
+    "description": "Écran : paiement"
+  },
+  "paySuivreLaPrestation": "Suivre la prestation",
+  "@paySuivreLaPrestation": {
+    "description": "Écran : paiement"
+  },
+  "payVosCreditsLiveSont": "Vos Crédits Live sont disponibles immédiatement.",
+  "@payVosCreditsLiveSont": {
+    "description": "Écran : paiement"
+  },
+  "payUtiliserMesCredits": "Utiliser mes crédits",
+  "@payUtiliserMesCredits": {
+    "description": "Écran : paiement"
+  },
+  "payLAcompteEstBloque2": "L'acompte est bloqué par Live jusqu'à la signature du bail et la remise des clés.",
+  "@payLAcompteEstBloque2": {
+    "description": "Écran : paiement"
+  },
+  "payVoirMaReservation": "Voir ma réservation",
+  "@payVoirMaReservation": {
+    "description": "Écran : paiement"
+  },
+  "payLePrestataireEstPrevenu": "Le prestataire est prévenu. Il est payé quand vous confirmez la fin du service.",
+  "@payLePrestataireEstPrevenu": {
+    "description": "Écran : paiement"
+  },
+  "payLiveProEstActif": "Live Pro est actif : statistiques détaillées et boosts à −30 %.",
+  "@payLiveProEstActif": {
+    "description": "Écran : paiement"
+  },
+  "payVoirMesSuperPouvoirs": "Voir mes super-pouvoirs",
+  "@payVoirMesSuperPouvoirs": {
+    "description": "Écran : paiement"
+  },
+  "payVosContenusSontDans": "Vos contenus sont dans « Mes achats ». Téléchargez-les pour les ouvrir sans connexion.",
+  "@payVosContenusSontDans": {
+    "description": "Écran : paiement"
+  },
+  "payOuvrirMesAchats": "Ouvrir mes achats",
+  "@payOuvrirMesAchats": {
+    "description": "Écran : paiement"
+  },
+  "payVousEtesFanBadge": "Vous êtes fan : badge dans les commentaires et vidéos réservées débloquées.",
+  "@payVousEtesFanBadge": {
+    "description": "Écran : paiement"
+  },
+  "payVoirLeCreateur": "Voir le créateur",
+  "@payVoirLeCreateur": {
+    "description": "Écran : paiement"
+  },
+  "paySejourReserveLePaiement": "Séjour réservé. Le paiement est versé à l’hôte après votre arrivée.",
+  "@paySejourReserveLePaiement": {
+    "description": "Écran : paiement"
+  },
+  "payCampagneEnVerificationElle": "Campagne en vérification. Elle sera diffusée avec la mention « Sponsorisé ».",
+  "@payCampagneEnVerificationElle": {
+    "description": "Écran : paiement"
+  },
+  "payVoirMesCampagnes": "Voir mes campagnes",
+  "@payVoirMesCampagnes": {
+    "description": "Écran : paiement"
+  },
+  "payLivePlusEstActif": "Live Plus est actif : vos crédits du mois sont ajoutés.",
+  "@payLivePlusEstActif": {
+    "description": "Écran : paiement"
+  },
+  "payCotisationRecueLiveLa": "Cotisation reçue. Live la garde et verse la cagnotte au bénéficiaire le jour du tour.",
+  "@payCotisationRecueLiveLa": {
+    "description": "Écran : paiement"
+  },
+  "payVoirLaTontine": "Voir la tontine",
+  "@payVoirLaTontine": {
+    "description": "Écran : paiement"
+  },
+  "payVousParticipezSiL": "Vous participez. Si l’objectif n’est pas atteint, vous êtes remboursé automatiquement.",
+  "@payVousParticipezSiL": {
+    "description": "Écran : paiement"
+  },
+  "payVoirLesAchatsGroupes": "Voir les achats groupés",
+  "@payVoirLesAchatsGroupes": {
+    "description": "Écran : paiement"
+  },
+  "payFactureRegleeLeRecu": "Facture réglée. Le reçu du fournisseur est dans vos paiements.",
+  "@payFactureRegleeLeRecu": {
+    "description": "Écran : paiement"
+  },
+  "payMesFactures": "Mes factures",
+  "@payMesFactures": {
+    "description": "Écran : paiement"
+  },
+  "payCreditEnvoyeSurLe": "Crédit envoyé sur le numéro choisi.",
+  "@payCreditEnvoyeSurLe": {
+    "description": "Écran : paiement"
+  },
+  "payVotreProcheEstPrevenu": "Votre proche est prévenu par SMS. Il montre son QR à la remise ; vous recevez la confirmation.",
+  "@payVotreProcheEstPrevenu": {
+    "description": "Écran : paiement"
+  },
+  "payMesEnvois": "Mes envois",
+  "@payMesEnvois": {
+    "description": "Écran : paiement"
+  },
+  "payTransfertEnvoyeVotreProche": "Transfert envoyé. Votre proche le retire en MTN MoMo ou Airtel Money, sans frais de retrait.",
+  "@payTransfertEnvoyeVotreProche": {
+    "description": "Écran : paiement"
+  },
+  "payVotreAnnoncePasseEn": "Votre annonce passe en tête du fil et des recherches de votre ville, avec la mention « Sponsorisé ».",
+  "@payVotreAnnoncePasseEn": {
+    "description": "Écran : paiement"
+  },
+  "payVoirMesVentes": "Voir mes ventes",
+  "@payVoirMesVentes": {
+    "description": "Écran : paiement"
+  },
+  "payPaiementReussi": "Paiement réussi",
+  "@payPaiementReussi": {
+    "description": "Écran : paiement"
+  },
+  "payVoirLeRecu": "Voir le reçu",
+  "@payVoirLeRecu": {
+    "description": "Écran : paiement"
+  },
+  "payEnAttenteDeL": "En attente de l’opérateur",
+  "@payEnAttenteDeL": {
+    "description": "Écran : paiement"
+  },
+  "payLaDemandePeutMettre": "La demande peut mettre jusqu’à 2 minutes à arriver. Vérifiez que votre téléphone a du réseau et du crédit Mobile Money.",
+  "@payLaDemandePeutMettre": {
+    "description": "Écran : paiement"
+  },
+  "payAucunDoubleDebitUne": "Aucun double débit : une seule demande peut être validée.",
+  "@payAucunDoubleDebitUne": {
+    "description": "Écran : paiement"
+  },
+  "payNouvelleDemandeEnvoyeeA": "Nouvelle demande envoyée à votre téléphone.",
+  "@payNouvelleDemandeEnvoyeeA": {
+    "description": "Écran : paiement"
+  },
+  "payRenvoyerLaDemande": "Renvoyer la demande",
+  "@payRenvoyerLaDemande": {
+    "description": "Écran : paiement"
+  },
+  "payChangerDeMoyenDe": "Changer de moyen de paiement",
+  "@payChangerDeMoyenDe": {
+    "description": "Écran : paiement"
+  },
+  "@paySoldeLive": {
+    "description": "Écran : pay_screens (moyen de paiement)"
+  },
+  "paySoldeLive": "Solde Live",
+  "@payCarteVisa": {
+    "description": "Écran : portefeuille"
+  },
+  "payCarteVisa": "Carte Visa",
+  "@payVerseAuVendeur": {
+    "description": "Écran : portefeuille",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "payVerseAuVendeur": "{montant} · versé au vendeur quand vous confirmez la réception",
+  "@payNomNiveau": {
+    "description": "Écran : portefeuille",
+    "placeholders": {
+      "prenom": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "payNomNiveau": "{prenom} Mabiala · N{n}",
+  "@payDepenses": {
+    "description": "Écran : portefeuille",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "payDepenses": "{montant} dépensés",
+  "@payQuandEnAttente": {
+    "description": "Écran : portefeuille",
+    "placeholders": {
+      "quand": {
+        "type": "String"
+      }
+    }
+  },
+  "payQuandEnAttente": "{quand} · en attente",
+  "payLogementEtVisites": "Logement et visites",
+  "@payLogementEtVisites": {
+    "description": "Écran : portefeuille"
+  },
+  "payServices": "Services",
+  "@payServices": {
+    "description": "Écran : portefeuille"
+  },
+  "payFacturesEtCredit": "Factures et crédit",
+  "@payFacturesEtCredit": {
+    "description": "Écran : portefeuille"
+  },
+  "payMonArgentLive": "Mon argent Live",
+  "@payMonArgentLive": {
+    "description": "Écran : portefeuille"
+  },
+  "payAfficherLesMontants": "Afficher les montants",
+  "@payAfficherLesMontants": {
+    "description": "Écran : portefeuille"
+  },
+  "payMasquerLesMontants": "Masquer les montants",
+  "@payMasquerLesMontants": {
+    "description": "Écran : portefeuille"
+  },
+  "payMesDepensesDeSeptembre": "Mes dépenses de septembre",
+  "@payMesDepensesDeSeptembre": {
+    "description": "Écran : portefeuille"
+  },
+  "payArgentBloquePourMes": "Argent bloqué pour mes achats",
+  "@payArgentBloquePourMes": {
+    "description": "Écran : portefeuille"
+  },
+  "payAucunAchatEnCours": "Aucun achat en cours. Quand vous payez dans Live, l’argent reste bloqué jusqu’à ce que vous confirmiez la réception.",
+  "@payAucunAchatEnCours": {
+    "description": "Écran : portefeuille"
+  },
+  "payMesMoyensDePaiement": "Mes moyens de paiement",
+  "@payMesMoyensDePaiement": {
+    "description": "Écran : portefeuille"
+  },
+  "payPrincipalRetraitsVersCe": "Principal · retraits vers ce numéro, à votre nom",
+  "@payPrincipalRetraitsVersCe": {
+    "description": "Écran : portefeuille"
+  },
+  "payAjouterAirtelMoney": "Ajouter Airtel Money",
+  "@payAjouterAirtelMoney": {
+    "description": "Écran : portefeuille"
+  },
+  "payAjouterMtnMomo": "Ajouter MTN MoMo",
+  "@payAjouterMtnMomo": {
+    "description": "Écran : portefeuille"
+  },
+  "payUnSecondNumeroA": "Un second numéro à votre nom",
+  "@payUnSecondNumeroA": {
+    "description": "Écran : portefeuille"
+  },
+  "payCodeDeVerificationEnvoye": "Code de vérification envoyé au nouveau numéro.",
+  "@payCodeDeVerificationEnvoye": {
+    "description": "Écran : portefeuille"
+  },
+  "paySaisieSurLaPage": "Saisie sur la page sécurisée de la banque à chaque paiement : Live n’enregistre aucune carte",
+  "@paySaisieSurLaPage": {
+    "description": "Écran : portefeuille"
+  },
+  "payVotreSoldeSeRemplit": "Votre solde se remplit par vos ventes, vos remboursements et l’argent reçu de l’étranger. Il sert à payer dans Live ou se retire sans frais vers votre numéro. Les dépôts libres arriveront avec notre partenaire agréé.",
+  "@payVotreSoldeSeRemplit": {
+    "description": "Écran : portefeuille"
+  },
+  "paySoldeDisponible": "Solde disponible",
+  "@paySoldeDisponible": {
+    "description": "Écran : portefeuille"
+  },
+  "payEnAttente": "En attente",
+  "@payEnAttente": {
+    "description": "Écran : portefeuille"
+  },
+  "payVentesNonConfirmees": "ventes non confirmées",
+  "@payVentesNonConfirmees": {
+    "description": "Écran : portefeuille"
+  },
+  "payBloque": "Bloqué",
+  "@payBloque": {
+    "description": "Écran : portefeuille"
+  },
+  "payPourMesAchats": "pour mes achats",
+  "@payPourMesAchats": {
+    "description": "Écran : portefeuille"
+  },
+  "payRetraitVersVotreNumero": "Retrait vers votre numéro jusqu’à 2 M FCFA par mois",
+  "@payRetraitVersVotreNumero": {
+    "description": "Écran : portefeuille"
+  },
+  "payRetraitApresVerificationDe": "Retrait après vérification de votre identité",
+  "@payRetraitApresVerificationDe": {
+    "description": "Écran : portefeuille"
+  },
+  "payRecevoir": "Recevoir",
+  "@payRecevoir": {
+    "description": "Écran : portefeuille"
+  },
+  "payFactures": "Factures",
+  "@payFactures": {
+    "description": "Écran : portefeuille"
+  },
+  "@payRecuRef": {
+    "description": "Écran : recu",
+    "placeholders": {
+      "ref": {
+        "type": "String"
+      }
+    }
+  },
+  "payRecuRef": "Reçu {ref}",
+  "payPaiementLive": "Paiement Live",
+  "@payPaiementLive": {
+    "description": "Écran : recu"
+  },
+  "payRecu": "Reçu",
+  "@payRecu": {
+    "description": "Écran : recu"
+  },
+  "payPartagerLeRecu": "Partager le reçu",
+  "@payPartagerLeRecu": {
+    "description": "Écran : recu"
+  },
+  "payRecuDePaiement": "Reçu de paiement",
+  "@payRecuDePaiement": {
+    "description": "Écran : recu"
+  },
+  "payPayeArgentProtege": "Payé · argent protégé",
+  "@payPayeArgentProtege": {
+    "description": "Écran : recu"
+  },
+  "payObjet": "Objet",
+  "@payObjet": {
+    "description": "Écran : recu"
+  },
+  "payReference2": "Référence",
+  "@payReference2": {
+    "description": "Écran : recu"
+  },
+  "payDate": "Date",
+  "@payDate": {
+    "description": "Écran : recu"
+  },
+  "payN25Sept202610": "25 sept. 2026 · 10:21",
+  "@payN25Sept202610": {
+    "description": "Écran : recu"
+  },
+  "payMoyen": "Moyen",
+  "@payMoyen": {
+    "description": "Écran : recu"
+  },
+  "payOperateur": "Opérateur",
+  "@payOperateur": {
+    "description": "Écran : recu"
+  },
+  "payRefOperateurMp2609251021": "Réf. opérateur MP260925.1021.C4412",
+  "@payRefOperateurMp2609251021": {
+    "description": "Écran : recu"
+  },
+  "payPayePar": "Payé par",
+  "@payPayePar": {
+    "description": "Écran : recu"
+  },
+  "payFraisPourLAcheteur": "Frais pour l’acheteur",
+  "@payFraisPourLAcheteur": {
+    "description": "Écran : recu"
+  },
+  "payTotal": "Total",
+  "@payTotal": {
+    "description": "Écran : recu"
+  },
+  "payLiveCongoSasRccm": "Live Congo SAS · RCCM CG-BZV-01-2026-B12-00000 · fonds détenus sur compte de séquestre bancaire.",
+  "@payLiveCongoSasRccm": {
+    "description": "Écran : recu"
+  },
+  "payRecuEnregistreEnPdf": "Reçu enregistré en PDF (simulation).",
+  "@payRecuEnregistreEnPdf": {
+    "description": "Écran : recu"
+  },
+  "payTelechargerEnPdf": "Télécharger en PDF",
+  "@payTelechargerEnPdf": {
+    "description": "Écran : recu"
+  },
+  "@messagesTous": {
+    "description": "Écran : messages_screens (filtre)"
+  },
+  "messagesTous": "Tous",
+  "@messagesNonLus": {
+    "description": "Écran : messages_screens (filtre)"
+  },
+  "messagesNonLus": "Non lus",
+  "@messagesGroupes": {
+    "description": "Écran : messages_screens (filtre)"
+  },
+  "messagesGroupes": "Groupes",
+  "@messagesCanaux": {
+    "description": "Écran : messages_screens (filtre)"
+  },
+  "messagesCanaux": "Canaux",
+  "messagesRechercherUneConversation": "Rechercher une conversation",
+  "@messagesRechercherUneConversation": {
+    "description": "Écran : messages_screens"
+  },
+  "messagesNouveauMessage": "Nouveau message",
+  "@messagesNouveauMessage": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesReglagesDesMessages": "Réglages des messages",
+  "@messagesReglagesDesMessages": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesDemandesDeMessages": "Demandes de messages",
+  "@messagesDemandesDeMessages": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesArchivees": "Archivées",
+  "@messagesArchivees": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesVosMessagesSontChiffres": "Vos messages sont chiffrés. Live ne vous demandera jamais votre code MoMo.",
+  "@messagesVosMessagesSontChiffres": {
+    "description": "Écran : messages_screens"
+  },
+  "@messagesTitre": {
+    "description": "Écran : messages_screens"
+  },
+  "messagesTitre": "Messages",
+  "messagesToujoursDisponible": "Toujours disponible ?",
+  "@messagesToujoursDisponible": {
+    "description": "Écran : conversation"
+  },
+  "messagesDernierPrix": "Dernier prix ?",
+  "@messagesDernierPrix": {
+    "description": "Écran : conversation"
+  },
+  "messagesOuSeRencontrer": "Où se rencontrer ?",
+  "@messagesOuSeRencontrer": {
+    "description": "Écran : conversation"
+  },
+  "messagesEnLigneProVerifie": "en ligne · Pro vérifié",
+  "@messagesEnLigneProVerifie": {
+    "description": "Écran : conversation"
+  },
+  "messagesOptions": "Options",
+  "@messagesOptions": {
+    "description": "Écran : groupe"
+  },
+  "messagesPayer": "Payer",
+  "@messagesPayer": {
+    "description": "Écran : conversation"
+  },
+  "messagesAujourdHui": "Aujourd’hui",
+  "@messagesAujourdHui": {
+    "description": "Écran : groupe"
+  },
+  "messagesPayezToujoursAvecLe": "Payez toujours avec le bouton Payer : votre argent reste bloqué par Live jusqu’à la remise.",
+  "@messagesPayezToujoursAvecLe": {
+    "description": "Écran : conversation"
+  },
+  "messagesOffreVousProposez75": "OFFRE · Vous proposez 75 000 FCFA",
+  "@messagesOffreVousProposez75": {
+    "description": "Écran : conversation"
+  },
+  "messagesRefuseeParGrace": "Refusée par Grâce",
+  "@messagesRefuseeParGrace": {
+    "description": "Écran : conversation"
+  },
+  "messagesContreOffreGrace80": "CONTRE-OFFRE · Grâce : 80 000 FCFA",
+  "@messagesContreOffreGrace80": {
+    "description": "Écran : conversation"
+  },
+  "messagesOffreAccepteeLienDe": "Offre acceptée · lien de paiement prêt",
+  "@messagesOffreAccepteeLienDe": {
+    "description": "Écran : conversation"
+  },
+  "messagesValableJusquADemain": "Valable jusqu'à demain 10:30",
+  "@messagesValableJusquADemain": {
+    "description": "Écran : conversation"
+  },
+  "messagesPayer80000Fcfa": "Payer 80 000 FCFA dans Live",
+  "@messagesPayer80000Fcfa": {
+    "description": "Écran : conversation"
+  },
+  "messagesVousAvezRefuseLa": "Vous avez refusé la contre-offre.",
+  "@messagesVousAvezRefuseLa": {
+    "description": "Écran : conversation"
+  },
+  "messagesRefuser": "Refuser",
+  "@messagesRefuser": {
+    "description": "Écran : conversation"
+  },
+  "messagesAccepter": "Accepter",
+  "@messagesAccepter": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesJoindre": "Joindre",
+  "@messagesJoindre": {
+    "description": "Écran : conversation"
+  },
+  "messagesMessage": "Message",
+  "@messagesMessage": {
+    "description": "Écran : conversation"
+  },
+  "messagesPhoto": "Photo",
+  "@messagesPhoto": {
+    "description": "Écran : conversation"
+  },
+  "messagesPhotoEnvoyeeSimulation": "Photo envoyée (simulation).",
+  "@messagesPhotoEnvoyeeSimulation": {
+    "description": "Écran : conversation"
+  },
+  "messagesNoteVocale": "Note vocale",
+  "@messagesNoteVocale": {
+    "description": "Écran : conversation"
+  },
+  "messagesEnvoyer": "Envoyer",
+  "@messagesEnvoyer": {
+    "description": "Écran : groupe"
+  },
+  "messagesVoirLaBoutique": "Voir la boutique",
+  "@messagesVoirLaBoutique": {
+    "description": "Écran : conversation"
+  },
+  "messagesArchiverLaConversation": "Archiver la conversation",
+  "@messagesArchiverLaConversation": {
+    "description": "Écran : conversation"
+  },
+  "messagesBloquer": "Bloquer",
+  "@messagesBloquer": {
+    "description": "Écran : conversation"
+  },
+  "messagesIlNePourraPlus": "Il ne pourra plus vous écrire ni voir vos annonces",
+  "@messagesIlNePourraPlus": {
+    "description": "Écran : conversation"
+  },
+  "messagesGraceModeEstBloque": "Grâce Mode est bloqué.",
+  "@messagesGraceModeEstBloque": {
+    "description": "Écran : conversation"
+  },
+  "messagesSignaler": "Signaler",
+  "@messagesSignaler": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesCetteConversation": "cette conversation",
+  "@messagesCetteConversation": {
+    "description": "Écran : conversation"
+  },
+  "messagesProposerUnLieuDe": "Proposer un lieu de rendez-vous",
+  "@messagesProposerUnLieuDe": {
+    "description": "Écran : conversation"
+  },
+  "messagesLieuxPublicsEtFrequentes": "Lieux publics et fréquentés, recommandés pour les remises en main propre.",
+  "@messagesLieuxPublicsEtFrequentes": {
+    "description": "Écran : conversation"
+  },
+  "messagesEclaireeGardienneeA600": "Éclairée, gardiennée · à 600 m",
+  "@messagesEclaireeGardienneeA600": {
+    "description": "Écran : conversation"
+  },
+  "messagesEntreePrincipaleA1": "Entrée principale · à 1,1 km",
+  "@messagesEntreePrincipaleA1": {
+    "description": "Écran : conversation"
+  },
+  "messagesParkingSurveilleA3": "Parking surveillé · à 3,4 km",
+  "@messagesParkingSurveilleA3": {
+    "description": "Écran : conversation"
+  },
+  "messagesPointDeRemiseSur": "Point de remise sûr · à 900 m",
+  "@messagesPointDeRemiseSur": {
+    "description": "Écran : conversation"
+  },
+  "@messagesRendezVous": {
+    "description": "Écran : bulles",
+    "placeholders": {
+      "lieu": {
+        "type": "String"
+      }
+    }
+  },
+  "messagesRendezVous": "Rendez-vous : {lieu}",
+  "messagesLieuPublicRecommandePar": "Lieu public recommandé par Live",
+  "@messagesLieuPublicRecommandePar": {
+    "description": "Écran : bulles"
+  },
+  "messagesAttentionCeMessagePropose": "Attention : ce message propose un paiement en dehors de Live. Si vous payez hors de l'application, vous n'êtes PAS protégé et ne pourrez pas être remboursé.",
+  "@messagesAttentionCeMessagePropose": {
+    "description": "Écran : bulles"
+  },
+  "@messagesCanalAbonnes": {
+    "description": "Écran : groupe",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "messagesCanalAbonnes": "Canal · {n} abonnés",
+  "@messagesGroupeMembres": {
+    "description": "Écran : groupe",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "messagesGroupeMembres": "Groupe · {n} membres",
+  "messagesCeCanal": "ce canal",
+  "@messagesCeCanal": {
+    "description": "Écran : groupe"
+  },
+  "messagesCeGroupe": "ce groupe",
+  "@messagesCeGroupe": {
+    "description": "Écran : groupe"
+  },
+  "messagesMessageEpingle": "Message épinglé",
+  "@messagesMessageEpingle": {
+    "description": "Écran : groupe"
+  },
+  "messagesPostulerSurLiveEst": "Postuler sur Live est toujours gratuit.",
+  "@messagesPostulerSurLiveEst": {
+    "description": "Écran : groupe"
+  },
+  "messagesSeulsLesAdministrateursPublient": "Seuls les administrateurs publient. Réagissez aux messages avec un appui long.",
+  "@messagesSeulsLesAdministrateursPublient": {
+    "description": "Écran : groupe"
+  },
+  "messagesMessageAuGroupe": "Message au groupe",
+  "@messagesMessageAuGroupe": {
+    "description": "Écran : groupe"
+  },
+  "messagesTelecharger": "Télécharger",
+  "@messagesTelecharger": {
+    "description": "Écran : groupe"
+  },
+  "messagesMessagesDePersonnesQue": "Messages de personnes que vous ne suivez pas. Elles ne savent pas si vous les avez lus tant que vous n’acceptez pas.",
+  "@messagesMessagesDePersonnesQue": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesAucuneDemandeEnAttente": "Aucune demande en attente.",
+  "@messagesAucuneDemandeEnAttente": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesArnaqueProbableDemandeD": "Arnaque probable : demande d’argent",
+  "@messagesArnaqueProbableDemandeD": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesUneConversationArchiveeRevient": "Une conversation archivée revient dans la liste dès qu’un nouveau message arrive.",
+  "@messagesUneConversationArchiveeRevient": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesQuiPeutMEcrire": "Qui peut m’écrire",
+  "@messagesQuiPeutMEcrire": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesToutLeMonde": "Tout le monde",
+  "@messagesToutLeMonde": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesLesInconnusArriventDans": "Les inconnus arrivent dans « Demandes »",
+  "@messagesLesInconnusArriventDans": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesMesAbonnementsEtMes": "Mes abonnements et mes clients",
+  "@messagesMesAbonnementsEtMes": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesRecommande": "Recommandé",
+  "@messagesRecommande": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesPersonne": "Personne",
+  "@messagesPersonne": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesSaufLesConversationsEn": "Sauf les conversations en cours",
+  "@messagesSaufLesConversationsEn": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesConfidentialite": "Confidentialité",
+  "@messagesConfidentialite": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesConfirmationsDeLecture": "Confirmations de lecture",
+  "@messagesConfirmationsDeLecture": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesLesCochesBleues": "Les coches bleues",
+  "@messagesLesCochesBleues": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesMontrerQuandJeSuis": "Montrer quand je suis en ligne",
+  "@messagesMontrerQuandJeSuis": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesDonnees": "Données",
+  "@messagesDonnees": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesTelechargerPhotosVideosEt": "Télécharger photos, vidéos et PDF en Wi-Fi seulement",
+  "@messagesTelechargerPhotosVideosEt": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesEconomiseVotreForfait": "Économise votre forfait",
+  "@messagesEconomiseVotreForfait": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesProtection": "Protection",
+  "@messagesProtection": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesAlerteAntiArnaque": "Alerte anti-arnaque",
+  "@messagesAlerteAntiArnaque": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesToujoursActiveLiveVous": "Toujours active : Live vous prévient quand un message demande de payer hors de l’application.",
+  "@messagesToujoursActiveLiveVous": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesComptesBloques": "Comptes bloqués",
+  "@messagesComptesBloques": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesRechercherUnNom": "Rechercher un nom",
+  "@messagesRechercherUnNom": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesNouveauGroupe": "Nouveau groupe",
+  "@messagesNouveauGroupe": {
+    "description": "Écran : messages_plus"
+  },
+  "messagesQuartierClassePassion": "Quartier, classe, passion",
+  "@messagesQuartierClassePassion": {
+    "description": "Écran : messages_plus"
+  }
 }
