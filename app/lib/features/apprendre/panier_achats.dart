@@ -72,17 +72,17 @@ class EcranPanier extends ConsumerWidget {
     final total = articles.fold(0, (s, c) => s + c.prix);
     if (articles.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Panier')),
+        appBar: AppBar(title: Text(context.t.apprendrePanier)),
         body: EtatVide(
           icone: Icons.shopping_cart_outlined,
-          texte: 'Votre panier est vide.',
-          action: 'Découvrir les cours',
+          texte: context.t.apprendreVotrePanierEstVide,
+          action: context.t.apprendreDecouvrirLesCours,
           onTap: () => context.push('/apprendre'),
         ),
       );
     }
     return Scaffold(
-      appBar: AppBar(title: Text('Panier · ${articles.length}')),
+      appBar: AppBar(title: Text(context.t.apprendrePanierN(articles.length))),
       body: DeuxColonnes(
         principale: [
           for (final c in articles)
@@ -97,7 +97,7 @@ class EcranPanier extends ConsumerWidget {
                     style: const TextStyle(fontWeight: FontWeight.w800),
                   ),
                   IconButton(
-                    tooltip: 'Retirer',
+                    tooltip: context.t.apprendreRetirer,
                     onPressed: () => store.retirerDuPanier(c.id),
                     icon: const Icon(Icons.delete_outline_rounded),
                   ),
@@ -108,25 +108,28 @@ class EcranPanier extends ConsumerWidget {
           TextButton.icon(
             onPressed: () => context.push('/apprendre'),
             icon: const Icon(Icons.add_rounded),
-            label: const Text('Ajouter d’autres contenus'),
+            label: Text(context.t.apprendreAjouterDAutresContenus),
           ),
         ],
         secondaire: [
-          LigneMontant('Sous-total', total),
-          const LigneMontant('Frais', 0, brut: 'Aucun'),
+          LigneMontant(context.t.apprendreSousTotal, total),
+          LigneMontant(
+            context.t.apprendreFrais,
+            0,
+            brut: context.t.apprendreAucun,
+          ),
           const Divider(),
-          LigneMontant('Total', total, gras: true),
+          LigneMontant(context.t.apprendreTotal, total, gras: true),
           const SizedBox(height: 12),
-          const BlocReglement(
+          BlocReglement(
             lignes: [
               LigneReglement(
-                'Contenus numériques',
+                context.t.apprendreContenusNumeriques,
                 Reglement.dansLive,
-                detail: 'Disponibles tout de suite dans « Mes achats »',
+                detail: context.t.apprendreDisponiblesToutDeSuite,
               ),
             ],
-            note:
-                'Payez avec votre solde Live, MTN MoMo, Airtel Money ou Visa.',
+            note: context.t.apprendrePayezAvecVotreSolde,
           ),
         ],
       ),
@@ -139,14 +142,14 @@ class EcranPanier extends ConsumerWidget {
                 montant: total,
                 libelle: articles.length == 1
                     ? articles.first.titre
-                    : '${articles.length} contenus numériques',
+                    : context.t.apprendreNContenus(articles.length),
                 beneficiaire: articles.first.auteur.nom,
                 cibleId: etat.panier.join(','),
               ),
             );
             context.push('/payer');
           },
-          child: Text('Payer ${fcfa(total)}'),
+          child: Text(context.t.apprendrePayerMontant(fcfa(total))),
         ),
       ),
     );
@@ -188,7 +191,7 @@ class _EcranMesAchatsState extends ConsumerState<EcranMesAchats> {
         : tous.where((c) => _telecharges.contains(c.id)).toList();
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes achats')),
+      appBar: AppBar(title: Text(context.t.apprendreMesAchats)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 24),
         children: [
@@ -196,8 +199,8 @@ class _EcranMesAchatsState extends ConsumerState<EcranMesAchats> {
             spacing: 8,
             children: [
               for (final (i, f) in [
-                'Tout (${tous.length})',
-                'Téléchargés',
+                context.t.apprendreToutN(tous.length),
+                context.t.apprendreTelecharges,
               ].indexed)
                 ChoiceChip(
                   label: Text(f),
@@ -210,23 +213,19 @@ class _EcranMesAchatsState extends ConsumerState<EcranMesAchats> {
           Bloc(
             fond: LiveColors.teinteVerte,
             padding: 12,
-            child: const Row(
+            child: Row(
               children: [
                 Icon(Icons.wifi_off_rounded, color: LiveColors.succes),
                 SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    'Téléchargez en Wi-Fi, puis regardez sans consommer votre forfait.',
-                  ),
-                ),
+                Expanded(child: Text(context.t.apprendreTelechargezEnWiFi)),
               ],
             ),
           ),
           const SizedBox(height: 8),
           if (liste.isEmpty)
-            const EtatVide(
+            EtatVide(
               icone: Icons.download_for_offline_outlined,
-              texte: 'Aucun contenu téléchargé pour l’instant.',
+              texte: context.t.apprendreAucunContenuTelechargePour,
             ),
           for (final c in liste)
             _LigneContenu(
@@ -252,7 +251,7 @@ class _EcranMesAchatsState extends ConsumerState<EcranMesAchats> {
                     )
                   : _telecharges.contains(c.id)
                   ? IconButton(
-                      tooltip: 'Ouvrir',
+                      tooltip: context.t.apprendreOuvrir,
                       onPressed: () => context.push('/lecteur/${c.id}'),
                       icon: const Icon(
                         Icons.play_circle_fill_rounded,
@@ -261,7 +260,7 @@ class _EcranMesAchatsState extends ConsumerState<EcranMesAchats> {
                       ),
                     )
                   : IconButton(
-                      tooltip: 'Télécharger',
+                      tooltip: context.t.apprendreTelecharger,
                       onPressed: () => _telecharger(c.id),
                       icon: const Icon(Icons.download_rounded, size: 28),
                     ),

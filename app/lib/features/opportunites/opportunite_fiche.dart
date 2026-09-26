@@ -14,10 +14,22 @@ class EcranOpportunite extends ConsumerWidget {
     final enregistre = etat.favoris.contains(o.id);
     final t = o.type;
     final chiffres = [
-      (Icons.event_rounded, 'Date limite', 'J-${o.joursRestants}'),
-      (Icons.location_on_outlined, 'Lieu', o.lieu.split(',').first),
-      (Icons.groups_rounded, 'Places', '${o.places}'),
-      (Icons.how_to_reg_outlined, 'Candidats', compact(o.candidats)),
+      (
+        Icons.event_rounded,
+        context.t.opportunitesDateLimite,
+        context.t.opportunitesJMoins(o.joursRestants),
+      ),
+      (
+        Icons.location_on_outlined,
+        context.t.opportunitesLieu,
+        o.lieu.split(',').first,
+      ),
+      (Icons.groups_rounded, context.t.opportunitesPlaces, '${o.places}'),
+      (
+        Icons.how_to_reg_outlined,
+        context.t.opportunitesCandidats,
+        compact(o.candidats),
+      ),
     ];
     final principale = <Widget>[
       if (o.video)
@@ -27,18 +39,21 @@ class EcranOpportunite extends ConsumerWidget {
             fit: StackFit.expand,
             children: [
               Vignette(couleur: t.couleur, icone: t.icone),
-              const Center(
+              Center(
                 child: Icon(
                   Icons.play_circle_fill_rounded,
                   color: Colors.white,
                   size: 56,
-                  semanticLabel: 'Présentation en 30 secondes',
+                  semanticLabel: context.t.opportunitesPresentationEn30Secondes,
                 ),
               ),
-              const Positioned(
+              Positioned(
                 left: 10,
                 bottom: 10,
-                child: Etiquette('Présentation · 30 s', icone: Icons.videocam),
+                child: Etiquette(
+                  context.t.opportunitesPresentation30S,
+                  icone: Icons.videocam,
+                ),
               ),
             ],
           ),
@@ -120,14 +135,16 @@ class EcranOpportunite extends ConsumerWidget {
         LigneMenu(
           icone: Icons.payments_outlined,
           titre: o.remuneration!,
-          detail: t == TypeOpportunite.bourse ? 'Allocation' : 'Rémunération',
+          detail: t == TypeOpportunite.bourse
+              ? context.t.opportunitesAllocation
+              : context.t.opportunitesRemuneration,
         ),
       ],
-      const EnTeteSection('Conditions'),
+      EnTeteSection(context.t.opportunitesConditions),
       for (final c in o.conditions) _Puce(Icons.check_circle_outline, c),
-      const EnTeteSection('Pièces à fournir'),
+      EnTeteSection(context.t.opportunitesPiecesAFournir),
       for (final p in o.pieces) _Puce(Icons.description_outlined, p),
-      const EnTeteSection('Ce que vous obtenez'),
+      EnTeteSection(context.t.opportunitesCeQueVousObtenez),
       Wrap(
         spacing: 8,
         runSpacing: 8,
@@ -145,33 +162,32 @@ class EcranOpportunite extends ConsumerWidget {
     final secondaire = <Widget>[
       const SizedBox(height: 4),
       BlocReglement(
-        titre: 'Coûts et frais',
+        titre: context.t.opportunitesCoutsEtFrais,
         lignes: [
-          const LigneReglement(
-            'Postuler sur Live',
+          LigneReglement(
+            context.t.opportunitesPostulerSurLive,
             Reglement.dansLive,
             montant: 0,
-            detail: 'Toujours gratuit',
+            detail: context.t.opportunitesToujoursGratuit,
           ),
           LigneReglement(
-            'Frais de dossier officiels',
+            context.t.opportunitesFraisDeDossierOfficiels,
             Reglement.direct,
             montant: o.frais,
             detail: o.gratuite
-                ? 'Aucun frais demandé'
-                : 'Payés ${o.fraisPayesA}',
+                ? context.t.opportunitesAucunFraisDemande
+                : context.t.opportunitesPayesA(o.fraisPayesA),
           ),
         ],
-        note:
-            'Personne ne peut vous demander d’argent pour « réserver » une '
-            'place ou « accélérer » un dossier. C’est une arnaque : signalez-la.',
+        note: context.t.opportunitesPersonneNePeutVous,
       ),
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: () => signaler(context, 'cette opportunité'),
+          onPressed: () =>
+              signaler(context, context.t.opportunitesCetteOpportunite),
           icon: const Icon(Icons.flag_outlined, size: 18),
-          label: const Text('On m’a demandé de l’argent'),
+          label: Text(context.t.opportunitesOnMADemande),
         ),
       ),
     ];
@@ -179,7 +195,7 @@ class EcranOpportunite extends ConsumerWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            tooltip: 'Partager',
+            tooltip: context.t.partager,
             onPressed: () => partager(context, o.titre),
             icon: const Icon(Icons.ios_share_rounded),
           ),
@@ -190,7 +206,9 @@ class EcranOpportunite extends ConsumerWidget {
         child: Row(
           children: [
             IconButton.outlined(
-              tooltip: enregistre ? 'Retirer des enregistrés' : 'Enregistrer',
+              tooltip: enregistre
+                  ? context.t.opportunitesRetirerDesEnregistres
+                  : context.t.enregistrer,
               style: IconButton.styleFrom(minimumSize: const Size(48, 48)),
               onPressed: () =>
                   ref.read(liveProvider.notifier).basculerFavori(o.id),
@@ -204,7 +222,11 @@ class EcranOpportunite extends ConsumerWidget {
                 onPressed: postule
                     ? () => context.push('/mes-candidatures')
                     : () => context.push('/opportunite/${o.id}/postuler'),
-                child: Text(postule ? 'Candidature envoyée' : 'Postuler'),
+                child: Text(
+                  postule
+                      ? context.t.opportunitesCandidatureEnvoyee
+                      : context.t.opportunitesPostuler,
+                ),
               ),
             ),
           ],

@@ -1,7 +1,12 @@
 part of 'opportunites_screens.dart';
 
 /// Étapes d'une candidature, de l'envoi au résultat.
-const _etapesCandidature = ['Envoyée', 'Vue', 'Présélection', 'Résultat'];
+List<String> _etapesCandidature(Textes t) => [
+  t.opportunitesEnvoyee,
+  t.opportunitesVue,
+  t.opportunitesPreselection,
+  t.opportunitesResultat,
+];
 
 /// E-OPP-03 — Postuler : profil Live, pièces, motivation. Gratuit.
 class EcranPostuler extends ConsumerStatefulWidget {
@@ -28,7 +33,7 @@ class _EcranPostulerState extends ConsumerState<EcranPostuler> {
         (piece == 'Pièce d’identité' && etat.identiteVerifiee);
     final manquantes = o.pieces.where((p) => !pret(p)).length;
     return Scaffold(
-      appBar: AppBar(title: const Text('Postuler')),
+      appBar: AppBar(title: Text(context.t.opportunitesPostuler)),
       body: DeuxColonnes(
         principale: [
           Text(
@@ -60,7 +65,7 @@ class _EcranPostulerState extends ConsumerState<EcranPostuler> {
                         style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        '${etat.telephone} · profil Live partagé',
+                        context.t.opportunitesProfilPartage(etat.telephone),
                         style: const TextStyle(
                           color: LiveColors.gris,
                           fontSize: 12.5,
@@ -72,7 +77,7 @@ class _EcranPostulerState extends ConsumerState<EcranPostuler> {
               ],
             ),
           ),
-          const EnTeteSection('Pièces à fournir'),
+          EnTeteSection(context.t.opportunitesPiecesAFournir),
           for (final piece in o.pieces)
             LigneMenu(
               icone: pret(piece)
@@ -80,39 +85,38 @@ class _EcranPostulerState extends ConsumerState<EcranPostuler> {
                   : Icons.upload_file_rounded,
               couleur: pret(piece) ? LiveColors.succes : LiveColors.bleu,
               titre: piece,
-              detail: pret(piece) ? 'Ajouté' : 'Photo ou PDF',
+              detail: pret(piece)
+                  ? context.t.opportunitesAjoute
+                  : context.t.opportunitesPhotoOuPdf,
               trailing: pret(piece)
                   ? null
                   : TextButton(
                       onPressed: () => setState(() => _ajoutees.add(piece)),
-                      child: const Text('Ajouter'),
+                      child: Text(context.t.opportunitesAjouter),
                     ),
             ),
           if (o.pieces.contains('CV') && etat.documents.isEmpty)
             TextButton.icon(
               onPressed: () => context.push('/ia/service/cv'),
               icon: const Icon(Icons.auto_awesome_rounded, size: 18),
-              label: const Text('Pas de CV ? Le créer avec Live IA'),
+              label: Text(context.t.opportunitesPasDeCvLe),
             ),
         ],
         secondaire: [
-          const Text(
-            'Motivation',
+          Text(
+            context.t.opportunitesMotivation,
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
           ),
           const SizedBox(height: 6),
-          const TextField(
+          TextField(
             minLines: 4,
             maxLines: 6,
             decoration: InputDecoration(
-              hintText: 'En quelques lignes, pourquoi vous ?',
+              hintText: context.t.opportunitesEnQuelquesLignesPourquoi,
             ),
           ),
           const SizedBox(height: 12),
-          const BandeauProtection(
-            'Candidature gratuite. Vos pièces ne sont visibles que par '
-            'l’organisation.',
-          ),
+          BandeauProtection(context.t.opportunitesCandidatureGratuiteVosPieces),
         ],
       ),
       bottomNavigationBar: BarreAction(
@@ -125,8 +129,8 @@ class _EcranPostulerState extends ConsumerState<EcranPostuler> {
                 },
           child: Text(
             manquantes > 0
-                ? '$manquantes pièce${manquantes > 1 ? 's' : ''} à ajouter'
-                : 'Envoyer ma candidature',
+                ? context.t.opportunitesPiecesAAjouter(manquantes)
+                : context.t.opportunitesEnvoyerMaCandidature,
           ),
         ),
       ),
@@ -142,15 +146,14 @@ class _EcranPostulerState extends ConsumerState<EcranPostuler> {
             children: [
               const Spacer(),
               const CocheAnimee(taille: 96),
-              const Text(
-                'Candidature envoyée',
+              Text(
+                context.t.opportunitesCandidatureEnvoyee,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Text(
-                '${o.organisation.nom} a reçu votre dossier. Vous serez '
-                'prévenu à chaque étape.',
+                context.t.opportunitesARecuDossier(o.organisation.nom),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
@@ -158,7 +161,7 @@ class _EcranPostulerState extends ConsumerState<EcranPostuler> {
               const Spacer(),
               FilledButton(
                 onPressed: () => context.go('/mes-candidatures'),
-                child: const Text('Mes candidatures'),
+                child: Text(context.t.opportunitesMesCandidatures),
               ),
             ],
           ),
@@ -177,7 +180,7 @@ class _Progression extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        for (final (i, e) in _etapesCandidature.indexed)
+        for (final (i, e) in _etapesCandidature(context.t).indexed)
           Expanded(
             child: Column(
               children: [
@@ -217,13 +220,13 @@ class EcranMesCandidatures extends ConsumerWidget {
     final envoyees = ref.watch(liveProvider.select((e) => e.candidatures));
     final liste = [
       for (final id in envoyees)
-        (opportuniteParId(id), 0, 'Envoyée aujourd’hui'),
-      (opportuniteParId('o3'), 1, 'Vue par l’organisation hier'),
-      (opportuniteParId('o5'), 2, 'Entretien le 28 septembre à 10 h'),
+        (opportuniteParId(id), 0, context.t.opportunitesEnvoyeeAujourdHui),
+      (opportuniteParId('o3'), 1, context.t.opportunitesVueParLOrganisation),
+      (opportuniteParId('o5'), 2, context.t.opportunitesEntretienLe28Septembre),
     ];
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes candidatures')),
+      appBar: AppBar(title: Text(context.t.opportunitesMesCandidatures)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
         children: [
@@ -279,7 +282,7 @@ class EcranMesCandidatures extends ConsumerWidget {
           OutlinedButton.icon(
             onPressed: () => context.push('/opportunites'),
             icon: const Icon(Icons.search_rounded),
-            label: const Text('Trouver d’autres opportunités'),
+            label: Text(context.t.opportunitesTrouverDAutresOpportunites),
           ),
         ],
       ),

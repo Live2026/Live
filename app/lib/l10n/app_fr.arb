@@ -9298,5 +9298,971 @@
   "piliersAuPointRelaisLe": "Au point relais, le colis est remis contre votre QR ; les espèces sont converties en Mobile Money par un agent agréé.",
   "@piliersAuPointRelaisLe": {
     "description": "Écran : adresse_points"
+  },
+  "apprendreRechercherUnCoursUn": "Rechercher un cours, un PDF…",
+  "@apprendreRechercherUnCoursUn": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreMesAchats": "Mes achats",
+  "@apprendreMesAchats": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreTout": "Tout",
+  "@apprendreTout": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreLesPlusSuivis": "Les plus suivis",
+  "@apprendreLesPlusSuivis": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreEnseignantsEtCreateurs": "Enseignants et créateurs",
+  "@apprendreEnseignantsEtCreateurs": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreTousLesContenus": "Tous les contenus",
+  "@apprendreTousLesContenus": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreEffacer": "Effacer",
+  "@apprendreEffacer": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreVousEnseignezOuVous": "Vous enseignez ou vous savez faire ?",
+  "@apprendreVousEnseignezOuVous": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreVendezVosCoursPdf": "Vendez vos cours, PDF et vidéos. Vous gardez 85 % de chaque vente, versés sur votre MoMo.",
+  "@apprendreVendezVosCoursPdf": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreMaBoutique": "Ma boutique",
+  "@apprendreMaBoutique": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreVendre": "Vendre",
+  "@apprendreVendre": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreReussirLeBac2027": "Réussir le BAC 2027",
+  "@apprendreReussirLeBac2027": {
+    "description": "Écran : apprendre_screens"
+  },
+  "apprendreLesCoursDesMeilleurs": "Les cours des meilleurs profs du Congo, à regarder même sans connexion.",
+  "@apprendreLesCoursDesMeilleurs": {
+    "description": "Écran : apprendre_screens"
+  },
+  "@apprendreVentesEnVente": {
+    "description": "Écran : boutique_savoirs",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendreVentesEnVente": "{n} ventes · en vente",
+  "@apprendreJourMontant": {
+    "description": "Écran : boutique_savoirs",
+    "placeholders": {
+      "jour": {
+        "type": "String"
+      },
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendreJourMontant": "{jour} : {montant}",
+  "apprendreMaBoutiqueDeSavoirs": "Ma boutique de savoirs",
+  "@apprendreMaBoutiqueDeSavoirs": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreVendreUnContenu": "Vendre un contenu",
+  "@apprendreVendreUnContenu": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreRevenusDuMois": "Revenus du mois",
+  "@apprendreRevenusDuMois": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreN18SurAout": "+18 % sur août",
+  "@apprendreN18SurAout": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreVentes": "Ventes",
+  "@apprendreVentes": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreCeMoisCi": "ce mois-ci",
+  "@apprendreCeMoisCi": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreEleves": "Élèves",
+  "@apprendreEleves": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreN31Nouveaux": "31 nouveaux",
+  "@apprendreN31Nouveaux": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreNoteMoyenne": "Note moyenne",
+  "@apprendreNoteMoyenne": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreN212Avis": "212 avis",
+  "@apprendreN212Avis": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreN7DerniersJours": "7 derniers jours",
+  "@apprendreN7DerniersJours": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreRevenusNetsApresLa": "Revenus nets, après la part de Live",
+  "@apprendreRevenusNetsApresLa": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreRepartitionParContenu": "Répartition par contenu",
+  "@apprendreRepartitionParContenu": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreSoldeDisponible": "Solde disponible",
+  "@apprendreSoldeDisponible": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreRetirer": "Retirer",
+  "@apprendreRetirer": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreMesContenus": "Mes contenus",
+  "@apprendreMesContenus": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "apprendreEnVerificationMoinsDe": "En vérification · moins de 24 h",
+  "@apprendreEnVerificationMoinsDe": {
+    "description": "Écran : boutique_savoirs"
+  },
+  "@apprendreNoteAvis": {
+    "description": "Écran : contenu_fiche",
+    "placeholders": {
+      "note": {
+        "type": "String"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendreNoteAvis": "{note} · {n} avis",
+  "@apprendreNEleves": {
+    "description": "Écran : contenu_fiche",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendreNEleves": "{n} élèves",
+  "@apprendreHorsConnexion": {
+    "description": "Écran : contenu_fiche",
+    "placeholders": {
+      "taille": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendreHorsConnexion": "Téléchargeable hors connexion · {taille}",
+  "@apprendreNAbonnes": {
+    "description": "Écran : contenu_fiche",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendreNAbonnes": "{n} abonnés",
+  "apprendreApercuGratuit2Min": "Aperçu gratuit · 2 min",
+  "@apprendreApercuGratuit2Min": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreCeQueVousObtenez": "Ce que vous obtenez",
+  "@apprendreCeQueVousObtenez": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreAccesAVieSur": "Accès à vie, sur tous vos appareils",
+  "@apprendreAccesAVieSur": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreAttestationLiveALa": "Attestation Live à la fin",
+  "@apprendreAttestationLiveALa": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreQuestionsALAuteur": "Questions à l’auteur dans Messages",
+  "@apprendreQuestionsALAuteur": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreProgramme": "Programme",
+  "@apprendreProgramme": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendrePrix": "Prix",
+  "@apprendrePrix": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreRembourseSous48H": "Remboursé sous 48 h si le contenu ne correspond pas",
+  "@apprendreRembourseSous48H": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreSoldeLiveMtnMomo": "Solde Live, MTN MoMo, Airtel Money ou Visa.",
+  "@apprendreSoldeLiveMtnMomo": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreAvisDesEleves": "Avis des élèves",
+  "@apprendreAvisDesEleves": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreOuvrir": "Ouvrir",
+  "@apprendreOuvrir": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreVoirLePanier": "Voir le panier",
+  "@apprendreVoirLePanier": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreAuPanier": "Au panier",
+  "@apprendreAuPanier": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreAcheter": "Acheter",
+  "@apprendreAcheter": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreAbonne": "Abonné",
+  "@apprendreAbonne": {
+    "description": "Écran : contenu_fiche"
+  },
+  "apprendreSuivre": "Suivre",
+  "@apprendreSuivre": {
+    "description": "Écran : contenu_fiche"
+  },
+  "@apprendreChapitreSur": {
+    "description": "Écran : lecteur",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "auteur": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendreChapitreSur": "Chapitre {n} sur {total} · {auteur}",
+  "@apprendreLeconSur": {
+    "description": "Écran : lecteur",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "auteur": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendreLeconSur": "Leçon {n} sur {total} · {auteur}",
+  "@apprendrePageN": {
+    "description": "Écran : lecteur",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "apprendrePageN": "Page {n}",
+  "apprendreHorsConnexion2": "Hors connexion",
+  "@apprendreHorsConnexion2": {
+    "description": "Écran : lecteur"
+  },
+  "apprendrePoserUneQuestionA": "Poser une question à l’auteur",
+  "@apprendrePoserUneQuestionA": {
+    "description": "Écran : lecteur"
+  },
+  "apprendreChapitreSuivant": "Chapitre suivant",
+  "@apprendreChapitreSuivant": {
+    "description": "Écran : lecteur"
+  },
+  "apprendreLeconSuivante": "Leçon suivante",
+  "@apprendreLeconSuivante": {
+    "description": "Écran : lecteur"
+  },
+  "apprendrePause": "Pause",
+  "@apprendrePause": {
+    "description": "Écran : lecteur"
+  },
+  "apprendreLire": "Lire",
+  "@apprendreLire": {
+    "description": "Écran : lecteur"
+  },
+  "@apprendrePanierN": {
+    "description": "Écran : panier_achats",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "apprendrePanierN": "Panier · {n}",
+  "@apprendreNContenus": {
+    "description": "Écran : panier_achats",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "apprendreNContenus": "{n} contenus numériques",
+  "@apprendrePayerMontant": {
+    "description": "Écran : panier_achats",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendrePayerMontant": "Payer {montant}",
+  "@apprendreToutN": {
+    "description": "Écran : panier_achats",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "apprendreToutN": "Tout ({n})",
+  "apprendrePanier": "Panier",
+  "@apprendrePanier": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreVotrePanierEstVide": "Votre panier est vide.",
+  "@apprendreVotrePanierEstVide": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreDecouvrirLesCours": "Découvrir les cours",
+  "@apprendreDecouvrirLesCours": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreAjouterDAutresContenus": "Ajouter d’autres contenus",
+  "@apprendreAjouterDAutresContenus": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreSousTotal": "Sous-total",
+  "@apprendreSousTotal": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreFrais": "Frais",
+  "@apprendreFrais": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreAucun": "Aucun",
+  "@apprendreAucun": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreTotal": "Total",
+  "@apprendreTotal": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreContenusNumeriques": "Contenus numériques",
+  "@apprendreContenusNumeriques": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreDisponiblesToutDeSuite": "Disponibles tout de suite dans « Mes achats »",
+  "@apprendreDisponiblesToutDeSuite": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendrePayezAvecVotreSolde": "Payez avec votre solde Live, MTN MoMo, Airtel Money ou Visa.",
+  "@apprendrePayezAvecVotreSolde": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreTelecharges": "Téléchargés",
+  "@apprendreTelecharges": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreTelechargezEnWiFi": "Téléchargez en Wi-Fi, puis regardez sans consommer votre forfait.",
+  "@apprendreTelechargezEnWiFi": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreAucunContenuTelechargePour": "Aucun contenu téléchargé pour l’instant.",
+  "@apprendreAucunContenuTelechargePour": {
+    "description": "Écran : panier_achats"
+  },
+  "apprendreTelecharger": "Télécharger",
+  "@apprendreTelecharger": {
+    "description": "Écran : panier_achats"
+  },
+  "@apprendreLeconExercices": {
+    "description": "Écran : vendre_contenu",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "apprendreLeconExercices": "Leçon {n} · Exercices.pdf · 2 Mo",
+  "@apprendreNFichiers": {
+    "description": "Écran : vendre_contenu",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "apprendreNFichiers": "{n, plural, =1{1 fichier} other{{n} fichiers}}",
+  "@apprendreEnVerification": {
+    "description": "Écran : vendre_contenu",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "apprendreEnVerification": "« {titre} » est en vérification. Il sera en vente dans moins de 24 h.",
+  "@apprendreDebutant": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreDebutant": "Débutant",
+  "@apprendreIntermediaire": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreIntermediaire": "Intermédiaire",
+  "@apprendreTerminale": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreTerminale": "Terminale",
+  "@apprendreProfessionnel": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreProfessionnel": "Professionnel",
+  "@apprendreComptabiliteCommercants": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreComptabiliteCommercants": "Comptabilité pour les commerçants",
+  "apprendreQueVendezVous": "Que vendez-vous ?",
+  "@apprendreQueVendezVous": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreInformations": "Informations",
+  "@apprendreInformations": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreFichiers": "Fichiers",
+  "@apprendreFichiers": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreApercuGratuit": "Aperçu gratuit",
+  "@apprendreApercuGratuit": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreVerification": "Vérification",
+  "@apprendreVerification": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreLeconsVideoAvecExercices": "Leçons vidéo avec exercices",
+  "@apprendreLeconsVideoAvecExercices": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreFichesAnnalesModeles": "Fiches, annales, modèles",
+  "@apprendreFichesAnnalesModeles": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreUneVideoOuUn": "Une vidéo ou un tutoriel",
+  "@apprendreUneVideoOuUn": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreEpubOuPdf": "ePub ou PDF",
+  "@apprendreEpubOuPdf": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreEpisodesCourtsReguliers": "Épisodes courts réguliers",
+  "@apprendreEpisodesCourtsReguliers": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreQuestionsCorrigeesEtChronometrees": "Questions corrigées et chronométrées",
+  "@apprendreQuestionsCorrigeesEtChronometrees": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreSeanceEnDirectSur": "Séance en direct, sur rendez-vous",
+  "@apprendreSeanceEnDirectSur": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreTitre": "Titre",
+  "@apprendreTitre": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreDescription": "Description",
+  "@apprendreDescription": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreCeQueLEleve": "Ce que l’élève saura faire à la fin…",
+  "@apprendreCeQueLEleve": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreNiveau": "Niveau",
+  "@apprendreNiveau": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreAjouterUnFichier": "Ajouter un fichier",
+  "@apprendreAjouterUnFichier": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreVideosPdfEpubImages": "Vidéos, PDF, ePub, images. Live prépare une version légère pour les petits forfaits et reprend l’envoi après une coupure.",
+  "@apprendreVideosPdfEpubImages": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendrePrixPayeParL": "Prix payé par l’élève",
+  "@apprendrePrixPayeParL": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendrePartDeLive15": "Part de Live (15 %)",
+  "@apprendrePartDeLive15": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreVousRecevez": "Vous recevez",
+  "@apprendreVousRecevez": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreVerseSurVotreSolde": "Versé sur votre solde Live à chaque vente, retirable sur MoMo ou Airtel Money.",
+  "@apprendreVerseSurVotreSolde": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendrePartieOfferteEnApercu": "Partie offerte en aperçu",
+  "@apprendrePartieOfferteEnApercu": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreVideoVerticaleDe30": "Vidéo verticale de 30 s pour le fil",
+  "@apprendreVideoVerticaleDe30": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreVosFutursElevesVous": "Vos futurs élèves vous découvrent en défilant",
+  "@apprendreVosFutursElevesVous": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreJeSuisLAuteur": "Je suis l’auteur de ce contenu ou j’ai le droit de le vendre.",
+  "@apprendreJeSuisLAuteur": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreLiveVerifieChaqueContenu": "Live vérifie chaque contenu en moins de 24 h (qualité, droits, contenu interdit) avant sa mise en vente.",
+  "@apprendreLiveVerifieChaqueContenu": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreContenuEnvoye": "Contenu envoyé",
+  "@apprendreContenuEnvoye": {
+    "description": "Écran : vendre_contenu"
+  },
+  "apprendreVoirMaBoutique": "Voir ma boutique",
+  "@apprendreVoirMaBoutique": {
+    "description": "Écran : vendre_contenu"
+  },
+  "@opportunitesJMoins": {
+    "description": "Écran : opportunite_fiche",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "opportunitesJMoins": "J-{n}",
+  "@opportunitesPayesA": {
+    "description": "Écran : opportunite_fiche",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "opportunitesPayesA": "Payés {qui}",
+  "opportunitesDateLimite": "Date limite",
+  "@opportunitesDateLimite": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesLieu": "Lieu",
+  "@opportunitesLieu": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesPlaces": "Places",
+  "@opportunitesPlaces": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesCandidats": "Candidats",
+  "@opportunitesCandidats": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesPresentationEn30Secondes": "Présentation en 30 secondes",
+  "@opportunitesPresentationEn30Secondes": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesPresentation30S": "Présentation · 30 s",
+  "@opportunitesPresentation30S": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesAllocation": "Allocation",
+  "@opportunitesAllocation": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesRemuneration": "Rémunération",
+  "@opportunitesRemuneration": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesConditions": "Conditions",
+  "@opportunitesConditions": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesPiecesAFournir": "Pièces à fournir",
+  "@opportunitesPiecesAFournir": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesCeQueVousObtenez": "Ce que vous obtenez",
+  "@opportunitesCeQueVousObtenez": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesCoutsEtFrais": "Coûts et frais",
+  "@opportunitesCoutsEtFrais": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesPostulerSurLive": "Postuler sur Live",
+  "@opportunitesPostulerSurLive": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesToujoursGratuit": "Toujours gratuit",
+  "@opportunitesToujoursGratuit": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesFraisDeDossierOfficiels": "Frais de dossier officiels",
+  "@opportunitesFraisDeDossierOfficiels": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesAucunFraisDemande": "Aucun frais demandé",
+  "@opportunitesAucunFraisDemande": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesPersonneNePeutVous": "Personne ne peut vous demander d’argent pour « réserver » une place ou « accélérer » un dossier. C’est une arnaque : signalez-la.",
+  "@opportunitesPersonneNePeutVous": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesCetteOpportunite": "cette opportunité",
+  "@opportunitesCetteOpportunite": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesOnMADemande": "On m’a demandé de l’argent",
+  "@opportunitesOnMADemande": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesRetirerDesEnregistres": "Retirer des enregistrés",
+  "@opportunitesRetirerDesEnregistres": {
+    "description": "Écran : opportunite_fiche"
+  },
+  "opportunitesCandidatureEnvoyee": "Candidature envoyée",
+  "@opportunitesCandidatureEnvoyee": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesPostuler": "Postuler",
+  "@opportunitesPostuler": {
+    "description": "Écran : postuler"
+  },
+  "@opportunitesToutesN": {
+    "description": "Écran : opportunites_screens",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "opportunitesToutesN": "Toutes ({n})",
+  "opportunitesVerificationRequise": "Vérification requise",
+  "@opportunitesVerificationRequise": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesPublierUneOpportuniteEst": "« Publier une opportunité » est un super-pouvoir. Il se débloque quand Live a vérifié votre identité : c’est ce qui protège les candidats des fausses offres.",
+  "@opportunitesPublierUneOpportuniteEst": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesVerifierMonIdentite": "Vérifier mon identité",
+  "@opportunitesVerifierMonIdentite": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesOpportunites": "Opportunités",
+  "@opportunitesOpportunites": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesRechercherUneBourseUn": "Rechercher une bourse, un stage…",
+  "@opportunitesRechercherUneBourseUn": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesMesCandidatures": "Mes candidatures",
+  "@opportunitesMesCandidatures": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesPublier": "Publier",
+  "@opportunitesPublier": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesPostulerSurLiveEst": "Postuler sur Live est toujours gratuit. Les frais officiels éventuels sont affichés avant de postuler.",
+  "@opportunitesPostulerSurLiveEst": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesANePasManquer": "À ne pas manquer",
+  "@opportunitesANePasManquer": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesPreparerSaCandidature": "Préparer sa candidature",
+  "@opportunitesPreparerSaCandidature": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesFaireMonCvAvec": "Faire mon CV avec Live IA",
+  "@opportunitesFaireMonCvAvec": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesPretEn1Minute": "Prêt en 1 minute, au format des recruteurs",
+  "@opportunitesPretEn1Minute": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesSEntrainerAuxConcours": "S’entraîner aux concours",
+  "@opportunitesSEntrainerAuxConcours": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesN1200QcmCorriges": "1 200 QCM corrigés et chronométrés",
+  "@opportunitesN1200QcmCorriges": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesCreerUneAlerte": "Créer une alerte",
+  "@opportunitesCreerUneAlerte": {
+    "description": "Écran : opportunites_screens"
+  },
+  "opportunitesEtrePrevenuDesNouvelles": "Être prévenu des nouvelles bourses et stages",
+  "@opportunitesEtrePrevenuDesNouvelles": {
+    "description": "Écran : opportunites_screens"
+  },
+  "@opportunitesProfilPartage": {
+    "description": "Écran : postuler",
+    "placeholders": {
+      "tel": {
+        "type": "String"
+      }
+    }
+  },
+  "opportunitesProfilPartage": "{tel} · profil Live partagé",
+  "@opportunitesPiecesAAjouter": {
+    "description": "Écran : postuler",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "opportunitesPiecesAAjouter": "{n, plural, =1{1 pièce à ajouter} other{{n} pièces à ajouter}}",
+  "@opportunitesARecuDossier": {
+    "description": "Écran : postuler",
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "opportunitesARecuDossier": "{org} a reçu votre dossier. Vous serez prévenu à chaque étape.",
+  "@opportunitesEnvoyee": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesEnvoyee": "Envoyée",
+  "@opportunitesVue": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesVue": "Vue",
+  "@opportunitesPreselection": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesPreselection": "Présélection",
+  "@opportunitesResultat": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesResultat": "Résultat",
+  "opportunitesAjoute": "Ajouté",
+  "@opportunitesAjoute": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesPhotoOuPdf": "Photo ou PDF",
+  "@opportunitesPhotoOuPdf": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesAjouter": "Ajouter",
+  "@opportunitesAjouter": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesPasDeCvLe": "Pas de CV ? Le créer avec Live IA",
+  "@opportunitesPasDeCvLe": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesMotivation": "Motivation",
+  "@opportunitesMotivation": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesEnQuelquesLignesPourquoi": "En quelques lignes, pourquoi vous ?",
+  "@opportunitesEnQuelquesLignesPourquoi": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesCandidatureGratuiteVosPieces": "Candidature gratuite. Vos pièces ne sont visibles que par l’organisation.",
+  "@opportunitesCandidatureGratuiteVosPieces": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesEnvoyerMaCandidature": "Envoyer ma candidature",
+  "@opportunitesEnvoyerMaCandidature": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesEnvoyeeAujourdHui": "Envoyée aujourd’hui",
+  "@opportunitesEnvoyeeAujourdHui": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesVueParLOrganisation": "Vue par l’organisation hier",
+  "@opportunitesVueParLOrganisation": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesEntretienLe28Septembre": "Entretien le 28 septembre à 10 h",
+  "@opportunitesEntretienLe28Septembre": {
+    "description": "Écran : postuler"
+  },
+  "opportunitesTrouverDAutresOpportunites": "Trouver d’autres opportunités",
+  "@opportunitesTrouverDAutresOpportunites": {
+    "description": "Écran : postuler"
+  },
+  "@opportunitesDansJours": {
+    "description": "Écran : publier_opportunite",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "opportunitesDansJours": "dans {n} jours",
+  "@opportunitesEstVerifiee": {
+    "description": "Écran : publier_opportunite",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "opportunitesEstVerifiee": "« {titre} » est vérifiée par Live puis diffusée aux personnes intéressées.",
+  "@opportunitesEnLigne": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesEnLigne": "En ligne",
+  "@opportunitesStageDemo": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesStageDemo": "Stage en communication digitale",
+  "opportunitesInformations": "Informations",
+  "@opportunitesInformations": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesDetails": "Détails",
+  "@opportunitesDetails": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesConditionsEtCouts": "Conditions et coûts",
+  "@opportunitesConditionsEtCouts": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesApercu": "Aperçu",
+  "@opportunitesApercu": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesPublierUneOpportunite": "Publier une opportunité",
+  "@opportunitesPublierUneOpportunite": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesMoins": "Moins",
+  "@opportunitesMoins": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesPlus": "Plus",
+  "@opportunitesPlus": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesType": "Type",
+  "@opportunitesType": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesTitre": "Titre",
+  "@opportunitesTitre": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesDescription": "Description",
+  "@opportunitesDescription": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesMissionsProfilRechercheCalendrier": "Missions, profil recherché, calendrier…",
+  "@opportunitesMissionsProfilRechercheCalendrier": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesNombreDePlaces": "Nombre de places",
+  "@opportunitesNombreDePlaces": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesDateLimiteJours": "Date limite (jours)",
+  "@opportunitesDateLimiteJours": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesAjouterUneVideoVerticale": "Ajouter une vidéo verticale de 30 s",
+  "@opportunitesAjouterUneVideoVerticale": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesLesAnnoncesAvecVideo": "Les annonces avec vidéo reçoivent 3 fois plus de candidatures",
+  "@opportunitesLesAnnoncesAvecVideo": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesDiplomeAgeDisponibilite": "Diplôme, âge, disponibilité…",
+  "@opportunitesDiplomeAgeDisponibilite": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesFraisDemandesAuxCandidats": "Frais demandés aux candidats",
+  "@opportunitesFraisDemandesAuxCandidats": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesAucunFrais": "Aucun frais",
+  "@opportunitesAucunFrais": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesRecommandeBadgeGratuitSur": "Recommandé : badge « Gratuit » sur l’annonce",
+  "@opportunitesRecommandeBadgeGratuitSur": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesFraisOfficielsDeDossier": "Frais officiels de dossier",
+  "@opportunitesFraisOfficielsDeDossier": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesPayesEnDirectContre": "Payés en direct, contre reçu officiel",
+  "@opportunitesPayesEnDirectContre": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesTransparenceObligatoireToutFrais": "Transparence obligatoire : tout frais non déclaré ici est interdit. Une annonce qui demande de l’argent en message est retirée et son auteur suspendu.",
+  "@opportunitesTransparenceObligatoireToutFrais": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesVoiciCommentLesCandidats": "Voici comment les candidats verront votre annonce :",
+  "@opportunitesVoiciCommentLesCandidats": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesJeCertifieQueCette": "Je certifie que cette offre est réelle et que tous les frais sont indiqués.",
+  "@opportunitesJeCertifieQueCette": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesOpportunitePubliee": "Opportunité publiée",
+  "@opportunitesOpportunitePubliee": {
+    "description": "Écran : publier_opportunite"
+  },
+  "opportunitesVoirLesOpportunites": "Voir les opportunités",
+  "@opportunitesVoirLesOpportunites": {
+    "description": "Écran : publier_opportunite"
   }
 }

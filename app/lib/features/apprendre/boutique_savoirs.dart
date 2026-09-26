@@ -20,10 +20,10 @@ class EcranBoutiqueSavoirs extends ConsumerWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ma boutique de savoirs'),
+        title: Text(context.t.apprendreMaBoutiqueDeSavoirs),
         actions: [
           IconButton(
-            tooltip: 'Vendre un contenu',
+            tooltip: context.t.apprendreVendreUnContenu,
             onPressed: () => context.push('/apprendre/vendre'),
             icon: const Icon(Icons.add_circle_outline_rounded),
           ),
@@ -38,34 +38,34 @@ class EcranBoutiqueSavoirs extends ConsumerWidget {
             hauteur: 112,
             enfants: [
               TuileChiffre(
-                libelle: 'Revenus du mois',
+                libelle: context.t.apprendreRevenusDuMois,
                 valeur: fcfaCourt(342500),
                 icone: Icons.trending_up_rounded,
-                detail: '+18 % sur août',
+                detail: context.t.apprendreN18SurAout,
                 couleur: LiveColors.succes,
               ),
-              const TuileChiffre(
-                libelle: 'Ventes',
+              TuileChiffre(
+                libelle: context.t.apprendreVentes,
                 valeur: '128',
                 icone: Icons.shopping_bag_outlined,
-                detail: 'ce mois-ci',
+                detail: context.t.apprendreCeMoisCi,
               ),
-              const TuileChiffre(
-                libelle: 'Élèves',
+              TuileChiffre(
+                libelle: context.t.apprendreEleves,
                 valeur: '96',
                 icone: Icons.people_alt_outlined,
-                detail: '31 nouveaux',
+                detail: context.t.apprendreN31Nouveaux,
               ),
-              const TuileChiffre(
-                libelle: 'Note moyenne',
+              TuileChiffre(
+                libelle: context.t.apprendreNoteMoyenne,
                 valeur: '4,8',
                 icone: Icons.star_rounded,
-                detail: '212 avis',
+                detail: context.t.apprendreN212Avis,
                 couleur: LiveColors.cuivre,
               ),
             ],
           ),
-          const EnTeteSection('7 derniers jours'),
+          EnTeteSection(context.t.apprendreN7DerniersJours),
           Bloc(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,8 +77,8 @@ class EcranBoutiqueSavoirs extends ConsumerWidget {
                     fontWeight: FontWeight.w900,
                   ),
                 ),
-                const Text(
-                  'Revenus nets, après la part de Live',
+                Text(
+                  context.t.apprendreRevenusNetsApresLa,
                   style: TextStyle(color: LiveColors.gris),
                 ),
                 const SizedBox(height: 12),
@@ -86,7 +86,7 @@ class EcranBoutiqueSavoirs extends ConsumerWidget {
               ],
             ),
           ),
-          const EnTeteSection('Répartition par contenu'),
+          EnTeteSection(context.t.apprendreRepartitionParContenu),
           Bloc(
             child: Column(
               children: [
@@ -149,7 +149,7 @@ class EcranBoutiqueSavoirs extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Solde disponible'),
+                      Text(context.t.apprendreSoldeDisponible),
                       Text(
                         fcfa(etat.disponible),
                         style: const TextStyle(
@@ -163,24 +163,26 @@ class EcranBoutiqueSavoirs extends ConsumerWidget {
                 FilledButton(
                   style: FilledButton.styleFrom(minimumSize: const Size(0, 40)),
                   onPressed: () => context.push('/retirer'),
-                  child: const Text('Retirer'),
+                  child: Text(context.t.apprendreRetirer),
                 ),
               ],
             ),
           ),
-          const EnTeteSection('Mes contenus'),
+          EnTeteSection(context.t.apprendreMesContenus),
           for (final titre in etat.contenusPublies)
             LigneMenu(
               icone: Icons.hourglass_top_rounded,
               titre: titre,
-              detail: 'En vérification · moins de 24 h',
+              detail: context.t.apprendreEnVerificationMoinsDe,
               couleur: LiveColors.cuivre,
             ),
           for (final id in _mesContenus)
             LigneMenu(
               icone: contenuParId(id).type.icone,
               titre: contenuParId(id).titre,
-              detail: '${compact(contenuParId(id).ventes)} ventes · en vente',
+              detail: context.t.apprendreVentesEnVente(
+                compact(contenuParId(id).ventes),
+              ),
               onTap: () => context.push('/contenu/$id'),
             ),
         ],
@@ -204,7 +206,7 @@ class _Histogramme extends StatelessWidget {
           for (final (i, (jour, montant)) in revenusSemaine.indexed)
             Expanded(
               child: Semantics(
-                label: '$jour : ${fcfa(montant)}',
+                label: context.t.apprendreJourMontant(jour, fcfa(montant)),
                 excludeSemantics: true,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,

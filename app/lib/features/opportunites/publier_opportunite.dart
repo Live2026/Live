@@ -12,16 +12,18 @@ class EcranPublierOpportunite extends ConsumerStatefulWidget {
 
 class _EcranPublierOpportuniteState
     extends ConsumerState<EcranPublierOpportunite> {
-  static const _titres = [
-    'Informations',
-    'Détails',
-    'Conditions et coûts',
-    'Aperçu',
+  late final _titres = [
+    context.t.opportunitesInformations,
+    context.t.opportunitesDetails,
+    context.t.opportunitesConditionsEtCouts,
+    context.t.opportunitesApercu,
   ];
 
   var _etape = 0;
   var _type = TypeOpportunite.stage;
-  final _titre = TextEditingController(text: 'Stage en communication digitale');
+  late final _titre = TextEditingController(
+    text: context.t.opportunitesStageDemo,
+  );
   var _lieu = 'Brazzaville';
   var _places = 4;
   var _jours = 21;
@@ -48,7 +50,7 @@ class _EcranPublierOpportuniteState
       couleur: LiveColors.bleu,
     ),
     lieu: _lieu,
-    dateLimite: 'dans $_jours jours',
+    dateLimite: context.t.opportunitesDansJours(_jours),
     joursRestants: _jours,
     places: _places,
     frais: _gratuit ? 0 : _frais,
@@ -60,7 +62,7 @@ class _EcranPublierOpportuniteState
     if (_publie) return _succes(context);
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Publier une opportunité')),
+      appBar: AppBar(title: Text(context.t.opportunitesPublierUneOpportunite)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
         children: [
@@ -98,7 +100,7 @@ class _EcranPublierOpportuniteState
       children: [
         Expanded(child: Text(libelle)),
         IconButton.outlined(
-          tooltip: 'Moins',
+          tooltip: context.t.opportunitesMoins,
           onPressed: valeur > 1 ? () => changer(valeur - 1) : null,
           icon: const Icon(Icons.remove),
         ),
@@ -111,7 +113,7 @@ class _EcranPublierOpportuniteState
           ),
         ),
         IconButton.outlined(
-          tooltip: 'Plus',
+          tooltip: context.t.opportunitesPlus,
           onPressed: () => changer(valeur + 1),
           icon: const Icon(Icons.add),
         ),
@@ -124,7 +126,10 @@ class _EcranPublierOpportuniteState
       0 => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Type', style: TextStyle(fontWeight: FontWeight.w700)),
+          Text(
+            context.t.opportunitesType,
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 6),
           Wrap(
             spacing: 8,
@@ -143,10 +148,13 @@ class _EcranPublierOpportuniteState
           TextField(
             controller: _titre,
             onChanged: (_) => setState(() {}),
-            decoration: const InputDecoration(labelText: 'Titre'),
+            decoration: InputDecoration(labelText: context.t.opportunitesTitre),
           ),
           const SizedBox(height: 12),
-          const Text('Lieu', style: TextStyle(fontWeight: FontWeight.w700)),
+          Text(
+            context.t.opportunitesLieu,
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 6),
           Wrap(
             spacing: 8,
@@ -159,7 +167,9 @@ class _EcranPublierOpportuniteState
                 'En ligne',
               ])
                 ChoiceChip(
-                  label: Text(l),
+                  label: Text(
+                    l == 'En ligne' ? context.t.opportunitesEnLigne : l,
+                  ),
                   selected: _lieu == l,
                   onSelected: (_) => setState(() => _lieu = l),
                 ),
@@ -170,23 +180,23 @@ class _EcranPublierOpportuniteState
       1 => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TextField(
+          TextField(
             minLines: 3,
             maxLines: 5,
             decoration: InputDecoration(
-              labelText: 'Description',
-              hintText: 'Missions, profil recherché, calendrier…',
+              labelText: context.t.opportunitesDescription,
+              hintText: context.t.opportunitesMissionsProfilRechercheCalendrier,
             ),
           ),
           const SizedBox(height: 12),
           _compteur(
-            'Nombre de places',
+            context.t.opportunitesNombreDePlaces,
             _places,
             (v) => setState(() => _places = v),
           ),
           const SizedBox(height: 8),
           _compteur(
-            'Date limite (jours)',
+            context.t.opportunitesDateLimiteJours,
             _jours,
             (v) => setState(() => _jours = v),
           ),
@@ -195,40 +205,38 @@ class _EcranPublierOpportuniteState
             contentPadding: EdgeInsets.zero,
             value: _video,
             onChanged: (v) => setState(() => _video = v),
-            title: const Text('Ajouter une vidéo verticale de 30 s'),
-            subtitle: const Text(
-              'Les annonces avec vidéo reçoivent 3 fois plus de candidatures',
-            ),
+            title: Text(context.t.opportunitesAjouterUneVideoVerticale),
+            subtitle: Text(context.t.opportunitesLesAnnoncesAvecVideo),
           ),
         ],
       ),
       2 => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TextField(
+          TextField(
             minLines: 2,
             maxLines: 4,
             decoration: InputDecoration(
-              labelText: 'Conditions',
-              hintText: 'Diplôme, âge, disponibilité…',
+              labelText: context.t.opportunitesConditions,
+              hintText: context.t.opportunitesDiplomeAgeDisponibilite,
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Frais demandés aux candidats',
+          Text(
+            context.t.opportunitesFraisDemandesAuxCandidats,
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
           ),
           const SizedBox(height: 6),
           Choix(
-            titre: 'Aucun frais',
-            sousTitre: 'Recommandé : badge « Gratuit » sur l’annonce',
+            titre: context.t.opportunitesAucunFrais,
+            sousTitre: context.t.opportunitesRecommandeBadgeGratuitSur,
             icone: Icons.money_off_rounded,
             selectionne: _gratuit,
             onTap: () => setState(() => _gratuit = true),
           ),
           Choix(
-            titre: 'Frais officiels de dossier',
-            sousTitre: 'Payés en direct, contre reçu officiel',
+            titre: context.t.opportunitesFraisOfficielsDeDossier,
+            sousTitre: context.t.opportunitesPayesEnDirectContre,
             icone: Icons.receipt_long_rounded,
             selectionne: !_gratuit,
             onTap: () => setState(() => _gratuit = false),
@@ -248,19 +256,15 @@ class _EcranPublierOpportuniteState
           const SizedBox(height: 12),
           Bloc(
             fond: LiveColors.fondAlerte,
-            child: const Text(
-              'Transparence obligatoire : tout frais non déclaré ici est '
-              'interdit. Une annonce qui demande de l’argent en message est '
-              'retirée et son auteur suspendu.',
-            ),
+            child: Text(context.t.opportunitesTransparenceObligatoireToutFrais),
           ),
         ],
       ),
       _ => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Voici comment les candidats verront votre annonce :',
+          Text(
+            context.t.opportunitesVoiciCommentLesCandidats,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 8),
@@ -271,10 +275,7 @@ class _EcranPublierOpportuniteState
             controlAffinity: ListTileControlAffinity.leading,
             value: _certifie,
             onChanged: (v) => setState(() => _certifie = v ?? false),
-            title: const Text(
-              'Je certifie que cette offre est réelle et que tous les frais '
-              'sont indiqués.',
-            ),
+            title: Text(context.t.opportunitesJeCertifieQueCette),
           ),
         ],
       ),
@@ -290,20 +291,19 @@ class _EcranPublierOpportuniteState
             children: [
               const Spacer(),
               const CocheAnimee(taille: 96),
-              const Text(
-                'Opportunité publiée',
+              Text(
+                context.t.opportunitesOpportunitePubliee,
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Text(
-                '« ${_titre.text} » est vérifiée par Live puis diffusée aux '
-                'personnes intéressées.',
+                context.t.opportunitesEstVerifiee(_titre.text),
                 textAlign: TextAlign.center,
               ),
               const Spacer(),
               FilledButton(
                 onPressed: () => context.go('/opportunites'),
-                child: const Text('Voir les opportunités'),
+                child: Text(context.t.opportunitesVoirLesOpportunites),
               ),
             ],
           ),
