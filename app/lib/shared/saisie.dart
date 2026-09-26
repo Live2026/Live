@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 
 /// Option sélectionnable (remplace les boutons radio).
 class Choix extends StatelessWidget {
@@ -154,9 +155,9 @@ class _ClavierPinState extends State<ClavierPin> {
                             ),
                             onPressed: () => _touche(t),
                             child: t == _effacer
-                                ? const Icon(
+                                ? Icon(
                                     Icons.backspace_outlined,
-                                    semanticLabel: 'Effacer',
+                                    semanticLabel: context.t.effacer,
                                   )
                                 : Text(t, style: const TextStyle(fontSize: 22)),
                           ),

@@ -105,8 +105,8 @@ class CarteQr extends StatelessWidget {
           const SizedBox(height: 6),
           Text(consigne, textAlign: TextAlign.center),
           const SizedBox(height: 6),
-          const Text(
-            "Ce n'est pas votre code MoMo.",
+          Text(
+            context.t.ceNEstPas,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: LiveColors.erreur,

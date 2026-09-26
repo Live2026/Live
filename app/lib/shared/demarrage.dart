@@ -132,13 +132,9 @@ class _Halo extends StatelessWidget {
 }
 
 /// Étapes de l'inscription, pour la barre de progression.
-const etapesInscription = [
-  'Numéro',
-  'Code',
-  'Profil',
-  'Code secret',
-  'Intérêts',
-];
+/// Nombre d'étapes de l'inscription (numéro, code, profil, code secret,
+/// intérêts), pour la barre de progression.
+const nombreEtapesInscription = 5;
 
 /// En-tête des pages du démarrage, comme WhatsApp : titre et texte centrés.
 /// Pendant l'inscription, une petite mention « Étape 1 sur 5 » au-dessus.
@@ -152,7 +148,7 @@ class EnTeteDemarrage extends StatelessWidget {
   final String titre;
   final String texte;
 
-  /// Rang dans [etapesInscription] ; nul hors inscription (connexion).
+  /// Rang parmi les [nombreEtapesInscription] étapes ; nul hors inscription (connexion).
   final int? etape;
 
   @override
@@ -163,7 +159,7 @@ class EnTeteDemarrage extends StatelessWidget {
         children: [
           if (etape != null) ...[
             Text(
-              context.t.etapeSur(etape! + 1, etapesInscription.length),
+              context.t.etapeSur(etape! + 1, nombreEtapesInscription),
               style: const TextStyle(
                 color: LiveColors.gris,
                 fontSize: 12.5,

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../core/format.dart';
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 
 /// Panneaux du bas communs : signaler, partager, options, filtres.
 
@@ -30,12 +31,12 @@ Future<T?> _feuille<T>(BuildContext context, Widget contenu) =>
 /// E-CONF-02 — Signaler un contenu, un profil ou un message.
 Future<void> signaler(BuildContext context, String quoi, {bool immo = false}) {
   final motifs = [
-    if (immo) ...['Déjà loué ou vendu', 'Annonce fausse ou photos volées'],
-    'Arnaque ou demande de paiement hors Live',
-    'Produit interdit ou dangereux',
-    'Contenu choquant ou violent',
-    'Harcèlement ou propos haineux',
-    'Autre raison',
+    if (immo) ...[context.t.dejaLoueOuVendu, context.t.annonceFausseOuPhotos],
+    context.t.arnaqueOuDemandeDe,
+    context.t.produitInterditOuDangereux,
+    context.t.contenuChoquantOuViolent,
+    context.t.harcelementOuProposHaineux,
+    context.t.autreRaison,
   ];
   return _feuille<void>(
     context,
@@ -45,12 +46,12 @@ Future<void> signaler(BuildContext context, String quoi, {bool immo = false}) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Signaler $quoi',
+            context.t.feuilleSignalerQuoi(quoi),
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 4),
-          const Text(
-            'Votre signalement est anonyme. Un modérateur Live le traite sous 24 h.',
+          Text(
+            context.t.votreSignalementEstAnonyme,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 8),
@@ -62,9 +63,7 @@ Future<void> signaler(BuildContext context, String quoi, {bool immo = false}) {
               onTap: () {
                 Navigator.pop(ctx);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Merci. Signalement envoyé à la modération.'),
-                  ),
+                  SnackBar(content: Text(context.t.merciSignalementEnvoyeA)),
                 );
               },
             ),
@@ -76,12 +75,12 @@ Future<void> signaler(BuildContext context, String quoi, {bool immo = false}) {
 
 /// E-FEED-04 — Partager une annonce ou une vidéo (lien avec aperçu).
 Future<void> partager(BuildContext context, String titre) {
-  const cibles = [
+  final cibles = [
     (Icons.chat_rounded, 'WhatsApp', Color(0xFF25D366)),
     (Icons.facebook_rounded, 'Facebook', Color(0xFF1877F2)),
     (Icons.sms_rounded, 'SMS', Color(0xFF13385C)),
-    (Icons.link_rounded, 'Copier le lien', LiveColors.gris),
-    (Icons.send_rounded, 'Dans Live', Color(0xFFFB9618)),
+    (Icons.link_rounded, context.t.copierLeLien, LiveColors.gris),
+    (Icons.send_rounded, context.t.dansLive, Color(0xFFFB9618)),
   ];
   return _feuille<void>(
     context,
@@ -89,8 +88,8 @@ Future<void> partager(BuildContext context, String titre) {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Partager',
+        Text(
+          context.t.partager,
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 12),
@@ -114,8 +113,8 @@ Future<void> partager(BuildContext context, String titre) {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
-                    const Text(
-                      'live.africa/a/8Kq2 · aperçu avec photo et prix',
+                    Text(
+                      context.t.liveAfricaA8kq2,
                       style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
                     ),
                   ],
@@ -137,7 +136,7 @@ Future<void> partager(BuildContext context, String titre) {
                   onTap: () {
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Partagé : $nom (simulation).')),
+                      SnackBar(content: Text(context.t.feuillePartage(nom))),
                     );
                   },
                   child: Column(
@@ -167,10 +166,10 @@ Future<void> partager(BuildContext context, String titre) {
 /// E-FEED-05 — Options d'une publication.
 Future<void> optionsPublication(BuildContext context, String auteur) {
   final options = [
-    (Icons.bookmark_border_rounded, 'Enregistrer', null),
-    (Icons.visibility_off_outlined, 'Pas intéressé', null),
-    (Icons.person_off_outlined, 'Masquer $auteur', null),
-    (Icons.flag_outlined, 'Signaler', 'signaler'),
+    (Icons.bookmark_border_rounded, context.t.enregistrer, null),
+    (Icons.visibility_off_outlined, context.t.pasInteresse, null),
+    (Icons.person_off_outlined, context.t.feuilleMasquer(auteur), null),
+    (Icons.flag_outlined, context.t.signaler, 'signaler'),
   ];
   return _feuille<void>(
     context,
@@ -192,11 +191,11 @@ Future<void> optionsPublication(BuildContext context, String auteur) {
             onTap: () {
               Navigator.pop(context);
               if (action == 'signaler') {
-                signaler(context, 'cette vidéo');
+                signaler(context, context.t.cetteVideo);
               } else {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text('$texte : c’est noté.')));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(context.t.feuilleNote(texte))),
+                );
               }
             },
           ),
@@ -222,13 +221,13 @@ Future<int?> ouvrirFiltresImmo(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Filtres',
+          Text(
+            context.t.filtres,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 12),
           Text(
-            vente ? 'Prix maximum' : 'Loyer maximum par mois',
+            vente ? context.t.prixMaximum : context.t.loyerMaximumParMois,
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
@@ -238,23 +237,32 @@ Future<int?> ouvrirFiltresImmo(
             children: [
               for (final p in paliers)
                 ChoiceChip(
-                  label: Text(p == 0 ? 'Tous' : 'max ${fcfaCourt(p)}'),
+                  label: Text(
+                    p == 0
+                        ? context.t.tous
+                        : context.t.feuilleMax(fcfaCourt(p)),
+                  ),
                   selected: choix == p,
                   onSelected: (_) => setState(() => choix = p),
                 ),
             ],
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Équipements',
+          Text(
+            context.t.equipements,
             style: TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
-          const _Bascules(['Forage', 'Meublé', 'Parking', 'Non inondable']),
+          _Bascules([
+            context.t.feuilleForage,
+            context.t.feuilleMeuble,
+            context.t.feuilleParking,
+            context.t.feuilleNonInondable,
+          ]),
           const SizedBox(height: 20),
           FilledButton(
             onPressed: () => Navigator.pop(ctx, choix),
-            child: const Text('Afficher les résultats'),
+            child: Text(context.t.afficherLesResultats),
           ),
         ],
       ),

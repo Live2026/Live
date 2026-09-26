@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../core/format.dart';
 import '../core/theme.dart';
 import 'demarrage.dart';
+import '../l10n/textes.dart';
 
 /// Bouton « Écouter l'explication » (principe 11). Le prototype affiche le texte lu.
 class BoutonEcouter extends StatelessWidget {
@@ -23,12 +24,12 @@ class BoutonEcouter extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
                   Icon(Icons.volume_up, color: LiveColors.bleu),
                   SizedBox(width: 8),
                   Text(
-                    'Lecture audio (simulée)',
+                    context.t.lectureAudioSimulee,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -39,8 +40,8 @@ class BoutonEcouter extends StatelessWidget {
                 style: const TextStyle(fontSize: 16, height: 1.4),
               ),
               const SizedBox(height: 12),
-              const Text(
-                "Dans l'application réelle, ce texte est lu à voix haute en français, puis en lingala et en kituba.",
+              Text(
+                context.t.dansLApplicationReelle,
                 style: TextStyle(color: LiveColors.gris),
               ),
             ],
@@ -48,7 +49,7 @@ class BoutonEcouter extends StatelessWidget {
         ),
       ),
       icon: const Icon(Icons.play_circle_outline),
-      label: const Text("Écouter l'explication"),
+      label: Text(context.t.ecouterLExplication),
     );
   }
 }
@@ -139,7 +140,7 @@ class BoutonMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      tooltip: 'Messages',
+      tooltip: context.t.messages,
       onPressed: () => context.push('/messages'),
       icon: Badge(
         label: const Text('1'),

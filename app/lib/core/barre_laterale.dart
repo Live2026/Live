@@ -77,7 +77,9 @@ class _BarreLaterale extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
             child: Tooltip(
-              message: replie ? 'Déplier le menu' : 'Replier le menu',
+              message: replie
+                  ? context.t.deplierLeMenu
+                  : context.t.replierLeMenu,
               child: Material(
                 color: LiveColors.champ,
                 borderRadius: BorderRadius.circular(8),
@@ -99,8 +101,8 @@ class _BarreLaterale extends StatelessWidget {
                         ),
                         if (large) ...[
                           const SizedBox(width: 8),
-                          const Text(
-                            'Replier',
+                          Text(
+                            context.t.replier,
                             style: TextStyle(color: LiveColors.gris),
                           ),
                         ],

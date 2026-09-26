@@ -182,7 +182,7 @@ class _EcranPublierBienState extends ConsumerState<EcranPublierBien> {
                 for (final t in TypeBien.values)
                   _Tuile(
                     icone: t.icone,
-                    texte: t.libelle,
+                    texte: t.libelleDe(context.t),
                     actif: _type == t,
                     onTap: () => setState(() => _type = t),
                   ),
@@ -390,7 +390,7 @@ class _EcranPublierBienState extends ConsumerState<EcranPublierBien> {
               const SizedBox(height: 8),
               Text(
                 context.t.publishBienEnvoyeTexte(
-                  _type.libelle,
+                  _type.libelleDe(context.t),
                   _quartier,
                   _vente ? fcfaCourt(_loyer) : context.t.parMois(fcfa(_loyer)),
                 ),

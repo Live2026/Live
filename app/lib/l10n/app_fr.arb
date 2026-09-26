@@ -3313,7 +3313,7 @@
   },
   "compteCreateur": "Créateur",
   "@compteCreateur": {
-    "description": "Écran : menu_profil"
+    "description": "Écran : commun (modèle)"
   },
   "compteFondsCreateurs": "Fonds Créateurs",
   "@compteFondsCreateurs": {
@@ -12450,5 +12450,579 @@
   "createursFicheMemoDerivees": "Fiche mémo : dérivées",
   "@createursFicheMemoDerivees": {
     "description": "Écran : fans"
-  }
+  },
+  "vueSatellite": "Vue satellite",
+  "@vueSatellite": {
+    "description": "Écran : carte_interactive"
+  },
+  "vuePlan": "Vue plan",
+  "@vuePlan": {
+    "description": "Écran : carte_interactive"
+  },
+  "vueRue": "Vue rue",
+  "@vueRue": {
+    "description": "Écran : carte_interactive"
+  },
+  "maPosition": "Ma position",
+  "@maPosition": {
+    "description": "Écran : carte_interactive"
+  },
+  "@carteVenteAnnonceur": {
+    "description": "Écran : cartes",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "carteVenteAnnonceur": "Vente · {qui}",
+  "@carteEntree": {
+    "description": "Écran : cartes",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "carteEntree": "Entrée {montant}",
+  "@carteAVendre": {
+    "description": "Écran : cartes"
+  },
+  "carteAVendre": " · à vendre",
+  "@carteParMoisCourt": {
+    "description": "Écran : cartes"
+  },
+  "carteParMoisCourt": " /mois",
+  "retirerDesFavoris": "Retirer des favoris",
+  "@retirerDesFavoris": {
+    "description": "Écran : cartes"
+  },
+  "aVoirPayeA": "À voir · payé à la remise",
+  "@aVoirPayeA": {
+    "description": "Écran : cartes"
+  },
+  "agenceVerifiee": "Agence vérifiée",
+  "@agenceVerifiee": {
+    "description": "Écran : cartes"
+  },
+  "verifie": "Vérifié",
+  "@verifie": {
+    "description": "Écran : cartes"
+  },
+  "nouveau": "Nouveau",
+  "@nouveau": {
+    "description": "Écran : cartes_savoirs"
+  },
+  "sponsorise": "Sponsorisé",
+  "@sponsorise": {
+    "description": "Écran : cartes"
+  },
+  "meuble": "Meublé",
+  "@meuble": {
+    "description": "Écran : cartes"
+  },
+  "parking": "Parking",
+  "@parking": {
+    "description": "Écran : cartes"
+  },
+  "des": "dès",
+  "@des": {
+    "description": "Écran : cartes"
+  },
+  "@carteDirectDe": {
+    "description": "Écran : cartes_divertissement",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      },
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "carteDirectDe": "Direct de {qui} : {titre}",
+  "@carteEnDirect": {
+    "description": "Écran : cartes_divertissement"
+  },
+  "carteEnDirect": "EN DIRECT",
+  "@carteEnDirectSpectateurs": {
+    "description": "Écran : cartes_divertissement",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "libelle": {
+        "type": "String"
+      }
+    }
+  },
+  "carteEnDirectSpectateurs": "EN DIRECT · {n}{libelle}",
+  "@carteLaNuit": {
+    "description": "Écran : cartes_divertissement",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "carteLaNuit": "{prix} la nuit",
+  "@carteNVoyageurs": {
+    "description": "Écran : cartes_divertissement",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "carteNVoyageurs": "{n, plural, =1{1 voyageur} other{{n} voyageurs}}",
+  "@carteLaNuitSuffixe": {
+    "description": "Écran : cartes_divertissement"
+  },
+  "carteLaNuitSuffixe": " la nuit",
+  "@carteLieuPlaces": {
+    "description": "Écran : cartes_savoirs",
+    "placeholders": {
+      "lieu": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "carteLieuPlaces": "{lieu} · {n, plural, =1{1 place} other{{n} places}}",
+  "@carteJMoinsDate": {
+    "description": "Écran : cartes_savoirs",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "carteJMoinsDate": "J-{n} · {date}",
+  "@carteFrais": {
+    "description": "Écran : cartes_savoirs",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "carteFrais": "Frais {montant}",
+  "achete": "Acheté",
+  "@achete": {
+    "description": "Écran : cartes_savoirs"
+  },
+  "gratuit": "Gratuit",
+  "@gratuit": {
+    "description": "Écran : reglement"
+  },
+  "@etoilesN": {
+    "description": "Écran : composants",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "etoilesN": "{n, plural, =1{1 étoile} other{{n} étoiles}}",
+  "voirTout": "Voir tout",
+  "@voirTout": {
+    "description": "Écran : composants"
+  },
+  "ceNEstPas": "Ce n'est pas votre code MoMo.",
+  "@ceNEstPas": {
+    "description": "Écran : confiance"
+  },
+  "@codeSousQr": {
+    "description": "Écran : dialogues"
+  },
+  "codeSousQr": "Code affiché sous le QR de l’autre personne.",
+  "choisissez4ChiffresQue": "Choisissez 4 chiffres que vous seul connaissez.",
+  "@choisissez4ChiffresQue": {
+    "description": "Écran : dialogues"
+  },
+  "lectureAudioSimulee": "Lecture audio (simulée)",
+  "@lectureAudioSimulee": {
+    "description": "Écran : elements"
+  },
+  "dansLApplicationReelle": "Dans l'application réelle, ce texte est lu à voix haute en français, puis en lingala et en kituba.",
+  "@dansLApplicationReelle": {
+    "description": "Écran : elements"
+  },
+  "ecouterLExplication": "Écouter l'explication",
+  "@ecouterLExplication": {
+    "description": "Écran : elements"
+  },
+  "messages": "Messages",
+  "@messages": {
+    "description": "Écran : elements"
+  },
+  "fermerLaRecherche": "Fermer la recherche",
+  "@fermerLaRecherche": {
+    "description": "Écran : en_tete_recherche"
+  },
+  "rechercher": "Rechercher",
+  "@rechercher": {
+    "description": "Écran : en_tete_recherche"
+  },
+  "horsConnexionVosActions": "Hors connexion : vos actions seront envoyées au retour du réseau. Les paiements attendent le réseau.",
+  "@horsConnexionVosActions": {
+    "description": "Écran : hors_connexion"
+  },
+  "reessayer": "Réessayer",
+  "@reessayer": {
+    "description": "Écran : hors_connexion"
+  },
+  "@justePrixMarche": {
+    "description": "Écran : juste_prix",
+    "placeholders": {
+      "bas": {
+        "type": "String"
+      },
+      "haut": {
+        "type": "String"
+      },
+      "suffixe": {
+        "type": "String"
+      }
+    }
+  },
+  "justePrixMarche": "Marché : {bas} à {haut}{suffixe}",
+  "bonPrix": "Bon prix",
+  "@bonPrix": {
+    "description": "Écran : juste_prix"
+  },
+  "auDessusDuMarche": "Au-dessus du marché",
+  "@auDessusDuMarche": {
+    "description": "Écran : juste_prix"
+  },
+  "prixDuMarche": "Prix du marché",
+  "@prixDuMarche": {
+    "description": "Écran : juste_prix"
+  },
+  "leJustePrixLive": "Le juste prix · Live IA",
+  "@leJustePrixLive": {
+    "description": "Écran : juste_prix"
+  },
+  "panier": "Panier",
+  "@panier": {
+    "description": "Écran : panier"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Écran : panier"
+  },
+  "mesCommandes": "Mes commandes",
+  "@mesCommandes": {
+    "description": "Écran : panier"
+  },
+  "commentCaSePaie": "Comment ça se paie",
+  "@commentCaSePaie": {
+    "description": "Écran : reglement"
+  },
+  "comprendreLesPaiementsSur": "Comprendre les paiements sur Live",
+  "@comprendreLesPaiementsSur": {
+    "description": "Écran : reglement"
+  },
+  "publier": "Publier",
+  "@publier": {
+    "description": "Écran : reglement"
+  },
+  "effacer": "Effacer",
+  "@effacer": {
+    "description": "Écran : saisie"
+  },
+  "@feuilleSignalerQuoi": {
+    "description": "Écran : feuilles",
+    "placeholders": {
+      "quoi": {
+        "type": "String"
+      }
+    }
+  },
+  "feuilleSignalerQuoi": "Signaler {quoi}",
+  "@feuillePartage": {
+    "description": "Écran : feuilles",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "feuillePartage": "Partagé : {nom} (simulation).",
+  "@feuilleMasquer": {
+    "description": "Écran : feuilles",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "feuilleMasquer": "Masquer {qui}",
+  "@feuilleNote": {
+    "description": "Écran : feuilles",
+    "placeholders": {
+      "texte": {
+        "type": "String"
+      }
+    }
+  },
+  "feuilleNote": "{texte} : c’est noté.",
+  "@feuilleMax": {
+    "description": "Écran : feuilles",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "feuilleMax": "max {prix}",
+  "@feuilleForage": {
+    "description": "Écran : feuilles"
+  },
+  "feuilleForage": "Forage",
+  "@feuilleMeuble": {
+    "description": "Écran : feuilles"
+  },
+  "feuilleMeuble": "Meublé",
+  "@feuilleParking": {
+    "description": "Écran : feuilles"
+  },
+  "feuilleParking": "Parking",
+  "@feuilleNonInondable": {
+    "description": "Écran : feuilles"
+  },
+  "feuilleNonInondable": "Non inondable",
+  "dejaLoueOuVendu": "Déjà loué ou vendu",
+  "@dejaLoueOuVendu": {
+    "description": "Écran : feuilles"
+  },
+  "annonceFausseOuPhotos": "Annonce fausse ou photos volées",
+  "@annonceFausseOuPhotos": {
+    "description": "Écran : feuilles"
+  },
+  "arnaqueOuDemandeDe": "Arnaque ou demande de paiement hors Live",
+  "@arnaqueOuDemandeDe": {
+    "description": "Écran : feuilles"
+  },
+  "produitInterditOuDangereux": "Produit interdit ou dangereux",
+  "@produitInterditOuDangereux": {
+    "description": "Écran : feuilles"
+  },
+  "contenuChoquantOuViolent": "Contenu choquant ou violent",
+  "@contenuChoquantOuViolent": {
+    "description": "Écran : feuilles"
+  },
+  "harcelementOuProposHaineux": "Harcèlement ou propos haineux",
+  "@harcelementOuProposHaineux": {
+    "description": "Écran : feuilles"
+  },
+  "autreRaison": "Autre raison",
+  "@autreRaison": {
+    "description": "Écran : feuilles"
+  },
+  "votreSignalementEstAnonyme": "Votre signalement est anonyme. Un modérateur Live le traite sous 24 h.",
+  "@votreSignalementEstAnonyme": {
+    "description": "Écran : feuilles"
+  },
+  "merciSignalementEnvoyeA": "Merci. Signalement envoyé à la modération.",
+  "@merciSignalementEnvoyeA": {
+    "description": "Écran : feuilles"
+  },
+  "copierLeLien": "Copier le lien",
+  "@copierLeLien": {
+    "description": "Écran : feuilles"
+  },
+  "dansLive": "Dans Live",
+  "@dansLive": {
+    "description": "Écran : feuilles"
+  },
+  "liveAfricaA8kq2": "live.africa/a/8Kq2 · aperçu avec photo et prix",
+  "@liveAfricaA8kq2": {
+    "description": "Écran : feuilles"
+  },
+  "pasInteresse": "Pas intéressé",
+  "@pasInteresse": {
+    "description": "Écran : feuilles"
+  },
+  "signaler": "Signaler",
+  "@signaler": {
+    "description": "Écran : feuilles"
+  },
+  "cetteVideo": "cette vidéo",
+  "@cetteVideo": {
+    "description": "Écran : feuilles"
+  },
+  "filtres": "Filtres",
+  "@filtres": {
+    "description": "Écran : feuilles"
+  },
+  "prixMaximum": "Prix maximum",
+  "@prixMaximum": {
+    "description": "Écran : feuilles"
+  },
+  "loyerMaximumParMois": "Loyer maximum par mois",
+  "@loyerMaximumParMois": {
+    "description": "Écran : feuilles"
+  },
+  "tous": "Tous",
+  "@tous": {
+    "description": "Écran : feuilles"
+  },
+  "equipements": "Équipements",
+  "@equipements": {
+    "description": "Écran : feuilles"
+  },
+  "afficherLesResultats": "Afficher les résultats",
+  "@afficherLesResultats": {
+    "description": "Écran : feuilles"
+  },
+  "deplierLeMenu": "Déplier le menu",
+  "@deplierLeMenu": {
+    "description": "Écran : barre_laterale"
+  },
+  "replierLeMenu": "Replier le menu",
+  "@replierLeMenu": {
+    "description": "Écran : barre_laterale"
+  },
+  "replier": "Replier",
+  "@replier": {
+    "description": "Écran : barre_laterale"
+  },
+  "@reglementDansLive": {
+    "description": "Écran : commun (modèle)"
+  },
+  "reglementDansLive": "Payé dans Live",
+  "@reglementSurPlace": {
+    "description": "Écran : commun (modèle)"
+  },
+  "reglementSurPlace": "Voir puis payer à la remise",
+  "@reglementDirect": {
+    "description": "Écran : commun (modèle)"
+  },
+  "reglementDirect": "Payé en direct",
+  "@reglementDansLiveCourt": {
+    "description": "Écran : commun (modèle)"
+  },
+  "reglementDansLiveCourt": "Dans Live",
+  "@reglementSurPlaceCourt": {
+    "description": "Écran : commun (modèle)"
+  },
+  "reglementSurPlaceCourt": "À la remise",
+  "@reglementDirectCourt": {
+    "description": "Écran : commun (modèle)"
+  },
+  "reglementDirectCourt": "En direct",
+  "@bienAppartement": {
+    "description": "Écran : commun (modèle)"
+  },
+  "bienAppartement": "Appartement",
+  "@bienMaison": {
+    "description": "Écran : commun (modèle)"
+  },
+  "bienMaison": "Maison",
+  "@bienStudio": {
+    "description": "Écran : commun (modèle)"
+  },
+  "bienStudio": "Studio",
+  "@bienChambre": {
+    "description": "Écran : commun (modèle)"
+  },
+  "bienChambre": "Chambre",
+  "@bienVilla": {
+    "description": "Écran : commun (modèle)"
+  },
+  "bienVilla": "Villa",
+  "@bienLocal": {
+    "description": "Écran : commun (modèle)"
+  },
+  "bienLocal": "Local commercial",
+  "@bienTerrain": {
+    "description": "Écran : commun (modèle)"
+  },
+  "bienTerrain": "Terrain",
+  "@contenuCours": {
+    "description": "Écran : commun (modèle)"
+  },
+  "contenuCours": "Cours",
+  "@contenuPdf": {
+    "description": "Écran : commun (modèle)"
+  },
+  "contenuPdf": "PDF",
+  "@contenuVideo": {
+    "description": "Écran : commun (modèle)"
+  },
+  "contenuVideo": "Vidéo",
+  "@contenuLivre": {
+    "description": "Écran : commun (modèle)"
+  },
+  "contenuLivre": "Livre",
+  "@contenuSerie": {
+    "description": "Écran : commun (modèle)"
+  },
+  "contenuSerie": "Série",
+  "@contenuQcm": {
+    "description": "Écran : commun (modèle)"
+  },
+  "contenuQcm": "Exercices & QCM",
+  "@contenuCoaching": {
+    "description": "Écran : commun (modèle)"
+  },
+  "contenuCoaching": "Coaching",
+  "@opportuniteBourse": {
+    "description": "Écran : commun (modèle)"
+  },
+  "opportuniteBourse": "Bourse",
+  "@opportuniteConcours": {
+    "description": "Écran : commun (modèle)"
+  },
+  "opportuniteConcours": "Concours",
+  "@opportuniteStage": {
+    "description": "Écran : commun (modèle)"
+  },
+  "opportuniteStage": "Stage",
+  "@opportuniteEmploi": {
+    "description": "Écran : commun (modèle)"
+  },
+  "opportuniteEmploi": "Emploi",
+  "@opportuniteFormation": {
+    "description": "Écran : commun (modèle)"
+  },
+  "opportuniteFormation": "Formation",
+  "@opportuniteAutre": {
+    "description": "Écran : commun (modèle)"
+  },
+  "opportuniteAutre": "Autre",
+  "@comptePersonne": {
+    "description": "Écran : commun (modèle)"
+  },
+  "comptePersonne": "Personne",
+  "@compteOrganisation": {
+    "description": "Écran : commun (modèle)"
+  },
+  "compteOrganisation": "Organisation",
+  "@compteEnseignant": {
+    "description": "Écran : commun (modèle)"
+  },
+  "compteEnseignant": "Enseignant",
+  "@comptePersonnes": {
+    "description": "Écran : commun (modèle)"
+  },
+  "comptePersonnes": "Personnes",
+  "@compteOrganisations": {
+    "description": "Écran : commun (modèle)"
+  },
+  "compteOrganisations": "Organisations",
+  "@compteCreateurs": {
+    "description": "Écran : commun (modèle)"
+  },
+  "compteCreateurs": "Créateurs",
+  "@compteEnseignants": {
+    "description": "Écran : commun (modèle)"
+  },
+  "compteEnseignants": "Enseignants"
 }

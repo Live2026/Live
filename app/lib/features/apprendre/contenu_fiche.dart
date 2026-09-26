@@ -49,7 +49,10 @@ class EcranContenu extends ConsumerWidget {
             Positioned(
               left: 10,
               top: 10,
-              child: Etiquette(c.type.libelle, icone: c.type.icone),
+              child: Etiquette(
+                c.type.libelleDe(context.t),
+                icone: c.type.icone,
+              ),
             ),
           ],
         ),

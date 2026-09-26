@@ -201,7 +201,11 @@ class _TuilesSpecs extends StatelessWidget {
   Widget build(BuildContext context) {
     final b = bien;
     final tuiles = <(IconData, String, String)>[
-      (b.type.icone, b.type.libelle.split(' ').first, context.t.immoType),
+      (
+        b.type.icone,
+        b.type.libelleDe(context.t).split(' ').first,
+        context.t.immoType,
+      ),
       if (b.chambres > 0)
         (Icons.bed_outlined, '${b.chambres}', context.t.immoChambres),
       if (b.douches > 0)

@@ -151,7 +151,9 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ChoiceChip(
-                      label: Text(t?.pluriel ?? context.t.socialTous),
+                      label: Text(
+                        t?.plurielDe(context.t) ?? context.t.socialTous,
+                      ),
                       selected: _filtre == t,
                       onSelected: (_) => setState(() => _filtre = t),
                     ),

@@ -7,6 +7,7 @@ import '../data/mock.dart';
 import 'animations.dart';
 import 'composants.dart';
 import 'medias.dart';
+import '../l10n/textes.dart';
 
 /// Vignette verticale d'un direct : pastille EN DIRECT, spectateurs, hôte.
 class CarteDirect extends StatelessWidget {
@@ -18,7 +19,7 @@ class CarteDirect extends StatelessWidget {
     final d = direct;
     return Semantics(
       button: true,
-      label: 'Direct de ${d.hote.nom} : ${d.titre}',
+      label: context.t.carteDirectDe(d.hote.nom, d.titre),
       excludeSemantics: true,
       child: Pressable(
         onTap: () => context.push('/direct/${d.id}'),
@@ -123,8 +124,11 @@ class PastilleDirect extends StatelessWidget {
           Flexible(
             child: Text(
               spectateurs == null
-                  ? 'EN DIRECT'
-                  : 'EN DIRECT · ${compact(spectateurs!)}${libelle == null ? '' : ' $libelle'}',
+                  ? context.t.carteEnDirect
+                  : context.t.carteEnDirectSpectateurs(
+                      compact(spectateurs!),
+                      libelle == null ? '' : ' $libelle',
+                    ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
@@ -150,7 +154,7 @@ class CarteSejour extends StatelessWidget {
     final s = sejour;
     return Semantics(
       button: true,
-      label: '${s.titre}, ${fcfa(s.nuit)} la nuit',
+      label: '${s.titre}, ${context.t.carteLaNuit(fcfa(s.nuit))}',
       excludeSemantics: true,
       child: Pressable(
         onTap: () => context.push('/sejour/${s.id}'),
@@ -167,7 +171,7 @@ class CarteSejour extends StatelessWidget {
                     left: 8,
                     top: 8,
                     child: Etiquette(
-                      '${s.voyageurs} voyageur${s.voyageurs > 1 ? 's' : ''}',
+                      context.t.carteNVoyageurs(s.voyageurs),
                       icone: Icons.people_alt_rounded,
                     ),
                   ),
@@ -202,8 +206,8 @@ class CarteSejour extends StatelessWidget {
                     text: fcfa(s.nuit),
                     style: const TextStyle(fontWeight: FontWeight.w800),
                   ),
-                  const TextSpan(
-                    text: ' la nuit',
+                  TextSpan(
+                    text: context.t.carteLaNuitSuffixe,
                     style: TextStyle(color: LiveColors.gris),
                   ),
                 ],

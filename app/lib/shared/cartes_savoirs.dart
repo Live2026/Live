@@ -7,6 +7,7 @@ import '../data/mock.dart';
 import 'animations.dart';
 import 'composants.dart';
 import 'medias.dart';
+import '../l10n/textes.dart';
 
 /// Cartes des espaces Apprendre et Opportunités. Même règle que les autres
 /// cartes : taille identique dans une catégorie, textes en zones fixes.
@@ -38,7 +39,7 @@ class CarteContenu extends StatelessWidget {
     final c = contenu;
     return Semantics(
       button: true,
-      label: '${c.type.libelle}, ${c.titre}, ${fcfa(c.prix)}',
+      label: '${c.type.libelleDe(context.t)}, ${c.titre}, ${fcfa(c.prix)}',
       excludeSemantics: true,
       child: Pressable(
         onTap: () => context.push('/contenu/${c.id}'),
@@ -54,14 +55,17 @@ class CarteContenu extends StatelessWidget {
                   Positioned(
                     left: 8,
                     top: 8,
-                    child: Etiquette(c.type.libelle, icone: c.type.icone),
+                    child: Etiquette(
+                      c.type.libelleDe(context.t),
+                      icone: c.type.icone,
+                    ),
                   ),
                   if (c.nouveau)
-                    const Positioned(
+                    Positioned(
                       right: 8,
                       top: 8,
                       child: Etiquette(
-                        'Nouveau',
+                        context.t.nouveau,
                         fond: LiveColors.orangeVif,
                         couleur: Colors.white,
                       ),
@@ -98,7 +102,7 @@ class CarteContenu extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  achete ? 'Acheté' : fcfa(c.prix),
+                  achete ? context.t.achete : fcfa(c.prix),
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     color: achete ? LiveColors.succes : LiveColors.encre,
@@ -126,7 +130,7 @@ class CarteOpportunite extends StatelessWidget {
     final urgent = o.joursRestants <= 10;
     return Semantics(
       button: true,
-      label: '${t.libelle}, ${o.titre}, ${o.organisation.nom}',
+      label: '${t.libelleDe(context.t)}, ${o.titre}, ${o.organisation.nom}',
       excludeSemantics: true,
       child: Pressable(
         onTap: () => context.push('/opportunite/${o.id}'),
@@ -152,7 +156,7 @@ class CarteOpportunite extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(child: _zone(context, o.organisation.nom, 1, _meta)),
                   Etiquette(
-                    t.libelle,
+                    t.libelleDe(context.t),
                     icone: t.icone,
                     fond: t.couleur.withValues(alpha: 0.12),
                     couleur: t.couleur,
@@ -173,7 +177,7 @@ class CarteOpportunite extends StatelessWidget {
               const Spacer(),
               _zone(
                 context,
-                '${o.lieu} · ${o.places} place${o.places > 1 ? 's' : ''}',
+                context.t.carteLieuPlaces(o.lieu, o.places),
                 1,
                 _meta,
               ),
@@ -188,7 +192,7 @@ class CarteOpportunite extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
-                      'J-${o.joursRestants} · ${o.dateLimite}',
+                      context.t.carteJMoinsDate(o.joursRestants, o.dateLimite),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: _meta.copyWith(
@@ -198,7 +202,9 @@ class CarteOpportunite extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    o.gratuite ? 'Gratuit' : 'Frais ${fcfaCourt(o.frais)}',
+                    o.gratuite
+                        ? context.t.gratuit
+                        : context.t.carteFrais(fcfaCourt(o.frais)),
                     style: TextStyle(
                       fontSize: 12.5,
                       fontWeight: FontWeight.w800,

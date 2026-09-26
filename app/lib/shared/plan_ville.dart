@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 import 'animations.dart';
 
 part 'plan_satellite.dart';

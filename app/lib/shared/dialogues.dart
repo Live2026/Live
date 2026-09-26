@@ -46,7 +46,7 @@ Future<bool> confirmer(
 Future<String?> saisirCode(
   BuildContext context, {
   required String titre,
-  String consigne = 'Code affiché sous le QR de l’autre personne.',
+  String? consigne,
 }) {
   final champ = TextEditingController(text: 'LV-');
   return showDialog<String>(
@@ -57,7 +57,10 @@ Future<String?> saisirCode(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(consigne, style: const TextStyle(color: LiveColors.gris)),
+          Text(
+            consigne ?? context.t.codeSousQr,
+            style: const TextStyle(color: LiveColors.gris),
+          ),
           const SizedBox(height: 12),
           TextField(
             controller: champ,
@@ -147,8 +150,8 @@ Future<bool> changerCode(BuildContext context, {required String titre}) async {
               titre,
               style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
             ),
-            const Text(
-              'Choisissez 4 chiffres que vous seul connaissez.',
+            Text(
+              context.t.choisissez4ChiffresQue,
               style: TextStyle(color: LiveColors.gris),
             ),
             ClavierPin(onComplet: (_) => Navigator.pop(ctx, true)),

@@ -94,7 +94,7 @@ class _SectionsApprendreState extends ConsumerState<SectionsApprendre> {
               for (final t in TypeContenu.values)
                 PuceIcone(
                   icone: t.icone,
-                  texte: t.libelle,
+                  texte: t.libelleDe(context.t),
                   active: _type == t,
                   onTap: () => setState(() => _type = _type == t ? null : t),
                 ),
@@ -161,7 +161,7 @@ class _SectionsApprendreState extends ConsumerState<SectionsApprendre> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: marge),
           child: EnTeteSection(
-            _type?.libelle ?? context.t.apprendreTousLesContenus,
+            _type?.libelleDe(context.t) ?? context.t.apprendreTousLesContenus,
             action: _type == null ? null : context.t.apprendreEffacer,
             onTap: _type == null ? null : () => setState(() => _type = null),
           ),

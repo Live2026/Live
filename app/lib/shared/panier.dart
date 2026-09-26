@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data/mock.dart';
 import '../data/store.dart';
+import '../l10n/textes.dart';
 
 /// Icône du panier (contenus numériques) avec le nombre d'articles.
 class BoutonPanier extends ConsumerWidget {
@@ -13,7 +14,7 @@ class BoutonPanier extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final n = ref.watch(liveProvider.select((e) => e.panier.length));
     return IconButton(
-      tooltip: 'Panier',
+      tooltip: context.t.panier,
       onPressed: () => context.push('/panier'),
       icon: Badge(
         isLabelVisible: n > 0,
@@ -33,7 +34,7 @@ class BoutonNotifications extends StatelessWidget {
   Widget build(BuildContext context) {
     final n = notificationsDemo.where((x) => x.nouvelle).length;
     return IconButton(
-      tooltip: 'Notifications',
+      tooltip: context.t.notifications,
       onPressed: () => context.push('/notifications'),
       icon: Badge(
         isLabelVisible: n > 0,
@@ -58,7 +59,7 @@ class BoutonCommandes extends ConsumerWidget {
       ),
     );
     return IconButton(
-      tooltip: 'Mes commandes',
+      tooltip: context.t.mesCommandes,
       onPressed: () => context.push('/commandes'),
       icon: Badge(
         isLabelVisible: n > 0,

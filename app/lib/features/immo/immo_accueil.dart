@@ -121,7 +121,7 @@ class _EcranImmoState extends State<EcranImmo> {
                 for (final t in TypeBien.values)
                   PuceIcone(
                     icone: t.icone,
-                    texte: t.libelle.split(' ').first,
+                    texte: t.libelleDe(context.t).split(' ').first,
                     active: _type == t,
                     onTap: () => setState(() => _type = _type == t ? null : t),
                   ),
@@ -362,7 +362,7 @@ class _VisiteVideo extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${b.type.libelle} · ${b.quartier}',
+                    '${b.type.libelleDe(context.t)} · ${b.quartier}',
                     maxLines: 2,
                     style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),

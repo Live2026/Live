@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
 import 'animations.dart';
+import '../l10n/textes.dart';
 
 /// Petits composants réutilisés sur tous les écrans : en-têtes de section,
 /// carrousels, pastilles, avatars, étoiles, états vides, chiffres clés.
@@ -38,7 +39,7 @@ class EnTeteSection extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
               ),
               onPressed: onTap,
-              child: Text(action ?? 'Voir tout'),
+              child: Text(action ?? context.t.voirTout),
             ),
         ],
       ),
@@ -287,7 +288,7 @@ class SelecteurEtoiles extends StatelessWidget {
           Semantics(
             button: true,
             selected: note == i,
-            label: '$i étoile${i > 1 ? 's' : ''}',
+            label: context.t.etoilesN(i),
             child: Pressable(
               echelle: 0.85,
               onTap: () => onChange(i),

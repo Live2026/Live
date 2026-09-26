@@ -39,7 +39,7 @@ class _LigneContenu extends StatelessWidget {
                     style: const TextStyle(fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    '${c.type.libelle} · ${c.auteur.nom}',
+                    '${c.type.libelleDe(context.t)} · ${c.auteur.nom}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(

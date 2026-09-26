@@ -172,7 +172,7 @@ class _MaPositionState extends State<_MaPosition>
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Ma position',
+      label: context.t.maPosition,
       child: SizedBox(
         width: 44,
         height: 44,

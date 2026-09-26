@@ -426,7 +426,11 @@ class _TuilesProduit extends StatelessWidget {
             : context.t.marketMainPropre,
         context.t.marketRemise,
       ),
-      (p.reglement.icone, p.reglement.court, context.t.marketPaiement),
+      (
+        p.reglement.icone,
+        p.reglement.courtDe(context.t),
+        context.t.marketPaiement,
+      ),
       (
         Icons.verified_user_outlined,
         surPlace ? context.t.marketPasDAvance : context.t.marketRembourse,

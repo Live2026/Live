@@ -64,7 +64,7 @@ class EcranOpportunite extends ConsumerWidget {
         runSpacing: 6,
         children: [
           Etiquette(
-            t.libelle,
+            t.libelleDe(context.t),
             icone: t.icone,
             fond: t.couleur.withValues(alpha: 0.12),
             couleur: t.couleur,

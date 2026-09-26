@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/format.dart';
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 
 /// « Le juste prix » de Live IA : fourchette observée sur les ventes et les
 /// locations réelles du même type, dans le même quartier, et position du
@@ -28,11 +29,15 @@ class JustePrix extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (verdict, couleur, icone) = prix < bas
-        ? ('Bon prix', LiveColors.succes, Icons.thumb_up_alt_rounded)
+        ? (context.t.bonPrix, LiveColors.succes, Icons.thumb_up_alt_rounded)
         : prix > haut
-        ? ('Au-dessus du marché', LiveColors.erreur, Icons.trending_up_rounded)
+        ? (
+            context.t.auDessusDuMarche,
+            LiveColors.erreur,
+            Icons.trending_up_rounded,
+          )
         : (
-            'Prix du marché',
+            context.t.prixDuMarche,
             const Color(0xFF0369A1),
             Icons.check_circle_rounded,
           );
@@ -54,9 +59,9 @@ class JustePrix extends StatelessWidget {
             children: [
               const Icon(Icons.auto_awesome_rounded, color: LiveColors.orange),
               const SizedBox(width: 8),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Le juste prix · Live IA',
+                  context.t.leJustePrixLive,
                   style: TextStyle(fontWeight: FontWeight.w800),
                 ),
               ),
@@ -138,7 +143,7 @@ class JustePrix extends StatelessWidget {
             },
           ),
           Text(
-            'Marché : ${fcfa(bas)} à ${fcfa(haut)}$suffixe',
+            context.t.justePrixMarche(fcfa(bas), fcfa(haut), suffixe),
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
           Text(

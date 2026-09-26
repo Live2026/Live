@@ -63,6 +63,8 @@ void main() {
     'lib/features/direct',
     'lib/features/social',
     'lib/features/createurs',
+    'lib/shared',
+    'lib/core',
   ];
   final enDur = RegExp(
     r'''(?:Text\(|titre: |texte: |label: |tooltip: |hintText: |labelText: )\s*(?:const )?'[A-ZÀ-Ý][a-zà-ÿ’']+ [a-zà-ÿ]''',

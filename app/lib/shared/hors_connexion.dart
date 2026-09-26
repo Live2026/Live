@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
 import 'animations.dart';
+import '../l10n/textes.dart';
 
 /// État du réseau. Dans l'application réelle, il suit `connectivity_plus` ;
 /// dans le prototype, on le bascule depuis Moi › Paramètres › Économie de
@@ -40,11 +41,9 @@ class BandeauHorsConnexion extends StatelessWidget {
                           size: 18,
                         ),
                         const SizedBox(width: 10),
-                        const Expanded(
+                        Expanded(
                           child: Text(
-                            'Hors connexion : vos actions seront envoyées au '
-                            'retour du réseau. Les paiements attendent le '
-                            'réseau.',
+                            context.t.horsConnexionVosActions,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12.5,
@@ -57,7 +56,7 @@ class BandeauHorsConnexion extends StatelessWidget {
                             minimumSize: const Size(0, 36),
                           ),
                           onPressed: () => horsConnexion.value = false,
-                          child: const Text('Réessayer'),
+                          child: Text(context.t.reessayer),
                         ),
                       ],
                     ),

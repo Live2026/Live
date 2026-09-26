@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../core/format.dart';
 import '../core/theme.dart';
 import '../data/modeles.dart';
+import '../l10n/textes.dart';
 
 /// Ce qui se paie où : dans Live (protégé), sur place après avoir vu, ou en
 /// direct au propriétaire ou à l'organisme. Affiché sur toutes les fiches.
@@ -30,7 +31,9 @@ class PastilleReglement extends StatelessWidget {
           const SizedBox(width: 4),
           Flexible(
             child: Text(
-              long ? reglement.libelle : reglement.court,
+              long
+                  ? reglement.libelleDe(context.t)
+                  : reglement.courtDe(context.t),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -62,14 +65,11 @@ class LigneReglement {
 
 /// Bloc « Comment ça se paie » : chaque somme avec son mode de règlement.
 class BlocReglement extends StatelessWidget {
-  const BlocReglement({
-    super.key,
-    required this.lignes,
-    this.titre = 'Comment ça se paie',
-    this.note,
-  });
+  const BlocReglement({super.key, required this.lignes, this.titre, this.note});
   final List<LigneReglement> lignes;
-  final String titre;
+
+  /// « Comment ça se paie » par défaut.
+  final String? titre;
   final String? note;
 
   @override
@@ -91,7 +91,7 @@ class BlocReglement extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  titre,
+                  titre ?? context.t.commentCaSePaie,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
@@ -131,7 +131,7 @@ class BlocReglement extends StatelessWidget {
                   if (l.montant != null) ...[
                     const SizedBox(width: 8),
                     Text(
-                      l.montant == 0 ? 'Gratuit' : fcfa(l.montant!),
+                      l.montant == 0 ? context.t.gratuit : fcfa(l.montant!),
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ],
@@ -153,7 +153,7 @@ class BlocReglement extends StatelessWidget {
                 minimumSize: const Size(0, 36),
               ),
               onPressed: () => context.push('/paiements'),
-              child: const Text('Comprendre les paiements sur Live'),
+              child: Text(context.t.comprendreLesPaiementsSur),
             ),
           ),
         ],
@@ -191,7 +191,7 @@ class EtapesAssistant extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'Étape ${etape + 1} sur ${titres.length}',
+          context.t.etapeSur(etape + 1, titres.length),
           style: const TextStyle(color: LiveColors.gris, fontSize: 13),
         ),
         Text(
@@ -212,13 +212,15 @@ class BoutonsAssistant extends StatelessWidget {
     required this.derniere,
     required this.onRetour,
     required this.onSuivant,
-    this.libelleFin = 'Publier',
+    this.libelleFin,
   });
   final int etape;
   final bool derniere;
   final VoidCallback onRetour;
   final VoidCallback? onSuivant;
-  final String libelleFin;
+
+  /// « Publier » par défaut.
+  final String? libelleFin;
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +230,7 @@ class BoutonsAssistant extends StatelessWidget {
           Expanded(
             child: OutlinedButton(
               onPressed: onRetour,
-              child: const Text('Retour'),
+              child: Text(context.t.retour),
             ),
           ),
           const SizedBox(width: 10),
@@ -237,7 +239,9 @@ class BoutonsAssistant extends StatelessWidget {
           flex: 2,
           child: FilledButton(
             onPressed: onSuivant,
-            child: Text(derniere ? libelleFin : 'Continuer'),
+            child: Text(
+              derniere ? libelleFin ?? context.t.publier : context.t.continuer,
+            ),
           ),
         ),
       ],

@@ -66,7 +66,7 @@ class _LigneCompte extends ConsumerWidget {
                   ),
                   Text(
                     context.t.socialTypeAbonnes(
-                      c.type.libelle,
+                      c.type.libelleDe(context.t),
                       compact(c.abonnes),
                     ),
                     maxLines: 1,
@@ -314,7 +314,7 @@ class _CarteSuggestion extends ConsumerWidget {
                   style: const TextStyle(fontWeight: FontWeight.w800),
                 ),
                 Text(
-                  c.type.libelle,
+                  c.type.libelleDe(context.t),
                   style: const TextStyle(color: LiveColors.gris, fontSize: 12),
                 ),
                 const SizedBox(height: 4),

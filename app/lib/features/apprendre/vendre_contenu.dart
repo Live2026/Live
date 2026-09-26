@@ -83,7 +83,7 @@ class _EcranVendreContenuState extends ConsumerState<EcranVendreContenu> {
         children: [
           for (final t in TypeContenu.values)
             Choix(
-              titre: t.libelle,
+              titre: t.libelleDe(context.t),
               icone: t.icone,
               sousTitre: switch (t) {
                 TypeContenu.cours =>
