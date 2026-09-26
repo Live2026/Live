@@ -27,10 +27,10 @@ Tout écran se construit avec la bibliothèque `app/lib/shared/` (importer `widg
 | `cartes_savoirs.dart`, `cartes_divertissement.dart`, `panier.dart` | `CarteContenu`, `CarteOpportunite`, `CarteDirect`, `PastilleDirect`, `CarteSejour`, `BoutonPanier`, `BoutonNotifications`, `BoutonCommandes` |
 | `saisie.dart`, `frise.dart`, `medias.dart`, `animations.dart` | choix, clavier de code, frise, vignettes, animations |
 | `logo.dart`, `en_tete_recherche.dart` | `LogoLive` (le nom s'écrit « Live »), `EnTeteRecherche` (loupe qui déploie le champ dans l'en-tête) |
-| `champ_code.dart`, `demarrage.dart`, `motif_live.dart` | `ChampCode` (six cases animées), `FondDemarrage`, `EnTeteDemarrage`, `DansCarte`, `MotifLive` (motif de fond dessiné, cercle de dessins façon WhatsApp), `LogoMotif` (logo assis dans le motif) |
+| `champ_code.dart`, `demarrage.dart`, `motif_live.dart` | `ChampCode` (six cases animées), `FondDemarrage`, `EnTeteDemarrage`, `DansCarte`, `MotifLive` (motif de fond dessiné, cercle de dessins façon WhatsApp), `LogoMotif` (logo assis dans le motif), `BarreDemarrage` |
 | `plan_ville.dart`, `carte_interactive.dart` | `PlanVille` (plan ou satellite, trajet, position), `CarteInteractive` (zoom, ma position, vue rue) |
 | `juste_prix.dart`, `ville.dart` | `JustePrix` (fourchette du marché, Live IA), `TexteVille` (ville choisie au lieu d'une ville écrite en dur) |
-| `champ_telephone.dart`, `drapeau.dart` | `ChampTelephone` (pays sur sa ligne, liste dessous ; numéro précédé de l'indicatif, mis en forme ; opérateur reconnu), `confirmerNumero` (« Vous avez saisi le numéro… »), `Drapeau` (dessiné, pas d'emoji) |
+| `champ_telephone.dart`, `drapeau.dart` | `ChampTelephone` (pays sur sa ligne, liste dessous avec recherche, 23 pays par région ; numéro précédé de l'indicatif, mis en forme ; opérateur reconnu), `confirmerNumero` (« Vous avez saisi le numéro… »), `Drapeau` (dessiné, pas d'emoji) |
 
 ## Données locales (Drift)
 

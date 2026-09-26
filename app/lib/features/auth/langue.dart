@@ -9,7 +9,7 @@ class EcranLangue extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final actuelle = ref.watch(liveProvider.select((e) => e.langue));
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [

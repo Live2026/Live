@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../shared/demarrage.dart';
-import '../shared/logo.dart';
 import 'adaptatif.dart';
 import 'theme.dart';
 
 /// Démarrage sur ordinateur (docs/ecrans/00, section 8), comme les écrans de
-/// WhatsApp : une page blanche, le logo en haut à gauche, le contenu dans une
-/// colonne centrée (sans carte), le bouton en bas de la colonne, puis les
+/// WhatsApp : une page blanche, la flèche de retour en haut à gauche, le
+/// contenu dans une colonne centrée (sans carte), le bouton en bas de la colonne, puis les
 /// liens utiles. Sur téléphone et tablette, la page seule.
 class CadreDemarrage extends StatelessWidget {
   const CadreDemarrage({
@@ -52,11 +51,17 @@ class CadreDemarrage extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, c) => Column(
             children: [
-              const Align(
+              // La flèche de retour tout en haut à gauche, comme WhatsApp.
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(32, 22, 32, 0),
-                  child: LogoLive(taille: 30),
+                  padding: const EdgeInsets.fromLTRB(20, 14, 20, 0),
+                  child: SizedBox(
+                    height: 48,
+                    child: Navigator.of(context).canPop()
+                        ? const BackButton()
+                        : null,
+                  ),
                 ),
               ),
               Expanded(

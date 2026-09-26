@@ -39,7 +39,7 @@ class _EcranTelephoneState extends State<EcranTelephone> {
     final valide = pays.complet(_numero.text) && _cgu && _confidentialite;
     final operateur = pays.operateur(_numero.text) ?? pays.operateurs.first;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
@@ -138,7 +138,7 @@ class _EcranProfilState extends State<EcranProfil> {
   Widget build(BuildContext context) {
     final nomComplet = '${_prenom.text.trim()} ${_nom.text.trim()}'.trim();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
@@ -373,7 +373,7 @@ class _EcranPinState extends ConsumerState<EcranPin> {
   Widget build(BuildContext context) {
     final confirmation = _premier != null;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [

@@ -44,7 +44,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
       ),
     };
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
@@ -159,7 +159,7 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: BarreDemarrage(
         actions: [
           TextButton(onPressed: _terminer, child: const Text('Passer')),
         ],

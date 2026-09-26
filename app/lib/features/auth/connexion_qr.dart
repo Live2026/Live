@@ -72,7 +72,7 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
     );
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: large ? null : AppBar(),
+      appBar: large ? null : const BarreDemarrage(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(28, 28, 28, 16),
         children: [

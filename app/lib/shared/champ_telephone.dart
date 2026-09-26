@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../core/theme.dart';
-import '../data/donnees_pays.dart';
+import '../data/donnees_telephone.dart';
 import 'drapeau.dart';
 
 /// Saisie du numéro, comme WhatsApp : le pays sur sa ligne (drapeau, nom ;
@@ -142,9 +142,11 @@ class _ChampTelephoneState extends State<ChampTelephone> {
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 220),
           child: Text(
-            operateur != null
+            operateur == null
+                ? '${pays.chiffres} chiffres, comme ${pays.format}'
+                : pays.mobileMoney
                 ? '$operateur Mobile Money reconnu'
-                : '${pays.chiffres} chiffres, comme ${pays.format}',
+                : 'Numéro mobile reconnu · paiement par carte',
             key: ValueKey(operateur ?? pays.code),
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -159,82 +161,165 @@ class _ChampTelephoneState extends State<ChampTelephone> {
   }
 }
 
-/// Ligne du pays : drapeau, nom et flèche ; la liste des six pays s'ouvre
-/// juste dessous, à la largeur du champ.
-class _ChoixPays extends StatelessWidget {
+/// Ligne du pays : drapeau, nom et flèche. La liste s'ouvre juste dessous,
+/// à la largeur du champ, avec une recherche en tête (comme WhatsApp Web)
+/// et les pays rangés par région.
+class _ChoixPays extends StatefulWidget {
   const _ChoixPays({required this.pays, required this.onPays});
   final int pays;
   final ValueChanged<int> onPays;
 
   @override
+  State<_ChoixPays> createState() => _ChoixPaysState();
+}
+
+class _ChoixPaysState extends State<_ChoixPays> {
+  final _recherche = TextEditingController();
+
+  @override
+  void dispose() {
+    _recherche.dispose();
+    super.dispose();
+  }
+
+  static String _simple(String t) => t
+      .toLowerCase()
+      .replaceAll(RegExp('[éèêë]'), 'e')
+      .replaceAll(RegExp('[àâã]'), 'a')
+      .replaceAll(RegExp('[ôõ]'), 'o')
+      .replaceAll(RegExp('[íî]'), 'i')
+      .replaceAll(RegExp('[’\'-]'), ' ');
+
+  bool _garde(PaysTelephone p) {
+    final q = _simple(_recherche.text.trim());
+    if (q.isEmpty) return true;
+    return _simple(p.nom).contains(q) || p.indicatif.contains(q);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final actuel = paysTelephone[pays];
+    final actuel = paysTelephone[widget.pays];
     return LayoutBuilder(
-      builder: (context, c) => MenuAnchor(
-        alignmentOffset: const Offset(0, 6),
-        style: MenuStyle(
-          backgroundColor: const WidgetStatePropertyAll(Colors.white),
-          shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          ),
-          maximumSize: const WidgetStatePropertyAll(Size(480, 420)),
-        ),
-        menuChildren: [
+      builder: (context, c) {
+        final largeur = c.maxWidth.clamp(260.0, 480.0);
+        final trouves = [
           for (final (i, p) in paysTelephone.indexed)
-            MenuItemButton(
-              onPressed: () => onPays(i),
-              leadingIcon: Drapeau(p.code, largeur: 26),
-              trailingIcon: i == pays
-                  ? const Icon(Icons.check_rounded, color: LiveColors.bleu)
-                  : Text(
-                      p.indicatif,
-                      style: const TextStyle(color: LiveColors.gris),
-                    ),
+            if (_garde(p)) (i, p),
+        ];
+        return MenuAnchor(
+          alignmentOffset: const Offset(0, 6),
+          onClose: () => setState(_recherche.clear),
+          style: MenuStyle(
+            backgroundColor: const WidgetStatePropertyAll(Colors.white),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            maximumSize: WidgetStatePropertyAll(Size(largeur, 440)),
+          ),
+          menuChildren: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 6, 10, 4),
               child: SizedBox(
-                width: (c.maxWidth - 110).clamp(160, 360),
-                child: Text(
-                  p.nom,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
+                width: largeur - 20,
+                child: TextField(
+                  controller: _recherche,
+                  autofocus: true,
+                  onChanged: (_) => setState(() {}),
+                  decoration: const InputDecoration(
+                    isDense: true,
+                    hintText: 'Rechercher un pays',
+                    prefixIcon: Icon(Icons.search_rounded),
+                  ),
                 ),
               ),
             ),
-        ],
-        builder: (context, menu, _) => Semantics(
-          button: true,
-          container: true,
-          label: 'Pays : ${actuel.nom} ${actuel.indicatif}. Changer',
-          excludeSemantics: true,
-          onTap: () => menu.isOpen ? menu.close() : menu.open(),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(8),
-            onTap: () => menu.isOpen ? menu.close() : menu.open(),
-            child: Ink(
-              decoration: _cadre(actif: menu.isOpen),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              child: Row(
-                children: [
-                  Drapeau(actuel.code, largeur: 26),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      actuel.nom,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+            if (trouves.isEmpty)
+              const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  'Aucun pays trouvé',
+                  style: TextStyle(color: LiveColors.gris),
+                ),
+              ),
+            for (final region in RegionTelephone.values)
+              if (trouves.any((t) => t.$2.region == region)) ...[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 4),
+                  child: Text(
+                    region.nom.toUpperCase(),
+                    style: const TextStyle(
+                      color: LiveColors.gris,
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.6,
                     ),
                   ),
-                  Icon(
-                    menu.isOpen
-                        ? Icons.keyboard_arrow_up_rounded
-                        : Icons.keyboard_arrow_down_rounded,
-                  ),
-                ],
+                ),
+                for (final (i, p) in trouves)
+                  if (p.region == region)
+                    MenuItemButton(
+                      onPressed: () => widget.onPays(i),
+                      leadingIcon: Drapeau(p.code, largeur: 26),
+                      trailingIcon: i == widget.pays
+                          ? const Icon(
+                              Icons.check_rounded,
+                              color: LiveColors.bleu,
+                            )
+                          : Text(
+                              p.indicatif,
+                              style: const TextStyle(color: LiveColors.gris),
+                            ),
+                      child: SizedBox(
+                        width: largeur - 130,
+                        child: Text(
+                          p.nom,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+              ],
+          ],
+          builder: (context, menu, _) => Semantics(
+            button: true,
+            container: true,
+            label: 'Pays : ${actuel.nom} ${actuel.indicatif}. Changer',
+            excludeSemantics: true,
+            onTap: () => menu.isOpen ? menu.close() : menu.open(),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: () => menu.isOpen ? menu.close() : menu.open(),
+              child: Ink(
+                decoration: _cadre(actif: menu.isOpen),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
+                child: Row(
+                  children: [
+                    Drapeau(actuel.code, largeur: 26),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        actuel.nom,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      menu.isOpen
+                          ? Icons.keyboard_arrow_up_rounded
+                          : Icons.keyboard_arrow_down_rounded,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

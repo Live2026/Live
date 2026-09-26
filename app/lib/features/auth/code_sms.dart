@@ -166,7 +166,7 @@ class _EcranCodeState extends State<EcranCode> {
     final minutes =
         '${_reste ~/ 60}:${(_reste % 60).toString().padLeft(2, '0')}';
     return Scaffold(
-      appBar: AppBar(
+      appBar: BarreDemarrage(
         actions: [TextButton(onPressed: _aide, child: const Text('Aide'))],
       ),
       body: ListView(

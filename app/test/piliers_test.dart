@@ -24,15 +24,18 @@ void main() {
     return store().paiementReussi();
   }
 
-  test('tontine : cagnotte = cotisation × membres ; la cotisation est notée', () {
-    final t = tontineParId('t1');
-    expect(t.cagnotte, 10000 * 8);
-    expect(t.beneficiaire, 'Merveille K.');
-    final id = payer(TypePaiement.cotisation, t.montant, 'Cotisation', t.id);
-    expect(id, startsWith('TO-'));
-    expect(etat().cotisations, contains('t1'));
-    expect(etat().paiement, isNull);
-  });
+  test(
+    'tontine : cagnotte = cotisation × membres ; la cotisation est notée',
+    () {
+      final t = tontineParId('t1');
+      expect(t.cagnotte, 10000 * 8);
+      expect(t.beneficiaire, 'Merveille K.');
+      final id = payer(TypePaiement.cotisation, t.montant, 'Cotisation', t.id);
+      expect(id, startsWith('TO-'));
+      expect(etat().cotisations, contains('t1'));
+      expect(etat().paiement, isNull);
+    },
+  );
 
   test('achat groupé, facture et recharge sont mémorisés', () {
     payer(TypePaiement.achatGroupe, 17500, 'Riz', 'ag1');
@@ -41,15 +44,28 @@ void main() {
     expect(etat().facturesPayees, contains('f1'));
   });
 
-  test('diaspora : paiement pour un proche et transfert dans « Mes envois »', () {
-    payer(TypePaiement.pourUnProche, 91350, 'Loyer pour Maman Céline', 'Loyer');
-    final id = payer(TypePaiement.transfert, 66907, 'Transfert à Frère Jordy', 'tr-1');
-    expect(id, startsWith('TR-'));
-    expect(etat().envois, [
-      'Transfert à Frère Jordy',
-      'Loyer pour Maman Céline',
-    ]);
-  });
+  test(
+    'diaspora : paiement pour un proche et transfert dans « Mes envois »',
+    () {
+      payer(
+        TypePaiement.pourUnProche,
+        91350,
+        'Loyer pour Maman Céline',
+        'Loyer',
+      );
+      final id = payer(
+        TypePaiement.transfert,
+        66907,
+        'Transfert à Frère Jordy',
+        'tr-1',
+      );
+      expect(id, startsWith('TR-'));
+      expect(etat().envois, [
+        'Transfert à Frère Jordy',
+        'Loyer pour Maman Céline',
+      ]);
+    },
+  );
 
   test('achat groupé : le prix de groupe est inférieur au prix normal', () {
     for (final a in achatsGroupes) {

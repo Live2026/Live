@@ -14,6 +14,23 @@ class DansCarte extends InheritedWidget {
   bool updateShouldNotify(DansCarte ancien) => false;
 }
 
+/// Barre du haut des pages du démarrage. Sur ordinateur (dans
+/// `CadreDemarrage`), la flèche de retour est en haut à gauche de la page,
+/// comme sur WhatsApp : la barre n'en affiche pas une seconde.
+class BarreDemarrage extends StatelessWidget implements PreferredSizeWidget {
+  const BarreDemarrage({super.key, this.actions});
+  final List<Widget>? actions;
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) => AppBar(
+    automaticallyImplyLeading: !DansCarte.de(context),
+    actions: actions,
+  );
+}
+
 /// Fond du démarrage : dégradé nuit et halos de couleur qui respirent.
 class FondDemarrage extends StatefulWidget {
   const FondDemarrage({super.key, required this.child});

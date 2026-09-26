@@ -41,21 +41,25 @@ void main() {
     expect(find.textContaining('contrat de bail'), findsOneWidget);
   });
 
-  testWidgets('assistant : une demande écrite reçoit une réponse et des actions', (
-    tester,
-  ) async {
-    tester.view.physicalSize = const Size(400, 860);
-    tester.view.devicePixelRatio = 1;
-    addTearDown(tester.view.reset);
-    sansAnimations(tester);
-    routeur.go('/ia/assistant');
-    await tester.pumpWidget(const ProviderScope(child: LiveApp()));
-    await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField), 'Un plombier demain matin');
-    await tester.pump();
-    await tester.tap(find.byTooltip('Envoyer'));
-    await tester.pumpAndSettle();
-    expect(find.textContaining('Serge, plombier vérifié'), findsOneWidget);
-    expect(find.text('Réserver Serge demain 8 h'), findsOneWidget);
-  });
+  testWidgets(
+    'assistant : une demande écrite reçoit une réponse et des actions',
+    (tester) async {
+      tester.view.physicalSize = const Size(400, 860);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      sansAnimations(tester);
+      routeur.go('/ia/assistant');
+      await tester.pumpWidget(const ProviderScope(child: LiveApp()));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.byType(TextField),
+        'Un plombier demain matin',
+      );
+      await tester.pump();
+      await tester.tap(find.byTooltip('Envoyer'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Serge, plombier vérifié'), findsOneWidget);
+      expect(find.text('Réserver Serge demain 8 h'), findsOneWidget);
+    },
+  );
 }

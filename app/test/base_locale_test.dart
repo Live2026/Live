@@ -78,28 +78,31 @@ void main() {
     expect((await e.enAttente()).single.tentatives, 1);
   });
 
-  test('réglages et favoris survivent à la fermeture de l’application', () async {
-    ProviderContainer ouvrir() => ProviderContainer(
-      overrides: [
-        depotParametresProvider.overrideWithValue(DepotParametresDrift(base)),
-        depotFavorisProvider.overrideWithValue(DepotFavorisDrift(base)),
-      ],
-    );
-    final avant = ouvrir();
-    avant.read(liveProvider.notifier)
-      ..choisirPays('Douala')
-      ..choisirDevise('CAD')
-      ..basculerFavori('b1');
-    await Future<void>.delayed(const Duration(milliseconds: 50));
-    avant.dispose();
+  test(
+    'réglages et favoris survivent à la fermeture de l’application',
+    () async {
+      ProviderContainer ouvrir() => ProviderContainer(
+        overrides: [
+          depotParametresProvider.overrideWithValue(DepotParametresDrift(base)),
+          depotFavorisProvider.overrideWithValue(DepotFavorisDrift(base)),
+        ],
+      );
+      final avant = ouvrir();
+      avant.read(liveProvider.notifier)
+        ..choisirPays('Douala')
+        ..choisirDevise('CAD')
+        ..basculerFavori('b1');
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      avant.dispose();
 
-    final apres = ouvrir();
-    addTearDown(apres.dispose);
-    apres.read(liveProvider);
-    await Future<void>.delayed(const Duration(milliseconds: 50));
-    final etat = apres.read(liveProvider);
-    expect(etat.pays, 'Douala');
-    expect(etat.devise, 'CAD');
-    expect(etat.favoris, containsAll(['b1', 'b3']));
-  });
+      final apres = ouvrir();
+      addTearDown(apres.dispose);
+      apres.read(liveProvider);
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      final etat = apres.read(liveProvider);
+      expect(etat.pays, 'Douala');
+      expect(etat.devise, 'CAD');
+      expect(etat.favoris, containsAll(['b1', 'b3']));
+    },
+  );
 }
