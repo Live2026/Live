@@ -13,11 +13,11 @@ class EcranListeMarket extends StatefulWidget {
 
 class _EcranListeMarketState extends State<EcranListeMarket> {
   late var _tri = widget.tri;
-  static const _tris = [
-    'Pertinence',
-    'Nouveautés',
-    'Prix croissant',
-    'Prix décroissant',
+  late final _tris = [
+    context.t.pertinence,
+    context.t.nouveautes,
+    context.t.prixCroissant,
+    context.t.prixDecroissant,
   ];
 
   @override
@@ -50,9 +50,9 @@ class _EcranListeMarketState extends State<EcranListeMarket> {
         titre: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.categorie ?? 'Toutes les annonces'),
+            Text(widget.categorie ?? context.t.toutesLesAnnonces),
             TexteVille(
-              '${liste.length} résultat${liste.length > 1 ? 's' : ''} à {ville}',
+              context.t.nResultatsA(liste.length, '{ville}'),
               style: const TextStyle(
                 fontSize: 13,
                 color: LiveColors.gris,
@@ -61,7 +61,7 @@ class _EcranListeMarketState extends State<EcranListeMarket> {
             ),
           ],
         ),
-        indice: 'Rechercher dans le Market…',
+        indice: context.t.rechercherDansLeMarket,
         onSubmitted: (q) => context.push('/recherche', extra: q),
       ),
       body: ListView(
@@ -99,9 +99,9 @@ class _EcranListeMarketState extends State<EcranListeMarket> {
             ),
           ),
           if (liste.isEmpty)
-            const EtatVide(
+            EtatVide(
               icone: Icons.search_off_rounded,
-              texte: 'Aucune annonce dans cette catégorie pour l’instant.',
+              texte: context.t.aucuneAnnonceDansCetteCategorie,
             ),
         ],
       ),
@@ -194,7 +194,7 @@ class _LigneProduit extends StatelessWidget {
                   ),
                   Text(
                     p.reglement == Reglement.surPlace
-                        ? '${p.etat} · payé à la remise'
+                        ? context.t.etatPayeRemise(p.etat)
                         : '${p.etat} · ${p.quartier}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -204,7 +204,7 @@ class _LigneProduit extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Par ${p.vendeur.nom}',
+                    context.t.parQui(p.vendeur.nom),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -259,15 +259,15 @@ class EcranMesCommandes extends ConsumerWidget {
     final achats = ref.watch(liveProvider.select((e) => e.achats));
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes commandes')),
+      appBar: AppBar(title: Text(context.t.mesCommandes)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 24),
         children: [
           if (achats.isEmpty)
             EtatVide(
               icone: Icons.receipt_long_outlined,
-              texte: 'Aucune commande pour l’instant.',
-              action: 'Découvrir le Market',
+              texte: context.t.aucuneCommandePourLInstant,
+              action: context.t.decouvrirLeMarket,
               onTap: () => context.go('/market'),
             ),
           for (final c in achats) LigneCommande(commande: c),

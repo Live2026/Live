@@ -58,7 +58,7 @@ class _EcranVueRueState extends State<EcranVueRue> {
                   children: [
                     BoutonVerre(
                       icone: Icons.arrow_back_rounded,
-                      libelle: 'Retour',
+                      libelle: context.t.retour,
                       onTap: () => context.pop(),
                     ),
                     const SizedBox(width: 8),
@@ -84,8 +84,8 @@ class _EcranVueRueState extends State<EcranVueRue> {
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
-                            const Text(
-                              'Vue rue · glissez pour regarder autour',
+                            Text(
+                              context.t.vueRueGlissezPourRegarder,
                               style: TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12,
@@ -97,7 +97,7 @@ class _EcranVueRueState extends State<EcranVueRue> {
                     ),
                     const SizedBox(width: 8),
                     Semantics(
-                      label: 'Boussole, cap ${_cap.round()} degrés',
+                      label: context.t.boussoleCap(_cap.round()),
                       child: Transform.rotate(
                         angle: -_cap * math.pi / 180,
                         child: const CircleAvatar(
@@ -127,7 +127,7 @@ class _EcranVueRueState extends State<EcranVueRue> {
                 ),
                 onPressed: () => setState(() => _pas++),
                 icon: const Icon(Icons.keyboard_double_arrow_up_rounded),
-                label: const Text('Avancer dans la rue'),
+                label: Text(context.t.avancerDansLaRue),
               ),
             ),
           ),

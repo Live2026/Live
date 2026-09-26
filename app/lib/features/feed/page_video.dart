@@ -54,7 +54,7 @@ class _PageVideoState extends State<_PageVideo> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final p = widget.pub;
-    final (titre, prix, action, route, extra) = annonceDe(p);
+    final (titre, prix, action, route, extra) = annonceDe(context.t, p);
     return GestureDetector(
       onDoubleTap: _doubleTape,
       child: Stack(
@@ -132,7 +132,7 @@ class _PageVideoState extends State<_PageVideo> with TickerProviderStateMixin {
                   icone: _enregistre
                       ? Icons.bookmark_rounded
                       : Icons.bookmark_border_rounded,
-                  texte: 'Garder',
+                  texte: context.t.garder,
                   couleur: _enregistre ? LiveColors.ambre : LiveColors.surface,
                   actif: _enregistre,
                   onTap: () => setState(() => _enregistre = !_enregistre),
@@ -145,7 +145,7 @@ class _PageVideoState extends State<_PageVideo> with TickerProviderStateMixin {
                 ),
                 _Action(
                   icone: Icons.more_horiz_rounded,
-                  texte: 'Plus',
+                  texte: context.t.plus,
                   onTap: () => optionsPublication(context, p.auteur),
                 ),
                 const SizedBox(height: 4),
@@ -306,7 +306,7 @@ class _Auteur extends StatelessWidget {
             bottom: 0,
             child: Semantics(
               button: true,
-              label: suivi ? 'Abonné' : 'Suivre ${pub.auteur}',
+              label: suivi ? context.t.abonne : context.t.suivreQui(pub.auteur),
               excludeSemantics: true,
               child: GestureDetector(
                 onTap: onSuivre,

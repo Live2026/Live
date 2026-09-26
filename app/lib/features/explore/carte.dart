@@ -82,7 +82,7 @@ class _EcranCarteState extends State<EcranCarte> {
                   children: [
                     BoutonVerre(
                       icone: Icons.arrow_back_rounded,
-                      libelle: 'Retour',
+                      libelle: context.t.retour,
                       onTap: () => context.pop(),
                     ),
                     const SizedBox(width: 8),
@@ -98,9 +98,9 @@ class _EcranCarteState extends State<EcranCarte> {
                         ),
                         child: Row(
                           children: [
-                            for (final (i, t) in const [
-                              'Logements',
-                              'Prestataires',
+                            for (final (i, t) in [
+                              context.t.logements,
+                              context.t.prestataires,
                             ].indexed)
                               Expanded(
                                 child: Semantics(
@@ -169,11 +169,13 @@ class _EcranCarteState extends State<EcranCarte> {
                             couleur: biens[i].couleur,
                             icone: biens[i].type.icone,
                             titre: biens[i].titre,
-                            detail:
-                                '${biens[i].quartier} · ${biens[i].chambres} ch.',
+                            detail: context.t.quartierChambres(
+                              biens[i].quartier,
+                              biens[i].chambres,
+                            ),
                             prix: biens[i].vente
                                 ? fcfaCourt(biens[i].loyer)
-                                : '${fcfa(biens[i].loyer)} / mois',
+                                : context.t.parMois(fcfa(biens[i].loyer)),
                             route: '/bien/${biens[i].id}',
                           )
                         : _FicheCarte(
@@ -182,7 +184,9 @@ class _EcranCarteState extends State<EcranCarte> {
                             titre: prestataires[i].nom,
                             detail:
                                 '${prestataires[i].metier} · ${note(prestataires[i].note)}',
-                            prix: 'Dès ${fcfa(prestataires[i].prixDepuis)}',
+                            prix: context.t.desPrix(
+                              fcfa(prestataires[i].prixDepuis),
+                            ),
                             route: '/pro/${prestataires[i].id}',
                           ),
                   ),

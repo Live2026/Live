@@ -8,6 +8,7 @@ import '../../data/mock.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'page_video.dart';
 part 'commentaires.dart';
@@ -50,10 +51,10 @@ class _EcranFilState extends State<EcranFil> {
                 fit: BoxFit.scaleDown,
                 child: Row(
                   children: [
-                    for (final (i, t) in const [
-                      'Abonnements',
-                      'Pour toi',
-                      'Près de moi',
+                    for (final (i, t) in [
+                      context.t.ongletAbonnements,
+                      context.t.pourToi,
+                      context.t.presDeMoi,
                     ].indexed)
                       TextButton(
                         onPressed: () => setState(() {
@@ -93,7 +94,7 @@ class _EcranFilState extends State<EcranFil> {
           child: SafeArea(
             child: Semantics(
               button: true,
-              label: 'Voir les directs en cours',
+              label: context.t.voirDirects,
               excludeSemantics: true,
               child: Pressable(
                 onTap: () => context.push('/directs'),
@@ -139,7 +140,7 @@ class _PanneauAnnonce extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (titre, prix, action, route, extra) = annonceDe(pub);
+    final (titre, prix, action, route, extra) = annonceDe(context.t, pub);
     return ListView(
       padding: const EdgeInsets.all(24),
       children: [
@@ -158,7 +159,7 @@ class _PanneauAnnonce extends StatelessWidget {
         FilledButton(onPressed: () => context.push(route), child: Text(action)),
         const Divider(height: 32),
         Text(
-          '${pub.commentaires} commentaires',
+          context.t.nCommentaires(pub.commentaires),
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -169,34 +170,34 @@ class _PanneauAnnonce extends StatelessWidget {
 }
 
 /// Titre, prix, action, route et information complémentaire de l'annonce liée.
-(String, String, String, String, String?) annonceDe(Publication p) {
+(String, String, String, String, String?) annonceDe(Textes t, Publication p) {
   switch (p.verticale) {
     case Verticale.market:
       final pr = produitParId(p.cibleId);
       return (
         pr.titre,
         fcfa(pr.prix),
-        'Acheter',
+        t.acheter,
         '/produit/${pr.id}',
-        pr.livraison > 0 ? 'Livraison possible' : null,
+        pr.livraison > 0 ? t.livraisonPossible : null,
       );
     case Verticale.immo:
       final b = bienParId(p.cibleId);
       return (
         '${b.titre} · ${b.quartier}',
-        '${fcfa(b.loyer, devise: false)}/mois',
-        'Visiter',
+        t.parMois(fcfa(b.loyer, devise: false)),
+        t.visiter,
         '/bien/${b.id}',
-        "Coût d'entrée : ${fcfa(b.coutEntree)}",
+        t.coutEntree(fcfa(b.coutEntree)),
       );
     case Verticale.services:
       final s = prestataireParId(p.cibleId);
       return (
         '${s.nom} · ${s.metier}',
         note(s.note),
-        'Réserver',
+        t.reserver,
         '/pro/${s.id}',
-        'Devis gratuit',
+        t.devisGratuit,
       );
   }
 }

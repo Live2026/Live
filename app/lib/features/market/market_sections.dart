@@ -18,24 +18,24 @@ class _CarrouselUneState extends State<_CarrouselUne> {
   Timer? _minuteur;
   var _page = 0;
 
-  static const _slides = [
+  late final _slides = [
     (
-      '0 % de commission',
-      'Vendez pendant 3 mois sans rien payer.',
+      context.t.n0DeCommission,
+      context.t.vendezPendant3MoisSans,
       Icons.sell_rounded,
       '/vendre',
       [LiveColors.bleu, LiveColors.nuit],
     ),
     (
-      'Payé seulement à la réception',
-      'Votre argent reste bloqué par Live jusqu’au QR de remise.',
+      context.t.payeSeulementALaReception,
+      context.t.votreArgentResteBloquePar,
       Icons.verified_user_rounded,
       '/paiements',
       [Color(0xFF1E7B4F), Color(0xFF0B3B26)],
     ),
     (
-      'Boutiques vérifiées',
-      'Identité et activité contrôlées par Live.',
+      context.t.boutiquesVerifiees,
+      context.t.identiteEtActiviteControleesPar,
       Icons.storefront_rounded,
       '/boutique/grace',
       [Color(0xFFC27A25), Color(0xFF6B3A0A)],
@@ -127,8 +127,8 @@ class _CarrouselUneState extends State<_CarrouselUne> {
                                     color: LiveColors.orangeVif,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: const Text(
-                                    'Découvrir',
+                                  child: Text(
+                                    context.t.decouvrir,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w700,
@@ -202,7 +202,9 @@ class _CarteVendeurUne extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),
               Text(
-                v.badge.startsWith('Pro') ? 'Boutique' : 'Particulier',
+                v.badge.startsWith('Pro')
+                    ? context.t.boutique
+                    : context.t.particulier,
                 style: const TextStyle(color: LiveColors.gris, fontSize: 12),
               ),
               const Spacer(),
@@ -251,7 +253,7 @@ class _TitreBloc extends StatelessWidget {
           TextButton(
             style: TextButton.styleFrom(minimumSize: const Size(0, 32)),
             onPressed: () => context.push(route!),
-            child: const Text('Voir tout'),
+            child: Text(context.t.voirTout),
           ),
       ],
     );
@@ -270,7 +272,7 @@ class _VosCommandes extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _TitreBloc('Vos commandes', route: '/commandes'),
+          _TitreBloc(context.t.vosCommandes, route: '/commandes'),
           for (final c in achats.take(3)) LigneCommande(commande: c),
         ],
       ),
@@ -288,11 +290,11 @@ class LigneCommande extends StatelessWidget {
     final c = commande;
     final (etat, couleur) = switch (c.statut) {
       StatutCommande.reservee => (
-        'Réservée · à payer à la remise',
+        context.t.reserveeAPayerALa,
         LiveColors.cuivre,
       ),
-      StatutCommande.terminee => ('Terminée', LiveColors.succes),
-      _ => ('Payée · argent bloqué par Live', LiveColors.bleu),
+      StatutCommande.terminee => (context.t.terminee, LiveColors.succes),
+      _ => (context.t.payeeArgentBloqueParLive, LiveColors.bleu),
     };
     return InkWell(
       onTap: () => context.push('/suivi/${c.id}'),
@@ -315,7 +317,7 @@ class LigneCommande extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Commande ${c.id}',
+                    context.t.commandeNumero(c.id),
                     style: const TextStyle(
                       color: LiveColors.gris,
                       fontSize: 12,
@@ -358,15 +360,12 @@ class _VendreSurLive extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _TitreBloc('Vendre sur Live'),
-          for (final (icone, texte) in const [
-            (
-              Icons.groups_rounded,
-              'Des milliers d’acheteurs près de chez vous',
-            ),
-            (Icons.percent_rounded, '0 % de commission pendant 3 mois'),
-            (Icons.lock_rounded, 'Paiement garanti avant la remise'),
-            (Icons.qr_code_2_rounded, 'Remise confirmée par QR'),
+          _TitreBloc(context.t.vendreSurLive),
+          for (final (icone, texte) in [
+            (Icons.groups_rounded, context.t.desMilliersDAcheteursPres),
+            (Icons.percent_rounded, context.t.n0DeCommissionPendant3),
+            (Icons.lock_rounded, context.t.paiementGarantiAvantLaRemise),
+            (Icons.qr_code_2_rounded, context.t.remiseConfirmeeParQr),
           ])
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 3),
@@ -383,7 +382,7 @@ class _VendreSurLive extends StatelessWidget {
             width: double.infinity,
             child: FilledButton(
               onPressed: () => context.push('/vendre'),
-              child: const Text('Vendre un produit'),
+              child: Text(context.t.vendreUnProduit),
             ),
           ),
         ],
@@ -403,14 +402,14 @@ class _PaiementsSecurises extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _TitreBloc('Paiements sécurisés', route: '/paiements'),
+          _TitreBloc(context.t.paiementsSecurises, route: '/paiements'),
           Row(
             children: [
-              for (final (icone, texte) in const [
-                (Icons.account_balance_wallet_rounded, 'Solde Live'),
+              for (final (icone, texte) in [
+                (Icons.account_balance_wallet_rounded, context.t.soldeLive),
                 (Icons.phone_android_rounded, 'MoMo · Airtel'),
                 (Icons.credit_card_rounded, 'Visa'),
-                (Icons.handshake_rounded, 'À la remise'),
+                (Icons.handshake_rounded, context.t.aLaRemise),
               ])
                 Expanded(
                   child: Column(
@@ -437,9 +436,7 @@ class _PaiementsSecurises extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          const BandeauProtection(
-            'Remboursé si vous ne recevez pas le produit.',
-          ),
+          BandeauProtection(context.t.rembourseSiVousNeRecevez),
         ],
       ),
     );
@@ -457,23 +454,23 @@ class _BesoinAide extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _TitreBloc('Besoin d’aide ?'),
+          _TitreBloc(context.t.besoinDAide),
           LigneMenu(
             icone: Icons.payments_outlined,
-            titre: 'Ce qui se paie dans Live',
-            detail: 'Dans Live, à la remise ou en direct',
+            titre: context.t.ceQuiSePaieDans,
+            detail: context.t.dansLiveALaRemise,
             onTap: () => context.push('/paiements'),
           ),
           LigneMenu(
             icone: Icons.report_problem_outlined,
-            titre: 'Signaler un problème',
-            detail: 'Produit non reçu, non conforme',
+            titre: context.t.signalerUnProbleme,
+            detail: context.t.produitNonRecuNonConforme,
             onTap: () => context.push('/probleme/commande/LV-00482'),
           ),
           LigneMenu(
             icone: Icons.support_agent_rounded,
-            titre: 'Centre d’aide',
-            detail: 'Questions fréquentes, écrire au support',
+            titre: context.t.centreDAide,
+            detail: context.t.questionsFrequentesEcrireAuSupport,
             onTap: () => context.push('/aide'),
           ),
         ],

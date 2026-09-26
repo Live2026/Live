@@ -48,13 +48,13 @@ class _FeuilleCommentairesState extends State<_FeuilleCommentaires> {
             children: [
               Expanded(
                 child: Text(
-                  '${widget.pub.commentaires} commentaires',
+                  context.t.nCommentaires(widget.pub.commentaires),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontWeight: FontWeight.w800),
                 ),
               ),
               IconButton(
-                tooltip: 'Fermer',
+                tooltip: context.t.fermer,
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(Icons.close_rounded),
               ),
@@ -90,14 +90,14 @@ class _FeuilleCommentairesState extends State<_FeuilleCommentaires> {
                 Expanded(
                   child: TextField(
                     controller: _saisie,
-                    decoration: const InputDecoration(
-                      hintText: 'Ajouter un commentaire…',
+                    decoration: InputDecoration(
+                      hintText: context.t.ajouterCommentaire,
                     ),
                     onSubmitted: (_) => _publier(),
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Publier',
+                  tooltip: context.t.publier,
                   onPressed: _publier,
                   icon: const Icon(Icons.send_rounded, color: LiveColors.bleu),
                 ),
@@ -165,8 +165,8 @@ class _LigneCommentaireState extends State<LigneCommentaire> {
                     ),
                     if (c.vendeur) ...[
                       const SizedBox(width: 6),
-                      const Etiquette(
-                        'Vendeur',
+                      Etiquette(
+                        context.t.vendeur,
                         fond: LiveColors.voile,
                         couleur: LiveColors.bleu,
                       ),
@@ -175,7 +175,7 @@ class _LigneCommentaireState extends State<LigneCommentaire> {
                 ),
                 Text(c.texte),
                 Text(
-                  '${c.quand} · Répondre',
+                  context.t.repondreQuand(c.quand),
                   style: const TextStyle(fontSize: 12, color: LiveColors.gris),
                 ),
               ],
@@ -183,7 +183,7 @@ class _LigneCommentaireState extends State<LigneCommentaire> {
           ),
           Semantics(
             button: true,
-            label: 'J’aime ce commentaire',
+            label: context.t.aimeCommentaire,
             excludeSemantics: true,
             child: GestureDetector(
               onTap: () => setState(() => _aime = !_aime),

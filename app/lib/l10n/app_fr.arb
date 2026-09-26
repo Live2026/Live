@@ -284,5 +284,268 @@
       }
     }
   },
-  "protegeParLive": "Protégé par Live. "
+  "protegeParLive": "Protégé par Live. ",
+  "nCommentaires": "{n} commentaires",
+  "@nCommentaires": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "fermer": "Fermer",
+  "ajouterCommentaire": "Ajouter un commentaire…",
+  "publier": "Publier",
+  "vendeur": "Vendeur",
+  "repondreQuand": "{quand} · Répondre",
+  "@repondreQuand": {
+    "placeholders": {
+      "quand": {
+        "type": "String"
+      }
+    }
+  },
+  "aimeCommentaire": "J’aime ce commentaire",
+  "ongletAbonnements": "Abonnements",
+  "pourToi": "Pour toi",
+  "presDeMoi": "Près de moi",
+  "voirDirects": "Voir les directs en cours",
+  "acheter": "Acheter",
+  "livraisonPossible": "Livraison possible",
+  "parMois": "{prix}/mois",
+  "@parMois": {
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "visiter": "Visiter",
+  "coutEntree": "Coût d’entrée : {montant}",
+  "@coutEntree": {
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "reserver": "Réserver",
+  "devisGratuit": "Devis gratuit",
+  "garder": "Garder",
+  "plus": "Plus",
+  "abonne": "Abonné",
+  "suivreQui": "Suivre {qui}",
+  "@suivreQui": {
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "acheterEtVendre": "Acheter et vendre",
+  "louerAcheter": "Louer, acheter",
+  "sejours": "Séjours",
+  "aLaNuitMeuble": "À la nuit, meublé",
+  "services": "Services",
+  "trouverUnPro": "Trouver un pro",
+  "directs": "Directs",
+  "acheterEnDirect": "Acheter en direct",
+  "cvExercicesBusinessPlan": "CV, exercices, business plan",
+  "savoir": "Savoir",
+  "coursPdfVideos": "Cours, PDF, vidéos",
+  "emploi": "Emploi",
+  "boursesStagesEmplois": "Bourses, stages, emplois",
+  "monArgent": "Mon argent",
+  "soldeSequestreHistorique": "Solde, séquestre, historique",
+  "tontines": "Tontines",
+  "cotiserEtRecevoirSansRetard": "Cotiser et recevoir, sans retard",
+  "facturesEtCredit": "Factures et crédit",
+  "electriciteEauTeleRecharge": "Électricité, eau, télé, recharge",
+  "diaspora": "Diaspora",
+  "payerPourUnProcheEnvoyer": "Payer pour un proche, envoyer",
+  "envoyerRecevoirToutesDevises": "Envoyer, recevoir, toutes devises",
+  "achatsGroupes": "Achats groupés",
+  "aPlusieursPrixDeGros": "À plusieurs, prix de gros",
+  "adresseLive": "Adresse Live",
+  "votreAdresseEnUnCode": "Votre adresse en un code",
+  "pointsRelais": "Points relais",
+  "colisEspecesEnMomo": "Colis, espèces en MoMo",
+  "groupesEtCanaux": "Groupes et canaux",
+  "quartierClassePassion": "Quartier, classe, passion",
+  "coursesAMoto": "Courses à moto",
+  "studioCreateur": "Studio créateur",
+  "cadeauxFansStatistiques": "Cadeaux, fans, statistiques",
+  "creditsIaChaqueMois": "Crédits IA chaque mois",
+  "publicite": "Publicité",
+  "videoSponsorisee": "Vidéo sponsorisée",
+  "offresPro": "Offres Pro",
+  "vendeurAgencePro": "Vendeur, agence, pro",
+  "servicesFinanciers": "Services financiers",
+  "n3FoisEpargneCredit": "3 fois, épargne, crédit",
+  "fondsCreateurs": "Fonds Créateurs",
+  "financeParLaPublicite": "Financé par la publicité",
+  "rechercherSurLive": "Rechercher sur Live…",
+  "argentEtQuotidien": "Argent et quotidien",
+  "enDirectMaintenant": "En direct maintenant",
+  "bonnesAffairesPresDeVous": "Bonnes affaires près de vous",
+  "nouveauxLogementsVerifies": "Nouveaux logements vérifiés",
+  "pourQuelquesNuits": "Pour quelques nuits",
+  "prosDisponiblesAujourdHui": "Pros disponibles aujourd'hui",
+  "apprendreAvecLiveSavoir": "Apprendre avec Live Savoir",
+  "opportunitesASaisir": "Opportunités à saisir",
+  "outilsEtServicesLive": "Outils et services Live",
+  "retour": "Retour",
+  "logements": "Logements",
+  "prestataires": "Prestataires",
+  "quartierChambres": "{quartier} · {n} ch.",
+  "@quartierChambres": {
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "desPrix": "Dès {prix}",
+  "@desPrix": {
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "exClimatiseurStudioPlombier": "Ex. climatiseur, studio, plombier…",
+  "effacer": "Effacer",
+  "recherchesRecentes": "Recherches récentes",
+  "tendancesPresDeChezVous": "Tendances près de chez vous",
+  "parcourir": "Parcourir",
+  "tout": "Tout",
+  "produits": "Produits",
+  "pros": "Pros",
+  "professionnels": "Professionnels",
+  "creerUneAlerte": "Créer une alerte",
+  "mesAlertes": "Mes alertes",
+  "n2NouveauxResultatsAujourdHui": "2 nouveaux résultats aujourd’hui",
+  "aucunNouveauResultat": "Aucun nouveau résultat",
+  "nouvelleAlerte": "Nouvelle alerte",
+  "vueRueGlissezPourRegarder": "Vue rue · glissez pour regarder autour",
+  "avancerDansLaRue": "Avancer dans la rue",
+  "boussoleCap": "Boussole, cap {n} degrés",
+  "@boussoleCap": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "resultatsPour": "Résultats pour ",
+  "aucunResultatPourPoint": ". Aucun résultat pour « {q} ».",
+  "@aucunResultatPourPoint": {
+    "placeholders": {
+      "q": {
+        "type": "String"
+      }
+    }
+  },
+  "aucunResultatAlerte": "Aucun résultat pour « {q} ». Créez une alerte : nous vous prévenons dès qu’une annonce arrive.",
+  "@aucunResultatAlerte": {
+    "placeholders": {
+      "q": {
+        "type": "String"
+      }
+    }
+  },
+  "creerAlerteQ": "Créer une alerte « {q} »",
+  "@creerAlerteQ": {
+    "placeholders": {
+      "q": {
+        "type": "String"
+      }
+    }
+  },
+  "alertesIntro": "Live vous prévient dès qu’une annonce correspond. Plus besoin de chercher tous les jours.",
+  "paiementProtege": "Paiement protégé",
+  "rechercherUnProduitUneBoutique": "Rechercher un produit, une boutique…",
+  "categoriesPopulaires": "Catégories populaires",
+  "recommandePourVous": "Recommandé pour vous",
+  "vendeursALaUne": "Vendeurs à la une",
+  "nouveautesPresDeVous": "Nouveautés près de vous",
+  "pertinence": "Pertinence",
+  "nouveautes": "Nouveautés",
+  "prixCroissant": "Prix croissant",
+  "prixDecroissant": "Prix décroissant",
+  "toutesLesAnnonces": "Toutes les annonces",
+  "rechercherDansLeMarket": "Rechercher dans le Market…",
+  "aucuneAnnonceDansCetteCategorie": "Aucune annonce dans cette catégorie pour l’instant.",
+  "mesCommandes": "Mes commandes",
+  "aucuneCommandePourLInstant": "Aucune commande pour l’instant.",
+  "decouvrirLeMarket": "Découvrir le Market",
+  "nResultatsA": "{n, plural, =1{1 résultat} other{{n} résultats}} à {ville}",
+  "@nResultatsA": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "ville": {
+        "type": "String"
+      }
+    }
+  },
+  "etatPayeRemise": "{etat} · payé à la remise",
+  "@etatPayeRemise": {
+    "placeholders": {
+      "etat": {
+        "type": "String"
+      }
+    }
+  },
+  "parQui": "Par {qui}",
+  "@parQui": {
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "n0DeCommission": "0 % de commission",
+  "vendezPendant3MoisSans": "Vendez pendant 3 mois sans rien payer.",
+  "payeSeulementALaReception": "Payé seulement à la réception",
+  "votreArgentResteBloquePar": "Votre argent reste bloqué par Live jusqu’au QR de remise.",
+  "boutiquesVerifiees": "Boutiques vérifiées",
+  "identiteEtActiviteControleesPar": "Identité et activité contrôlées par Live.",
+  "decouvrir": "Découvrir",
+  "boutique": "Boutique",
+  "particulier": "Particulier",
+  "voirTout": "Voir tout",
+  "vosCommandes": "Vos commandes",
+  "reserveeAPayerALa": "Réservée · à payer à la remise",
+  "terminee": "Terminée",
+  "payeeArgentBloqueParLive": "Payée · argent bloqué par Live",
+  "vendreSurLive": "Vendre sur Live",
+  "desMilliersDAcheteursPres": "Des milliers d’acheteurs près de chez vous",
+  "n0DeCommissionPendant3": "0 % de commission pendant 3 mois",
+  "paiementGarantiAvantLaRemise": "Paiement garanti avant la remise",
+  "remiseConfirmeeParQr": "Remise confirmée par QR",
+  "vendreUnProduit": "Vendre un produit",
+  "paiementsSecurises": "Paiements sécurisés",
+  "soldeLive": "Solde Live",
+  "aLaRemise": "À la remise",
+  "rembourseSiVousNeRecevez": "Remboursé si vous ne recevez pas le produit.",
+  "besoinDAide": "Besoin d’aide ?",
+  "ceQuiSePaieDans": "Ce qui se paie dans Live",
+  "dansLiveALaRemise": "Dans Live, à la remise ou en direct",
+  "signalerUnProbleme": "Signaler un problème",
+  "produitNonRecuNonConforme": "Produit non reçu, non conforme",
+  "centreDAide": "Centre d’aide",
+  "questionsFrequentesEcrireAuSupport": "Questions fréquentes, écrire au support",
+  "commandeNumero": "Commande {id}",
+  "@commandeNumero": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  }
 }

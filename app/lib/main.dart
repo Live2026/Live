@@ -81,14 +81,16 @@ class _LiveAppState extends ConsumerState<LiveApp> with WidgetsBindingObserver {
             Brightness.dark,
     };
     LiveColors.sombre = sombre;
+    final affichee = languesTraduites.contains(langue) ? langue : 'fr';
     return MaterialApp.router(
-      key: ValueKey(sombre),
+      // Changer d'apparence ou de langue reconstruit toute l'application.
+      key: ValueKey('$sombre-$affichee'),
       title: 'Live — prototype',
       debugShowCheckedModeBanner: false,
       theme: liveTheme(sombre: sombre),
       // Langue choisie au démarrage ; français si elle n'est pas encore
       // traduite.
-      locale: Locale(languesTraduites.contains(langue) ? langue : 'fr'),
+      locale: Locale(affichee),
       supportedLocales: Textes.supportedLocales,
       localizationsDelegates: const [
         Textes.delegate,
