@@ -15,16 +15,14 @@ class _Recevoir extends ConsumerWidget {
       children: [
         _Banniere(
           icone: Icons.public_rounded,
-          titre: 'Recevez du monde entier',
-          texte:
-              'Vos proches envoient en euros, dollars, livres ou yuans ; vous '
-              'recevez en francs CFA, sans frais de retrait.',
+          titre: context.t.piliersRecevezDuMondeEntier,
+          texte: context.t.piliersVosProchesEnvoientEn,
           couleurs: const [Color(0xFF15803D), LiveColors.nuit],
           enfant: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Votre numéro de réception',
+              Text(
+                context.t.piliersVotreNumeroDeReception,
                 style: TextStyle(color: Colors.white70),
               ),
               Text(
@@ -44,16 +42,17 @@ class _Recevoir extends ConsumerWidget {
                 ),
                 onPressed: () => partager(
                   context,
-                  'Envoie-moi de l’argent avec Live Transfert, dans ta '
-                  'devise : live.africa/recevoir/${etat.telephone.replaceAll(' ', '')}',
+                  context.t.piliersLienReception(
+                    'live.africa/recevoir/${etat.telephone.replaceAll(' ', '')}',
+                  ),
                 ),
                 icon: const Icon(Icons.share_rounded),
-                label: const Text('Partager mon lien de réception'),
+                label: Text(context.t.piliersPartagerMonLienDe),
               ),
             ],
           ),
         ),
-        const EnTeteSection('Devises acceptées'),
+        EnTeteSection(context.t.piliersDevisesAcceptees),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -66,7 +65,7 @@ class _Recevoir extends ConsumerWidget {
               ),
           ],
         ),
-        const EnTeteSection('Transferts reçus'),
+        EnTeteSection(context.t.piliersTransfertsRecus),
         for (final t in transfertsRecus)
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
@@ -106,7 +105,10 @@ class _CarteRecu extends ConsumerWidget {
                       style: const TextStyle(fontWeight: FontWeight.w800),
                     ),
                     Text(
-                      '${d.ecrire(recu.montant)} envoyés · ${recu.quand}',
+                      context.t.piliersEnvoyesQuand(
+                        d.ecrire(recu.montant),
+                        recu.quand,
+                      ),
                       style: const TextStyle(color: LiveColors.gris),
                     ),
                   ],
@@ -126,7 +128,7 @@ class _CarteRecu extends ConsumerWidget {
           const SizedBox(height: 8),
           if (retire)
             Etiquette(
-              'Versé sur votre compte $compte',
+              context.t.piliersVerseSurCompte(compte),
               icone: Icons.check_circle_rounded,
               fond: LiveColors.teinteVerte,
               couleur: LiveColors.succes,
@@ -137,8 +139,8 @@ class _CarteRecu extends ConsumerWidget {
               runSpacing: 8,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                const Etiquette(
-                  'Sur votre solde Live',
+                Etiquette(
+                  context.t.piliersSurVotreSoldeLive,
                   icone: Icons.account_balance_wallet_rounded,
                   fond: LiveColors.teinteAmbre,
                   couleur: LiveColors.cuivre,
@@ -149,12 +151,11 @@ class _CarteRecu extends ConsumerWidget {
                     ref.read(liveProvider.notifier).retirerTransfert(recu.id);
                     informer(
                       context,
-                      '${fcfa(recu.fcfa)} versés sur votre compte '
-                      '$compte, sans frais.',
+                      context.t.piliersVersesSansFrais(fcfa(recu.fcfa), compte),
                     );
                   },
                   icon: const Icon(Icons.south_rounded),
-                  label: Text('Retirer en $compte'),
+                  label: Text(context.t.piliersRetirerEn(compte)),
                 ),
               ],
             ),

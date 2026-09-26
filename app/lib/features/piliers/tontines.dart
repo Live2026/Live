@@ -10,17 +10,14 @@ class EcranTontines extends ConsumerWidget {
     final payees = ref.watch(liveProvider.select((e) => e.cotisations));
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Tontines')),
+      appBar: AppBar(title: Text(context.t.piliersTontines)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
           _Banniere(
             icone: Icons.diversity_3_rounded,
-            titre: 'La tontine, sans cahier ni retard',
-            texte:
-                'Chacun cotise en Mobile Money, Live garde l’argent et verse la '
-                'cagnotte au bénéficiaire le jour du tour. Tout est inscrit, '
-                'personne ne peut partir avec la caisse.',
+            titre: context.t.piliersLaTontineSansCahier,
+            texte: context.t.piliersChacunCotiseEnMobile,
             couleurs: const [Color(0xFFDB2777), Color(0xFF7C3AED)],
             enfant: FilledButton.icon(
               style: FilledButton.styleFrom(
@@ -30,10 +27,10 @@ class EcranTontines extends ConsumerWidget {
               ),
               onPressed: () => _creer(context),
               icon: const Icon(Icons.add_rounded),
-              label: const Text('Créer une tontine'),
+              label: Text(context.t.piliersCreerUneTontine),
             ),
           ),
-          const EnTeteSection('Mes tontines'),
+          EnTeteSection(context.t.piliersMesTontines),
           GrilleAdaptative(
             largeurMax: 460,
             espacement: 12,
@@ -48,27 +45,27 @@ class EcranTontines extends ConsumerWidget {
                 ),
             ],
           ),
-          const EnTeteSection('Comment ça marche'),
-          for (final (icone, titre, texte) in const [
+          EnTeteSection(context.t.piliersCommentCaMarche),
+          for (final (icone, titre, texte) in [
             (
               Icons.event_repeat_rounded,
-              'Même somme, même jour',
-              'Rappel la veille ; cotisation en un geste avec votre code MoMo.',
+              context.t.piliersMemeSommeMemeJour,
+              context.t.piliersRappelLaVeilleCotisation,
             ),
             (
               Icons.lock_rounded,
-              'Argent gardé par Live',
-              'Les cotisations sont bloquées jusqu’au versement : personne n’y touche.',
+              context.t.piliersArgentGardeParLive,
+              context.t.piliersLesCotisationsSontBloquees,
             ),
             (
               Icons.shuffle_rounded,
-              'Ordre des tours clair',
-              'Tirage au sort filmé dans l’application ou ordre choisi ensemble.',
+              context.t.piliersOrdreDesToursClair,
+              context.t.piliersTirageAuSortFilme,
             ),
             (
               Icons.gavel_rounded,
-              'Retards encadrés',
-              'Rappels, puis pénalité votée par le groupe ; exclusion à la majorité.',
+              context.t.piliersRetardsEncadres,
+              context.t.piliersRappelsPuisPenaliteVotee,
             ),
           ])
             LigneMenu(icone: icone, titre: titre, detail: texte),
@@ -76,7 +73,7 @@ class EcranTontines extends ConsumerWidget {
           OutlinedButton.icon(
             onPressed: () => context.push('/achats-groupes'),
             icon: const Icon(Icons.groups_2_rounded),
-            label: const Text('Voir aussi les achats groupés'),
+            label: Text(context.t.piliersVoirAussiLesAchats),
           ),
         ],
       ),
@@ -103,17 +100,19 @@ class EcranTontines extends ConsumerWidget {
               16 + MediaQuery.viewInsetsOf(ctx).bottom,
             ),
             children: [
-              const Text(
-                'Nouvelle tontine',
+              Text(
+                context.t.piliersNouvelleTontine,
                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 12),
-              const TextField(
-                decoration: InputDecoration(labelText: 'Nom du groupe'),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: context.t.piliersNomDuGroupe,
+                ),
               ),
               const SizedBox(height: 14),
               Text(
-                'Cotisation : ${fcfa(montant.round())}',
+                context.t.piliersCotisationMontant(fcfa(montant.round())),
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),
               Slider(
@@ -125,17 +124,25 @@ class EcranTontines extends ConsumerWidget {
                     maj(() => montant = (v / 1000).round() * 1000),
               ),
               SegmentedButton<bool>(
-                segments: const [
-                  ButtonSegment(value: true, label: Text('Chaque semaine')),
-                  ButtonSegment(value: false, label: Text('Chaque mois')),
+                segments: [
+                  ButtonSegment(
+                    value: true,
+                    label: Text(context.t.piliersChaqueSemaine),
+                  ),
+                  ButtonSegment(
+                    value: false,
+                    label: Text(context.t.piliersChaqueMois),
+                  ),
                 ],
                 selected: {semaine},
                 onSelectionChanged: (v) => maj(() => semaine = v.first),
               ),
               const SizedBox(height: 14),
               Text(
-                '${membres.round()} membres · cagnotte de '
-                '${fcfa((montant * membres).round())} par tour',
+                context.t.piliersMembresCagnotte(
+                  membres.round(),
+                  fcfa((montant * membres).round()),
+                ),
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),
               Slider(
@@ -149,17 +156,13 @@ class EcranTontines extends ConsumerWidget {
               FilledButton(
                 onPressed: () {
                   Navigator.pop(ctx);
-                  informer(
-                    context,
-                    'Tontine créée : invitez vos membres par lien WhatsApp.',
-                  );
+                  informer(context, context.t.piliersTontineCreeeInvitezVos);
                 },
-                child: const Text('Créer et inviter'),
+                child: Text(context.t.piliersCreerEtInviter),
               ),
               const SizedBox(height: 6),
-              const Text(
-                'Frais Live : 1 % de chaque cagnotte versée. Aucun frais '
-                'pour cotiser.',
+              Text(
+                context.t.piliersFraisLive1De,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
               ),
@@ -224,13 +227,19 @@ class _CarteTontine extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              '$ont / ${t.membres.length} ont cotisé · tour de '
-              '${monTour ? 'vous' : t.beneficiaire} · ${t.prochaine}',
+              context.t.piliersOntCotise(
+                ont,
+                t.membres.length,
+                monTour ? context.t.piliersVous : t.beneficiaire,
+                t.prochaine,
+              ),
               style: const TextStyle(fontSize: 12.5, color: LiveColors.gris),
             ),
             const SizedBox(height: 8),
             Etiquette(
-              payee ? 'Cotisation payée' : 'À cotiser : ${fcfa(t.montant)}',
+              payee
+                  ? context.t.piliersCotisationPayee
+                  : context.t.piliersACotiser(fcfa(t.montant)),
               icone: payee
                   ? Icons.check_circle_rounded
                   : Icons.schedule_rounded,

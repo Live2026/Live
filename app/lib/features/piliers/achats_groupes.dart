@@ -10,17 +10,14 @@ class EcranAchatsGroupes extends ConsumerWidget {
     final rejoints = ref.watch(liveProvider.select((e) => e.groupes));
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Achats groupés')),
+      appBar: AppBar(title: Text(context.t.piliersAchatsGroupes)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
-          const _Banniere(
+          _Banniere(
             icone: Icons.groups_2_rounded,
-            titre: 'Ensemble, au prix de gros',
-            texte:
-                'Rejoignez un achat avec votre quartier. Quand l’objectif est '
-                'atteint, le grossiste livre au point relais ; sinon vous êtes '
-                'remboursé automatiquement.',
+            titre: context.t.piliersEnsembleAuPrixDe,
+            texte: context.t.piliersRejoignezUnAchatAvec,
             couleurs: [Color(0xFFB45309), Color(0xFFDB2777)],
           ),
           const SizedBox(height: 16),
@@ -39,7 +36,7 @@ class EcranAchatsGroupes extends ConsumerWidget {
                       ref,
                       TypePaiement.achatGroupe,
                       a.prixGroupe,
-                      'Achat groupé · ${a.titre}',
+                      context.t.piliersAchatGroupeDe(a.titre),
                       a.id,
                       beneficiaire: a.vendeur,
                     ),
@@ -141,13 +138,13 @@ class _CarteGroupe extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            '$inscrits / ${a.objectif} participants · ${a.fin}',
+            context.t.piliersParticipants(inscrits, a.objectif, a.fin),
             style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
           const SizedBox(height: 10),
           if (rejoint)
-            const Etiquette(
-              'Vous participez · remboursé si l’objectif échoue',
+            Etiquette(
+              context.t.piliersVousParticipezRembourseSi,
               icone: Icons.check_circle_rounded,
               fond: LiveColors.teinteVerte,
               couleur: LiveColors.succes,
@@ -155,7 +152,9 @@ class _CarteGroupe extends StatelessWidget {
           else
             FilledButton(
               onPressed: onRejoindre,
-              child: Text('Rejoindre · ${fcfa(a.prixGroupe)}'),
+              child: Text(
+                context.t.piliersRejoindreMontant(fcfa(a.prixGroupe)),
+              ),
             ),
         ],
       ),

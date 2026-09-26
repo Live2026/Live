@@ -8455,5 +8455,848 @@
   "iaN18Sept": "18 sept.",
   "@iaN18Sept": {
     "description": "Écran : ia_assistant_donnees"
+  },
+  "@piliersCotisationMontant": {
+    "description": "Écran : tontines",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersCotisationMontant": "Cotisation : {montant}",
+  "@piliersMembresCagnotte": {
+    "description": "Écran : tontines",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersMembresCagnotte": "{n} membres · cagnotte de {montant} par tour",
+  "@piliersOntCotise": {
+    "description": "Écran : tontines",
+    "placeholders": {
+      "ont": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "qui": {
+        "type": "String"
+      },
+      "quand": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersOntCotise": "{ont} / {total} ont cotisé · tour de {qui} · {quand}",
+  "@piliersVous": {
+    "description": "Écran : tontines, tontine_detail"
+  },
+  "piliersVous": "vous",
+  "@piliersACotiser": {
+    "description": "Écran : tontines",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersACotiser": "À cotiser : {montant}",
+  "piliersTontines": "Tontines",
+  "@piliersTontines": {
+    "description": "Écran : tontines"
+  },
+  "piliersLaTontineSansCahier": "La tontine, sans cahier ni retard",
+  "@piliersLaTontineSansCahier": {
+    "description": "Écran : tontines"
+  },
+  "piliersChacunCotiseEnMobile": "Chacun cotise en Mobile Money, Live garde l’argent et verse la cagnotte au bénéficiaire le jour du tour. Tout est inscrit, personne ne peut partir avec la caisse.",
+  "@piliersChacunCotiseEnMobile": {
+    "description": "Écran : tontines"
+  },
+  "piliersCreerUneTontine": "Créer une tontine",
+  "@piliersCreerUneTontine": {
+    "description": "Écran : tontines"
+  },
+  "piliersMesTontines": "Mes tontines",
+  "@piliersMesTontines": {
+    "description": "Écran : tontines"
+  },
+  "piliersCommentCaMarche": "Comment ça marche",
+  "@piliersCommentCaMarche": {
+    "description": "Écran : tontines"
+  },
+  "piliersMemeSommeMemeJour": "Même somme, même jour",
+  "@piliersMemeSommeMemeJour": {
+    "description": "Écran : tontines"
+  },
+  "piliersRappelLaVeilleCotisation": "Rappel la veille ; cotisation en un geste avec votre code MoMo.",
+  "@piliersRappelLaVeilleCotisation": {
+    "description": "Écran : tontines"
+  },
+  "piliersArgentGardeParLive": "Argent gardé par Live",
+  "@piliersArgentGardeParLive": {
+    "description": "Écran : tontines"
+  },
+  "piliersLesCotisationsSontBloquees": "Les cotisations sont bloquées jusqu’au versement : personne n’y touche.",
+  "@piliersLesCotisationsSontBloquees": {
+    "description": "Écran : tontines"
+  },
+  "piliersOrdreDesToursClair": "Ordre des tours clair",
+  "@piliersOrdreDesToursClair": {
+    "description": "Écran : tontines"
+  },
+  "piliersTirageAuSortFilme": "Tirage au sort filmé dans l’application ou ordre choisi ensemble.",
+  "@piliersTirageAuSortFilme": {
+    "description": "Écran : tontines"
+  },
+  "piliersRetardsEncadres": "Retards encadrés",
+  "@piliersRetardsEncadres": {
+    "description": "Écran : tontines"
+  },
+  "piliersRappelsPuisPenaliteVotee": "Rappels, puis pénalité votée par le groupe ; exclusion à la majorité.",
+  "@piliersRappelsPuisPenaliteVotee": {
+    "description": "Écran : tontines"
+  },
+  "piliersVoirAussiLesAchats": "Voir aussi les achats groupés",
+  "@piliersVoirAussiLesAchats": {
+    "description": "Écran : tontines"
+  },
+  "piliersNouvelleTontine": "Nouvelle tontine",
+  "@piliersNouvelleTontine": {
+    "description": "Écran : tontines"
+  },
+  "piliersNomDuGroupe": "Nom du groupe",
+  "@piliersNomDuGroupe": {
+    "description": "Écran : tontines"
+  },
+  "piliersChaqueSemaine": "Chaque semaine",
+  "@piliersChaqueSemaine": {
+    "description": "Écran : tontines"
+  },
+  "piliersChaqueMois": "Chaque mois",
+  "@piliersChaqueMois": {
+    "description": "Écran : tontines"
+  },
+  "piliersTontineCreeeInvitezVos": "Tontine créée : invitez vos membres par lien WhatsApp.",
+  "@piliersTontineCreeeInvitezVos": {
+    "description": "Écran : tontines"
+  },
+  "piliersCreerEtInviter": "Créer et inviter",
+  "@piliersCreerEtInviter": {
+    "description": "Écran : tontines"
+  },
+  "piliersFraisLive1De": "Frais Live : 1 % de chaque cagnotte versée. Aucun frais pour cotiser.",
+  "@piliersFraisLive1De": {
+    "description": "Écran : tontines"
+  },
+  "piliersCotisationPayee": "Cotisation payée",
+  "@piliersCotisationPayee": {
+    "description": "Écran : tontines"
+  },
+  "@piliersRejoinsTontine": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      },
+      "lien": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersRejoinsTontine": "Rejoins la tontine « {nom} » sur Live : {lien}",
+  "@piliersCagnotteMontant": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersCagnotteMontant": "Cagnotte : {montant}",
+  "@piliersTourSur": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "qui": {
+        "type": "String"
+      },
+      "quand": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersTourSur": "Tour {n} sur {total} · pour {qui} · versée {quand} à 18 h.",
+  "@piliersCotisationsRecues": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "ont": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "piliersCotisationsRecues": "{ont} / {total} cotisations reçues",
+  "@piliersCotisationDe": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersCotisationDe": "Cotisation · {nom}",
+  "@piliersTontineNom": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersTontineNom": "Tontine {nom}",
+  "@piliersCotiserMontant": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersCotiserMontant": "Cotiser {montant}",
+  "@piliersNomVous": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersNomVous": "{nom} (vous)",
+  "@piliersTourN": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "piliersTourN": "Tour {n}",
+  "@piliersCagnotteVerseeA": {
+    "description": "Écran : tontine_detail",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      },
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersCagnotteVerseeA": "Cagnotte de {montant} versée à {qui}",
+  "piliersDiscussionDuGroupe": "Discussion du groupe",
+  "@piliersDiscussionDuGroupe": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersInviter": "Inviter",
+  "@piliersInviter": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersVotreCotisationDeCe": "Votre cotisation de ce tour est payée.",
+  "@piliersVotreCotisationDeCe": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersOrdreDesTours": "Ordre des tours",
+  "@piliersOrdreDesTours": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersARecuSaCagnotte": "A reçu sa cagnotte",
+  "@piliersARecuSaCagnotte": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersRecoitLaCagnotteCe": "Reçoit la cagnotte ce tour-ci",
+  "@piliersRecoitLaCagnotteCe": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersACotise": "A cotisé",
+  "@piliersACotise": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersPasEncoreCotise": "Pas encore cotisé",
+  "@piliersPasEncoreCotise": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersHistorique": "Historique",
+  "@piliersHistorique": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersN20Sept": "20 sept.",
+  "@piliersN20Sept": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersN13Sept": "13 sept.",
+  "@piliersN13Sept": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersN6Sept": "6 sept.",
+  "@piliersN6Sept": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersTousLesMembresOnt": "Tous les membres ont cotisé",
+  "@piliersTousLesMembresOnt": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersRappelEnvoyeA2": "Rappel envoyé à 2 membres en retard",
+  "@piliersRappelEnvoyeA2": {
+    "description": "Écran : tontine_detail"
+  },
+  "piliersLiveGardeLesCotisations": "Live garde les cotisations sur un compte séparé et verse la cagnotte automatiquement. Frais : 1 % de la cagnotte versée.",
+  "@piliersLiveGardeLesCotisations": {
+    "description": "Écran : tontine_detail"
+  },
+  "@piliersAchatGroupeDe": {
+    "description": "Écran : achats_groupes",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersAchatGroupeDe": "Achat groupé · {titre}",
+  "@piliersParticipants": {
+    "description": "Écran : achats_groupes",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "objectif": {
+        "type": "int"
+      },
+      "fin": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersParticipants": "{n} / {objectif} participants · {fin}",
+  "@piliersRejoindreMontant": {
+    "description": "Écran : achats_groupes",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersRejoindreMontant": "Rejoindre · {montant}",
+  "piliersAchatsGroupes": "Achats groupés",
+  "@piliersAchatsGroupes": {
+    "description": "Écran : achats_groupes"
+  },
+  "piliersEnsembleAuPrixDe": "Ensemble, au prix de gros",
+  "@piliersEnsembleAuPrixDe": {
+    "description": "Écran : achats_groupes"
+  },
+  "piliersRejoignezUnAchatAvec": "Rejoignez un achat avec votre quartier. Quand l’objectif est atteint, le grossiste livre au point relais ; sinon vous êtes remboursé automatiquement.",
+  "@piliersRejoignezUnAchatAvec": {
+    "description": "Écran : achats_groupes"
+  },
+  "piliersVousParticipezRembourseSi": "Vous participez · remboursé si l’objectif échoue",
+  "@piliersVousParticipezRembourseSi": {
+    "description": "Écran : achats_groupes"
+  },
+  "@piliersBesoinPour": {
+    "description": "Écran : diaspora",
+    "placeholders": {
+      "besoin": {
+        "type": "String"
+      },
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersBesoinPour": "{besoin} pour {nom}",
+  "piliersLoyer": "Loyer",
+  "@piliersLoyer": {
+    "description": "Écran : diaspora"
+  },
+  "piliersPayeALAgence": "Payé à l’agence, reçu à votre nom",
+  "@piliersPayeALAgence": {
+    "description": "Écran : diaspora"
+  },
+  "piliersCourses": "Courses",
+  "@piliersCourses": {
+    "description": "Écran : diaspora"
+  },
+  "piliersLivreesOuRetireesAu": "Livrées ou retirées au point relais",
+  "@piliersLivreesOuRetireesAu": {
+    "description": "Écran : diaspora"
+  },
+  "piliersScolarite": "Scolarité",
+  "@piliersScolarite": {
+    "description": "Écran : diaspora"
+  },
+  "piliersVerseeALEcole": "Versée à l’école, reçu officiel",
+  "@piliersVerseeALEcole": {
+    "description": "Écran : diaspora"
+  },
+  "piliersSante": "Santé",
+  "@piliersSante": {
+    "description": "Écran : diaspora"
+  },
+  "piliersPharmacieOuCliniquePartenaire": "Pharmacie ou clinique partenaire",
+  "@piliersPharmacieOuCliniquePartenaire": {
+    "description": "Écran : diaspora"
+  },
+  "piliersFactures": "Factures",
+  "@piliersFactures": {
+    "description": "Écran : diaspora"
+  },
+  "piliersElectriciteEauTelevision": "Électricité, eau, télévision",
+  "@piliersElectriciteEauTelevision": {
+    "description": "Écran : diaspora"
+  },
+  "piliersUnPro": "Un pro",
+  "@piliersUnPro": {
+    "description": "Écran : diaspora"
+  },
+  "piliersPlombierElectricienMacon": "Plombier, électricien, maçon…",
+  "@piliersPlombierElectricienMacon": {
+    "description": "Écran : diaspora"
+  },
+  "piliersMontantAuPays": "Montant au pays",
+  "@piliersMontantAuPays": {
+    "description": "Écran : diaspora"
+  },
+  "piliersSoitParCarte": "Soit, par carte",
+  "@piliersSoitParCarte": {
+    "description": "Écran : diaspora"
+  },
+  "piliersFraisLive": "Frais Live",
+  "@piliersFraisLive": {
+    "description": "Écran : diaspora"
+  },
+  "piliersVotreProcheEstPrevenu": "Votre proche est prévenu par SMS et montre son QR à la remise : vous recevez la photo du reçu et la confirmation.",
+  "@piliersVotreProcheEstPrevenu": {
+    "description": "Écran : diaspora"
+  },
+  "piliersPayerParCarte": "Payer par carte",
+  "@piliersPayerParCarte": {
+    "description": "Écran : diaspora"
+  },
+  "piliersDiaspora": "Diaspora",
+  "@piliersDiaspora": {
+    "description": "Écran : diaspora"
+  },
+  "piliersDIciPrenezSoin": "D’ici, prenez soin de ceux de là-bas",
+  "@piliersDIciPrenezSoin": {
+    "description": "Écran : diaspora"
+  },
+  "piliersPayezLeLoyerLes": "Payez le loyer, les courses ou l’école de vos proches, avec preuve de remise. Payez dans votre devise : euro, dollar, livre, franc suisse, yuan…",
+  "@piliersPayezLeLoyerLes": {
+    "description": "Écran : diaspora"
+  },
+  "piliersEnvoyerDeLArgent": "Envoyer de l’argent",
+  "@piliersEnvoyerDeLArgent": {
+    "description": "Écran : diaspora"
+  },
+  "piliersPourQui": "Pour qui ?",
+  "@piliersPourQui": {
+    "description": "Écran : diaspora"
+  },
+  "piliersAjouterUnProche": "Ajouter un proche",
+  "@piliersAjouterUnProche": {
+    "description": "Écran : diaspora"
+  },
+  "piliersAjoutParNumeroDe": "Ajout par numéro de téléphone.",
+  "@piliersAjoutParNumeroDe": {
+    "description": "Écran : diaspora"
+  },
+  "piliersAjouter": "Ajouter",
+  "@piliersAjouter": {
+    "description": "Écran : diaspora"
+  },
+  "piliersQueVoulezVousPayer": "Que voulez-vous payer ?",
+  "@piliersQueVoulezVousPayer": {
+    "description": "Écran : diaspora"
+  },
+  "piliersMesEnvois": "Mes envois",
+  "@piliersMesEnvois": {
+    "description": "Écran : diaspora"
+  },
+  "piliersVosPaiementsEtTransferts": "Vos paiements et transferts apparaîtront ici, avec leur preuve.",
+  "@piliersVosPaiementsEtTransferts": {
+    "description": "Écran : diaspora"
+  },
+  "piliersPayeVotreProcheA": "Payé · votre proche a été prévenu",
+  "@piliersPayeVotreProcheA": {
+    "description": "Écran : diaspora"
+  },
+  "@piliersTauxFixe": {
+    "description": "Écran : transfert"
+  },
+  "piliersTauxFixe": "Taux fixe garanti",
+  "@piliersTauxDuJour": {
+    "description": "Écran : transfert"
+  },
+  "piliersTauxDuJour": "Taux du jour, bloqué 30 min",
+  "@piliersTauxFrais": {
+    "description": "Écran : transfert",
+    "placeholders": {
+      "taux": {
+        "type": "String"
+      },
+      "libelle": {
+        "type": "String"
+      },
+      "frais": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersTauxFrais": "{taux} · {libelle}\nFrais : {frais} (2 %) · aucun frais de retrait",
+  "@piliersTransfertA": {
+    "description": "Écran : transfert",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      },
+      "montant": {
+        "type": "String"
+      },
+      "recu": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersTransfertA": "Transfert à {nom} · {montant} = {recu}",
+  "@piliersEnvoyerA": {
+    "description": "Écran : transfert",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      },
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersEnvoyerA": "Envoyer {montant} à {nom}",
+  "@piliersDeviseChanger": {
+    "description": "Écran : transfert",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersDeviseChanger": "Devise : {nom}. Changer",
+  "piliersCarteBancaire": "Carte bancaire",
+  "@piliersCarteBancaire": {
+    "description": "Écran : transfert"
+  },
+  "piliersVirementBancaire": "Virement bancaire",
+  "@piliersVirementBancaire": {
+    "description": "Écran : transfert"
+  },
+  "piliersMobileMoneyAL": "Mobile Money à l’étranger",
+  "@piliersMobileMoneyAL": {
+    "description": "Écran : transfert"
+  },
+  "piliersEnvoyer": "Envoyer",
+  "@piliersEnvoyer": {
+    "description": "Écran : transfert"
+  },
+  "piliersRecevoir": "Recevoir",
+  "@piliersRecevoir": {
+    "description": "Écran : transfert"
+  },
+  "piliersVousEnvoyez": "Vous envoyez",
+  "@piliersVousEnvoyez": {
+    "description": "Écran : transfert"
+  },
+  "piliersVotreProcheRecoit": "Votre proche reçoit",
+  "@piliersVotreProcheRecoit": {
+    "description": "Écran : transfert"
+  },
+  "piliersAQui": "À qui ?",
+  "@piliersAQui": {
+    "description": "Écran : transfert"
+  },
+  "piliersPayerAvec": "Payer avec",
+  "@piliersPayerAvec": {
+    "description": "Écran : transfert"
+  },
+  "piliersCommentLeRecupereT": "Comment le récupère-t-il ?",
+  "@piliersCommentLeRecupereT": {
+    "description": "Écran : transfert"
+  },
+  "piliersVerseDirectementSansFrais": "Versé directement, sans frais de retrait",
+  "@piliersVerseDirectementSansFrais": {
+    "description": "Écran : transfert"
+  },
+  "piliersSoldeLive": "Solde Live",
+  "@piliersSoldeLive": {
+    "description": "Écran : transfert"
+  },
+  "piliersPourPayerDansLive": "Pour payer dans Live, retirable à tout moment",
+  "@piliersPourPayerDansLive": {
+    "description": "Écran : transfert"
+  },
+  "piliersDansQuelleDeviseEnvoyez": "Dans quelle devise envoyez-vous ?",
+  "@piliersDansQuelleDeviseEnvoyez": {
+    "description": "Écran : transfert"
+  },
+  "piliersServiceOpereParUn": "Service opéré par un établissement de paiement agréé. Identité vérifiée de l’envoyeur et du bénéficiaire ; plafonds selon la réglementation CEMAC et du pays d’envoi.",
+  "@piliersServiceOpereParUn": {
+    "description": "Écran : transfert"
+  },
+  "@piliersLienReception": {
+    "description": "Écran : transfert_recevoir",
+    "placeholders": {
+      "lien": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersLienReception": "Envoie-moi de l’argent avec Live Transfert, dans ta devise : {lien}",
+  "@piliersEnvoyesQuand": {
+    "description": "Écran : transfert_recevoir",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      },
+      "quand": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersEnvoyesQuand": "{montant} envoyés · {quand}",
+  "@piliersVerseSurCompte": {
+    "description": "Écran : transfert_recevoir",
+    "placeholders": {
+      "compte": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersVerseSurCompte": "Versé sur votre compte {compte}",
+  "@piliersVersesSansFrais": {
+    "description": "Écran : transfert_recevoir",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      },
+      "compte": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersVersesSansFrais": "{montant} versés sur votre compte {compte}, sans frais.",
+  "@piliersRetirerEn": {
+    "description": "Écran : transfert_recevoir",
+    "placeholders": {
+      "compte": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersRetirerEn": "Retirer en {compte}",
+  "piliersRecevezDuMondeEntier": "Recevez du monde entier",
+  "@piliersRecevezDuMondeEntier": {
+    "description": "Écran : transfert_recevoir"
+  },
+  "piliersVosProchesEnvoientEn": "Vos proches envoient en euros, dollars, livres ou yuans ; vous recevez en francs CFA, sans frais de retrait.",
+  "@piliersVosProchesEnvoientEn": {
+    "description": "Écran : transfert_recevoir"
+  },
+  "piliersVotreNumeroDeReception": "Votre numéro de réception",
+  "@piliersVotreNumeroDeReception": {
+    "description": "Écran : transfert_recevoir"
+  },
+  "piliersPartagerMonLienDe": "Partager mon lien de réception",
+  "@piliersPartagerMonLienDe": {
+    "description": "Écran : transfert_recevoir"
+  },
+  "piliersDevisesAcceptees": "Devises acceptées",
+  "@piliersDevisesAcceptees": {
+    "description": "Écran : transfert_recevoir"
+  },
+  "piliersTransfertsRecus": "Transferts reçus",
+  "@piliersTransfertsRecus": {
+    "description": "Écran : transfert_recevoir"
+  },
+  "piliersSurVotreSoldeLive": "Sur votre solde Live",
+  "@piliersSurVotreSoldeLive": {
+    "description": "Écran : transfert_recevoir"
+  },
+  "@piliersFacturesAPayer": {
+    "description": "Écran : factures",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "piliersFacturesAPayer": "{n, plural, =1{1 facture à payer} other{{n} factures à payer}}",
+  "@piliersTotalSansFrais": {
+    "description": "Écran : factures",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersTotalSansFrais": "Total : {montant} · sans frais, reçu du fournisseur immédiat.",
+  "@piliersCreditOperateur": {
+    "description": "Écran : factures",
+    "placeholders": {
+      "operateur": {
+        "type": "String"
+      },
+      "numero": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersCreditOperateur": "Crédit {operateur} · {numero}",
+  "@piliersRechargerMontant": {
+    "description": "Écran : factures",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersRechargerMontant": "Recharger {montant}",
+  "piliersFacturesEtCredit": "Factures et crédit",
+  "@piliersFacturesEtCredit": {
+    "description": "Écran : factures"
+  },
+  "piliersToutEstPaye": "Tout est payé",
+  "@piliersToutEstPaye": {
+    "description": "Écran : factures"
+  },
+  "piliersNousVousPrevenonsDes": "Nous vous prévenons dès qu’une nouvelle facture arrive.",
+  "@piliersNousVousPrevenonsDes": {
+    "description": "Écran : factures"
+  },
+  "piliersMesFactures": "Mes factures",
+  "@piliersMesFactures": {
+    "description": "Écran : factures"
+  },
+  "piliersPayee": "Payée",
+  "@piliersPayee": {
+    "description": "Écran : factures"
+  },
+  "piliersPayer": "Payer",
+  "@piliersPayer": {
+    "description": "Écran : factures"
+  },
+  "piliersAjoutDUnCompteur": "Ajout d’un compteur ou d’un abonné : numéro de référence du fournisseur.",
+  "@piliersAjoutDUnCompteur": {
+    "description": "Écran : factures"
+  },
+  "piliersAjouterUnCompteurOu": "Ajouter un compteur ou un abonnement",
+  "@piliersAjouterUnCompteurOu": {
+    "description": "Écran : factures"
+  },
+  "piliersCreditEtForfaits": "Crédit et forfaits",
+  "@piliersCreditEtForfaits": {
+    "description": "Écran : factures"
+  },
+  "piliersNumeroARecharger": "Numéro à recharger",
+  "@piliersNumeroARecharger": {
+    "description": "Écran : factures"
+  },
+  "@piliersCodeCopie": {
+    "description": "Écran : adresse_points",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersCodeCopie": "Code copié : {code}",
+  "@piliersMonAdresseLien": {
+    "description": "Écran : adresse_points",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "lien": {
+        "type": "String"
+      }
+    }
+  },
+  "piliersMonAdresseLien": "Mon Adresse Live : {code} · {lien}",
+  "piliersChezMoi": "Chez moi",
+  "@piliersChezMoi": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersMonAdresseLive": "Mon Adresse Live",
+  "@piliersMonAdresseLive": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersCopier": "Copier",
+  "@piliersCopier": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersRepere": "Repère",
+  "@piliersRepere": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersDerriereLeMarcheTotal": "Derrière le marché Total, portail bleu, 3e maison après la boutique Chez Ya Mado.",
+  "@piliersDerriereLeMarcheTotal": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersLeLivreurVoitL": "Le livreur voit l’itinéraire et la photo du portail",
+  "@piliersLeLivreurVoitL": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersVosVisiteursEtVos": "Vos visiteurs et vos pros trouvent sans appeler",
+  "@piliersVosVisiteursEtVos": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersVisibleSeulementParCeux": "Visible seulement par ceux à qui vous l’envoyez",
+  "@piliersVisibleSeulementParCeux": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersAdresseLive": "Adresse Live",
+  "@piliersAdresseLive": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersPointsRelais": "Points relais",
+  "@piliersPointsRelais": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersDepotDeColis": "Dépôt de colis",
+  "@piliersDepotDeColis": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersRetrait": "Retrait",
+  "@piliersRetrait": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersEspecesEnMomo": "Espèces en MoMo",
+  "@piliersEspecesEnMomo": {
+    "description": "Écran : adresse_points"
+  },
+  "piliersAuPointRelaisLe": "Au point relais, le colis est remis contre votre QR ; les espèces sont converties en Mobile Money par un agent agréé.",
+  "@piliersAuPointRelaisLe": {
+    "description": "Écran : adresse_points"
   }
 }

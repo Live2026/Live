@@ -29,11 +29,19 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
     if (ancien.recevoir != widget.recevoir) _recevoir = widget.recevoir;
   }
 
-  static const _sources = [
-    ('Carte bancaire', 'Visa, Mastercard', Icons.credit_card_rounded),
-    ('Virement bancaire', 'SEPA, ACH, Interac…', Icons.account_balance_rounded),
+  late final _sources = [
     (
-      'Mobile Money à l’étranger',
+      context.t.piliersCarteBancaire,
+      'Visa, Mastercard',
+      Icons.credit_card_rounded,
+    ),
+    (
+      context.t.piliersVirementBancaire,
+      'SEPA, ACH, Interac…',
+      Icons.account_balance_rounded,
+    ),
+    (
+      context.t.piliersMobileMoneyAL,
       'Orange Money, Wave, M-Pesa…',
       Icons.phone_android_rounded,
     ),
@@ -48,15 +56,15 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 24),
         children: [
           SegmentedButton<bool>(
-            segments: const [
+            segments: [
               ButtonSegment(
                 value: false,
-                label: Text('Envoyer'),
+                label: Text(context.t.piliersEnvoyer),
                 icon: Icon(Icons.north_east_rounded),
               ),
               ButtonSegment(
                 value: true,
-                label: Text('Recevoir'),
+                label: Text(context.t.piliersRecevoir),
                 icon: Icon(Icons.south_west_rounded),
               ),
             ],
@@ -89,7 +97,10 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Vous envoyez', style: TextStyle(color: Colors.white70)),
+            Text(
+              context.t.piliersVousEnvoyez,
+              style: TextStyle(color: Colors.white70),
+            ),
             Row(
               children: [
                 Expanded(
@@ -120,8 +131,8 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
               onChanged: (v) => setState(() => _montant = v),
             ),
             const Divider(color: Colors.white24),
-            const Text(
-              'Votre proche reçoit',
+            Text(
+              context.t.piliersVotreProcheRecoit,
               style: TextStyle(color: Colors.white70),
             ),
             ChiffreAnime(
@@ -135,15 +146,19 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
             ),
             const SizedBox(height: 4),
             Text(
-              '${d.fixe ? 'Taux fixe garanti' : 'Taux du jour, bloqué 30 min'}'
-              ' · ${d.libelleTaux}\nFrais : ${d.ecrire(frais, decimales: true)}'
-              ' (2 %) · aucun frais de retrait',
+              context.t.piliersTauxFrais(
+                d.fixe
+                    ? context.t.piliersTauxFixe
+                    : context.t.piliersTauxDuJour,
+                d.libelleTaux,
+                d.ecrire(frais, decimales: true),
+              ),
               style: const TextStyle(color: Colors.white70, fontSize: 12.5),
             ),
           ],
         ),
       ),
-      const EnTeteSection('À qui ?'),
+      EnTeteSection(context.t.piliersAQui),
       for (final (i, (n, l, t, _)) in proches.indexed)
         Choix(
           titre: n,
@@ -152,7 +167,7 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
           onTap: () => setState(() => _proche = i),
           icone: Icons.person_rounded,
         ),
-      const EnTeteSection('Payer avec'),
+      EnTeteSection(context.t.piliersPayerAvec),
       for (final (i, (titre, detail, icone)) in _sources.indexed)
         Choix(
           titre: titre,
@@ -161,11 +176,11 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
           onTap: () => setState(() => _source = i),
           icone: icone,
         ),
-      const EnTeteSection('Comment le récupère-t-il ?'),
-      for (final (i, (titre, detail)) in const [
-        ('MTN MoMo', 'Versé directement, sans frais de retrait'),
-        ('Airtel Money', 'Versé directement, sans frais de retrait'),
-        ('Solde Live', 'Pour payer dans Live, retirable à tout moment'),
+      EnTeteSection(context.t.piliersCommentLeRecupereT),
+      for (final (i, (titre, detail)) in [
+        ('MTN MoMo', context.t.piliersVerseDirectementSansFrais),
+        ('Airtel Money', context.t.piliersVerseDirectementSansFrais),
+        (context.t.piliersSoldeLive, context.t.piliersPourPayerDansLive),
       ].indexed)
         Choix(
           titre: titre,
@@ -191,11 +206,13 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
           ref,
           TypePaiement.transfert,
           d.versFcfa(montant * (1 + _taux)),
-          'Transfert à $nom · ${d.ecrire(montant)} = ${fcfa(recu)}',
+          context.t.piliersTransfertA(nom, d.ecrire(montant), fcfa(recu)),
           'tr-$_proche',
           beneficiaire: '$nom · $lieu',
         ),
-        child: Text('Envoyer ${d.ecrire(montant)} à ${nom.split(' ').last}'),
+        child: Text(
+          context.t.piliersEnvoyerA(d.ecrire(montant), nom.split(' ').last),
+        ),
       ),
     );
   }
@@ -216,10 +233,10 @@ class _EcranTransfertState extends ConsumerState<EcranTransfert> {
             shrinkWrap: true,
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
                 child: Text(
-                  'Dans quelle devise envoyez-vous ?',
+                  context.t.piliersDansQuelleDeviseEnvoyez,
                   style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
                 ),
               ),
@@ -282,7 +299,7 @@ class _BoutonDevise extends StatelessWidget {
     return Semantics(
       container: true,
       button: true,
-      label: 'Devise : ${devise.nom}. Changer',
+      label: context.t.piliersDeviseChanger(devise.nom),
       onTap: onTap,
       excludeSemantics: true,
       child: Material(
@@ -319,20 +336,14 @@ class _NoteAgrement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Bloc(
+    return Bloc(
       fond: LiveColors.voile,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(Icons.account_balance_rounded, color: LiveColors.bleu),
           SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              'Service opéré par un établissement de paiement agréé. '
-              'Identité vérifiée de l’envoyeur et du bénéficiaire ; '
-              'plafonds selon la réglementation CEMAC et du pays d’envoi.',
-            ),
-          ),
+          Expanded(child: Text(context.t.piliersServiceOpereParUn)),
         ],
       ),
     );

@@ -1,23 +1,33 @@
 part of 'piliers_screens.dart';
 
 /// Ce que la diaspora paie pour un proche, et le bénéficiaire payé.
-const _besoins = [
-  (Icons.home_rounded, 'Loyer', 'Payé à l’agence, reçu à votre nom', 90000),
+List<(IconData, String, String, int)> _besoins(Textes t) => [
+  (Icons.home_rounded, t.piliersLoyer, t.piliersPayeALAgence, 90000),
   (
     Icons.shopping_basket_rounded,
-    'Courses',
-    'Livrées ou retirées au point relais',
+    t.piliersCourses,
+    t.piliersLivreesOuRetireesAu,
     25000,
   ),
-  (Icons.school_rounded, 'Scolarité', 'Versée à l’école, reçu officiel', 60000),
+  (Icons.school_rounded, t.piliersScolarite, t.piliersVerseeALEcole, 60000),
   (
     Icons.local_hospital_rounded,
-    'Santé',
-    'Pharmacie ou clinique partenaire',
+    t.piliersSante,
+    t.piliersPharmacieOuCliniquePartenaire,
     15000,
   ),
-  (Icons.bolt_rounded, 'Factures', 'Électricité, eau, télévision', 18450),
-  (Icons.handyman_rounded, 'Un pro', 'Plombier, électricien, maçon…', 25000),
+  (
+    Icons.bolt_rounded,
+    t.piliersFactures,
+    t.piliersElectriciteEauTelevision,
+    18450,
+  ),
+  (
+    Icons.handyman_rounded,
+    t.piliersUnPro,
+    t.piliersPlombierElectricienMacon,
+    25000,
+  ),
 ];
 
 /// E-DIA-01 — Diaspora : payer, depuis l'étranger, ce dont un proche a
@@ -48,24 +58,23 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                '$besoin pour $nom',
+                context.t.piliersBesoinPour(besoin, nom),
                 style: const TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.w800,
                 ),
               ),
               const SizedBox(height: 12),
-              LigneMontant('Montant au pays', montant),
+              LigneMontant(context.t.piliersMontantAuPays, montant),
               LigneMontant(
-                'Soit, par carte',
+                context.t.piliersSoitParCarte,
                 0,
                 brut: d.ecrire(d.depuisFcfa(montant), decimales: true),
               ),
-              const LigneMontant('Frais Live', 0, brut: '1,5 %'),
+              LigneMontant(context.t.piliersFraisLive, 0, brut: '1,5 %'),
               const SizedBox(height: 8),
-              const Text(
-                'Votre proche est prévenu par SMS et montre son QR à la '
-                'remise : vous recevez la photo du reçu et la confirmation.',
+              Text(
+                context.t.piliersVotreProcheEstPrevenu,
                 style: TextStyle(color: LiveColors.gris),
               ),
               const SizedBox(height: 14),
@@ -77,12 +86,12 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
                     ref,
                     TypePaiement.pourUnProche,
                     (montant * 1.015).round(),
-                    '$besoin pour $nom',
+                    context.t.piliersBesoinPour(besoin, nom),
                     besoin,
                     beneficiaire: nom,
                   );
                 },
-                child: const Text('Payer par carte'),
+                child: Text(context.t.piliersPayerParCarte),
               ),
             ],
           ),
@@ -96,17 +105,14 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
     final envois = ref.watch(liveProvider.select((e) => e.envois));
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Diaspora')),
+      appBar: AppBar(title: Text(context.t.piliersDiaspora)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 4, marge, 32),
         children: [
           _Banniere(
             icone: Icons.flight_land_rounded,
-            titre: 'D’ici, prenez soin de ceux de là-bas',
-            texte:
-                'Payez le loyer, les courses ou l’école de vos proches, avec '
-                'preuve de remise. Payez dans votre devise : euro, dollar, '
-                'livre, franc suisse, yuan…',
+            titre: context.t.piliersDIciPrenezSoin,
+            texte: context.t.piliersPayezLeLoyerLes,
             couleurs: const [Color(0xFF0369A1), LiveColors.nuit],
             enfant: FilledButton.icon(
               style: FilledButton.styleFrom(
@@ -116,10 +122,10 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
               ),
               onPressed: () => context.push('/transfert'),
               icon: const Icon(Icons.send_rounded),
-              label: const Text('Envoyer de l’argent'),
+              label: Text(context.t.piliersEnvoyerDeLArgent),
             ),
           ),
-          const EnTeteSection('Pour qui ?'),
+          EnTeteSection(context.t.piliersPourQui),
           SizedBox(
             height: 104,
             child: ListView(
@@ -182,27 +188,30 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
                   child: Column(
                     children: [
                       IconButton.filledTonal(
-                        tooltip: 'Ajouter un proche',
+                        tooltip: context.t.piliersAjouterUnProche,
                         iconSize: 30,
-                        onPressed: () =>
-                            informer(context, 'Ajout par numéro de téléphone.'),
+                        onPressed: () => informer(
+                          context,
+                          context.t.piliersAjoutParNumeroDe,
+                        ),
                         icon: const Icon(Icons.person_add_alt_1_rounded),
                       ),
-                      const Text('Ajouter'),
+                      Text(context.t.piliersAjouter),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          const EnTeteSection('Que voulez-vous payer ?'),
+          EnTeteSection(context.t.piliersQueVoulezVousPayer),
           GrilleAdaptative(
             largeurMax: 260,
             espacement: 10,
             hauteur: 112,
             enfants: [
-              for (final (i, (icone, titre, texte, montant))
-                  in _besoins.indexed)
+              for (final (i, (icone, titre, texte, montant)) in _besoins(
+                context.t,
+              ).indexed)
                 Apparition(
                   rang: i,
                   child: Pressable(
@@ -234,10 +243,10 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
                 ),
             ],
           ),
-          const EnTeteSection('Mes envois'),
+          EnTeteSection(context.t.piliersMesEnvois),
           if (envois.isEmpty)
-            const Text(
-              'Vos paiements et transferts apparaîtront ici, avec leur preuve.',
+            Text(
+              context.t.piliersVosPaiementsEtTransferts,
               style: TextStyle(color: LiveColors.gris),
             )
           else
@@ -245,7 +254,7 @@ class _EcranDiasporaState extends ConsumerState<EcranDiaspora> {
               LigneMenu(
                 icone: Icons.verified_rounded,
                 titre: e,
-                detail: 'Payé · votre proche a été prévenu',
+                detail: context.t.piliersPayeVotreProcheA,
                 couleur: LiveColors.succes,
               ),
         ],

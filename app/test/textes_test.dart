@@ -53,6 +53,7 @@ void main() {
     'lib/features/services',
     'lib/features/publish',
     'lib/features/ia',
+    'lib/features/piliers',
   ];
   final enDur = RegExp(
     r'''(?:Text\(|titre: |texte: |label: |tooltip: |hintText: |labelText: )\s*(?:const )?'[A-ZÀ-Ý][a-zà-ÿ’']+ [a-zà-ÿ]''',
