@@ -201,4 +201,43 @@ void main() {
       },
     );
   }
+
+  // Accessibilité : texte agrandi par le téléphone (150 % et 200 %), sur
+  // les écrans du démarrage, qu'on ne peut pas contourner.
+  for (final echelle in [1.5, 2.0]) {
+    testWidgets(
+      'démarrage lisible avec le texte à ${(echelle * 100).toInt()} %',
+      (tester) async {
+        tester.view.physicalSize = const Size(360, 740);
+        tester.view.devicePixelRatio = 1;
+        tester.platformDispatcher.textScaleFactorTestValue = echelle;
+        addTearDown(tester.view.reset);
+        addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+        sansAnimations(tester);
+        routeur.go('/bienvenue');
+        await tester.pumpWidget(const ProviderScope(child: LiveApp()));
+        await tester.pumpAndSettle();
+        final erreurs = <String>[];
+        for (final r in const [
+          '/demarrage',
+          '/bienvenue',
+          '/langue',
+          '/telephone',
+          '/connexion',
+          '/connexion/qr',
+          '/code',
+          '/profil',
+          '/interets',
+          '/pin',
+        ]) {
+          routeur.go(r);
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 600));
+          final e = tester.takeException();
+          if (e != null) erreurs.add('$r : ${e.toString().split('\n').first}');
+        }
+        expect(erreurs, isEmpty, reason: erreurs.join('\n'));
+      },
+    );
+  }
 }

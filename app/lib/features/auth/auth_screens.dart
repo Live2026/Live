@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../core/adaptatif.dart';
@@ -35,7 +36,12 @@ class _EcranTelephoneState extends State<EcranTelephone> {
 
   Future<void> _suivant(PaysTelephone pays, String operateur) async {
     final numero = '${pays.indicatif} ${_numero.text}';
-    if (await confirmerNumero(context, numero) && mounted) {
+    if (await confirmerNumero(
+          context,
+          numero,
+          alerte: alerteNumero(pays, _numero.text),
+        ) &&
+        mounted) {
       context.push('/code', extra: (numero, operateur));
     }
   }
@@ -124,7 +130,6 @@ class _EcranProfilState extends State<EcranProfil> {
   final _nom = TextEditingController();
   var _ville = 'Brazzaville';
   var _majeur = true;
-  var _photo = false;
 
   static const _villes = [
     'Brazzaville',
@@ -151,13 +156,7 @@ class _EcranProfilState extends State<EcranProfil> {
                 'Indiquez votre nom et, si vous voulez, une photo. Votre '
                 'prénom s’affiche sur vos annonces et vos messages.',
           ),
-          Center(
-            child: _PhotoProfil(
-              nom: nomComplet,
-              photo: _photo,
-              onPhoto: (v) => setState(() => _photo = v),
-            ),
-          ),
+          Center(child: _PhotoProfil(nom: nomComplet)),
           const SizedBox(height: 18),
           TextField(
             controller: _prenom,
@@ -219,22 +218,17 @@ class _EcranProfilState extends State<EcranProfil> {
 }
 
 /// Photo de profil, comme WhatsApp : un grand cercle au centre, un badge
-/// appareil photo ; un appui propose de prendre ou de choisir une photo.
-class _PhotoProfil extends StatelessWidget {
-  const _PhotoProfil({
-    required this.nom,
-    required this.photo,
-    required this.onPhoto,
-  });
+/// appareil photo ; un appui propose de prendre ou de choisir une photo
+/// (sur ordinateur, le choix d'un fichier). Image réduite à 800 px.
+class _PhotoProfil extends ConsumerWidget {
+  const _PhotoProfil({required this.nom});
   final String nom;
-  final bool photo;
-  final ValueChanged<bool> onPhoto;
 
-  Future<void> _choisir(BuildContext context) async {
+  Future<void> _choisir(BuildContext context, WidgetRef ref) async {
+    final photo = ref.read(liveProvider).photoProfil;
     final choix = await showModalBottomSheet<String>(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.white,
       builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -244,46 +238,68 @@ class _PhotoProfil extends StatelessWidget {
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
-            for (final (icone, titre) in [
-              (Icons.photo_camera_outlined, 'Prendre une photo'),
-              (Icons.photo_library_outlined, 'Choisir dans la galerie'),
-              if (photo) (Icons.delete_outline_rounded, 'Retirer la photo'),
+            for (final (cle, icone, titre) in [
+              ('camera', Icons.photo_camera_outlined, 'Prendre une photo'),
+              ('galerie', Icons.photo_library_outlined, 'Choisir une photo'),
+              if (photo != null)
+                ('retirer', Icons.delete_outline_rounded, 'Retirer la photo'),
             ])
               ListTile(
                 leading: Icon(icone, color: LiveColors.bleu),
                 title: Text(titre),
-                onTap: () => Navigator.pop(ctx, titre),
+                onTap: () => Navigator.pop(ctx, cle),
               ),
           ],
         ),
       ),
     );
-    if (choix != null) onPhoto(choix != 'Retirer la photo');
+    if (choix == null) return;
+    final store = ref.read(liveProvider.notifier);
+    if (choix == 'retirer') return store.choisirPhoto(null);
+    try {
+      final fichier = await ImagePicker().pickImage(
+        source: choix == 'camera' ? ImageSource.camera : ImageSource.gallery,
+        maxWidth: 800,
+        imageQuality: 82,
+      );
+      if (fichier == null) return;
+      store.choisirPhoto(await fichier.readAsBytes());
+    } on Exception {
+      if (context.mounted) {
+        informer(
+          context,
+          'Impossible d’ouvrir l’appareil photo. Autorisez-le dans les '
+          'réglages du téléphone, ou choisissez une photo.',
+        );
+      }
+    }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final photo = ref.watch(liveProvider.select((e) => e.photoProfil));
     return Semantics(
       button: true,
       container: true,
-      label: photo
+      label: photo != null
           ? 'Changer la photo de profil'
           : 'Ajouter une photo de profil',
       excludeSemantics: true,
-      onTap: () => _choisir(context),
+      onTap: () => _choisir(context, ref),
       child: GestureDetector(
-        onTap: () => _choisir(context),
+        onTap: () => _choisir(context, ref),
         child: Stack(
           clipBehavior: Clip.none,
           children: [
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 250),
-              child: photo
+              child: photo != null
                   ? Avatar(
-                      key: ValueKey('photo$nom'),
+                      key: ValueKey(photo.length),
                       nom: nom.isEmpty ? 'Live' : nom,
                       couleur: LiveColors.orange,
                       taille: 112,
+                      photo: photo,
                     )
                   : Container(
                       key: const ValueKey('vide'),

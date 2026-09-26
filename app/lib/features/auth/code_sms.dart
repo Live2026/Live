@@ -210,7 +210,7 @@ class _EcranCodeState extends State<EcranCode> {
             ),
           ),
           const SizedBox(height: 12),
-          ChampCode(onComplet: _valider, etat: _etat),
+          ChampCode(onComplet: _valider, etat: _etat, lireSms: true),
           const SizedBox(height: 10),
           const Text(
             'Prototype : tapez 6 chiffres au choix.',
@@ -236,9 +236,11 @@ class _EcranCodeState extends State<EcranCode> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Text(
-                        'Renvoyer le code dans $minutes',
-                        style: const TextStyle(color: LiveColors.gris),
+                      Flexible(
+                        child: Text(
+                          'Renvoyer le code dans $minutes',
+                          style: const TextStyle(color: LiveColors.gris),
+                        ),
                       ),
                     ],
                   )

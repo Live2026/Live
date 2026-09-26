@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'mock.dart';
 
 /// État du prototype, gardé en mémoire (tout est perdu au redémarrage).
@@ -261,6 +263,7 @@ class LiveState {
     this.envois = const [],
     this.devise = 'EUR',
     this.langue = 'fr',
+    this.photoProfil,
     this.demandesSupport = const [],
     this.transfertsRetires = const {},
     this.sejoursReserves = const [],
@@ -351,6 +354,9 @@ class LiveState {
   /// Langue de l'interface, choisie au démarrage (code : fr, en, ln…).
   final String langue;
 
+  /// Photo de profil choisie au démarrage ou dans le profil.
+  final Uint8List? photoProfil;
+
   /// Demandes écrites au support : (numéro, sujet, message).
   final List<(String, String, String)> demandesSupport;
   final Set<String> transfertsRetires;
@@ -410,6 +416,8 @@ class LiveState {
     List<String>? envois,
     String? devise,
     String? langue,
+    Uint8List? photoProfil,
+    bool retirerPhoto = false,
     List<(String, String, String)>? demandesSupport,
     Set<String>? transfertsRetires,
     List<String>? sejoursReserves,
@@ -462,6 +470,7 @@ class LiveState {
       envois: envois ?? this.envois,
       devise: devise ?? this.devise,
       langue: langue ?? this.langue,
+      photoProfil: retirerPhoto ? null : photoProfil ?? this.photoProfil,
       demandesSupport: demandesSupport ?? this.demandesSupport,
       transfertsRetires: transfertsRetires ?? this.transfertsRetires,
       sejoursReserves: sejoursReserves ?? this.sejoursReserves,

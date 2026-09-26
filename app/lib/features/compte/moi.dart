@@ -43,6 +43,7 @@ class EcranMoi extends ConsumerWidget {
                 taille: 72,
                 verifie: etat.identiteVerifiee,
                 anneau: true,
+                photo: etat.photoProfil,
               ),
               const SizedBox(width: 16),
               Expanded(

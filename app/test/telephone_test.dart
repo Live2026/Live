@@ -25,4 +25,13 @@ void main() {
     expect(pays('FR').mobileMoney, isFalse);
     expect(pays('CG').mobileMoney, isTrue);
   });
+
+  test('un début de numéro impossible est signalé, pas un début valide', () {
+    final congo = paysTelephone.firstWhere((p) => p.code == 'CG');
+    expect(congo.debutInconnu('07'), isTrue);
+    expect(congo.debutInconnu('0'), isFalse);
+    expect(congo.debutInconnu('06 1'), isFalse);
+    expect(congo.debutInconnu(''), isFalse);
+    expect(congo.debutsConnus, '06, 05, 04');
+  });
 }

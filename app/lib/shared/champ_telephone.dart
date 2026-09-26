@@ -36,14 +36,19 @@ class ChampTelephone extends StatefulWidget {
 
 const _bord = Color(0xFFC5CCD6);
 
-BoxDecoration _cadre({required bool actif}) => BoxDecoration(
-  color: Colors.white,
-  borderRadius: BorderRadius.circular(8),
-  border: Border.all(
-    color: actif ? LiveColors.bleu : _bord,
-    width: actif ? 2 : 1,
-  ),
-);
+BoxDecoration _cadre({required bool actif, bool alerte = false}) =>
+    BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(
+        color: alerte
+            ? LiveColors.cuivre
+            : actif
+            ? LiveColors.bleu
+            : _bord,
+        width: actif || alerte ? 2 : 1,
+      ),
+    );
 
 class _ChampTelephoneState extends State<ChampTelephone> {
   final _focus = FocusNode();
@@ -66,6 +71,7 @@ class _ChampTelephoneState extends State<ChampTelephone> {
     final numero = widget.controleur.text;
     final operateur = pays.operateur(numero);
     final complet = pays.complet(numero);
+    final inconnu = pays.debutInconnu(numero);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -80,7 +86,7 @@ class _ChampTelephoneState extends State<ChampTelephone> {
         const SizedBox(height: 12),
         AnimatedContainer(
           duration: const Duration(milliseconds: 180),
-          decoration: _cadre(actif: _focus.hasFocus),
+          decoration: _cadre(actif: _focus.hasFocus, alerte: inconnu),
           child: Row(
             children: [
               Padding(
@@ -148,17 +154,24 @@ class _ChampTelephoneState extends State<ChampTelephone> {
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 220),
           child: Text(
-            operateur == null
+            inconnu
+                ? 'Ce début ne correspond à aucun opérateur connu '
+                      '(${pays.nom} : ${pays.debutsConnus}). Vérifiez le numéro.'
+                : operateur == null
                 ? '${pays.chiffres} chiffres, comme ${pays.format}'
                 : pays.mobileMoney
                 ? '$operateur Mobile Money reconnu'
                 : 'Numéro mobile reconnu · paiement par carte',
-            key: ValueKey(operateur ?? pays.code),
+            key: ValueKey(inconnu ? 'inconnu' : operateur ?? pays.code),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 12.5,
-              fontWeight: operateur != null ? FontWeight.w700 : null,
-              color: operateur != null ? LiveColors.succes : LiveColors.gris,
+              fontWeight: operateur != null || inconnu ? FontWeight.w700 : null,
+              color: inconnu
+                  ? LiveColors.cuivre
+                  : operateur != null
+                  ? LiveColors.succes
+                  : LiveColors.gris,
             ),
           ),
         ),
@@ -360,9 +373,22 @@ class _FormatNumero extends TextInputFormatter {
   }
 }
 
+/// Texte d'alerte pour [confirmerNumero] quand le début est inconnu.
+String? alerteNumero(PaysTelephone pays, String numero) =>
+    pays.debutInconnu(numero)
+    ? 'Attention : ce début ne correspond à aucun opérateur connu '
+          '(${pays.nom} : ${pays.debutsConnus}).'
+    : null;
+
 /// Avant d'envoyer le code, comme WhatsApp : on relit le numéro. Un SMS
-/// envoyé à un numéro mal saisi est perdu (et payé).
-Future<bool> confirmerNumero(BuildContext context, String numero) async {
+/// envoyé à un numéro mal saisi est perdu (et payé). [alerte] signale un
+/// début de numéro inconnu.
+
+Future<bool> confirmerNumero(
+  BuildContext context,
+  String numero, {
+  String? alerte,
+}) async {
   final ok = await showDialog<bool>(
     context: context,
     builder: (ctx) => AlertDialog(
@@ -379,6 +405,16 @@ Future<bool> confirmerNumero(BuildContext context, String numero) async {
               letterSpacing: 0.5,
             ),
           ),
+          if (alerte != null) ...[
+            const SizedBox(height: 10),
+            Text(
+              alerte,
+              style: const TextStyle(
+                color: LiveColors.cuivre,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
           const SizedBox(height: 12),
           const Text('Est-il correct, ou voulez-vous le modifier ?'),
         ],

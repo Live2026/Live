@@ -17,7 +17,11 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
   Future<void> _envoyer() async {
     final pays = paysTelephone[_pays];
     if (!pays.complet(_tel.text)) return;
-    if (await confirmerNumero(context, '${pays.indicatif} ${_tel.text}') &&
+    if (await confirmerNumero(
+          context,
+          '${pays.indicatif} ${_tel.text}',
+          alerte: alerteNumero(pays, _tel.text),
+        ) &&
         mounted) {
       setState(() => _etape = 1);
     }
@@ -87,7 +91,10 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
               ),
             ],
           ] else if (_etape == 1)
-            ChampCode(onComplet: (_) => setState(() => _etape = 2))
+            ChampCode(
+              lireSms: true,
+              onComplet: (_) => setState(() => _etape = 2),
+            )
           else ...[
             ClavierPin(
               onComplet: (_) {

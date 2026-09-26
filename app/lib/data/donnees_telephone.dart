@@ -48,6 +48,22 @@ class PaysTelephone {
     return null;
   }
 
+  /// Le début tapé ne peut mener à aucun opérateur connu (ex. 07 au Congo).
+  bool debutInconnu(String numero) {
+    final n = numero.replaceAll(RegExp(r'\D'), '');
+    if (n.isEmpty) return false;
+    return !prefixes.any((p) => p.$1.startsWith(n) || n.startsWith(p.$1));
+  }
+
+  /// Débuts de numéro valides, pour l'aide : « 06, 05, 04 ».
+  String get debutsConnus {
+    final debuts = <String>{
+      for (final (d, _) in prefixes) d.length > 3 ? d.substring(0, 3) : d,
+    };
+    final liste = debuts.take(5).join(', ');
+    return debuts.length > 5 ? '$liste…' : liste;
+  }
+
   bool complet(String numero) =>
       numero.replaceAll(RegExp(r'\D'), '').length == chiffres;
 }

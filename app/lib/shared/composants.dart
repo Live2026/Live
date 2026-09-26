@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
@@ -132,8 +134,12 @@ class Avatar extends StatelessWidget {
     this.verifie = false,
     this.anneau = false,
     this.enLigne = false,
+    this.photo,
   });
   final String nom;
+
+  /// Photo choisie par l'utilisateur ; sinon, les initiales.
+  final Uint8List? photo;
   final Color couleur;
   final double taille;
   final bool verifie;
@@ -164,15 +170,20 @@ class Avatar extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
+        image: photo == null
+            ? null
+            : DecorationImage(image: MemoryImage(photo!), fit: BoxFit.cover),
       ),
-      child: Text(
-        _initiales,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: taille * 0.36,
-        ),
-      ),
+      child: photo != null
+          ? null
+          : Text(
+              _initiales,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: taille * 0.36,
+              ),
+            ),
     );
     return Stack(
       clipBehavior: Clip.none,

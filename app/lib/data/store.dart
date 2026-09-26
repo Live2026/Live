@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -377,6 +379,13 @@ class LiveStore extends Notifier<LiveState> with PersistanceLocale {
   void choisirDevise(String code) {
     state = state.copyWith(devise: code);
     garder('devise', code);
+  }
+
+  /// Photo de profil (octets de l'image), ou null pour la retirer.
+  void choisirPhoto(Uint8List? octets) {
+    state = octets == null
+        ? state.copyWith(retirerPhoto: true)
+        : state.copyWith(photoProfil: octets);
   }
 
   void choisirLangue(String code) {

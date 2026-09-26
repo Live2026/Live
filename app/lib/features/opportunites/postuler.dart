@@ -44,7 +44,12 @@ class _EcranPostulerState extends ConsumerState<EcranPostuler> {
             padding: 12,
             child: Row(
               children: [
-                Avatar(nom: etat.prenom, couleur: LiveColors.bleu, taille: 44),
+                Avatar(
+                  nom: etat.prenom,
+                  couleur: LiveColors.bleu,
+                  taille: 44,
+                  photo: etat.photoProfil,
+                ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
