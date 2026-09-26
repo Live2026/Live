@@ -64,14 +64,26 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
               texte: texte,
             ),
           ),
-          if (_etape == 0)
+          if (_etape == 0) ...[
             ChampTelephone(
               controleur: _tel,
               pays: _pays,
               onPays: (i) => setState(() => _pays = i),
               onChanged: () => setState(() {}),
-            )
-          else if (_etape == 1)
+            ),
+            // Sur ordinateur, comme WhatsApp Web : le téléphone déjà
+            // connecté suffit, sans SMS.
+            if (context.taille == Taille.etendue) ...[
+              const SizedBox(height: 16),
+              Center(
+                child: TextButton.icon(
+                  onPressed: () => context.go('/connexion/qr'),
+                  icon: const Icon(Icons.qr_code_2_rounded),
+                  label: const Text('Se connecter avec un code QR'),
+                ),
+              ),
+            ],
+          ] else if (_etape == 1)
             ChampCode(onComplet: (_) => setState(() => _etape = 2))
           else ...[
             ClavierPin(

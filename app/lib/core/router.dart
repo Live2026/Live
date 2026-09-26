@@ -28,13 +28,14 @@ import '../features/test/scenarios_screen.dart';
 import 'cadre_demarrage.dart';
 import 'navigation.dart';
 
-/// Démarrage : marque à gauche, formulaire à droite sur ordinateur.
+/// Démarrage sur ordinateur : une carte centrée façon WhatsApp Web.
 /// Hauteur de la carte de chaque page, pour qu'elle épouse son contenu.
 const _demarrage = {
-  '/bienvenue': 560.0,
-  '/telephone': 700.0,
-  '/connexion': 520.0,
-  '/code': 600.0,
+  '/bienvenue': 430.0,
+  '/telephone': 600.0,
+  '/connexion': 470.0,
+  '/connexion/qr': 450.0,
+  '/code': 500.0,
   '/profil': 700.0,
   '/interets': 720.0,
   '/pin': 700.0,
@@ -58,7 +59,12 @@ GoRoute _route(
 }) => GoRoute(
   path: chemin,
   builder: (_, s) => _demarrage.containsKey(chemin)
-      ? CadreDemarrage(hauteur: _demarrage[chemin]!, child: ecran(s))
+      ? CadreDemarrage(
+          chemin: chemin,
+          hauteur: _demarrage[chemin]!,
+          largeur: chemin == '/connexion/qr' ? 760 : 560,
+          child: ecran(s),
+        )
       : !cadre || _pleinEcran(chemin)
       ? ecran(s)
       : CadreOrdinateur(chemin: s.uri.path, child: ecran(s)),
@@ -73,6 +79,7 @@ final routeur = GoRouter(
     _route('/demarrage', (_) => const EcranSplash()),
     _route('/bienvenue', (_) => const EcranBienvenue()),
     _route('/telephone', (_) => const EcranTelephone()),
+    _route('/connexion/qr', (_) => const EcranConnexionQr()),
     _route('/connexion', (_) => const EcranConnexion()),
     _route('/code', (s) {
       final (tel, op) = s.extra as (String, String)? ?? ('06 123 45 67', 'MTN');

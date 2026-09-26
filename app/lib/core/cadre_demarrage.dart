@@ -1,84 +1,76 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 import '../shared/animations.dart';
-import '../shared/demarrage.dart';
 import '../shared/logo.dart';
 import 'adaptatif.dart';
 import 'theme.dart';
 
-/// Démarrage sur ordinateur (docs/ecrans/00, section 8) : à gauche, Live
-/// se présente (slogan animé, espaces, promesses) ; à droite, le formulaire
-/// dans une carte avec le logo. Sur téléphone et tablette, la page seule.
-/// Image de fond du démarrage sur ordinateur : déposer le fichier à cet
-/// emplacement (dossier déclaré dans pubspec.yaml). Sans image, le fond animé
-/// de Live s'affiche.
-const imageFondDemarrage = 'assets/images/fond_demarrage.jpg';
-
+/// Démarrage sur ordinateur (docs/ecrans/00, section 8), inspiré de WhatsApp
+/// Web : fond clair et calme, logo en haut à gauche, une carte centrée à
+/// hauteur de son contenu, puis les liens utiles sous la carte. Rien d'autre
+/// ne détourne l'attention du formulaire. Sur téléphone et tablette, la page
+/// seule.
 class CadreDemarrage extends StatelessWidget {
-  const CadreDemarrage({super.key, required this.child, this.hauteur = 620});
+  const CadreDemarrage({
+    super.key,
+    required this.chemin,
+    required this.child,
+    this.hauteur = 620,
+    this.largeur = 560,
+  });
+
+  final String chemin;
   final Widget child;
 
-  /// Hauteur de la carte, adaptée au contenu de chaque page (router.dart) :
-  /// la carte ne prend jamais toute la hauteur, le fond reste visible.
+  /// Hauteur de la carte, adaptée au contenu de chaque page (router.dart).
   final double hauteur;
+  final double largeur;
 
-  static const _promesses = [
-    (
-      Icons.lock_rounded,
-      'Argent protégé',
-      'Bloqué par Live jusqu’à la remise, confirmée par QR.',
-    ),
-    (
-      Icons.verified_rounded,
-      'Comptes vérifiés',
-      'Vendeurs, agences et pros contrôlés ; avis de vrais clients.',
-    ),
-    (
-      Icons.account_balance_wallet_rounded,
-      'Mobile Money et carte',
-      'Payez et soyez payé comme vous en avez l’habitude.',
-    ),
-  ];
+  /// Fond crème très léger : chaleureux, accordé à l'orange de Live.
+  static const fond = Color(0xFFF8F5EF);
 
   @override
   Widget build(BuildContext context) {
     if (context.taille != Taille.etendue) return child;
     return Material(
-      color: LiveColors.nuit,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          const _Fond(),
-          Row(
-            children: [
-              const Expanded(flex: 6, child: _Presentation()),
-              Expanded(
-                flex: 5,
-                child: LayoutBuilder(
-                  builder: (context, c) => Center(
+      color: fond,
+      child: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, c) => SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: c.maxHeight),
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: SizedBox(
-                        width: 440,
-                        height: min(hauteur, c.maxHeight - 64),
-                        child: Apparition(child: _Carte(child: child)),
-                      ),
+                      padding: EdgeInsets.fromLTRB(32, 22, 32, 0),
+                      child: LogoLive(taille: 30),
                     ),
                   ),
-                ),
+                  const SizedBox(height: 28),
+                  SizedBox(
+                    width: min(largeur, c.maxWidth - 48),
+                    height: min(hauteur, max(420.0, c.maxHeight - 190)),
+                    child: Apparition(child: _Carte(child: child)),
+                  ),
+                  const SizedBox(height: 22),
+                  _PiedCarte(chemin: chemin),
+                  const SizedBox(height: 28),
+                ],
               ),
-            ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
 }
 
-/// La carte du formulaire : logo en tête, page dessous.
+/// La carte : bord fin, grand arrondi, ombre à peine visible.
 class _Carte extends StatelessWidget {
   const _Carte({required this.child});
   final Widget child;
@@ -88,178 +80,101 @@ class _Carte extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFFCBD2DC)),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x40000000),
-            blurRadius: 48,
-            offset: Offset(0, 20),
+            color: Color(0x0F041936),
+            blurRadius: 24,
+            offset: Offset(0, 8),
           ),
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 22, bottom: 2),
-              child: LogoLive(taille: 34),
-            ),
-            Expanded(child: child),
-          ],
+        borderRadius: BorderRadius.circular(23),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: child,
         ),
       ),
     );
   }
 }
 
-/// Fond de toute la page : l'image si elle est fournie, sinon le fond animé ;
-/// un voile à gauche garde le texte lisible.
-/// L'image n'est demandée que si elle figure parmi les ressources : pas de
-/// requête en échec (404) tant qu'elle n'a pas été déposée.
-final Future<bool> _imagePresente =
-    AssetManifest.loadFromAssetBundle(rootBundle).then(
-      (m) => m.listAssets().contains(imageFondDemarrage),
-      onError: (_) => false,
-    );
-
-class _FondAnime extends StatelessWidget {
-  const _FondAnime();
-
-  @override
-  Widget build(BuildContext context) =>
-      const FondDemarrage(child: SizedBox.expand());
-}
-
-class _Fond extends StatelessWidget {
-  const _Fond();
+/// Sous la carte : l'autre chemin (se connecter ou créer un compte), la
+/// promesse de protection, puis les liens légaux et l'aide.
+class _PiedCarte extends StatelessWidget {
+  const _PiedCarte({required this.chemin});
+  final String chemin;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
+    final lien = switch (chemin) {
+      '/telephone' => ('Déjà un compte Live ?', 'Se connecter', '/connexion'),
+      '/connexion' || '/connexion/qr' => (
+        'Pas encore de compte ?',
+        'Créer un compte',
+        '/telephone',
+      ),
+      _ => null,
+    };
+    return Column(
       children: [
-        FutureBuilder<bool>(
-          future: _imagePresente,
-          builder: (context, s) => s.data == true
-              ? Image.asset(
-                  imageFondDemarrage,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => const _FondAnime(),
-                )
-              : const _FondAnime(),
-        ),
-        const DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xCC041936), Color(0x33041936)],
-              stops: [0.35, 1],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _Presentation extends StatelessWidget {
-  const _Presentation();
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      type: MaterialType.transparency,
-      child: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, c) => SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(56, 44, 56, 36),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: c.maxHeight - 80),
-              child: IntrinsicHeight(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const LogoLive(taille: 40, couleur: Colors.white),
-                    const Spacer(),
-                    const SloganAnime(taille: 46),
-                    const SizedBox(height: 14),
-                    const Text(
-                      'La place de marché sociale de l’Afrique centrale : '
-                      'produits, logements, services, directs, cours et '
-                      'emplois, au même endroit.',
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 17,
-                        height: 1.45,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
-                      children: [
-                        for (final (i, (icone, nom, couleur))
-                            in espacesLive.indexed)
-                          Apparition(
-                            rang: i + 1,
-                            child: PastilleEspace(
-                              icone: icone,
-                              nom: nom,
-                              couleur: couleur,
-                            ),
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 32),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (final (icone, titre, texte)
-                            in CadreDemarrage._promesses)
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 18),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(icone, color: LiveColors.ambre),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    titre,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    texte,
-                                    style: const TextStyle(
-                                      color: Colors.white60,
-                                      fontSize: 13,
-                                      height: 1.35,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                    const Spacer(),
-                    const SizedBox(height: 24),
-                    const Text(
-                      '6 pays de la CEMAC · une seule monnaie, le FCFA · '
-                      'Prototype, aucune transaction réelle',
-                      style: TextStyle(color: Colors.white54, fontSize: 12.5),
-                    ),
-                  ],
+        if (lien != null) ...[
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(lien.$1, style: const TextStyle(fontSize: 15)),
+              TextButton(
+                onPressed: () => context.go(lien.$3),
+                child: Text(
+                  lien.$2,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    decoration: TextDecoration.underline,
+                    decorationColor: LiveColors.orange,
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
+          const SizedBox(height: 4),
+        ],
+        const Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.lock_outline_rounded, size: 16, color: LiveColors.gris),
+            SizedBox(width: 6),
+            Text(
+              'Votre argent reste protégé par Live jusqu’à la remise',
+              style: TextStyle(color: LiveColors.gris),
+            ),
+          ],
         ),
-      ),
+        const SizedBox(height: 6),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (final (i, (nom, route)) in const [
+              ('Conditions d’utilisation', '/legal/cgu'),
+              ('Confidentialité', '/legal/confidentialite'),
+              ('Aide', '/aide'),
+            ].indexed) ...[
+              if (i > 0)
+                const Text('·', style: TextStyle(color: LiveColors.gris)),
+              TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: LiveColors.gris,
+                  textStyle: const TextStyle(fontSize: 12.5),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                ),
+                onPressed: () => context.push(route),
+                child: Text(nom),
+              ),
+            ],
+          ],
+        ),
+      ],
     );
   }
 }

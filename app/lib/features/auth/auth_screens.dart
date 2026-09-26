@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../core/adaptatif.dart';
 import '../../core/theme.dart';
@@ -14,8 +15,8 @@ import '../../shared/widgets.dart';
 part 'bienvenue.dart';
 part 'code_sms.dart';
 part 'connexion_interets.dart';
+part 'connexion_qr.dart';
 
-/// Pays de la zone CEMAC : indicatif, exemple de numéro, opérateurs.
 /// E-AUTH-02 — Numéro de téléphone : pays, numéro, opérateur détecté,
 /// consentements explicites.
 class EcranTelephone extends StatefulWidget {

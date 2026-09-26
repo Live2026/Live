@@ -12,6 +12,7 @@ const routes = [
   '/bienvenue',
   '/telephone',
   '/connexion',
+  '/connexion/qr',
   '/code',
   '/profil',
   '/interets',

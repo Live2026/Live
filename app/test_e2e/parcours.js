@@ -180,6 +180,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     const fermer = async () => { await p.keyboard.press('Escape'); await p.waitForTimeout(700); };
     const TOUR = [
       ['connexion', 'connexion'],
+      ['connexion/qr', 'connexion_qr'],
       ['accueil', 'fil_retour'],
       ['accueil', 'fil_commentaires', async () => { await bouton('84', { exact: true }); }],
       ['accueil', 'fil_partage', async () => { await fermer(); await bouton('210', { exact: true }); }],

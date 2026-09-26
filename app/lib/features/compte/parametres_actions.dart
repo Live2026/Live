@@ -80,6 +80,27 @@ class _ActionsParametres {
                 child: const Text('Déconnecter'),
               ),
             ),
+            // Connexion sur ordinateur par code QR (E-AUTH-09).
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+              child: FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size.fromHeight(48),
+                ),
+                onPressed: () async {
+                  Navigator.pop(ctx);
+                  if (await simulerScan(
+                        context,
+                        quoi: 'le code affiché sur l’ordinateur',
+                      ) &&
+                      context.mounted) {
+                    informer(context, 'Ordinateur connecté à votre compte.');
+                  }
+                },
+                icon: const Icon(Icons.qr_code_scanner_rounded),
+                label: const Text('Connecter un appareil'),
+              ),
+            ),
           ],
         ),
       ),
