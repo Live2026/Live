@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'etat.dart';
+import '../l10n/textes.dart';
 
 /// Les « super-pouvoirs » de Live : les capacités du document 03, section 5.
 ///
@@ -164,9 +165,9 @@ const pouvoirs = <Pouvoir>[
 Pouvoir pouvoirParId(String id) => pouvoirs.firstWhere((p) => p.id == id);
 
 /// Libellé du niveau de confiance (document 03, section 4).
-String libelleNiveau(int n) => switch (n) {
-  1 => 'Téléphone vérifié',
-  2 => 'Identité vérifiée',
-  3 => 'Pro vérifié',
-  _ => 'Partenaire',
+String libelleNiveau(Textes t, int n) => switch (n) {
+  1 => t.niveauTelephone,
+  2 => t.niveauIdentite,
+  3 => t.niveauPro,
+  _ => t.niveauPartenaire,
 };

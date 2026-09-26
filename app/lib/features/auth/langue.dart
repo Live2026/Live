@@ -56,7 +56,7 @@ class EcranLangue extends ConsumerWidget {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: () => context.push('/telephone'),
-          child: Text(context.t.demarrageSuivant),
+          child: Text(context.t.suivant),
         ),
       ),
     );

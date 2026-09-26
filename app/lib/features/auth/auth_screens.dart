@@ -102,7 +102,7 @@ class _EcranTelephoneState extends State<EcranTelephone> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: valide ? () => _suivant(pays, operateur) : null,
-          child: Text(context.t.demarrageSuivant),
+          child: Text(context.t.suivant),
         ),
       ),
     );

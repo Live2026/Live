@@ -72,10 +72,6 @@
   "@aide": {
     "description": "Écran : cadre_demarrage, bienvenue, code_sms"
   },
-  "demarrageSuivant": "Suivant",
-  "@demarrageSuivant": {
-    "description": "Écran : auth_screens, connexion_interets, langue"
-  },
   "continuer": "Continuer",
   "@continuer": {
     "description": "Écran : auth_screens, commande, variantes, confiance"
@@ -494,10 +490,6 @@
   },
   "demarrageCodeSecretOublieQ": "Code secret oublié ?",
   "@demarrageCodeSecretOublieQ": {
-    "description": "Écran : connexion_interets"
-  },
-  "demarragePasser": "Passer",
-  "@demarragePasser": {
     "description": "Écran : connexion_interets"
   },
   "demarrageInteretsTitre": "Qu’est-ce qui vous intéresse ?",
@@ -1447,10 +1439,6 @@
   },
   "marketVoirEtPayer": "Voir et payer",
   "@marketVoirEtPayer": {
-    "description": "Écran : produit_commande"
-  },
-  "marketPartager": "Partager",
-  "@marketPartager": {
     "description": "Écran : produit_commande"
   },
   "marketSuivre": "Suivre",
@@ -2446,10 +2434,6 @@
   "@marketLAcheteurEstRembourse": {
     "description": "Écran : mes_ventes_blocs"
   },
-  "marketAnnuler": "Annuler",
-  "@marketAnnuler": {
-    "description": "Écran : mes_ventes_blocs"
-  },
   "marketSamsungA105Sous": "Samsung A10 : 5 % sous le marché",
   "@marketSamsungA105Sous": {
     "description": "Écran : mes_ventes_ia"
@@ -2562,10 +2546,6 @@
   },
   "marketGererLAnnonce": "Gérer l’annonce",
   "@marketGererLAnnonce": {
-    "description": "Écran : mes_ventes_outils"
-  },
-  "marketModifier": "Modifier",
-  "@marketModifier": {
     "description": "Écran : mes_ventes_outils"
   },
   "marketDupliquer": "Dupliquer",
@@ -2976,5 +2956,1372 @@
   "@etatAReparer": {
     "description": "Écran : commun (état d’un objet)"
   },
-  "etatAReparer": "À réparer"
+  "etatAReparer": "À réparer",
+  "@niveauTelephone": {
+    "description": "Écran : commun (niveau de confiance)"
+  },
+  "niveauTelephone": "Téléphone vérifié",
+  "@niveauIdentite": {
+    "description": "Écran : commun (niveau de confiance)"
+  },
+  "niveauIdentite": "Identité vérifiée",
+  "@niveauPro": {
+    "description": "Écran : commun (niveau de confiance)"
+  },
+  "niveauPro": "Pro vérifié",
+  "@niveauPartenaire": {
+    "description": "Écran : commun (niveau de confiance)"
+  },
+  "niveauPartenaire": "Partenaire",
+  "@moiNCredits": {
+    "description": "Écran : moi",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "moiNCredits": "{n} crédits",
+  "@moiNVentes": {
+    "description": "Écran : moi",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "moiNVentes": "{n, plural, =1{1 vente} other{{n} ventes}}",
+  "@moiNEnCours": {
+    "description": "Écran : moi",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "moiNEnCours": "{n} en cours",
+  "@moiNVisites": {
+    "description": "Écran : moi",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "moiNVisites": "{n, plural, =0{0 visite} =1{1 visite} other{{n} visites}}",
+  "@moiNFavoris": {
+    "description": "Écran : moi",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "moiNFavoris": "{n, plural, =0{0 favori} =1{1 favori} other{{n} favoris}}",
+  "@moiFormuleActive": {
+    "description": "Écran : moi",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "moiFormuleActive": "Formule {nom} active",
+  "@moiPouvoirsSemantique": {
+    "description": "Écran : moi",
+    "placeholders": {
+      "actifs": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "moiPouvoirsSemantique": "Mes super-pouvoirs, {actifs} sur {total} actifs",
+  "@moiPouvoirsActifs": {
+    "description": "Écran : moi",
+    "placeholders": {
+      "actifs": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "moiPouvoirsActifs": "{actifs} sur {total} actifs · gagnez de l’argent en débloquant les autres",
+  "@moiEleve": {
+    "description": "Écran : moi"
+  },
+  "moiEleve": "Élève",
+  "compteNotifications": "Notifications",
+  "@compteNotifications": {
+    "description": "Écran : parametres"
+  },
+  "compteMenuDuProfil": "Menu du profil",
+  "@compteMenuDuProfil": {
+    "description": "Écran : moi"
+  },
+  "compteAbonnes": "Abonnés",
+  "@compteAbonnes": {
+    "description": "Écran : profil_public"
+  },
+  "compteAbonnements": "Abonnements",
+  "@compteAbonnements": {
+    "description": "Écran : profil_public"
+  },
+  "compteNote": "Note",
+  "@compteNote": {
+    "description": "Écran : profil_public"
+  },
+  "compteTransactions": "Transactions",
+  "@compteTransactions": {
+    "description": "Écran : profil_public"
+  },
+  "compteProfilPublic": "Profil public",
+  "@compteProfilPublic": {
+    "description": "Écran : moi"
+  },
+  "compteCreditsLive": "Crédits Live",
+  "@compteCreditsLive": {
+    "description": "Écran : moi"
+  },
+  "compteMesVentes": "Mes ventes",
+  "@compteMesVentes": {
+    "description": "Écran : menu_profil"
+  },
+  "compteMesAchats": "Mes achats",
+  "@compteMesAchats": {
+    "description": "Écran : moi"
+  },
+  "compteMesVisites": "Mes visites",
+  "@compteMesVisites": {
+    "description": "Écran : moi"
+  },
+  "comptePrestations": "Prestations",
+  "@comptePrestations": {
+    "description": "Écran : moi"
+  },
+  "compteEnregistres": "Enregistrés",
+  "@compteEnregistres": {
+    "description": "Écran : enregistres"
+  },
+  "compteMesEspaces": "Mes espaces",
+  "@compteMesEspaces": {
+    "description": "Écran : moi"
+  },
+  "compteEspaceAgenceDeDemonstration": "Espace agence de démonstration · 3 agents",
+  "@compteEspaceAgenceDeDemonstration": {
+    "description": "Écran : moi"
+  },
+  "compteMesInterventions": "Mes interventions",
+  "@compteMesInterventions": {
+    "description": "Écran : menu_profil"
+  },
+  "compteEspacePrestataireDeDemonstration": "Espace prestataire de démonstration (Serge)",
+  "@compteEspacePrestataireDeDemonstration": {
+    "description": "Écran : moi"
+  },
+  "compteMonEspaceVerifie": "Mon espace vérifié",
+  "@compteMonEspaceVerifie": {
+    "description": "Écran : moi"
+  },
+  "compteCreerUnEspace": "Créer un espace",
+  "@compteCreerUnEspace": {
+    "description": "Écran : espace"
+  },
+  "compteBoutiqueAgencePrestataireOu": "Boutique, agence, prestataire ou chaîne",
+  "@compteBoutiqueAgencePrestataireOu": {
+    "description": "Écran : moi"
+  },
+  "compteMonArgentAuQuotidien": "Mon argent au quotidien",
+  "@compteMonArgentAuQuotidien": {
+    "description": "Écran : moi"
+  },
+  "compteMesTontines": "Mes tontines",
+  "@compteMesTontines": {
+    "description": "Écran : moi"
+  },
+  "compteN2TontinesProchaineCotisation": "2 tontines · prochaine cotisation samedi",
+  "@compteN2TontinesProchaineCotisation": {
+    "description": "Écran : moi"
+  },
+  "compteFacturesEtCredit": "Factures et crédit",
+  "@compteFacturesEtCredit": {
+    "description": "Écran : moi"
+  },
+  "compteElectriciteEauTelevisionRecharge": "Électricité, eau, télévision, recharge",
+  "@compteElectriciteEauTelevisionRecharge": {
+    "description": "Écran : moi"
+  },
+  "compteDiasporaEtTransferts": "Diaspora et transferts",
+  "@compteDiasporaEtTransferts": {
+    "description": "Écran : moi"
+  },
+  "comptePayerPourUnProche": "Payer pour un proche, Live Transfert",
+  "@comptePayerPourUnProche": {
+    "description": "Écran : moi"
+  },
+  "compteRecevoirDeLEtranger": "Recevoir de l’étranger",
+  "@compteRecevoirDeLEtranger": {
+    "description": "Écran : moi"
+  },
+  "compteEuroDollarLivreRecus": "Euro, dollar, livre… reçus en FCFA",
+  "@compteEuroDollarLivreRecus": {
+    "description": "Écran : moi"
+  },
+  "compteMonAdresseLive": "Mon Adresse Live",
+  "@compteMonAdresseLive": {
+    "description": "Écran : moi"
+  },
+  "compteCreerEtGagner": "Créer et gagner",
+  "@compteCreerEtGagner": {
+    "description": "Écran : moi"
+  },
+  "compteStudioCreateur": "Studio créateur",
+  "@compteStudioCreateur": {
+    "description": "Écran : menu_profil"
+  },
+  "compteVuesCadeauxFansEt": "Vues, cadeaux, fans et revenus",
+  "@compteVuesCadeauxFansEt": {
+    "description": "Écran : moi"
+  },
+  "compteLancerUnDirect": "Lancer un direct",
+  "@compteLancerUnDirect": {
+    "description": "Écran : menu_profil"
+  },
+  "compteVendreEnDirectRecevoir": "Vendre en direct, recevoir des cadeaux",
+  "@compteVendreEnDirectRecevoir": {
+    "description": "Écran : moi"
+  },
+  "compteCreditsLiveIaChaque": "Crédits Live IA chaque mois",
+  "@compteCreditsLiveIaChaque": {
+    "description": "Écran : moi"
+  },
+  "comptePublicite": "Publicité",
+  "@comptePublicite": {
+    "description": "Écran : menu_profil"
+  },
+  "compteFaireVoirUneVideo": "Faire voir une vidéo dans votre quartier",
+  "@compteFaireVoirUneVideo": {
+    "description": "Écran : moi"
+  },
+  "compteServicesFinanciers": "Services financiers",
+  "@compteServicesFinanciers": {
+    "description": "Écran : menu_profil"
+  },
+  "comptePayerEn3Fois": "Payer en 3 fois, tirelire, micro-crédit",
+  "@comptePayerEn3Fois": {
+    "description": "Écran : moi"
+  },
+  "compteActivite": "Activité",
+  "@compteActivite": {
+    "description": "Écran : moi"
+  },
+  "compteCeQuiSePaie": "Ce qui se paie dans Live",
+  "@compteCeQuiSePaie": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteDansLiveSurPlace": "Dans Live, sur place ou en direct",
+  "@compteDansLiveSurPlace": {
+    "description": "Écran : moi"
+  },
+  "compteMesReclamations": "Mes réclamations",
+  "@compteMesReclamations": {
+    "description": "Écran : menu_profil"
+  },
+  "compteAucuneReclamationEnCours": "Aucune réclamation en cours.",
+  "@compteAucuneReclamationEnCours": {
+    "description": "Écran : moi"
+  },
+  "compteMesAlertesDeRecherche": "Mes alertes de recherche",
+  "@compteMesAlertesDeRecherche": {
+    "description": "Écran : moi"
+  },
+  "compteInviterDesAmis": "Inviter des amis",
+  "@compteInviterDesAmis": {
+    "description": "Écran : moi"
+  },
+  "compteN1000FcfaDe": "1 000 FCFA de crédits pour vous deux",
+  "@compteN1000FcfaDe": {
+    "description": "Écran : moi"
+  },
+  "compteDonneesUtiliseesCeMois": "Données utilisées ce mois",
+  "@compteDonneesUtiliseesCeMois": {
+    "description": "Écran : moi"
+  },
+  "compteScenariosDeTest": "Scénarios de test",
+  "@compteScenariosDeTest": {
+    "description": "Écran : moi"
+  },
+  "compteMesSuperPouvoirs": "Mes super-pouvoirs",
+  "@compteMesSuperPouvoirs": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteFermerLeMenu": "Fermer le menu",
+  "@compteFermerLeMenu": {
+    "description": "Écran : menu_profil"
+  },
+  "compteCompte": "Compte",
+  "@compteCompte": {
+    "description": "Écran : parametres"
+  },
+  "compteParametresEtConfidentialite": "Paramètres et confidentialité",
+  "@compteParametresEtConfidentialite": {
+    "description": "Écran : menu_profil"
+  },
+  "compteVerifierMonIdentite": "Vérifier mon identité",
+  "@compteVerifierMonIdentite": {
+    "description": "Écran : menu_profil"
+  },
+  "compteEconomieDeDonnees": "Économie de données",
+  "@compteEconomieDeDonnees": {
+    "description": "Écran : parametres"
+  },
+  "compteMonEspace": "Mon espace",
+  "@compteMonEspace": {
+    "description": "Écran : menu_profil"
+  },
+  "compteMonArgentLive": "Mon argent Live",
+  "@compteMonArgentLive": {
+    "description": "Écran : carte_argent"
+  },
+  "compteMesCommandes": "Mes commandes",
+  "@compteMesCommandes": {
+    "description": "Écran : menu_profil"
+  },
+  "compteMesAlertes": "Mes alertes",
+  "@compteMesAlertes": {
+    "description": "Écran : menu_profil"
+  },
+  "compteAbonnesEtAbonnements": "Abonnés et abonnements",
+  "@compteAbonnesEtAbonnements": {
+    "description": "Écran : menu_profil"
+  },
+  "compteCreditsLiveIa": "Crédits Live IA",
+  "@compteCreditsLiveIa": {
+    "description": "Écran : menu_profil"
+  },
+  "compteMesDocumentsIa": "Mes documents IA",
+  "@compteMesDocumentsIa": {
+    "description": "Écran : menu_profil"
+  },
+  "compteEspacesProfessionnels": "Espaces professionnels",
+  "@compteEspacesProfessionnels": {
+    "description": "Écran : menu_profil"
+  },
+  "compteCreateur": "Créateur",
+  "@compteCreateur": {
+    "description": "Écran : menu_profil"
+  },
+  "compteFondsCreateurs": "Fonds Créateurs",
+  "@compteFondsCreateurs": {
+    "description": "Écran : menu_profil"
+  },
+  "compteDevelopperMonActivite": "Développer mon activité",
+  "@compteDevelopperMonActivite": {
+    "description": "Écran : menu_profil"
+  },
+  "compteOffresPro": "Offres Pro",
+  "@compteOffresPro": {
+    "description": "Écran : menu_profil"
+  },
+  "compteApiPartenaires": "API partenaires",
+  "@compteApiPartenaires": {
+    "description": "Écran : menu_profil"
+  },
+  "compteAideEtConfiance": "Aide et confiance",
+  "@compteAideEtConfiance": {
+    "description": "Écran : menu_profil"
+  },
+  "compteCentreDAide": "Centre d’aide",
+  "@compteCentreDAide": {
+    "description": "Écran : parametres"
+  },
+  "compteSignalerUnProbleme": "Signaler un problème",
+  "@compteSignalerUnProbleme": {
+    "description": "Écran : menu_profil"
+  },
+  "compteSeDeconnecter": "Se déconnecter",
+  "@compteSeDeconnecter": {
+    "description": "Écran : parametres"
+  },
+  "@compteArgentDisponible": {
+    "description": "Écran : carte_argent",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "compteArgentDisponible": "Mon argent Live : {montant} disponibles",
+  "compteEnAttente96000": "En attente : 96 000 FCFA · reçus et historique",
+  "@compteEnAttente96000": {
+    "description": "Écran : carte_argent"
+  },
+  "compteRetirer": "Retirer",
+  "@compteRetirer": {
+    "description": "Écran : carte_argent"
+  },
+  "@compteLogementsN": {
+    "description": "Écran : enregistres",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "compteLogementsN": "Logements ({n})",
+  "@compteProduitsN": {
+    "description": "Écran : enregistres",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "compteProduitsN": "Produits ({n})",
+  "compteTouchezLeCUr": "Touchez le cœur d’une annonce pour la retrouver ici.",
+  "@compteTouchezLeCUr": {
+    "description": "Écran : enregistres"
+  },
+  "compteExplorer": "Explorer",
+  "@compteExplorer": {
+    "description": "Écran : enregistres"
+  },
+  "@compteQuartierVille": {
+    "description": "Écran : boutique",
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      }
+    }
+  },
+  "compteQuartierVille": "{quartier}, Brazzaville",
+  "@compteSurLiveDepuis": {
+    "description": "Écran : boutique",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "compteSurLiveDepuis": "Sur Live depuis {date}",
+  "compteVentes": "Ventes",
+  "@compteVentes": {
+    "description": "Écran : boutique"
+  },
+  "compteLocations": "Locations",
+  "@compteLocations": {
+    "description": "Écran : boutique"
+  },
+  "compteRepondEn": "Répond en",
+  "@compteRepondEn": {
+    "description": "Écran : boutique"
+  },
+  "compteContenus": "Contenus",
+  "@compteContenus": {
+    "description": "Écran : boutique"
+  },
+  "compteOpportunites": "Opportunités",
+  "@compteOpportunites": {
+    "description": "Écran : boutique"
+  },
+  "compteProduits": "Produits",
+  "@compteProduits": {
+    "description": "Écran : boutique"
+  },
+  "compteBiens": "Biens",
+  "@compteBiens": {
+    "description": "Écran : boutique"
+  },
+  "compteVideos": "Vidéos",
+  "@compteVideos": {
+    "description": "Écran : profil_public"
+  },
+  "compteAvis": "Avis",
+  "@compteAvis": {
+    "description": "Écran : profil_public"
+  },
+  "compteLivraisonOuRemiseEn": "Livraison ou remise en main propre",
+  "@compteLivraisonOuRemiseEn": {
+    "description": "Écran : boutique"
+  },
+  "@compteNomQuartier": {
+    "description": "Écran : parametres",
+    "placeholders": {
+      "prenom": {
+        "type": "String"
+      }
+    }
+  },
+  "compteNomQuartier": "{prenom} Mabiala · Moungali",
+  "@compteMomoTelephone": {
+    "description": "Écran : parametres",
+    "placeholders": {
+      "tel": {
+        "type": "String"
+      }
+    }
+  },
+  "compteMomoTelephone": "MTN MoMo · {tel}",
+  "compteParametres": "Paramètres",
+  "@compteParametres": {
+    "description": "Écran : parametres"
+  },
+  "compteProfil": "Profil",
+  "@compteProfil": {
+    "description": "Écran : parametres"
+  },
+  "compteNumeroDeTelephone": "Numéro de téléphone",
+  "@compteNumeroDeTelephone": {
+    "description": "Écran : parametres"
+  },
+  "compteVerification": "Vérification",
+  "@compteVerification": {
+    "description": "Écran : parametres"
+  },
+  "compteComptesDeRetrait": "Comptes de retrait",
+  "@compteComptesDeRetrait": {
+    "description": "Écran : parametres"
+  },
+  "compteSecurite": "Sécurité",
+  "@compteSecurite": {
+    "description": "Écran : parametres"
+  },
+  "compteCodeSecretDeL": "Code secret de l’application",
+  "@compteCodeSecretDeL": {
+    "description": "Écran : parametres"
+  },
+  "compteCodeSecretDePaiement": "Code secret de paiement",
+  "@compteCodeSecretDePaiement": {
+    "description": "Écran : parametres"
+  },
+  "compteDistinctDuCodeDe": "Distinct du code de l’application",
+  "@compteDistinctDuCodeDe": {
+    "description": "Écran : parametres"
+  },
+  "compteAppareilsConnectes": "Appareils connectés",
+  "@compteAppareilsConnectes": {
+    "description": "Écran : parametres"
+  },
+  "comptePreferences": "Préférences",
+  "@comptePreferences": {
+    "description": "Écran : parametres"
+  },
+  "compteActivee": "Activée",
+  "@compteActivee": {
+    "description": "Écran : parametres"
+  },
+  "compteDesactivee": "Désactivée",
+  "@compteDesactivee": {
+    "description": "Écran : parametres"
+  },
+  "compteLangue": "Langue",
+  "@compteLangue": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteApparence": "Apparence",
+  "@compteApparence": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteClair": "Clair",
+  "@compteClair": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteSombre": "Sombre",
+  "@compteSombre": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteCommeLeTelephone": "Comme le téléphone",
+  "@compteCommeLeTelephone": {
+    "description": "Écran : parametres_actions"
+  },
+  "comptePaysEtVille": "Pays et ville",
+  "@comptePaysEtVille": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteCentresDInteret": "Centres d’intérêt",
+  "@compteCentresDInteret": {
+    "description": "Écran : parametres"
+  },
+  "compteAideEtConfidentialite": "Aide et confidentialité",
+  "@compteAideEtConfidentialite": {
+    "description": "Écran : parametres"
+  },
+  "compteQuestionsFrequentesEcrireAu": "Questions fréquentes, écrire au support, mes demandes",
+  "@compteQuestionsFrequentesEcrireAu": {
+    "description": "Écran : parametres"
+  },
+  "compteMesDonneesPersonnelles": "Mes données personnelles",
+  "@compteMesDonneesPersonnelles": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteTelechargerOuSupprimer": "Télécharger ou supprimer",
+  "@compteTelechargerOuSupprimer": {
+    "description": "Écran : parametres"
+  },
+  "compteConditionsDUtilisation": "Conditions d’utilisation",
+  "@compteConditionsDUtilisation": {
+    "description": "Écran : legal"
+  },
+  "comptePolitiqueDeConfidentialite": "Politique de confidentialité",
+  "@comptePolitiqueDeConfidentialite": {
+    "description": "Écran : legal"
+  },
+  "compteSupprimerMonCompte": "Supprimer mon compte",
+  "@compteSupprimerMonCompte": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteVosGainsDoiventD": "Vos gains doivent d’abord être retirés",
+  "@compteVosGainsDoiventD": {
+    "description": "Écran : parametres"
+  },
+  "compteLive10Prototype": "Live 1.0 (prototype)",
+  "@compteLive10Prototype": {
+    "description": "Écran : parametres"
+  },
+  "comptePaiements": "Paiements",
+  "@comptePaiements": {
+    "description": "Écran : parametres"
+  },
+  "compteMessages": "Messages",
+  "@compteMessages": {
+    "description": "Écran : parametres"
+  },
+  "compteCommandesEtVisites": "Commandes et visites",
+  "@compteCommandesEtVisites": {
+    "description": "Écran : parametres"
+  },
+  "compteAlertesDeRecherche": "Alertes de recherche",
+  "@compteAlertesDeRecherche": {
+    "description": "Écran : parametres"
+  },
+  "compteToujoursEnvoyeAussiPar": "Toujours envoyé aussi par SMS",
+  "@compteToujoursEnvoyeAussiPar": {
+    "description": "Écran : parametres"
+  },
+  "compteNouveauxMessagesEtOffres": "Nouveaux messages et offres",
+  "@compteNouveauxMessagesEtOffres": {
+    "description": "Écran : parametres"
+  },
+  "compteAcceptationRemiseRappelDe": "Acceptation, remise, rappel de visite",
+  "@compteAcceptationRemiseRappelDe": {
+    "description": "Écran : parametres"
+  },
+  "compteNouveauxResultats": "Nouveaux résultats",
+  "@compteNouveauxResultats": {
+    "description": "Écran : parametres"
+  },
+  "compteComptesSuivis": "Comptes suivis",
+  "@compteComptesSuivis": {
+    "description": "Écran : parametres"
+  },
+  "compteNouvellesVideosEtDirects": "Nouvelles vidéos et directs",
+  "@compteNouvellesVideosEtDirects": {
+    "description": "Écran : parametres"
+  },
+  "compteOffresDeLive": "Offres de Live",
+  "@compteOffresDeLive": {
+    "description": "Écran : parametres"
+  },
+  "comptePromotionsCreditsOfferts": "Promotions, crédits offerts",
+  "@comptePromotionsCreditsOfferts": {
+    "description": "Écran : parametres"
+  },
+  "compteLesNotificationsDePaiement": "Les notifications de paiement ne peuvent pas être coupées : elles protègent votre argent.",
+  "@compteLesNotificationsDePaiement": {
+    "description": "Écran : parametres"
+  },
+  "compteCeMoisCi": "Ce mois-ci",
+  "@compteCeMoisCi": {
+    "description": "Écran : parametres"
+  },
+  "compteVideos71Photos22": "Vidéos 71 % · photos 22 % · messages 7 %",
+  "@compteVideos71Photos22": {
+    "description": "Écran : parametres"
+  },
+  "compteVideosEn360pLecture": "Vidéos en 360p, lecture au toucher sur réseau mobile. Environ 3 fois moins de données.",
+  "@compteVideosEn360pLecture": {
+    "description": "Écran : parametres"
+  },
+  "compteEnWiFi": "En Wi-Fi",
+  "@compteEnWiFi": {
+    "description": "Écran : parametres"
+  },
+  "compteVideosEnHauteQualite": "Vidéos en haute qualité, préchargement",
+  "@compteVideosEnHauteQualite": {
+    "description": "Écran : parametres"
+  },
+  "compteEn3g4g": "En 3G / 4G",
+  "@compteEn3g4g": {
+    "description": "Écran : parametres"
+  },
+  "compteQualiteReduitePasDe": "Qualité réduite, pas de préchargement",
+  "@compteQualiteReduitePasDe": {
+    "description": "Écran : parametres"
+  },
+  "compteTelechargements": "Téléchargements",
+  "@compteTelechargements": {
+    "description": "Écran : parametres"
+  },
+  "compteUniquementEnWiFi": "Uniquement en Wi-Fi",
+  "@compteUniquementEnWiFi": {
+    "description": "Écran : parametres"
+  },
+  "compteSimulerUneCoupureDu": "Simuler une coupure du réseau",
+  "@compteSimulerUneCoupureDu": {
+    "description": "Écran : parametres"
+  },
+  "comptePrototypeAfficheLeBandeau": "Prototype : affiche le bandeau « Hors connexion » sur toutes les pages. Les brouillons restent, les envois attendent.",
+  "@comptePrototypeAfficheLeBandeau": {
+    "description": "Écran : parametres"
+  },
+  "@compteAuNomDe": {
+    "description": "Écran : parametres_actions",
+    "placeholders": {
+      "prenom": {
+        "type": "String"
+      }
+    }
+  },
+  "compteAuNomDe": "Au nom de {prenom} Mabiala",
+  "@compteModifie": {
+    "description": "Écran : parametres_actions",
+    "placeholders": {
+      "quoi": {
+        "type": "String"
+      }
+    }
+  },
+  "compteModifie": "{quoi} modifié.",
+  "@compteAnnoncesPrixDe": {
+    "description": "Écran : parametres_actions",
+    "placeholders": {
+      "pays": {
+        "type": "String"
+      }
+    }
+  },
+  "compteAnnoncesPrixDe": "Annonces et prix de {pays}, toujours en FCFA.",
+  "@compteRetirezGainsTexte": {
+    "description": "Écran : parametres_actions",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "compteRetirezGainsTexte": "Il vous reste {montant}. Retirez-les sur votre Mobile Money avant de supprimer votre compte.",
+  "compteChangerDeNumero": "Changer de numéro",
+  "@compteChangerDeNumero": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteUnCodeSmsSera": "Un code SMS sera envoyé au nouveau numéro. Pour votre sécurité, les retraits sont suspendus 24 h après le changement.",
+  "@compteUnCodeSmsSera": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteCodeEnvoyeAuNouveau": "Code envoyé au nouveau numéro.",
+  "@compteCodeEnvoyeAuNouveau": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteCompteDeRetrait": "Compte de retrait",
+  "@compteCompteDeRetrait": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteAjouterUnNumeroAirtel": "Ajouter un numéro Airtel Money",
+  "@compteAjouterUnNumeroAirtel": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteIlDoitEtreA": "Il doit être à votre nom (vérifié)",
+  "@compteIlDoitEtreA": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteUnCodeSmsVerifiera": "Un code SMS vérifiera le numéro Airtel Money.",
+  "@compteUnCodeSmsVerifiera": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteCeTelephoneTecnoSpark": "Ce téléphone · Tecno Spark 10",
+  "@compteCeTelephoneTecnoSpark": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteBrazzavilleActifMaintenant": "Brazzaville · actif maintenant",
+  "@compteBrazzavilleActifMaintenant": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteChromeSurOrdinateur": "Chrome sur ordinateur",
+  "@compteChromeSurOrdinateur": {
+    "description": "Écran : parametres_actions"
+  },
+  "comptePointeNoireIlY": "Pointe-Noire · il y a 2 jours",
+  "@comptePointeNoireIlY": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteAppareilDeconnecte": "Appareil déconnecté.",
+  "@compteAppareilDeconnecte": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteDeconnecter": "Déconnecter",
+  "@compteDeconnecter": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteLeCodeAfficheSur": "le code affiché sur l’ordinateur",
+  "@compteLeCodeAfficheSur": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteOrdinateurConnecteAVotre": "Ordinateur connecté à votre compte.",
+  "@compteOrdinateurConnecteAVotre": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteConnecterUnAppareil": "Connecter un appareil",
+  "@compteConnecterUnAppareil": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteLangueEnregistree": "Langue enregistrée.",
+  "@compteLangueEnregistree": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteClairLeJourSombre": "Clair le jour, sombre si le téléphone l’est",
+  "@compteClairLeJourSombre": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteReposeLesYeuxLa": "Repose les yeux la nuit, économise la batterie",
+  "@compteReposeLesYeuxLa": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteTelechargerMesDonnees": "Télécharger mes données",
+  "@compteTelechargerMesDonnees": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteArchiveEnvoyeeParSms": "Archive envoyée par SMS sous 48 h",
+  "@compteArchiveEnvoyeeParSms": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteVoirCeQueLive": "Voir ce que Live conserve",
+  "@compteVoirCeQueLive": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteProfilAnnoncesTransactionsMessages": "Profil, annonces, transactions, messages",
+  "@compteProfilAnnoncesTransactionsMessages": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteDemandeEnregistreeLienDe": "Demande enregistrée : lien de téléchargement sous 48 h.",
+  "@compteDemandeEnregistreeLienDe": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteRetirezDAbordVos": "Retirez d’abord vos gains",
+  "@compteRetirezDAbordVos": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteRetirerMesGains": "Retirer mes gains",
+  "@compteRetirerMesGains": {
+    "description": "Écran : parametres_actions"
+  },
+  "compteVosAnnoncesEtVotre": "Vos annonces et votre profil disparaissent. Les reçus de paiement sont conservés 10 ans, comme la loi l’exige.",
+  "@compteVosAnnoncesEtVotre": {
+    "description": "Écran : parametres_actions"
+  },
+  "suivant": "Suivant",
+  "@suivant": {
+    "description": "Écran : commun"
+  },
+  "passer": "Passer",
+  "@passer": {
+    "description": "Écran : commun"
+  },
+  "partager": "Partager",
+  "@partager": {
+    "description": "Écran : commun"
+  },
+  "supprimer": "Supprimer",
+  "@supprimer": {
+    "description": "Écran : commun"
+  },
+  "@compteEspaceCree": {
+    "description": "Écran : espace",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "compteEspaceCree": "{nom} est créé",
+  "compteBoutique": "Boutique",
+  "@compteBoutique": {
+    "description": "Écran : espace"
+  },
+  "compteCatalogueVideosLivraison": "Catalogue, vidéos, livraison",
+  "@compteCatalogueVideosLivraison": {
+    "description": "Écran : espace"
+  },
+  "compteAgenceImmobiliere": "Agence immobilière",
+  "@compteAgenceImmobiliere": {
+    "description": "Écran : espace"
+  },
+  "compteBiensAgentsVisites": "Biens, agents, visites",
+  "@compteBiensAgentsVisites": {
+    "description": "Écran : espace"
+  },
+  "comptePrestataire": "Prestataire",
+  "@comptePrestataire": {
+    "description": "Écran : espace"
+  },
+  "compteServicesDevisAgenda": "Services, devis, agenda",
+  "@compteServicesDevisAgenda": {
+    "description": "Écran : espace"
+  },
+  "compteChaineDeCreateur": "Chaîne de créateur",
+  "@compteChaineDeCreateur": {
+    "description": "Écran : espace"
+  },
+  "compteVideosFansDirects": "Vidéos, fans, directs",
+  "@compteVideosFansDirects": {
+    "description": "Écran : espace"
+  },
+  "compteRccmRegistreDuCommerce": "RCCM (registre du commerce)",
+  "@compteRccmRegistreDuCommerce": {
+    "description": "Écran : espace"
+  },
+  "compteNiuNumeroDIdentification": "NIU (numéro d’identification unique)",
+  "@compteNiuNumeroDIdentification": {
+    "description": "Écran : espace"
+  },
+  "compteAgrementDAgenceImmobiliere": "Agrément d’agence immobilière",
+  "@compteAgrementDAgenceImmobiliere": {
+    "description": "Écran : espace"
+  },
+  "compteJustificatifDAdresseDu": "Justificatif d’adresse du local",
+  "@compteJustificatifDAdresseDu": {
+    "description": "Écran : espace"
+  },
+  "compteUnEspaceProDemande": "Un espace pro demande d’abord la vérification de votre identité.",
+  "@compteUnEspaceProDemande": {
+    "description": "Écran : espace"
+  },
+  "compteVerifier": "Vérifier",
+  "@compteVerifier": {
+    "description": "Écran : espace"
+  },
+  "compteQuelEspace": "Quel espace ?",
+  "@compteQuelEspace": {
+    "description": "Écran : espace"
+  },
+  "compteNomDeLEspace": "Nom de l’espace",
+  "@compteNomDeLEspace": {
+    "description": "Écran : espace"
+  },
+  "compteJustificatifs": "Justificatifs",
+  "@compteJustificatifs": {
+    "description": "Écran : espace"
+  },
+  "compteVerifiesParLiveSous": "Vérifiés par Live sous 48 h. Ils donnent droit au badge « Pro vérifié ».",
+  "@compteVerifiesParLiveSous": {
+    "description": "Écran : espace"
+  },
+  "compteAjoute": "Ajouté",
+  "@compteAjoute": {
+    "description": "Écran : espace"
+  },
+  "comptePhotoOuPdf": "Photo ou PDF",
+  "@comptePhotoOuPdf": {
+    "description": "Écran : espace"
+  },
+  "compteCreerMonEspace": "Créer mon espace",
+  "@compteCreerMonEspace": {
+    "description": "Écran : espace"
+  },
+  "compteSuperPouvoirDebloqueAgence": "Super-pouvoir débloqué : « Agence ou boutique ». Vous êtes au niveau N3 (Pro vérifié) : équipe jusqu’à 5 membres, plafonds élevés, badge.",
+  "@compteSuperPouvoirDebloqueAgence": {
+    "description": "Écran : espace"
+  },
+  "compteAllerAMonEspace": "Aller à mon espace",
+  "@compteAllerAMonEspace": {
+    "description": "Écran : espace"
+  },
+  "compteInviterMonEquipe": "Inviter mon équipe",
+  "@compteInviterMonEquipe": {
+    "description": "Écran : espace"
+  },
+  "compteProprietaire": "Propriétaire",
+  "@compteProprietaire": {
+    "description": "Écran : espace"
+  },
+  "compteTousLesDroits": "Tous les droits",
+  "@compteTousLesDroits": {
+    "description": "Écran : espace"
+  },
+  "compteGestionnaire": "Gestionnaire",
+  "@compteGestionnaire": {
+    "description": "Écran : espace"
+  },
+  "compteAnnoncesVisitesMessages": "Annonces, visites, messages",
+  "@compteAnnoncesVisitesMessages": {
+    "description": "Écran : espace"
+  },
+  "compteAgent": "Agent",
+  "@compteAgent": {
+    "description": "Écran : espace"
+  },
+  "compteVisitesEtMessages": "Visites et messages",
+  "@compteVisitesEtMessages": {
+    "description": "Écran : espace"
+  },
+  "compteComptable": "Comptable",
+  "@compteComptable": {
+    "description": "Écran : espace"
+  },
+  "compteConsultationDesFinances": "Consultation des finances",
+  "@compteConsultationDesFinances": {
+    "description": "Écran : espace"
+  },
+  "compteEquipe": "Équipe",
+  "@compteEquipe": {
+    "description": "Écran : espace"
+  },
+  "compteN5MembresSur5": "5 membres sur 5 gratuits. Chaque action est journalisée : qui a publié, modifié ou remboursé.",
+  "@compteN5MembresSur5": {
+    "description": "Écran : espace"
+  },
+  "compteSeulLeProprietairePeut": "Seul le propriétaire peut retirer l’argent de l’espace.",
+  "@compteSeulLeProprietairePeut": {
+    "description": "Écran : espace"
+  },
+  "compteAuDelaDe5": "Au-delà de 5 membres : abonnement Pro Entreprise.",
+  "@compteAuDelaDe5": {
+    "description": "Écran : espace"
+  },
+  "compteInviterUnMembre": "Inviter un membre",
+  "@compteInviterUnMembre": {
+    "description": "Écran : espace"
+  },
+  "@compteVerifierEtape": {
+    "description": "Écran : verifier",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "compteVerifierEtape": "Vérifier mon identité · {n}/3",
+  "@compteNomOperateur": {
+    "description": "Écran : verifier",
+    "placeholders": {
+      "prenom": {
+        "type": "String"
+      }
+    }
+  },
+  "compteNomOperateur": "Nom chez l’opérateur : MABIALA {prenom}",
+  "@comptePrise": {
+    "description": "Écran : verifier",
+    "placeholders": {
+      "quoi": {
+        "type": "String"
+      }
+    }
+  },
+  "comptePrise": "{quoi} : prise",
+  "@compteCni": {
+    "description": "Écran : verifier"
+  },
+  "compteCni": "CNI",
+  "@comptePasseport": {
+    "description": "Écran : verifier"
+  },
+  "comptePasseport": "Passeport",
+  "compteVotrePieceDIdentite": "Votre pièce d’identité",
+  "@compteVotrePieceDIdentite": {
+    "description": "Écran : verifier"
+  },
+  "compteCniCongolaiseOuPasseport": "CNI congolaise ou passeport, en cours de validité.",
+  "@compteCniCongolaiseOuPasseport": {
+    "description": "Écran : verifier"
+  },
+  "comptePhotoDuRecto": "Photo du recto",
+  "@comptePhotoDuRecto": {
+    "description": "Écran : verifier"
+  },
+  "comptePageAvecLaPhoto": "Page avec la photo",
+  "@comptePageAvecLaPhoto": {
+    "description": "Écran : verifier"
+  },
+  "comptePhotoDuVerso": "Photo du verso",
+  "@comptePhotoDuVerso": {
+    "description": "Écran : verifier"
+  },
+  "compteUnSelfie": "Un selfie",
+  "@compteUnSelfie": {
+    "description": "Écran : verifier"
+  },
+  "comptePourVerifierQueLa": "Pour vérifier que la pièce est bien la vôtre. Retirez lunettes et chapeau.",
+  "@comptePourVerifierQueLa": {
+    "description": "Écran : verifier"
+  },
+  "compteSelfiePris": "Selfie pris",
+  "@compteSelfiePris": {
+    "description": "Écran : verifier"
+  },
+  "comptePrendreLeSelfie": "Prendre le selfie",
+  "@comptePrendreLeSelfie": {
+    "description": "Écran : verifier"
+  },
+  "compteVotreCompteMobileMoney": "Votre compte Mobile Money",
+  "@compteVotreCompteMobileMoney": {
+    "description": "Écran : verifier"
+  },
+  "compteLeNomDuTitulaire": "Le nom du titulaire doit être le même que sur votre pièce.",
+  "@compteLeNomDuTitulaire": {
+    "description": "Écran : verifier"
+  },
+  "compteNomSurLaPiece": "Nom sur la pièce",
+  "@compteNomSurLaPiece": {
+    "description": "Écran : verifier"
+  },
+  "compteVosDocumentsSontChiffres": "Vos documents sont chiffrés et vus uniquement par l’équipe de vérification.",
+  "@compteVosDocumentsSontChiffres": {
+    "description": "Écran : verifier"
+  },
+  "compteEnvoyerPourVerification": "Envoyer pour vérification",
+  "@compteEnvoyerPourVerification": {
+    "description": "Écran : verifier"
+  },
+  "compteIdentiteVerifiee": "Identité vérifiée",
+  "@compteIdentiteVerifiee": {
+    "description": "Écran : verifier"
+  },
+  "compteVerificationEnCours": "Vérification en cours…",
+  "@compteVerificationEnCours": {
+    "description": "Écran : verifier"
+  },
+  "compteNouveauxSuperPouvoirsDebloques": "Nouveaux super-pouvoirs débloqués :",
+  "@compteNouveauxSuperPouvoirsDebloques": {
+    "description": "Écran : verifier"
+  },
+  "compteEnGeneralMoinsDe": "En général moins de 10 minutes. Vous pouvez continuer à utiliser Live.",
+  "@compteEnGeneralMoinsDe": {
+    "description": "Écran : verifier"
+  },
+  "@compteADebloquerN": {
+    "description": "Écran : pouvoirs_ecran",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "compteADebloquerN": "À débloquer ({n})",
+  "@compteActifsN": {
+    "description": "Écran : pouvoirs_ecran",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "compteActifsN": "Actifs ({n})",
+  "@compteActif": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteActif": "Actif",
+  "compteSurLiveToutLe": "Sur Live, tout le monde commence comme utilisateur. Chaque pouvoir débloqué vous permet de gagner de l’argent autrement.",
+  "@compteSurLiveToutLe": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteTelephone": "Téléphone",
+  "@compteTelephone": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteIdentite": "Identité",
+  "@compteIdentite": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteProVerifie": "Pro vérifié",
+  "@compteProVerifie": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteAbonnement": "Abonnement",
+  "@compteAbonnement": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteStatistiquesDetaillees": "Statistiques détaillées",
+  "@compteStatistiquesDetaillees": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteVuesClicsVentesPar": "Vues, clics, ventes par jour et par quartier",
+  "@compteVuesClicsVentesPar": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteBoostsA30": "Boosts à −30 %",
+  "@compteBoostsA30": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteMettezVosAnnoncesEn": "Mettez vos annonces en tête du fil",
+  "@compteMettezVosAnnoncesEn": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteReponsesRapides": "Réponses rapides",
+  "@compteReponsesRapides": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteRepondezEnUnGeste": "Répondez en un geste aux questions fréquentes",
+  "@compteRepondezEnUnGeste": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteBadgePro": "Badge Pro",
+  "@compteBadgePro": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteAfficheSurVosAnnonces": "Affiché sur vos annonces et votre profil",
+  "@compteAfficheSurVosAnnonces": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteAssistancePrioritaire": "Assistance prioritaire",
+  "@compteAssistancePrioritaire": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteUnConseillerLiveRepond": "Un conseiller Live répond en moins d’une heure",
+  "@compteUnConseillerLiveRepond": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteN5000FcfaMois": "5 000 FCFA / mois · sans engagement",
+  "@compteN5000FcfaMois": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "comptePourLesVendeursAgences": "Pour les vendeurs, agences et prestataires qui veulent aller plus loin.",
+  "@comptePourLesVendeursAgences": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteLivePro1Mois": "Live Pro · 1 mois",
+  "@compteLivePro1Mois": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteLiveProEstActif": "Live Pro est actif",
+  "@compteLiveProEstActif": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteSAbonner5000": "S’abonner · 5 000 FCFA / mois",
+  "@compteSAbonner5000": {
+    "description": "Écran : pouvoirs_ecran"
+  },
+  "compteComptableABrazzavilleJe": "Comptable à Brazzaville. Je vends ce dont je ne me sers plus.",
+  "@compteComptableABrazzavilleJe": {
+    "description": "Écran : profil_public"
+  },
+  "compteEtudianteFanDeMode": "Étudiante, fan de mode et de bonnes affaires.",
+  "@compteEtudianteFanDeMode": {
+    "description": "Écran : profil_public"
+  },
+  "compteAnnonces": "Annonces",
+  "@compteAnnonces": {
+    "description": "Écran : profil_public"
+  },
+  "compteMoungaliBrazzaville": "Moungali, Brazzaville",
+  "@compteMoungaliBrazzaville": {
+    "description": "Écran : profil_public"
+  },
+  "compteSurLiveDepuisSeptembre": "Sur Live depuis septembre 2026",
+  "@compteSurLiveDepuisSeptembre": {
+    "description": "Écran : profil_public"
+  },
+  "compteOptions": "Options",
+  "@compteOptions": {
+    "description": "Écran : profil_public"
+  },
+  "compteCeProfil": "ce profil",
+  "@compteCeProfil": {
+    "description": "Écran : profil_public"
+  },
+  "compteAbonne": "Abonné",
+  "@compteAbonne": {
+    "description": "Écran : profil_public"
+  },
+  "compteSuivre": "Suivre",
+  "@compteSuivre": {
+    "description": "Écran : profil_public"
+  },
+  "compteEcrire": "Écrire",
+  "@compteEcrire": {
+    "description": "Écran : profil_public"
+  },
+  "compteN214AvisVerifiesAcheteurs": "214 avis vérifiés · acheteurs ayant payé dans Live",
+  "@compteN214AvisVerifiesAcheteurs": {
+    "description": "Écran : profil_public"
+  },
+  "compteLArgentEstBloque": "L’argent est bloqué par Live et versé seulement quand vous confirmez (QR, réception, fin du service). Remboursé sinon.",
+  "@compteLArgentEstBloque": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteAchatsPayesDAvance": "Achats payés d’avance (argent bloqué jusqu’au QR de remise)",
+  "@compteAchatsPayesDAvance": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteFraisDeVisiteD": "Frais de visite d’un logement",
+  "@compteFraisDeVisiteD": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteAcompteDeReservationD": "Acompte de réservation d’un logement",
+  "@compteAcompteDeReservationD": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteServicesAPrixFixe": "Services à prix fixe et acomptes de devis",
+  "@compteServicesAPrixFixe": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteCreditsLiveIaBoosts": "Crédits Live IA, boosts, Live Pro",
+  "@compteCreditsLiveIaBoosts": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteVousVoyezLObjet": "Vous voyez l’objet avant d’acheter. La commande est réservée sans paiement ; au rendez-vous, vous validez la demande MoMo ou Airtel envoyée par Live. Pas d’avance, pas d’espèces.",
+  "@compteVousVoyezLObjet": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteTelephonesEtOrdinateursD": "Téléphones et ordinateurs d’occasion",
+  "@compteTelephonesEtOrdinateursD": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteMotosVoituresPieces": "Motos, voitures, pièces",
+  "@compteMotosVoituresPieces": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteElectromenagerEtMeublesD": "Électroménager et meubles d’occasion",
+  "@compteElectromenagerEtMeublesD": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteCesSommesSeReglent": "Ces sommes se règlent entre vous et le propriétaire, l’agence ou l’organisme, contre un reçu ou un contrat signé. Live affiche les montants à l’avance mais ne les encaisse pas.",
+  "@compteCesSommesSeReglent": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteLoyersAvanceEtCaution": "Loyers, avance et caution",
+  "@compteLoyersAvanceEtCaution": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteCommissionDAgence": "Commission d’agence",
+  "@compteCommissionDAgence": {
+    "description": "Écran : paiements_guide"
+  },
+  "comptePrixDAchatD": "Prix d’achat d’une maison ou d’un terrain (chez le notaire)",
+  "@comptePrixDAchatD": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteFraisOfficielsDUn": "Frais officiels d’un concours (Live Emploi)",
+  "@compteFraisOfficielsDUn": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteSurLiveChaqueSomme": "Sur Live, chaque somme porte une étiquette : vous savez toujours où et comment elle se paie.",
+  "@compteSurLiveChaqueSomme": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteSiUneSommeEst": "Si une somme est marquée « Payé dans Live » et qu’on vous demande de l’envoyer directement sur un numéro MoMo, c’est une arnaque : refusez et signalez-la.",
+  "@compteSiUneSommeEst": {
+    "description": "Écran : paiements_guide"
+  },
+  "compteTroisCasPayeDans": "Trois cas. Payé dans Live : Live garde votre argent jusqu’à ce que vous confirmiez. À la remise : vous voyez d’abord l’objet, puis vous validez le paiement MoMo sur votre téléphone. En direct : loyers, caution, prix d’une maison ou frais officiels, payés contre reçu au propriétaire ou à l’organisme.",
+  "@compteTroisCasPayeDans": {
+    "description": "Écran : paiements_guide"
+  },
+  "@compteLegalVersionFrancaise": {
+    "description": "Écran : legal (bandeau, anglais seulement)"
+  },
+  "compteLegalVersionFrancaise": ""
 }

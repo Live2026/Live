@@ -11,7 +11,7 @@ class _CarteArgent extends StatelessWidget {
     return Semantics(
       container: true,
       button: true,
-      label: 'Mon argent Live : ${fcfa(etat.disponible)} disponibles',
+      label: context.t.compteArgentDisponible(fcfa(etat.disponible)),
       onTap: () => context.push('/portefeuille'),
       child: Pressable(
         onTap: () => context.push('/portefeuille'),
@@ -32,8 +32,8 @@ class _CarteArgent extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Mon argent Live',
+                      Text(
+                        context.t.compteMonArgentLive,
                         style: TextStyle(color: LiveColors.brumeClaire),
                       ),
                       ChiffreAnime(
@@ -45,8 +45,8 @@ class _CarteArgent extends StatelessWidget {
                           fontWeight: FontWeight.w900,
                         ),
                       ),
-                      const Text(
-                        'En attente : 96 000 FCFA · reçus et historique',
+                      Text(
+                        context.t.compteEnAttente96000,
                         style: TextStyle(
                           color: Color(0xFFB8C0CC),
                           fontSize: 12.5,
@@ -63,7 +63,7 @@ class _CarteArgent extends StatelessWidget {
                   minimumSize: const Size(0, 44),
                 ),
                 onPressed: () => context.push('/retirer'),
-                child: const Text('Retirer'),
+                child: Text(context.t.compteRetirer),
               ),
             ],
           ),

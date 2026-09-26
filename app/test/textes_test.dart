@@ -46,6 +46,7 @@ void main() {
     'lib/features/feed',
     'lib/features/explore',
     'lib/features/market',
+    'lib/features/compte',
     'lib/features/messages/appels.dart',
     'lib/features/messages/appel_en_cours.dart',
     'lib/features/messages/appel_vues.dart',

@@ -212,7 +212,7 @@ class EcranProduit extends StatelessWidget {
         appBar: AppBar(
           actions: [
             IconButton(
-              tooltip: context.t.marketPartager,
+              tooltip: context.t.partager,
               onPressed: () => partager(context, p.titre),
               icon: const Icon(Icons.ios_share_rounded),
             ),
@@ -261,7 +261,7 @@ class EcranProduit extends StatelessWidget {
             actions: [
               BoutonVerre(
                 icone: Icons.ios_share_rounded,
-                libelle: context.t.marketPartager,
+                libelle: context.t.partager,
                 onTap: () => partager(context, p.titre),
               ),
               const SizedBox(width: 8),

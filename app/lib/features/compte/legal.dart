@@ -162,7 +162,7 @@ class EcranLegal extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          cgu ? 'Conditions d’utilisation' : 'Politique de confidentialité',
+          cgu ? context.t.compteConditionsDUtilisation : context.t.comptePolitiqueDeConfidentialite,
         ),
       ),
       body: Etroit(
@@ -182,6 +182,10 @@ class EcranLegal extends StatelessWidget {
                 'avant le lancement (décision D-16).',
               ),
             ),
+            if (context.t.compteLegalVersionFrancaise.isNotEmpty) ...[
+              const SizedBox(height: 10),
+              Bloc(child: Text(context.t.compteLegalVersionFrancaise)),
+            ],
             for (final (titre, paragraphes) in articles) ...[
               const SizedBox(height: 18),
               Text(

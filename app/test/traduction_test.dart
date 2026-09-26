@@ -8,6 +8,8 @@ import 'package:live/main.dart';
 import 'outils.dart';
 
 void main() {
+  setUpAll(chargerPolices);
+
   testWidgets('en anglais, le démarrage et la navigation sont traduits', (
     tester,
   ) async {
@@ -36,6 +38,25 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Home'), findsOneWidget);
     expect(find.text('Explore'), findsOneWidget);
+
+    // Les écrans traduits ensuite.
+    for (final (route, texte) in const [
+      ('/accueil', 'For you'),
+      ('/explorer', 'Money and daily life'),
+      ('/market', 'Popular categories'),
+      ('/produit/p1', 'Handover'),
+      ('/mes-ventes', 'My sales'),
+      ('/vendre', 'What are you selling?'),
+      ('/moi', 'Followers'),
+      ('/parametres', 'Security'),
+      ('/appels', 'Calls'),
+    ]) {
+      routeur.go(route);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 600));
+      expect(tester.takeException(), isNull, reason: route);
+      expect(find.text(texte), findsWidgets, reason: route);
+    }
   });
 
   testWidgets('une langue pas encore traduite retombe sur le français', (

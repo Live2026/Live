@@ -200,7 +200,7 @@ class _MesAnnoncesState extends ConsumerState<_MesAnnonces> {
                     itemBuilder: (_) => [
                       PopupMenuItem(
                         value: 'modifier',
-                        child: Text(context.t.marketModifier),
+                        child: Text(context.t.modifier),
                       ),
                       PopupMenuItem(
                         value: 'dupliquer',

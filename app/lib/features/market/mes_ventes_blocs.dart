@@ -347,7 +347,7 @@ void _refuser(BuildContext context, WidgetRef ref, Commande v) {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text(context.t.marketAnnuler),
+            child: Text(context.t.annuler),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: LiveColors.erreur),

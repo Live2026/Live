@@ -122,7 +122,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
                 onPressed: paysTelephone[_pays].complet(_tel.text)
                     ? _envoyer
                     : null,
-                child: Text(context.t.demarrageSuivant),
+                child: Text(context.t.suivant),
               ),
             )
           : null,
@@ -167,10 +167,7 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
     return Scaffold(
       appBar: BarreDemarrage(
         actions: [
-          TextButton(
-            onPressed: _terminer,
-            child: Text(context.t.demarragePasser),
-          ),
+          TextButton(onPressed: _terminer, child: Text(context.t.passer)),
         ],
       ),
       body: ListView(

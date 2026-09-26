@@ -12,42 +12,42 @@ class _ActionsParametres {
   Future<void> numero() async {
     if (await confirmer(
       context,
-      titre: 'Changer de numéro',
-      texte:
-          'Un code SMS sera envoyé au nouveau numéro. Pour votre sécurité, '
-          'les retraits sont suspendus 24 h après le changement.',
-      action: 'Continuer',
+      titre: context.t.compteChangerDeNumero,
+      texte: context.t.compteUnCodeSmsSera,
+      action: context.t.continuer,
     )) {
-      if (context.mounted) informer(context, 'Code envoyé au nouveau numéro.');
+      if (context.mounted) {
+        informer(context, context.t.compteCodeEnvoyeAuNouveau);
+      }
     }
   }
 
   Future<void> comptesRetrait() async {
     final choix = await choisir<String>(
       context,
-      titre: 'Compte de retrait',
+      titre: context.t.compteCompteDeRetrait,
       actuel: _etat.operateur,
       options: [
         (
           'MTN',
-          'MTN MoMo · ${_etat.telephone}',
-          'Au nom de ${_etat.prenom} Mabiala',
+          context.t.compteMomoTelephone(_etat.telephone),
+          context.t.compteAuNomDe(_etat.prenom),
         ),
         (
           'Airtel',
-          'Ajouter un numéro Airtel Money',
-          'Il doit être à votre nom (vérifié)',
+          context.t.compteAjouterUnNumeroAirtel,
+          context.t.compteIlDoitEtreA,
         ),
       ],
     );
     if (choix == 'Airtel' && context.mounted) {
-      informer(context, 'Un code SMS vérifiera le numéro Airtel Money.');
+      informer(context, context.t.compteUnCodeSmsVerifiera);
     }
   }
 
   Future<void> code(String titre) async {
     if (await changerCode(context, titre: titre) && context.mounted) {
-      informer(context, '$titre modifié.');
+      informer(context, context.t.compteModifie(titre));
     }
   }
 
@@ -60,24 +60,24 @@ class _ActionsParametres {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const ListTile(
+            ListTile(
               leading: Icon(
                 Icons.phone_android_rounded,
                 color: LiveColors.bleu,
               ),
-              title: Text('Ce téléphone · Tecno Spark 10'),
-              subtitle: Text('Brazzaville · actif maintenant'),
+              title: Text(context.t.compteCeTelephoneTecnoSpark),
+              subtitle: Text(context.t.compteBrazzavilleActifMaintenant),
             ),
             ListTile(
               leading: const Icon(Icons.laptop_rounded),
-              title: const Text('Chrome sur ordinateur'),
-              subtitle: const Text('Pointe-Noire · il y a 2 jours'),
+              title: Text(context.t.compteChromeSurOrdinateur),
+              subtitle: Text(context.t.comptePointeNoireIlY),
               trailing: TextButton(
                 onPressed: () {
                   Navigator.pop(ctx);
-                  informer(context, 'Appareil déconnecté.');
+                  informer(context, context.t.compteAppareilDeconnecte);
                 },
-                child: const Text('Déconnecter'),
+                child: Text(context.t.compteDeconnecter),
               ),
             ),
             // Connexion sur ordinateur par code QR (E-AUTH-09).
@@ -91,14 +91,14 @@ class _ActionsParametres {
                   Navigator.pop(ctx);
                   if (await simulerScan(
                         context,
-                        quoi: 'le code affiché sur l’ordinateur',
+                        quoi: context.t.compteLeCodeAfficheSur,
                       ) &&
                       context.mounted) {
-                    informer(context, 'Ordinateur connecté à votre compte.');
+                    informer(context, context.t.compteOrdinateurConnecteAVotre);
                   }
                 },
                 icon: const Icon(Icons.qr_code_scanner_rounded),
-                label: const Text('Connecter un appareil'),
+                label: Text(context.t.compteConnecterUnAppareil),
               ),
             ),
           ],
@@ -110,7 +110,7 @@ class _ActionsParametres {
   Future<void> langue() async {
     final choix = await choisir<String>(
       context,
-      titre: 'Langue',
+      titre: context.t.compteLangue,
       actuel: _etat.langue,
       options: [
         for (final (code, nom, francais) in languesLive)
@@ -119,7 +119,7 @@ class _ActionsParametres {
     );
     if (choix != null && context.mounted) {
       ref.read(liveProvider.notifier).choisirLangue(choix);
-      informer(context, 'Langue enregistrée.');
+      informer(context, context.t.compteLangueEnregistree);
     }
   }
 
@@ -127,16 +127,16 @@ class _ActionsParametres {
   Future<void> apparence() async {
     final choix = await choisir<String>(
       context,
-      titre: 'Apparence',
+      titre: context.t.compteApparence,
       actuel: _etat.apparence,
-      options: const [
+      options: [
         (
           'systeme',
-          'Comme le téléphone',
-          'Clair le jour, sombre si le téléphone l’est',
+          context.t.compteCommeLeTelephone,
+          context.t.compteClairLeJourSombre,
         ),
-        ('clair', 'Clair', null),
-        ('sombre', 'Sombre', 'Repose les yeux la nuit, économise la batterie'),
+        ('clair', context.t.compteClair, null),
+        ('sombre', context.t.compteSombre, context.t.compteReposeLesYeuxLa),
       ],
     );
     if (choix != null && context.mounted) {
@@ -148,7 +148,7 @@ class _ActionsParametres {
   Future<void> pays() async {
     final choix = await choisir<String>(
       context,
-      titre: 'Pays et ville',
+      titre: context.t.comptePaysEtVille,
       actuel: _etat.pays,
       options: [
         for (final v in villesLive)
@@ -157,28 +157,29 @@ class _ActionsParametres {
     );
     if (choix != null && context.mounted) {
       ref.read(liveProvider.notifier).choisirPays(choix);
-      informer(context, 'Annonces et prix de $choix, toujours en FCFA.');
+      informer(context, context.t.compteAnnoncesPrixDe(choix));
     }
   }
 
   Future<void> donnees() async {
     final choix = await choisir<int>(
       context,
-      titre: 'Mes données personnelles',
-      options: const [
-        (0, 'Télécharger mes données', 'Archive envoyée par SMS sous 48 h'),
+      titre: context.t.compteMesDonneesPersonnelles,
+      options: [
+        (
+          0,
+          context.t.compteTelechargerMesDonnees,
+          context.t.compteArchiveEnvoyeeParSms,
+        ),
         (
           1,
-          'Voir ce que Live conserve',
-          'Profil, annonces, transactions, messages',
+          context.t.compteVoirCeQueLive,
+          context.t.compteProfilAnnoncesTransactionsMessages,
         ),
       ],
     );
     if (choix == 0 && context.mounted) {
-      informer(
-        context,
-        'Demande enregistrée : lien de téléchargement sous 48 h.',
-      );
+      informer(context, context.t.compteDemandeEnregistreeLienDe);
     }
   }
 
@@ -187,22 +188,18 @@ class _ActionsParametres {
     if (_etat.disponible > 0) {
       final retirer = await confirmer(
         context,
-        titre: 'Retirez d’abord vos gains',
-        texte:
-            'Il vous reste ${fcfa(_etat.disponible)}. Retirez-les sur votre '
-            'Mobile Money avant de supprimer votre compte.',
-        action: 'Retirer mes gains',
+        titre: context.t.compteRetirezDAbordVos,
+        texte: context.t.compteRetirezGainsTexte(fcfa(_etat.disponible)),
+        action: context.t.compteRetirerMesGains,
       );
       if (retirer && context.mounted) context.push('/retirer');
       return;
     }
     if (await confirmer(
       context,
-      titre: 'Supprimer mon compte',
-      texte:
-          'Vos annonces et votre profil disparaissent. Les reçus de paiement '
-          'sont conservés 10 ans, comme la loi l’exige.',
-      action: 'Supprimer',
+      titre: context.t.compteSupprimerMonCompte,
+      texte: context.t.compteVosAnnoncesEtVotre,
+      action: context.t.supprimer,
       danger: true,
     )) {
       if (context.mounted) context.go('/bienvenue');

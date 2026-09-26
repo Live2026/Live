@@ -20,26 +20,26 @@ class EcranProfilPublic extends ConsumerWidget {
       nom: nom,
       pseudo: moi ? '@${etat.prenom.toLowerCase()}.mabiala' : '@merveille.k',
       couleur: moi ? LiveColors.bleu : const Color(0xFF7E22CE),
-      badge: libelleNiveau(moi ? etat.niveau : 2),
+      badge: libelleNiveau(context.t, moi ? etat.niveau : 2),
       bio: moi
-          ? 'Comptable à Brazzaville. Je vends ce dont je ne me sers plus.'
-          : 'Étudiante, fan de mode et de bonnes affaires.',
-      stats: const [
-        ('128', 'Abonnés'),
-        ('4', 'Abonnements'),
-        ('4,8', 'Note'),
-        ('12', 'Transactions'),
+          ? context.t.compteComptableABrazzavilleJe
+          : context.t.compteEtudianteFanDeMode,
+      stats: [
+        ('128', context.t.compteAbonnes),
+        ('4', context.t.compteAbonnements),
+        ('4,8', context.t.compteNote),
+        ('12', context.t.compteTransactions),
       ],
       idSuivi: moi ? null : 'merveille',
       onglets: [
         (
-          'Vidéos',
+          context.t.compteVideos,
           _GrilleVideos(
             couleur: moi ? LiveColors.bleu : const Color(0xFF7E22CE),
           ),
         ),
         (
-          'Annonces',
+          context.t.compteAnnonces,
           GrilleAdaptative(
             largeurMax: 200,
             espacement: 12,
@@ -49,11 +49,11 @@ class EcranProfilPublic extends ConsumerWidget {
             ],
           ),
         ),
-        ('Avis', const _ListeAvis()),
+        (context.t.compteAvis, const _ListeAvis()),
       ],
-      infos: const [
-        (Icons.location_on_outlined, 'Moungali, Brazzaville'),
-        (Icons.calendar_month_outlined, 'Sur Live depuis septembre 2026'),
+      infos: [
+        (Icons.location_on_outlined, context.t.compteMoungaliBrazzaville),
+        (Icons.calendar_month_outlined, context.t.compteSurLiveDepuisSeptembre),
       ],
     );
   }
@@ -106,13 +106,13 @@ class _PageProfilState extends ConsumerState<_PageProfil> {
             backgroundColor: LiveColors.surface,
             actions: [
               IconButton(
-                tooltip: 'Partager',
+                tooltip: context.t.partager,
                 onPressed: () => partager(context, w.nom),
                 icon: const Icon(Icons.ios_share_rounded),
               ),
               IconButton(
-                tooltip: 'Options',
-                onPressed: () => signaler(context, 'ce profil'),
+                tooltip: context.t.compteOptions,
+                onPressed: () => signaler(context, context.t.compteCeProfil),
                 icon: const Icon(Icons.more_horiz_rounded),
               ),
               const SizedBox(width: 4),
@@ -241,14 +241,14 @@ class _PageProfilState extends ConsumerState<_PageProfil> {
                                         Icons.check_rounded,
                                         size: 18,
                                       ),
-                                      label: const Text('Abonné'),
+                                      label: Text(context.t.compteAbonne),
                                     )
                                   : FilledButton(
                                       key: const ValueKey('suivre'),
                                       onPressed: () => ref
                                           .read(liveProvider.notifier)
                                           .basculerSuivi(w.idSuivi!),
-                                      child: const Text('Suivre'),
+                                      child: Text(context.t.compteSuivre),
                                     ),
                             ),
                           ),
@@ -256,7 +256,7 @@ class _PageProfilState extends ConsumerState<_PageProfil> {
                           Expanded(
                             child: OutlinedButton(
                               onPressed: () => context.push('/conversation'),
-                              child: const Text('Écrire'),
+                              child: Text(context.t.compteEcrire),
                             ),
                           ),
                         ],
@@ -361,7 +361,7 @@ class _ListeAvis extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
+        Row(
           children: [
             Text(
               '4,8',
@@ -373,7 +373,7 @@ class _ListeAvis extends StatelessWidget {
               children: [
                 Etoiles(4.8, taille: 18),
                 Text(
-                  '214 avis vérifiés · acheteurs ayant payé dans Live',
+                  context.t.compteN214AvisVerifiesAcheteurs,
                   style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
                 ),
               ],

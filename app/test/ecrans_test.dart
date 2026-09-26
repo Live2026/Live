@@ -280,4 +280,31 @@ void main() {
       expect(erreurs, isEmpty, reason: erreurs.join('\n'));
     });
   }
+
+  // Anglais : les textes plus longs ne doivent rien faire déborder.
+  for (final largeur in [320.0, 1280.0]) {
+    testWidgets('tous les écrans en anglais à ${largeur.toInt()} px', (
+      tester,
+    ) async {
+      tester.view.physicalSize = Size(largeur, largeur > 600 ? 800 : 780);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      sansAnimations(tester);
+      routeur.go('/bienvenue');
+      await tester.pumpWidget(const ProviderScope(child: LiveApp()));
+      ProviderScope.containerOf(tester.element(find.byType(LiveApp)))
+          .read(liveProvider.notifier)
+          .choisirLangue('en');
+      await tester.pumpAndSettle();
+      final erreurs = <String>[];
+      for (final r in routes) {
+        routeur.go(r);
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 600));
+        final e = tester.takeException();
+        if (e != null) erreurs.add('$r : ${e.toString().split('\n').first}');
+      }
+      expect(erreurs, isEmpty, reason: erreurs.join('\n'));
+    });
+  }
 }
