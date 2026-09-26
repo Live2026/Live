@@ -547,5 +547,300 @@
         "type": "String"
       }
     }
-  }
+  },
+  "noteVentes": "{note} · {n} ventes",
+  "@noteVentes": {
+    "placeholders": {
+      "note": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "quartierVues": "{quartier} · {n} vues",
+  "@quartierVues": {
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "ventesComparables": "Ventes récentes de « {categorie} » comparables",
+  "@ventesComparables": {
+    "placeholders": {
+      "categorie": {
+        "type": "String"
+      }
+    }
+  },
+  "enMainPropreA": "En main propre à {quartier}",
+  "@enMainPropreA": {
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      }
+    }
+  },
+  "noteVentesReponse": "{note} · {n} ventes · répond en {delai}",
+  "@noteVentesReponse": {
+    "placeholders": {
+      "note": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      },
+      "delai": {
+        "type": "String"
+      }
+    }
+  },
+  "meilleureVente": "Meilleure vente",
+  "prixNegociable": "Prix négociable",
+  "categorie": "Catégorie",
+  "remise": "Remise",
+  "dansUnLieuPublicPropose": "Dans un lieu public proposé par Live",
+  "vousVerifiezPuisVousMontrez": "Vous vérifiez, puis vous montrez votre QR",
+  "gratuit": "Gratuit",
+  "livraisonABrazzaville": "Livraison à Brazzaville",
+  "parLeVendeurSous24": "Par le vendeur, sous 24 à 48 h",
+  "description": "Description",
+  "payezAuRendezVousPar": "Payez au rendez-vous par MoMo ou Airtel via Live : jamais d’avance.",
+  "cetteAnnonce": "cette annonce",
+  "signalerLAnnonce": "Signaler l’annonce",
+  "vousAimerezAussi": "Vous aimerez aussi",
+  "ecrireAuVendeur": "Écrire au vendeur",
+  "negocier": "Négocier",
+  "voirEtPayer": "Voir et payer",
+  "partager": "Partager",
+  "suivre": "Suivre",
+  "voirAvantDePayer": "Voir avant de payer",
+  "prix": "Prix",
+  "rienAPayerMaintenantAu": "Rien à payer maintenant. Au rendez-vous, vous vérifiez l’objet puis vous validez la demande MoMo ou Airtel envoyée par Live.",
+  "neVersezJamaisDAvance": "Ne versez jamais d’avance pour un objet que vous n’avez pas vu.",
+  "bloqueParLiveJusquA": "Bloqué par Live jusqu’à la remise",
+  "livraisonSiVousLaChoisissez": "Livraison (si vous la choisissez)",
+  "etat": "État",
+  "mainPropreOuLivraison": "Main propre ou livraison",
+  "mainPropre": "Main propre",
+  "paiement": "Paiement",
+  "pasDAvance": "Pas d’avance",
+  "rembourse": "Remboursé",
+  "protection": "Protection",
+  "tailleX": "Taille {taille}",
+  "@tailleX": {
+    "placeholders": {
+      "taille": {
+        "type": "String"
+      }
+    }
+  },
+  "enMainPropreQuartier": "En main propre · {quartier}",
+  "@enMainPropreQuartier": {
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      }
+    }
+  },
+  "eclaireeGardiennee": "Éclairée, gardiennée",
+  "tresFrequente": "Très fréquenté",
+  "pointDeRemiseSur": "Point de remise sûr",
+  "votreCommande": "Votre commande",
+  "livraison": "Livraison",
+  "adresseOuRepere": "Adresse ou repère…",
+  "payerMaintenant": "Payer maintenant",
+  "argentBloqueJusquAReception": "Argent bloqué jusqu'à réception.",
+  "payerALaRemise": "Payer à la remise",
+  "momoOuAirtelProduitEn": "MoMo ou Airtel, produit en main.",
+  "payerMaintenantVousPayezTout": "Payer maintenant : vous payez tout de suite, mais Live garde l'argent. Le vendeur ne le reçoit que quand vous avez le produit en main. Payer à la remise : vous ne payez rien maintenant. Au moment où vous recevez le produit, vous validez le paiement MoMo ou Airtel sur votre téléphone.",
+  "totalAPayer": "Total à payer",
+  "aucunFraisSupplementaire": "Aucun frais supplémentaire.",
+  "lieuDuRendezVous": "Lieu du rendez-vous",
+  "paiementALaRemise": "Paiement à la remise",
+  "momoOuAirtelAuRendez": "MoMo ou Airtel, au rendez-vous",
+  "vousVerifiezLObjetLe": "Vous vérifiez l’objet, le vendeur appuie sur « Encaisser » et vous validez la demande sur votre téléphone.",
+  "rienAPayerMaintenantVerifiez": "Rien à payer maintenant. Vérifiez l’objet, testez-le, puis payez.",
+  "fixerLeRendezVous": "Fixer le rendez-vous",
+  "plusQueStock": "Plus que {n} en stock",
+  "@plusQueStock": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "nEnStock": "{n} en stock",
+  "@nEnStock": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "taille": "Taille",
+  "quantite": "Quantité",
+  "moins": "Moins",
+  "choisissezUneTaille": "Choisissez une taille",
+  "payerMaintenantMontant": "Payer maintenant {montant}",
+  "@payerMaintenantMontant": {
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "commandeReservee": "Commande réservée",
+  "aujourdHui1021": "Aujourd'hui 10:21",
+  "accepteeParLeVendeur": "Acceptée par le vendeur",
+  "aujourdHui1034": "Aujourd'hui 10:34",
+  "payeeALaRemise": "Payée à la remise",
+  "receptionConfirmee": "Réception confirmée",
+  "aLInstant": "À l'instant",
+  "enAttenteDeLaRemise": "En attente de la remise",
+  "ecrire": "Écrire",
+  "livraisonLiveSuivreLeLivreur": "Livraison Live : suivre le livreur",
+  "votreArgentEstBloqueJusqu": "Votre argent est bloqué jusqu'à votre confirmation.",
+  "paiementRecuMerci": "Paiement reçu. Merci !",
+  "receptionConfirmeeLeVendeurEst": "Réception confirmée. Le vendeur est payé.",
+  "laisserUnAvis": "Laisser un avis",
+  "confirmerLaRemise": "Confirmer la remise",
+  "montrezLeAuVendeurQuand": "Montrez-le au vendeur quand vous avez vérifié le produit.",
+  "jAiRecuLeProduit": "J'ai reçu le produit",
+  "simulerLeVendeurScanneVotre": "Simuler : le vendeur scanne votre QR",
+  "verifiezLeProduitPuisPayez": "Vérifiez le produit, puis payez.",
+  "leVendeurVousEnverraUne": "Le vendeur vous enverra une demande MoMo ou Airtel. Elle n'arrive pas ? Payez vous-même :",
+  "unProbleme": "Un problème ?",
+  "vousPourrezDecrireLeProbleme": "Vous pourrez décrire le problème et joindre des photos. L'argent reste bloqué jusqu'à la solution.\n\n(Écran de réclamation non inclus dans ce prototype.)",
+  "votreAvis": "Votre avis",
+  "votreCommentaireFacultatif": "Votre commentaire (facultatif)",
+  "publierLAvis": "Publier l'avis",
+  "titrePrixDemande": "{titre} · prix demandé {prix}",
+  "@titrePrixDemande": {
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      },
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "pourcentSousPrix": "{n} % sous le prix demandé",
+  "@pourcentSousPrix": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "offreEnvoyee": "Offre de {montant} envoyée à {qui}.",
+  "@offreEnvoyee": {
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      },
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "envoyerOffre": "Envoyer mon offre · {montant}",
+  "@envoyerOffre": {
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "boostTitre": "{titre} · en tête du fil et des recherches à Brazzaville.",
+  "@boostTitre": {
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "boostLibelle": "Boost {duree} · {titre}",
+  "@boostLibelle": {
+    "placeholders": {
+      "duree": {
+        "type": "String"
+      },
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "acheteur": "Acheteur",
+  "faireUneOffre": "Faire une offre",
+  "prixDemande": "Prix demandé",
+  "siLeVendeurAccepteVous": "Si le vendeur accepte, vous recevez un lien de paiement sécurisé dans la conversation. Offre valable 24 h.",
+  "encaisserALaRemise": "Encaisser à la remise",
+  "paiementRecu": "Paiement reçu",
+  "verseSurVotreSoldeApres": "Versé sur votre solde après 24 h sans réclamation.",
+  "scannerPourPayer": "Scanner pour payer",
+  "lAcheteurScanneCeQr": "L'acheteur scanne ce QR avec Live, puis valide avec son code MoMo ou Airtel.",
+  "simulerLAcheteurPaie": "Simuler : l'acheteur paie",
+  "retourAMesVentes": "Retour à mes ventes",
+  "n24Heures": "24 heures",
+  "env1500Vues": "env. 1 500 vues",
+  "n3Jours": "3 jours",
+  "env5000Vues": "env. 5 000 vues",
+  "n7Jours": "7 jours",
+  "env12000Vues": "env. 12 000 vues",
+  "boosterUneAnnonce": "Booster une annonce",
+  "lesAnnoncesBoosteesPortentLa": "Les annonces boostées portent la mention « Sponsorisé ».",
+  "titreMontant": "{titre} · {montant}",
+  "@titreMontant": {
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      },
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "acheteurX": "Acheteur : {qui}",
+  "@acheteurX": {
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "remiseConfirmeeGains": "Remise confirmée.\n{montant} ajoutés à vos gains.",
+  "@remiseConfirmeeGains": {
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "vousRecevrez": "Vous recevrez {net}\n({total} - 6 % de commission Live)",
+  "@vousRecevrez": {
+    "placeholders": {
+      "net": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "voirMesGains": "Voir mes gains",
+  "auMomentDeLaRemise": "Au moment de la remise, scannez le QR que l'acheteur vous montre.",
+  "deLAcheteur": "de l'acheteur",
+  "scannerLeQrDeL": "Scanner le QR de l'acheteur",
+  "saisirLeCodeLvA": "Saisir le code LV- à la place",
+  "lAcheteurPaieALa": "L'acheteur paie à la remise : montrez-lui votre QR de paiement.",
+  "afficherMonQrDePaiement": "Afficher mon QR de paiement",
+  "codeDeSecours": "Code de secours",
+  "demandezALAcheteurLe": "Demandez à l'acheteur le code affiché sous son QR (ex. LV-K4827)."
 }

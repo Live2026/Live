@@ -25,14 +25,20 @@ class EcranSuiviCommande extends ConsumerWidget {
     final remise = c.mode == ModePaiement.remise;
     final etapes = <EtapeFrise>[
       EtapeFrise(
-        remise ? 'Commande réservée' : 'Payée · argent bloqué par Live',
-        "Aujourd'hui 10:21",
+        remise
+            ? context.t.commandeReservee
+            : context.t.payeeArgentBloqueParLive,
+        context.t.aujourdHui1021,
         true,
       ),
-      const EtapeFrise('Acceptée par le vendeur', "Aujourd'hui 10:34", true),
       EtapeFrise(
-        remise ? 'Payée à la remise' : 'Réception confirmée',
-        termine ? "À l'instant" : 'En attente de la remise',
+        context.t.accepteeParLeVendeur,
+        context.t.aujourdHui1034,
+        true,
+      ),
+      EtapeFrise(
+        remise ? context.t.payeeALaRemise : context.t.receptionConfirmee,
+        termine ? context.t.aLInstant : context.t.enAttenteDeLaRemise,
         termine,
       ),
     ];
@@ -77,7 +83,7 @@ class EcranSuiviCommande extends ConsumerWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text('Commande ${c.id}'),
+        title: Text(context.t.commandeNumero(c.id)),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => context.go('/accueil'),
@@ -86,7 +92,7 @@ class EcranSuiviCommande extends ConsumerWidget {
           TextButton.icon(
             onPressed: () => context.push('/conversation'),
             icon: const Icon(Icons.chat_bubble_outline, size: 18),
-            label: const Text('Écrire'),
+            label: Text(context.t.ecrire),
           ),
         ],
       ),
@@ -102,15 +108,13 @@ class EcranSuiviCommande extends ConsumerWidget {
               child: TextButton.icon(
                 onPressed: () => context.push('/livraison/${c.id}'),
                 icon: const Icon(Icons.two_wheeler_rounded, size: 18),
-                label: const Text('Livraison Live : suivre le livreur'),
+                label: Text(context.t.livraisonLiveSuivreLeLivreur),
               ),
             ),
           if (!termine && !remise)
-            const Apparition(
+            Apparition(
               rang: 2,
-              child: BandeauProtection(
-                "Votre argent est bloqué jusqu'à votre confirmation.",
-              ),
+              child: BandeauProtection(context.t.votreArgentEstBloqueJusqu),
             ),
         ],
         secondaire: [
@@ -120,8 +124,8 @@ class EcranSuiviCommande extends ConsumerWidget {
             const SizedBox(height: 12),
             Text(
               remise
-                  ? 'Paiement reçu. Merci !'
-                  : 'Réception confirmée. Le vendeur est payé.',
+                  ? context.t.paiementRecuMerci
+                  : context.t.receptionConfirmeeLeVendeurEst,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium
                   ?.copyWith(fontWeight: FontWeight.w700),
@@ -129,44 +133,43 @@ class EcranSuiviCommande extends ConsumerWidget {
             const SizedBox(height: 16),
             FilledButton.tonal(
               onPressed: () => _avis(context),
-              child: const Text('Laisser un avis'),
+              child: Text(context.t.laisserUnAvis),
             ),
           ] else if (!remise) ...[
             Apparition(
               rang: 2,
               child: CarteQr(
-                titre: 'Confirmer la remise',
+                titre: context.t.confirmerLaRemise,
                 donnee: 'live://remise/${c.id}',
                 codeSecours: 'LV-K4827',
-                consigne:
-                    'Montrez-le au vendeur quand vous avez vérifié le produit.',
+                consigne: context.t.montrezLeAuVendeurQuand,
               ),
             ),
             const SizedBox(height: 12),
             FilledButton.tonal(
               onPressed: () =>
                   ref.read(liveProvider.notifier).confirmerReception(c.id),
-              child: const Text("J'ai reçu le produit"),
+              child: Text(context.t.jAiRecuLeProduit),
             ),
             TextButton(
               onPressed: () => _probleme(context),
-              child: const Text('Signaler un problème'),
+              child: Text(context.t.signalerUnProbleme),
             ),
             const SizedBox(height: 8),
             BoutonSimulation(
-              texte: 'Simuler : le vendeur scanne votre QR',
+              texte: context.t.simulerLeVendeurScanneVotre,
               onTap: () =>
                   ref.read(liveProvider.notifier).confirmerReception(c.id),
             ),
           ] else ...[
             Text(
-              'Vérifiez le produit, puis payez.',
+              context.t.verifiezLeProduitPuisPayez,
               style: Theme.of(context).textTheme.titleMedium
                   ?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 6),
-            const Text(
-              "Le vendeur vous enverra une demande MoMo ou Airtel. Elle n'arrive pas ? Payez vous-même :",
+            Text(
+              context.t.leVendeurVousEnverraUne,
               style: TextStyle(color: LiveColors.gris),
             ),
             const SizedBox(height: 12),
@@ -186,7 +189,7 @@ class EcranSuiviCommande extends ConsumerWidget {
                     );
                 context.push('/payer');
               },
-              child: Text('Payer maintenant ${fcfa(c.total)}'),
+              child: Text(context.t.payerMaintenantMontant(fcfa(c.total))),
             ),
           ],
         ],
@@ -207,14 +210,12 @@ class EcranSuiviCommande extends ConsumerWidget {
     showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Un problème ?'),
-        content: const Text(
-          "Vous pourrez décrire le problème et joindre des photos. L'argent reste bloqué jusqu'à la solution.\n\n(Écran de réclamation non inclus dans ce prototype.)",
-        ),
+        title: Text(context.t.unProbleme),
+        content: Text(context.t.vousPourrezDecrireLeProbleme),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('OK'),
+            child: Text(context.t.ok),
           ),
         ],
       ),
@@ -244,8 +245,8 @@ class _FeuilleAvisState extends State<_FeuilleAvis> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            'Votre avis',
+          Text(
+            context.t.votreAvis,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Row(
@@ -262,15 +263,15 @@ class _FeuilleAvisState extends State<_FeuilleAvis> {
                 ),
             ],
           ),
-          const TextField(
+          TextField(
             decoration: InputDecoration(
-              hintText: 'Votre commentaire (facultatif)',
+              hintText: context.t.votreCommentaireFacultatif,
             ),
           ),
           const SizedBox(height: 12),
           FilledButton(
             onPressed: _note == 0 ? null : () => Navigator.pop(context),
-            child: const Text("Publier l'avis"),
+            child: Text(context.t.publierLAvis),
           ),
         ],
       ),

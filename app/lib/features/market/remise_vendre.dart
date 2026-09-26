@@ -12,22 +12,22 @@ class EcranRemise extends ConsumerWidget {
     final net = v.total - commission(v.total, 0.06, minimum: 100);
     final termine = v.statut == StatutCommande.terminee;
     return Scaffold(
-      appBar: AppBar(title: Text('Commande ${v.id}')),
+      appBar: AppBar(title: Text(context.t.commandeNumero(v.id))),
       body: Etroit(
         largeur: 720,
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
             Text(
-              '${v.produit.titre} · ${fcfa(v.total)}',
+              context.t.titreMontant(v.produit.titre, fcfa(v.total)),
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text('Acheteur : ${v.acheteur}'),
+            Text(context.t.acheteurX(v.acheteur ?? '')),
             const SizedBox(height: 24),
             if (termine) ...[
               const CocheAnimee(taille: 72),
               Text(
-                'Remise confirmée.\n${fcfa(net)} ajoutés à vos gains.',
+                context.t.remiseConfirmeeGains(fcfa(net)),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 18,
@@ -37,37 +37,34 @@ class EcranRemise extends ConsumerWidget {
               const SizedBox(height: 16),
               FilledButton(
                 onPressed: () => context.go('/gains'),
-                child: const Text('Voir mes gains'),
+                child: Text(context.t.voirMesGains),
               ),
             ] else ...[
-              const Text(
-                "Au moment de la remise, scannez le QR que l'acheteur vous montre.",
+              Text(
+                context.t.auMomentDeLaRemise,
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 16),
               FilledButton.icon(
                 onPressed: () async {
-                  if (await simulerScan(context, quoi: "de l'acheteur")) {
+                  if (await simulerScan(context, quoi: context.t.deLAcheteur)) {
                     ref.read(liveProvider.notifier).remettreVente(v.id);
                   }
                 },
                 icon: const Icon(Icons.qr_code_scanner),
-                label: const Text("Scanner le QR de l'acheteur"),
+                label: Text(context.t.scannerLeQrDeL),
               ),
               TextButton(
                 onPressed: () => _codeSecours(context, ref, v.id),
-                child: const Text('Saisir le code LV- à la place'),
+                child: Text(context.t.saisirLeCodeLvA),
               ),
               if (v.mode == ModePaiement.remise) ...[
                 const Divider(height: 32),
-                const Text(
-                  "L'acheteur paie à la remise : montrez-lui votre QR de paiement.",
-                  textAlign: TextAlign.center,
-                ),
+                Text(context.t.lAcheteurPaieALa, textAlign: TextAlign.center),
                 TextButton.icon(
                   onPressed: () => context.push('/vente/${v.id}/qr'),
                   icon: const Icon(Icons.qr_code_2_rounded),
-                  label: const Text('Afficher mon QR de paiement'),
+                  label: Text(context.t.afficherMonQrDePaiement),
                 ),
               ],
             ],
@@ -78,7 +75,7 @@ class EcranRemise extends ConsumerWidget {
           ? null
           : BarreAction(
               child: Text(
-                'Vous recevrez ${fcfa(net)}\n(${fcfa(v.total)} - 6 % de commission Live)',
+                context.t.vousRecevrez(fcfa(net), fcfa(v.total)),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -90,13 +87,11 @@ class EcranRemise extends ConsumerWidget {
     showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Code de secours'),
+        title: Text(context.t.codeDeSecours),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              "Demandez à l'acheteur le code affiché sous son QR (ex. LV-K4827).",
-            ),
+            Text(context.t.demandezALAcheteurLe),
             const SizedBox(height: 8),
             TextField(
               controller: ctrl,
@@ -107,7 +102,7 @@ class EcranRemise extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Annuler'),
+            child: Text(context.t.annuler),
           ),
           FilledButton(
             style: FilledButton.styleFrom(minimumSize: const Size(100, 44)),
@@ -115,7 +110,7 @@ class EcranRemise extends ConsumerWidget {
               Navigator.pop(ctx);
               ref.read(liveProvider.notifier).remettreVente(id);
             },
-            child: const Text('Valider'),
+            child: Text(context.t.valider),
           ),
         ],
       ),

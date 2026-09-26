@@ -23,10 +23,10 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
   var _mode = ModePaiement.avance;
   var _lieu = 0;
 
-  static const _lieux = [
-    ('Station Total Moungali', 'Éclairée, gardiennée'),
-    ('Marché Total, entrée principale', 'Très fréquenté'),
-    ('Commissariat de Moungali', 'Point de remise sûr'),
+  late final _lieux = [
+    ('Station Total Moungali', context.t.eclaireeGardiennee),
+    ('Marché Total, entrée principale', context.t.tresFrequente),
+    ('Commissariat de Moungali', context.t.pointDeRemiseSur),
   ];
 
   @override
@@ -35,7 +35,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
     if (p.reglement == Reglement.surPlace) return _surPlace(context, p);
     final total = p.prix * widget.quantite + (_livraison ? p.livraison : 0);
     return Scaffold(
-      appBar: AppBar(title: const Text('Votre commande')),
+      appBar: AppBar(title: Text(context.t.votreCommande)),
       body: DeuxColonnes(
         principale: [
           ListTile(
@@ -52,7 +52,8 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
                 ? null
                 : Text(
                     [
-                      if (widget.variante != null) 'Taille ${widget.variante}',
+                      if (widget.variante != null)
+                        context.t.tailleX(widget.variante!),
                       '× ${widget.quantite}',
                     ].join(' · '),
                   ),
@@ -62,62 +63,61 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Remise',
+          Text(
+            context.t.remise,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 6),
           Choix(
-            titre: 'En main propre · ${p.quartier}',
+            titre: context.t.enMainPropreQuartier(p.quartier),
             icone: Icons.handshake,
             selectionne: !_livraison,
             onTap: () => setState(() => _livraison = false),
           ),
           if (p.livraison > 0)
             Choix(
-              titre: 'Livraison',
+              titre: context.t.livraison,
               icone: Icons.delivery_dining,
               trailing: '+ ${fcfa(p.livraison)}',
               selectionne: _livraison,
               onTap: () => setState(() => _livraison = true),
             ),
           if (_livraison)
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(bottom: 8),
               child: TextField(
-                decoration: InputDecoration(hintText: 'Adresse ou repère…'),
+                decoration: InputDecoration(
+                  hintText: context.t.adresseOuRepere,
+                ),
               ),
             ),
           const SizedBox(height: 8),
         ],
         secondaire: [
-          const Text(
-            'Paiement',
+          Text(
+            context.t.paiement,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 6),
           Choix(
-            titre: 'Payer maintenant',
-            sousTitre: "Argent bloqué jusqu'à réception.",
+            titre: context.t.payerMaintenant,
+            sousTitre: context.t.argentBloqueJusquAReception,
             icone: Icons.lock_clock,
             selectionne: _mode == ModePaiement.avance,
             onTap: () => setState(() => _mode = ModePaiement.avance),
           ),
           Choix(
-            titre: 'Payer à la remise',
-            sousTitre: 'MoMo ou Airtel, produit en main.',
+            titre: context.t.payerALaRemise,
+            sousTitre: context.t.momoOuAirtelProduitEn,
             icone: Icons.phone_android,
             selectionne: _mode == ModePaiement.remise,
             onTap: () => setState(() => _mode = ModePaiement.remise),
           ),
-          const BoutonEcouter(
-            "Payer maintenant : vous payez tout de suite, mais Live garde l'argent. Le vendeur ne le reçoit que quand vous avez le produit en main. "
-            "Payer à la remise : vous ne payez rien maintenant. Au moment où vous recevez le produit, vous validez le paiement MoMo ou Airtel sur votre téléphone.",
-          ),
+          BoutonEcouter(context.t.payerMaintenantVousPayezTout),
           const Divider(height: 24),
-          LigneMontant('Total à payer', total, gras: true),
-          const Text(
-            'Aucun frais supplémentaire.',
+          LigneMontant(context.t.totalAPayer, total, gras: true),
+          Text(
+            context.t.aucunFraisSupplementaire,
             style: TextStyle(color: LiveColors.gris),
           ),
         ],
@@ -142,7 +142,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
               context.go('/suivi/$id');
             }
           },
-          child: const Text('Continuer'),
+          child: Text(context.t.continuer),
         ),
       ),
     );
@@ -152,7 +152,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
   /// sûr, rien n'est payé maintenant.
   Widget _surPlace(BuildContext context, Produit p) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Voir avant de payer')),
+      appBar: AppBar(title: Text(context.t.voirAvantDePayer)),
       body: DeuxColonnes(
         principale: [
           ListTile(
@@ -172,8 +172,8 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Lieu du rendez-vous',
+          Text(
+            context.t.lieuDuRendezVous,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 6),
@@ -187,22 +187,18 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
             ),
         ],
         secondaire: [
-          const Text(
-            'Paiement à la remise',
+          Text(
+            context.t.paiementALaRemise,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 6),
-          const LigneMenu(
+          LigneMenu(
             icone: Icons.phone_android_rounded,
-            titre: 'MoMo ou Airtel, au rendez-vous',
-            detail:
-                'Vous vérifiez l’objet, le vendeur appuie sur « Encaisser » '
-                'et vous validez la demande sur votre téléphone.',
+            titre: context.t.momoOuAirtelAuRendez,
+            detail: context.t.vousVerifiezLObjetLe,
           ),
           const SizedBox(height: 8),
-          const BandeauProtection(
-            'Rien à payer maintenant. Vérifiez l’objet, testez-le, puis payez.',
-          ),
+          BandeauProtection(context.t.rienAPayerMaintenantVerifiez),
         ],
       ),
       bottomNavigationBar: BarreAction(
@@ -213,7 +209,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
                 .reserverCommande(p, p.prix);
             context.go('/suivi/$id');
           },
-          child: const Text('Fixer le rendez-vous'),
+          child: Text(context.t.fixerLeRendezVous),
         ),
       ),
     );
