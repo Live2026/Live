@@ -83,27 +83,27 @@ class _Message {
 }
 
 /// Ce que l'Assistant sait faire, en suggestions de départ.
-const _suggestions = [
+List<(IconData, String, String)> _suggestions(Textes t) => [
   (
     Icons.home_work_rounded,
-    'Trouver un logement',
+    t.iaTrouverUnLogement,
     'Un 2 pièces à Moungali à moins de 100 000',
   ),
-  (Icons.handyman_rounded, 'Réserver un pro', 'Un plombier demain matin'),
+  (Icons.handyman_rounded, t.iaReserverUnPro, 'Un plombier demain matin'),
   (
     Icons.smartphone_rounded,
-    'Comparer des prix',
+    t.iaComparerDesPrix,
     'Un iPhone à moins de 90 000',
   ),
-  (Icons.bolt_rounded, 'Payer une facture', 'Payer ma facture d’électricité'),
+  (Icons.bolt_rounded, t.iaPayerUneFacture, 'Payer ma facture d’électricité'),
 ];
 
 /// Conversations récentes (volet de gauche sur ordinateur, liste sur mobile).
-const _conversations = [
-  ('Logement à Moungali', 'Aujourd’hui'),
-  ('Budget de la boutique', 'Hier'),
-  ('Facture E2C de septembre', 'Lun.'),
-  ('Lettre pour le stage chez Total', '18 sept.'),
+List<(String, String)> _conversations(Textes t) => [
+  (t.iaLogementAMoungali, t.iaAujourdHui),
+  (t.iaBudgetDeLaBoutique, t.iaHier),
+  (t.iaFactureE2cDeSeptembre, t.iaLun),
+  (t.iaLettrePourLeStage, t.iaN18Sept),
 ];
 
 /// Langues de la voix : l'assistant comprend et répond dans chacune.

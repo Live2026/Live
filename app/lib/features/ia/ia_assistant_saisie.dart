@@ -68,8 +68,8 @@ class _Saisie extends StatelessWidget {
                   maxLines: 6,
                   textInputAction: TextInputAction.send,
                   onSubmitted: (_) => onEnvoyer(),
-                  decoration: const InputDecoration(
-                    hintText: 'Écrivez à Live…',
+                  decoration: InputDecoration(
+                    hintText: context.t.iaEcrivezALive,
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none,
@@ -81,19 +81,19 @@ class _Saisie extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      tooltip: 'Joindre un fichier',
+                      tooltip: context.t.iaJoindreUnFichier,
                       onPressed: () => _joindre(context),
                       icon: const Icon(Icons.add_rounded),
                     ),
                     IconButton(
-                      tooltip: 'Dicter',
+                      tooltip: context.t.iaDicter,
                       onPressed: onDicter,
                       icon: const Icon(Icons.mic_none_rounded),
                     ),
                     const Spacer(),
                     if (pret)
                       IconButton.filled(
-                        tooltip: 'Envoyer',
+                        tooltip: context.t.iaEnvoyer,
                         onPressed: onEnvoyer,
                         style: IconButton.styleFrom(
                           backgroundColor: LiveColors.orangeVif,
@@ -102,7 +102,7 @@ class _Saisie extends StatelessWidget {
                       )
                     else
                       IconButton.filled(
-                        tooltip: 'Mode vocal',
+                        tooltip: context.t.iaModeVocal,
                         onPressed: onVocal,
                         style: IconButton.styleFrom(
                           backgroundColor: LiveColors.nuit,
@@ -133,8 +133,8 @@ class _Saisie extends StatelessWidget {
             children: [
               ListTile(
                 leading: const Icon(Icons.photo_library_outlined),
-                title: const Text('Photos'),
-                subtitle: const Text('Une image, une capture, un reçu'),
+                title: Text(context.t.iaPhotos),
+                subtitle: Text(context.t.iaUneImageUneCapture),
                 onTap: () {
                   Navigator.pop(ctx);
                   onJoindre(_fichiersDemo.last);
@@ -142,8 +142,8 @@ class _Saisie extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.photo_camera_outlined),
-                title: const Text('Appareil photo'),
-                subtitle: const Text('Photographier un document'),
+                title: Text(context.t.iaAppareilPhoto),
+                subtitle: Text(context.t.iaPhotographierUnDocument),
                 onTap: () {
                   Navigator.pop(ctx);
                   onJoindre(_fichiersDemo.last);
@@ -151,10 +151,8 @@ class _Saisie extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.upload_file_rounded),
-                title: const Text('Fichier'),
-                subtitle: const Text(
-                  'PDF, Word, Excel, PowerPoint, texte, Markdown, CSV…',
-                ),
+                title: Text(context.t.iaFichier),
+                subtitle: Text(context.t.iaPdfWordExcelPowerpoint),
                 onTap: () {
                   Navigator.pop(ctx);
                   _choisirFichier(context);
@@ -162,8 +160,8 @@ class _Saisie extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.folder_open_rounded),
-                title: const Text('Mes documents Live IA'),
-                subtitle: const Text('CV, lettres, business plans créés'),
+                title: Text(context.t.iaMesDocumentsLiveIa),
+                subtitle: Text(context.t.iaCvLettresBusinessPlans),
                 onTap: () {
                   Navigator.pop(ctx);
                   onJoindre(_fichiersDemo[2]);
@@ -193,10 +191,10 @@ class _Saisie extends StatelessWidget {
             shrinkWrap: true,
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
                 child: Text(
-                  'Téléchargements',
+                  context.t.iaTelechargements,
                   style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
                 ),
               ),
@@ -212,9 +210,7 @@ class _Saisie extends StatelessWidget {
                     child: Icon(f.icone, color: Colors.white, size: 22),
                   ),
                   title: Text(f.nom),
-                  subtitle: Text(
-                    '${f.taille} · ${f.pages} page${f.pages > 1 ? 's' : ''}',
-                  ),
+                  subtitle: Text(context.t.iaTaillePages(f.taille, f.pages)),
                   onTap: () {
                     Navigator.pop(ctx);
                     onJoindre(f);

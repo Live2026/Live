@@ -5,11 +5,11 @@ class EtapesGeneration extends StatelessWidget {
   const EtapesGeneration({super.key, required this.progression});
   final double progression;
 
-  static const _etapes = [
-    'Lecture de vos informations',
-    'Rédaction du contenu',
-    'Calculs et mise en forme',
-    'Relecture finale',
+  static List<String> _etapes(Textes t) => [
+    t.iaLectureDeVosInformations,
+    t.iaRedactionDuContenu,
+    t.iaCalculsEtMiseEn,
+    t.iaRelectureFinale,
   ];
 
   @override
@@ -51,20 +51,22 @@ class EtapesGeneration extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              for (final (i, e) in _etapes.indexed)
+              for (final (i, e) in _etapes(context.t).indexed)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Row(
                     children: [
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 250),
-                        child: progression > (i + 1) / _etapes.length - 0.01
+                        child:
+                            progression >
+                                (i + 1) / _etapes(context.t).length - 0.01
                             ? const Icon(
                                 Icons.check_circle_rounded,
                                 key: ValueKey(1),
                                 color: LiveColors.succes,
                               )
-                            : progression > i / _etapes.length
+                            : progression > i / _etapes(context.t).length
                             ? const SizedBox(
                                 key: ValueKey(2),
                                 width: 24,
@@ -88,8 +90,8 @@ class EtapesGeneration extends StatelessWidget {
                   ),
                 ),
               const SizedBox(height: 16),
-              const Text(
-                'Vous pouvez quitter l’écran : vous serez prévenu quand ce sera prêt.',
+              Text(
+                context.t.iaVousPouvezQuitterL,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: LiveColors.gris),
               ),
@@ -128,19 +130,19 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
   var _apport = 1500000;
   var _pret = 3000000;
 
-  static const _titres = [
-    'Le projet',
-    'Les clients',
-    'La concurrence',
-    'Les ventes',
-    'Le financement',
-    'Récapitulatif',
+  late final _titres = [
+    context.t.iaLeProjet,
+    context.t.iaLesClients,
+    context.t.iaLaConcurrence,
+    context.t.iaLesVentes,
+    context.t.iaLeFinancement,
+    context.t.iaRecapitulatif,
   ];
 
   int get _caMensuel => _prix * _ventes;
 
   Future<void> _generer() async {
-    final s = serviceParId('bp_complet');
+    final s = serviceParId(context.t, 'bp_complet');
     if (!await confirmerPrix(context, ref, s.titre, s.prix)) return;
     setState(() => _enCours = true);
     for (var i = 1; i <= 12; i++) {
@@ -183,14 +185,14 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
   Widget build(BuildContext context) {
     if (_enCours) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Business plan complet')),
+        appBar: AppBar(title: Text(context.t.iaBusinessPlanComplet)),
         body: EtapesGeneration(progression: _progression),
       );
     }
     final credits = ref.watch(liveProvider.select((e) => e.credits));
     return Scaffold(
       appBar: AppBar(
-        title: Text('Business plan · ${_etape + 1}/6'),
+        title: Text(context.t.iaBusinessPlanEtape(_etape + 1)),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -216,13 +218,15 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
             0 => [
               TextField(
                 controller: _c['activite'],
-                decoration: const InputDecoration(labelText: 'Votre activité'),
+                decoration: InputDecoration(
+                  labelText: context.t.iaVotreActivite,
+                ),
               ),
               const SizedBox(height: 12),
               TextField(
                 controller: _c['quartier'],
-                decoration: const InputDecoration(
-                  labelText: 'Ville et quartier',
+                decoration: InputDecoration(
+                  labelText: context.t.iaVilleEtQuartier,
                 ),
               ),
             ],
@@ -230,8 +234,8 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
               TextField(
                 controller: _c['clients'],
                 maxLines: 3,
-                decoration: const InputDecoration(
-                  labelText: 'Qui sont vos clients ?',
+                decoration: InputDecoration(
+                  labelText: context.t.iaQuiSontVosClients,
                 ),
               ),
             ],
@@ -239,14 +243,14 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
               TextField(
                 controller: _c['concurrents'],
                 maxLines: 3,
-                decoration: const InputDecoration(
-                  labelText: 'Qui sont vos concurrents ?',
+                decoration: InputDecoration(
+                  labelText: context.t.iaQuiSontVosConcurrents,
                 ),
               ),
             ],
             3 => [
               _Curseur(
-                'Prix moyen d’une vente',
+                context.t.iaPrixMoyenDUne2,
                 _prix,
                 500,
                 20000,
@@ -254,7 +258,7 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
                 (v) => setState(() => _prix = v),
               ),
               _Curseur(
-                'Ventes par mois',
+                context.t.iaVentesParMois,
                 _ventes,
                 50,
                 2000,
@@ -265,7 +269,7 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
               Bloc(
                 fond: LiveColors.champ,
                 child: LigneMontant(
-                  'Chiffre d’affaires mensuel',
+                  context.t.iaChiffreDAffairesMensuel,
                   _caMensuel,
                   gras: true,
                 ),
@@ -273,7 +277,7 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
             ],
             4 => [
               _Curseur(
-                'Votre apport',
+                context.t.iaVotreApport,
                 _apport,
                 0,
                 10000000,
@@ -281,7 +285,7 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
                 (v) => setState(() => _apport = v),
               ),
               _Curseur(
-                'Prêt recherché',
+                context.t.iaPretRecherche,
                 _pret,
                 0,
                 20000000,
@@ -292,7 +296,11 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
             _ => [
               _Previsionnel(caAnnuel: _caMensuel * 12),
               const SizedBox(height: 12),
-              LigneMontant('Besoin total', _apport + _pret, gras: true),
+              LigneMontant(
+                context.t.iaBesoinTotal,
+                _apport + _pret,
+                gras: true,
+              ),
             ],
           },
         ],
@@ -304,7 +312,7 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () => setState(() => _etape--),
-                  child: const Text('Retour'),
+                  child: Text(context.t.retour),
                 ),
               ),
               const SizedBox(width: 10),
@@ -315,7 +323,11 @@ class _EcranBusinessPlanState extends ConsumerState<EcranBusinessPlan> {
                 onPressed: _etape < 5
                     ? () => setState(() => _etape++)
                     : _generer,
-                child: Text(_etape < 5 ? 'Continuer' : 'Générer · 150 crédits'),
+                child: Text(
+                  _etape < 5
+                      ? context.t.continuer
+                      : context.t.iaGenererCredits(150),
+                ),
               ),
             ),
           ],
@@ -386,8 +398,8 @@ class _Previsionnel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Chiffre d’affaires prévisionnel',
+          Text(
+            context.t.iaChiffreDAffairesPrevisionnel,
             style: TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 12),
@@ -427,7 +439,7 @@ class _Previsionnel extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Année ${i + 1}',
+                            context.t.iaAnneeN(i + 1),
                             style: const TextStyle(
                               fontSize: 12,
                               color: LiveColors.gris,
@@ -441,8 +453,8 @@ class _Previsionnel extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Chiffres indicatifs à faire vérifier par un comptable.',
+          Text(
+            context.t.iaChiffresIndicatifsAFaire,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
         ],

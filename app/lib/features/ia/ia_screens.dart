@@ -8,6 +8,7 @@ import '../../core/theme.dart';
 import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'ia_catalogue.dart';
 part 'ia_accueil_credits.dart';

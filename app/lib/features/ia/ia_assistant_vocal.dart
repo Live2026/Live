@@ -64,11 +64,11 @@ class _ModeVocalState extends State<_ModeVocal>
   @override
   Widget build(BuildContext context) {
     final statut = _micCoupe
-        ? 'Micro coupé'
+        ? context.t.iaMicroCoupe
         : switch (_etat) {
-            _EtatVocal.ecoute => 'Je vous écoute… touchez le cercle et parlez',
-            _EtatVocal.reflechit => 'Live réfléchit…',
-            _EtatVocal.parle => 'Live vous répond',
+            _EtatVocal.ecoute => context.t.iaJeVousEcouteTouchez,
+            _EtatVocal.reflechit => context.t.iaLiveReflechit,
+            _EtatVocal.parle => context.t.iaLiveVousRepond,
           };
     return Scaffold(
       backgroundColor: LiveColors.nuit,
@@ -79,9 +79,9 @@ class _ModeVocalState extends State<_ModeVocal>
             children: [
               Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      'Mode vocal',
+                      context.t.iaModeVocal,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -90,7 +90,7 @@ class _ModeVocalState extends State<_ModeVocal>
                     ),
                   ),
                   PopupMenuButton<int>(
-                    tooltip: 'Langue',
+                    tooltip: context.t.iaLangue,
                     initialValue: _langue,
                     onSelected: (i) => setState(() => _langue = i),
                     itemBuilder: (_) => [
@@ -112,7 +112,7 @@ class _ModeVocalState extends State<_ModeVocal>
               Semantics(
                 button: true,
                 container: true,
-                label: 'Parler',
+                label: context.t.iaParler,
                 onTap: _entendre,
                 excludeSemantics: true,
                 child: GestureDetector(
@@ -194,8 +194,8 @@ class _ModeVocalState extends State<_ModeVocal>
                 children: [
                   IconButton.filledTonal(
                     tooltip: _micCoupe
-                        ? 'Rétablir le micro'
-                        : 'Couper le micro',
+                        ? context.t.iaRetablirLeMicro
+                        : context.t.iaCouperLeMicro,
                     iconSize: 30,
                     onPressed: () => setState(() => _micCoupe = !_micCoupe),
                     icon: Icon(
@@ -204,7 +204,7 @@ class _ModeVocalState extends State<_ModeVocal>
                   ),
                   const SizedBox(width: 32),
                   IconButton.filled(
-                    tooltip: 'Terminer',
+                    tooltip: context.t.iaTerminer,
                     iconSize: 30,
                     style: IconButton.styleFrom(
                       backgroundColor: LiveColors.erreur,

@@ -10,35 +10,37 @@ class EcranExercice extends ConsumerStatefulWidget {
 
 class _EcranExerciceState extends ConsumerState<EcranExercice> {
   var _photo = false;
-  var _niveau = 'Lycée';
+  late var _niveau = context.t.iaLycee;
   var _apprentissage = true;
   var _etape = -1; // -1 : saisie ; 0..2 : étapes ; 3 : fin
   String? _retour;
 
-  static const _etapes = [
+  late final _etapes = [
     (
-      'On veut isoler x. Que faut-il faire avec le « + 3 » ?',
-      ['Le soustraire des deux côtés', 'Le multiplier par 2'],
+      context.t.iaOnVeutIsolerX,
+      [context.t.iaLeSoustraireDesDeux, context.t.iaLeMultiplierPar2],
       0,
-      '2x + 3 − 3 = 11 − 3, donc 2x = 8.',
+      context.t.iaN2x3311,
     ),
     (
-      'On a 2x = 8. Comment trouver x ?',
-      ['Diviser les deux côtés par 2', 'Ajouter 2 des deux côtés'],
+      context.t.iaOnA2x8,
+      [context.t.iaDiviserLesDeuxCotes, context.t.iaAjouter2DesDeux],
       0,
-      'x = 8 ÷ 2, donc x = 4.',
+      context.t.iaX82Donc,
     ),
-    (
-      'Vérifions : que vaut 2 × 4 + 3 ?',
-      ['11', '10'],
-      0,
-      '2 × 4 + 3 = 8 + 3 = 11. La solution x = 4 est juste.',
-    ),
+    (context.t.iaVerifionsQueVaut2, ['11', '10'], 0, context.t.iaN2438),
   ];
 
   Future<void> _envoyer() async {
     final prix = _apprentissage ? 5 : 8;
-    if (!await confirmerPrix(context, ref, 'Exercice par photo', prix)) return;
+    if (!await confirmerPrix(
+      context,
+      ref,
+      context.t.iaExerciceParPhoto,
+      prix,
+    )) {
+      return;
+    }
     ref.read(liveProvider.notifier).ajouterDocument(
       'exercice',
       'Exercice · Équation',
@@ -54,7 +56,11 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_etape < 0 ? 'Exercice par photo' : 'Équation · $_niveau'),
+        title: Text(
+          _etape < 0
+              ? context.t.iaExerciceParPhoto
+              : context.t.iaEquationNiveau(_niveau),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -73,8 +79,8 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
     onPressed: _photo ? _envoyer : null,
     child: Text(
       _photo
-          ? 'Envoyer · ${_apprentissage ? 5 : 8} crédits'
-          : 'Prenez d\'abord la photo',
+          ? context.t.iaEnvoyerCredits(_apprentissage ? 5 : 8)
+          : context.t.iaPrenezDAbordLa,
     ),
   );
 
@@ -93,13 +99,13 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
                   ? Container(
                       padding: const EdgeInsets.all(16),
                       color: LiveColors.surface,
-                      child: const Text(
-                        'Exercice 3 : Résoudre 2x + 3 = 11',
+                      child: Text(
+                        context.t.iaExercice3Resoudre2x,
                         style: TextStyle(fontSize: 20),
                       ),
                     )
-                  : const Text(
-                      'Cadrez l\'énoncé',
+                  : Text(
+                      context.t.iaCadrezLEnonce,
                       style: TextStyle(color: Colors.white70),
                     ),
             ),
@@ -107,22 +113,28 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
         ),
         const SizedBox(height: 8),
         if (_photo)
-          const Text(
-            'Photo nette · texte lisible',
+          Text(
+            context.t.iaPhotoNetteTexteLisible,
             style: TextStyle(color: LiveColors.bleu),
           ),
         OutlinedButton.icon(
           onPressed: () => setState(() => _photo = true),
           icon: const Icon(Icons.photo_camera),
-          label: Text(_photo ? 'Reprendre la photo' : 'Prendre la photo'),
+          label: Text(
+            _photo ? context.t.iaReprendreLaPhoto : context.t.iaPrendreLaPhoto,
+          ),
         ),
       ],
       secondaire: [
-        const Text('Niveau', style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(context.t.iaNiveau, style: TextStyle(fontWeight: FontWeight.bold)),
         Wrap(
           spacing: 8,
           children: [
-            for (final n in const ['Collège', 'Lycée', 'Université'])
+            for (final n in [
+              context.t.iaCollege,
+              context.t.iaLycee,
+              context.t.iaUniversite,
+            ])
               ChoiceChip(
                 label: Text(n),
                 selected: _niveau == n,
@@ -132,14 +144,14 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
         ),
         const SizedBox(height: 12),
         Choix(
-          titre: 'M\'aider à comprendre',
-          sousTitre: 'Étape par étape, avec des questions · 5 crédits',
+          titre: context.t.iaMAiderAComprendre,
+          sousTitre: context.t.iaEtapeParEtapeAvec,
           selectionne: _apprentissage,
           onTap: () => setState(() => _apprentissage = true),
         ),
         Choix(
-          titre: 'Solution complète',
-          sousTitre: 'Solution rédigée et justifiée · 8 crédits',
+          titre: context.t.iaSolutionComplete,
+          sousTitre: context.t.iaSolutionRedigeeEtJustifiee,
           selectionne: !_apprentissage,
           onTap: () => setState(() => _apprentissage = false),
         ),
@@ -156,7 +168,7 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
       return ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          const Text('Énoncé : Résoudre 2x + 3 = 11'),
+          Text(context.t.iaEnonceResoudre2x3),
           const SizedBox(height: 16),
           for (final e in _etapes)
             Padding(
@@ -171,14 +183,14 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
               ),
             ),
           const SizedBox(height: 8),
-          const Text(
-            'Solution : x = 4',
+          Text(
+            context.t.iaSolutionX4,
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           OutlinedButton(
             onPressed: () => context.go('/ia'),
-            child: const Text('Retour à Live IA'),
+            child: Text(context.t.iaRetourALiveIa),
           ),
         ],
       );
@@ -187,10 +199,10 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
     return ListView(
       padding: const EdgeInsets.all(24),
       children: [
-        const Text('Énoncé : Résoudre 2x + 3 = 11'),
+        Text(context.t.iaEnonceResoudre2x3),
         const SizedBox(height: 16),
         Text(
-          'ÉTAPE ${_etape + 1} SUR ${_etapes.length}',
+          context.t.iaEtapeSur(_etape + 1, _etapes.length),
           style: const TextStyle(
             color: LiveColors.bleu,
             fontWeight: FontWeight.bold,
@@ -205,8 +217,8 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
             child: OutlinedButton(
               onPressed: () => setState(
                 () => _retour = i == bon
-                    ? 'Bravo ! $explication'
-                    : 'Pas tout à fait. $explication',
+                    ? context.t.iaBravo(explication)
+                    : context.t.iaPasTout(explication),
               ),
               child: Text(c),
             ),
@@ -228,8 +240,8 @@ class _EcranExerciceState extends ConsumerState<EcranExercice> {
             }),
             child: Text(
               _etape + 1 < _etapes.length
-                  ? 'Étape suivante'
-                  : 'Voir le récapitulatif',
+                  ? context.t.iaEtapeSuivante
+                  : context.t.iaVoirLeRecapitulatif,
             ),
           ),
         ],
@@ -246,13 +258,13 @@ class EcranMesDocuments extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final docs = ref.watch(liveProvider).documents;
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes documents')),
+      appBar: AppBar(title: Text(context.t.iaMesDocuments)),
       body: docs.isEmpty
-          ? const Center(
+          ? Center(
               child: Padding(
                 padding: EdgeInsets.all(24),
                 child: Text(
-                  'Aucun document pour le moment. Vos CV, lettres et business plans apparaîtront ici.',
+                  context.t.iaAucunDocumentPourLe,
                   textAlign: TextAlign.center,
                 ),
               ),

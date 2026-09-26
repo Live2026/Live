@@ -61,9 +61,7 @@ class _VueMessage extends StatelessWidget {
               _PuceFichier(fichier: f),
               const SizedBox(height: 10),
               Text(
-                'Lire et résumer ce fichier coûte ${f.cout} crédits '
-                '(${f.pages} page${f.pages > 1 ? 's' : ''}). Il vous en '
-                'restera ${credits - f.cout}.',
+                context.t.iaLireResumerCout(f.pages, f.cout, credits - f.cout),
               ),
               const SizedBox(height: 10),
               Wrap(
@@ -75,14 +73,14 @@ class _VueMessage extends StatelessWidget {
                       minimumSize: const Size(0, 44),
                     ),
                     onPressed: () => onLire(f),
-                    child: Text('Lire pour ${f.cout} crédits'),
+                    child: Text(context.t.iaLirePour(f.cout)),
                   ),
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       minimumSize: const Size(0, 44),
                     ),
                     onPressed: onAnnuler,
-                    child: const Text('Annuler'),
+                    child: Text(context.t.annuler),
                   ),
                 ],
               ),
@@ -178,20 +176,20 @@ class _Outils extends StatelessWidget {
         );
     return Row(
       children: [
-        outil('Copier', Icons.copy_rounded, () {
-          informer(context, 'Réponse copiée.');
+        outil(context.t.iaCopier, Icons.copy_rounded, () {
+          informer(context, context.t.iaReponseCopiee);
         }),
-        outil('Écouter', Icons.volume_up_rounded, () {
-          informer(context, 'Lecture à voix haute… (simulation)');
+        outil(context.t.iaEcouter, Icons.volume_up_rounded, () {
+          informer(context, context.t.iaLectureAVoixHaute);
         }),
-        outil('Bonne réponse', Icons.thumb_up_alt_outlined, () {
-          informer(context, 'Merci, c’est noté.');
+        outil(context.t.iaBonneReponse, Icons.thumb_up_alt_outlined, () {
+          informer(context, context.t.iaMerciCEstNote);
         }),
-        outil('Mauvaise réponse', Icons.thumb_down_alt_outlined, () {
-          informer(context, 'Merci : dites-moi ce qui ne va pas.');
+        outil(context.t.iaMauvaiseReponse, Icons.thumb_down_alt_outlined, () {
+          informer(context, context.t.iaMerciDitesMoiCe);
         }),
         if (onRegenerer != null)
-          outil('Régénérer', Icons.refresh_rounded, onRegenerer!),
+          outil(context.t.iaRegenerer, Icons.refresh_rounded, onRegenerer!),
       ],
     );
   }
@@ -203,7 +201,7 @@ class _Reflechit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.only(bottom: 12),
       child: Row(
         children: [
@@ -213,7 +211,10 @@ class _Reflechit extends StatelessWidget {
             child: CircularProgressIndicator(strokeWidth: 2),
           ),
           SizedBox(width: 10),
-          Text('Live réfléchit…', style: TextStyle(color: LiveColors.gris)),
+          Text(
+            context.t.iaLiveReflechit,
+            style: TextStyle(color: LiveColors.gris),
+          ),
         ],
       ),
     );
@@ -270,7 +271,7 @@ class _PuceFichier extends StatelessWidget {
           ),
           if (onRetirer != null)
             IconButton(
-              tooltip: 'Retirer ${f.nom}',
+              tooltip: context.t.iaRetirerFichier(f.nom),
               visualDensity: VisualDensity.compact,
               iconSize: 18,
               onPressed: onRetirer,
@@ -293,42 +294,64 @@ class _Actions extends StatelessWidget {
   Widget build(BuildContext context) {
     final actions = switch (type) {
       'pro' => [
-        ('Réserver Serge demain 8 h', '/pro/s1', Icons.event_available_rounded),
-        ('Voir d’autres plombiers', '/services', Icons.handyman_rounded),
+        (
+          context.t.iaReserverSergeDemain8,
+          '/pro/s1',
+          Icons.event_available_rounded,
+        ),
+        (context.t.iaVoirDAutresPlombiers, '/services', Icons.handyman_rounded),
       ],
       'produit' => [
         (
-          'Voir les 2 iPhone',
+          context.t.iaVoirLes2Iphone,
           '/market/liste?categorie=T%C3%A9l%C3%A9phones',
           Icons.smartphone_rounded,
         ),
         (
-          'M’alerter des nouveaux',
+          context.t.iaMAlerterDesNouveaux,
           '/alertes',
           Icons.notifications_active_rounded,
         ),
       ],
-      'facture' => [('Payer 18 450 FCFA', '/factures', Icons.bolt_rounded)],
+      'facture' => [
+        (context.t.iaPayer18450Fcfa, '/factures', Icons.bolt_rounded),
+      ],
       'budget' => [
         (
-          'En faire un business plan',
+          context.t.iaEnFaireUnBusiness,
           '/ia/business-plan',
           Icons.insights_rounded,
         ),
-        ('Ouvrir ma boutique', '/espace/nouveau', Icons.storefront_rounded),
+        (
+          context.t.iaOuvrirMaBoutique,
+          '/espace/nouveau',
+          Icons.storefront_rounded,
+        ),
       ],
       'cv' => [
-        ('Améliorer mon CV (15 crédits)', '/ia/service/cv', Icons.badge),
-        ('Voir les offres d’emploi', '/opportunites', Icons.work_rounded),
+        (context.t.iaAmeliorerMonCv15, '/ia/service/cv', Icons.badge),
+        (context.t.iaVoirLesOffresD, '/opportunites', Icons.work_rounded),
       ],
       'cours' => [
-        ('M’entraîner par photo', '/ia/exercice', Icons.school_rounded),
-        ('Parler au tuteur', '/ia/tuteur', Icons.record_voice_over_rounded),
+        (context.t.iaMEntrainerParPhoto, '/ia/exercice', Icons.school_rounded),
+        (
+          context.t.iaParlerAuTuteur,
+          '/ia/tuteur',
+          Icons.record_voice_over_rounded,
+        ),
       ],
       _ => [
-        ('Réserver la visite de mardi', '/bien/b1/visite', Icons.event_rounded),
-        ('Voir les 3 logements', '/immo', Icons.home_work_rounded),
-        ('Créer l’alerte', '/alertes', Icons.notifications_active_rounded),
+        (
+          context.t.iaReserverLaVisiteDe,
+          '/bien/b1/visite',
+          Icons.event_rounded,
+        ),
+        (context.t.iaVoirLes3Logements, '/immo', Icons.home_work_rounded),
+        (
+          context.t.iaCreerLAlerte,
+          '/alertes',
+          Icons.notifications_active_rounded,
+        ),
       ],
     };
     return Wrap(

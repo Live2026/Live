@@ -76,12 +76,12 @@ class _EcranAssistantState extends ConsumerState<EcranAssistant> {
   Future<void> _lireFichier(int index, _Fichier f) async {
     final store = ref.read(liveProvider.notifier);
     if (!store.depenserCredits(f.cout)) {
-      informer(context, 'Crédits insuffisants : rechargez vos crédits Live.');
+      informer(context, context.t.iaCreditsInsuffisantsRechargezVos);
       context.push('/ia/credits');
       return;
     }
     setState(() {
-      _fil[index] = _Message.moi('Lire « ${f.nom} » pour ${f.cout} crédits');
+      _fil[index] = _Message.moi(context.t.iaLireFichierPour(f.nom, f.cout));
       _reflechit = true;
     });
     _enBas();
@@ -95,9 +95,7 @@ class _EcranAssistantState extends ConsumerState<EcranAssistant> {
   }
 
   void _annulerLecture(int index) => setState(() {
-    _fil[index] = const _Message.live(
-      _Reponse('D’accord, je n’ai pas lu le fichier. Aucun crédit utilisé.'),
-    );
+    _fil[index] = _Message.live(_Reponse(context.t.iaDAccordJeN));
   });
 
   void _nouvelle() => setState(() {
@@ -126,7 +124,7 @@ class _EcranAssistantState extends ConsumerState<EcranAssistant> {
 
   void _dicter() {
     final (langue, phrase) = _langues[_langue];
-    informer(context, 'Dictée en $langue… (simulation)');
+    informer(context, context.t.iaDicteeEn(langue));
     _saisie.text = phrase;
   }
 
@@ -179,7 +177,7 @@ class _EcranAssistantState extends ConsumerState<EcranAssistant> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
+        title: Row(
           children: [
             CircleAvatar(
               radius: 16,
@@ -192,29 +190,32 @@ class _EcranAssistantState extends ConsumerState<EcranAssistant> {
             ),
             SizedBox(width: 10),
             Flexible(
-              child: Text('Assistant Live', overflow: TextOverflow.ellipsis),
+              child: Text(
+                context.t.iaAssistantLive,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),
         actions: [
           if (!etendu)
             IconButton(
-              tooltip: 'Conversations',
+              tooltip: context.t.iaConversations,
               onPressed: () => _historique(context),
               icon: const Icon(Icons.history_rounded),
             ),
           IconButton(
-            tooltip: 'Nouvelle conversation',
+            tooltip: context.t.iaNouvelleConversation,
             onPressed: _nouvelle,
             icon: const Icon(Icons.edit_square),
           ),
           PopupMenuButton<int>(
-            tooltip: 'Langue de la voix',
+            tooltip: context.t.iaLangueDeLaVoix,
             icon: const Icon(Icons.translate_rounded),
             initialValue: _langue,
             onSelected: (i) {
               setState(() => _langue = i);
-              informer(context, 'Voix en ${_langues[i].$1}.');
+              informer(context, context.t.iaVoixEn(_langues[i].$1));
             },
             itemBuilder: (_) => [
               for (final (i, (langue, _)) in _langues.indexed)
@@ -283,7 +284,7 @@ class _Accueil extends ConsumerWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Bonjour $prenom, que puis-je faire pour vous ?',
+                  context.t.iaBonjourPrenom(prenom),
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w900,
@@ -291,9 +292,8 @@ class _Accueil extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 6),
-                const Text(
-                  'Je cherche, compare, réserve et paie dans Live. Je lis aussi '
-                  'vos fichiers : PDF, Word, Excel, présentations, photos.',
+                Text(
+                  context.t.iaJeChercheCompareReserve,
                   style: TextStyle(color: LiveColors.gris, height: 1.35),
                 ),
                 const SizedBox(height: 18),
@@ -302,7 +302,9 @@ class _Accueil extends ConsumerWidget {
                   espacement: 10,
                   hauteur: 108,
                   enfants: [
-                    for (final (icone, titre, demande) in _suggestions)
+                    for (final (icone, titre, demande) in _suggestions(
+                      context.t,
+                    ))
                       Pressable(
                         onTap: () => onChoix(demande),
                         child: Bloc(
@@ -356,19 +358,19 @@ class _ListeConversations extends StatelessWidget {
         FilledButton.icon(
           onPressed: onNouvelle,
           icon: const Icon(Icons.add_rounded),
-          label: const Text('Nouvelle conversation'),
+          label: Text(context.t.iaNouvelleConversation),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.fromLTRB(8, 16, 8, 6),
           child: Text(
-            'Récentes',
+            context.t.iaRecentes,
             style: TextStyle(
               color: LiveColors.gris,
               fontWeight: FontWeight.w700,
             ),
           ),
         ),
-        for (final (titre, quand) in _conversations)
+        for (final (titre, quand) in _conversations(context.t))
           ListTile(
             dense: true,
             shape: RoundedRectangleBorder(
@@ -377,7 +379,8 @@ class _ListeConversations extends StatelessWidget {
             leading: const Icon(Icons.chat_bubble_outline_rounded, size: 20),
             title: Text(titre, maxLines: 1, overflow: TextOverflow.ellipsis),
             subtitle: Text(quand),
-            onTap: () => informer(context, 'Conversation « $titre » ouverte.'),
+            onTap: () =>
+                informer(context, context.t.iaConversationOuverte(titre)),
           ),
       ],
     );

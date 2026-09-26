@@ -7400,5 +7400,1060 @@
   "publishNouvelArrivageLivraison24": "Nouvel arrivage ! Livraison 24 h…",
   "@publishNouvelArrivageLivraison24": {
     "description": "Écran : publier_envois"
+  },
+  "@iaBientotDispo": {
+    "description": "Écran : ia_accueil_credits",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "iaBientotDispo": "{titre} : disponible prochainement.",
+  "@iaNonInclus": {
+    "description": "Écran : ia_accueil_credits",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "iaNonInclus": "{titre} : non inclus dans ce prototype.",
+  "@iaNCreditsLive": {
+    "description": "Écran : ia_accueil_credits",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "iaNCreditsLive": "{n} Crédits Live",
+  "@iaPayerMontant": {
+    "description": "Écran : ia_accueil_credits",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "iaPayerMontant": "Payer {montant}",
+  "@iaCreditsPour": {
+    "description": "Écran : ia_accueil_credits",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "iaCreditsPour": "{n} crédits pour {montant}",
+  "@iaBonus": {
+    "description": "Écran : ia_accueil_credits",
+    "placeholders": {
+      "bonus": {
+        "type": "String"
+      }
+    }
+  },
+  "iaBonus": "Bonus {bonus}",
+  "@iaSoldeInsuffisant": {
+    "description": "Écran : ia_accueil_credits",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "iaSoldeInsuffisant": "Solde insuffisant : il vous manque {n} crédits.",
+  "@iaVotreSoldeDeux": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaVotreSoldeDeux": "Votre solde : ",
+  "iaAssistantLive": "Assistant Live",
+  "@iaAssistantLive": {
+    "description": "Écran : ia_assistant"
+  },
+  "iaIlChercheReservePaie": "Il cherche, réserve, paie et lit vos fichiers (PDF, Word, Excel). À l’écrit ou en mode vocal.",
+  "@iaIlChercheReservePaie": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaMesCreditsLive": "Mes Crédits Live",
+  "@iaMesCreditsLive": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaN1Credit10Fcfa": "1 crédit = 10 FCFA · valables 12 mois",
+  "@iaN1Credit10Fcfa": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaAcheterDesCredits": "Acheter des crédits",
+  "@iaAcheterDesCredits": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaMesDocuments": "Mes documents",
+  "@iaMesDocuments": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaBientot": "Bientôt",
+  "@iaBientot": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaExemples": "Exemples",
+  "@iaExemples": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaN1Cv20Credits": "1 CV = 20 crédits · 1 lettre = 10 · 1 exercice = 5",
+  "@iaN1Cv20Credits": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaOffrirDesCreditsNon": "Offrir des crédits : non inclus dans ce prototype.",
+  "@iaOffrirDesCreditsNon": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaOffrirDesCreditsA": "Offrir des crédits à un proche",
+  "@iaOffrirDesCreditsA": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaCreditsValables12Mois": "Crédits valables 12 mois, utilisables uniquement pour Live IA. Non remboursables en argent.",
+  "@iaCreditsValables12Mois": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaPackDeBase": "Pack de base",
+  "@iaPackDeBase": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaCeServiceCoute": "Ce service coûte",
+  "@iaCeServiceCoute": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaVotreSolde": "Votre solde",
+  "@iaVotreSolde": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaApres": "Après",
+  "@iaApres": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaUneRevisionGratuiteIncluse": "Une révision gratuite incluse. Recrédité si la génération échoue.",
+  "@iaUneRevisionGratuiteIncluse": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "iaGenerer": "Générer",
+  "@iaGenerer": {
+    "description": "Écran : ia_accueil_credits"
+  },
+  "@iaLireFichierPour": {
+    "description": "Écran : ia_assistant",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "iaLireFichierPour": "Lire « {nom} » pour {n} crédits",
+  "@iaDicteeEn": {
+    "description": "Écran : ia_assistant",
+    "placeholders": {
+      "langue": {
+        "type": "String"
+      }
+    }
+  },
+  "iaDicteeEn": "Dictée en {langue}… (simulation)",
+  "@iaVoixEn": {
+    "description": "Écran : ia_assistant",
+    "placeholders": {
+      "langue": {
+        "type": "String"
+      }
+    }
+  },
+  "iaVoixEn": "Voix en {langue}.",
+  "@iaBonjourPrenom": {
+    "description": "Écran : ia_assistant",
+    "placeholders": {
+      "prenom": {
+        "type": "String"
+      }
+    }
+  },
+  "iaBonjourPrenom": "Bonjour {prenom}, que puis-je faire pour vous ?",
+  "@iaConversationOuverte": {
+    "description": "Écran : ia_assistant",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "iaConversationOuverte": "Conversation « {titre} » ouverte.",
+  "iaCreditsInsuffisantsRechargezVos": "Crédits insuffisants : rechargez vos crédits Live.",
+  "@iaCreditsInsuffisantsRechargezVos": {
+    "description": "Écran : ia_assistant"
+  },
+  "iaDAccordJeN": "D’accord, je n’ai pas lu le fichier. Aucun crédit utilisé.",
+  "@iaDAccordJeN": {
+    "description": "Écran : ia_assistant"
+  },
+  "iaConversations": "Conversations",
+  "@iaConversations": {
+    "description": "Écran : ia_assistant"
+  },
+  "iaNouvelleConversation": "Nouvelle conversation",
+  "@iaNouvelleConversation": {
+    "description": "Écran : ia_assistant"
+  },
+  "iaLangueDeLaVoix": "Langue de la voix",
+  "@iaLangueDeLaVoix": {
+    "description": "Écran : ia_assistant"
+  },
+  "iaJeChercheCompareReserve": "Je cherche, compare, réserve et paie dans Live. Je lis aussi vos fichiers : PDF, Word, Excel, présentations, photos.",
+  "@iaJeChercheCompareReserve": {
+    "description": "Écran : ia_assistant"
+  },
+  "iaRecentes": "Récentes",
+  "@iaRecentes": {
+    "description": "Écran : ia_assistant"
+  },
+  "@iaLireResumerCout": {
+    "description": "Écran : ia_assistant_elements",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "cout": {
+        "type": "int"
+      },
+      "reste": {
+        "type": "int"
+      }
+    }
+  },
+  "iaLireResumerCout": "{n, plural, =1{Lire et résumer ce fichier coûte {cout} crédits (1 page). Il vous en restera {reste}.} other{Lire et résumer ce fichier coûte {cout} crédits ({n} pages). Il vous en restera {reste}.}}",
+  "@iaLirePour": {
+    "description": "Écran : ia_assistant_elements",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "iaLirePour": "Lire pour {n} crédits",
+  "@iaRetirerFichier": {
+    "description": "Écran : ia_assistant_elements",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "iaRetirerFichier": "Retirer {nom}",
+  "iaCopier": "Copier",
+  "@iaCopier": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaReponseCopiee": "Réponse copiée.",
+  "@iaReponseCopiee": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaEcouter": "Écouter",
+  "@iaEcouter": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaLectureAVoixHaute": "Lecture à voix haute… (simulation)",
+  "@iaLectureAVoixHaute": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaBonneReponse": "Bonne réponse",
+  "@iaBonneReponse": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaMerciCEstNote": "Merci, c’est noté.",
+  "@iaMerciCEstNote": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaMauvaiseReponse": "Mauvaise réponse",
+  "@iaMauvaiseReponse": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaMerciDitesMoiCe": "Merci : dites-moi ce qui ne va pas.",
+  "@iaMerciDitesMoiCe": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaRegenerer": "Régénérer",
+  "@iaRegenerer": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaLiveReflechit": "Live réfléchit…",
+  "@iaLiveReflechit": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "iaReserverSergeDemain8": "Réserver Serge demain 8 h",
+  "@iaReserverSergeDemain8": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaVoirDAutresPlombiers": "Voir d’autres plombiers",
+  "@iaVoirDAutresPlombiers": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaVoirLes2Iphone": "Voir les 2 iPhone",
+  "@iaVoirLes2Iphone": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaMAlerterDesNouveaux": "M’alerter des nouveaux",
+  "@iaMAlerterDesNouveaux": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaPayer18450Fcfa": "Payer 18 450 FCFA",
+  "@iaPayer18450Fcfa": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaEnFaireUnBusiness": "En faire un business plan",
+  "@iaEnFaireUnBusiness": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaOuvrirMaBoutique": "Ouvrir ma boutique",
+  "@iaOuvrirMaBoutique": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaAmeliorerMonCv15": "Améliorer mon CV (15 crédits)",
+  "@iaAmeliorerMonCv15": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaVoirLesOffresD": "Voir les offres d’emploi",
+  "@iaVoirLesOffresD": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaMEntrainerParPhoto": "M’entraîner par photo",
+  "@iaMEntrainerParPhoto": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaParlerAuTuteur": "Parler au tuteur",
+  "@iaParlerAuTuteur": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaReserverLaVisiteDe": "Réserver la visite de mardi",
+  "@iaReserverLaVisiteDe": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaVoirLes3Logements": "Voir les 3 logements",
+  "@iaVoirLes3Logements": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "iaCreerLAlerte": "Créer l’alerte",
+  "@iaCreerLAlerte": {
+    "description": "Écran : ia_assistant_elements"
+  },
+  "@iaTaillePages": {
+    "description": "Écran : ia_assistant_saisie",
+    "placeholders": {
+      "taille": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "iaTaillePages": "{taille} · {n, plural, =1{1 page} other{{n} pages}}",
+  "iaEcrivezALive": "Écrivez à Live…",
+  "@iaEcrivezALive": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaJoindreUnFichier": "Joindre un fichier",
+  "@iaJoindreUnFichier": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaDicter": "Dicter",
+  "@iaDicter": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaEnvoyer": "Envoyer",
+  "@iaEnvoyer": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaModeVocal": "Mode vocal",
+  "@iaModeVocal": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "iaPhotos": "Photos",
+  "@iaPhotos": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaUneImageUneCapture": "Une image, une capture, un reçu",
+  "@iaUneImageUneCapture": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaAppareilPhoto": "Appareil photo",
+  "@iaAppareilPhoto": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaPhotographierUnDocument": "Photographier un document",
+  "@iaPhotographierUnDocument": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaFichier": "Fichier",
+  "@iaFichier": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaPdfWordExcelPowerpoint": "PDF, Word, Excel, PowerPoint, texte, Markdown, CSV…",
+  "@iaPdfWordExcelPowerpoint": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaMesDocumentsLiveIa": "Mes documents Live IA",
+  "@iaMesDocumentsLiveIa": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaCvLettresBusinessPlans": "CV, lettres, business plans créés",
+  "@iaCvLettresBusinessPlans": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaTelechargements": "Téléchargements",
+  "@iaTelechargements": {
+    "description": "Écran : ia_assistant_saisie"
+  },
+  "iaMicroCoupe": "Micro coupé",
+  "@iaMicroCoupe": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "iaJeVousEcouteTouchez": "Je vous écoute… touchez le cercle et parlez",
+  "@iaJeVousEcouteTouchez": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "iaLiveVousRepond": "Live vous répond",
+  "@iaLiveVousRepond": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "iaLangue": "Langue",
+  "@iaLangue": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "iaParler": "Parler",
+  "@iaParler": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "iaRetablirLeMicro": "Rétablir le micro",
+  "@iaRetablirLeMicro": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "iaCouperLeMicro": "Couper le micro",
+  "@iaCouperLeMicro": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "iaTerminer": "Terminer",
+  "@iaTerminer": {
+    "description": "Écran : ia_assistant_vocal"
+  },
+  "@iaMathematiques": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaMathematiques": "Mathématiques",
+  "@iaFrancais": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaFrancais": "Français",
+  "@iaAnglais": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaAnglais": "Anglais",
+  "@iaEntretien": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaEntretien": "Entretien d’embauche",
+  "iaBonjourGraceOnRevise": "Bonjour Grâce ! On révise quoi aujourd’hui ? Parle-moi normalement, je t’écoute.",
+  "@iaBonjourGraceOnRevise": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaJeNeComprendsPas": "Je ne comprends pas les équations du premier degré.",
+  "@iaJeNeComprendsPas": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaDAccordUneEquation": "D’accord. Une équation, c’est une balance. Si j’ajoute 3 d’un côté, je dois enlever 3 de l’autre. Essaie : 2x + 3 = 11, que fais-tu avec le 3 ?",
+  "@iaDAccordUneEquation": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaJeLEnleveDes": "Je l’enlève des deux côtés, donc 2x = 8.",
+  "@iaJeLEnleveDes": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaParfaitEtMaintenantPour": "Parfait ! Et maintenant, pour trouver x ?",
+  "@iaParfaitEtMaintenantPour": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaTuteurVocal": "Tuteur vocal",
+  "@iaTuteurVocal": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaArreterDeParler": "Arrêter de parler",
+  "@iaArreterDeParler": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaJeVousEcoute": "Je vous écoute…",
+  "@iaJeVousEcoute": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaTouchezPourParler5": "Touchez pour parler · 5 crédits / minute",
+  "@iaTouchezPourParler5": {
+    "description": "Écran : ia_tuteur"
+  },
+  "iaExerciceParPhoto": "Exercice par photo",
+  "@iaExerciceParPhoto": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaComprendreEtapeParEtape": "Comprendre étape par étape",
+  "@iaComprendreEtapeParEtape": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaReussirALEcole": "Réussir à l'école",
+  "@iaReussirALEcole": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaResumerUnCours": "Résumer un cours",
+  "@iaResumerUnCours": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaPhotoOuPdfEn": "Photo ou PDF, en quelques points",
+  "@iaPhotoOuPdfEn": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaCvComplet": "CV complet",
+  "@iaCvComplet": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaMisEnPagePdf": "Mis en page, PDF et Word",
+  "@iaMisEnPagePdf": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaTrouverUnEmploi": "Trouver un emploi",
+  "@iaTrouverUnEmploi": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaPosteVise": "Poste visé",
+  "@iaPosteVise": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaNomComplet": "Nom complet",
+  "@iaNomComplet": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaTelephone": "Téléphone",
+  "@iaTelephone": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaVille": "Ville",
+  "@iaVille": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaExperiences": "Expériences",
+  "@iaExperiences": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaFormation": "Formation",
+  "@iaFormation": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaCompetences": "Compétences",
+  "@iaCompetences": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaLangues": "Langues",
+  "@iaLangues": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaLettreDeMotivation": "Lettre de motivation",
+  "@iaLettreDeMotivation": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaAdapteeAUneOffre": "Adaptée à une offre précise",
+  "@iaAdapteeAUneOffre": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaEntreprise": "Entreprise",
+  "@iaEntreprise": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaVotreNom": "Votre nom",
+  "@iaVotreNom": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaVotreExperienceEnQuelques": "Votre expérience en quelques mots",
+  "@iaVotreExperienceEnQuelques": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaPackCandidature": "Pack candidature",
+  "@iaPackCandidature": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaCvLettreMessage": "CV + lettre + message",
+  "@iaCvLettreMessage": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaBusinessPlanExpress": "Business plan express",
+  "@iaBusinessPlanExpress": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaN5A6Pages": "5 à 6 pages, budget de démarrage",
+  "@iaN5A6Pages": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaLancerMonActivite": "Lancer mon activité",
+  "@iaLancerMonActivite": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaVotreActivite": "Votre activité",
+  "@iaVotreActivite": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaBoulangerieDeQuartier": "Boulangerie de quartier",
+  "@iaBoulangerieDeQuartier": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaVilleEtQuartier": "Ville et quartier",
+  "@iaVilleEtQuartier": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaVosClients": "Vos clients",
+  "@iaVosClients": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaFamillesEtPetitsCommerces": "Familles et petits commerces du quartier",
+  "@iaFamillesEtPetitsCommerces": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaPrixMoyenDUne": "Prix moyen d’une vente (FCFA)",
+  "@iaPrixMoyenDUne": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaVentesEspereesParMois": "Ventes espérées par mois",
+  "@iaVentesEspereesParMois": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaVotreApportFcfa": "Votre apport (FCFA)",
+  "@iaVotreApportFcfa": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaBusinessPlanComplet": "Business plan complet",
+  "@iaBusinessPlanComplet": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaAssistantEn6Etapes": "Assistant en 6 étapes, prévisionnel 3 ans",
+  "@iaAssistantEn6Etapes": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaFormeJuridiqueEnvisagee": "Forme juridique envisagée",
+  "@iaFormeJuridiqueEnvisagee": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaVosConcurrents": "Vos concurrents",
+  "@iaVosConcurrents": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaDeuxBoulangeriesA1": "Deux boulangeries à 1 km",
+  "@iaDeuxBoulangeriesA1": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaPretRechercheFcfa": "Prêt recherché (FCFA)",
+  "@iaPretRechercheFcfa": {
+    "description": "Écran : ia_catalogue"
+  },
+  "iaReviserPreparerUnEntretien": "Réviser, préparer un entretien",
+  "@iaReviserPreparerUnEntretien": {
+    "description": "Écran : ia_catalogue"
+  },
+  "@iaGenererCredits": {
+    "description": "Écran : ia_generateur, ia_business_plan",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "iaGenererCredits": "Générer · {n} crédits",
+  "@iaSimule": {
+    "description": "Écran : ia_generateur",
+    "placeholders": {
+      "quoi": {
+        "type": "String"
+      }
+    }
+  },
+  "iaSimule": "{quoi} (simulé dans le prototype)",
+  "@iaPrixDeux": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaPrixDeux": "Prix : ",
+  "iaRemplirAvecMonProfil": "Remplir avec mon profil Live",
+  "@iaRemplirAvecMonProfil": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaLIaReformuleVos": "L’IA reformule vos informations ; elle n’invente ni expérience ni diplôme.",
+  "@iaLIaReformuleVos": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaVousObtiendrez": "Vous obtiendrez",
+  "@iaVousObtiendrez": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaExportPdfEtWord": "Export PDF et Word · une révision gratuite",
+  "@iaExportPdfEtWord": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaRepondezSimplementAuxQuestions": "Répondez simplement aux questions sur votre projet. Live IA rédige ensuite un dossier que vous pourrez modifier, télécharger et présenter à une banque ou à un partenaire. Vérifiez toujours les chiffres avant de vous engager.",
+  "@iaRepondezSimplementAuxQuestions": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaALInstant": "à l'instant",
+  "@iaALInstant": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaTelechargementDuPdf": "Téléchargement du PDF",
+  "@iaTelechargementDuPdf": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaTelechargerPdf": "Télécharger PDF",
+  "@iaTelechargerPdf": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaTelechargementWord": "Téléchargement Word",
+  "@iaTelechargementWord": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaPartage": "Partage",
+  "@iaPartage": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaRevisionGratuite": "Révision gratuite",
+  "@iaRevisionGratuite": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaDocumentPret": "Document prêt",
+  "@iaDocumentPret": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaGenereAvecLiveIa": "Généré avec Live IA : relisez avant d’envoyer. Le document est conservé dans « Mes documents ».",
+  "@iaGenereAvecLiveIa": {
+    "description": "Écran : ia_generateur"
+  },
+  "iaRetourALiveIa": "Retour à Live IA",
+  "@iaRetourALiveIa": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "@iaBusinessPlanEtape": {
+    "description": "Écran : ia_business_plan",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "iaBusinessPlanEtape": "Business plan · {n}/6",
+  "@iaAnneeN": {
+    "description": "Écran : ia_business_plan",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "iaAnneeN": "Année {n}",
+  "iaLectureDeVosInformations": "Lecture de vos informations",
+  "@iaLectureDeVosInformations": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaRedactionDuContenu": "Rédaction du contenu",
+  "@iaRedactionDuContenu": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaCalculsEtMiseEn": "Calculs et mise en forme",
+  "@iaCalculsEtMiseEn": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaRelectureFinale": "Relecture finale",
+  "@iaRelectureFinale": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaVousPouvezQuitterL": "Vous pouvez quitter l’écran : vous serez prévenu quand ce sera prêt.",
+  "@iaVousPouvezQuitterL": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaLeProjet": "Le projet",
+  "@iaLeProjet": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaLesClients": "Les clients",
+  "@iaLesClients": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaLaConcurrence": "La concurrence",
+  "@iaLaConcurrence": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaLesVentes": "Les ventes",
+  "@iaLesVentes": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaLeFinancement": "Le financement",
+  "@iaLeFinancement": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaRecapitulatif": "Récapitulatif",
+  "@iaRecapitulatif": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaQuiSontVosClients": "Qui sont vos clients ?",
+  "@iaQuiSontVosClients": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaQuiSontVosConcurrents": "Qui sont vos concurrents ?",
+  "@iaQuiSontVosConcurrents": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaPrixMoyenDUne2": "Prix moyen d’une vente",
+  "@iaPrixMoyenDUne2": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaVentesParMois": "Ventes par mois",
+  "@iaVentesParMois": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaChiffreDAffairesMensuel": "Chiffre d’affaires mensuel",
+  "@iaChiffreDAffairesMensuel": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaVotreApport": "Votre apport",
+  "@iaVotreApport": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaPretRecherche": "Prêt recherché",
+  "@iaPretRecherche": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaBesoinTotal": "Besoin total",
+  "@iaBesoinTotal": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaChiffreDAffairesPrevisionnel": "Chiffre d’affaires prévisionnel",
+  "@iaChiffreDAffairesPrevisionnel": {
+    "description": "Écran : ia_business_plan"
+  },
+  "iaChiffresIndicatifsAFaire": "Chiffres indicatifs à faire vérifier par un comptable.",
+  "@iaChiffresIndicatifsAFaire": {
+    "description": "Écran : ia_business_plan"
+  },
+  "@iaEquationNiveau": {
+    "description": "Écran : ia_exercice_documents",
+    "placeholders": {
+      "niveau": {
+        "type": "String"
+      }
+    }
+  },
+  "iaEquationNiveau": "Équation · {niveau}",
+  "@iaEnvoyerCredits": {
+    "description": "Écran : ia_exercice_documents",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "iaEnvoyerCredits": "Envoyer · {n} crédits",
+  "@iaEtapeSur": {
+    "description": "Écran : ia_exercice_documents",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "iaEtapeSur": "ÉTAPE {n} SUR {total}",
+  "@iaBravo": {
+    "description": "Écran : ia_exercice_documents",
+    "placeholders": {
+      "explication": {
+        "type": "String"
+      }
+    }
+  },
+  "iaBravo": "Bravo ! {explication}",
+  "@iaPasTout": {
+    "description": "Écran : ia_exercice_documents",
+    "placeholders": {
+      "explication": {
+        "type": "String"
+      }
+    }
+  },
+  "iaPasTout": "Pas tout à fait. {explication}",
+  "@iaCollege": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaCollege": "Collège",
+  "@iaLycee": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaLycee": "Lycée",
+  "@iaUniversite": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaUniversite": "Université",
+  "iaOnVeutIsolerX": "On veut isoler x. Que faut-il faire avec le « + 3 » ?",
+  "@iaOnVeutIsolerX": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaLeSoustraireDesDeux": "Le soustraire des deux côtés",
+  "@iaLeSoustraireDesDeux": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaLeMultiplierPar2": "Le multiplier par 2",
+  "@iaLeMultiplierPar2": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaOnA2x8": "On a 2x = 8. Comment trouver x ?",
+  "@iaOnA2x8": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaDiviserLesDeuxCotes": "Diviser les deux côtés par 2",
+  "@iaDiviserLesDeuxCotes": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaAjouter2DesDeux": "Ajouter 2 des deux côtés",
+  "@iaAjouter2DesDeux": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaVerifionsQueVaut2": "Vérifions : que vaut 2 × 4 + 3 ?",
+  "@iaVerifionsQueVaut2": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaN2438": "2 × 4 + 3 = 8 + 3 = 11. La solution x = 4 est juste.",
+  "@iaN2438": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaN2x3311": "2x + 3 − 3 = 11 − 3, donc 2x = 8.",
+  "@iaN2x3311": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaX82Donc": "x = 8 ÷ 2, donc x = 4.",
+  "@iaX82Donc": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaPrenezDAbordLa": "Prenez d’abord la photo",
+  "@iaPrenezDAbordLa": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaExercice3Resoudre2x": "Exercice 3 : Résoudre 2x + 3 = 11",
+  "@iaExercice3Resoudre2x": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaCadrezLEnonce": "Cadrez l’énoncé",
+  "@iaCadrezLEnonce": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaPhotoNetteTexteLisible": "Photo nette · texte lisible",
+  "@iaPhotoNetteTexteLisible": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaReprendreLaPhoto": "Reprendre la photo",
+  "@iaReprendreLaPhoto": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaPrendreLaPhoto": "Prendre la photo",
+  "@iaPrendreLaPhoto": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaNiveau": "Niveau",
+  "@iaNiveau": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaMAiderAComprendre": "M’aider à comprendre",
+  "@iaMAiderAComprendre": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaEtapeParEtapeAvec": "Étape par étape, avec des questions · 5 crédits",
+  "@iaEtapeParEtapeAvec": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaSolutionComplete": "Solution complète",
+  "@iaSolutionComplete": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaSolutionRedigeeEtJustifiee": "Solution rédigée et justifiée · 8 crédits",
+  "@iaSolutionRedigeeEtJustifiee": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaEnonceResoudre2x3": "Énoncé : Résoudre 2x + 3 = 11",
+  "@iaEnonceResoudre2x3": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaSolutionX4": "Solution : x = 4",
+  "@iaSolutionX4": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaEtapeSuivante": "Étape suivante",
+  "@iaEtapeSuivante": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaVoirLeRecapitulatif": "Voir le récapitulatif",
+  "@iaVoirLeRecapitulatif": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaAucunDocumentPourLe": "Aucun document pour le moment. Vos CV, lettres et business plans apparaîtront ici.",
+  "@iaAucunDocumentPourLe": {
+    "description": "Écran : ia_exercice_documents"
+  },
+  "iaTrouverUnLogement": "Trouver un logement",
+  "@iaTrouverUnLogement": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaReserverUnPro": "Réserver un pro",
+  "@iaReserverUnPro": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaComparerDesPrix": "Comparer des prix",
+  "@iaComparerDesPrix": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaPayerUneFacture": "Payer une facture",
+  "@iaPayerUneFacture": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaLogementAMoungali": "Logement à Moungali",
+  "@iaLogementAMoungali": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaBudgetDeLaBoutique": "Budget de la boutique",
+  "@iaBudgetDeLaBoutique": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaFactureE2cDeSeptembre": "Facture E2C de septembre",
+  "@iaFactureE2cDeSeptembre": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaLettrePourLeStage": "Lettre pour le stage chez Total",
+  "@iaLettrePourLeStage": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaAujourdHui": "Aujourd’hui",
+  "@iaAujourdHui": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaHier": "Hier",
+  "@iaHier": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaLun": "Lun.",
+  "@iaLun": {
+    "description": "Écran : ia_assistant_donnees"
+  },
+  "iaN18Sept": "18 sept.",
+  "@iaN18Sept": {
+    "description": "Écran : ia_assistant_donnees"
   }
 }
