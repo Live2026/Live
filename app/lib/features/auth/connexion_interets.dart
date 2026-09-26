@@ -20,7 +20,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
     if (await confirmerNumero(
           context,
           '${pays.indicatif} ${_tel.text}',
-          alerte: alerteNumero(pays, _tel.text),
+          alerte: alerteNumero(context, pays, _tel.text),
         ) &&
         mounted) {
       setState(() => _etape = 1);
@@ -30,32 +30,23 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
   Future<void> _oublie() async {
     if (await confirmer(
       context,
-      titre: 'Code secret oublié',
-      texte:
-          'Nous envoyons un code par SMS à votre numéro. Vous pourrez '
-          'ensuite choisir un nouveau code secret.',
-      action: 'Recevoir le code',
+      titre: context.t.codeSecretOublie,
+      texte: context.t.codeSecretOublieTexte,
+      action: context.t.recevoirCode,
     )) {
-      if (mounted) informer(context, 'Code envoyé par SMS.');
+      if (mounted) informer(context, context.t.codeEnvoyeSms);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final (titre, texte) = switch (_etape) {
-      0 => (
-        'Bon retour sur Live',
-        'Entrez le numéro de votre compte : nous vous envoyons un code.',
-      ),
+      0 => (context.t.bonRetour, context.t.bonRetourTexte),
       1 => (
-        'Code reçu par SMS',
-        'Envoyé au ${paysTelephone[_pays].indicatif} ${_tel.text}. '
-            'Prototype : 6 chiffres au choix.',
+        context.t.codeRecuSms,
+        context.t.envoyeAu('${paysTelephone[_pays].indicatif} ${_tel.text}'),
       ),
-      _ => (
-        'Votre code secret',
-        'Pour protéger votre compte sur cet appareil.',
-      ),
+      _ => (context.t.votreCodeSecret, context.t.protegerAppareil),
     };
     return Scaffold(
       appBar: const BarreDemarrage(),
@@ -86,7 +77,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
                 child: TextButton.icon(
                   onPressed: () => context.go('/connexion/qr'),
                   icon: const Icon(Icons.qr_code_2_rounded),
-                  label: const Text('Se connecter avec un code QR'),
+                  label: Text(context.t.connexionQr),
                 ),
               ),
             ],
@@ -114,7 +105,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
             Center(
               child: TextButton(
                 onPressed: _oublie,
-                child: const Text('Code secret oublié ?'),
+                child: Text(context.t.codeSecretOublieQ),
               ),
             ),
           ],
@@ -126,7 +117,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
                 onPressed: paysTelephone[_pays].complet(_tel.text)
                     ? _envoyer
                     : null,
-                child: const Text('Suivant'),
+                child: Text(context.t.suivant),
               ),
             )
           : null,
@@ -171,18 +162,16 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
     return Scaffold(
       appBar: BarreDemarrage(
         actions: [
-          TextButton(onPressed: _terminer, child: const Text('Passer')),
+          TextButton(onPressed: _terminer, child: Text(context.t.passer)),
         ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          const EnTeteDemarrage(
+          EnTeteDemarrage(
             etape: 4,
-            titre: 'Qu’est-ce qui vous intéresse ?',
-            texte:
-                'Choisissez-en au moins 3 : votre fil sera utile dès '
-                'maintenant. Vous pourrez changer plus tard.',
+            titre: context.t.interetsTitre,
+            texte: context.t.interetsTexte,
           ),
           GrilleAdaptative(
             largeurMax: 120,
@@ -211,7 +200,7 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: _choix.length >= 3 ? _terminer : null,
-          child: Text('Continuer · ${_choix.length} choisis'),
+          child: Text(context.t.continuerChoisis(_choix.length)),
         ),
       ),
     );
@@ -273,7 +262,13 @@ class _TuileInteret extends StatelessWidget {
                       Icon(icone, color: choisi ? Colors.white : couleur),
                       const SizedBox(height: 6),
                       Text(
-                        nom,
+                        // Clé sans accent ni tiret pour la traduction.
+                        context.t.interet(
+                          nom
+                              .replaceAll('é', 'e')
+                              .replaceAll('É', 'E')
+                              .replaceAll('-', ''),
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

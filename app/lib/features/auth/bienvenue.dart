@@ -49,11 +49,11 @@ class _EcranSplashState extends State<EcranSplash> {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 28),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 28),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     'Live',
                     style: TextStyle(
                       color: LiveColors.bleu,
@@ -62,9 +62,9 @@ class _EcranSplashState extends State<EcranSplash> {
                       letterSpacing: 0.4,
                     ),
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Text(
-                    'La place de marché sociale',
+                    context.t.signature,
                     style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
                   ),
                 ],
@@ -145,24 +145,24 @@ class _Titre extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         children: [
           Text(
-            'Bienvenue sur Live',
+            context.t.bienvenueTitre,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: couleurMotif,
               fontSize: 28,
               fontWeight: FontWeight.w800,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
-            'Achetez, vendez, louez et payez en toute confiance.',
+            context.t.bienvenueTexte,
             textAlign: TextAlign.center,
-            style: TextStyle(color: LiveColors.gris, fontSize: 15.5),
+            style: const TextStyle(color: LiveColors.gris, fontSize: 15.5),
           ),
         ],
       ),
@@ -189,7 +189,7 @@ class _Actions extends StatelessWidget {
                 minimumSize: const Size.fromHeight(50),
               ),
               onPressed: () => context.push('/langue'),
-              child: const Text('Commencer'),
+              child: Text(context.t.commencer),
             ),
             const SizedBox(height: 10),
             OutlinedButton(
@@ -198,17 +198,17 @@ class _Actions extends StatelessWidget {
                 backgroundColor: LiveColors.surface,
               ),
               onPressed: onDecouvrir,
-              child: const Text('Découvrir sans compte'),
+              child: Text(context.t.decouvrirSansCompte),
             ),
             const SizedBox(height: 6),
             Wrap(
               alignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                const Text('Déjà un compte ?'),
+                Text(context.t.dejaUnCompte),
                 TextButton(
                   onPressed: () => context.push('/connexion'),
-                  child: const Text('Se connecter'),
+                  child: Text(context.t.seConnecter),
                 ),
               ],
             ),
@@ -216,10 +216,10 @@ class _Actions extends StatelessWidget {
               alignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                for (final (i, (nom, route)) in const [
-                  ('Conditions d’utilisation', '/legal/cgu'),
-                  ('Confidentialité', '/legal/confidentialite'),
-                  ('Aide', '/aide'),
+                for (final (i, (nom, route)) in [
+                  (context.t.conditionsUtilisation, '/legal/cgu'),
+                  (context.t.confidentialite, '/legal/confidentialite'),
+                  (context.t.aide, '/aide'),
                 ].indexed) ...[
                   if (i > 0)
                     const Text('·', style: TextStyle(color: LiveColors.gris)),

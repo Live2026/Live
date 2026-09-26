@@ -5,22 +5,10 @@ part of 'auth_screens.dart';
 enum _Canal { sms, appel, whatsapp }
 
 extension on _Canal {
-  (IconData, String, String) get infos => switch (this) {
-    _Canal.sms => (
-      Icons.sms_rounded,
-      'Renvoyer le SMS',
-      'Nouveau code par SMS',
-    ),
-    _Canal.appel => (
-      Icons.call_rounded,
-      'M’appeler',
-      'Un appel automatique vous dicte le code',
-    ),
-    _Canal.whatsapp => (
-      Icons.chat_rounded,
-      'Recevoir sur WhatsApp',
-      'Si WhatsApp est installé sur ce numéro',
-    ),
+  (IconData, String, String) infos(Textes t) => switch (this) {
+    _Canal.sms => (Icons.sms_rounded, t.renvoyerSms, t.nouveauCodeSms),
+    _Canal.appel => (Icons.call_rounded, t.mAppeler, t.appelDicte),
+    _Canal.whatsapp => (Icons.chat_rounded, t.recevoirWhatsapp, t.siWhatsapp),
   };
 }
 
@@ -77,9 +65,9 @@ class _EcranCodeState extends State<EcranCode> {
     // Chaque nouvel envoi allonge l'attente, contre les abus.
     _demarrer(45 + 15 * _envois);
     informer(context, switch (canal) {
-      _Canal.sms => 'Nouveau code envoyé par SMS au ${widget.telephone}.',
-      _Canal.appel => 'Appel en cours au ${widget.telephone} : décrochez.',
-      _Canal.whatsapp => 'Code envoyé sur WhatsApp au ${widget.telephone}.',
+      _Canal.sms => context.t.nouveauCodeEnvoye(widget.telephone),
+      _Canal.appel => context.t.appelEnCours(widget.telephone),
+      _Canal.whatsapp => context.t.codeWhatsappEnvoye(widget.telephone),
     });
   }
 
@@ -103,25 +91,16 @@ class _EcranCodeState extends State<EcranCode> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Code non reçu ?',
+              Text(
+                context.t.codeNonRecu,
                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 10),
-              for (final (icone, texte) in const [
-                (
-                  Icons.signal_cellular_alt_rounded,
-                  'Vérifiez que vous avez du réseau.',
-                ),
-                (Icons.dialpad_rounded, 'Vérifiez le numéro saisi.'),
-                (
-                  Icons.inbox_rounded,
-                  'Regardez vos SMS, même ceux des numéros inconnus.',
-                ),
-                (
-                  Icons.schedule_rounded,
-                  'Le SMS peut prendre jusqu’à 2 minutes.',
-                ),
+              for (final (icone, texte) in [
+                (Icons.signal_cellular_alt_rounded, context.t.verifiezReseau),
+                (Icons.dialpad_rounded, context.t.verifiezNumero),
+                (Icons.inbox_rounded, context.t.regardezSms),
+                (Icons.schedule_rounded, context.t.smsDeuxMinutes),
               ])
                 ListTile(
                   contentPadding: EdgeInsets.zero,
@@ -132,7 +111,7 @@ class _EcranCodeState extends State<EcranCode> {
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.edit_rounded, color: LiveColors.bleu),
-                title: const Text('Modifier le numéro'),
+                title: Text(context.t.modifierNumero),
                 onTap: () {
                   Navigator.pop(ctx);
                   context.pop();
@@ -144,10 +123,8 @@ class _EcranCodeState extends State<EcranCode> {
                   Icons.support_agent_rounded,
                   color: LiveColors.bleu,
                 ),
-                title: const Text('Contacter l’assistance Live'),
-                subtitle: const Text(
-                  'Un agent répond en moins de 2 h, 7 j / 7',
-                ),
+                title: Text(context.t.contacterAssistance),
+                subtitle: Text(context.t.agentRepond),
                 onTap: () {
                   Navigator.pop(ctx);
                   context.push('/aide/ecrire?sujet=Compte');
@@ -167,14 +144,14 @@ class _EcranCodeState extends State<EcranCode> {
         '${_reste ~/ 60}:${(_reste % 60).toString().padLeft(2, '0')}';
     return Scaffold(
       appBar: BarreDemarrage(
-        actions: [TextButton(onPressed: _aide, child: const Text('Aide'))],
+        actions: [TextButton(onPressed: _aide, child: Text(context.t.aide))],
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
         children: [
           const SizedBox(height: 8),
-          const Text(
-            'Vérifiez votre numéro',
+          Text(
+            context.t.verifiezVotreNumero,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: LiveColors.bleu,
@@ -188,9 +165,9 @@ class _EcranCodeState extends State<EcranCode> {
               children: [
                 TextSpan(
                   text: switch (_canal) {
-                    _Canal.sms => 'Code envoyé par SMS au ',
-                    _Canal.appel => 'Code dicté par appel au ',
-                    _Canal.whatsapp => 'Code envoyé sur WhatsApp au ',
+                    _Canal.sms => context.t.codeEnvoyeSmsA,
+                    _Canal.appel => context.t.codeDicteA,
+                    _Canal.whatsapp => context.t.codeEnvoyeWhatsappA,
                   },
                 ),
                 TextSpan(
@@ -206,14 +183,14 @@ class _EcranCodeState extends State<EcranCode> {
           Center(
             child: TextButton(
               onPressed: () => context.pop(),
-              child: const Text('Mauvais numéro ? Le modifier'),
+              child: Text(context.t.mauvaisNumero),
             ),
           ),
           const SizedBox(height: 12),
           ChampCode(onComplet: _valider, etat: _etat, lireSms: true),
           const SizedBox(height: 10),
-          const Text(
-            'Prototype : tapez 6 chiffres au choix.',
+          Text(
+            context.t.prototypeCode,
             textAlign: TextAlign.center,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
@@ -238,7 +215,7 @@ class _EcranCodeState extends State<EcranCode> {
                       const SizedBox(width: 10),
                       Flexible(
                         child: Text(
-                          'Renvoyer le code dans $minutes',
+                          context.t.renvoyerDans(minutes),
                           style: const TextStyle(color: LiveColors.gris),
                         ),
                       ),
@@ -248,8 +225,8 @@ class _EcranCodeState extends State<EcranCode> {
                     key: const ValueKey('options'),
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text(
-                        'Vous n’avez pas reçu le code ?',
+                      Text(
+                        context.t.pasRecuCode,
                         style: TextStyle(fontWeight: FontWeight.w800),
                       ),
                       const SizedBox(height: 8),
@@ -277,7 +254,7 @@ class _OptionCanal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (icone, titre, detail) = canal.infos;
+    final (icone, titre, detail) = canal.infos(context.t);
     final couleur = switch (canal) {
       _Canal.sms => LiveColors.bleu,
       _Canal.appel => LiveColors.succes,

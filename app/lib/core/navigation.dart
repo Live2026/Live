@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../shared/logo.dart';
 import 'adaptatif.dart';
 import 'theme.dart';
+import '../l10n/textes.dart';
 
 part 'barre_laterale.dart';
 
@@ -13,12 +14,12 @@ class NavigationPrincipale extends StatelessWidget {
   const NavigationPrincipale({super.key, required this.shell});
   final StatefulNavigationShell shell;
 
-  static const _onglets = [
-    (Icons.home_outlined, Icons.home, 'Accueil'),
-    (Icons.search, Icons.search, 'Explorer'),
-    (Icons.add_circle_outline, Icons.add_circle, 'Publier'),
-    (Icons.auto_awesome_outlined, Icons.auto_awesome, 'IA'),
-    (Icons.person_outline, Icons.person, 'Moi'),
+  static List<(IconData, IconData, String)> _onglets(Textes t) => [
+    (Icons.home_outlined, Icons.home, t.ongletAccueil),
+    (Icons.search, Icons.search, t.ongletExplorer),
+    (Icons.add_circle_outline, Icons.add_circle, t.ongletPublier),
+    (Icons.auto_awesome_outlined, Icons.auto_awesome, t.ongletIa),
+    (Icons.person_outline, Icons.person, t.ongletMoi),
   ];
 
   void _aller(int i) =>
@@ -35,7 +36,7 @@ class NavigationPrincipale extends StatelessWidget {
           onDestinationSelected: _aller,
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
           destinations: [
-            for (final (icone, active, libelle) in _onglets)
+            for (final (icone, active, libelle) in _onglets(context.t))
               NavigationDestination(
                 icon: Icon(icone),
                 selectedIcon: Icon(active),
@@ -52,7 +53,7 @@ class NavigationPrincipale extends StatelessWidget {
           _BarreLaterale(
             etendue: etendu,
             selection: shell.currentIndex,
-            onglets: _onglets,
+            onglets: _onglets(context.t),
             onTap: _aller,
           ),
           const VerticalDivider(width: 1),
@@ -153,7 +154,7 @@ class CadreOrdinateur extends StatelessWidget {
           _BarreLaterale(
             etendue: taille == Taille.etendue,
             selection: ongletDe(chemin),
-            onglets: NavigationPrincipale._onglets,
+            onglets: NavigationPrincipale._onglets(context.t),
             onTap: (i) => context.go(racinesOnglets[i]),
           ),
           const VerticalDivider(width: 1),

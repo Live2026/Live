@@ -12,6 +12,7 @@ import '../../data/mock.dart';
 import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'bienvenue.dart';
 part 'code_sms.dart';
@@ -39,7 +40,7 @@ class _EcranTelephoneState extends State<EcranTelephone> {
     if (await confirmerNumero(
           context,
           numero,
-          alerte: alerteNumero(pays, _numero.text),
+          alerte: alerteNumero(context, pays, _numero.text),
         ) &&
         mounted) {
       context.push('/code', extra: (numero, operateur));
@@ -56,12 +57,10 @@ class _EcranTelephoneState extends State<EcranTelephone> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
-          const EnTeteDemarrage(
+          EnTeteDemarrage(
             etape: 0,
-            titre: 'Saisissez votre numéro',
-            texte:
-                'Live va vérifier votre numéro par SMS. Il sert aussi à vos '
-                'paiements Mobile Money.',
+            titre: context.t.saisissezNumero,
+            texte: context.t.saisissezNumeroTexte,
           ),
           const SizedBox(height: 8),
           ChampTelephone(
@@ -79,11 +78,11 @@ class _EcranTelephoneState extends State<EcranTelephone> {
             onChanged: (v) => setState(() => _cgu = v ?? false),
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,
-            title: const Text("J'accepte les Conditions d'utilisation"),
+            title: Text(context.t.accepteConditions),
             secondary: TextButton(
               style: TextButton.styleFrom(minimumSize: const Size(0, 44)),
               onPressed: () => context.push('/legal/cgu'),
-              child: const Text('Lire'),
+              child: Text(context.t.lire),
             ),
           ),
           CheckboxListTile(
@@ -91,11 +90,11 @@ class _EcranTelephoneState extends State<EcranTelephone> {
             onChanged: (v) => setState(() => _confidentialite = v ?? false),
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,
-            title: const Text("J'accepte la Politique de confidentialité"),
+            title: Text(context.t.accepteConfidentialite),
             secondary: TextButton(
               style: TextButton.styleFrom(minimumSize: const Size(0, 44)),
               onPressed: () => context.push('/legal/confidentialite'),
-              child: const Text('Lire'),
+              child: Text(context.t.lire),
             ),
           ),
         ],
@@ -103,7 +102,7 @@ class _EcranTelephoneState extends State<EcranTelephone> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: valide ? () => _suivant(pays, operateur) : null,
-          child: const Text('Suivant'),
+          child: Text(context.t.suivant),
         ),
       ),
     );
@@ -149,30 +148,31 @@ class _EcranProfilState extends State<EcranProfil> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
-          const EnTeteDemarrage(
+          EnTeteDemarrage(
             etape: 2,
-            titre: 'Infos du profil',
-            texte:
-                'Indiquez votre nom et, si vous voulez, une photo. Votre '
-                'prénom s’affiche sur vos annonces et vos messages.',
+            titre: context.t.infosProfil,
+            texte: context.t.infosProfilTexte,
           ),
           Center(child: _PhotoProfil(nom: nomComplet)),
           const SizedBox(height: 18),
           TextField(
             controller: _prenom,
             textCapitalization: TextCapitalization.words,
-            decoration: const InputDecoration(labelText: 'Prénom'),
+            decoration: InputDecoration(labelText: context.t.prenom),
             onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 12),
           TextField(
             controller: _nom,
             textCapitalization: TextCapitalization.words,
-            decoration: const InputDecoration(labelText: 'Nom'),
+            decoration: InputDecoration(labelText: context.t.nom),
             onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 18),
-          const Text('Ville', style: TextStyle(fontWeight: FontWeight.w700)),
+          Text(
+            context.t.ville,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
@@ -180,7 +180,7 @@ class _EcranProfilState extends State<EcranProfil> {
             children: [
               for (final v in _villes)
                 ChoiceChip(
-                  label: Text(v),
+                  label: Text(v == 'Autre ville' ? context.t.autreVille : v),
                   selected: _ville == v,
                   onSelected: (_) => setState(() => _ville = v),
                 ),
@@ -191,10 +191,8 @@ class _EcranProfilState extends State<EcranProfil> {
             value: _majeur,
             onChanged: (v) => setState(() => _majeur = v),
             contentPadding: EdgeInsets.zero,
-            title: const Text("J'ai 18 ans ou plus"),
-            subtitle: Text(
-              _majeur ? 'Acheter, vendre et payer dans Live.' : 'Compte en consultation seulement (achat et vente à partir de 18 ans).',
-            ),
+            title: Text(context.t.majeur),
+            subtitle: Text(_majeur ? context.t.majeurOui : context.t.majeurNon),
           ),
         ],
       ),
@@ -210,7 +208,7 @@ class _EcranProfilState extends State<EcranProfil> {
                     widget.operateur,
                   ),
                 ),
-          child: const Text('Continuer'),
+          child: Text(context.t.continuer),
         ),
       ),
     );
@@ -233,16 +231,20 @@ class _PhotoProfil extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'Photo de profil',
+            Text(
+              context.t.photoProfil,
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
             for (final (cle, icone, titre) in [
-              ('camera', Icons.photo_camera_outlined, 'Prendre une photo'),
-              ('galerie', Icons.photo_library_outlined, 'Choisir une photo'),
+              ('camera', Icons.photo_camera_outlined, context.t.prendrePhoto),
+              ('galerie', Icons.photo_library_outlined, context.t.choisirPhoto),
               if (photo != null)
-                ('retirer', Icons.delete_outline_rounded, 'Retirer la photo'),
+                (
+                  'retirer',
+                  Icons.delete_outline_rounded,
+                  context.t.retirerPhoto,
+                ),
             ])
               ListTile(
                 leading: Icon(icone, color: LiveColors.bleu),
@@ -266,11 +268,7 @@ class _PhotoProfil extends ConsumerWidget {
       store.choisirPhoto(await fichier.readAsBytes());
     } on Exception {
       if (context.mounted) {
-        informer(
-          context,
-          'Impossible d’ouvrir l’appareil photo. Autorisez-le dans les '
-          'réglages du téléphone, ou choisissez une photo.',
-        );
+        informer(context, context.t.photoImpossible);
       }
     }
   }
@@ -281,9 +279,7 @@ class _PhotoProfil extends ConsumerWidget {
     return Semantics(
       button: true,
       container: true,
-      label: photo != null
-          ? 'Changer la photo de profil'
-          : 'Ajouter une photo de profil',
+      label: photo != null ? context.t.changerPhoto : context.t.ajouterPhoto,
       excludeSemantics: true,
       onTap: () => _choisir(context, ref),
       child: GestureDetector(
@@ -398,22 +394,19 @@ class _EcranPinState extends ConsumerState<EcranPin> {
           EnTeteDemarrage(
             etape: 3,
             titre: confirmation
-                ? 'Confirmez votre code'
-                : 'Bonjour ${widget.prenom}, créez votre code secret',
-            texte: confirmation
-                ? 'Tapez à nouveau les 4 chiffres.'
-                : 'Il protège votre compte et vos paiements. Ne le donnez '
-                      'jamais, même à un agent Live.',
+                ? context.t.confirmezCode
+                : context.t.creezCode(widget.prenom),
+            texte: confirmation ? context.t.retapezCode : context.t.codeProtege,
           ),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             child: _erreur
-                ? const Padding(
+                ? Padding(
                     padding: EdgeInsets.only(bottom: 12),
                     child: Bloc(
                       fond: LiveColors.teinteRouge,
                       child: Text(
-                        'Les deux codes sont différents. Recommencez.',
+                        context.t.codesDifferents,
                         style: TextStyle(color: LiveColors.erreur),
                       ),
                     ),
@@ -431,8 +424,8 @@ class _EcranPinState extends ConsumerState<EcranPin> {
               color: LiveColors.succes,
               size: 30,
             ),
-            title: const Text('Déverrouiller avec l’empreinte'),
-            subtitle: const Text('Ou le visage, selon votre téléphone'),
+            title: Text(context.t.empreinte),
+            subtitle: Text(context.t.empreinteTexte),
           ),
         ],
       ),

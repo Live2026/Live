@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +9,7 @@ import 'data/depots/depots.dart';
 import 'data/depots/depots_drift.dart';
 import 'data/local/base_locale.dart';
 import 'data/store.dart';
+import 'l10n/textes.dart';
 import 'shared/hors_connexion.dart';
 
 /// Au démarrage, les dépôts passent de la mémoire à la base locale Drift
@@ -70,6 +72,7 @@ class _LiveAppState extends ConsumerState<LiveApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final apparence = ref.watch(liveProvider.select((e) => e.apparence));
+    final langue = ref.watch(liveProvider.select((e) => e.langue));
     final sombre = switch (apparence) {
       'sombre' => true,
       'clair' => false,
@@ -83,6 +86,16 @@ class _LiveAppState extends ConsumerState<LiveApp> with WidgetsBindingObserver {
       title: 'Live — prototype',
       debugShowCheckedModeBanner: false,
       theme: liveTheme(sombre: sombre),
+      // Langue choisie au démarrage ; français si elle n'est pas encore
+      // traduite.
+      locale: Locale(languesTraduites.contains(langue) ? langue : 'fr'),
+      supportedLocales: Textes.supportedLocales,
+      localizationsDelegates: const [
+        Textes.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       routerConfig: routeur,
       builder: (context, child) => _BandeauPrototype(child: child!),
     );

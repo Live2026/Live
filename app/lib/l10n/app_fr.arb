@@ -1,0 +1,288 @@
+{
+  "@@locale": "fr",
+  "ongletAccueil": "Accueil",
+  "ongletExplorer": "Explorer",
+  "ongletPublier": "Publier",
+  "ongletIa": "IA",
+  "ongletMoi": "Moi",
+  "signature": "La place de marché sociale",
+  "bienvenueTitre": "Bienvenue sur Live",
+  "bienvenueTexte": "Achetez, vendez, louez et payez en toute confiance.",
+  "commencer": "Commencer",
+  "decouvrirSansCompte": "Découvrir sans compte",
+  "dejaUnCompte": "Déjà un compte ?",
+  "dejaUnCompteLive": "Déjà un compte Live ?",
+  "seConnecter": "Se connecter",
+  "pasEncoreDeCompte": "Pas encore de compte ?",
+  "creerUnCompte": "Créer un compte",
+  "conditionsUtilisation": "Conditions d’utilisation",
+  "confidentialite": "Confidentialité",
+  "aide": "Aide",
+  "suivant": "Suivant",
+  "continuer": "Continuer",
+  "langueTitre": "Choisissez votre langue",
+  "langueTexte": "Vous pourrez la changer à tout moment dans Paramètres.",
+  "langueEnCours": "Le démarrage et la navigation sont traduits ; les autres écrans le seront au fil des mises à jour. Votre langue sert déjà aux sous-titres et à Live IA.",
+  "etapeSur": "Étape {n} sur {total}",
+  "@etapeSur": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "nomPays": "{code, select, CG{Congo} CD{RD Congo} GA{Gabon} CM{Cameroun} TD{Tchad} CF{Centrafrique} GQ{Guinée équatoriale} AO{Angola} ST{São Tomé-et-Príncipe} RW{Rwanda} BI{Burundi} CI{Côte d’Ivoire} SN{Sénégal} ML{Mali} BF{Burkina Faso} BJ{Bénin} TG{Togo} NE{Niger} GN{Guinée} NG{Nigeria} GH{Ghana} FR{France} CN{Chine} other{{code}}}",
+  "@nomPays": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "region": "{region, select, centrale{Afrique centrale} ouest{Afrique de l’Ouest} other{Europe et Asie}}",
+  "@region": {
+    "placeholders": {
+      "region": {
+        "type": "String"
+      }
+    }
+  },
+  "numeroDeTelephone": "Numéro de téléphone",
+  "numeroComplet": "Numéro complet",
+  "debutInconnu": "Ce début ne correspond à aucun opérateur connu ({pays} : {debuts}). Vérifiez le numéro.",
+  "@debutInconnu": {
+    "placeholders": {
+      "pays": {
+        "type": "String"
+      },
+      "debuts": {
+        "type": "String"
+      }
+    }
+  },
+  "chiffresComme": "{n} chiffres, comme {exemple}",
+  "@chiffresComme": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "exemple": {
+        "type": "String"
+      }
+    }
+  },
+  "mobileMoneyReconnu": "{operateur} Mobile Money reconnu",
+  "@mobileMoneyReconnu": {
+    "placeholders": {
+      "operateur": {
+        "type": "String"
+      }
+    }
+  },
+  "numeroMobileCarte": "Numéro mobile reconnu · paiement par carte",
+  "rechercherPays": "Rechercher un pays",
+  "aucunPays": "Aucun pays trouvé",
+  "paysChanger": "Pays : {pays} {indicatif}. Changer",
+  "@paysChanger": {
+    "placeholders": {
+      "pays": {
+        "type": "String"
+      },
+      "indicatif": {
+        "type": "String"
+      }
+    }
+  },
+  "alerteDebut": "Attention : ce début ne correspond à aucun opérateur connu ({pays} : {debuts}).",
+  "@alerteDebut": {
+    "placeholders": {
+      "pays": {
+        "type": "String"
+      },
+      "debuts": {
+        "type": "String"
+      }
+    }
+  },
+  "vousAvezSaisi": "Vous avez saisi le numéro :",
+  "estIlCorrect": "Est-il correct, ou voulez-vous le modifier ?",
+  "modifier": "Modifier",
+  "ok": "OK",
+  "saisissezNumero": "Saisissez votre numéro",
+  "saisissezNumeroTexte": "Live va vérifier votre numéro par SMS. Il sert aussi à vos paiements Mobile Money.",
+  "accepteConditions": "J'accepte les Conditions d'utilisation",
+  "accepteConfidentialite": "J'accepte la Politique de confidentialité",
+  "lire": "Lire",
+  "autreVille": "Autre ville",
+  "infosProfil": "Infos du profil",
+  "infosProfilTexte": "Indiquez votre nom et, si vous voulez, une photo. Votre prénom s’affiche sur vos annonces et vos messages.",
+  "prenom": "Prénom",
+  "nom": "Nom",
+  "ville": "Ville",
+  "majeur": "J'ai 18 ans ou plus",
+  "majeurOui": "Acheter, vendre et payer dans Live.",
+  "majeurNon": "Compte en consultation seulement (achat et vente à partir de 18 ans).",
+  "photoProfil": "Photo de profil",
+  "prendrePhoto": "Prendre une photo",
+  "choisirPhoto": "Choisir une photo",
+  "retirerPhoto": "Retirer la photo",
+  "photoImpossible": "Impossible d’ouvrir l’appareil photo. Autorisez-le dans les réglages du téléphone, ou choisissez une photo.",
+  "changerPhoto": "Changer la photo de profil",
+  "ajouterPhoto": "Ajouter une photo de profil",
+  "confirmezCode": "Confirmez votre code",
+  "creezCode": "Bonjour {prenom}, créez votre code secret",
+  "@creezCode": {
+    "placeholders": {
+      "prenom": {
+        "type": "String"
+      }
+    }
+  },
+  "retapezCode": "Tapez à nouveau les 4 chiffres.",
+  "codeProtege": "Il protège votre compte et vos paiements. Ne le donnez jamais, même à un agent Live.",
+  "codesDifferents": "Les deux codes sont différents. Recommencez.",
+  "empreinte": "Déverrouiller avec l’empreinte",
+  "empreinteTexte": "Ou le visage, selon votre téléphone",
+  "renvoyerSms": "Renvoyer le SMS",
+  "nouveauCodeSms": "Nouveau code par SMS",
+  "mAppeler": "M’appeler",
+  "appelDicte": "Un appel automatique vous dicte le code",
+  "recevoirWhatsapp": "Recevoir sur WhatsApp",
+  "siWhatsapp": "Si WhatsApp est installé sur ce numéro",
+  "codeNonRecu": "Code non reçu ?",
+  "verifiezReseau": "Vérifiez que vous avez du réseau.",
+  "verifiezNumero": "Vérifiez le numéro saisi.",
+  "regardezSms": "Regardez vos SMS, même ceux des numéros inconnus.",
+  "smsDeuxMinutes": "Le SMS peut prendre jusqu’à 2 minutes.",
+  "modifierNumero": "Modifier le numéro",
+  "contacterAssistance": "Contacter l’assistance Live",
+  "agentRepond": "Un agent répond en moins de 2 h, 7 j / 7",
+  "verifiezVotreNumero": "Vérifiez votre numéro",
+  "codeEnvoyeSmsA": "Code envoyé par SMS au ",
+  "codeDicteA": "Code dicté par appel au ",
+  "codeEnvoyeWhatsappA": "Code envoyé sur WhatsApp au ",
+  "mauvaisNumero": "Mauvais numéro ? Le modifier",
+  "prototypeCode": "Prototype : tapez 6 chiffres au choix.",
+  "pasRecuCode": "Vous n’avez pas reçu le code ?",
+  "nouveauCodeEnvoye": "Nouveau code envoyé par SMS au {tel}.",
+  "@nouveauCodeEnvoye": {
+    "placeholders": {
+      "tel": {
+        "type": "String"
+      }
+    }
+  },
+  "appelEnCours": "Appel en cours au {tel} : décrochez.",
+  "@appelEnCours": {
+    "placeholders": {
+      "tel": {
+        "type": "String"
+      }
+    }
+  },
+  "codeWhatsappEnvoye": "Code envoyé sur WhatsApp au {tel}.",
+  "@codeWhatsappEnvoye": {
+    "placeholders": {
+      "tel": {
+        "type": "String"
+      }
+    }
+  },
+  "renvoyerDans": "Renvoyer le code dans {minutes}",
+  "@renvoyerDans": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "codeSecretOublie": "Code secret oublié",
+  "codeSecretOublieTexte": "Nous envoyons un code par SMS à votre numéro. Vous pourrez ensuite choisir un nouveau code secret.",
+  "recevoirCode": "Recevoir le code",
+  "codeEnvoyeSms": "Code envoyé par SMS.",
+  "bonRetour": "Bon retour sur Live",
+  "bonRetourTexte": "Entrez le numéro de votre compte : nous vous envoyons un code.",
+  "codeRecuSms": "Code reçu par SMS",
+  "votreCodeSecret": "Votre code secret",
+  "protegerAppareil": "Pour protéger votre compte sur cet appareil.",
+  "connexionQr": "Se connecter avec un code QR",
+  "codeSecretOublieQ": "Code secret oublié ?",
+  "passer": "Passer",
+  "interetsTitre": "Qu’est-ce qui vous intéresse ?",
+  "interetsTexte": "Choisissez-en au moins 3 : votre fil sera utile dès maintenant. Vous pourrez changer plus tard.",
+  "envoyeAu": "Envoyé au {numero}. Prototype : 6 chiffres au choix.",
+  "@envoyeAu": {
+    "placeholders": {
+      "numero": {
+        "type": "String"
+      }
+    }
+  },
+  "continuerChoisis": "Continuer · {n} choisis",
+  "@continuerChoisis": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "interet": "{nom, select, Telephones{Téléphones} Mode{Mode} Logement{Logement} Artisans{Artisans} Cuisine{Cuisine} Beaute{Beauté} Etudes{Études} Emploi{Emploi} Automoto{Auto-moto} Musique{Musique} Football{Football} Enfants{Enfants} other{{nom}}}",
+  "@interet": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "resterConnecte": "Rester connecté sur ce navigateur",
+  "connexionNumero": "Se connecter avec un numéro",
+  "scannezConnexion": "Scannez pour vous connecter",
+  "qrEtape1": "Ouvrez Live sur votre téléphone",
+  "qrEtape2": "Touchez Moi › Paramètres › Appareils connectés",
+  "qrEtape3": "Touchez « Connecter un appareil » et visez ce code",
+  "besoinAide": "Besoin d’aide ?",
+  "codeQrConnexion": "Code QR de connexion",
+  "simulerScan": "Prototype : simuler le scan",
+  "leCodeConnexion": "le code de connexion",
+  "nouveauCodeDans": "Nouveau code dans {s} s",
+  "@nouveauCodeDans": {
+    "placeholders": {
+      "s": {
+        "type": "int"
+      }
+    }
+  },
+  "annuler": "Annuler",
+  "confirmer": "Confirmer",
+  "valider": "Valider",
+  "codeAChiffres": "Code à {n} chiffres",
+  "@codeAChiffres": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "qrReconnu": "QR reconnu",
+  "scannerQr": "Scanner le QR {quoi}",
+  "@scannerQr": {
+    "placeholders": {
+      "quoi": {
+        "type": "String"
+      }
+    }
+  },
+  "cameraSimulee": "Caméra simulée…",
+  "codeSecours": "Code de secours : {code}",
+  "@codeSecours": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "protegeParLive": "Protégé par Live. "
+}

@@ -13,9 +13,9 @@ class EcranLangue extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
-          const EnTeteDemarrage(
-            titre: 'Choisissez votre langue',
-            texte: 'Vous pourrez la changer à tout moment dans Paramètres.',
+          EnTeteDemarrage(
+            titre: context.t.langueTitre,
+            texte: context.t.langueTexte,
           ),
           RadioGroup<String>(
             groupValue: actuelle,
@@ -43,13 +43,12 @@ class EcranLangue extends ConsumerWidget {
             ),
           ),
           if (actuelle != 'fr')
-            const Padding(
-              padding: EdgeInsets.only(top: 8),
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
               child: Text(
-                'Live s’affiche en français pour le moment ; votre langue '
-                'sert déjà aux sous-titres et à Live IA.',
+                context.t.langueEnCours,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: LiveColors.gris, fontSize: 13),
+                style: const TextStyle(color: LiveColors.gris, fontSize: 13),
               ),
             ),
         ],
@@ -57,7 +56,7 @@ class EcranLangue extends ConsumerWidget {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: () => context.push('/telephone'),
-          child: const Text('Suivant'),
+          child: Text(context.t.suivant),
         ),
       ),
     );

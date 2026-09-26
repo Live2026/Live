@@ -343,3 +343,12 @@ Restent identiques dans les deux modes : l'orange et l'ambre de la marque, les f
 
 Vérification : test automatique de tous les écrans en mode sombre à 360 et 1 280 px, puis revue visuelle des captures (`?apparence=sombre` dans l'adresse).
 
+## 11. Langues de l'interface (26/09/2026)
+
+Le choix de la langue se fait au démarrage (écran Langue, après « Commencer ») et dans **Paramètres › Préférences › Langue** ; il est gardé sur l'appareil et appliqué tout de suite.
+
+- **Mécanisme** : traductions de Flutter (`flutter_localizations`, fichiers ARB dans `app/lib/l10n/`, accès par `context.t`). Le français est la langue de référence ; les noms de pays, régions et centres d'intérêt passent par des sélections ICU.
+- **Traduit en anglais** (26/09/2026) : ouverture, accueil, langue, numéro et liste des pays, confirmation du numéro, code SMS et ses recours, infos du profil et photo, code secret, centres d'intérêt, connexion et connexion par QR, barre de navigation, bas de page du démarrage, dialogues communs (confirmer, annuler, scanner un QR), bandeau « Protégé par Live ». Les composants Material (dates, boutons système) suivent la langue.
+- **À traduire** : les écrans de l'application (environ 4 300 textes : Compte, Back-office, Market, Live IA, Quotidien, Immo, Paiements…), écran par écran ; les données de démonstration restent en français.
+- **Autres langues proposées** (espagnol, arabe, lingala, kituba, sango) : l'interface reste en français en attendant leur traduction ; l'arabe demandera aussi une police à l'alphabet arabe et la mise en page de droite à gauche.
+

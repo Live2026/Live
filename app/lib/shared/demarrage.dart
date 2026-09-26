@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 
 /// Posé par `CadreDemarrage` : la page s'affiche dans la carte du démarrage
 /// sur ordinateur, en version simple et centrée (façon WhatsApp Web).
@@ -162,7 +163,7 @@ class EnTeteDemarrage extends StatelessWidget {
         children: [
           if (etape != null) ...[
             Text(
-              'Étape ${etape! + 1} sur ${etapesInscription.length}',
+              context.t.etapeSur(etape! + 1, etapesInscription.length),
               style: const TextStyle(
                 color: LiveColors.gris,
                 fontSize: 12.5,

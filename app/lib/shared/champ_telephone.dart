@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../core/theme.dart';
 import '../data/donnees_telephone.dart';
+import '../l10n/textes.dart';
 import 'drapeau.dart';
 
 /// Saisie du numéro, comme WhatsApp : le pays sur sa ligne (drapeau, nom ;
@@ -105,7 +106,7 @@ class _ChampTelephoneState extends State<ChampTelephone> {
                 // pas avec la ligne du pays juste au-dessus.
                 child: Semantics(
                   container: true,
-                  label: 'Numéro de téléphone',
+                  label: context.t.numeroDeTelephone,
                   child: TextField(
                     controller: widget.controleur,
                     focusNode: _focus,
@@ -131,10 +132,10 @@ class _ChampTelephoneState extends State<ChampTelephone> {
                         vertical: 15,
                       ),
                       suffixIcon: complet
-                          ? const Icon(
+                          ? Icon(
                               Icons.check_circle_rounded,
                               color: LiveColors.succes,
-                              semanticLabel: 'Numéro complet',
+                              semanticLabel: context.t.numeroComplet,
                             )
                           : null,
                     ),
@@ -155,13 +156,15 @@ class _ChampTelephoneState extends State<ChampTelephone> {
           duration: const Duration(milliseconds: 220),
           child: Text(
             inconnu
-                ? 'Ce début ne correspond à aucun opérateur connu '
-                      '(${pays.nom} : ${pays.debutsConnus}). Vérifiez le numéro.'
+                ? context.t.debutInconnu(
+                    context.t.nomPays(pays.code),
+                    pays.debutsConnus,
+                  )
                 : operateur == null
-                ? '${pays.chiffres} chiffres, comme ${pays.format}'
+                ? context.t.chiffresComme(pays.chiffres, pays.format)
                 : pays.mobileMoney
-                ? '$operateur Mobile Money reconnu'
-                : 'Numéro mobile reconnu · paiement par carte',
+                ? context.t.mobileMoneyReconnu(operateur)
+                : context.t.numeroMobileCarte,
             key: ValueKey(inconnu ? 'inconnu' : operateur ?? pays.code),
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -209,10 +212,12 @@ class _ChoixPaysState extends State<_ChoixPays> {
       .replaceAll(RegExp('[íî]'), 'i')
       .replaceAll(RegExp('[’\'-]'), ' ');
 
-  bool _garde(PaysTelephone p) {
+  bool _garde(PaysTelephone p, Textes t) {
     final q = _simple(_recherche.text.trim());
     if (q.isEmpty) return true;
-    return _simple(p.nom).contains(q) || p.indicatif.contains(q);
+    return _simple(p.nom).contains(q) ||
+        _simple(t.nomPays(p.code)).contains(q) ||
+        p.indicatif.contains(q);
   }
 
   @override
@@ -223,7 +228,7 @@ class _ChoixPaysState extends State<_ChoixPays> {
         final largeur = c.maxWidth.clamp(260.0, 480.0);
         final trouves = [
           for (final (i, p) in paysTelephone.indexed)
-            if (_garde(p)) (i, p),
+            if (_garde(p, context.t)) (i, p),
         ];
         return MenuAnchor(
           alignmentOffset: const Offset(0, 6),
@@ -244,20 +249,20 @@ class _ChoixPaysState extends State<_ChoixPays> {
                   controller: _recherche,
                   autofocus: true,
                   onChanged: (_) => setState(() {}),
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     isDense: true,
-                    hintText: 'Rechercher un pays',
-                    prefixIcon: Icon(Icons.search_rounded),
+                    hintText: context.t.rechercherPays,
+                    prefixIcon: const Icon(Icons.search_rounded),
                   ),
                 ),
               ),
             ),
             if (trouves.isEmpty)
-              const Padding(
-                padding: EdgeInsets.all(16),
+              Padding(
+                padding: const EdgeInsets.all(16),
                 child: Text(
-                  'Aucun pays trouvé',
-                  style: TextStyle(color: LiveColors.gris),
+                  context.t.aucunPays,
+                  style: const TextStyle(color: LiveColors.gris),
                 ),
               ),
             for (final region in RegionTelephone.values)
@@ -265,7 +270,7 @@ class _ChoixPaysState extends State<_ChoixPays> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 10, 16, 4),
                   child: Text(
-                    region.nom.toUpperCase(),
+                    context.t.region(region.name).toUpperCase(),
                     style: const TextStyle(
                       color: LiveColors.gris,
                       fontSize: 11.5,
@@ -291,7 +296,7 @@ class _ChoixPaysState extends State<_ChoixPays> {
                       child: SizedBox(
                         width: largeur - 130,
                         child: Text(
-                          p.nom,
+                          context.t.nomPays(p.code),
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
@@ -302,7 +307,10 @@ class _ChoixPaysState extends State<_ChoixPays> {
           builder: (context, menu, _) => Semantics(
             button: true,
             container: true,
-            label: 'Pays : ${actuel.nom} ${actuel.indicatif}. Changer',
+            label: context.t.paysChanger(
+              context.t.nomPays(actuel.code),
+              actuel.indicatif,
+            ),
             excludeSemantics: true,
             onTap: () => menu.isOpen ? menu.close() : menu.open(),
             child: InkWell(
@@ -320,7 +328,7 @@ class _ChoixPaysState extends State<_ChoixPays> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        actuel.nom,
+                        context.t.nomPays(actuel.code),
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -374,10 +382,9 @@ class _FormatNumero extends TextInputFormatter {
 }
 
 /// Texte d'alerte pour [confirmerNumero] quand le début est inconnu.
-String? alerteNumero(PaysTelephone pays, String numero) =>
+String? alerteNumero(BuildContext context, PaysTelephone pays, String numero) =>
     pays.debutInconnu(numero)
-    ? 'Attention : ce début ne correspond à aucun opérateur connu '
-          '(${pays.nom} : ${pays.debutsConnus}).'
+    ? context.t.alerteDebut(context.t.nomPays(pays.code), pays.debutsConnus)
     : null;
 
 /// Avant d'envoyer le code, comme WhatsApp : on relit le numéro. Un SMS
@@ -392,7 +399,7 @@ Future<bool> confirmerNumero(
   final ok = await showDialog<bool>(
     context: context,
     builder: (ctx) => AlertDialog(
-      title: const Text('Vous avez saisi le numéro :'),
+      title: Text(context.t.vousAvezSaisi),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -416,17 +423,17 @@ Future<bool> confirmerNumero(
             ),
           ],
           const SizedBox(height: 12),
-          const Text('Est-il correct, ou voulez-vous le modifier ?'),
+          Text(context.t.estIlCorrect),
         ],
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx, false),
-          child: const Text('Modifier'),
+          child: Text(context.t.modifier),
         ),
         FilledButton(
           onPressed: () => Navigator.pop(ctx, true),
-          child: const Text('OK'),
+          child: Text(context.t.ok),
         ),
       ],
     ),

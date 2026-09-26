@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 
 /// Bandeau « Protégé par Live » (composant 5.3 des maquettes).
 class BandeauProtection extends StatelessWidget {
@@ -25,8 +26,8 @@ class BandeauProtection extends StatelessWidget {
             child: Text.rich(
               TextSpan(
                 children: [
-                  const TextSpan(
-                    text: 'Protégé par Live. ',
+                  TextSpan(
+                    text: context.t.protegeParLive,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: LiveColors.bleu,
@@ -98,7 +99,7 @@ class CarteQr extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Code de secours : $codeSecours',
+            context.t.codeSecours(codeSecours),
             style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
           ),
           const SizedBox(height: 6),
@@ -178,7 +179,9 @@ class _DialogueScanState extends State<_DialogueScan> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(_scanne ? 'QR reconnu' : 'Scanner le QR ${widget.quoi}'),
+      title: Text(
+        _scanne ? context.t.qrReconnu : context.t.scannerQr(widget.quoi),
+      ),
       content: Container(
         height: 200,
         decoration: BoxDecoration(
@@ -203,8 +206,8 @@ class _DialogueScanState extends State<_DialogueScan> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      'Caméra simulée…',
+                    Text(
+                      context.t.cameraSimulee,
                       style: TextStyle(color: Colors.white70),
                     ),
                   ],
@@ -214,12 +217,12 @@ class _DialogueScanState extends State<_DialogueScan> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text('Annuler'),
+          child: Text(context.t.annuler),
         ),
         FilledButton(
           style: FilledButton.styleFrom(minimumSize: const Size(120, 44)),
           onPressed: _scanne ? () => Navigator.pop(context, true) : null,
-          child: const Text('Continuer'),
+          child: Text(context.t.continuer),
         ),
       ],
     );

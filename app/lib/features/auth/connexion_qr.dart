@@ -38,7 +38,7 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
   }
 
   Future<void> _scanner() async {
-    if (!await simulerScan(context, quoi: 'le code de connexion')) return;
+    if (!await simulerScan(context, quoi: context.t.leCodeConnexion)) return;
     ref
         .read(liveProvider.notifier)
         .connecter(
@@ -59,8 +59,8 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
       onChanged: (v) => setState(() => _resterConnecte = v!),
       controlAffinity: ListTileControlAffinity.leading,
       contentPadding: EdgeInsets.zero,
-      title: const Text(
-        'Rester connecté sur ce navigateur',
+      title: Text(
+        context.t.resterConnecte,
         style: TextStyle(fontWeight: FontWeight.w600),
       ),
     );
@@ -68,7 +68,7 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
       onPressed: () => context.go('/connexion'),
       iconAlignment: IconAlignment.end,
       icon: const Icon(Icons.chevron_right_rounded),
-      label: const Text('Se connecter avec un numéro'),
+      label: Text(context.t.connexionNumero),
     );
     return Scaffold(
       backgroundColor: LiveColors.surface,
@@ -76,8 +76,8 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(28, 28, 28, 16),
         children: [
-          const Text(
-            'Scannez pour vous connecter',
+          Text(
+            context.t.scannezConnexion,
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 20),
@@ -117,18 +117,14 @@ class _Etapes extends StatelessWidget {
   const _Etapes({required this.onAide});
   final VoidCallback onAide;
 
-  static const _textes = [
-    'Ouvrez Live sur votre téléphone',
-    'Touchez Moi › Paramètres › Appareils connectés',
-    'Touchez « Connecter un appareil » et visez ce code',
-  ];
+  static List<String> _textes(Textes t) => [t.qrEtape1, t.qrEtape2, t.qrEtape3];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (final (i, t) in _textes.indexed)
+        for (final (i, t) in _textes(context.t).indexed)
           Padding(
             padding: const EdgeInsets.only(bottom: 14),
             child: Row(
@@ -161,7 +157,7 @@ class _Etapes extends StatelessWidget {
           onPressed: onAide,
           iconAlignment: IconAlignment.end,
           icon: const Icon(Icons.north_east_rounded, size: 16),
-          label: const Text('Besoin d’aide ?'),
+          label: Text(context.t.besoinAide),
         ),
       ],
     );
@@ -183,7 +179,7 @@ class _CodeQr extends StatelessWidget {
     return Column(
       children: [
         Semantics(
-          label: 'Code QR de connexion',
+          label: context.t.codeQrConnexion,
           image: true,
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
@@ -217,13 +213,10 @@ class _CodeQr extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          'Nouveau code dans $reste s',
+          context.t.nouveauCodeDans(reste),
           style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
         ),
-        TextButton(
-          onPressed: onScan,
-          child: const Text('Prototype : simuler le scan'),
-        ),
+        TextButton(onPressed: onScan, child: Text(context.t.simulerScan)),
       ],
     );
   }

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:smart_auth/smart_auth.dart';
 
 import '../core/theme.dart';
+import '../l10n/textes.dart';
 
 /// Saisie d'un code à usage unique : une case par chiffre, la case active
 /// s'allume, chaque chiffre apparaît avec un léger rebond. Le code complet
@@ -131,7 +132,7 @@ class _ChampCodeState extends State<ChampCode>
                   ],
                   showCursor: false,
                   decoration: InputDecoration(
-                    labelText: 'Code à ${widget.longueur} chiffres',
+                    labelText: context.t.codeAChiffres(widget.longueur),
                   ),
                   enableInteractiveSelection: false,
                   onChanged: (v) {

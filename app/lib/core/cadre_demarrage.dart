@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../l10n/textes.dart';
 import '../shared/demarrage.dart';
 import 'adaptatif.dart';
 import 'theme.dart';
@@ -103,11 +104,14 @@ class _Pied extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lien = switch (chemin) {
-      '/langue' ||
-      '/telephone' => ('Déjà un compte Live ?', 'Se connecter', '/connexion'),
+      '/langue' || '/telephone' => (
+        context.t.dejaUnCompteLive,
+        context.t.seConnecter,
+        '/connexion',
+      ),
       '/connexion' || '/connexion/qr' => (
-        'Pas encore de compte ?',
-        'Créer un compte',
+        context.t.pasEncoreDeCompte,
+        context.t.creerUnCompte,
         '/langue',
       ),
       _ => null,
@@ -124,10 +128,10 @@ class _Pied extends StatelessWidget {
           ),
           const SizedBox(width: 16),
         ],
-        for (final (nom, route) in const [
-          ('Conditions d’utilisation', '/legal/cgu'),
-          ('Confidentialité', '/legal/confidentialite'),
-          ('Aide', '/aide'),
+        for (final (nom, route) in [
+          (context.t.conditionsUtilisation, '/legal/cgu'),
+          (context.t.confidentialite, '/legal/confidentialite'),
+          (context.t.aide, '/aide'),
         ])
           TextButton(
             style: TextButton.styleFrom(

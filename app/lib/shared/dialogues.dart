@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
 import 'saisie.dart';
+import '../l10n/textes.dart';
 
 /// Fenêtres et panneaux courts réutilisés partout : confirmer, saisir un
 /// code, choisir une option, informer.
@@ -15,7 +16,7 @@ Future<bool> confirmer(
   BuildContext context, {
   required String titre,
   required String texte,
-  String action = 'Confirmer',
+  String? action,
   bool danger = false,
 }) async {
   final ok = await showDialog<bool>(
@@ -26,14 +27,14 @@ Future<bool> confirmer(
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx, false),
-          child: const Text('Annuler'),
+          child: Text(context.t.annuler),
         ),
         FilledButton(
           style: danger
               ? FilledButton.styleFrom(backgroundColor: LiveColors.erreur)
               : null,
           onPressed: () => Navigator.pop(ctx, true),
-          child: Text(action),
+          child: Text(action ?? context.t.confirmer),
         ),
       ],
     ),
@@ -70,14 +71,14 @@ Future<String?> saisirCode(
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Annuler'),
+          child: Text(context.t.annuler),
         ),
         FilledButton(
           onPressed: () => Navigator.pop(
             ctx,
             champ.text.trim().length >= 7 ? champ.text.trim() : 'LV-V3915',
           ),
-          child: const Text('Valider'),
+          child: Text(context.t.valider),
         ),
       ],
     ),
