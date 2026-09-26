@@ -9,7 +9,7 @@ class EcranSuivis extends StatelessWidget {
   Widget build(BuildContext context) {
     final marge = context.grandEcran ? 24.0 : 16.0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Mes abonnements')),
+      appBar: AppBar(title: Text(context.t.socialMesAbonnements)),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 24),
         children: [

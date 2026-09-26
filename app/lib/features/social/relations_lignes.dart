@@ -65,7 +65,10 @@ class _LigneCompte extends ConsumerWidget {
                     ],
                   ),
                   Text(
-                    '${c.type.libelle} · ${compact(c.abonnes)} abonnés',
+                    context.t.socialTypeAbonnes(
+                      c.type.libelle,
+                      compact(c.abonnes),
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -75,15 +78,15 @@ class _LigneCompte extends ConsumerWidget {
                   ),
                   const SizedBox(height: 3),
                   if (abonne && suivi)
-                    const Etiquette(
-                      'Vous vous suivez',
+                    Etiquette(
+                      context.t.socialVousVousSuivez,
                       icone: Icons.sync_alt_rounded,
                       fond: LiveColors.teinteVerte,
                       couleur: LiveColors.succes,
                     )
                   else if (abonne && !ongletAbonnes)
-                    const Etiquette(
-                      'Vous suit',
+                    Etiquette(
+                      context.t.socialVousSuit,
                       fond: LiveColors.voile,
                       couleur: LiveColors.bleu,
                     )
@@ -110,7 +113,7 @@ class _LigneCompte extends ConsumerWidget {
                           padding: EdgeInsets.zero,
                         ),
                         onPressed: () => store.basculerSuivi(c.id),
-                        child: const Text('Abonné'),
+                        child: Text(context.t.socialAbonne),
                       )
                     : FilledButton(
                         key: const ValueKey('suivre'),
@@ -120,13 +123,17 @@ class _LigneCompte extends ConsumerWidget {
                         ),
                         onPressed: () => store.basculerSuivi(c.id),
                         child: FittedBox(
-                          child: Text(abonne ? 'Suivre en retour' : 'Suivre'),
+                          child: Text(
+                            abonne
+                                ? context.t.socialSuivreEnRetour
+                                : context.t.socialSuivre,
+                          ),
                         ),
                       ),
               ),
             ),
             IconButton(
-              tooltip: 'Plus d’options pour ${c.nom}',
+              tooltip: context.t.socialPlusOptions(c.nom),
               onPressed: () =>
                   _menuCompte(context, ref, c, ongletAbonnes: ongletAbonnes),
               icon: const Icon(Icons.more_vert_rounded),
@@ -178,29 +185,32 @@ void _menuCompte(
               subtitle: Text(
                 c.enCommun.isEmpty
                     ? c.bio
-                    : 'Suivi par ${c.enCommun.first}${c.enCommun.length > 1 ? ' et ${c.enCommun.length - 1} autre${c.enCommun.length > 2 ? 's' : ''}' : ''}',
+                    : context.t.socialSuiviPar(
+                        c.enCommun.first,
+                        c.enCommun.length - 1,
+                      ),
               ),
             ),
             const Divider(height: 8),
             if (c.route != null)
               ListTile(
                 leading: const Icon(Icons.person_outline_rounded),
-                title: const Text('Voir le profil'),
+                title: Text(context.t.socialVoirLeProfil),
                 onTap: () => action(() => context.push(c.route!)),
               ),
             ListTile(
               leading: const Icon(Icons.chat_bubble_outline_rounded),
-              title: const Text('Envoyer un message'),
+              title: Text(context.t.socialEnvoyerUnMessage),
               onTap: () => action(() => context.push('/conversation')),
             ),
             if (ongletAbonnes)
               ListTile(
                 leading: const Icon(Icons.person_remove_outlined),
-                title: const Text('Retirer cet abonné'),
-                subtitle: const Text('Il n’est pas prévenu'),
+                title: Text(context.t.socialRetirerCetAbonne),
+                subtitle: Text(context.t.socialIlNEstPas),
                 onTap: () => action(() {
                   store.retirerAbonne(c.id);
-                  message('${c.nom} ne vous suit plus.');
+                  message(context.t.socialNeVousSuitPlus(c.nom));
                 }),
               ),
             if (etat.suivis.contains(c.id))
@@ -213,8 +223,8 @@ void _menuCompte(
                 ),
                 title: Text(
                   etat.cloches.contains(c.id)
-                      ? 'Ne plus être prévenu de ses publications'
-                      : 'Être prévenu de chaque publication',
+                      ? context.t.socialNePlusEtrePrevenu
+                      : context.t.socialEtrePrevenuDeChaque,
                 ),
                 onTap: () => action(() => store.basculerCloche(c.id)),
               ),
@@ -226,12 +236,10 @@ void _menuCompte(
               ),
               title: Text(
                 etat.sourdine.contains(c.id)
-                    ? 'Réactiver'
-                    : 'Mettre en sourdine',
+                    ? context.t.socialReactiver
+                    : context.t.socialMettreEnSourdine,
               ),
-              subtitle: const Text(
-                'Ses publications n’apparaissent plus dans votre fil',
-              ),
+              subtitle: Text(context.t.socialSesPublicationsNApparaissent),
               onTap: () => action(() => store.basculerSourdine(c.id)),
             ),
             ListTile(
@@ -239,13 +247,13 @@ void _menuCompte(
                 Icons.block_rounded,
                 color: LiveColors.erreur,
               ),
-              title: const Text(
-                'Bloquer',
+              title: Text(
+                context.t.socialBloquer,
                 style: TextStyle(color: LiveColors.erreur),
               ),
               onTap: () => action(() {
                 store.bloquer(c.id);
-                message('${c.nom} est bloqué.');
+                message(context.t.socialEstBloque(c.nom));
               }),
             ),
             ListTile(
@@ -253,11 +261,12 @@ void _menuCompte(
                 Icons.flag_outlined,
                 color: LiveColors.erreur,
               ),
-              title: const Text(
-                'Signaler',
+              title: Text(
+                context.t.socialSignaler,
                 style: TextStyle(color: LiveColors.erreur),
               ),
-              onTap: () => action(() => signaler(context, 'ce compte')),
+              onTap: () =>
+                  action(() => signaler(context, context.t.socialCeCompte)),
             ),
           ],
         ),
@@ -279,8 +288,8 @@ class _CarteSuggestion extends ConsumerWidget {
       liveProvider.select((e) => e.suivis.contains(c.id)),
     );
     final raison = c.enCommun.isEmpty
-        ? 'Populaire près de chez vous'
-        : 'Suivi par ${c.enCommun.first}${c.enCommun.length > 1 ? ' et ${c.enCommun.length - 1} autre${c.enCommun.length > 2 ? 's' : ''}' : ''}';
+        ? context.t.socialPopulairePresDeChez
+        : context.t.socialSuiviPar(c.enCommun.first, c.enCommun.length - 1);
     return Pressable(
       onTap: c.route == null ? null : () => context.push(c.route!),
       child: Bloc(
@@ -327,7 +336,7 @@ class _CarteSuggestion extends ConsumerWidget {
                           onPressed: () => ref
                               .read(liveProvider.notifier)
                               .basculerSuivi(c.id),
-                          child: const Text('Abonné'),
+                          child: Text(context.t.socialAbonne),
                         )
                       : FilledButton(
                           style: FilledButton.styleFrom(
@@ -336,7 +345,7 @@ class _CarteSuggestion extends ConsumerWidget {
                           onPressed: () => ref
                               .read(liveProvider.notifier)
                               .basculerSuivi(c.id),
-                          child: const Text('Suivre'),
+                          child: Text(context.t.socialSuivre),
                         ),
                 ),
               ],
@@ -345,7 +354,7 @@ class _CarteSuggestion extends ConsumerWidget {
               right: -8,
               top: -8,
               child: IconButton(
-                tooltip: 'Écarter ${c.nom}',
+                tooltip: context.t.socialEcarter(c.nom),
                 onPressed: onEcarter,
                 icon: const Icon(
                   Icons.close_rounded,
@@ -378,7 +387,7 @@ class _CarteInviter extends StatelessWidget {
             colors: [LiveColors.bleu, LiveColors.nuit],
           ),
         ),
-        child: const Row(
+        child: Row(
           children: [
             Icon(
               Icons.card_giftcard_rounded,
@@ -391,14 +400,14 @@ class _CarteInviter extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Invitez vos contacts',
+                    context.t.socialInvitezVosContacts,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
                   Text(
-                    '1 000 FCFA de crédits Live pour vous deux à leur inscription.',
+                    context.t.socialN1000FcfaDe,
                     style: TextStyle(color: Colors.white70, fontSize: 12.5),
                   ),
                 ],

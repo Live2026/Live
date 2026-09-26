@@ -59,7 +59,10 @@ class _EcranFansState extends ConsumerState<EcranFans> {
                         ),
                       ),
                       Text(
-                        '${compact(c.abonnes)} abonnés · ${compact(c.abonnes ~/ 25)} fans',
+                        context.t.createursAbonnesFans(
+                          compact(c.abonnes),
+                          compact(c.abonnes ~/ 25),
+                        ),
                         style: const TextStyle(color: Colors.white70),
                       ),
                       const SizedBox(height: 16),
@@ -74,23 +77,21 @@ class _EcranFansState extends ConsumerState<EcranFans> {
             sliver: SliverList.list(
               children: [
                 if (fan)
-                  const Bloc(
+                  Bloc(
                     fond: LiveColors.teinteVerte,
                     child: Row(
                       children: [
                         Icon(Icons.star_rounded, color: LiveColors.succes),
                         SizedBox(width: 10),
                         Expanded(
-                          child: Text(
-                            'Vous êtes fan : les contenus réservés sont débloqués.',
-                          ),
+                          child: Text(context.t.createursVousEtesFanLes),
                         ),
                       ],
                     ),
                   )
                 else ...[
-                  const Text(
-                    'Soutenez ce créateur chaque mois',
+                  Text(
+                    context.t.createursSoutenezCeCreateurChaque,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
                   ),
                   const SizedBox(height: 8),
@@ -136,7 +137,7 @@ class _EcranFansState extends ConsumerState<EcranFans> {
                                     ),
                                   ),
                                   Text(
-                                    '${fcfa(o.prix)} / mois',
+                                    context.t.createursParMois(fcfa(o.prix)),
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w800,
                                     ),
@@ -164,22 +165,22 @@ class _EcranFansState extends ConsumerState<EcranFans> {
                         ),
                       ),
                     ),
-                  const Text(
-                    'Payé dans Live, résiliable à tout moment. Le créateur reçoit 75 %.',
+                  Text(
+                    context.t.createursPayeDansLiveResiliable,
                     style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
                   ),
                 ],
-                const EnTeteSection('Contenus réservés aux fans'),
+                EnTeteSection(context.t.createursContenusReservesAuxFans),
                 GrilleAdaptative(
                   largeurMax: 160,
                   espacement: 8,
                   hauteur: 200,
                   enfants: [
-                    for (final (i, t) in const [
-                      'Corrigé détaillé BAC 2025',
-                      'Direct privé : questions',
-                      'Méthode pour les QCM',
-                      'Fiche mémo : dérivées',
+                    for (final (i, t) in [
+                      context.t.createursCorrigeDetailleBac2025,
+                      context.t.createursDirectPriveQuestions,
+                      context.t.createursMethodePourLesQcm,
+                      context.t.createursFicheMemoDerivees,
                     ].indexed)
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
@@ -244,7 +245,7 @@ class _EcranFansState extends ConsumerState<EcranFans> {
                         PaiementEnCours(
                           type: TypePaiement.fan,
                           montant: o.prix,
-                          libelle: 'Abonnement ${o.nom} · 1 mois',
+                          libelle: context.t.createursAbonnementMois(o.nom),
                           beneficiaire: c.nom,
                           cibleId: c.id,
                         ),
@@ -253,7 +254,10 @@ class _EcranFansState extends ConsumerState<EcranFans> {
                 },
                 icon: const Icon(Icons.star_rounded),
                 label: Text(
-                  'Devenir ${offresFan[_offre].nom.toLowerCase()} · ${fcfa(offresFan[_offre].prix)}',
+                  context.t.createursDevenir(
+                    offresFan[_offre].nom.toLowerCase(),
+                    fcfa(offresFan[_offre].prix),
+                  ),
                 ),
               ),
             ),

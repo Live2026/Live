@@ -10,7 +10,7 @@ class EcranLancerDirect extends ConsumerStatefulWidget {
 }
 
 class _EcranLancerDirectState extends ConsumerState<EcranLancerDirect> {
-  final _titre = TextEditingController(text: 'Nouvel arrivage wax en direct');
+  late final _titre = TextEditingController(text: context.t.directTitreDemo);
   final _epingles = <String>{'p2'};
   var _cadeaux = true;
   var _commentaires = true;
@@ -22,21 +22,18 @@ class _EcranLancerDirectState extends ConsumerState<EcranLancerDirect> {
     final marge = context.grandEcran ? 24.0 : 16.0;
     if (!etat.identiteVerifiee) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Lancer un direct')),
+        appBar: AppBar(title: Text(context.t.directLancerUnDirect)),
         body: EtatVide(
           icone: Icons.videocam_off_outlined,
-          texte:
-              '« Ouvrir un direct » est un super-pouvoir : vérifiez votre '
-              'identité (2 minutes). C’est ce qui protège les acheteurs pendant '
-              'le live shopping.',
-          action: 'Vérifier mon identité',
+          texte: context.t.directOuvrirUnDirectEst,
+          action: context.t.directVerifierMonIdentite,
           onTap: () => context.push('/verifier'),
         ),
       );
     }
     final mesProduits = produitsDe(graceMode);
     return Scaffold(
-      appBar: AppBar(title: const Text('Lancer un direct')),
+      appBar: AppBar(title: Text(context.t.directLancerUnDirect)),
       body: ListView(
         padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
         children: [
@@ -56,15 +53,15 @@ class _EcranLancerDirectState extends ConsumerState<EcranLancerDirect> {
                   top: 12,
                   child: BoutonVerre(
                     icone: Icons.flip_camera_ios_rounded,
-                    libelle: 'Retourner la caméra',
+                    libelle: context.t.directRetournerLaCamera,
                     onTap: () {},
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   left: 12,
                   bottom: 12,
                   child: Etiquette(
-                    'Réseau bon · 720p',
+                    context.t.directReseauBon720p,
                     icone: Icons.network_check_rounded,
                     fond: Colors.black45,
                     couleur: Colors.white,
@@ -77,11 +74,13 @@ class _EcranLancerDirectState extends ConsumerState<EcranLancerDirect> {
           TextField(
             controller: _titre,
             maxLength: 80,
-            decoration: const InputDecoration(labelText: 'Titre du direct'),
+            decoration: InputDecoration(
+              labelText: context.t.directTitreDuDirect,
+            ),
           ),
-          const EnTeteSection('Produits à épingler'),
-          const Text(
-            'Les spectateurs les achètent sans quitter le direct, payés dans Live.',
+          EnTeteSection(context.t.directProduitsAEpingler),
+          Text(
+            context.t.directLesSpectateursLesAchetent,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 8),
@@ -102,20 +101,28 @@ class _EcranLancerDirectState extends ConsumerState<EcranLancerDirect> {
               title: Text(p.titre),
               subtitle: Text(fcfa(p.prix)),
             ),
-          const EnTeteSection('Réglages'),
+          EnTeteSection(context.t.directReglages),
           LigneMenu(
             icone: Icons.public_rounded,
-            titre: 'Qui peut regarder',
-            valeur: _public,
+            titre: context.t.directQuiPeutRegarder,
+            valeur: switch (_public) {
+              'Mes abonnés' => context.t.directMesAbonnes,
+              'Mes fans' => context.t.directMesFans,
+              _ => context.t.directToutLeMonde,
+            },
             onTap: () async {
               final c = await choisir<String>(
                 context,
-                titre: 'Qui peut regarder',
+                titre: context.t.directQuiPeutRegarder,
                 actuel: _public,
-                options: const [
-                  ('Tout le monde', 'Tout le monde', null),
-                  ('Mes abonnés', 'Mes abonnés', null),
-                  ('Mes fans', 'Mes fans', 'Abonnés payants seulement'),
+                options: [
+                  ('Tout le monde', context.t.directToutLeMonde, null),
+                  ('Mes abonnés', context.t.directMesAbonnes, null),
+                  (
+                    'Mes fans',
+                    context.t.directMesFans,
+                    context.t.directAbonnesPayants,
+                  ),
                 ],
               );
               if (c != null) setState(() => _public = c);
@@ -125,15 +132,15 @@ class _EcranLancerDirectState extends ConsumerState<EcranLancerDirect> {
             contentPadding: EdgeInsets.zero,
             value: _cadeaux,
             onChanged: (v) => setState(() => _cadeaux = v),
-            title: const Text('Accepter les cadeaux'),
-            subtitle: const Text('Vous recevez 75 % de chaque cadeau'),
+            title: Text(context.t.directAccepterLesCadeaux),
+            subtitle: Text(context.t.directVousRecevez75De),
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             value: _commentaires,
             onChanged: (v) => setState(() => _commentaires = v),
-            title: const Text('Commentaires'),
-            subtitle: const Text('Filtre anti-arnaque toujours actif'),
+            title: Text(context.t.directCommentaires),
+            subtitle: Text(context.t.directFiltreAntiArnaqueToujours),
           ),
         ],
       ),
@@ -144,7 +151,7 @@ class _EcranLancerDirectState extends ConsumerState<EcranLancerDirect> {
           ),
           onPressed: () => context.pushReplacement('/direct/d1'),
           icon: const Icon(Icons.videocam_rounded),
-          label: const Text('Lancer le direct'),
+          label: Text(context.t.directLancerLeDirect),
         ),
       ),
     );

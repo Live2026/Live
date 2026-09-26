@@ -10,6 +10,7 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
 
 part 'relations_lignes.dart';
 part 'suivis.dart';
@@ -87,34 +88,37 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
     ];
     return Scaffold(
       appBar: EnTeteRecherche(
-        titre: const Text('Mes relations'),
-        indice: 'Rechercher un nom',
+        titre: Text(context.t.socialMesRelations),
+        indice: context.t.socialRechercherUnNom,
         onChanged: (v) => setState(() => _recherche.text = v),
         actions: [
           PopupMenuButton<_Tri>(
-            tooltip: 'Trier',
+            tooltip: context.t.socialTrier,
             initialValue: _tri,
             onSelected: (t) => setState(() => _tri = t),
             icon: const Icon(Icons.swap_vert_rounded),
-            itemBuilder: (_) => const [
+            itemBuilder: (_) => [
               PopupMenuItem(
                 value: _Tri.recents,
-                child: Text('Les plus récents'),
+                child: Text(context.t.socialLesPlusRecents),
               ),
-              PopupMenuItem(value: _Tri.nom, child: Text('Nom, de A à Z')),
+              PopupMenuItem(
+                value: _Tri.nom,
+                child: Text(context.t.socialNomDeAA),
+              ),
               PopupMenuItem(
                 value: _Tri.populaires,
-                child: Text('Les plus suivis'),
+                child: Text(context.t.socialLesPlusSuivis),
               ),
             ],
           ),
           IconButton(
-            tooltip: 'Inviter des contacts',
+            tooltip: context.t.socialInviterDesContacts,
             onPressed: () => _inviter(context),
             icon: const Icon(Icons.person_add_alt_1_outlined),
           ),
           IconButton(
-            tooltip: 'Comptes bloqués',
+            tooltip: context.t.socialComptesBloques,
             onPressed: () => context.push('/bloques'),
             icon: Badge(
               isLabelVisible: etat.bloques.isNotEmpty,
@@ -129,7 +133,11 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
         children: [
           _OngletsRelations(
             actif: _onglet,
-            libelles: ['Abonnés', 'Abonnements', 'Suggestions'],
+            libelles: [
+              context.t.socialAbonnes,
+              context.t.socialAbonnements,
+              context.t.socialSuggestions,
+            ],
             nombres: total,
             onTap: (i) => setState(() => _onglet = i),
           ),
@@ -143,7 +151,7 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ChoiceChip(
-                      label: Text(t?.pluriel ?? 'Tous'),
+                      label: Text(t?.pluriel ?? context.t.socialTous),
                       selected: _filtre == t,
                       onSelected: (_) => setState(() => _filtre = t),
                     ),
@@ -158,7 +166,7 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: marge),
-              child: const EnTeteSection('Vous pourriez les connaître'),
+              child: EnTeteSection(context.t.socialVousPourriezLesConnaitre),
             ),
             if (liste.isEmpty) const _Vide(),
             Padding(
@@ -185,9 +193,12 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
               child: Text(
                 q.isEmpty
                     ? (_onglet == 0
-                          ? 'Les personnes qui vous suivent'
-                          : 'Les comptes que vous suivez')
-                    : '${liste.length} résultat${liste.length > 1 ? 's' : ''} pour « ${_recherche.text.trim()} »',
+                          ? context.t.socialLesPersonnesQuiVous
+                          : context.t.socialLesComptesQueVous)
+                    : context.t.socialNResultatsPour(
+                        liste.length,
+                        _recherche.text.trim(),
+                      ),
                 style: const TextStyle(color: LiveColors.gris, fontSize: 13),
               ),
             ),
@@ -208,7 +219,7 @@ class _EcranAbonnesState extends ConsumerState<EcranAbonnes> {
                 child: OutlinedButton.icon(
                   onPressed: () => context.push('/suivis'),
                   icon: const Icon(Icons.dynamic_feed_rounded),
-                  label: const Text('Voir l’activité de mes abonnements'),
+                  label: Text(context.t.socialVoirLActiviteDe),
                 ),
               ),
           ],
@@ -222,9 +233,9 @@ class _Vide extends StatelessWidget {
   const _Vide();
 
   @override
-  Widget build(BuildContext context) => const EtatVide(
+  Widget build(BuildContext context) => EtatVide(
     icone: Icons.person_search_rounded,
-    texte: 'Aucun compte ne correspond.',
+    texte: context.t.socialAucunCompteNeCorrespond,
   );
 }
 

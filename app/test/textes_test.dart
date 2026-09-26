@@ -59,6 +59,10 @@ void main() {
     'lib/features/croissance',
     'lib/features/expansion',
     'lib/features/aide',
+    'lib/features/confiance',
+    'lib/features/direct',
+    'lib/features/social',
+    'lib/features/createurs',
   ];
   final enDur = RegExp(
     r'''(?:Text\(|titre: |texte: |label: |tooltip: |hintText: |labelText: )\s*(?:const )?'[A-ZÀ-Ý][a-zà-ÿ’']+ [a-zà-ÿ]''',

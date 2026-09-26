@@ -11438,5 +11438,1017 @@
   "aideEnCours": "En cours",
   "@aideEnCours": {
     "description": "Écran : aide_ecrire"
+  },
+  "@confianceVisiteDe": {
+    "description": "Écran : confiance_screens",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "confianceVisiteDe": "Visite · {titre}",
+  "@confianceAideCommunaute": {
+    "description": "Écran : confiance_screens",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "confianceAideCommunaute": "Il aide toute la communauté à choisir {qui} en confiance.",
+  "@confianceCommentEchange": {
+    "description": "Écran : confiance_screens",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "confianceCommentEchange": "Comment s’est passé votre échange avec {qui} ?",
+  "@confianceObjetBloques": {
+    "description": "Écran : confiance_screens",
+    "placeholders": {
+      "objet": {
+        "type": "String"
+      },
+      "qui": {
+        "type": "String"
+      },
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "confianceObjetBloques": "{objet} · {qui}\n{montant} restent bloqués par Live pendant l’examen.",
+  "@confianceAppartement2Chambres": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceAppartement2Chambres": "Appartement 2 chambres",
+  "confianceConformeAuxPhotos": "Conforme aux photos",
+  "@confianceConformeAuxPhotos": {
+    "description": "Écran : confiance_screens"
+  },
+  "confiancePonctuel": "Ponctuel",
+  "@confiancePonctuel": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceAimable": "Aimable",
+  "@confianceAimable": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceBonPrix": "Bon prix",
+  "@confianceBonPrix": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceBienEmballe": "Bien emballé",
+  "@confianceBienEmballe": {
+    "description": "Écran : confiance_screens"
+  },
+  "confiancePasConforme": "Pas conforme",
+  "@confiancePasConforme": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceEnRetard": "En retard",
+  "@confianceEnRetard": {
+    "description": "Écran : confiance_screens"
+  },
+  "confiancePasJoignable": "Pas joignable",
+  "@confiancePasJoignable": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceTropCher": "Trop cher",
+  "@confianceTropCher": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceMerciPourVotreAvis": "Merci pour votre avis",
+  "@confianceMerciPourVotreAvis": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceTerminer": "Terminer",
+  "@confianceTerminer": {
+    "description": "Écran : reclamation"
+  },
+  "confianceLaisserUnAvis": "Laisser un avis",
+  "@confianceLaisserUnAvis": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceTouchezUneEtoile": "Touchez une étoile",
+  "@confianceTouchezUneEtoile": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceTresMauvais": "Très mauvais",
+  "@confianceTresMauvais": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceMauvais": "Mauvais",
+  "@confianceMauvais": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceCorrect": "Correct",
+  "@confianceCorrect": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceBien": "Bien",
+  "@confianceBien": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceExcellent": "Excellent",
+  "@confianceExcellent": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceVotreCommentaireFacultatif": "Votre commentaire (facultatif)",
+  "@confianceVotreCommentaireFacultatif": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceSeulsLesClientsAyant": "Seuls les clients ayant payé dans Live peuvent noter : les avis sont donc vérifiés.",
+  "@confianceSeulsLesClientsAyant": {
+    "description": "Écran : confiance_screens"
+  },
+  "confiancePublierMonAvis": "Publier mon avis",
+  "@confiancePublierMonAvis": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceRemboursementTotal": "Remboursement total",
+  "@confianceRemboursementTotal": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceJeNAiRien": "Je n’ai rien reçu",
+  "@confianceJeNAiRien": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceProduitDifferentDeL": "Produit différent de l’annonce",
+  "@confianceProduitDifferentDeL": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceProduitAbimeOuEn": "Produit abîmé ou en panne",
+  "@confianceProduitAbimeOuEn": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceIlManqueDesArticles": "Il manque des articles",
+  "@confianceIlManqueDesArticles": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceLeBienNeCorrespond": "Le bien ne correspond pas",
+  "@confianceLeBienNeCorrespond": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceLAgentNEst": "L’agent n’est pas venu",
+  "@confianceLAgentNEst": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceLeBienEstDeja": "Le bien est déjà loué",
+  "@confianceLeBienEstDeja": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceOnMADemande": "On m’a demandé de l’argent en plus",
+  "@confianceOnMADemande": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceTravailMalFait": "Travail mal fait",
+  "@confianceTravailMalFait": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceLePrestataireNEst": "Le prestataire n’est pas venu",
+  "@confianceLePrestataireNEst": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceTravailNonTermine": "Travail non terminé",
+  "@confianceTravailNonTermine": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceDegatsCauses": "Dégâts causés",
+  "@confianceDegatsCauses": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceSignalerUnProbleme": "Signaler un problème",
+  "@confianceSignalerUnProbleme": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceQueSEstIl": "Que s’est-il passé ?",
+  "@confianceQueSEstIl": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceExpliquezEnQuelquesMots": "Expliquez en quelques mots",
+  "@confianceExpliquezEnQuelquesMots": {
+    "description": "Écran : confiance_screens"
+  },
+  "confiancePreuves": "Preuves",
+  "@confiancePreuves": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceCeQueVousDemandez": "Ce que vous demandez",
+  "@confianceCeQueVousDemandez": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceRemboursementPartiel": "Remboursement partiel",
+  "@confianceRemboursementPartiel": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceEchangeOuReprise": "Échange ou reprise",
+  "@confianceEchangeOuReprise": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceLAutrePartieA": "L’autre partie a 48 h pour répondre. Sinon, Live décide sur la base de vos preuves.",
+  "@confianceLAutrePartieA": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceEnvoyerMaReclamation": "Envoyer ma réclamation",
+  "@confianceEnvoyerMaReclamation": {
+    "description": "Écran : confiance_screens"
+  },
+  "@confianceReclamationN": {
+    "description": "Écran : reclamation",
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "confianceReclamationN": "Réclamation {id}",
+  "@confianceMotif": {
+    "description": "Écran : reclamation",
+    "placeholders": {
+      "motif": {
+        "type": "String"
+      }
+    }
+  },
+  "confianceMotif": "Motif : {motif}",
+  "@confianceRemboursesMomo": {
+    "description": "Écran : reclamation",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "confianceRemboursesMomo": "{montant} remboursés sur votre MoMo",
+  "@confianceBloquesLive": {
+    "description": "Écran : reclamation",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "confianceBloquesLive": "{montant} bloqués par Live",
+  "confianceReclamationOuverte": "Réclamation ouverte",
+  "@confianceReclamationOuverte": {
+    "description": "Écran : reclamation"
+  },
+  "confianceAujourdHui1102": "Aujourd’hui 11:02 · preuves reçues",
+  "@confianceAujourdHui1102": {
+    "description": "Écran : reclamation"
+  },
+  "confianceReponseDuVendeur": "Réponse du vendeur",
+  "@confianceReponseDuVendeur": {
+    "description": "Écran : reclamation"
+  },
+  "confianceJeProposeDeReprendre": "« Je propose de reprendre le téléphone. »",
+  "@confianceJeProposeDeReprendre": {
+    "description": "Écran : reclamation"
+  },
+  "confianceIlAJusquA": "Il a jusqu’à demain 11:02",
+  "@confianceIlAJusquA": {
+    "description": "Écran : reclamation"
+  },
+  "confianceDecisionDeLive": "Décision de Live",
+  "@confianceDecisionDeLive": {
+    "description": "Écran : reclamation"
+  },
+  "confianceRemboursementTotalAccorde": "Remboursement total accordé",
+  "@confianceRemboursementTotalAccorde": {
+    "description": "Écran : reclamation"
+  },
+  "confianceUnMediateurExamineLe": "Un médiateur examine le dossier",
+  "@confianceUnMediateurExamineLe": {
+    "description": "Écran : reclamation"
+  },
+  "confianceEchanges": "Échanges",
+  "@confianceEchanges": {
+    "description": "Écran : reclamation"
+  },
+  "confianceVous": "Vous",
+  "@confianceVous": {
+    "description": "Écran : reclamation"
+  },
+  "confianceLeTelephoneRecuN": "Le téléphone reçu n’est pas un iPhone 11 mais un iPhone 8.",
+  "@confianceLeTelephoneRecuN": {
+    "description": "Écran : reclamation"
+  },
+  "confianceDesoleeErreurDeColis": "Désolée, erreur de colis. Je reprends le téléphone et je rembourse.",
+  "@confianceDesoleeErreurDeColis": {
+    "description": "Écran : reclamation"
+  },
+  "confianceMediateurLive": "Médiateur Live",
+  "@confianceMediateurLive": {
+    "description": "Écran : reclamation"
+  },
+  "confianceDecisionRemboursementTotalLe": "Décision : remboursement total. Le vendeur récupère le téléphone lors d’un rendez-vous.",
+  "@confianceDecisionRemboursementTotalLe": {
+    "description": "Écran : reclamation"
+  },
+  "confianceSimulerLeVendeurRepond": "Simuler : le vendeur répond",
+  "@confianceSimulerLeVendeurRepond": {
+    "description": "Écran : reclamation"
+  },
+  "confianceSimulerLiveDecide": "Simuler : Live décide",
+  "@confianceSimulerLiveDecide": {
+    "description": "Écran : reclamation"
+  },
+  "@confianceReparationFuite": {
+    "description": "Écran : confiance_screens"
+  },
+  "confianceReparationFuite": "Réparation fuite",
+  "@directCadeauEnvoye": {
+    "description": "Écran : direct_blocs",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "directCadeauEnvoye": "{nom} envoyé !",
+  "@directPayeDansLive": {
+    "description": "Écran : direct_blocs",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "directPayeDansLive": "{prix} · payé dans Live",
+  "@directOffrirCadeauA": {
+    "description": "Écran : direct_blocs",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "directOffrirCadeauA": "Offrir un cadeau à {qui}",
+  "@directSoldeHote": {
+    "description": "Écran : direct_blocs",
+    "placeholders": {
+      "solde": {
+        "type": "String"
+      },
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "directSoldeHote": "Solde Live : {solde} · {qui} reçoit 75 %",
+  "@directEnvoyerMontant": {
+    "description": "Écran : direct_blocs",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "directEnvoyerMontant": "Envoyer · {montant}",
+  "directProduitSuivant": "Produit suivant",
+  "@directProduitSuivant": {
+    "description": "Écran : direct_blocs"
+  },
+  "directAcheter": "Acheter",
+  "@directAcheter": {
+    "description": "Écran : direct_blocs"
+  },
+  "directVisiter": "Visiter",
+  "@directVisiter": {
+    "description": "Écran : direct_blocs"
+  },
+  "directSoldeInsuffisantRechargezPar": "Solde insuffisant : rechargez par Mobile Money.",
+  "@directSoldeInsuffisantRechargezPar": {
+    "description": "Écran : direct_blocs"
+  },
+  "directChoisissezUnCadeau": "Choisissez un cadeau",
+  "@directChoisissezUnCadeau": {
+    "description": "Écran : direct_blocs"
+  },
+  "@directToutLeMonde": {
+    "description": "Écran : direct_lancer"
+  },
+  "directToutLeMonde": "Tout le monde",
+  "@directMesAbonnes": {
+    "description": "Écran : direct_lancer"
+  },
+  "directMesAbonnes": "Mes abonnés",
+  "@directMesFans": {
+    "description": "Écran : direct_lancer"
+  },
+  "directMesFans": "Mes fans",
+  "@directAbonnesPayants": {
+    "description": "Écran : direct_lancer"
+  },
+  "directAbonnesPayants": "Abonnés payants seulement",
+  "@directTitreDemo": {
+    "description": "Écran : direct_lancer"
+  },
+  "directTitreDemo": "Nouvel arrivage wax en direct",
+  "directLancerUnDirect": "Lancer un direct",
+  "@directLancerUnDirect": {
+    "description": "Écran : direct_screens"
+  },
+  "directOuvrirUnDirectEst": "« Ouvrir un direct » est un super-pouvoir : vérifiez votre identité (2 minutes). C’est ce qui protège les acheteurs pendant le live shopping.",
+  "@directOuvrirUnDirectEst": {
+    "description": "Écran : direct_lancer"
+  },
+  "directVerifierMonIdentite": "Vérifier mon identité",
+  "@directVerifierMonIdentite": {
+    "description": "Écran : direct_lancer"
+  },
+  "directRetournerLaCamera": "Retourner la caméra",
+  "@directRetournerLaCamera": {
+    "description": "Écran : direct_lancer"
+  },
+  "directReseauBon720p": "Réseau bon · 720p",
+  "@directReseauBon720p": {
+    "description": "Écran : direct_lancer"
+  },
+  "directTitreDuDirect": "Titre du direct",
+  "@directTitreDuDirect": {
+    "description": "Écran : direct_lancer"
+  },
+  "directProduitsAEpingler": "Produits à épingler",
+  "@directProduitsAEpingler": {
+    "description": "Écran : direct_lancer"
+  },
+  "directLesSpectateursLesAchetent": "Les spectateurs les achètent sans quitter le direct, payés dans Live.",
+  "@directLesSpectateursLesAchetent": {
+    "description": "Écran : direct_lancer"
+  },
+  "directReglages": "Réglages",
+  "@directReglages": {
+    "description": "Écran : direct_lancer"
+  },
+  "directQuiPeutRegarder": "Qui peut regarder",
+  "@directQuiPeutRegarder": {
+    "description": "Écran : direct_lancer"
+  },
+  "directAccepterLesCadeaux": "Accepter les cadeaux",
+  "@directAccepterLesCadeaux": {
+    "description": "Écran : direct_lancer"
+  },
+  "directVousRecevez75De": "Vous recevez 75 % de chaque cadeau",
+  "@directVousRecevez75De": {
+    "description": "Écran : direct_lancer"
+  },
+  "directCommentaires": "Commentaires",
+  "@directCommentaires": {
+    "description": "Écran : direct_lancer"
+  },
+  "directFiltreAntiArnaqueToujours": "Filtre anti-arnaque toujours actif",
+  "@directFiltreAntiArnaqueToujours": {
+    "description": "Écran : direct_lancer"
+  },
+  "directLancerLeDirect": "Lancer le direct",
+  "@directLancerLeDirect": {
+    "description": "Écran : direct_lancer"
+  },
+  "@directAEnvoye": {
+    "description": "Écran : direct_lecteur",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "directAEnvoye": "a envoyé {nom}",
+  "@directNAbonnes": {
+    "description": "Écran : direct_lecteur",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "directNAbonnes": "{n} abonnés",
+  "directSuivre": "Suivre",
+  "@directSuivre": {
+    "description": "Écran : direct_lecteur"
+  },
+  "directQuitterLeDirect": "Quitter le direct",
+  "@directQuitterLeDirect": {
+    "description": "Écran : direct_lecteur"
+  },
+  "directJAime": "J’aime",
+  "@directJAime": {
+    "description": "Écran : direct_lecteur"
+  },
+  "directCadeau": "Cadeau",
+  "@directCadeau": {
+    "description": "Écran : direct_lecteur"
+  },
+  "directCommenter": "Commenter…",
+  "@directCommenter": {
+    "description": "Écran : direct_lecteur"
+  },
+  "@directHoteQuand": {
+    "description": "Écran : direct_screens",
+    "placeholders": {
+      "hote": {
+        "type": "String"
+      },
+      "quand": {
+        "type": "String"
+      }
+    }
+  },
+  "directHoteQuand": "{hote} · {quand}",
+  "directDirects": "Directs",
+  "@directDirects": {
+    "description": "Écran : direct_screens"
+  },
+  "directEnDirectMaintenant": "En direct maintenant",
+  "@directEnDirectMaintenant": {
+    "description": "Écran : direct_screens"
+  },
+  "directAVenir": "À venir",
+  "@directAVenir": {
+    "description": "Écran : direct_screens"
+  },
+  "directRappelActive": "Rappel activé",
+  "@directRappelActive": {
+    "description": "Écran : direct_screens"
+  },
+  "directMeRappeler": "Me rappeler",
+  "@directMeRappeler": {
+    "description": "Écran : direct_screens"
+  },
+  "directVousSerezPrevenuAu": "Vous serez prévenu au début du direct.",
+  "@directVousSerezPrevenuAu": {
+    "description": "Écran : direct_screens"
+  },
+  "socialComptesBloques": "Comptes bloqués",
+  "@socialComptesBloques": {
+    "description": "Écran : social_screens"
+  },
+  "socialUnCompteBloqueNe": "Un compte bloqué ne voit plus votre profil ni vos annonces et ne peut plus vous écrire. Il n’est pas prévenu.",
+  "@socialUnCompteBloqueNe": {
+    "description": "Écran : bloques"
+  },
+  "socialAucunCompteBloque": "Aucun compte bloqué.",
+  "@socialAucunCompteBloque": {
+    "description": "Écran : bloques"
+  },
+  "socialDebloquer": "Débloquer",
+  "@socialDebloquer": {
+    "description": "Écran : bloques"
+  },
+  "@socialTypeAbonnes": {
+    "description": "Écran : relations_lignes",
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "socialTypeAbonnes": "{type} · {n} abonnés",
+  "@socialSuiviPar": {
+    "description": "Écran : relations_lignes",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "socialSuiviPar": "{n, plural, =0{Suivi par {nom}} =1{Suivi par {nom} et 1 autre} other{Suivi par {nom} et {n} autres}}",
+  "@socialPlusOptions": {
+    "description": "Écran : relations_lignes",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "socialPlusOptions": "Plus d’options pour {nom}",
+  "@socialNeVousSuitPlus": {
+    "description": "Écran : relations_lignes",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "socialNeVousSuitPlus": "{nom} ne vous suit plus.",
+  "@socialEstBloque": {
+    "description": "Écran : relations_lignes",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "socialEstBloque": "{nom} est bloqué.",
+  "@socialEcarter": {
+    "description": "Écran : relations_lignes",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "socialEcarter": "Écarter {nom}",
+  "socialVousVousSuivez": "Vous vous suivez",
+  "@socialVousVousSuivez": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialVousSuit": "Vous suit",
+  "@socialVousSuit": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialAbonne": "Abonné",
+  "@socialAbonne": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialSuivreEnRetour": "Suivre en retour",
+  "@socialSuivreEnRetour": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialSuivre": "Suivre",
+  "@socialSuivre": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialVoirLeProfil": "Voir le profil",
+  "@socialVoirLeProfil": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialEnvoyerUnMessage": "Envoyer un message",
+  "@socialEnvoyerUnMessage": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialRetirerCetAbonne": "Retirer cet abonné",
+  "@socialRetirerCetAbonne": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialIlNEstPas": "Il n’est pas prévenu",
+  "@socialIlNEstPas": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialNePlusEtrePrevenu": "Ne plus être prévenu de ses publications",
+  "@socialNePlusEtrePrevenu": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialEtrePrevenuDeChaque": "Être prévenu de chaque publication",
+  "@socialEtrePrevenuDeChaque": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialReactiver": "Réactiver",
+  "@socialReactiver": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialMettreEnSourdine": "Mettre en sourdine",
+  "@socialMettreEnSourdine": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialSesPublicationsNApparaissent": "Ses publications n’apparaissent plus dans votre fil",
+  "@socialSesPublicationsNApparaissent": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialBloquer": "Bloquer",
+  "@socialBloquer": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialSignaler": "Signaler",
+  "@socialSignaler": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialCeCompte": "ce compte",
+  "@socialCeCompte": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialPopulairePresDeChez": "Populaire près de chez vous",
+  "@socialPopulairePresDeChez": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialInvitezVosContacts": "Invitez vos contacts",
+  "@socialInvitezVosContacts": {
+    "description": "Écran : relations_lignes"
+  },
+  "socialN1000FcfaDe": "1 000 FCFA de crédits Live pour vous deux à leur inscription.",
+  "@socialN1000FcfaDe": {
+    "description": "Écran : relations_lignes"
+  },
+  "@socialNResultatsPour": {
+    "description": "Écran : social_screens",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "q": {
+        "type": "String"
+      }
+    }
+  },
+  "socialNResultatsPour": "{n, plural, =1{1 résultat pour « {q} »} other{{n} résultats pour « {q} »}}",
+  "socialMesRelations": "Mes relations",
+  "@socialMesRelations": {
+    "description": "Écran : social_screens"
+  },
+  "socialRechercherUnNom": "Rechercher un nom",
+  "@socialRechercherUnNom": {
+    "description": "Écran : social_screens"
+  },
+  "socialTrier": "Trier",
+  "@socialTrier": {
+    "description": "Écran : social_screens"
+  },
+  "socialLesPlusRecents": "Les plus récents",
+  "@socialLesPlusRecents": {
+    "description": "Écran : social_screens"
+  },
+  "socialNomDeAA": "Nom, de A à Z",
+  "@socialNomDeAA": {
+    "description": "Écran : social_screens"
+  },
+  "socialLesPlusSuivis": "Les plus suivis",
+  "@socialLesPlusSuivis": {
+    "description": "Écran : social_screens"
+  },
+  "socialInviterDesContacts": "Inviter des contacts",
+  "@socialInviterDesContacts": {
+    "description": "Écran : social_screens"
+  },
+  "socialAbonnes": "Abonnés",
+  "@socialAbonnes": {
+    "description": "Écran : social_screens"
+  },
+  "socialAbonnements": "Abonnements",
+  "@socialAbonnements": {
+    "description": "Écran : social_screens"
+  },
+  "socialSuggestions": "Suggestions",
+  "@socialSuggestions": {
+    "description": "Écran : social_screens"
+  },
+  "socialTous": "Tous",
+  "@socialTous": {
+    "description": "Écran : social_screens"
+  },
+  "socialVousPourriezLesConnaitre": "Vous pourriez les connaître",
+  "@socialVousPourriezLesConnaitre": {
+    "description": "Écran : social_screens"
+  },
+  "socialLesPersonnesQuiVous": "Les personnes qui vous suivent",
+  "@socialLesPersonnesQuiVous": {
+    "description": "Écran : social_screens"
+  },
+  "socialLesComptesQueVous": "Les comptes que vous suivez",
+  "@socialLesComptesQueVous": {
+    "description": "Écran : social_screens"
+  },
+  "socialVoirLActiviteDe": "Voir l’activité de mes abonnements",
+  "@socialVoirLActiviteDe": {
+    "description": "Écran : social_screens"
+  },
+  "socialAucunCompteNeCorrespond": "Aucun compte ne correspond.",
+  "@socialAucunCompteNeCorrespond": {
+    "description": "Écran : social_screens"
+  },
+  "socialMesAbonnements": "Mes abonnements",
+  "@socialMesAbonnements": {
+    "description": "Écran : suivis"
+  },
+  "@createursNJours": {
+    "description": "Écran : createurs_screens",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "createursNJours": "{n} j",
+  "@createursHeures": {
+    "description": "Écran : createurs_screens",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "createursHeures": "{n} h",
+  "@createursDesAbonnes": {
+    "description": "Écran : createurs_screens",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "createursDesAbonnes": "dès {n} abonnés",
+  "@createursIlEnManque": {
+    "description": "Écran : createurs_screens",
+    "placeholders": {
+      "abonnes": {
+        "type": "int"
+      },
+      "seuil": {
+        "type": "int"
+      },
+      "manque": {
+        "type": "int"
+      }
+    }
+  },
+  "createursIlEnManque": "{abonnes} / {seuil} abonnés · il en manque {manque}",
+  "createursStudioCreateur": "Studio créateur",
+  "@createursStudioCreateur": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursVues": "Vues",
+  "@createursVues": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursN12SurLaPeriode": "+12 % sur la période",
+  "@createursN12SurLaPeriode": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursTempsDeVisionnage": "Temps de visionnage",
+  "@createursTempsDeVisionnage": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursMoyenne38SPar": "moyenne 38 s par vidéo",
+  "@createursMoyenne38SPar": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursNouveauxAbonnes": "Nouveaux abonnés",
+  "@createursNouveauxAbonnes": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursGraceAVosDirects": "grâce à vos directs",
+  "@createursGraceAVosDirects": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursCadeauxRecus": "Cadeaux reçus",
+  "@createursCadeauxRecus": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursOutilsDeCreation": "Outils de création",
+  "@createursOutilsDeCreation": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursVideo": "Vidéo",
+  "@createursVideo": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursDirect": "Direct",
+  "@createursDirect": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursCours": "Cours",
+  "@createursCours": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursSondage": "Sondage",
+  "@createursSondage": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursProgrammer": "Programmer",
+  "@createursProgrammer": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursCommentLesCreateursGagnent": "Comment les créateurs gagnent",
+  "@createursCommentLesCreateursGagnent": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursCadeaux": "Cadeaux",
+  "@createursCadeaux": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursOffertsParLesFans": "Offerts par les fans pendant les directs et sous les vidéos.",
+  "@createursOffertsParLesFans": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursAbonnementsDeFans": "Abonnements de fans",
+  "@createursAbonnementsDeFans": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursN500Ou1500": "500 ou 1 500 FCFA par mois : badge et contenus réservés.",
+  "@createursN500Ou1500": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursLiveShopping": "Live shopping",
+  "@createursLiveShopping": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursVosProduitsOuCeux": "Vos produits, ou ceux d’une boutique partenaire, vendus en direct.",
+  "@createursVosProduitsOuCeux": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursPartenariatsDeMarques": "Partenariats de marques",
+  "@createursPartenariatsDeMarques": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursContratsSignesDansLive": "Contrats signés dans Live, paiement garanti.",
+  "@createursContratsSignesDansLive": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursVousGardez75Des": "Vous gardez 75 % des cadeaux et des abonnements de fans ; Live garde 25 % (document 02). Retrait sur MoMo ou Airtel Money.",
+  "@createursVousGardez75Des": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursVoirLaPageFans": "Voir la page fans d’un créateur",
+  "@createursVoirLaPageFans": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursProgrammeCreateurs": "Programme Créateurs",
+  "@createursProgrammeCreateurs": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursIdentiteVerifiee": "Identité vérifiée",
+  "@createursIdentiteVerifiee": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursIdentiteAVerifier": "Identité à vérifier",
+  "@createursIdentiteAVerifier": {
+    "description": "Écran : createurs_screens"
+  },
+  "createursEnsuiteCadeauxAbonnementsDe": "Ensuite : cadeaux, abonnements de fans et partenariats.",
+  "@createursEnsuiteCadeauxAbonnementsDe": {
+    "description": "Écran : createurs_screens"
+  },
+  "@createursAbonnesFans": {
+    "description": "Écran : fans",
+    "placeholders": {
+      "abonnes": {
+        "type": "String"
+      },
+      "fans": {
+        "type": "String"
+      }
+    }
+  },
+  "createursAbonnesFans": "{abonnes} abonnés · {fans} fans",
+  "@createursParMois": {
+    "description": "Écran : fans",
+    "placeholders": {
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "createursParMois": "{prix} / mois",
+  "@createursAbonnementMois": {
+    "description": "Écran : fans",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "createursAbonnementMois": "Abonnement {nom} · 1 mois",
+  "@createursDevenir": {
+    "description": "Écran : fans",
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      },
+      "prix": {
+        "type": "String"
+      }
+    }
+  },
+  "createursDevenir": "Devenir {nom} · {prix}",
+  "createursVousEtesFanLes": "Vous êtes fan : les contenus réservés sont débloqués.",
+  "@createursVousEtesFanLes": {
+    "description": "Écran : fans"
+  },
+  "createursSoutenezCeCreateurChaque": "Soutenez ce créateur chaque mois",
+  "@createursSoutenezCeCreateurChaque": {
+    "description": "Écran : fans"
+  },
+  "createursPayeDansLiveResiliable": "Payé dans Live, résiliable à tout moment. Le créateur reçoit 75 %.",
+  "@createursPayeDansLiveResiliable": {
+    "description": "Écran : fans"
+  },
+  "createursContenusReservesAuxFans": "Contenus réservés aux fans",
+  "@createursContenusReservesAuxFans": {
+    "description": "Écran : fans"
+  },
+  "createursCorrigeDetailleBac2025": "Corrigé détaillé BAC 2025",
+  "@createursCorrigeDetailleBac2025": {
+    "description": "Écran : fans"
+  },
+  "createursDirectPriveQuestions": "Direct privé : questions",
+  "@createursDirectPriveQuestions": {
+    "description": "Écran : fans"
+  },
+  "createursMethodePourLesQcm": "Méthode pour les QCM",
+  "@createursMethodePourLesQcm": {
+    "description": "Écran : fans"
+  },
+  "createursFicheMemoDerivees": "Fiche mémo : dérivées",
+  "@createursFicheMemoDerivees": {
+    "description": "Écran : fans"
   }
 }

@@ -57,7 +57,7 @@ class _GrandCadeau extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '${cadeau.nom} envoyé !',
+              context.t.directCadeauEnvoye(cadeau.nom),
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -215,7 +215,7 @@ class _ProduitEpingle extends StatelessWidget {
                   style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '${fcfa(p.prix)} · payé dans Live',
+                  context.t.directPayeDansLive(fcfa(p.prix)),
                   style: const TextStyle(
                     color: LiveColors.succes,
                     fontSize: 12.5,
@@ -226,7 +226,7 @@ class _ProduitEpingle extends StatelessWidget {
           ),
           if (nombre > 1)
             IconButton(
-              tooltip: 'Produit suivant',
+              tooltip: context.t.directProduitSuivant,
               onPressed: onSuivant,
               icon: Badge(
                 label: Text('$nombre'),
@@ -240,7 +240,7 @@ class _ProduitEpingle extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12),
             ),
             onPressed: () => context.push('/produit/${p.id}'),
-            child: const Text('Acheter'),
+            child: Text(context.t.directAcheter),
           ),
         ],
       ),
@@ -283,7 +283,7 @@ class _BienEpingle extends StatelessWidget {
           FilledButton(
             style: FilledButton.styleFrom(minimumSize: const Size(0, 38)),
             onPressed: () => context.push('/bien/${b.id}'),
-            child: const Text('Visiter'),
+            child: Text(context.t.directVisiter),
           ),
         ],
       ),
@@ -318,7 +318,7 @@ void _ouvrirCadeaux(
                   children: [
                     Expanded(
                       child: Text(
-                        'Offrir un cadeau à ${d.hote.nom}',
+                        context.t.directOffrirCadeauA(d.hote.nom),
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
@@ -328,7 +328,7 @@ void _ouvrirCadeaux(
                   ],
                 ),
                 Text(
-                  'Solde Live : ${fcfa(solde)} · ${d.hote.nom} reçoit 75 %',
+                  context.t.directSoldeHote(fcfa(solde), d.hote.nom),
                   style: const TextStyle(color: LiveColors.gris),
                 ),
                 const SizedBox(height: 12),
@@ -403,14 +403,14 @@ void _ouvrirCadeaux(
                             } else {
                               informer(
                                 context,
-                                'Solde insuffisant : rechargez par Mobile Money.',
+                                context.t.directSoldeInsuffisantRechargezPar,
                               );
                             }
                           },
                     child: Text(
                       choisi == null
-                          ? 'Choisissez un cadeau'
-                          : 'Envoyer · ${fcfa(choisi!.prix)}',
+                          ? context.t.directChoisissezUnCadeau
+                          : context.t.directEnvoyerMontant(fcfa(choisi!.prix)),
                     ),
                   ),
                 ),
