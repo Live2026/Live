@@ -10,6 +10,8 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../../l10n/textes.dart';
+import 'appels.dart';
 
 part 'conversation.dart';
 part 'bulles.dart';
@@ -58,6 +60,11 @@ class _EcranMessagesState extends State<EcranMessages> {
         indice: 'Rechercher une conversation',
         onChanged: (v) => setState(() => _q = v),
         actions: [
+          IconButton(
+            tooltip: context.t.appelsTitre,
+            onPressed: () => context.push('/appels'),
+            icon: const Icon(Icons.call_outlined),
+          ),
           IconButton(
             tooltip: 'Nouveau message',
             onPressed: () => _nouveauMessage(context),

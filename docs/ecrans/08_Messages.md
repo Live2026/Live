@@ -131,3 +131,30 @@ Quand un message contient un numéro de téléphone, « envoie par MoMo », « p
 ```
 
 La proposition apparaît dans la conversation sous forme de carte `(Refuser) [ Accepter ]`.
+
+## E-CHAT-10 — Appels (`/appels`)
+
+Historique des appels, comme l'onglet Appels de WhatsApp. Ouvert par l'icône de téléphone de l'en-tête des Messages.
+
+| Élément | Comportement |
+|---------|--------------|
+| Filtres | Tous · Manqués |
+| Ligne | Photo, nom (en rouge si manqué), flèche entrant, sortant ou manqué, jour et heure, durée, taille du groupe ; bouton pour rappeler en audio ou en vidéo |
+| Bouton « Nouvel appel » | Choisir une conversation, puis audio ou vidéo |
+| Bandeau | « Appels gratuits par internet : votre numéro n'est jamais montré. » |
+
+## E-CHAT-11 — Appel en cours (`/appel`)
+
+Plein écran sombre, sur téléphone comme sur ordinateur.
+
+| État | Écran |
+|------|-------|
+| Sonnerie | Grande photo, ondes qui s'élargissent (coupées si l'utilisateur réduit les animations), « Sonnerie… », « Chiffré de bout en bout », rappel « Live ne vous demandera jamais votre code secret pendant un appel » |
+| Appel reçu | Refuser · Accepter · Répondre par message |
+| Audio | Minuteur sous le nom ; micro, caméra, haut-parleur, ajouter, raccrocher |
+| Vidéo | Image de l'autre en plein écran, la mienne en vignette ; retourner la caméra |
+| Groupe | Grille des participants (moi compris), micro coupé signalé ; « Ajouter » invite une personne de plus, un appel à deux devient un appel de groupe |
+| Réseau faible | Bandeau : la vidéo baisse de qualité ; « Passer en audio » |
+| Fin | « Appel terminé · 3:34 » |
+
+Points d'entrée : en-tête d'une conversation et d'un groupe (pas d'un canal), historique, profil d'un pro (Services), réservation de visite (Immo, « Visite en vidéo »).

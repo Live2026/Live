@@ -99,6 +99,7 @@ class _EcranConversationState extends State<EcranConversation> {
           ),
         ),
         actions: [
+          ...boutonsAppel(context, 'Grâce Mode'),
           IconButton(
             tooltip: 'Options',
             onPressed: () => _options(context),

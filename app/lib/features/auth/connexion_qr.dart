@@ -38,7 +38,7 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
   }
 
   Future<void> _scanner() async {
-    if (!await simulerScan(context, quoi: context.t.leCodeConnexion)) return;
+    if (!await simulerScan(context, quoi: context.t.demarrageLeCodeConnexion)) return;
     ref
         .read(liveProvider.notifier)
         .connecter(
@@ -60,7 +60,7 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
       controlAffinity: ListTileControlAffinity.leading,
       contentPadding: EdgeInsets.zero,
       title: Text(
-        context.t.resterConnecte,
+        context.t.demarrageResterConnecte,
         style: TextStyle(fontWeight: FontWeight.w600),
       ),
     );
@@ -68,7 +68,7 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
       onPressed: () => context.go('/connexion'),
       iconAlignment: IconAlignment.end,
       icon: const Icon(Icons.chevron_right_rounded),
-      label: Text(context.t.connexionNumero),
+      label: Text(context.t.demarrageConnexionNumero),
     );
     return Scaffold(
       backgroundColor: LiveColors.surface,
@@ -77,7 +77,7 @@ class _EcranConnexionQrState extends ConsumerState<EcranConnexionQr> {
         padding: const EdgeInsets.fromLTRB(28, 28, 28, 16),
         children: [
           Text(
-            context.t.scannezConnexion,
+            context.t.demarrageScannezConnexion,
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 20),
@@ -117,7 +117,7 @@ class _Etapes extends StatelessWidget {
   const _Etapes({required this.onAide});
   final VoidCallback onAide;
 
-  static List<String> _textes(Textes t) => [t.qrEtape1, t.qrEtape2, t.qrEtape3];
+  static List<String> _textes(Textes t) => [t.demarrageQrEtape1, t.demarrageQrEtape2, t.demarrageQrEtape3];
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +157,7 @@ class _Etapes extends StatelessWidget {
           onPressed: onAide,
           iconAlignment: IconAlignment.end,
           icon: const Icon(Icons.north_east_rounded, size: 16),
-          label: Text(context.t.besoinAide),
+          label: Text(context.t.demarrageBesoinAide),
         ),
       ],
     );
@@ -179,7 +179,7 @@ class _CodeQr extends StatelessWidget {
     return Column(
       children: [
         Semantics(
-          label: context.t.codeQrConnexion,
+          label: context.t.demarrageCodeQrConnexion,
           image: true,
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
@@ -213,10 +213,10 @@ class _CodeQr extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          context.t.nouveauCodeDans(reste),
+          context.t.demarrageNouveauCodeDans(reste),
           style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
         ),
-        TextButton(onPressed: onScan, child: Text(context.t.simulerScan)),
+        TextButton(onPressed: onScan, child: Text(context.t.demarrageSimulerScan)),
       ],
     );
   }

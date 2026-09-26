@@ -26,19 +26,19 @@ class EcranSuiviCommande extends ConsumerWidget {
     final etapes = <EtapeFrise>[
       EtapeFrise(
         remise
-            ? context.t.commandeReservee
-            : context.t.payeeArgentBloqueParLive,
-        context.t.aujourdHui1021,
+            ? context.t.marketCommandeReservee
+            : context.t.marketPayeeArgentBloqueParLive,
+        context.t.marketAujourdHui1021,
         true,
       ),
       EtapeFrise(
-        context.t.accepteeParLeVendeur,
-        context.t.aujourdHui1034,
+        context.t.marketAccepteeParLeVendeur,
+        context.t.marketAujourdHui1034,
         true,
       ),
       EtapeFrise(
-        remise ? context.t.payeeALaRemise : context.t.receptionConfirmee,
-        termine ? context.t.aLInstant : context.t.enAttenteDeLaRemise,
+        remise ? context.t.marketPayeeALaRemise : context.t.marketReceptionConfirmee,
+        termine ? context.t.marketALInstant : context.t.marketEnAttenteDeLaRemise,
         termine,
       ),
     ];
@@ -83,7 +83,7 @@ class EcranSuiviCommande extends ConsumerWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.t.commandeNumero(c.id)),
+        title: Text(context.t.marketCommandeNumero(c.id)),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => context.go('/accueil'),
@@ -92,7 +92,7 @@ class EcranSuiviCommande extends ConsumerWidget {
           TextButton.icon(
             onPressed: () => context.push('/conversation'),
             icon: const Icon(Icons.chat_bubble_outline, size: 18),
-            label: Text(context.t.ecrire),
+            label: Text(context.t.marketEcrire),
           ),
         ],
       ),
@@ -108,13 +108,13 @@ class EcranSuiviCommande extends ConsumerWidget {
               child: TextButton.icon(
                 onPressed: () => context.push('/livraison/${c.id}'),
                 icon: const Icon(Icons.two_wheeler_rounded, size: 18),
-                label: Text(context.t.livraisonLiveSuivreLeLivreur),
+                label: Text(context.t.marketLivraisonLiveSuivreLeLivreur),
               ),
             ),
           if (!termine && !remise)
             Apparition(
               rang: 2,
-              child: BandeauProtection(context.t.votreArgentEstBloqueJusqu),
+              child: BandeauProtection(context.t.marketVotreArgentEstBloqueJusqu),
             ),
         ],
         secondaire: [
@@ -124,8 +124,8 @@ class EcranSuiviCommande extends ConsumerWidget {
             const SizedBox(height: 12),
             Text(
               remise
-                  ? context.t.paiementRecuMerci
-                  : context.t.receptionConfirmeeLeVendeurEst,
+                  ? context.t.marketPaiementRecuMerci
+                  : context.t.marketReceptionConfirmeeLeVendeurEst,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium
                   ?.copyWith(fontWeight: FontWeight.w700),
@@ -133,43 +133,43 @@ class EcranSuiviCommande extends ConsumerWidget {
             const SizedBox(height: 16),
             FilledButton.tonal(
               onPressed: () => _avis(context),
-              child: Text(context.t.laisserUnAvis),
+              child: Text(context.t.marketLaisserUnAvis),
             ),
           ] else if (!remise) ...[
             Apparition(
               rang: 2,
               child: CarteQr(
-                titre: context.t.confirmerLaRemise,
+                titre: context.t.marketConfirmerLaRemise,
                 donnee: 'live://remise/${c.id}',
                 codeSecours: 'LV-K4827',
-                consigne: context.t.montrezLeAuVendeurQuand,
+                consigne: context.t.marketMontrezLeAuVendeurQuand,
               ),
             ),
             const SizedBox(height: 12),
             FilledButton.tonal(
               onPressed: () =>
                   ref.read(liveProvider.notifier).confirmerReception(c.id),
-              child: Text(context.t.jAiRecuLeProduit),
+              child: Text(context.t.marketJAiRecuLeProduit),
             ),
             TextButton(
               onPressed: () => _probleme(context),
-              child: Text(context.t.signalerUnProbleme),
+              child: Text(context.t.marketSignalerUnProbleme),
             ),
             const SizedBox(height: 8),
             BoutonSimulation(
-              texte: context.t.simulerLeVendeurScanneVotre,
+              texte: context.t.marketSimulerLeVendeurScanneVotre,
               onTap: () =>
                   ref.read(liveProvider.notifier).confirmerReception(c.id),
             ),
           ] else ...[
             Text(
-              context.t.verifiezLeProduitPuisPayez,
+              context.t.marketVerifiezLeProduitPuisPayez,
               style: Theme.of(context).textTheme.titleMedium
                   ?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 6),
             Text(
-              context.t.leVendeurVousEnverraUne,
+              context.t.marketLeVendeurVousEnverraUne,
               style: TextStyle(color: LiveColors.gris),
             ),
             const SizedBox(height: 12),
@@ -189,7 +189,7 @@ class EcranSuiviCommande extends ConsumerWidget {
                     );
                 context.push('/payer');
               },
-              child: Text(context.t.payerMaintenantMontant(fcfa(c.total))),
+              child: Text(context.t.marketPayerMaintenantMontant(fcfa(c.total))),
             ),
           ],
         ],
@@ -210,8 +210,8 @@ class EcranSuiviCommande extends ConsumerWidget {
     showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text(context.t.unProbleme),
-        content: Text(context.t.vousPourrezDecrireLeProbleme),
+        title: Text(context.t.marketUnProbleme),
+        content: Text(context.t.marketVousPourrezDecrireLeProbleme),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
@@ -246,7 +246,7 @@ class _FeuilleAvisState extends State<_FeuilleAvis> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            context.t.votreAvis,
+            context.t.marketVotreAvis,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Row(
@@ -265,13 +265,13 @@ class _FeuilleAvisState extends State<_FeuilleAvis> {
           ),
           TextField(
             decoration: InputDecoration(
-              hintText: context.t.votreCommentaireFacultatif,
+              hintText: context.t.marketVotreCommentaireFacultatif,
             ),
           ),
           const SizedBox(height: 12),
           FilledButton(
             onPressed: _note == 0 ? null : () => Navigator.pop(context),
-            child: Text(context.t.publierLAvis),
+            child: Text(context.t.marketPublierLAvis),
           ),
         ],
       ),

@@ -5,6 +5,7 @@ import 'donnees_opportunites.dart';
 import 'donnees_services.dart';
 import 'modeles.dart';
 
+export 'donnees_appels.dart';
 export 'donnees_apprendre.dart';
 export 'donnees_comptes.dart';
 export 'donnees_immo.dart';

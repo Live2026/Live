@@ -10,6 +10,8 @@ import '../../data/store.dart';
 import '../../shared/animations.dart';
 import '../../shared/feuilles.dart';
 import '../../shared/widgets.dart';
+import '../messages/appels.dart';
+import '../../l10n/textes.dart';
 
 part 'services_demande.dart';
 part 'services_suivi.dart';

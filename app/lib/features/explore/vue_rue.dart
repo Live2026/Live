@@ -85,7 +85,7 @@ class _EcranVueRueState extends State<EcranVueRue> {
                               ),
                             ),
                             Text(
-                              context.t.vueRueGlissezPourRegarder,
+                              context.t.explorerVueRueGlissezPourRegarder,
                               style: TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12,
@@ -97,7 +97,7 @@ class _EcranVueRueState extends State<EcranVueRue> {
                     ),
                     const SizedBox(width: 8),
                     Semantics(
-                      label: context.t.boussoleCap(_cap.round()),
+                      label: context.t.explorerBoussoleCap(_cap.round()),
                       child: Transform.rotate(
                         angle: -_cap * math.pi / 180,
                         child: const CircleAvatar(
@@ -127,7 +127,7 @@ class _EcranVueRueState extends State<EcranVueRue> {
                 ),
                 onPressed: () => setState(() => _pas++),
                 icon: const Icon(Icons.keyboard_double_arrow_up_rounded),
-                label: Text(context.t.avancerDansLaRue),
+                label: Text(context.t.explorerAvancerDansLaRue),
               ),
             ),
           ),

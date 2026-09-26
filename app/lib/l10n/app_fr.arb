@@ -1,28 +1,97 @@
 {
   "@@locale": "fr",
   "ongletAccueil": "Accueil",
+  "@ongletAccueil": {
+    "description": "Écran : navigation"
+  },
   "ongletExplorer": "Explorer",
+  "@ongletExplorer": {
+    "description": "Écran : navigation, explore_screen"
+  },
   "ongletPublier": "Publier",
+  "@ongletPublier": {
+    "description": "Écran : navigation"
+  },
   "ongletIa": "IA",
+  "@ongletIa": {
+    "description": "Écran : navigation"
+  },
   "ongletMoi": "Moi",
-  "signature": "La place de marché sociale",
-  "bienvenueTitre": "Bienvenue sur Live",
-  "bienvenueTexte": "Achetez, vendez, louez et payez en toute confiance.",
+  "@ongletMoi": {
+    "description": "Écran : navigation"
+  },
+  "demarrageSignature": "La place de marché sociale",
+  "@demarrageSignature": {
+    "description": "Écran : bienvenue"
+  },
+  "demarrageBienvenueTitre": "Bienvenue sur Live",
+  "@demarrageBienvenueTitre": {
+    "description": "Écran : bienvenue"
+  },
+  "demarrageBienvenueTexte": "Achetez, vendez, louez et payez en toute confiance.",
+  "@demarrageBienvenueTexte": {
+    "description": "Écran : bienvenue"
+  },
   "commencer": "Commencer",
-  "decouvrirSansCompte": "Découvrir sans compte",
-  "dejaUnCompte": "Déjà un compte ?",
+  "@commencer": {
+    "description": "Écran : bienvenue, textes"
+  },
+  "demarrageDecouvrirSansCompte": "Découvrir sans compte",
+  "@demarrageDecouvrirSansCompte": {
+    "description": "Écran : bienvenue"
+  },
+  "demarrageDejaUnCompte": "Déjà un compte ?",
+  "@demarrageDejaUnCompte": {
+    "description": "Écran : bienvenue"
+  },
   "dejaUnCompteLive": "Déjà un compte Live ?",
+  "@dejaUnCompteLive": {
+    "description": "Écran : cadre_demarrage"
+  },
   "seConnecter": "Se connecter",
+  "@seConnecter": {
+    "description": "Écran : cadre_demarrage, bienvenue"
+  },
   "pasEncoreDeCompte": "Pas encore de compte ?",
+  "@pasEncoreDeCompte": {
+    "description": "Écran : cadre_demarrage"
+  },
   "creerUnCompte": "Créer un compte",
+  "@creerUnCompte": {
+    "description": "Écran : cadre_demarrage"
+  },
   "conditionsUtilisation": "Conditions d’utilisation",
+  "@conditionsUtilisation": {
+    "description": "Écran : cadre_demarrage, bienvenue"
+  },
   "confidentialite": "Confidentialité",
+  "@confidentialite": {
+    "description": "Écran : cadre_demarrage, bienvenue"
+  },
   "aide": "Aide",
-  "suivant": "Suivant",
+  "@aide": {
+    "description": "Écran : cadre_demarrage, bienvenue, code_sms"
+  },
+  "demarrageSuivant": "Suivant",
+  "@demarrageSuivant": {
+    "description": "Écran : auth_screens, connexion_interets, langue"
+  },
   "continuer": "Continuer",
-  "langueTitre": "Choisissez votre langue",
-  "langueTexte": "Vous pourrez la changer à tout moment dans Paramètres.",
-  "langueEnCours": "Le démarrage et la navigation sont traduits ; les autres écrans le seront au fil des mises à jour. Votre langue sert déjà aux sous-titres et à Live IA.",
+  "@continuer": {
+    "description": "Écran : auth_screens, commande, variantes, confiance"
+  },
+  "demarrageLangueTitre": "Choisissez votre langue",
+  "@demarrageLangueTitre": {
+    "description": "Écran : langue"
+  },
+  "demarrageLangueTexte": "Vous pourrez la changer à tout moment dans Paramètres.",
+  "@demarrageLangueTexte": {
+    "description": "Écran : langue"
+  },
+  "demarrageLangueEnCours": "Le démarrage et la navigation sont traduits ; les autres écrans le seront au fil des mises à jour. Votre langue sert déjà aux sous-titres et à Live IA.",
+  "@demarrageLangueEnCours": {
+    "description": "Écran : langue"
+  },
   "etapeSur": "Étape {n} sur {total}",
   "@etapeSur": {
     "placeholders": {
@@ -32,7 +101,8 @@
       "total": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : demarrage"
   },
   "nomPays": "{code, select, CG{Congo} CD{RD Congo} GA{Gabon} CM{Cameroun} TD{Tchad} CF{Centrafrique} GQ{Guinée équatoriale} AO{Angola} ST{São Tomé-et-Príncipe} RW{Rwanda} BI{Burundi} CI{Côte d’Ivoire} SN{Sénégal} ML{Mali} BF{Burkina Faso} BJ{Bénin} TG{Togo} NE{Niger} GN{Guinée} NG{Nigeria} GH{Ghana} FR{France} CN{Chine} other{{code}}}",
   "@nomPays": {
@@ -40,7 +110,8 @@
       "code": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : champ_telephone"
   },
   "region": "{region, select, centrale{Afrique centrale} ouest{Afrique de l’Ouest} other{Europe et Asie}}",
   "@region": {
@@ -48,10 +119,17 @@
       "region": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : champ_telephone"
   },
   "numeroDeTelephone": "Numéro de téléphone",
+  "@numeroDeTelephone": {
+    "description": "Écran : champ_telephone"
+  },
   "numeroComplet": "Numéro complet",
+  "@numeroComplet": {
+    "description": "Écran : champ_telephone"
+  },
   "debutInconnu": "Ce début ne correspond à aucun opérateur connu ({pays} : {debuts}). Vérifiez le numéro.",
   "@debutInconnu": {
     "placeholders": {
@@ -61,7 +139,8 @@
       "debuts": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : champ_telephone"
   },
   "chiffresComme": "{n} chiffres, comme {exemple}",
   "@chiffresComme": {
@@ -72,7 +151,8 @@
       "exemple": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : champ_telephone"
   },
   "mobileMoneyReconnu": "{operateur} Mobile Money reconnu",
   "@mobileMoneyReconnu": {
@@ -80,11 +160,21 @@
       "operateur": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : champ_telephone"
   },
   "numeroMobileCarte": "Numéro mobile reconnu · paiement par carte",
+  "@numeroMobileCarte": {
+    "description": "Écran : champ_telephone"
+  },
   "rechercherPays": "Rechercher un pays",
+  "@rechercherPays": {
+    "description": "Écran : champ_telephone"
+  },
   "aucunPays": "Aucun pays trouvé",
+  "@aucunPays": {
+    "description": "Écran : champ_telephone"
+  },
   "paysChanger": "Pays : {pays} {indicatif}. Changer",
   "@paysChanger": {
     "placeholders": {
@@ -94,7 +184,8 @@
       "indicatif": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : champ_telephone"
   },
   "alerteDebut": "Attention : ce début ne correspond à aucun opérateur connu ({pays} : {debuts}).",
   "@alerteDebut": {
@@ -105,300 +196,780 @@
       "debuts": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : champ_telephone"
   },
   "vousAvezSaisi": "Vous avez saisi le numéro :",
+  "@vousAvezSaisi": {
+    "description": "Écran : champ_telephone"
+  },
   "estIlCorrect": "Est-il correct, ou voulez-vous le modifier ?",
+  "@estIlCorrect": {
+    "description": "Écran : champ_telephone"
+  },
   "modifier": "Modifier",
+  "@modifier": {
+    "description": "Écran : champ_telephone"
+  },
   "ok": "OK",
-  "saisissezNumero": "Saisissez votre numéro",
-  "saisissezNumeroTexte": "Live va vérifier votre numéro par SMS. Il sert aussi à vos paiements Mobile Money.",
-  "accepteConditions": "J'accepte les Conditions d'utilisation",
-  "accepteConfidentialite": "J'accepte la Politique de confidentialité",
-  "lire": "Lire",
-  "autreVille": "Autre ville",
-  "infosProfil": "Infos du profil",
-  "infosProfilTexte": "Indiquez votre nom et, si vous voulez, une photo. Votre prénom s’affiche sur vos annonces et vos messages.",
-  "prenom": "Prénom",
+  "@ok": {
+    "description": "Écran : suivi_commande, champ_telephone"
+  },
+  "demarrageSaisissezNumero": "Saisissez votre numéro",
+  "@demarrageSaisissezNumero": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageSaisissezNumeroTexte": "Live va vérifier votre numéro par SMS. Il sert aussi à vos paiements Mobile Money.",
+  "@demarrageSaisissezNumeroTexte": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageAccepteConditions": "J'accepte les Conditions d'utilisation",
+  "@demarrageAccepteConditions": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageAccepteConfidentialite": "J'accepte la Politique de confidentialité",
+  "@demarrageAccepteConfidentialite": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageLire": "Lire",
+  "@demarrageLire": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageAutreVille": "Autre ville",
+  "@demarrageAutreVille": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageInfosProfil": "Infos du profil",
+  "@demarrageInfosProfil": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageInfosProfilTexte": "Indiquez votre nom et, si vous voulez, une photo. Votre prénom s’affiche sur vos annonces et vos messages.",
+  "@demarrageInfosProfilTexte": {
+    "description": "Écran : auth_screens"
+  },
+  "demarragePrenom": "Prénom",
+  "@demarragePrenom": {
+    "description": "Écran : auth_screens"
+  },
   "nom": "Nom",
-  "ville": "Ville",
-  "majeur": "J'ai 18 ans ou plus",
-  "majeurOui": "Acheter, vendre et payer dans Live.",
-  "majeurNon": "Compte en consultation seulement (achat et vente à partir de 18 ans).",
-  "photoProfil": "Photo de profil",
-  "prendrePhoto": "Prendre une photo",
-  "choisirPhoto": "Choisir une photo",
-  "retirerPhoto": "Retirer la photo",
-  "photoImpossible": "Impossible d’ouvrir l’appareil photo. Autorisez-le dans les réglages du téléphone, ou choisissez une photo.",
-  "changerPhoto": "Changer la photo de profil",
-  "ajouterPhoto": "Ajouter une photo de profil",
-  "confirmezCode": "Confirmez votre code",
-  "creezCode": "Bonjour {prenom}, créez votre code secret",
-  "@creezCode": {
+  "@nom": {
+    "description": "Écran : auth_screens, tontine_detail, tontines"
+  },
+  "demarrageVille": "Ville",
+  "@demarrageVille": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageMajeur": "J'ai 18 ans ou plus",
+  "@demarrageMajeur": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageMajeurOui": "Acheter, vendre et payer dans Live.",
+  "@demarrageMajeurOui": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageMajeurNon": "Compte en consultation seulement (achat et vente à partir de 18 ans).",
+  "@demarrageMajeurNon": {
+    "description": "Écran : auth_screens"
+  },
+  "demarragePhotoProfil": "Photo de profil",
+  "@demarragePhotoProfil": {
+    "description": "Écran : auth_screens"
+  },
+  "demarragePrendrePhoto": "Prendre une photo",
+  "@demarragePrendrePhoto": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageChoisirPhoto": "Choisir une photo",
+  "@demarrageChoisirPhoto": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageRetirerPhoto": "Retirer la photo",
+  "@demarrageRetirerPhoto": {
+    "description": "Écran : auth_screens"
+  },
+  "demarragePhotoImpossible": "Impossible d’ouvrir l’appareil photo. Autorisez-le dans les réglages du téléphone, ou choisissez une photo.",
+  "@demarragePhotoImpossible": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageChangerPhoto": "Changer la photo de profil",
+  "@demarrageChangerPhoto": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageAjouterPhoto": "Ajouter une photo de profil",
+  "@demarrageAjouterPhoto": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageConfirmezCode": "Confirmez votre code",
+  "@demarrageConfirmezCode": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageCreezCode": "Bonjour {prenom}, créez votre code secret",
+  "@demarrageCreezCode": {
     "placeholders": {
       "prenom": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : auth_screens"
   },
-  "retapezCode": "Tapez à nouveau les 4 chiffres.",
-  "codeProtege": "Il protège votre compte et vos paiements. Ne le donnez jamais, même à un agent Live.",
-  "codesDifferents": "Les deux codes sont différents. Recommencez.",
-  "empreinte": "Déverrouiller avec l’empreinte",
-  "empreinteTexte": "Ou le visage, selon votre téléphone",
-  "renvoyerSms": "Renvoyer le SMS",
-  "nouveauCodeSms": "Nouveau code par SMS",
-  "mAppeler": "M’appeler",
-  "appelDicte": "Un appel automatique vous dicte le code",
-  "recevoirWhatsapp": "Recevoir sur WhatsApp",
-  "siWhatsapp": "Si WhatsApp est installé sur ce numéro",
-  "codeNonRecu": "Code non reçu ?",
-  "verifiezReseau": "Vérifiez que vous avez du réseau.",
-  "verifiezNumero": "Vérifiez le numéro saisi.",
-  "regardezSms": "Regardez vos SMS, même ceux des numéros inconnus.",
-  "smsDeuxMinutes": "Le SMS peut prendre jusqu’à 2 minutes.",
-  "modifierNumero": "Modifier le numéro",
-  "contacterAssistance": "Contacter l’assistance Live",
-  "agentRepond": "Un agent répond en moins de 2 h, 7 j / 7",
-  "verifiezVotreNumero": "Vérifiez votre numéro",
-  "codeEnvoyeSmsA": "Code envoyé par SMS au ",
-  "codeDicteA": "Code dicté par appel au ",
-  "codeEnvoyeWhatsappA": "Code envoyé sur WhatsApp au ",
-  "mauvaisNumero": "Mauvais numéro ? Le modifier",
-  "prototypeCode": "Prototype : tapez 6 chiffres au choix.",
-  "pasRecuCode": "Vous n’avez pas reçu le code ?",
-  "nouveauCodeEnvoye": "Nouveau code envoyé par SMS au {tel}.",
-  "@nouveauCodeEnvoye": {
+  "demarrageRetapezCode": "Tapez à nouveau les 4 chiffres.",
+  "@demarrageRetapezCode": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageCodeProtege": "Il protège votre compte et vos paiements. Ne le donnez jamais, même à un agent Live.",
+  "@demarrageCodeProtege": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageCodesDifferents": "Les deux codes sont différents. Recommencez.",
+  "@demarrageCodesDifferents": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageEmpreinte": "Déverrouiller avec l’empreinte",
+  "@demarrageEmpreinte": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageEmpreinteTexte": "Ou le visage, selon votre téléphone",
+  "@demarrageEmpreinteTexte": {
+    "description": "Écran : auth_screens"
+  },
+  "demarrageRenvoyerSms": "Renvoyer le SMS",
+  "@demarrageRenvoyerSms": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageNouveauCodeSms": "Nouveau code par SMS",
+  "@demarrageNouveauCodeSms": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageMAppeler": "M’appeler",
+  "@demarrageMAppeler": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageAppelDicte": "Un appel automatique vous dicte le code",
+  "@demarrageAppelDicte": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageRecevoirWhatsapp": "Recevoir sur WhatsApp",
+  "@demarrageRecevoirWhatsapp": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageSiWhatsapp": "Si WhatsApp est installé sur ce numéro",
+  "@demarrageSiWhatsapp": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageCodeNonRecu": "Code non reçu ?",
+  "@demarrageCodeNonRecu": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageVerifiezReseau": "Vérifiez que vous avez du réseau.",
+  "@demarrageVerifiezReseau": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageVerifiezNumero": "Vérifiez le numéro saisi.",
+  "@demarrageVerifiezNumero": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageRegardezSms": "Regardez vos SMS, même ceux des numéros inconnus.",
+  "@demarrageRegardezSms": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageSmsDeuxMinutes": "Le SMS peut prendre jusqu’à 2 minutes.",
+  "@demarrageSmsDeuxMinutes": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageModifierNumero": "Modifier le numéro",
+  "@demarrageModifierNumero": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageContacterAssistance": "Contacter l’assistance Live",
+  "@demarrageContacterAssistance": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageAgentRepond": "Un agent répond en moins de 2 h, 7 j / 7",
+  "@demarrageAgentRepond": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageVerifiezVotreNumero": "Vérifiez votre numéro",
+  "@demarrageVerifiezVotreNumero": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageCodeEnvoyeSmsA": "Code envoyé par SMS au ",
+  "@demarrageCodeEnvoyeSmsA": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageCodeDicteA": "Code dicté par appel au ",
+  "@demarrageCodeDicteA": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageCodeEnvoyeWhatsappA": "Code envoyé sur WhatsApp au ",
+  "@demarrageCodeEnvoyeWhatsappA": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageMauvaisNumero": "Mauvais numéro ? Le modifier",
+  "@demarrageMauvaisNumero": {
+    "description": "Écran : code_sms"
+  },
+  "demarragePrototypeCode": "Prototype : tapez 6 chiffres au choix.",
+  "@demarragePrototypeCode": {
+    "description": "Écran : code_sms"
+  },
+  "demarragePasRecuCode": "Vous n’avez pas reçu le code ?",
+  "@demarragePasRecuCode": {
+    "description": "Écran : code_sms"
+  },
+  "demarrageNouveauCodeEnvoye": "Nouveau code envoyé par SMS au {tel}.",
+  "@demarrageNouveauCodeEnvoye": {
     "placeholders": {
       "tel": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : code_sms"
   },
-  "appelEnCours": "Appel en cours au {tel} : décrochez.",
-  "@appelEnCours": {
+  "demarrageAppelEnCours": "Appel en cours au {tel} : décrochez.",
+  "@demarrageAppelEnCours": {
     "placeholders": {
       "tel": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : code_sms"
   },
-  "codeWhatsappEnvoye": "Code envoyé sur WhatsApp au {tel}.",
-  "@codeWhatsappEnvoye": {
+  "demarrageCodeWhatsappEnvoye": "Code envoyé sur WhatsApp au {tel}.",
+  "@demarrageCodeWhatsappEnvoye": {
     "placeholders": {
       "tel": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : code_sms"
   },
-  "renvoyerDans": "Renvoyer le code dans {minutes}",
-  "@renvoyerDans": {
+  "demarrageRenvoyerDans": "Renvoyer le code dans {minutes}",
+  "@demarrageRenvoyerDans": {
     "placeholders": {
       "minutes": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : code_sms"
   },
-  "codeSecretOublie": "Code secret oublié",
-  "codeSecretOublieTexte": "Nous envoyons un code par SMS à votre numéro. Vous pourrez ensuite choisir un nouveau code secret.",
-  "recevoirCode": "Recevoir le code",
-  "codeEnvoyeSms": "Code envoyé par SMS.",
-  "bonRetour": "Bon retour sur Live",
-  "bonRetourTexte": "Entrez le numéro de votre compte : nous vous envoyons un code.",
-  "codeRecuSms": "Code reçu par SMS",
-  "votreCodeSecret": "Votre code secret",
-  "protegerAppareil": "Pour protéger votre compte sur cet appareil.",
-  "connexionQr": "Se connecter avec un code QR",
-  "codeSecretOublieQ": "Code secret oublié ?",
-  "passer": "Passer",
-  "interetsTitre": "Qu’est-ce qui vous intéresse ?",
-  "interetsTexte": "Choisissez-en au moins 3 : votre fil sera utile dès maintenant. Vous pourrez changer plus tard.",
-  "envoyeAu": "Envoyé au {numero}. Prototype : 6 chiffres au choix.",
-  "@envoyeAu": {
+  "demarrageCodeSecretOublie": "Code secret oublié",
+  "@demarrageCodeSecretOublie": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageCodeSecretOublieTexte": "Nous envoyons un code par SMS à votre numéro. Vous pourrez ensuite choisir un nouveau code secret.",
+  "@demarrageCodeSecretOublieTexte": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageRecevoirCode": "Recevoir le code",
+  "@demarrageRecevoirCode": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageCodeEnvoyeSms": "Code envoyé par SMS.",
+  "@demarrageCodeEnvoyeSms": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageBonRetour": "Bon retour sur Live",
+  "@demarrageBonRetour": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageBonRetourTexte": "Entrez le numéro de votre compte : nous vous envoyons un code.",
+  "@demarrageBonRetourTexte": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageCodeRecuSms": "Code reçu par SMS",
+  "@demarrageCodeRecuSms": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageVotreCodeSecret": "Votre code secret",
+  "@demarrageVotreCodeSecret": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageProtegerAppareil": "Pour protéger votre compte sur cet appareil.",
+  "@demarrageProtegerAppareil": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageConnexionQr": "Se connecter avec un code QR",
+  "@demarrageConnexionQr": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageCodeSecretOublieQ": "Code secret oublié ?",
+  "@demarrageCodeSecretOublieQ": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarragePasser": "Passer",
+  "@demarragePasser": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageInteretsTitre": "Qu’est-ce qui vous intéresse ?",
+  "@demarrageInteretsTitre": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageInteretsTexte": "Choisissez-en au moins 3 : votre fil sera utile dès maintenant. Vous pourrez changer plus tard.",
+  "@demarrageInteretsTexte": {
+    "description": "Écran : connexion_interets"
+  },
+  "demarrageEnvoyeAu": "Envoyé au {numero}. Prototype : 6 chiffres au choix.",
+  "@demarrageEnvoyeAu": {
     "placeholders": {
       "numero": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : connexion_interets"
   },
-  "continuerChoisis": "Continuer · {n} choisis",
-  "@continuerChoisis": {
+  "demarrageContinuerChoisis": "Continuer · {n} choisis",
+  "@demarrageContinuerChoisis": {
     "placeholders": {
       "n": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : connexion_interets"
   },
-  "interet": "{nom, select, Telephones{Téléphones} Mode{Mode} Logement{Logement} Artisans{Artisans} Cuisine{Cuisine} Beaute{Beauté} Etudes{Études} Emploi{Emploi} Automoto{Auto-moto} Musique{Musique} Football{Football} Enfants{Enfants} other{{nom}}}",
-  "@interet": {
+  "demarrageInteret": "{nom, select, Telephones{Téléphones} Mode{Mode} Logement{Logement} Artisans{Artisans} Cuisine{Cuisine} Beaute{Beauté} Etudes{Études} Emploi{Emploi} Automoto{Auto-moto} Musique{Musique} Football{Football} Enfants{Enfants} other{{nom}}}",
+  "@demarrageInteret": {
     "placeholders": {
       "nom": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : connexion_interets"
   },
-  "resterConnecte": "Rester connecté sur ce navigateur",
-  "connexionNumero": "Se connecter avec un numéro",
-  "scannezConnexion": "Scannez pour vous connecter",
-  "qrEtape1": "Ouvrez Live sur votre téléphone",
-  "qrEtape2": "Touchez Moi › Paramètres › Appareils connectés",
-  "qrEtape3": "Touchez « Connecter un appareil » et visez ce code",
-  "besoinAide": "Besoin d’aide ?",
-  "codeQrConnexion": "Code QR de connexion",
-  "simulerScan": "Prototype : simuler le scan",
-  "leCodeConnexion": "le code de connexion",
-  "nouveauCodeDans": "Nouveau code dans {s} s",
-  "@nouveauCodeDans": {
+  "demarrageResterConnecte": "Rester connecté sur ce navigateur",
+  "@demarrageResterConnecte": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageConnexionNumero": "Se connecter avec un numéro",
+  "@demarrageConnexionNumero": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageScannezConnexion": "Scannez pour vous connecter",
+  "@demarrageScannezConnexion": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageQrEtape1": "Ouvrez Live sur votre téléphone",
+  "@demarrageQrEtape1": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageQrEtape2": "Touchez Moi › Paramètres › Appareils connectés",
+  "@demarrageQrEtape2": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageQrEtape3": "Touchez « Connecter un appareil » et visez ce code",
+  "@demarrageQrEtape3": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageBesoinAide": "Besoin d’aide ?",
+  "@demarrageBesoinAide": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageCodeQrConnexion": "Code QR de connexion",
+  "@demarrageCodeQrConnexion": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageSimulerScan": "Prototype : simuler le scan",
+  "@demarrageSimulerScan": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageLeCodeConnexion": "le code de connexion",
+  "@demarrageLeCodeConnexion": {
+    "description": "Écran : connexion_qr"
+  },
+  "demarrageNouveauCodeDans": "Nouveau code dans {s} s",
+  "@demarrageNouveauCodeDans": {
     "placeholders": {
       "s": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : connexion_qr"
   },
   "annuler": "Annuler",
+  "@annuler": {
+    "description": "Écran : remise_vendre, confiance, dialogues"
+  },
   "confirmer": "Confirmer",
+  "@confirmer": {
+    "description": "Écran : dialogues"
+  },
   "valider": "Valider",
+  "@valider": {
+    "description": "Écran : remise_vendre, dialogues"
+  },
   "codeAChiffres": "Code à {n} chiffres",
   "@codeAChiffres": {
     "placeholders": {
       "n": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : champ_code"
   },
   "qrReconnu": "QR reconnu",
+  "@qrReconnu": {
+    "description": "Écran : confiance"
+  },
   "scannerQr": "Scanner le QR {quoi}",
   "@scannerQr": {
     "placeholders": {
       "quoi": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : confiance"
   },
   "cameraSimulee": "Caméra simulée…",
+  "@cameraSimulee": {
+    "description": "Écran : confiance"
+  },
   "codeSecours": "Code de secours : {code}",
   "@codeSecours": {
     "placeholders": {
       "code": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : confiance"
   },
   "protegeParLive": "Protégé par Live. ",
-  "nCommentaires": "{n} commentaires",
-  "@nCommentaires": {
+  "@protegeParLive": {
+    "description": "Écran : confiance"
+  },
+  "accueilNCommentaires": "{n} commentaires",
+  "@accueilNCommentaires": {
     "placeholders": {
       "n": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : commentaires, feed_screen"
   },
   "fermer": "Fermer",
-  "ajouterCommentaire": "Ajouter un commentaire…",
-  "publier": "Publier",
-  "vendeur": "Vendeur",
-  "repondreQuand": "{quand} · Répondre",
-  "@repondreQuand": {
+  "@fermer": {
+    "description": "Écran : commun"
+  },
+  "accueilAjouterCommentaire": "Ajouter un commentaire…",
+  "@accueilAjouterCommentaire": {
+    "description": "Écran : commentaires"
+  },
+  "accueilPublier": "Publier",
+  "@accueilPublier": {
+    "description": "Écran : commentaires"
+  },
+  "accueilVendeur": "Vendeur",
+  "@accueilVendeur": {
+    "description": "Écran : commentaires"
+  },
+  "accueilRepondreQuand": "{quand} · Répondre",
+  "@accueilRepondreQuand": {
     "placeholders": {
       "quand": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : commentaires"
   },
-  "aimeCommentaire": "J’aime ce commentaire",
-  "ongletAbonnements": "Abonnements",
-  "pourToi": "Pour toi",
-  "presDeMoi": "Près de moi",
-  "voirDirects": "Voir les directs en cours",
+  "accueilAimeCommentaire": "J’aime ce commentaire",
+  "@accueilAimeCommentaire": {
+    "description": "Écran : commentaires"
+  },
+  "accueilOngletAbonnements": "Abonnements",
+  "@accueilOngletAbonnements": {
+    "description": "Écran : feed_screen"
+  },
+  "accueilPourToi": "Pour toi",
+  "@accueilPourToi": {
+    "description": "Écran : feed_screen"
+  },
+  "accueilPresDeMoi": "Près de moi",
+  "@accueilPresDeMoi": {
+    "description": "Écran : feed_screen"
+  },
+  "accueilVoirDirects": "Voir les directs en cours",
+  "@accueilVoirDirects": {
+    "description": "Écran : feed_screen"
+  },
   "acheter": "Acheter",
-  "livraisonPossible": "Livraison possible",
+  "@acheter": {
+    "description": "Écran : feed_screen, produit_commande"
+  },
+  "accueilLivraisonPossible": "Livraison possible",
+  "@accueilLivraisonPossible": {
+    "description": "Écran : feed_screen"
+  },
   "parMois": "{prix}/mois",
   "@parMois": {
     "placeholders": {
       "prix": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : carte, feed_screen"
   },
-  "visiter": "Visiter",
-  "coutEntree": "Coût d’entrée : {montant}",
-  "@coutEntree": {
+  "accueilVisiter": "Visiter",
+  "@accueilVisiter": {
+    "description": "Écran : feed_screen"
+  },
+  "accueilCoutEntree": "Coût d’entrée : {montant}",
+  "@accueilCoutEntree": {
     "placeholders": {
       "montant": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : feed_screen"
   },
-  "reserver": "Réserver",
-  "devisGratuit": "Devis gratuit",
-  "garder": "Garder",
+  "accueilReserver": "Réserver",
+  "@accueilReserver": {
+    "description": "Écran : feed_screen"
+  },
+  "accueilDevisGratuit": "Devis gratuit",
+  "@accueilDevisGratuit": {
+    "description": "Écran : feed_screen"
+  },
+  "accueilGarder": "Garder",
+  "@accueilGarder": {
+    "description": "Écran : page_video"
+  },
   "plus": "Plus",
+  "@plus": {
+    "description": "Écran : page_video, variantes"
+  },
   "abonne": "Abonné",
-  "suivreQui": "Suivre {qui}",
-  "@suivreQui": {
+  "@abonne": {
+    "description": "Écran : page_video, produit_commande"
+  },
+  "accueilSuivreQui": "Suivre {qui}",
+  "@accueilSuivreQui": {
     "placeholders": {
       "qui": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : page_video"
   },
-  "acheterEtVendre": "Acheter et vendre",
-  "louerAcheter": "Louer, acheter",
-  "sejours": "Séjours",
-  "aLaNuitMeuble": "À la nuit, meublé",
-  "services": "Services",
-  "trouverUnPro": "Trouver un pro",
-  "directs": "Directs",
-  "acheterEnDirect": "Acheter en direct",
-  "cvExercicesBusinessPlan": "CV, exercices, business plan",
-  "savoir": "Savoir",
-  "coursPdfVideos": "Cours, PDF, vidéos",
-  "emploi": "Emploi",
-  "boursesStagesEmplois": "Bourses, stages, emplois",
-  "monArgent": "Mon argent",
-  "soldeSequestreHistorique": "Solde, séquestre, historique",
-  "tontines": "Tontines",
-  "cotiserEtRecevoirSansRetard": "Cotiser et recevoir, sans retard",
-  "facturesEtCredit": "Factures et crédit",
-  "electriciteEauTeleRecharge": "Électricité, eau, télé, recharge",
-  "diaspora": "Diaspora",
-  "payerPourUnProcheEnvoyer": "Payer pour un proche, envoyer",
-  "envoyerRecevoirToutesDevises": "Envoyer, recevoir, toutes devises",
-  "achatsGroupes": "Achats groupés",
-  "aPlusieursPrixDeGros": "À plusieurs, prix de gros",
-  "adresseLive": "Adresse Live",
-  "votreAdresseEnUnCode": "Votre adresse en un code",
-  "pointsRelais": "Points relais",
-  "colisEspecesEnMomo": "Colis, espèces en MoMo",
-  "groupesEtCanaux": "Groupes et canaux",
-  "quartierClassePassion": "Quartier, classe, passion",
-  "coursesAMoto": "Courses à moto",
-  "studioCreateur": "Studio créateur",
-  "cadeauxFansStatistiques": "Cadeaux, fans, statistiques",
-  "creditsIaChaqueMois": "Crédits IA chaque mois",
-  "publicite": "Publicité",
-  "videoSponsorisee": "Vidéo sponsorisée",
-  "offresPro": "Offres Pro",
-  "vendeurAgencePro": "Vendeur, agence, pro",
-  "servicesFinanciers": "Services financiers",
-  "n3FoisEpargneCredit": "3 fois, épargne, crédit",
-  "fondsCreateurs": "Fonds Créateurs",
-  "financeParLaPublicite": "Financé par la publicité",
-  "rechercherSurLive": "Rechercher sur Live…",
-  "argentEtQuotidien": "Argent et quotidien",
-  "enDirectMaintenant": "En direct maintenant",
-  "bonnesAffairesPresDeVous": "Bonnes affaires près de vous",
-  "nouveauxLogementsVerifies": "Nouveaux logements vérifiés",
-  "pourQuelquesNuits": "Pour quelques nuits",
-  "prosDisponiblesAujourdHui": "Pros disponibles aujourd'hui",
-  "apprendreAvecLiveSavoir": "Apprendre avec Live Savoir",
-  "opportunitesASaisir": "Opportunités à saisir",
-  "outilsEtServicesLive": "Outils et services Live",
+  "explorerAcheterEtVendre": "Acheter et vendre",
+  "@explorerAcheterEtVendre": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerLouerAcheter": "Louer, acheter",
+  "@explorerLouerAcheter": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerSejours": "Séjours",
+  "@explorerSejours": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerALaNuitMeuble": "À la nuit, meublé",
+  "@explorerALaNuitMeuble": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerServices": "Services",
+  "@explorerServices": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerTrouverUnPro": "Trouver un pro",
+  "@explorerTrouverUnPro": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerDirects": "Directs",
+  "@explorerDirects": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerAcheterEnDirect": "Acheter en direct",
+  "@explorerAcheterEnDirect": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerCvExercicesBusinessPlan": "CV, exercices, business plan",
+  "@explorerCvExercicesBusinessPlan": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerSavoir": "Savoir",
+  "@explorerSavoir": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerCoursPdfVideos": "Cours, PDF, vidéos",
+  "@explorerCoursPdfVideos": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerEmploi": "Emploi",
+  "@explorerEmploi": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerBoursesStagesEmplois": "Bourses, stages, emplois",
+  "@explorerBoursesStagesEmplois": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerMonArgent": "Mon argent",
+  "@explorerMonArgent": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerSoldeSequestreHistorique": "Solde, séquestre, historique",
+  "@explorerSoldeSequestreHistorique": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerTontines": "Tontines",
+  "@explorerTontines": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerCotiserEtRecevoirSansRetard": "Cotiser et recevoir, sans retard",
+  "@explorerCotiserEtRecevoirSansRetard": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerFacturesEtCredit": "Factures et crédit",
+  "@explorerFacturesEtCredit": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerElectriciteEauTeleRecharge": "Électricité, eau, télé, recharge",
+  "@explorerElectriciteEauTeleRecharge": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerDiaspora": "Diaspora",
+  "@explorerDiaspora": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerPayerPourUnProcheEnvoyer": "Payer pour un proche, envoyer",
+  "@explorerPayerPourUnProcheEnvoyer": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerEnvoyerRecevoirToutesDevises": "Envoyer, recevoir, toutes devises",
+  "@explorerEnvoyerRecevoirToutesDevises": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerAchatsGroupes": "Achats groupés",
+  "@explorerAchatsGroupes": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerAPlusieursPrixDeGros": "À plusieurs, prix de gros",
+  "@explorerAPlusieursPrixDeGros": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerAdresseLive": "Adresse Live",
+  "@explorerAdresseLive": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerVotreAdresseEnUnCode": "Votre adresse en un code",
+  "@explorerVotreAdresseEnUnCode": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerPointsRelais": "Points relais",
+  "@explorerPointsRelais": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerColisEspecesEnMomo": "Colis, espèces en MoMo",
+  "@explorerColisEspecesEnMomo": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerGroupesEtCanaux": "Groupes et canaux",
+  "@explorerGroupesEtCanaux": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerQuartierClassePassion": "Quartier, classe, passion",
+  "@explorerQuartierClassePassion": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerCoursesAMoto": "Courses à moto",
+  "@explorerCoursesAMoto": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerStudioCreateur": "Studio créateur",
+  "@explorerStudioCreateur": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerCadeauxFansStatistiques": "Cadeaux, fans, statistiques",
+  "@explorerCadeauxFansStatistiques": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerCreditsIaChaqueMois": "Crédits IA chaque mois",
+  "@explorerCreditsIaChaqueMois": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerPublicite": "Publicité",
+  "@explorerPublicite": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerVideoSponsorisee": "Vidéo sponsorisée",
+  "@explorerVideoSponsorisee": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerOffresPro": "Offres Pro",
+  "@explorerOffresPro": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerVendeurAgencePro": "Vendeur, agence, pro",
+  "@explorerVendeurAgencePro": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerServicesFinanciers": "Services financiers",
+  "@explorerServicesFinanciers": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerN3FoisEpargneCredit": "3 fois, épargne, crédit",
+  "@explorerN3FoisEpargneCredit": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerFondsCreateurs": "Fonds Créateurs",
+  "@explorerFondsCreateurs": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerFinanceParLaPublicite": "Financé par la publicité",
+  "@explorerFinanceParLaPublicite": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerRechercherSurLive": "Rechercher sur Live…",
+  "@explorerRechercherSurLive": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerArgentEtQuotidien": "Argent et quotidien",
+  "@explorerArgentEtQuotidien": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerEnDirectMaintenant": "En direct maintenant",
+  "@explorerEnDirectMaintenant": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerBonnesAffairesPresDeVous": "Bonnes affaires près de vous",
+  "@explorerBonnesAffairesPresDeVous": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerNouveauxLogementsVerifies": "Nouveaux logements vérifiés",
+  "@explorerNouveauxLogementsVerifies": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerPourQuelquesNuits": "Pour quelques nuits",
+  "@explorerPourQuelquesNuits": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerProsDisponiblesAujourdHui": "Pros disponibles aujourd'hui",
+  "@explorerProsDisponiblesAujourdHui": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerApprendreAvecLiveSavoir": "Apprendre avec Live Savoir",
+  "@explorerApprendreAvecLiveSavoir": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerOpportunitesASaisir": "Opportunités à saisir",
+  "@explorerOpportunitesASaisir": {
+    "description": "Écran : explore_screen"
+  },
+  "explorerOutilsEtServicesLive": "Outils et services Live",
+  "@explorerOutilsEtServicesLive": {
+    "description": "Écran : explore_screen"
+  },
   "retour": "Retour",
-  "logements": "Logements",
-  "prestataires": "Prestataires",
-  "quartierChambres": "{quartier} · {n} ch.",
-  "@quartierChambres": {
+  "@retour": {
+    "description": "Écran : carte, vue_rue, produit_commande"
+  },
+  "explorerLogements": "Logements",
+  "@explorerLogements": {
+    "description": "Écran : carte, recherche"
+  },
+  "explorerPrestataires": "Prestataires",
+  "@explorerPrestataires": {
+    "description": "Écran : carte"
+  },
+  "explorerQuartierChambres": "{quartier} · {n} ch.",
+  "@explorerQuartierChambres": {
     "placeholders": {
       "quartier": {
         "type": "String"
@@ -406,84 +977,192 @@
       "n": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : carte"
   },
-  "desPrix": "Dès {prix}",
-  "@desPrix": {
+  "explorerDesPrix": "Dès {prix}",
+  "@explorerDesPrix": {
     "placeholders": {
       "prix": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : carte"
   },
-  "exClimatiseurStudioPlombier": "Ex. climatiseur, studio, plombier…",
-  "effacer": "Effacer",
-  "recherchesRecentes": "Recherches récentes",
-  "tendancesPresDeChezVous": "Tendances près de chez vous",
-  "parcourir": "Parcourir",
-  "tout": "Tout",
-  "produits": "Produits",
-  "pros": "Pros",
-  "professionnels": "Professionnels",
-  "creerUneAlerte": "Créer une alerte",
-  "mesAlertes": "Mes alertes",
-  "n2NouveauxResultatsAujourdHui": "2 nouveaux résultats aujourd’hui",
-  "aucunNouveauResultat": "Aucun nouveau résultat",
-  "nouvelleAlerte": "Nouvelle alerte",
-  "vueRueGlissezPourRegarder": "Vue rue · glissez pour regarder autour",
-  "avancerDansLaRue": "Avancer dans la rue",
-  "boussoleCap": "Boussole, cap {n} degrés",
-  "@boussoleCap": {
+  "explorerExClimatiseurStudioPlombier": "Ex. climatiseur, studio, plombier…",
+  "@explorerExClimatiseurStudioPlombier": {
+    "description": "Écran : recherche"
+  },
+  "explorerEffacer": "Effacer",
+  "@explorerEffacer": {
+    "description": "Écran : recherche"
+  },
+  "explorerRecherchesRecentes": "Recherches récentes",
+  "@explorerRecherchesRecentes": {
+    "description": "Écran : recherche"
+  },
+  "explorerTendancesPresDeChezVous": "Tendances près de chez vous",
+  "@explorerTendancesPresDeChezVous": {
+    "description": "Écran : recherche"
+  },
+  "explorerParcourir": "Parcourir",
+  "@explorerParcourir": {
+    "description": "Écran : recherche"
+  },
+  "explorerTout": "Tout",
+  "@explorerTout": {
+    "description": "Écran : recherche"
+  },
+  "explorerProduits": "Produits",
+  "@explorerProduits": {
+    "description": "Écran : recherche"
+  },
+  "explorerPros": "Pros",
+  "@explorerPros": {
+    "description": "Écran : recherche"
+  },
+  "explorerProfessionnels": "Professionnels",
+  "@explorerProfessionnels": {
+    "description": "Écran : recherche"
+  },
+  "explorerCreerUneAlerte": "Créer une alerte",
+  "@explorerCreerUneAlerte": {
+    "description": "Écran : recherche"
+  },
+  "explorerMesAlertes": "Mes alertes",
+  "@explorerMesAlertes": {
+    "description": "Écran : recherche"
+  },
+  "explorerN2NouveauxResultatsAujourdHui": "2 nouveaux résultats aujourd’hui",
+  "@explorerN2NouveauxResultatsAujourdHui": {
+    "description": "Écran : recherche"
+  },
+  "explorerAucunNouveauResultat": "Aucun nouveau résultat",
+  "@explorerAucunNouveauResultat": {
+    "description": "Écran : recherche"
+  },
+  "explorerNouvelleAlerte": "Nouvelle alerte",
+  "@explorerNouvelleAlerte": {
+    "description": "Écran : recherche"
+  },
+  "explorerVueRueGlissezPourRegarder": "Vue rue · glissez pour regarder autour",
+  "@explorerVueRueGlissezPourRegarder": {
+    "description": "Écran : vue_rue"
+  },
+  "explorerAvancerDansLaRue": "Avancer dans la rue",
+  "@explorerAvancerDansLaRue": {
+    "description": "Écran : vue_rue"
+  },
+  "explorerBoussoleCap": "Boussole, cap {n} degrés",
+  "@explorerBoussoleCap": {
     "placeholders": {
       "n": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : vue_rue"
   },
-  "resultatsPour": "Résultats pour ",
-  "aucunResultatPourPoint": ". Aucun résultat pour « {q} ».",
-  "@aucunResultatPourPoint": {
+  "explorerResultatsPour": "Résultats pour ",
+  "@explorerResultatsPour": {
+    "description": "Écran : recherche"
+  },
+  "explorerAucunResultatPourPoint": ". Aucun résultat pour « {q} ».",
+  "@explorerAucunResultatPourPoint": {
     "placeholders": {
       "q": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : recherche"
   },
-  "aucunResultatAlerte": "Aucun résultat pour « {q} ». Créez une alerte : nous vous prévenons dès qu’une annonce arrive.",
-  "@aucunResultatAlerte": {
+  "explorerAucunResultatAlerte": "Aucun résultat pour « {q} ». Créez une alerte : nous vous prévenons dès qu’une annonce arrive.",
+  "@explorerAucunResultatAlerte": {
     "placeholders": {
       "q": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : recherche"
   },
-  "creerAlerteQ": "Créer une alerte « {q} »",
-  "@creerAlerteQ": {
+  "explorerCreerAlerteQ": "Créer une alerte « {q} »",
+  "@explorerCreerAlerteQ": {
     "placeholders": {
       "q": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : recherche"
   },
-  "alertesIntro": "Live vous prévient dès qu’une annonce correspond. Plus besoin de chercher tous les jours.",
-  "paiementProtege": "Paiement protégé",
-  "rechercherUnProduitUneBoutique": "Rechercher un produit, une boutique…",
-  "categoriesPopulaires": "Catégories populaires",
-  "recommandePourVous": "Recommandé pour vous",
-  "vendeursALaUne": "Vendeurs à la une",
-  "nouveautesPresDeVous": "Nouveautés près de vous",
-  "pertinence": "Pertinence",
-  "nouveautes": "Nouveautés",
-  "prixCroissant": "Prix croissant",
-  "prixDecroissant": "Prix décroissant",
-  "toutesLesAnnonces": "Toutes les annonces",
-  "rechercherDansLeMarket": "Rechercher dans le Market…",
-  "aucuneAnnonceDansCetteCategorie": "Aucune annonce dans cette catégorie pour l’instant.",
-  "mesCommandes": "Mes commandes",
-  "aucuneCommandePourLInstant": "Aucune commande pour l’instant.",
-  "decouvrirLeMarket": "Découvrir le Market",
-  "nResultatsA": "{n, plural, =1{1 résultat} other{{n} résultats}} à {ville}",
-  "@nResultatsA": {
+  "explorerAlertesIntro": "Live vous prévient dès qu’une annonce correspond. Plus besoin de chercher tous les jours.",
+  "@explorerAlertesIntro": {
+    "description": "Écran : recherche"
+  },
+  "marketPaiementProtege": "Paiement protégé",
+  "@marketPaiementProtege": {
+    "description": "Écran : market_accueil"
+  },
+  "marketRechercherUnProduitUneBoutique": "Rechercher un produit, une boutique…",
+  "@marketRechercherUnProduitUneBoutique": {
+    "description": "Écran : market_accueil"
+  },
+  "marketCategoriesPopulaires": "Catégories populaires",
+  "@marketCategoriesPopulaires": {
+    "description": "Écran : market_accueil"
+  },
+  "marketRecommandePourVous": "Recommandé pour vous",
+  "@marketRecommandePourVous": {
+    "description": "Écran : market_accueil"
+  },
+  "marketVendeursALaUne": "Vendeurs à la une",
+  "@marketVendeursALaUne": {
+    "description": "Écran : market_accueil"
+  },
+  "marketNouveautesPresDeVous": "Nouveautés près de vous",
+  "@marketNouveautesPresDeVous": {
+    "description": "Écran : market_accueil"
+  },
+  "marketPertinence": "Pertinence",
+  "@marketPertinence": {
+    "description": "Écran : market_liste"
+  },
+  "marketNouveautes": "Nouveautés",
+  "@marketNouveautes": {
+    "description": "Écran : market_liste"
+  },
+  "marketPrixCroissant": "Prix croissant",
+  "@marketPrixCroissant": {
+    "description": "Écran : market_liste"
+  },
+  "marketPrixDecroissant": "Prix décroissant",
+  "@marketPrixDecroissant": {
+    "description": "Écran : market_liste"
+  },
+  "marketToutesLesAnnonces": "Toutes les annonces",
+  "@marketToutesLesAnnonces": {
+    "description": "Écran : market_liste"
+  },
+  "marketRechercherDansLeMarket": "Rechercher dans le Market…",
+  "@marketRechercherDansLeMarket": {
+    "description": "Écran : market_liste"
+  },
+  "marketAucuneAnnonceDansCetteCategorie": "Aucune annonce dans cette catégorie pour l’instant.",
+  "@marketAucuneAnnonceDansCetteCategorie": {
+    "description": "Écran : market_liste"
+  },
+  "marketMesCommandes": "Mes commandes",
+  "@marketMesCommandes": {
+    "description": "Écran : market_liste"
+  },
+  "marketAucuneCommandePourLInstant": "Aucune commande pour l’instant.",
+  "@marketAucuneCommandePourLInstant": {
+    "description": "Écran : market_liste"
+  },
+  "marketDecouvrirLeMarket": "Découvrir le Market",
+  "@marketDecouvrirLeMarket": {
+    "description": "Écran : market_liste"
+  },
+  "marketNResultatsA": "{n, plural, =1{1 résultat} other{{n} résultats}} à {ville}",
+  "@marketNResultatsA": {
     "placeholders": {
       "n": {
         "type": "int"
@@ -491,65 +1170,162 @@
       "ville": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : market_liste"
   },
-  "etatPayeRemise": "{etat} · payé à la remise",
-  "@etatPayeRemise": {
+  "marketEtatPayeRemise": "{etat} · payé à la remise",
+  "@marketEtatPayeRemise": {
     "placeholders": {
       "etat": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : market_liste"
   },
-  "parQui": "Par {qui}",
-  "@parQui": {
+  "marketParQui": "Par {qui}",
+  "@marketParQui": {
     "placeholders": {
       "qui": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : market_liste"
   },
-  "n0DeCommission": "0 % de commission",
-  "vendezPendant3MoisSans": "Vendez pendant 3 mois sans rien payer.",
-  "payeSeulementALaReception": "Payé seulement à la réception",
-  "votreArgentResteBloquePar": "Votre argent reste bloqué par Live jusqu’au QR de remise.",
-  "boutiquesVerifiees": "Boutiques vérifiées",
-  "identiteEtActiviteControleesPar": "Identité et activité contrôlées par Live.",
-  "decouvrir": "Découvrir",
-  "boutique": "Boutique",
-  "particulier": "Particulier",
-  "voirTout": "Voir tout",
-  "vosCommandes": "Vos commandes",
-  "reserveeAPayerALa": "Réservée · à payer à la remise",
-  "terminee": "Terminée",
-  "payeeArgentBloqueParLive": "Payée · argent bloqué par Live",
-  "vendreSurLive": "Vendre sur Live",
-  "desMilliersDAcheteursPres": "Des milliers d’acheteurs près de chez vous",
-  "n0DeCommissionPendant3": "0 % de commission pendant 3 mois",
-  "paiementGarantiAvantLaRemise": "Paiement garanti avant la remise",
-  "remiseConfirmeeParQr": "Remise confirmée par QR",
-  "vendreUnProduit": "Vendre un produit",
-  "paiementsSecurises": "Paiements sécurisés",
-  "soldeLive": "Solde Live",
-  "aLaRemise": "À la remise",
-  "rembourseSiVousNeRecevez": "Remboursé si vous ne recevez pas le produit.",
-  "besoinDAide": "Besoin d’aide ?",
-  "ceQuiSePaieDans": "Ce qui se paie dans Live",
-  "dansLiveALaRemise": "Dans Live, à la remise ou en direct",
-  "signalerUnProbleme": "Signaler un problème",
-  "produitNonRecuNonConforme": "Produit non reçu, non conforme",
-  "centreDAide": "Centre d’aide",
-  "questionsFrequentesEcrireAuSupport": "Questions fréquentes, écrire au support",
-  "commandeNumero": "Commande {id}",
-  "@commandeNumero": {
+  "marketN0DeCommission": "0 % de commission",
+  "@marketN0DeCommission": {
+    "description": "Écran : market_sections"
+  },
+  "marketVendezPendant3MoisSans": "Vendez pendant 3 mois sans rien payer.",
+  "@marketVendezPendant3MoisSans": {
+    "description": "Écran : market_sections"
+  },
+  "marketPayeSeulementALaReception": "Payé seulement à la réception",
+  "@marketPayeSeulementALaReception": {
+    "description": "Écran : market_sections"
+  },
+  "marketVotreArgentResteBloquePar": "Votre argent reste bloqué par Live jusqu’au QR de remise.",
+  "@marketVotreArgentResteBloquePar": {
+    "description": "Écran : market_sections"
+  },
+  "marketBoutiquesVerifiees": "Boutiques vérifiées",
+  "@marketBoutiquesVerifiees": {
+    "description": "Écran : market_sections"
+  },
+  "marketIdentiteEtActiviteControleesPar": "Identité et activité contrôlées par Live.",
+  "@marketIdentiteEtActiviteControleesPar": {
+    "description": "Écran : market_sections"
+  },
+  "marketDecouvrir": "Découvrir",
+  "@marketDecouvrir": {
+    "description": "Écran : market_sections"
+  },
+  "marketBoutique": "Boutique",
+  "@marketBoutique": {
+    "description": "Écran : market_sections"
+  },
+  "marketParticulier": "Particulier",
+  "@marketParticulier": {
+    "description": "Écran : market_sections"
+  },
+  "marketVoirTout": "Voir tout",
+  "@marketVoirTout": {
+    "description": "Écran : market_sections"
+  },
+  "marketVosCommandes": "Vos commandes",
+  "@marketVosCommandes": {
+    "description": "Écran : market_sections"
+  },
+  "marketReserveeAPayerALa": "Réservée · à payer à la remise",
+  "@marketReserveeAPayerALa": {
+    "description": "Écran : market_sections"
+  },
+  "marketTerminee": "Terminée",
+  "@marketTerminee": {
+    "description": "Écran : market_sections"
+  },
+  "marketPayeeArgentBloqueParLive": "Payée · argent bloqué par Live",
+  "@marketPayeeArgentBloqueParLive": {
+    "description": "Écran : market_sections, suivi_commande"
+  },
+  "marketVendreSurLive": "Vendre sur Live",
+  "@marketVendreSurLive": {
+    "description": "Écran : market_sections"
+  },
+  "marketDesMilliersDAcheteursPres": "Des milliers d’acheteurs près de chez vous",
+  "@marketDesMilliersDAcheteursPres": {
+    "description": "Écran : market_sections"
+  },
+  "marketN0DeCommissionPendant3": "0 % de commission pendant 3 mois",
+  "@marketN0DeCommissionPendant3": {
+    "description": "Écran : market_sections"
+  },
+  "marketPaiementGarantiAvantLaRemise": "Paiement garanti avant la remise",
+  "@marketPaiementGarantiAvantLaRemise": {
+    "description": "Écran : market_sections"
+  },
+  "marketRemiseConfirmeeParQr": "Remise confirmée par QR",
+  "@marketRemiseConfirmeeParQr": {
+    "description": "Écran : market_sections"
+  },
+  "marketVendreUnProduit": "Vendre un produit",
+  "@marketVendreUnProduit": {
+    "description": "Écran : market_sections"
+  },
+  "marketPaiementsSecurises": "Paiements sécurisés",
+  "@marketPaiementsSecurises": {
+    "description": "Écran : market_sections"
+  },
+  "marketSoldeLive": "Solde Live",
+  "@marketSoldeLive": {
+    "description": "Écran : market_sections"
+  },
+  "marketALaRemise": "À la remise",
+  "@marketALaRemise": {
+    "description": "Écran : market_sections"
+  },
+  "marketRembourseSiVousNeRecevez": "Remboursé si vous ne recevez pas le produit.",
+  "@marketRembourseSiVousNeRecevez": {
+    "description": "Écran : market_sections, produit_commande"
+  },
+  "marketBesoinDAide": "Besoin d’aide ?",
+  "@marketBesoinDAide": {
+    "description": "Écran : market_sections"
+  },
+  "marketCeQuiSePaieDans": "Ce qui se paie dans Live",
+  "@marketCeQuiSePaieDans": {
+    "description": "Écran : market_sections"
+  },
+  "marketDansLiveALaRemise": "Dans Live, à la remise ou en direct",
+  "@marketDansLiveALaRemise": {
+    "description": "Écran : market_sections"
+  },
+  "marketSignalerUnProbleme": "Signaler un problème",
+  "@marketSignalerUnProbleme": {
+    "description": "Écran : market_sections, suivi_commande"
+  },
+  "marketProduitNonRecuNonConforme": "Produit non reçu, non conforme",
+  "@marketProduitNonRecuNonConforme": {
+    "description": "Écran : market_sections"
+  },
+  "marketCentreDAide": "Centre d’aide",
+  "@marketCentreDAide": {
+    "description": "Écran : market_sections"
+  },
+  "marketQuestionsFrequentesEcrireAuSupport": "Questions fréquentes, écrire au support",
+  "@marketQuestionsFrequentesEcrireAuSupport": {
+    "description": "Écran : market_sections"
+  },
+  "marketCommandeNumero": "Commande {id}",
+  "@marketCommandeNumero": {
     "placeholders": {
       "id": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : market_sections, remise_vendre, suivi_commande"
   },
-  "noteVentes": "{note} · {n} ventes",
-  "@noteVentes": {
+  "marketNoteVentes": "{note} · {n} ventes",
+  "@marketNoteVentes": {
     "placeholders": {
       "note": {
         "type": "String"
@@ -557,10 +1333,11 @@
       "n": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : produit_commande"
   },
-  "quartierVues": "{quartier} · {n} vues",
-  "@quartierVues": {
+  "marketQuartierVues": "{quartier} · {n} vues",
+  "@marketQuartierVues": {
     "placeholders": {
       "quartier": {
         "type": "String"
@@ -568,26 +1345,29 @@
       "n": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : produit_commande"
   },
-  "ventesComparables": "Ventes récentes de « {categorie} » comparables",
-  "@ventesComparables": {
+  "marketVentesComparables": "Ventes récentes de « {categorie} » comparables",
+  "@marketVentesComparables": {
     "placeholders": {
       "categorie": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : produit_commande"
   },
-  "enMainPropreA": "En main propre à {quartier}",
-  "@enMainPropreA": {
+  "marketEnMainPropreA": "En main propre à {quartier}",
+  "@marketEnMainPropreA": {
     "placeholders": {
       "quartier": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : produit_commande"
   },
-  "noteVentesReponse": "{note} · {n} ventes · répond en {delai}",
-  "@noteVentesReponse": {
+  "marketNoteVentesReponse": "{note} · {n} ventes · répond en {delai}",
+  "@marketNoteVentesReponse": {
     "placeholders": {
       "note": {
         "type": "String"
@@ -598,130 +1378,376 @@
       "delai": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : produit_commande"
   },
-  "meilleureVente": "Meilleure vente",
-  "prixNegociable": "Prix négociable",
-  "categorie": "Catégorie",
-  "remise": "Remise",
-  "dansUnLieuPublicPropose": "Dans un lieu public proposé par Live",
-  "vousVerifiezPuisVousMontrez": "Vous vérifiez, puis vous montrez votre QR",
-  "gratuit": "Gratuit",
-  "livraisonABrazzaville": "Livraison à Brazzaville",
-  "parLeVendeurSous24": "Par le vendeur, sous 24 à 48 h",
-  "description": "Description",
-  "payezAuRendezVousPar": "Payez au rendez-vous par MoMo ou Airtel via Live : jamais d’avance.",
-  "cetteAnnonce": "cette annonce",
-  "signalerLAnnonce": "Signaler l’annonce",
-  "vousAimerezAussi": "Vous aimerez aussi",
-  "ecrireAuVendeur": "Écrire au vendeur",
-  "negocier": "Négocier",
-  "voirEtPayer": "Voir et payer",
-  "partager": "Partager",
-  "suivre": "Suivre",
-  "voirAvantDePayer": "Voir avant de payer",
-  "prix": "Prix",
-  "rienAPayerMaintenantAu": "Rien à payer maintenant. Au rendez-vous, vous vérifiez l’objet puis vous validez la demande MoMo ou Airtel envoyée par Live.",
-  "neVersezJamaisDAvance": "Ne versez jamais d’avance pour un objet que vous n’avez pas vu.",
-  "bloqueParLiveJusquA": "Bloqué par Live jusqu’à la remise",
-  "livraisonSiVousLaChoisissez": "Livraison (si vous la choisissez)",
-  "etat": "État",
-  "mainPropreOuLivraison": "Main propre ou livraison",
-  "mainPropre": "Main propre",
-  "paiement": "Paiement",
-  "pasDAvance": "Pas d’avance",
-  "rembourse": "Remboursé",
-  "protection": "Protection",
-  "tailleX": "Taille {taille}",
-  "@tailleX": {
+  "marketMeilleureVente": "Meilleure vente",
+  "@marketMeilleureVente": {
+    "description": "Écran : produit_commande"
+  },
+  "marketPrixNegociable": "Prix négociable",
+  "@marketPrixNegociable": {
+    "description": "Écran : produit_commande"
+  },
+  "marketCategorie": "Catégorie",
+  "@marketCategorie": {
+    "description": "Écran : produit_commande"
+  },
+  "marketRemise": "Remise",
+  "@marketRemise": {
+    "description": "Écran : commande, produit_commande"
+  },
+  "marketDansUnLieuPublicPropose": "Dans un lieu public proposé par Live",
+  "@marketDansUnLieuPublicPropose": {
+    "description": "Écran : produit_commande"
+  },
+  "marketVousVerifiezPuisVousMontrez": "Vous vérifiez, puis vous montrez votre QR",
+  "@marketVousVerifiezPuisVousMontrez": {
+    "description": "Écran : produit_commande"
+  },
+  "marketGratuit": "Gratuit",
+  "@marketGratuit": {
+    "description": "Écran : produit_commande"
+  },
+  "marketLivraisonABrazzaville": "Livraison à Brazzaville",
+  "@marketLivraisonABrazzaville": {
+    "description": "Écran : produit_commande"
+  },
+  "marketParLeVendeurSous24": "Par le vendeur, sous 24 à 48 h",
+  "@marketParLeVendeurSous24": {
+    "description": "Écran : produit_commande"
+  },
+  "marketDescription": "Description",
+  "@marketDescription": {
+    "description": "Écran : produit_commande"
+  },
+  "marketPayezAuRendezVousPar": "Payez au rendez-vous par MoMo ou Airtel via Live : jamais d’avance.",
+  "@marketPayezAuRendezVousPar": {
+    "description": "Écran : produit_commande"
+  },
+  "marketCetteAnnonce": "cette annonce",
+  "@marketCetteAnnonce": {
+    "description": "Écran : produit_commande"
+  },
+  "marketSignalerLAnnonce": "Signaler l’annonce",
+  "@marketSignalerLAnnonce": {
+    "description": "Écran : produit_commande"
+  },
+  "marketVousAimerezAussi": "Vous aimerez aussi",
+  "@marketVousAimerezAussi": {
+    "description": "Écran : produit_commande"
+  },
+  "marketEcrireAuVendeur": "Écrire au vendeur",
+  "@marketEcrireAuVendeur": {
+    "description": "Écran : produit_commande"
+  },
+  "marketNegocier": "Négocier",
+  "@marketNegocier": {
+    "description": "Écran : produit_commande"
+  },
+  "marketVoirEtPayer": "Voir et payer",
+  "@marketVoirEtPayer": {
+    "description": "Écran : produit_commande"
+  },
+  "marketPartager": "Partager",
+  "@marketPartager": {
+    "description": "Écran : produit_commande"
+  },
+  "marketSuivre": "Suivre",
+  "@marketSuivre": {
+    "description": "Écran : produit_commande"
+  },
+  "marketVoirAvantDePayer": "Voir avant de payer",
+  "@marketVoirAvantDePayer": {
+    "description": "Écran : commande, produit_commande"
+  },
+  "marketPrix": "Prix",
+  "@marketPrix": {
+    "description": "Écran : produit_commande"
+  },
+  "marketRienAPayerMaintenantAu": "Rien à payer maintenant. Au rendez-vous, vous vérifiez l’objet puis vous validez la demande MoMo ou Airtel envoyée par Live.",
+  "@marketRienAPayerMaintenantAu": {
+    "description": "Écran : produit_commande"
+  },
+  "marketNeVersezJamaisDAvance": "Ne versez jamais d’avance pour un objet que vous n’avez pas vu.",
+  "@marketNeVersezJamaisDAvance": {
+    "description": "Écran : produit_commande"
+  },
+  "marketBloqueParLiveJusquA": "Bloqué par Live jusqu’à la remise",
+  "@marketBloqueParLiveJusquA": {
+    "description": "Écran : produit_commande"
+  },
+  "marketLivraisonSiVousLaChoisissez": "Livraison (si vous la choisissez)",
+  "@marketLivraisonSiVousLaChoisissez": {
+    "description": "Écran : produit_commande"
+  },
+  "marketEtat": "État",
+  "@marketEtat": {
+    "description": "Écran : produit_commande"
+  },
+  "marketMainPropreOuLivraison": "Main propre ou livraison",
+  "@marketMainPropreOuLivraison": {
+    "description": "Écran : produit_commande"
+  },
+  "marketMainPropre": "Main propre",
+  "@marketMainPropre": {
+    "description": "Écran : produit_commande"
+  },
+  "marketPaiement": "Paiement",
+  "@marketPaiement": {
+    "description": "Écran : commande, produit_commande"
+  },
+  "marketPasDAvance": "Pas d’avance",
+  "@marketPasDAvance": {
+    "description": "Écran : produit_commande"
+  },
+  "marketRembourse": "Remboursé",
+  "@marketRembourse": {
+    "description": "Écran : produit_commande"
+  },
+  "marketProtection": "Protection",
+  "@marketProtection": {
+    "description": "Écran : produit_commande"
+  },
+  "marketTailleX": "Taille {taille}",
+  "@marketTailleX": {
     "placeholders": {
       "taille": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : commande"
   },
-  "enMainPropreQuartier": "En main propre · {quartier}",
-  "@enMainPropreQuartier": {
+  "marketEnMainPropreQuartier": "En main propre · {quartier}",
+  "@marketEnMainPropreQuartier": {
     "placeholders": {
       "quartier": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : commande"
   },
-  "eclaireeGardiennee": "Éclairée, gardiennée",
-  "tresFrequente": "Très fréquenté",
-  "pointDeRemiseSur": "Point de remise sûr",
-  "votreCommande": "Votre commande",
-  "livraison": "Livraison",
-  "adresseOuRepere": "Adresse ou repère…",
-  "payerMaintenant": "Payer maintenant",
-  "argentBloqueJusquAReception": "Argent bloqué jusqu'à réception.",
-  "payerALaRemise": "Payer à la remise",
-  "momoOuAirtelProduitEn": "MoMo ou Airtel, produit en main.",
-  "payerMaintenantVousPayezTout": "Payer maintenant : vous payez tout de suite, mais Live garde l'argent. Le vendeur ne le reçoit que quand vous avez le produit en main. Payer à la remise : vous ne payez rien maintenant. Au moment où vous recevez le produit, vous validez le paiement MoMo ou Airtel sur votre téléphone.",
-  "totalAPayer": "Total à payer",
-  "aucunFraisSupplementaire": "Aucun frais supplémentaire.",
-  "lieuDuRendezVous": "Lieu du rendez-vous",
-  "paiementALaRemise": "Paiement à la remise",
-  "momoOuAirtelAuRendez": "MoMo ou Airtel, au rendez-vous",
-  "vousVerifiezLObjetLe": "Vous vérifiez l’objet, le vendeur appuie sur « Encaisser » et vous validez la demande sur votre téléphone.",
-  "rienAPayerMaintenantVerifiez": "Rien à payer maintenant. Vérifiez l’objet, testez-le, puis payez.",
-  "fixerLeRendezVous": "Fixer le rendez-vous",
-  "plusQueStock": "Plus que {n} en stock",
-  "@plusQueStock": {
+  "marketEclaireeGardiennee": "Éclairée, gardiennée",
+  "@marketEclaireeGardiennee": {
+    "description": "Écran : commande"
+  },
+  "marketTresFrequente": "Très fréquenté",
+  "@marketTresFrequente": {
+    "description": "Écran : commande"
+  },
+  "marketPointDeRemiseSur": "Point de remise sûr",
+  "@marketPointDeRemiseSur": {
+    "description": "Écran : commande"
+  },
+  "marketVotreCommande": "Votre commande",
+  "@marketVotreCommande": {
+    "description": "Écran : commande"
+  },
+  "marketLivraison": "Livraison",
+  "@marketLivraison": {
+    "description": "Écran : commande"
+  },
+  "marketAdresseOuRepere": "Adresse ou repère…",
+  "@marketAdresseOuRepere": {
+    "description": "Écran : commande"
+  },
+  "marketPayerMaintenant": "Payer maintenant",
+  "@marketPayerMaintenant": {
+    "description": "Écran : commande"
+  },
+  "marketArgentBloqueJusquAReception": "Argent bloqué jusqu'à réception.",
+  "@marketArgentBloqueJusquAReception": {
+    "description": "Écran : commande"
+  },
+  "marketPayerALaRemise": "Payer à la remise",
+  "@marketPayerALaRemise": {
+    "description": "Écran : commande"
+  },
+  "marketMomoOuAirtelProduitEn": "MoMo ou Airtel, produit en main.",
+  "@marketMomoOuAirtelProduitEn": {
+    "description": "Écran : commande"
+  },
+  "marketPayerMaintenantVousPayezTout": "Payer maintenant : vous payez tout de suite, mais Live garde l'argent. Le vendeur ne le reçoit que quand vous avez le produit en main. Payer à la remise : vous ne payez rien maintenant. Au moment où vous recevez le produit, vous validez le paiement MoMo ou Airtel sur votre téléphone.",
+  "@marketPayerMaintenantVousPayezTout": {
+    "description": "Écran : commande"
+  },
+  "marketTotalAPayer": "Total à payer",
+  "@marketTotalAPayer": {
+    "description": "Écran : commande"
+  },
+  "marketAucunFraisSupplementaire": "Aucun frais supplémentaire.",
+  "@marketAucunFraisSupplementaire": {
+    "description": "Écran : commande"
+  },
+  "marketLieuDuRendezVous": "Lieu du rendez-vous",
+  "@marketLieuDuRendezVous": {
+    "description": "Écran : commande"
+  },
+  "marketPaiementALaRemise": "Paiement à la remise",
+  "@marketPaiementALaRemise": {
+    "description": "Écran : commande"
+  },
+  "marketMomoOuAirtelAuRendez": "MoMo ou Airtel, au rendez-vous",
+  "@marketMomoOuAirtelAuRendez": {
+    "description": "Écran : commande"
+  },
+  "marketVousVerifiezLObjetLe": "Vous vérifiez l’objet, le vendeur appuie sur « Encaisser » et vous validez la demande sur votre téléphone.",
+  "@marketVousVerifiezLObjetLe": {
+    "description": "Écran : commande"
+  },
+  "marketRienAPayerMaintenantVerifiez": "Rien à payer maintenant. Vérifiez l’objet, testez-le, puis payez.",
+  "@marketRienAPayerMaintenantVerifiez": {
+    "description": "Écran : commande"
+  },
+  "marketFixerLeRendezVous": "Fixer le rendez-vous",
+  "@marketFixerLeRendezVous": {
+    "description": "Écran : commande"
+  },
+  "marketPlusQueStock": "Plus que {n} en stock",
+  "@marketPlusQueStock": {
     "placeholders": {
       "n": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : variantes"
   },
-  "nEnStock": "{n} en stock",
-  "@nEnStock": {
+  "marketNEnStock": "{n} en stock",
+  "@marketNEnStock": {
     "placeholders": {
       "n": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : variantes"
   },
-  "taille": "Taille",
-  "quantite": "Quantité",
-  "moins": "Moins",
-  "choisissezUneTaille": "Choisissez une taille",
-  "payerMaintenantMontant": "Payer maintenant {montant}",
-  "@payerMaintenantMontant": {
+  "marketTaille": "Taille",
+  "@marketTaille": {
+    "description": "Écran : variantes"
+  },
+  "marketQuantite": "Quantité",
+  "@marketQuantite": {
+    "description": "Écran : variantes"
+  },
+  "marketMoins": "Moins",
+  "@marketMoins": {
+    "description": "Écran : variantes"
+  },
+  "marketChoisissezUneTaille": "Choisissez une taille",
+  "@marketChoisissezUneTaille": {
+    "description": "Écran : variantes"
+  },
+  "marketPayerMaintenantMontant": "Payer maintenant {montant}",
+  "@marketPayerMaintenantMontant": {
     "placeholders": {
       "montant": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : suivi_commande"
   },
-  "commandeReservee": "Commande réservée",
-  "aujourdHui1021": "Aujourd'hui 10:21",
-  "accepteeParLeVendeur": "Acceptée par le vendeur",
-  "aujourdHui1034": "Aujourd'hui 10:34",
-  "payeeALaRemise": "Payée à la remise",
-  "receptionConfirmee": "Réception confirmée",
-  "aLInstant": "À l'instant",
-  "enAttenteDeLaRemise": "En attente de la remise",
-  "ecrire": "Écrire",
-  "livraisonLiveSuivreLeLivreur": "Livraison Live : suivre le livreur",
-  "votreArgentEstBloqueJusqu": "Votre argent est bloqué jusqu'à votre confirmation.",
-  "paiementRecuMerci": "Paiement reçu. Merci !",
-  "receptionConfirmeeLeVendeurEst": "Réception confirmée. Le vendeur est payé.",
-  "laisserUnAvis": "Laisser un avis",
-  "confirmerLaRemise": "Confirmer la remise",
-  "montrezLeAuVendeurQuand": "Montrez-le au vendeur quand vous avez vérifié le produit.",
-  "jAiRecuLeProduit": "J'ai reçu le produit",
-  "simulerLeVendeurScanneVotre": "Simuler : le vendeur scanne votre QR",
-  "verifiezLeProduitPuisPayez": "Vérifiez le produit, puis payez.",
-  "leVendeurVousEnverraUne": "Le vendeur vous enverra une demande MoMo ou Airtel. Elle n'arrive pas ? Payez vous-même :",
-  "unProbleme": "Un problème ?",
-  "vousPourrezDecrireLeProbleme": "Vous pourrez décrire le problème et joindre des photos. L'argent reste bloqué jusqu'à la solution.\n\n(Écran de réclamation non inclus dans ce prototype.)",
-  "votreAvis": "Votre avis",
-  "votreCommentaireFacultatif": "Votre commentaire (facultatif)",
-  "publierLAvis": "Publier l'avis",
-  "titrePrixDemande": "{titre} · prix demandé {prix}",
-  "@titrePrixDemande": {
+  "marketCommandeReservee": "Commande réservée",
+  "@marketCommandeReservee": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketAujourdHui1021": "Aujourd'hui 10:21",
+  "@marketAujourdHui1021": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketAccepteeParLeVendeur": "Acceptée par le vendeur",
+  "@marketAccepteeParLeVendeur": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketAujourdHui1034": "Aujourd'hui 10:34",
+  "@marketAujourdHui1034": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketPayeeALaRemise": "Payée à la remise",
+  "@marketPayeeALaRemise": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketReceptionConfirmee": "Réception confirmée",
+  "@marketReceptionConfirmee": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketALInstant": "À l'instant",
+  "@marketALInstant": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketEnAttenteDeLaRemise": "En attente de la remise",
+  "@marketEnAttenteDeLaRemise": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketEcrire": "Écrire",
+  "@marketEcrire": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketLivraisonLiveSuivreLeLivreur": "Livraison Live : suivre le livreur",
+  "@marketLivraisonLiveSuivreLeLivreur": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketVotreArgentEstBloqueJusqu": "Votre argent est bloqué jusqu'à votre confirmation.",
+  "@marketVotreArgentEstBloqueJusqu": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketPaiementRecuMerci": "Paiement reçu. Merci !",
+  "@marketPaiementRecuMerci": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketReceptionConfirmeeLeVendeurEst": "Réception confirmée. Le vendeur est payé.",
+  "@marketReceptionConfirmeeLeVendeurEst": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketLaisserUnAvis": "Laisser un avis",
+  "@marketLaisserUnAvis": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketConfirmerLaRemise": "Confirmer la remise",
+  "@marketConfirmerLaRemise": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketMontrezLeAuVendeurQuand": "Montrez-le au vendeur quand vous avez vérifié le produit.",
+  "@marketMontrezLeAuVendeurQuand": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketJAiRecuLeProduit": "J'ai reçu le produit",
+  "@marketJAiRecuLeProduit": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketSimulerLeVendeurScanneVotre": "Simuler : le vendeur scanne votre QR",
+  "@marketSimulerLeVendeurScanneVotre": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketVerifiezLeProduitPuisPayez": "Vérifiez le produit, puis payez.",
+  "@marketVerifiezLeProduitPuisPayez": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketLeVendeurVousEnverraUne": "Le vendeur vous enverra une demande MoMo ou Airtel. Elle n'arrive pas ? Payez vous-même :",
+  "@marketLeVendeurVousEnverraUne": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketUnProbleme": "Un problème ?",
+  "@marketUnProbleme": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketVousPourrezDecrireLeProbleme": "Vous pourrez décrire le problème et joindre des photos. L'argent reste bloqué jusqu'à la solution.\n\n(Écran de réclamation non inclus dans ce prototype.)",
+  "@marketVousPourrezDecrireLeProbleme": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketVotreAvis": "Votre avis",
+  "@marketVotreAvis": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketVotreCommentaireFacultatif": "Votre commentaire (facultatif)",
+  "@marketVotreCommentaireFacultatif": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketPublierLAvis": "Publier l'avis",
+  "@marketPublierLAvis": {
+    "description": "Écran : suivi_commande"
+  },
+  "marketTitrePrixDemande": "{titre} · prix demandé {prix}",
+  "@marketTitrePrixDemande": {
     "placeholders": {
       "titre": {
         "type": "String"
@@ -729,18 +1755,20 @@
       "prix": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : offre_qr"
   },
-  "pourcentSousPrix": "{n} % sous le prix demandé",
-  "@pourcentSousPrix": {
+  "marketPourcentSousPrix": "{n} % sous le prix demandé",
+  "@marketPourcentSousPrix": {
     "placeholders": {
       "n": {
         "type": "int"
       }
-    }
+    },
+    "description": "Écran : offre_qr"
   },
-  "offreEnvoyee": "Offre de {montant} envoyée à {qui}.",
-  "@offreEnvoyee": {
+  "marketOffreEnvoyee": "Offre de {montant} envoyée à {qui}.",
+  "@marketOffreEnvoyee": {
     "placeholders": {
       "montant": {
         "type": "String"
@@ -748,26 +1776,29 @@
       "qui": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : offre_qr"
   },
-  "envoyerOffre": "Envoyer mon offre · {montant}",
-  "@envoyerOffre": {
+  "marketEnvoyerOffre": "Envoyer mon offre · {montant}",
+  "@marketEnvoyerOffre": {
     "placeholders": {
       "montant": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : offre_qr"
   },
-  "boostTitre": "{titre} · en tête du fil et des recherches à Brazzaville.",
-  "@boostTitre": {
+  "marketBoostTitre": "{titre} · en tête du fil et des recherches à Brazzaville.",
+  "@marketBoostTitre": {
     "placeholders": {
       "titre": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : offre_qr"
   },
-  "boostLibelle": "Boost {duree} · {titre}",
-  "@boostLibelle": {
+  "marketBoostLibelle": "Boost {duree} · {titre}",
+  "@marketBoostLibelle": {
     "placeholders": {
       "duree": {
         "type": "String"
@@ -775,29 +1806,87 @@
       "titre": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : offre_qr"
   },
-  "acheteur": "Acheteur",
-  "faireUneOffre": "Faire une offre",
-  "prixDemande": "Prix demandé",
-  "siLeVendeurAccepteVous": "Si le vendeur accepte, vous recevez un lien de paiement sécurisé dans la conversation. Offre valable 24 h.",
-  "encaisserALaRemise": "Encaisser à la remise",
-  "paiementRecu": "Paiement reçu",
-  "verseSurVotreSoldeApres": "Versé sur votre solde après 24 h sans réclamation.",
-  "scannerPourPayer": "Scanner pour payer",
-  "lAcheteurScanneCeQr": "L'acheteur scanne ce QR avec Live, puis valide avec son code MoMo ou Airtel.",
-  "simulerLAcheteurPaie": "Simuler : l'acheteur paie",
-  "retourAMesVentes": "Retour à mes ventes",
-  "n24Heures": "24 heures",
-  "env1500Vues": "env. 1 500 vues",
-  "n3Jours": "3 jours",
-  "env5000Vues": "env. 5 000 vues",
-  "n7Jours": "7 jours",
-  "env12000Vues": "env. 12 000 vues",
-  "boosterUneAnnonce": "Booster une annonce",
-  "lesAnnoncesBoosteesPortentLa": "Les annonces boostées portent la mention « Sponsorisé ».",
-  "titreMontant": "{titre} · {montant}",
-  "@titreMontant": {
+  "marketAcheteur": "Acheteur",
+  "@marketAcheteur": {
+    "description": "Écran : offre_qr"
+  },
+  "marketFaireUneOffre": "Faire une offre",
+  "@marketFaireUneOffre": {
+    "description": "Écran : offre_qr"
+  },
+  "marketPrixDemande": "Prix demandé",
+  "@marketPrixDemande": {
+    "description": "Écran : offre_qr"
+  },
+  "marketSiLeVendeurAccepteVous": "Si le vendeur accepte, vous recevez un lien de paiement sécurisé dans la conversation. Offre valable 24 h.",
+  "@marketSiLeVendeurAccepteVous": {
+    "description": "Écran : offre_qr"
+  },
+  "marketEncaisserALaRemise": "Encaisser à la remise",
+  "@marketEncaisserALaRemise": {
+    "description": "Écran : offre_qr"
+  },
+  "marketPaiementRecu": "Paiement reçu",
+  "@marketPaiementRecu": {
+    "description": "Écran : offre_qr"
+  },
+  "marketVerseSurVotreSoldeApres": "Versé sur votre solde après 24 h sans réclamation.",
+  "@marketVerseSurVotreSoldeApres": {
+    "description": "Écran : offre_qr"
+  },
+  "marketScannerPourPayer": "Scanner pour payer",
+  "@marketScannerPourPayer": {
+    "description": "Écran : offre_qr"
+  },
+  "marketLAcheteurScanneCeQr": "L'acheteur scanne ce QR avec Live, puis valide avec son code MoMo ou Airtel.",
+  "@marketLAcheteurScanneCeQr": {
+    "description": "Écran : offre_qr"
+  },
+  "marketSimulerLAcheteurPaie": "Simuler : l'acheteur paie",
+  "@marketSimulerLAcheteurPaie": {
+    "description": "Écran : offre_qr"
+  },
+  "marketRetourAMesVentes": "Retour à mes ventes",
+  "@marketRetourAMesVentes": {
+    "description": "Écran : offre_qr"
+  },
+  "marketN24Heures": "24 heures",
+  "@marketN24Heures": {
+    "description": "Écran : offre_qr"
+  },
+  "marketEnv1500Vues": "env. 1 500 vues",
+  "@marketEnv1500Vues": {
+    "description": "Écran : offre_qr"
+  },
+  "marketN3Jours": "3 jours",
+  "@marketN3Jours": {
+    "description": "Écran : offre_qr"
+  },
+  "marketEnv5000Vues": "env. 5 000 vues",
+  "@marketEnv5000Vues": {
+    "description": "Écran : offre_qr"
+  },
+  "marketN7Jours": "7 jours",
+  "@marketN7Jours": {
+    "description": "Écran : offre_qr"
+  },
+  "marketEnv12000Vues": "env. 12 000 vues",
+  "@marketEnv12000Vues": {
+    "description": "Écran : offre_qr"
+  },
+  "marketBoosterUneAnnonce": "Booster une annonce",
+  "@marketBoosterUneAnnonce": {
+    "description": "Écran : offre_qr"
+  },
+  "marketLesAnnoncesBoosteesPortentLa": "Les annonces boostées portent la mention « Sponsorisé ».",
+  "@marketLesAnnoncesBoosteesPortentLa": {
+    "description": "Écran : offre_qr"
+  },
+  "marketTitreMontant": "{titre} · {montant}",
+  "@marketTitreMontant": {
     "placeholders": {
       "titre": {
         "type": "String"
@@ -805,26 +1894,29 @@
       "montant": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : remise_vendre"
   },
-  "acheteurX": "Acheteur : {qui}",
-  "@acheteurX": {
+  "marketAcheteurX": "Acheteur : {qui}",
+  "@marketAcheteurX": {
     "placeholders": {
       "qui": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : remise_vendre"
   },
-  "remiseConfirmeeGains": "Remise confirmée.\n{montant} ajoutés à vos gains.",
-  "@remiseConfirmeeGains": {
+  "marketRemiseConfirmeeGains": "Remise confirmée.\n{montant} ajoutés à vos gains.",
+  "@marketRemiseConfirmeeGains": {
     "placeholders": {
       "montant": {
         "type": "String"
       }
-    }
+    },
+    "description": "Écran : remise_vendre"
   },
-  "vousRecevrez": "Vous recevrez {net}\n({total} - 6 % de commission Live)",
-  "@vousRecevrez": {
+  "marketVousRecevrez": "Vous recevrez {net}\n({total} - 6 % de commission Live)",
+  "@marketVousRecevrez": {
     "placeholders": {
       "net": {
         "type": "String"
@@ -832,15 +1924,255 @@
       "total": {
         "type": "String"
       }
+    },
+    "description": "Écran : remise_vendre"
+  },
+  "marketVoirMesGains": "Voir mes gains",
+  "@marketVoirMesGains": {
+    "description": "Écran : remise_vendre"
+  },
+  "marketAuMomentDeLaRemise": "Au moment de la remise, scannez le QR que l'acheteur vous montre.",
+  "@marketAuMomentDeLaRemise": {
+    "description": "Écran : remise_vendre"
+  },
+  "marketDeLAcheteur": "de l'acheteur",
+  "@marketDeLAcheteur": {
+    "description": "Écran : remise_vendre"
+  },
+  "marketScannerLeQrDeL": "Scanner le QR de l'acheteur",
+  "@marketScannerLeQrDeL": {
+    "description": "Écran : remise_vendre"
+  },
+  "marketSaisirLeCodeLvA": "Saisir le code LV- à la place",
+  "@marketSaisirLeCodeLvA": {
+    "description": "Écran : remise_vendre"
+  },
+  "marketLAcheteurPaieALa": "L'acheteur paie à la remise : montrez-lui votre QR de paiement.",
+  "@marketLAcheteurPaieALa": {
+    "description": "Écran : remise_vendre"
+  },
+  "marketAfficherMonQrDePaiement": "Afficher mon QR de paiement",
+  "@marketAfficherMonQrDePaiement": {
+    "description": "Écran : remise_vendre"
+  },
+  "marketCodeDeSecours": "Code de secours",
+  "@marketCodeDeSecours": {
+    "description": "Écran : remise_vendre"
+  },
+  "marketDemandezALAcheteurLe": "Demandez à l'acheteur le code affiché sous son QR (ex. LV-K4827).",
+  "@marketDemandezALAcheteurLe": {
+    "description": "Écran : remise_vendre"
+  },
+  "@appelsTitre": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsTitre": "Appels",
+  "@appelsTous": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsTous": "Tous",
+  "@appelsManques": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsManques": "Manqués",
+  "@appelsGratuits": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsGratuits": "Appels gratuits par internet : votre numéro n’est jamais montré.",
+  "@appelsAujourdhui": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsAujourdhui": "Aujourd’hui",
+  "@appelsHier": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsHier": "Hier",
+  "@appelsIlYaJours": {
+    "description": "Écran : appels (historique)",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
     }
   },
-  "voirMesGains": "Voir mes gains",
-  "auMomentDeLaRemise": "Au moment de la remise, scannez le QR que l'acheteur vous montre.",
-  "deLAcheteur": "de l'acheteur",
-  "scannerLeQrDeL": "Scanner le QR de l'acheteur",
-  "saisirLeCodeLvA": "Saisir le code LV- à la place",
-  "lAcheteurPaieALa": "L'acheteur paie à la remise : montrez-lui votre QR de paiement.",
-  "afficherMonQrDePaiement": "Afficher mon QR de paiement",
-  "codeDeSecours": "Code de secours",
-  "demandezALAcheteurLe": "Demandez à l'acheteur le code affiché sous son QR (ex. LV-K4827)."
+  "appelsIlYaJours": "Il y a {n} jours",
+  "@appelsEntrant": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsEntrant": "Entrant",
+  "@appelsSortant": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsSortant": "Sortant",
+  "@appelsManque": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsManque": "Manqué",
+  "@appelsDetail": {
+    "description": "Écran : appels (historique)",
+    "placeholders": {
+      "sens": {
+        "type": "String"
+      },
+      "quand": {
+        "type": "String"
+      },
+      "heure": {
+        "type": "String"
+      }
+    }
+  },
+  "appelsDetail": "{sens} · {quand}, {heure}",
+  "@appelsGroupeDe": {
+    "description": "Écran : appels (historique)",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "appelsGroupeDe": "Groupe · {n} personnes",
+  "@appelsAppelAudio": {
+    "description": "Écran : appels, conversation, groupe"
+  },
+  "appelsAppelAudio": "Appel audio",
+  "@appelsAppelVideo": {
+    "description": "Écran : appels, conversation, groupe"
+  },
+  "appelsAppelVideo": "Appel vidéo",
+  "@appelsAppelGroupe": {
+    "description": "Écran : groupe"
+  },
+  "appelsAppelGroupe": "Appel en groupe",
+  "@appelsNouvelAppel": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsNouvelAppel": "Nouvel appel",
+  "@appelsChoisirContact": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsChoisirContact": "Qui voulez-vous appeler ?",
+  "@appelsSimulerEntrant": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsSimulerEntrant": "Prototype : recevoir un appel",
+  "@appelsAucunManque": {
+    "description": "Écran : appels (historique)"
+  },
+  "appelsAucunManque": "Aucun appel manqué.",
+  "@appelSonnerie": {
+    "description": "Écran : appel en cours"
+  },
+  "appelSonnerie": "Sonnerie…",
+  "@appelConnexion": {
+    "description": "Écran : appel en cours"
+  },
+  "appelConnexion": "Connexion…",
+  "@appelEntrantAudio": {
+    "description": "Écran : appel en cours"
+  },
+  "appelEntrantAudio": "Appel audio Live entrant",
+  "@appelEntrantVideo": {
+    "description": "Écran : appel en cours"
+  },
+  "appelEntrantVideo": "Appel vidéo Live entrant",
+  "@appelChiffre": {
+    "description": "Écran : appel en cours"
+  },
+  "appelChiffre": "Chiffré de bout en bout",
+  "@appelMicro": {
+    "description": "Écran : appel en cours"
+  },
+  "appelMicro": "Micro",
+  "@appelCamera": {
+    "description": "Écran : appel en cours"
+  },
+  "appelCamera": "Caméra",
+  "@appelHautParleur": {
+    "description": "Écran : appel en cours"
+  },
+  "appelHautParleur": "Haut-parleur",
+  "@appelRetourner": {
+    "description": "Écran : appel en cours"
+  },
+  "appelRetourner": "Retourner",
+  "@appelAjouter": {
+    "description": "Écran : appel en cours"
+  },
+  "appelAjouter": "Ajouter",
+  "@appelRaccrocher": {
+    "description": "Écran : appel en cours"
+  },
+  "appelRaccrocher": "Raccrocher",
+  "@appelRefuser": {
+    "description": "Écran : appel en cours"
+  },
+  "appelRefuser": "Refuser",
+  "@appelAccepter": {
+    "description": "Écran : appel en cours"
+  },
+  "appelAccepter": "Accepter",
+  "@appelRepondreMessage": {
+    "description": "Écran : appel en cours"
+  },
+  "appelRepondreMessage": "Répondre par message",
+  "@appelVous": {
+    "description": "Écran : appel en cours"
+  },
+  "appelVous": "Vous",
+  "@appelMicroCoupe": {
+    "description": "Écran : appel en cours"
+  },
+  "appelMicroCoupe": "Micro coupé",
+  "@appelReseauFaible": {
+    "description": "Écran : appel en cours"
+  },
+  "appelReseauFaible": "Réseau faible : vidéo en qualité réduite pour garder l’appel.",
+  "@appelPasserAudio": {
+    "description": "Écran : appel en cours"
+  },
+  "appelPasserAudio": "Passer en audio",
+  "@appelTermine": {
+    "description": "Écran : appel en cours",
+    "placeholders": {
+      "duree": {
+        "type": "String"
+      }
+    }
+  },
+  "appelTermine": "Appel terminé · {duree}",
+  "@appelParticipants": {
+    "description": "Écran : appel en cours",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "appelParticipants": "{n} participants",
+  "@appelAjouterQui": {
+    "description": "Écran : appel en cours"
+  },
+  "appelAjouterQui": "Ajouter à l’appel",
+  "@appelAjoute": {
+    "description": "Écran : appel en cours",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "appelAjoute": "{qui} a été invité à l’appel.",
+  "@appelNeDonnezJamais": {
+    "description": "Écran : appel en cours"
+  },
+  "appelNeDonnezJamais": "Live ne vous demandera jamais votre code secret pendant un appel.",
+  "@appelVisiteVideo": {
+    "description": "Écran : fiche du bien"
+  },
+  "appelVisiteVideo": "Visite en vidéo",
+  "@appelVisiteVideoTexte": {
+    "description": "Écran : fiche du bien"
+  },
+  "appelVisiteVideoTexte": "L’agent vous fait visiter en direct, sans vous déplacer."
 }

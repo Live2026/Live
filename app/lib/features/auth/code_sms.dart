@@ -6,9 +6,9 @@ enum _Canal { sms, appel, whatsapp }
 
 extension on _Canal {
   (IconData, String, String) infos(Textes t) => switch (this) {
-    _Canal.sms => (Icons.sms_rounded, t.renvoyerSms, t.nouveauCodeSms),
-    _Canal.appel => (Icons.call_rounded, t.mAppeler, t.appelDicte),
-    _Canal.whatsapp => (Icons.chat_rounded, t.recevoirWhatsapp, t.siWhatsapp),
+    _Canal.sms => (Icons.sms_rounded, t.demarrageRenvoyerSms, t.demarrageNouveauCodeSms),
+    _Canal.appel => (Icons.call_rounded, t.demarrageMAppeler, t.demarrageAppelDicte),
+    _Canal.whatsapp => (Icons.chat_rounded, t.demarrageRecevoirWhatsapp, t.demarrageSiWhatsapp),
   };
 }
 
@@ -65,9 +65,9 @@ class _EcranCodeState extends State<EcranCode> {
     // Chaque nouvel envoi allonge l'attente, contre les abus.
     _demarrer(45 + 15 * _envois);
     informer(context, switch (canal) {
-      _Canal.sms => context.t.nouveauCodeEnvoye(widget.telephone),
-      _Canal.appel => context.t.appelEnCours(widget.telephone),
-      _Canal.whatsapp => context.t.codeWhatsappEnvoye(widget.telephone),
+      _Canal.sms => context.t.demarrageNouveauCodeEnvoye(widget.telephone),
+      _Canal.appel => context.t.demarrageAppelEnCours(widget.telephone),
+      _Canal.whatsapp => context.t.demarrageCodeWhatsappEnvoye(widget.telephone),
     });
   }
 
@@ -92,15 +92,15 @@ class _EcranCodeState extends State<EcranCode> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                context.t.codeNonRecu,
+                context.t.demarrageCodeNonRecu,
                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 10),
               for (final (icone, texte) in [
-                (Icons.signal_cellular_alt_rounded, context.t.verifiezReseau),
-                (Icons.dialpad_rounded, context.t.verifiezNumero),
-                (Icons.inbox_rounded, context.t.regardezSms),
-                (Icons.schedule_rounded, context.t.smsDeuxMinutes),
+                (Icons.signal_cellular_alt_rounded, context.t.demarrageVerifiezReseau),
+                (Icons.dialpad_rounded, context.t.demarrageVerifiezNumero),
+                (Icons.inbox_rounded, context.t.demarrageRegardezSms),
+                (Icons.schedule_rounded, context.t.demarrageSmsDeuxMinutes),
               ])
                 ListTile(
                   contentPadding: EdgeInsets.zero,
@@ -111,7 +111,7 @@ class _EcranCodeState extends State<EcranCode> {
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.edit_rounded, color: LiveColors.bleu),
-                title: Text(context.t.modifierNumero),
+                title: Text(context.t.demarrageModifierNumero),
                 onTap: () {
                   Navigator.pop(ctx);
                   context.pop();
@@ -123,8 +123,8 @@ class _EcranCodeState extends State<EcranCode> {
                   Icons.support_agent_rounded,
                   color: LiveColors.bleu,
                 ),
-                title: Text(context.t.contacterAssistance),
-                subtitle: Text(context.t.agentRepond),
+                title: Text(context.t.demarrageContacterAssistance),
+                subtitle: Text(context.t.demarrageAgentRepond),
                 onTap: () {
                   Navigator.pop(ctx);
                   context.push('/aide/ecrire?sujet=Compte');
@@ -151,7 +151,7 @@ class _EcranCodeState extends State<EcranCode> {
         children: [
           const SizedBox(height: 8),
           Text(
-            context.t.verifiezVotreNumero,
+            context.t.demarrageVerifiezVotreNumero,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: LiveColors.bleu,
@@ -165,9 +165,9 @@ class _EcranCodeState extends State<EcranCode> {
               children: [
                 TextSpan(
                   text: switch (_canal) {
-                    _Canal.sms => context.t.codeEnvoyeSmsA,
-                    _Canal.appel => context.t.codeDicteA,
-                    _Canal.whatsapp => context.t.codeEnvoyeWhatsappA,
+                    _Canal.sms => context.t.demarrageCodeEnvoyeSmsA,
+                    _Canal.appel => context.t.demarrageCodeDicteA,
+                    _Canal.whatsapp => context.t.demarrageCodeEnvoyeWhatsappA,
                   },
                 ),
                 TextSpan(
@@ -183,14 +183,14 @@ class _EcranCodeState extends State<EcranCode> {
           Center(
             child: TextButton(
               onPressed: () => context.pop(),
-              child: Text(context.t.mauvaisNumero),
+              child: Text(context.t.demarrageMauvaisNumero),
             ),
           ),
           const SizedBox(height: 12),
           ChampCode(onComplet: _valider, etat: _etat, lireSms: true),
           const SizedBox(height: 10),
           Text(
-            context.t.prototypeCode,
+            context.t.demarragePrototypeCode,
             textAlign: TextAlign.center,
             style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
           ),
@@ -215,7 +215,7 @@ class _EcranCodeState extends State<EcranCode> {
                       const SizedBox(width: 10),
                       Flexible(
                         child: Text(
-                          context.t.renvoyerDans(minutes),
+                          context.t.demarrageRenvoyerDans(minutes),
                           style: const TextStyle(color: LiveColors.gris),
                         ),
                       ),
@@ -226,7 +226,7 @@ class _EcranCodeState extends State<EcranCode> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        context.t.pasRecuCode,
+                        context.t.demarragePasRecuCode,
                         style: TextStyle(fontWeight: FontWeight.w800),
                       ),
                       const SizedBox(height: 8),

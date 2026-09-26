@@ -52,9 +52,9 @@ class _EcranFilState extends State<EcranFil> {
                 child: Row(
                   children: [
                     for (final (i, t) in [
-                      context.t.ongletAbonnements,
-                      context.t.pourToi,
-                      context.t.presDeMoi,
+                      context.t.accueilOngletAbonnements,
+                      context.t.accueilPourToi,
+                      context.t.accueilPresDeMoi,
                     ].indexed)
                       TextButton(
                         onPressed: () => setState(() {
@@ -94,7 +94,7 @@ class _EcranFilState extends State<EcranFil> {
           child: SafeArea(
             child: Semantics(
               button: true,
-              label: context.t.voirDirects,
+              label: context.t.accueilVoirDirects,
               excludeSemantics: true,
               child: Pressable(
                 onTap: () => context.push('/directs'),
@@ -159,7 +159,7 @@ class _PanneauAnnonce extends StatelessWidget {
         FilledButton(onPressed: () => context.push(route), child: Text(action)),
         const Divider(height: 32),
         Text(
-          context.t.nCommentaires(pub.commentaires),
+          context.t.accueilNCommentaires(pub.commentaires),
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -179,25 +179,25 @@ class _PanneauAnnonce extends StatelessWidget {
         fcfa(pr.prix),
         t.acheter,
         '/produit/${pr.id}',
-        pr.livraison > 0 ? t.livraisonPossible : null,
+        pr.livraison > 0 ? t.accueilLivraisonPossible : null,
       );
     case Verticale.immo:
       final b = bienParId(p.cibleId);
       return (
         '${b.titre} · ${b.quartier}',
         t.parMois(fcfa(b.loyer, devise: false)),
-        t.visiter,
+        t.accueilVisiter,
         '/bien/${b.id}',
-        t.coutEntree(fcfa(b.coutEntree)),
+        t.accueilCoutEntree(fcfa(b.coutEntree)),
       );
     case Verticale.services:
       final s = prestataireParId(p.cibleId);
       return (
         '${s.nom} · ${s.metier}',
         note(s.note),
-        t.reserver,
+        t.accueilReserver,
         '/pro/${s.id}',
-        t.devisGratuit,
+        t.accueilDevisGratuit,
       );
   }
 }

@@ -107,11 +107,11 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
             prefixIcon: const Icon(Icons.search),
-            hintText: context.t.exClimatiseurStudioPlombier,
+            hintText: context.t.explorerExClimatiseurStudioPlombier,
             suffixIcon: q.isEmpty
                 ? null
                 : IconButton(
-                    tooltip: context.t.effacer,
+                    tooltip: context.t.explorerEffacer,
                     onPressed: () => setState(_champ.clear),
                     icon: const Icon(Icons.close_rounded),
                   ),
@@ -128,7 +128,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
     return ListView(
       padding: EdgeInsets.fromLTRB(marge, 8, marge, 24),
       children: [
-        EnTeteSection(context.t.recherchesRecentes),
+        EnTeteSection(context.t.explorerRecherchesRecentes),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -141,7 +141,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
               ),
           ],
         ),
-        EnTeteSection(context.t.tendancesPresDeChezVous),
+        EnTeteSection(context.t.explorerTendancesPresDeChezVous),
         for (final (i, t) in _tendances.indexed)
           ListTile(
             contentPadding: EdgeInsets.zero,
@@ -157,7 +157,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
             trailing: const Icon(Icons.north_west_rounded, size: 18),
             onTap: () => _chercher(t),
           ),
-        EnTeteSection(context.t.parcourir),
+        EnTeteSection(context.t.explorerParcourir),
         Wrap(
           children: [
             for (final (icone, nom) in categoriesMarket)
@@ -212,7 +212,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
             child: Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(text: context.t.resultatsPour),
+                  TextSpan(text: context.t.explorerResultatsPour),
                   TextSpan(
                     text: '« $_corrigee »',
                     style: const TextStyle(
@@ -221,7 +221,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
                     ),
                   ),
                   TextSpan(
-                    text: context.t.aucunResultatPourPoint(_champ.text.trim()),
+                    text: context.t.explorerAucunResultatPourPoint(_champ.text.trim()),
                   ),
                 ],
               ),
@@ -232,10 +232,10 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
           child: Row(
             children: [
               for (final (i, (nom, n)) in [
-                (context.t.tout, total),
-                (context.t.produits, prods.length),
-                (context.t.logements, logements.length),
-                (context.t.pros, pros.length),
+                (context.t.explorerTout, total),
+                (context.t.explorerProduits, prods.length),
+                (context.t.explorerLogements, logements.length),
+                (context.t.explorerPros, pros.length),
               ].indexed)
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
@@ -251,15 +251,15 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
         if (total == 0)
           EtatVide(
             icone: Icons.search_off_rounded,
-            texte: context.t.aucunResultatAlerte(_champ.text),
-            action: context.t.creerUneAlerte,
+            texte: context.t.explorerAucunResultatAlerte(_champ.text),
+            action: context.t.explorerCreerUneAlerte,
             onTap: () {
               ref.read(liveProvider.notifier).ajouterAlerte(_champ.text.trim());
               context.push('/alertes');
             },
           ),
         if ((_onglet == 0 || _onglet == 1) && prods.isNotEmpty) ...[
-          EnTeteSection(context.t.produits),
+          EnTeteSection(context.t.explorerProduits),
           GrilleAdaptative(
             largeurMax: context.grandEcran ? 220 : 180,
             espacement: 14,
@@ -273,7 +273,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
           ),
         ],
         if ((_onglet == 0 || _onglet == 2) && logements.isNotEmpty) ...[
-          EnTeteSection(context.t.logements),
+          EnTeteSection(context.t.explorerLogements),
           GrilleAdaptative(
             largeurMax: context.grandEcran ? 280 : 200,
             espacement: 14,
@@ -281,7 +281,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
           ),
         ],
         if ((_onglet == 0 || _onglet == 3) && pros.isNotEmpty) ...[
-          EnTeteSection(context.t.professionnels),
+          EnTeteSection(context.t.explorerProfessionnels),
           GrilleAdaptative(
             largeurMax: 460,
             espacement: 10,
@@ -296,7 +296,7 @@ class _EcranRechercheState extends ConsumerState<EcranRecherche> {
               context.push('/alertes');
             },
             icon: const Icon(Icons.notifications_active_outlined),
-            label: Text(context.t.creerAlerteQ(_champ.text.trim())),
+            label: Text(context.t.explorerCreerAlerteQ(_champ.text.trim())),
           ),
         ],
       ],
@@ -312,12 +312,12 @@ class EcranAlertes extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final alertes = ref.watch(liveProvider).alertes;
     return Scaffold(
-      appBar: AppBar(title: Text(context.t.mesAlertes)),
+      appBar: AppBar(title: Text(context.t.explorerMesAlertes)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           Text(
-            context.t.alertesIntro,
+            context.t.explorerAlertesIntro,
             style: TextStyle(color: LiveColors.gris),
           ),
           const SizedBox(height: 12),
@@ -345,8 +345,8 @@ class EcranAlertes extends ConsumerWidget {
                           ),
                           Text(
                             i == 0
-                                ? context.t.n2NouveauxResultatsAujourdHui
-                                : context.t.aucunNouveauResultat,
+                                ? context.t.explorerN2NouveauxResultatsAujourdHui
+                                : context.t.explorerAucunNouveauResultat,
                             style: const TextStyle(
                               color: LiveColors.gris,
                               fontSize: 12.5,
@@ -370,7 +370,7 @@ class EcranAlertes extends ConsumerWidget {
         child: FilledButton.icon(
           onPressed: () => context.push('/recherche'),
           icon: const Icon(Icons.add_rounded),
-          label: Text(context.t.nouvelleAlerte),
+          label: Text(context.t.explorerNouvelleAlerte),
         ),
       ),
     );

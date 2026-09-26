@@ -108,6 +108,19 @@ class EcranProfilPrestataire extends ConsumerWidget {
                   child: const Text('Écrire'),
                 ),
               ),
+              const SizedBox(width: 8),
+              // Appel par Live : le numéro du pro n'est jamais montré.
+              IconButton.outlined(
+                tooltip: context.t.appelsAppelAudio,
+                onPressed: () => context.push(routeAppel(avec: p.nom)),
+                icon: const Icon(Icons.call_outlined),
+              ),
+              IconButton.outlined(
+                tooltip: context.t.appelsAppelVideo,
+                onPressed: () =>
+                    context.push(routeAppel(avec: p.nom, video: true)),
+                icon: const Icon(Icons.videocam_outlined),
+              ),
             ],
           ),
           if (p.services.isNotEmpty) ...[

@@ -17,6 +17,8 @@ import '../features/feed/feed_screen.dart';
 import '../features/ia/ia_screens.dart';
 import '../features/immo/immo_screens.dart';
 import '../features/market/market_screens.dart';
+import '../features/messages/appel_en_cours.dart';
+import '../features/messages/appels.dart';
 import '../features/messages/messages_screens.dart';
 import '../features/opportunites/opportunites_screens.dart';
 import '../features/pay/pay_screens.dart';
@@ -51,6 +53,7 @@ bool _pleinEcran(String chemin) =>
       '/publier/media',
       '/direct/:id',
       '/lecteur/:id',
+      '/appel',
     }.contains(chemin) ||
     chemin.startsWith('/admin');
 
@@ -287,6 +290,16 @@ final routeur = GoRouter(
     _route('/recu/:id', (s) => EcranRecu(id: _p(s, 'id'))),
     // Messages
     _route('/messages', (_) => const EcranMessages()),
+    _route('/appels', (_) => const EcranAppels()),
+    _route('/appel', (s) {
+      final q = s.uri.queryParameters;
+      return EcranAppel(
+        avec: q['avec'] ?? 'Grâce Mode',
+        video: q['video'] == '1',
+        groupe: q['groupe'],
+        entrant: q['entrant'] == '1',
+      );
+    }),
     _route('/conversation', (_) => const EcranConversation()),
     _route('/groupe/:id', (s) => EcranGroupe(id: _p(s, 'id'))),
     _route('/messages/demandes', (_) => const EcranDemandes()),

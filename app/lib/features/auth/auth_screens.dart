@@ -59,8 +59,8 @@ class _EcranTelephoneState extends State<EcranTelephone> {
         children: [
           EnTeteDemarrage(
             etape: 0,
-            titre: context.t.saisissezNumero,
-            texte: context.t.saisissezNumeroTexte,
+            titre: context.t.demarrageSaisissezNumero,
+            texte: context.t.demarrageSaisissezNumeroTexte,
           ),
           const SizedBox(height: 8),
           ChampTelephone(
@@ -78,11 +78,11 @@ class _EcranTelephoneState extends State<EcranTelephone> {
             onChanged: (v) => setState(() => _cgu = v ?? false),
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,
-            title: Text(context.t.accepteConditions),
+            title: Text(context.t.demarrageAccepteConditions),
             secondary: TextButton(
               style: TextButton.styleFrom(minimumSize: const Size(0, 44)),
               onPressed: () => context.push('/legal/cgu'),
-              child: Text(context.t.lire),
+              child: Text(context.t.demarrageLire),
             ),
           ),
           CheckboxListTile(
@@ -90,11 +90,11 @@ class _EcranTelephoneState extends State<EcranTelephone> {
             onChanged: (v) => setState(() => _confidentialite = v ?? false),
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,
-            title: Text(context.t.accepteConfidentialite),
+            title: Text(context.t.demarrageAccepteConfidentialite),
             secondary: TextButton(
               style: TextButton.styleFrom(minimumSize: const Size(0, 44)),
               onPressed: () => context.push('/legal/confidentialite'),
-              child: Text(context.t.lire),
+              child: Text(context.t.demarrageLire),
             ),
           ),
         ],
@@ -102,7 +102,7 @@ class _EcranTelephoneState extends State<EcranTelephone> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: valide ? () => _suivant(pays, operateur) : null,
-          child: Text(context.t.suivant),
+          child: Text(context.t.demarrageSuivant),
         ),
       ),
     );
@@ -150,15 +150,15 @@ class _EcranProfilState extends State<EcranProfil> {
         children: [
           EnTeteDemarrage(
             etape: 2,
-            titre: context.t.infosProfil,
-            texte: context.t.infosProfilTexte,
+            titre: context.t.demarrageInfosProfil,
+            texte: context.t.demarrageInfosProfilTexte,
           ),
           Center(child: _PhotoProfil(nom: nomComplet)),
           const SizedBox(height: 18),
           TextField(
             controller: _prenom,
             textCapitalization: TextCapitalization.words,
-            decoration: InputDecoration(labelText: context.t.prenom),
+            decoration: InputDecoration(labelText: context.t.demarragePrenom),
             onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 12),
@@ -170,7 +170,7 @@ class _EcranProfilState extends State<EcranProfil> {
           ),
           const SizedBox(height: 18),
           Text(
-            context.t.ville,
+            context.t.demarrageVille,
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
@@ -180,7 +180,7 @@ class _EcranProfilState extends State<EcranProfil> {
             children: [
               for (final v in _villes)
                 ChoiceChip(
-                  label: Text(v == 'Autre ville' ? context.t.autreVille : v),
+                  label: Text(v == 'Autre ville' ? context.t.demarrageAutreVille : v),
                   selected: _ville == v,
                   onSelected: (_) => setState(() => _ville = v),
                 ),
@@ -191,8 +191,8 @@ class _EcranProfilState extends State<EcranProfil> {
             value: _majeur,
             onChanged: (v) => setState(() => _majeur = v),
             contentPadding: EdgeInsets.zero,
-            title: Text(context.t.majeur),
-            subtitle: Text(_majeur ? context.t.majeurOui : context.t.majeurNon),
+            title: Text(context.t.demarrageMajeur),
+            subtitle: Text(_majeur ? context.t.demarrageMajeurOui : context.t.demarrageMajeurNon),
           ),
         ],
       ),
@@ -232,18 +232,18 @@ class _PhotoProfil extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              context.t.photoProfil,
+              context.t.demarragePhotoProfil,
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
             for (final (cle, icone, titre) in [
-              ('camera', Icons.photo_camera_outlined, context.t.prendrePhoto),
-              ('galerie', Icons.photo_library_outlined, context.t.choisirPhoto),
+              ('camera', Icons.photo_camera_outlined, context.t.demarragePrendrePhoto),
+              ('galerie', Icons.photo_library_outlined, context.t.demarrageChoisirPhoto),
               if (photo != null)
                 (
                   'retirer',
                   Icons.delete_outline_rounded,
-                  context.t.retirerPhoto,
+                  context.t.demarrageRetirerPhoto,
                 ),
             ])
               ListTile(
@@ -268,7 +268,7 @@ class _PhotoProfil extends ConsumerWidget {
       store.choisirPhoto(await fichier.readAsBytes());
     } on Exception {
       if (context.mounted) {
-        informer(context, context.t.photoImpossible);
+        informer(context, context.t.demarragePhotoImpossible);
       }
     }
   }
@@ -279,7 +279,7 @@ class _PhotoProfil extends ConsumerWidget {
     return Semantics(
       button: true,
       container: true,
-      label: photo != null ? context.t.changerPhoto : context.t.ajouterPhoto,
+      label: photo != null ? context.t.demarrageChangerPhoto : context.t.demarrageAjouterPhoto,
       excludeSemantics: true,
       onTap: () => _choisir(context, ref),
       child: GestureDetector(
@@ -394,9 +394,9 @@ class _EcranPinState extends ConsumerState<EcranPin> {
           EnTeteDemarrage(
             etape: 3,
             titre: confirmation
-                ? context.t.confirmezCode
-                : context.t.creezCode(widget.prenom),
-            texte: confirmation ? context.t.retapezCode : context.t.codeProtege,
+                ? context.t.demarrageConfirmezCode
+                : context.t.demarrageCreezCode(widget.prenom),
+            texte: confirmation ? context.t.demarrageRetapezCode : context.t.demarrageCodeProtege,
           ),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
@@ -406,7 +406,7 @@ class _EcranPinState extends ConsumerState<EcranPin> {
                     child: Bloc(
                       fond: LiveColors.teinteRouge,
                       child: Text(
-                        context.t.codesDifferents,
+                        context.t.demarrageCodesDifferents,
                         style: TextStyle(color: LiveColors.erreur),
                       ),
                     ),
@@ -424,8 +424,8 @@ class _EcranPinState extends ConsumerState<EcranPin> {
               color: LiveColors.succes,
               size: 30,
             ),
-            title: Text(context.t.empreinte),
-            subtitle: Text(context.t.empreinteTexte),
+            title: Text(context.t.demarrageEmpreinte),
+            subtitle: Text(context.t.demarrageEmpreinteTexte),
           ),
         ],
       ),

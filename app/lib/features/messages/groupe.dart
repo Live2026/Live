@@ -140,6 +140,7 @@ class _EcranGroupeState extends State<EcranGroupe> {
           ],
         ),
         actions: [
+          if (!canal) ...boutonsAppel(context, c.nom, groupe: c.id),
           IconButton(
             tooltip: 'Options',
             onPressed: () =>

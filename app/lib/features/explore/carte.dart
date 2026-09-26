@@ -99,8 +99,8 @@ class _EcranCarteState extends State<EcranCarte> {
                         child: Row(
                           children: [
                             for (final (i, t) in [
-                              context.t.logements,
-                              context.t.prestataires,
+                              context.t.explorerLogements,
+                              context.t.explorerPrestataires,
                             ].indexed)
                               Expanded(
                                 child: Semantics(
@@ -169,7 +169,7 @@ class _EcranCarteState extends State<EcranCarte> {
                             couleur: biens[i].couleur,
                             icone: biens[i].type.icone,
                             titre: biens[i].titre,
-                            detail: context.t.quartierChambres(
+                            detail: context.t.explorerQuartierChambres(
                               biens[i].quartier,
                               biens[i].chambres,
                             ),
@@ -184,7 +184,7 @@ class _EcranCarteState extends State<EcranCarte> {
                             titre: prestataires[i].nom,
                             detail:
                                 '${prestataires[i].metier} · ${note(prestataires[i].note)}',
-                            prix: context.t.desPrix(
+                            prix: context.t.explorerDesPrix(
                               fcfa(prestataires[i].prixDepuis),
                             ),
                             route: '/pro/${prestataires[i].id}',

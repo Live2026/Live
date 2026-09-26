@@ -20,22 +20,22 @@ class _CarrouselUneState extends State<_CarrouselUne> {
 
   late final _slides = [
     (
-      context.t.n0DeCommission,
-      context.t.vendezPendant3MoisSans,
+      context.t.marketN0DeCommission,
+      context.t.marketVendezPendant3MoisSans,
       Icons.sell_rounded,
       '/vendre',
       [LiveColors.bleu, LiveColors.nuit],
     ),
     (
-      context.t.payeSeulementALaReception,
-      context.t.votreArgentResteBloquePar,
+      context.t.marketPayeSeulementALaReception,
+      context.t.marketVotreArgentResteBloquePar,
       Icons.verified_user_rounded,
       '/paiements',
       [Color(0xFF1E7B4F), Color(0xFF0B3B26)],
     ),
     (
-      context.t.boutiquesVerifiees,
-      context.t.identiteEtActiviteControleesPar,
+      context.t.marketBoutiquesVerifiees,
+      context.t.marketIdentiteEtActiviteControleesPar,
       Icons.storefront_rounded,
       '/boutique/grace',
       [Color(0xFFC27A25), Color(0xFF6B3A0A)],
@@ -128,7 +128,7 @@ class _CarrouselUneState extends State<_CarrouselUne> {
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Text(
-                                    context.t.decouvrir,
+                                    context.t.marketDecouvrir,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w700,
@@ -203,8 +203,8 @@ class _CarteVendeurUne extends StatelessWidget {
               ),
               Text(
                 v.badge.startsWith('Pro')
-                    ? context.t.boutique
-                    : context.t.particulier,
+                    ? context.t.marketBoutique
+                    : context.t.marketParticulier,
                 style: const TextStyle(color: LiveColors.gris, fontSize: 12),
               ),
               const Spacer(),
@@ -253,7 +253,7 @@ class _TitreBloc extends StatelessWidget {
           TextButton(
             style: TextButton.styleFrom(minimumSize: const Size(0, 32)),
             onPressed: () => context.push(route!),
-            child: Text(context.t.voirTout),
+            child: Text(context.t.marketVoirTout),
           ),
       ],
     );
@@ -272,7 +272,7 @@ class _VosCommandes extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _TitreBloc(context.t.vosCommandes, route: '/commandes'),
+          _TitreBloc(context.t.marketVosCommandes, route: '/commandes'),
           for (final c in achats.take(3)) LigneCommande(commande: c),
         ],
       ),
@@ -290,11 +290,11 @@ class LigneCommande extends StatelessWidget {
     final c = commande;
     final (etat, couleur) = switch (c.statut) {
       StatutCommande.reservee => (
-        context.t.reserveeAPayerALa,
+        context.t.marketReserveeAPayerALa,
         LiveColors.cuivre,
       ),
-      StatutCommande.terminee => (context.t.terminee, LiveColors.succes),
-      _ => (context.t.payeeArgentBloqueParLive, LiveColors.bleu),
+      StatutCommande.terminee => (context.t.marketTerminee, LiveColors.succes),
+      _ => (context.t.marketPayeeArgentBloqueParLive, LiveColors.bleu),
     };
     return InkWell(
       onTap: () => context.push('/suivi/${c.id}'),
@@ -317,7 +317,7 @@ class LigneCommande extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    context.t.commandeNumero(c.id),
+                    context.t.marketCommandeNumero(c.id),
                     style: const TextStyle(
                       color: LiveColors.gris,
                       fontSize: 12,
@@ -360,12 +360,12 @@ class _VendreSurLive extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _TitreBloc(context.t.vendreSurLive),
+          _TitreBloc(context.t.marketVendreSurLive),
           for (final (icone, texte) in [
-            (Icons.groups_rounded, context.t.desMilliersDAcheteursPres),
-            (Icons.percent_rounded, context.t.n0DeCommissionPendant3),
-            (Icons.lock_rounded, context.t.paiementGarantiAvantLaRemise),
-            (Icons.qr_code_2_rounded, context.t.remiseConfirmeeParQr),
+            (Icons.groups_rounded, context.t.marketDesMilliersDAcheteursPres),
+            (Icons.percent_rounded, context.t.marketN0DeCommissionPendant3),
+            (Icons.lock_rounded, context.t.marketPaiementGarantiAvantLaRemise),
+            (Icons.qr_code_2_rounded, context.t.marketRemiseConfirmeeParQr),
           ])
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 3),
@@ -382,7 +382,7 @@ class _VendreSurLive extends StatelessWidget {
             width: double.infinity,
             child: FilledButton(
               onPressed: () => context.push('/vendre'),
-              child: Text(context.t.vendreUnProduit),
+              child: Text(context.t.marketVendreUnProduit),
             ),
           ),
         ],
@@ -402,14 +402,14 @@ class _PaiementsSecurises extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _TitreBloc(context.t.paiementsSecurises, route: '/paiements'),
+          _TitreBloc(context.t.marketPaiementsSecurises, route: '/paiements'),
           Row(
             children: [
               for (final (icone, texte) in [
-                (Icons.account_balance_wallet_rounded, context.t.soldeLive),
+                (Icons.account_balance_wallet_rounded, context.t.marketSoldeLive),
                 (Icons.phone_android_rounded, 'MoMo · Airtel'),
                 (Icons.credit_card_rounded, 'Visa'),
-                (Icons.handshake_rounded, context.t.aLaRemise),
+                (Icons.handshake_rounded, context.t.marketALaRemise),
               ])
                 Expanded(
                   child: Column(
@@ -436,7 +436,7 @@ class _PaiementsSecurises extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          BandeauProtection(context.t.rembourseSiVousNeRecevez),
+          BandeauProtection(context.t.marketRembourseSiVousNeRecevez),
         ],
       ),
     );
@@ -454,23 +454,23 @@ class _BesoinAide extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _TitreBloc(context.t.besoinDAide),
+          _TitreBloc(context.t.marketBesoinDAide),
           LigneMenu(
             icone: Icons.payments_outlined,
-            titre: context.t.ceQuiSePaieDans,
-            detail: context.t.dansLiveALaRemise,
+            titre: context.t.marketCeQuiSePaieDans,
+            detail: context.t.marketDansLiveALaRemise,
             onTap: () => context.push('/paiements'),
           ),
           LigneMenu(
             icone: Icons.report_problem_outlined,
-            titre: context.t.signalerUnProbleme,
-            detail: context.t.produitNonRecuNonConforme,
+            titre: context.t.marketSignalerUnProbleme,
+            detail: context.t.marketProduitNonRecuNonConforme,
             onTap: () => context.push('/probleme/commande/LV-00482'),
           ),
           LigneMenu(
             icone: Icons.support_agent_rounded,
-            titre: context.t.centreDAide,
-            detail: context.t.questionsFrequentesEcrireAuSupport,
+            titre: context.t.marketCentreDAide,
+            detail: context.t.marketQuestionsFrequentesEcrireAuSupport,
             onTap: () => context.push('/aide'),
           ),
         ],

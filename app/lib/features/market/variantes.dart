@@ -46,8 +46,8 @@ void ouvrirVariantes(BuildContext context, Produit p) {
                         ),
                         Text(
                           stock <= 3
-                              ? context.t.plusQueStock(stock)
-                              : context.t.nEnStock(stock),
+                              ? context.t.marketPlusQueStock(stock)
+                              : context.t.marketNEnStock(stock),
                           style: TextStyle(
                             color: stock <= 3
                                 ? LiveColors.erreur
@@ -63,7 +63,7 @@ void ouvrirVariantes(BuildContext context, Produit p) {
               ),
               const SizedBox(height: 16),
               Text(
-                context.t.taille,
+                context.t.marketTaille,
                 style: TextStyle(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 6),
@@ -83,12 +83,12 @@ void ouvrirVariantes(BuildContext context, Produit p) {
                 children: [
                   Expanded(
                     child: Text(
-                      context.t.quantite,
+                      context.t.marketQuantite,
                       style: TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
                   IconButton.outlined(
-                    tooltip: context.t.moins,
+                    tooltip: context.t.marketMoins,
                     onPressed: quantite > 1
                         ? () => maj(() => quantite--)
                         : null,
@@ -128,7 +128,7 @@ void ouvrirVariantes(BuildContext context, Produit p) {
                         },
                   child: Text(
                     taille == null
-                        ? context.t.choisissezUneTaille
+                        ? context.t.marketChoisissezUneTaille
                         : context.t.continuer,
                   ),
                 ),

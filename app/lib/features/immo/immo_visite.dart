@@ -61,6 +61,16 @@ class _EcranReserverVisiteState extends ConsumerState<EcranReserverVisite> {
               ),
             ],
           ),
+          const SizedBox(height: 12),
+          // Sans se déplacer : l'agent fait visiter en appel vidéo.
+          LigneMenu(
+            icone: Icons.videocam_outlined,
+            titre: context.t.appelVisiteVideo,
+            detail: context.t.appelVisiteVideoTexte,
+            onTap: () => context.push(
+              routeAppel(avec: b.annonceur.nom, video: true),
+            ),
+          ),
           const SizedBox(height: 20),
           const Text(
             'Choisissez un jour',

@@ -64,7 +64,7 @@ class _EcranSplashState extends State<EcranSplash> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    context.t.signature,
+                    context.t.demarrageSignature,
                     style: TextStyle(color: LiveColors.gris, fontSize: 12.5),
                   ),
                 ],
@@ -150,7 +150,7 @@ class _Titre extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            context.t.bienvenueTitre,
+            context.t.demarrageBienvenueTitre,
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: couleurMotif,
@@ -160,7 +160,7 @@ class _Titre extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            context.t.bienvenueTexte,
+            context.t.demarrageBienvenueTexte,
             textAlign: TextAlign.center,
             style: const TextStyle(color: LiveColors.gris, fontSize: 15.5),
           ),
@@ -198,14 +198,14 @@ class _Actions extends StatelessWidget {
                 backgroundColor: LiveColors.surface,
               ),
               onPressed: onDecouvrir,
-              child: Text(context.t.decouvrirSansCompte),
+              child: Text(context.t.demarrageDecouvrirSansCompte),
             ),
             const SizedBox(height: 6),
             Wrap(
               alignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Text(context.t.dejaUnCompte),
+                Text(context.t.demarrageDejaUnCompte),
                 TextButton(
                   onPressed: () => context.push('/connexion'),
                   child: Text(context.t.seConnecter),

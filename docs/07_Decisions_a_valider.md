@@ -138,4 +138,15 @@ Statuts : ✅ Décidée · ⚖️ Décidée, **sous réserve** d'une vérificati
 | Cartes | Google Maps Platform (Maps SDK, Street View, Directions, Places, Geocoding) ; positions en direct par Supabase Realtime | ✅ |
 | Voix locales | Lingala et kituba : collecte de voix consentie avant le lancement ; repli sur le français | ⚖️ |
 
+## 13. Décision du 26/09/2026 : appels dans Live
+
+| Point | Décision | Statut |
+|-------|----------|--------|
+| Appels audio, vidéo et en groupe | Dans la messagerie, comme WhatsApp : boutons en haut de chaque conversation et de chaque groupe, historique `/appels`. Aussi là où Live apporte quelque chose : appeler un pro (Services), **visite en vidéo** d'un logement (Immo) | ✅ (prototype) |
+| Technique | **WebRTC par un service géré : LiveKit** (libre, SDK Flutter, hébergeable près de nos utilisateurs si le coût l'exige), Agora en second choix. **Mux n'est pas fait pour les appels** : il sert la vidéo publiée et les directs (un vers plusieurs, quelques secondes de retard) ; un appel demande du temps réel | ⚖️ à confirmer au moment de la P2 |
+| Vie privée | Le numéro de téléphone n'est jamais montré : l'appel passe par le compte Live | ✅ |
+| Réseau faible | La vidéo baisse de qualité pour garder l'appel ; proposition de passer en audio (moins de données) | ✅ |
+| Sécurité | Chiffrement de bout en bout (option E2EE de LiveKit) ; rappel « Live ne vous demandera jamais votre code secret pendant un appel » ; signalement depuis l'historique | ⚖️ |
+| Coût | Facturé à la minute par participant par le fournisseur : gratuit pour l'utilisateur au lancement, plafond de participants par appel de groupe (8) à confirmer | ⚖️ |
+
 **Fin du Document 07**

@@ -21,7 +21,7 @@ class EcranMarket extends ConsumerWidget {
           children: [
             Text('Market'),
             Text(
-              context.t.paiementProtege,
+              context.t.marketPaiementProtege,
               style: TextStyle(
                 fontSize: 13,
                 color: LiveColors.gris,
@@ -30,7 +30,7 @@ class EcranMarket extends ConsumerWidget {
             ),
           ],
         ),
-        indice: context.t.rechercherUnProduitUneBoutique,
+        indice: context.t.marketRechercherUnProduitUneBoutique,
         onSubmitted: (q) => context.push('/recherche', extra: q),
         actions: [
           const BoutonCommandes(),
@@ -48,7 +48,7 @@ class EcranMarket extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
-              context.t.categoriesPopulaires,
+              context.t.marketCategoriesPopulaires,
               onTap: () => context.push('/market/liste'),
             ),
           ),
@@ -72,7 +72,7 @@ class EcranMarket extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
-              context.t.recommandePourVous,
+              context.t.marketRecommandePourVous,
               onTap: () => context.push('/market/liste'),
             ),
           ),
@@ -87,7 +87,7 @@ class EcranMarket extends ConsumerWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
-            child: EnTeteSection(context.t.vendeursALaUne),
+            child: EnTeteSection(context.t.marketVendeursALaUne),
           ),
           Carrousel(
             largeur: 132,
@@ -98,7 +98,7 @@ class EcranMarket extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: marge),
             child: EnTeteSection(
-              context.t.nouveautesPresDeVous,
+              context.t.marketNouveautesPresDeVous,
               onTap: () => context.push('/market/liste?tri=1'),
             ),
           ),

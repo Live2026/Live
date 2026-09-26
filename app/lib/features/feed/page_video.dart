@@ -132,7 +132,7 @@ class _PageVideoState extends State<_PageVideo> with TickerProviderStateMixin {
                   icone: _enregistre
                       ? Icons.bookmark_rounded
                       : Icons.bookmark_border_rounded,
-                  texte: context.t.garder,
+                  texte: context.t.accueilGarder,
                   couleur: _enregistre ? LiveColors.ambre : LiveColors.surface,
                   actif: _enregistre,
                   onTap: () => setState(() => _enregistre = !_enregistre),
@@ -306,7 +306,7 @@ class _Auteur extends StatelessWidget {
             bottom: 0,
             child: Semantics(
               button: true,
-              label: suivi ? context.t.abonne : context.t.suivreQui(pub.auteur),
+              label: suivi ? context.t.abonne : context.t.accueilSuivreQui(pub.auteur),
               excludeSemantics: true,
               child: GestureDetector(
                 onTap: onSuivre,

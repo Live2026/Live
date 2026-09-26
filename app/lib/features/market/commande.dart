@@ -24,9 +24,9 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
   var _lieu = 0;
 
   late final _lieux = [
-    ('Station Total Moungali', context.t.eclaireeGardiennee),
-    ('Marché Total, entrée principale', context.t.tresFrequente),
-    ('Commissariat de Moungali', context.t.pointDeRemiseSur),
+    ('Station Total Moungali', context.t.marketEclaireeGardiennee),
+    ('Marché Total, entrée principale', context.t.marketTresFrequente),
+    ('Commissariat de Moungali', context.t.marketPointDeRemiseSur),
   ];
 
   @override
@@ -35,7 +35,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
     if (p.reglement == Reglement.surPlace) return _surPlace(context, p);
     final total = p.prix * widget.quantite + (_livraison ? p.livraison : 0);
     return Scaffold(
-      appBar: AppBar(title: Text(context.t.votreCommande)),
+      appBar: AppBar(title: Text(context.t.marketVotreCommande)),
       body: DeuxColonnes(
         principale: [
           ListTile(
@@ -53,7 +53,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
                 : Text(
                     [
                       if (widget.variante != null)
-                        context.t.tailleX(widget.variante!),
+                        context.t.marketTailleX(widget.variante!),
                       '× ${widget.quantite}',
                     ].join(' · '),
                   ),
@@ -64,19 +64,19 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
           ),
           const SizedBox(height: 8),
           Text(
-            context.t.remise,
+            context.t.marketRemise,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 6),
           Choix(
-            titre: context.t.enMainPropreQuartier(p.quartier),
+            titre: context.t.marketEnMainPropreQuartier(p.quartier),
             icone: Icons.handshake,
             selectionne: !_livraison,
             onTap: () => setState(() => _livraison = false),
           ),
           if (p.livraison > 0)
             Choix(
-              titre: context.t.livraison,
+              titre: context.t.marketLivraison,
               icone: Icons.delivery_dining,
               trailing: '+ ${fcfa(p.livraison)}',
               selectionne: _livraison,
@@ -87,7 +87,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
               padding: EdgeInsets.only(bottom: 8),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: context.t.adresseOuRepere,
+                  hintText: context.t.marketAdresseOuRepere,
                 ),
               ),
             ),
@@ -95,29 +95,29 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
         ],
         secondaire: [
           Text(
-            context.t.paiement,
+            context.t.marketPaiement,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 6),
           Choix(
-            titre: context.t.payerMaintenant,
-            sousTitre: context.t.argentBloqueJusquAReception,
+            titre: context.t.marketPayerMaintenant,
+            sousTitre: context.t.marketArgentBloqueJusquAReception,
             icone: Icons.lock_clock,
             selectionne: _mode == ModePaiement.avance,
             onTap: () => setState(() => _mode = ModePaiement.avance),
           ),
           Choix(
-            titre: context.t.payerALaRemise,
-            sousTitre: context.t.momoOuAirtelProduitEn,
+            titre: context.t.marketPayerALaRemise,
+            sousTitre: context.t.marketMomoOuAirtelProduitEn,
             icone: Icons.phone_android,
             selectionne: _mode == ModePaiement.remise,
             onTap: () => setState(() => _mode = ModePaiement.remise),
           ),
-          BoutonEcouter(context.t.payerMaintenantVousPayezTout),
+          BoutonEcouter(context.t.marketPayerMaintenantVousPayezTout),
           const Divider(height: 24),
-          LigneMontant(context.t.totalAPayer, total, gras: true),
+          LigneMontant(context.t.marketTotalAPayer, total, gras: true),
           Text(
-            context.t.aucunFraisSupplementaire,
+            context.t.marketAucunFraisSupplementaire,
             style: TextStyle(color: LiveColors.gris),
           ),
         ],
@@ -152,7 +152,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
   /// sûr, rien n'est payé maintenant.
   Widget _surPlace(BuildContext context, Produit p) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.t.voirAvantDePayer)),
+      appBar: AppBar(title: Text(context.t.marketVoirAvantDePayer)),
       body: DeuxColonnes(
         principale: [
           ListTile(
@@ -173,7 +173,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
           ),
           const SizedBox(height: 8),
           Text(
-            context.t.lieuDuRendezVous,
+            context.t.marketLieuDuRendezVous,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 6),
@@ -188,17 +188,17 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
         ],
         secondaire: [
           Text(
-            context.t.paiementALaRemise,
+            context.t.marketPaiementALaRemise,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 6),
           LigneMenu(
             icone: Icons.phone_android_rounded,
-            titre: context.t.momoOuAirtelAuRendez,
-            detail: context.t.vousVerifiezLObjetLe,
+            titre: context.t.marketMomoOuAirtelAuRendez,
+            detail: context.t.marketVousVerifiezLObjetLe,
           ),
           const SizedBox(height: 8),
-          BandeauProtection(context.t.rienAPayerMaintenantVerifiez),
+          BandeauProtection(context.t.marketRienAPayerMaintenantVerifiez),
         ],
       ),
       bottomNavigationBar: BarreAction(
@@ -209,7 +209,7 @@ class _EcranCommandeState extends ConsumerState<EcranCommande> {
                 .reserverCommande(p, p.prix);
             context.go('/suivi/$id');
           },
-          child: Text(context.t.fixerLeRendezVous),
+          child: Text(context.t.marketFixerLeRendezVous),
         ),
       ),
     );

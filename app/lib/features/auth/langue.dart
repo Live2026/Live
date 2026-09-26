@@ -14,8 +14,8 @@ class EcranLangue extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         children: [
           EnTeteDemarrage(
-            titre: context.t.langueTitre,
-            texte: context.t.langueTexte,
+            titre: context.t.demarrageLangueTitre,
+            texte: context.t.demarrageLangueTexte,
           ),
           RadioGroup<String>(
             groupValue: actuelle,
@@ -46,7 +46,7 @@ class EcranLangue extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
-                context.t.langueEnCours,
+                context.t.demarrageLangueEnCours,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: LiveColors.gris, fontSize: 13),
               ),
@@ -56,7 +56,7 @@ class EcranLangue extends ConsumerWidget {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: () => context.push('/telephone'),
-          child: Text(context.t.suivant),
+          child: Text(context.t.demarrageSuivant),
         ),
       ),
     );

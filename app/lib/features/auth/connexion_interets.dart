@@ -30,23 +30,23 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
   Future<void> _oublie() async {
     if (await confirmer(
       context,
-      titre: context.t.codeSecretOublie,
-      texte: context.t.codeSecretOublieTexte,
-      action: context.t.recevoirCode,
+      titre: context.t.demarrageCodeSecretOublie,
+      texte: context.t.demarrageCodeSecretOublieTexte,
+      action: context.t.demarrageRecevoirCode,
     )) {
-      if (mounted) informer(context, context.t.codeEnvoyeSms);
+      if (mounted) informer(context, context.t.demarrageCodeEnvoyeSms);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final (titre, texte) = switch (_etape) {
-      0 => (context.t.bonRetour, context.t.bonRetourTexte),
+      0 => (context.t.demarrageBonRetour, context.t.demarrageBonRetourTexte),
       1 => (
-        context.t.codeRecuSms,
-        context.t.envoyeAu('${paysTelephone[_pays].indicatif} ${_tel.text}'),
+        context.t.demarrageCodeRecuSms,
+        context.t.demarrageEnvoyeAu('${paysTelephone[_pays].indicatif} ${_tel.text}'),
       ),
-      _ => (context.t.votreCodeSecret, context.t.protegerAppareil),
+      _ => (context.t.demarrageVotreCodeSecret, context.t.demarrageProtegerAppareil),
     };
     return Scaffold(
       appBar: const BarreDemarrage(),
@@ -77,7 +77,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
                 child: TextButton.icon(
                   onPressed: () => context.go('/connexion/qr'),
                   icon: const Icon(Icons.qr_code_2_rounded),
-                  label: Text(context.t.connexionQr),
+                  label: Text(context.t.demarrageConnexionQr),
                 ),
               ),
             ],
@@ -105,7 +105,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
             Center(
               child: TextButton(
                 onPressed: _oublie,
-                child: Text(context.t.codeSecretOublieQ),
+                child: Text(context.t.demarrageCodeSecretOublieQ),
               ),
             ),
           ],
@@ -117,7 +117,7 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
                 onPressed: paysTelephone[_pays].complet(_tel.text)
                     ? _envoyer
                     : null,
-                child: Text(context.t.suivant),
+                child: Text(context.t.demarrageSuivant),
               ),
             )
           : null,
@@ -162,7 +162,7 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
     return Scaffold(
       appBar: BarreDemarrage(
         actions: [
-          TextButton(onPressed: _terminer, child: Text(context.t.passer)),
+          TextButton(onPressed: _terminer, child: Text(context.t.demarragePasser)),
         ],
       ),
       body: ListView(
@@ -170,8 +170,8 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
         children: [
           EnTeteDemarrage(
             etape: 4,
-            titre: context.t.interetsTitre,
-            texte: context.t.interetsTexte,
+            titre: context.t.demarrageInteretsTitre,
+            texte: context.t.demarrageInteretsTexte,
           ),
           GrilleAdaptative(
             largeurMax: 120,
@@ -200,7 +200,7 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: _choix.length >= 3 ? _terminer : null,
-          child: Text(context.t.continuerChoisis(_choix.length)),
+          child: Text(context.t.demarrageContinuerChoisis(_choix.length)),
         ),
       ),
     );
@@ -263,7 +263,7 @@ class _TuileInteret extends StatelessWidget {
                       const SizedBox(height: 6),
                       Text(
                         // Clé sans accent ni tiret pour la traduction.
-                        context.t.interet(
+                        context.t.demarrageInteret(
                           nom
                               .replaceAll('é', 'e')
                               .replaceAll('É', 'E')

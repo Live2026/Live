@@ -16,7 +16,7 @@ class EcranProduit extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(bottom: 6),
           child: Etiquette(
-            context.t.meilleureVente,
+            context.t.marketMeilleureVente,
             icone: Icons.local_fire_department_rounded,
             fond: LiveColors.teinteOrange,
             couleur: LiveColors.cuivre,
@@ -48,7 +48,7 @@ class EcranProduit extends StatelessWidget {
             const SizedBox(width: 8),
             const Icon(Icons.star_rounded, size: 15, color: LiveColors.ambre),
             Text(
-              ' ${context.t.noteVentes(note(p.vendeur.note).replaceAll('/5', ''), p.vendeur.ventes)}',
+              ' ${context.t.marketNoteVentes(note(p.vendeur.note).replaceAll('/5', ''), p.vendeur.ventes)}',
               style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
             ),
           ],
@@ -68,13 +68,13 @@ class EcranProduit extends StatelessWidget {
           Etiquette(p.etat, fond: LiveColors.voile, couleur: LiveColors.bleu),
           if (p.negociable)
             Etiquette(
-              context.t.prixNegociable,
+              context.t.marketPrixNegociable,
               fond: LiveColors.teinteOrange,
               couleur: LiveColors.cuivre,
             ),
           PastilleReglement(p.reglement),
           Text(
-            context.t.quartierVues(p.quartier, compact(p.vues)),
+            context.t.marketQuartierVues(p.quartier, compact(p.vues)),
             style: const TextStyle(color: LiveColors.gris, fontSize: 13),
           ),
         ],
@@ -88,7 +88,7 @@ class EcranProduit extends StatelessWidget {
           children: [
             for (final e in p.details.entries)
               LigneMontant(e.key, 0, brut: e.value),
-            LigneMontant(context.t.categorie, 0, brut: p.categorie),
+            LigneMontant(context.t.marketCategorie, 0, brut: p.categorie),
           ],
         ),
       ),
@@ -100,7 +100,7 @@ class EcranProduit extends StatelessWidget {
             prix: p.prix,
             bas: bas,
             haut: haut,
-            base: context.t.ventesComparables(p.categorie),
+            base: context.t.marketVentesComparables(p.categorie),
           );
         },
       ),
@@ -108,27 +108,27 @@ class EcranProduit extends StatelessWidget {
       _ReglementProduit(produit: p),
       const SizedBox(height: 14),
       Text(
-        context.t.remise,
+        context.t.marketRemise,
         style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
       ),
       LigneMenu(
         icone: Icons.handshake_outlined,
-        titre: context.t.enMainPropreA(p.quartier),
+        titre: context.t.marketEnMainPropreA(p.quartier),
         detail: surPlace
-            ? context.t.dansUnLieuPublicPropose
-            : context.t.vousVerifiezPuisVousMontrez,
-        valeur: context.t.gratuit,
+            ? context.t.marketDansUnLieuPublicPropose
+            : context.t.marketVousVerifiezPuisVousMontrez,
+        valeur: context.t.marketGratuit,
       ),
       if (p.livraison > 0 && !surPlace)
         LigneMenu(
           icone: Icons.local_shipping_outlined,
-          titre: context.t.livraisonABrazzaville,
-          detail: context.t.parLeVendeurSous24,
+          titre: context.t.marketLivraisonABrazzaville,
+          detail: context.t.marketParLeVendeurSous24,
           valeur: fcfa(p.livraison),
         ),
       const SizedBox(height: 8),
       Text(
-        context.t.description,
+        context.t.marketDescription,
         style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
       ),
       const SizedBox(height: 4),
@@ -139,15 +139,15 @@ class EcranProduit extends StatelessWidget {
       const SizedBox(height: 12),
       BandeauProtection(
         surPlace
-            ? context.t.payezAuRendezVousPar
-            : context.t.rembourseSiVousNeRecevez,
+            ? context.t.marketPayezAuRendezVousPar
+            : context.t.marketRembourseSiVousNeRecevez,
       ),
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: () => signaler(context, context.t.cetteAnnonce),
+          onPressed: () => signaler(context, context.t.marketCetteAnnonce),
           icon: const Icon(Icons.flag_outlined, size: 18),
-          label: Text(context.t.signalerLAnnonce),
+          label: Text(context.t.marketSignalerLAnnonce),
         ),
       ),
     ];
@@ -161,7 +161,7 @@ class EcranProduit extends StatelessWidget {
     final carrousel = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        EnTeteSection(context.t.vousAimerezAussi),
+        EnTeteSection(context.t.marketVousAimerezAussi),
         Carrousel(
           largeur: 160,
           hauteur: 250,
@@ -176,7 +176,7 @@ class EcranProduit extends StatelessWidget {
       child: Row(
         children: [
           IconButton.outlined(
-            tooltip: context.t.ecrireAuVendeur,
+            tooltip: context.t.marketEcrireAuVendeur,
             style: IconButton.styleFrom(minimumSize: const Size(48, 48)),
             onPressed: () => context.push('/conversation'),
             icon: const Icon(Icons.chat_bubble_outline_rounded),
@@ -186,7 +186,7 @@ class EcranProduit extends StatelessWidget {
             Expanded(
               child: OutlinedButton(
                 onPressed: () => ouvrirOffre(context, p),
-                child: Text(context.t.negocier),
+                child: Text(context.t.marketNegocier),
               ),
             ),
             const SizedBox(width: 8),
@@ -199,7 +199,7 @@ class EcranProduit extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  surPlace ? context.t.voirEtPayer : context.t.acheter,
+                  surPlace ? context.t.marketVoirEtPayer : context.t.acheter,
                 ),
               ),
             ),
@@ -212,7 +212,7 @@ class EcranProduit extends StatelessWidget {
         appBar: AppBar(
           actions: [
             IconButton(
-              tooltip: context.t.partager,
+              tooltip: context.t.marketPartager,
               onPressed: () => partager(context, p.titre),
               icon: const Icon(Icons.ios_share_rounded),
             ),
@@ -261,7 +261,7 @@ class EcranProduit extends StatelessWidget {
             actions: [
               BoutonVerre(
                 icone: Icons.ios_share_rounded,
-                libelle: context.t.partager,
+                libelle: context.t.marketPartager,
                 onTap: () => partager(context, p.titre),
               ),
               const SizedBox(width: 8),
@@ -340,7 +340,7 @@ class _CarteVendeur extends ConsumerWidget {
                   ),
                   BadgeVerifie(v.badge),
                   Text(
-                    context.t.noteVentesReponse(
+                    context.t.marketNoteVentesReponse(
                       note(v.note),
                       v.ventes,
                       v.reponse,
@@ -357,7 +357,7 @@ class _CarteVendeur extends ConsumerWidget {
           TextButton(
             onPressed: () =>
                 ref.read(liveProvider.notifier).basculerSuivi(v.id),
-            child: Text(suivi ? context.t.abonne : context.t.suivre),
+            child: Text(suivi ? context.t.abonne : context.t.marketSuivre),
           ),
         ],
       ),
@@ -376,29 +376,29 @@ class _ReglementProduit extends StatelessWidget {
     final p = produit;
     if (p.reglement == Reglement.surPlace) {
       return BlocReglement(
-        titre: context.t.voirAvantDePayer,
+        titre: context.t.marketVoirAvantDePayer,
         lignes: [
           LigneReglement(
-            context.t.prix,
+            context.t.marketPrix,
             Reglement.surPlace,
             montant: p.prix,
-            detail: context.t.rienAPayerMaintenantAu,
+            detail: context.t.marketRienAPayerMaintenantAu,
           ),
         ],
-        note: context.t.neVersezJamaisDAvance,
+        note: context.t.marketNeVersezJamaisDAvance,
       );
     }
     return BlocReglement(
       lignes: [
         LigneReglement(
-          context.t.prix,
+          context.t.marketPrix,
           Reglement.dansLive,
           montant: p.prix,
-          detail: context.t.bloqueParLiveJusquA,
+          detail: context.t.marketBloqueParLiveJusquA,
         ),
         if (p.livraison > 0)
           LigneReglement(
-            context.t.livraisonSiVousLaChoisissez,
+            context.t.marketLivraisonSiVousLaChoisissez,
             Reglement.dansLive,
             montant: p.livraison,
           ),
@@ -418,19 +418,19 @@ class _TuilesProduit extends StatelessWidget {
     final p = produit;
     final surPlace = p.reglement == Reglement.surPlace;
     final tuiles = [
-      (Icons.new_releases_outlined, p.etat, context.t.etat),
+      (Icons.new_releases_outlined, p.etat, context.t.marketEtat),
       (
         Icons.local_shipping_outlined,
         p.livraison > 0 && !surPlace
-            ? context.t.mainPropreOuLivraison
-            : context.t.mainPropre,
-        context.t.remise,
+            ? context.t.marketMainPropreOuLivraison
+            : context.t.marketMainPropre,
+        context.t.marketRemise,
       ),
-      (p.reglement.icone, p.reglement.court, context.t.paiement),
+      (p.reglement.icone, p.reglement.court, context.t.marketPaiement),
       (
         Icons.verified_user_outlined,
-        surPlace ? context.t.pasDAvance : context.t.rembourse,
-        context.t.protection,
+        surPlace ? context.t.marketPasDAvance : context.t.marketRembourse,
+        context.t.marketProtection,
       ),
     ];
     return GrilleAdaptative(
