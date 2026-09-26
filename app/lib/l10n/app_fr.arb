@@ -5312,5 +5312,892 @@
   "messagesQuartierClassePassion": "Quartier, classe, passion",
   "@messagesQuartierClassePassion": {
     "description": "Écran : messages_plus"
+  },
+  "@immoVilleVerifies": {
+    "description": "Écran : immo_accueil",
+    "placeholders": {
+      "ville": {
+        "type": "String"
+      }
+    }
+  },
+  "immoVilleVerifies": "{ville} · logements vérifiés",
+  "@immoNResultats": {
+    "description": "Écran : immo_accueil",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoNResultats": "{n, plural, =1{1 résultat} other{{n} résultats}}",
+  "@immoNoteBiens": {
+    "description": "Écran : immo_accueil",
+    "placeholders": {
+      "note": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoNoteBiens": "{note} · {n} biens",
+  "@immoVisiteVideoDe": {
+    "description": "Écran : immo_accueil",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "immoVisiteVideoDe": "Visite vidéo {titre}",
+  "immoQuartierTypeDeLogement": "Quartier, type de logement…",
+  "@immoQuartierTypeDeLogement": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoVoirSurLaCarte": "Voir sur la carte",
+  "@immoVoirSurLaCarte": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoLouer": "Louer",
+  "@immoLouer": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoAcheter": "Acheter",
+  "@immoAcheter": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoFiltres": "Filtres",
+  "@immoFiltres": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoTout": "Tout",
+  "@immoTout": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoALaUne": "À la une",
+  "@immoALaUne": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoAgencesVerifiees": "Agences vérifiées",
+  "@immoAgencesVerifiees": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoVisitesEnVideo": "Visites en vidéo",
+  "@immoVisitesEnVideo": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoSejoursMeublesALa": "Séjours meublés à la nuit",
+  "@immoSejoursMeublesALa": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoVisitesEnDirect": "Visites en direct",
+  "@immoVisitesEnDirect": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoBiensAVendre": "Biens à vendre",
+  "@immoBiensAVendre": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoTousLesLogements": "Tous les logements",
+  "@immoTousLesLogements": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoEffacer": "Effacer",
+  "@immoEffacer": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoAucunBienNeCorrespond": "Aucun bien ne correspond. Créez une alerte : nous vous prévenons dès qu’un bien arrive.",
+  "@immoAucunBienNeCorrespond": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoCreerUneAlerte": "Créer une alerte",
+  "@immoCreerUneAlerte": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoVousAvezUnBien": "Vous avez un bien à louer ?",
+  "@immoVousAvezUnBien": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoPublicationGratuiteLesFrais": "Publication gratuite. Les frais de visite vous sont versés après chaque visite.",
+  "@immoPublicationGratuiteLesFrais": {
+    "description": "Écran : immo_accueil"
+  },
+  "immoPublier": "Publier",
+  "@immoPublier": {
+    "description": "Écran : immo_accueil"
+  },
+  "@immoParMoisSuffixe": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoParMoisSuffixe": " / mois",
+  "@immoVentesComparablesA": {
+    "description": "Écran : immo_fiche",
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      }
+    }
+  },
+  "immoVentesComparablesA": "Ventes récentes comparables à {quartier}",
+  "@immoLoyersDe": {
+    "description": "Écran : immo_fiche",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "quartier": {
+        "type": "String"
+      }
+    }
+  },
+  "immoLoyersDe": "{n, plural, =1{Loyers de 1 chambre} other{Loyers de {n} chambres}} à {quartier}, ces 6 derniers mois",
+  "@immoTitreQuartier": {
+    "description": "Écran : immo_fiche",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      },
+      "quartier": {
+        "type": "String"
+      }
+    }
+  },
+  "immoTitreQuartier": "{titre} · {quartier}",
+  "@immoDisponibiliteConfirmee": {
+    "description": "Écran : immo_fiche",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoDisponibiliteConfirmee": "{n, plural, =1{Disponibilité confirmée il y a 1 jour} other{Disponibilité confirmée il y a {n} jours}}",
+  "@immoAvanceMois": {
+    "description": "Écran : immo_fiche",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoAvanceMois": "Avance ({n} mois)",
+  "@immoCautionMois": {
+    "description": "Écran : immo_fiche",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoCautionMois": "Caution ({n} mois)",
+  "@immoEau": {
+    "description": "Écran : immo_fiche",
+    "placeholders": {
+      "v": {
+        "type": "String"
+      }
+    }
+  },
+  "immoEau": "Eau : {v}",
+  "@immoElectricite": {
+    "description": "Écran : immo_fiche",
+    "placeholders": {
+      "v": {
+        "type": "String"
+      }
+    }
+  },
+  "immoElectricite": "Électricité : {v}",
+  "immoFraisDeVisiteEt": "Frais de visite et acompte : toujours dans Live, jamais sur un numéro MoMo.",
+  "@immoFraisDeVisiteEt": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoCetteAnnonce": "cette annonce",
+  "@immoCetteAnnonce": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoDejaLoueOuAnnonce": "Déjà loué ou annonce fausse ?",
+  "@immoDejaLoueOuAnnonce": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoEcrire": "Écrire",
+  "@immoEcrire": {
+    "description": "Écran : immo_agence"
+  },
+  "immoDemanderUneVisite": "Demander une visite",
+  "@immoDemanderUneVisite": {
+    "description": "Écran : immo_visite"
+  },
+  "immoType": "Type",
+  "@immoType": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoChambres": "Chambres",
+  "@immoChambres": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoDouches": "Douches",
+  "@immoDouches": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoSurface": "Surface",
+  "@immoSurface": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoOui": "Oui",
+  "@immoOui": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoNon": "Non",
+  "@immoNon": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoMeuble": "Meublé",
+  "@immoMeuble": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoPrixDeVente": "Prix de vente",
+  "@immoPrixDeVente": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoFraisDeVisiteRemboursables": "Frais de visite (remboursables)",
+  "@immoFraisDeVisiteRemboursables": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoTitreFoncierVerifiePar": "Titre foncier vérifié par Live avant la mise en ligne. Acompte de réservation séquestré jusqu’à la signature chez le notaire.",
+  "@immoTitreFoncierVerifiePar": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoCommission": "Commission",
+  "@immoCommission": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoCoutDEntree": "COÛT D'ENTRÉE",
+  "@immoCoutDEntree": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoLoyerEnsuite": "Loyer ensuite",
+  "@immoLoyerEnsuite": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoFraisDeVisite": "Frais de visite",
+  "@immoFraisDeVisite": {
+    "description": "Écran : immo_visite"
+  },
+  "immoPourEntrerDansCe": "Pour entrer dans ce logement, vous payez l'avance, la caution et la commission. La caution vous est rendue à votre départ si le logement est en bon état.",
+  "@immoPourEntrerDansCe": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoParking": "Parking",
+  "@immoParking": {
+    "description": "Écran : immo_fiche"
+  },
+  "immoEquipements": "Équipements",
+  "@immoEquipements": {
+    "description": "Écran : immo_fiche"
+  },
+  "@immoRepere": {
+    "description": "Écran : immo_fiche_blocs",
+    "placeholders": {
+      "v": {
+        "type": "String"
+      }
+    }
+  },
+  "immoRepere": "Repère : {v}",
+  "@immoNoteLocations": {
+    "description": "Écran : immo_fiche_blocs",
+    "placeholders": {
+      "note": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      },
+      "delai": {
+        "type": "String"
+      }
+    }
+  },
+  "immoNoteLocations": "{note} · {n} locations via Live · répond en {delai}",
+  "@immoALaSignature": {
+    "description": "Écran : immo_fiche_blocs",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "immoALaSignature": "À {qui}, à la signature du bail, contre reçu",
+  "@immoChaqueMois": {
+    "description": "Écran : immo_fiche_blocs",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "immoChaqueMois": "Chaque mois, à {qui}",
+  "@immoLagence": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoLagence": "l’agence",
+  "immoAdresseExacteVisibleApres": "Adresse exacte visible après le paiement de la visite.",
+  "@immoAdresseExacteVisibleApres": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoVueRue": "Vue rue",
+  "@immoVueRue": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoSurLaCarte": "Sur la carte",
+  "@immoSurLaCarte": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoAgence": "Agence",
+  "@immoAgence": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoVoirLAgence": "Voir l'agence",
+  "@immoVoirLAgence": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoVoirLeProfil": "Voir le profil",
+  "@immoVoirLeProfil": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoSuivi": "Suivi",
+  "@immoSuivi": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoSuivre": "Suivre",
+  "@immoSuivre": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoBiensSimilaires": "Biens similaires",
+  "@immoBiensSimilaires": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoLeProprietaire": "le propriétaire",
+  "@immoLeProprietaire": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoBloquesJusquALa": "Bloqués jusqu’à la visite, remboursés si elle n’a pas lieu",
+  "@immoBloquesJusquALa": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoAcompteDeReservationFacultatif": "Acompte de réservation (facultatif)",
+  "@immoAcompteDeReservationFacultatif": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoApresLaVisitePour": "Après la visite, pour bloquer le bien",
+  "@immoApresLaVisitePour": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoChezLeNotaireA": "Chez le notaire, à la signature de l’acte",
+  "@immoChezLeNotaireA": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoAvanceCautionEtCommission": "Avance, caution et commission",
+  "@immoAvanceCautionEtCommission": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "immoLoyerMensuel": "Loyer mensuel",
+  "@immoLoyerMensuel": {
+    "description": "Écran : immo_fiche_blocs"
+  },
+  "@immoLun": {
+    "description": "Écran : immo_visite (jour abrégé)"
+  },
+  "immoLun": "Lun",
+  "@immoMar": {
+    "description": "Écran : immo_visite (jour abrégé)"
+  },
+  "immoMar": "Mar",
+  "@immoMer": {
+    "description": "Écran : immo_visite (jour abrégé)"
+  },
+  "immoMer": "Mer",
+  "@immoJeu": {
+    "description": "Écran : immo_visite (jour abrégé)"
+  },
+  "immoJeu": "Jeu",
+  "@immoVen": {
+    "description": "Écran : immo_visite (jour abrégé)"
+  },
+  "immoVen": "Ven",
+  "@immoVisiteDe": {
+    "description": "Écran : immo_visite",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "immoVisiteDe": "Visite {titre}",
+  "@immoPayerMontant": {
+    "description": "Écran : immo_visite",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "immoPayerMontant": "Payer {montant}",
+  "@immoCreneauDemo": {
+    "description": "Écran : immo_visite"
+  },
+  "immoCreneauDemo": "Mar 30 · 10:30",
+  "@immoVisiteCreneau": {
+    "description": "Écran : immo_visite",
+    "placeholders": {
+      "creneau": {
+        "type": "String"
+      }
+    }
+  },
+  "immoVisiteCreneau": "Visite · {creneau}",
+  "@immoAdresseExacteValeur": {
+    "description": "Écran : immo_visite",
+    "placeholders": {
+      "quartier": {
+        "type": "String"
+      },
+      "repere": {
+        "type": "String"
+      }
+    }
+  },
+  "immoAdresseExacteValeur": "12, rue Mbochis, {quartier}\nRepère : {repere}",
+  "@immoVousProposeReserver": {
+    "description": "Écran : immo_visite",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      },
+      "titre": {
+        "type": "String"
+      },
+      "quartier": {
+        "type": "String"
+      }
+    }
+  },
+  "immoVousProposeReserver": "{qui} vous propose de réserver {titre} à {quartier}.",
+  "@immoReservationDe": {
+    "description": "Écran : immo_visite",
+    "placeholders": {
+      "titre": {
+        "type": "String"
+      }
+    }
+  },
+  "immoReservationDe": "Réservation {titre}",
+  "@immoReserverMontant": {
+    "description": "Écran : immo_visite",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "immoReserverMontant": "Réserver · {montant}",
+  "@immoAnnulerTexte": {
+    "description": "Écran : immo_visite",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "immoAnnulerTexte": "Plus de 24 h avant : {montant} remboursés. Moins de 24 h : frais versés à l’annonceur.",
+  "@immoVisiteAnnulee": {
+    "description": "Écran : immo_visite",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "immoVisiteAnnulee": "Visite annulée : {montant} remboursés sur votre Mobile Money.",
+  "immoChoisissezUnJour": "Choisissez un jour",
+  "@immoChoisissezUnJour": {
+    "description": "Écran : immo_visite"
+  },
+  "immoChoisissezUneHeure": "Choisissez une heure",
+  "@immoChoisissezUneHeure": {
+    "description": "Écran : immo_visite"
+  },
+  "immoLAnnonceurNeVient": "L'annonceur ne vient pas ou le bien n'est plus libre : vous êtes remboursé.",
+  "@immoLAnnonceurNeVient": {
+    "description": "Écran : immo_visite"
+  },
+  "immoVousNeVenezPas": "Vous ne venez pas : les frais sont versés à l'annonceur.",
+  "@immoVousNeVenezPas": {
+    "description": "Écran : immo_visite"
+  },
+  "immoVousPayezLesFrais": "Vous payez les frais de visite maintenant, mais Live les garde. L'annonceur ne les reçoit qu'après la visite, quand il scanne votre QR. S'il ne vient pas, ou si le logement n'est plus libre, vous êtes remboursé. Si c'est vous qui ne venez pas, les frais lui sont versés.",
+  "@immoVousPayezLesFrais": {
+    "description": "Écran : immo_visite"
+  },
+  "immoChoisissezUnCreneau": "Choisissez un créneau",
+  "@immoChoisissezUnCreneau": {
+    "description": "Écran : immo_visite"
+  },
+  "immoStatutReserveeEtPayee": "Statut : réservée et payée",
+  "@immoStatutReserveeEtPayee": {
+    "description": "Écran : immo_visite"
+  },
+  "immoVisiteEffectuee": "Visite effectuée",
+  "@immoVisiteEffectuee": {
+    "description": "Écran : immo_visite"
+  },
+  "immoLogementReserve": "Logement réservé",
+  "@immoLogementReserve": {
+    "description": "Écran : immo_visite"
+  },
+  "immoAdresseExacte": "Adresse exacte",
+  "@immoAdresseExacte": {
+    "description": "Écran : immo_visite"
+  },
+  "immoVotreContact": "Votre contact",
+  "@immoVotreContact": {
+    "description": "Écran : immo_visite"
+  },
+  "immoLogementReserveLAcompte": "Logement réservé. L’acompte est bloqué par Live jusqu’à la signature du bail.",
+  "@immoLogementReserveLAcompte": {
+    "description": "Écran : immo_visite"
+  },
+  "immoVisiteConfirmeeSiLe": "Visite confirmée. Si le logement vous plaît, l'agence peut vous envoyer une offre de réservation.",
+  "@immoVisiteConfirmeeSiLe": {
+    "description": "Écran : immo_visite"
+  },
+  "immoVoirLOffreDe": "Voir l'offre de réservation",
+  "@immoVoirLOffreDe": {
+    "description": "Écran : immo_visite"
+  },
+  "immoLaisserUnAvis": "Laisser un avis",
+  "@immoLaisserUnAvis": {
+    "description": "Écran : immo_visite"
+  },
+  "immoConfirmerLaVisite": "Confirmer la visite",
+  "@immoConfirmerLaVisite": {
+    "description": "Écran : immo_visite"
+  },
+  "immoMontrezLeAL": "Montrez-le à l'agent sur place.",
+  "@immoMontrezLeAL": {
+    "description": "Écran : immo_visite"
+  },
+  "immoLeBienNeCorrespond": "Le bien ne correspond pas",
+  "@immoLeBienNeCorrespond": {
+    "description": "Écran : immo_visite"
+  },
+  "immoAnnulerOuSignalerUne": "Annuler ou signaler une absence",
+  "@immoAnnulerOuSignalerUne": {
+    "description": "Écran : immo_visite"
+  },
+  "immoSimulerLAgentScanne": "Simuler : l'agent scanne votre QR",
+  "@immoSimulerLAgentScanne": {
+    "description": "Écran : immo_visite"
+  },
+  "immoOffreDeReservation": "Offre de réservation",
+  "@immoOffreDeReservation": {
+    "description": "Écran : immo_visite"
+  },
+  "immoAcompteDeReservation1": "Acompte de réservation (1 mois)",
+  "@immoAcompteDeReservation1": {
+    "description": "Écran : immo_visite"
+  },
+  "immoResteAPayerA": "Reste à payer à la signature",
+  "@immoResteAPayerA": {
+    "description": "Écran : immo_visite"
+  },
+  "immoCoutDEntreeTotal": "Coût d’entrée total",
+  "@immoCoutDEntreeTotal": {
+    "description": "Écran : immo_visite"
+  },
+  "immoLAcompteEstBloque": "L’acompte est bloqué par Live jusqu’à la signature du bail et la remise des clés.",
+  "@immoLAcompteEstBloque": {
+    "description": "Écran : immo_visite"
+  },
+  "immoLeProprietaireSeDesiste": "Le propriétaire se désiste : remboursement intégral sous 48 h.",
+  "@immoLeProprietaireSeDesiste": {
+    "description": "Écran : immo_visite"
+  },
+  "immoVousAnnulezSous24": "Vous annulez sous 24 h : remboursé. Au-delà, 50 % sont retenus.",
+  "@immoVousAnnulezSous24": {
+    "description": "Écran : immo_visite"
+  },
+  "immoOffreValableJusquA": "Offre valable jusqu’à demain 18:00.",
+  "@immoOffreValableJusquA": {
+    "description": "Écran : immo_visite"
+  },
+  "immoVosClesOuVotre": "Vos clés ou votre argent.",
+  "@immoVosClesOuVotre": {
+    "description": "Écran : immo_visite"
+  },
+  "immoRefuser": "Refuser",
+  "@immoRefuser": {
+    "description": "Écran : immo_visite"
+  },
+  "immoAnnulerLaVisite": "Annuler la visite",
+  "@immoAnnulerLaVisite": {
+    "description": "Écran : immo_visite"
+  },
+  "immoLAnnonceurNEst": "L’annonceur n’est pas venu",
+  "@immoLAnnonceurNEst": {
+    "description": "Écran : immo_visite"
+  },
+  "immoRemboursementIntegralEtSa": "Remboursement intégral, et sa réputation baisse.",
+  "@immoRemboursementIntegralEtSa": {
+    "description": "Écran : immo_visite"
+  },
+  "immoAbsenceSignaleeRemboursementIntegral": "Absence signalée : remboursement intégral sous 24 h.",
+  "@immoAbsenceSignaleeRemboursementIntegral": {
+    "description": "Écran : immo_visite"
+  },
+  "@immoAgentsNote": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "note": {
+        "type": "String"
+      },
+      "abonnes": {
+        "type": "String"
+      }
+    }
+  },
+  "immoAgentsNote": "{n} agents · {note} · {abonnes} abonnés",
+  "@immoOngletAujourdhui": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoOngletAujourdhui": "Aujourd’hui · {n}",
+  "@immoOngletDemandes": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoOngletDemandes": "Demandes · {n}",
+  "@immoOngletBiens": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoOngletBiens": "Biens · {n}",
+  "@immoOngletEquipe": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoOngletEquipe": "Équipe · {n}",
+  "@immoAgentVisites": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "immoAgentVisites": "Agent · {n} visites ce mois",
+  "@immoVisiteurAgent": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "visiteur": {
+        "type": "String"
+      },
+      "agent": {
+        "type": "String"
+      }
+    }
+  },
+  "immoVisiteurAgent": "{visiteur} · agent : {agent}",
+  "@immoNouvelle": {
+    "description": "Écran : immo_agence"
+  },
+  "immoNouvelle": "Nouvelle",
+  "@immoFraisPayes": {
+    "description": "Écran : immo_agence"
+  },
+  "immoFraisPayes": "Frais payés",
+  "@immoStatsBien": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "loyer": {
+        "type": "String"
+      },
+      "vues": {
+        "type": "int"
+      },
+      "visites": {
+        "type": "int"
+      }
+    }
+  },
+  "immoStatsBien": "{loyer} · {vues} vues · {visites} visites",
+  "@immoVisiteValidee": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "immoVisiteValidee": "Visite validée. {montant} seront versés sur le solde de l’agence.",
+  "@immoOffreEnvoyeeA": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "qui": {
+        "type": "String"
+      }
+    }
+  },
+  "immoOffreEnvoyeeA": "Offre de réservation envoyée à {qui}.",
+  "@immoAbsenceTexte": {
+    "description": "Écran : immo_agence",
+    "placeholders": {
+      "montant": {
+        "type": "String"
+      }
+    }
+  },
+  "immoAbsenceTexte": "Après 30 minutes d’attente, les frais de visite ({montant}) vous sont versés, moins la commission de 15 %. Le visiteur est prévenu.",
+  "immoEspaceAgence": "Espace agence",
+  "@immoEspaceAgence": {
+    "description": "Écran : immo_agence"
+  },
+  "immoPublierUnBien": "Publier un bien",
+  "@immoPublierUnBien": {
+    "description": "Écran : immo_agence"
+  },
+  "immoAgenceVerifieeAgrement0231": "Agence vérifiée · agrément 0231",
+  "@immoAgenceVerifieeAgrement0231": {
+    "description": "Écran : immo_agence"
+  },
+  "immoVisitesAujourdHui": "Visites aujourd'hui",
+  "@immoVisitesAujourdHui": {
+    "description": "Écran : immo_agence"
+  },
+  "immoProchaineA1030": "Prochaine à 10:30",
+  "@immoProchaineA1030": {
+    "description": "Écran : immo_agence"
+  },
+  "immoNouvellesDemandes": "Nouvelles demandes",
+  "@immoNouvellesDemandes": {
+    "description": "Écran : immo_agence"
+  },
+  "immoAAttribuer": "À attribuer",
+  "@immoAAttribuer": {
+    "description": "Écran : immo_agence"
+  },
+  "immoBiensEnLigne": "Biens en ligne",
+  "@immoBiensEnLigne": {
+    "description": "Écran : immo_agence"
+  },
+  "immoN1AReconfirmer": "1 à reconfirmer",
+  "@immoN1AReconfirmer": {
+    "description": "Écran : immo_agence"
+  },
+  "immoEncaisseCeMois": "Encaissé ce mois",
+  "@immoEncaisseCeMois": {
+    "description": "Écran : immo_agence"
+  },
+  "immoFcfaFraisDeVisite": "FCFA · frais de visite",
+  "@immoFcfaFraisDeVisite": {
+    "description": "Écran : immo_agence"
+  },
+  "immoGestionnaire12VisitesCe": "Gestionnaire · 12 visites ce mois",
+  "@immoGestionnaire12VisitesCe": {
+    "description": "Écran : immo_agence"
+  },
+  "immoAjouterUnMembre": "Ajouter un membre",
+  "@immoAjouterUnMembre": {
+    "description": "Écran : immo_agence"
+  },
+  "immoVisiteAttribueeAChristian": "Visite attribuée à Christian.",
+  "@immoVisiteAttribueeAChristian": {
+    "description": "Écran : immo_agence"
+  },
+  "immoAttribuer": "Attribuer",
+  "@immoAttribuer": {
+    "description": "Écran : immo_agence"
+  },
+  "immoDisponibiliteReconfirmeeLAnnonce": "Disponibilité reconfirmée : l’annonce reste en ligne 30 jours.",
+  "@immoDisponibiliteReconfirmeeLAnnonce": {
+    "description": "Écran : immo_agence"
+  },
+  "immoReconfirmer": "Reconfirmer",
+  "@immoReconfirmer": {
+    "description": "Écran : immo_agence"
+  },
+  "immoEnLigne": "En ligne",
+  "@immoEnLigne": {
+    "description": "Écran : immo_agence"
+  },
+  "immoValiderLaVisite": "Valider la visite",
+  "@immoValiderLaVisite": {
+    "description": "Écran : immo_agence"
+  },
+  "immoEnvoyerUneOffreDe": "Envoyer une offre de réservation",
+  "@immoEnvoyerUneOffreDe": {
+    "description": "Écran : immo_agence"
+  },
+  "immoRetourAuTableauDe": "Retour au tableau de bord",
+  "@immoRetourAuTableauDe": {
+    "description": "Écran : immo_agence"
+  },
+  "immoSurPlaceDemandezAu": "Sur place, demandez au visiteur d’ouvrir sa visite dans Live et scannez son QR. C’est ce qui déclenche le versement des frais de visite.",
+  "@immoSurPlaceDemandezAu": {
+    "description": "Écran : immo_agence"
+  },
+  "immoDuVisiteur": "du visiteur",
+  "@immoDuVisiteur": {
+    "description": "Écran : immo_agence"
+  },
+  "immoScannerLeQrDu": "Scanner le QR du visiteur",
+  "@immoScannerLeQrDu": {
+    "description": "Écran : immo_agence"
+  },
+  "immoCodeDuVisiteur": "Code du visiteur",
+  "@immoCodeDuVisiteur": {
+    "description": "Écran : immo_agence"
+  },
+  "immoSaisirLeCodeLv": "Saisir le code LV- à la place",
+  "@immoSaisirLeCodeLv": {
+    "description": "Écran : immo_agence"
+  },
+  "immoVisiteurAbsent": "Visiteur absent",
+  "@immoVisiteurAbsent": {
+    "description": "Écran : immo_agence"
+  },
+  "immoDeclarerLAbsence": "Déclarer l’absence",
+  "@immoDeclarerLAbsence": {
+    "description": "Écran : immo_agence"
+  },
+  "immoAbsenceEnregistreeFraisVerses": "Absence enregistrée : frais versés à l’agence.",
+  "@immoAbsenceEnregistreeFraisVerses": {
+    "description": "Écran : immo_agence"
+  },
+  "immoLeVisiteurNeS": "Le visiteur ne s’est pas présenté",
+  "@immoLeVisiteurNeS": {
+    "description": "Écran : immo_agence"
   }
 }
