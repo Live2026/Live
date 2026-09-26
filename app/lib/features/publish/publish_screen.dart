@@ -16,6 +16,7 @@ part 'publier_media.dart';
 part 'publier_legende.dart';
 part 'publier_envois.dart';
 part 'publier_bien.dart';
+part 'publier_bien_elements.dart';
 part 'publier_service.dart';
 
 /// E-PUB-01 — Que voulez-vous publier ? Chaque option dit si le super-pouvoir

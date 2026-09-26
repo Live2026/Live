@@ -97,7 +97,7 @@ class _AnalysePhotoState extends State<_AnalysePhoto> {
       'Samsung Galaxy A10',
     ),
     (Icons.category_rounded, context.t.marketCategorie, 'Téléphones · 32 Go'),
-    (Icons.verified_rounded, context.t.marketEtatEstime, 'Très bon état'),
+    (Icons.verified_rounded, context.t.marketEtatEstime, context.t.etatTresBon),
     (
       Icons.sell_rounded,
       context.t.marketPrixConseille,

@@ -14,6 +14,7 @@ import '../../l10n/textes.dart';
 import 'appels.dart';
 
 part 'conversation.dart';
+part 'conversation_actions.dart';
 part 'bulles.dart';
 part 'groupe.dart';
 part 'messages_plus.dart';

@@ -2052,10 +2052,6 @@
     "description": "Écran : appel en cours"
   },
   "appelSonnerie": "Sonnerie…",
-  "@appelConnexion": {
-    "description": "Écran : appel en cours"
-  },
-  "appelConnexion": "Connexion…",
   "@appelEntrantAudio": {
     "description": "Écran : appel en cours"
   },
@@ -2108,10 +2104,6 @@
     "description": "Écran : appel en cours"
   },
   "appelVous": "Vous",
-  "@appelMicroCoupe": {
-    "description": "Écran : appel en cours"
-  },
-  "appelMicroCoupe": "Micro coupé",
   "@appelReseauFaible": {
     "description": "Écran : appel en cours"
   },
@@ -2129,15 +2121,6 @@
     }
   },
   "appelTermine": "Appel terminé · {duree}",
-  "@appelParticipants": {
-    "description": "Écran : appel en cours",
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "appelParticipants": "{n} participants",
   "@appelAjouterQui": {
     "description": "Écran : appel en cours"
   },
@@ -11947,18 +11930,6 @@
   "@directCommenter": {
     "description": "Écran : direct_lecteur"
   },
-  "@directHoteQuand": {
-    "description": "Écran : direct_screens",
-    "placeholders": {
-      "hote": {
-        "type": "String"
-      },
-      "quand": {
-        "type": "String"
-      }
-    }
-  },
-  "directHoteQuand": "{hote} · {quand}",
   "directDirects": "Directs",
   "@directDirects": {
     "description": "Écran : direct_screens"
@@ -12228,15 +12199,6 @@
     }
   },
   "createursNJours": "{n} j",
-  "@createursHeures": {
-    "description": "Écran : createurs_screens",
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "createursHeures": "{n} h",
   "@createursDesAbonnes": {
     "description": "Écran : createurs_screens",
     "placeholders": {
