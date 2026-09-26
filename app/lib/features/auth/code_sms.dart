@@ -162,7 +162,6 @@ class _EcranCodeState extends State<EcranCode> {
 
   @override
   Widget build(BuildContext context) {
-    final (iconeCanal, _, _) = _canal.infos;
     final attente = _reste > 0;
     final minutes =
         '${_reste ~/ 60}:${(_reste % 60).toString().padLeft(2, '0')}';
@@ -173,29 +172,15 @@ class _EcranCodeState extends State<EcranCode> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
         children: [
-          // Dans la carte d'ordinateur, pas d'icône : titre et code seuls.
-          if (!DansCarte.de(context)) ...[
-            Center(
-              child: Apparition(
-                child: Container(
-                  width: 84,
-                  height: 84,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [LiveColors.ambre, LiveColors.orangeVif],
-                    ),
-                  ),
-                  child: Icon(iconeCanal, color: Colors.white, size: 40),
-                ),
-              ),
-            ),
-            const SizedBox(height: 18),
-          ],
+          const SizedBox(height: 8),
           const Text(
             'Vérifiez votre numéro',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
+            style: TextStyle(
+              color: LiveColors.bleu,
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(height: 8),
           Text.rich(

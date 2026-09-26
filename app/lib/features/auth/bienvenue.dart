@@ -110,83 +110,79 @@ class EcranBienvenue extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final grand = context.taille == Taille.etendue;
-    final hauteur = MediaQuery.sizeOf(context).height;
     return Scaffold(
+      backgroundColor: fondMotif,
       body: Stack(
         fit: StackFit.expand,
         children: [
-          const MotifLive(),
-          // Voiles clairs en haut et en bas : le texte reste lisible.
-          const DecoratedBox(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xF2FBF8F3),
-                  Color(0x00FBF8F3),
-                  Color(0x00FBF8F3),
-                  Color(0xFAFBF8F3),
-                ],
-                stops: [0.08, 0.3, 0.62, 0.86],
-              ),
+          const MotifLive(rayonnant: true),
+          const Apparition(child: LogoMotif()),
+          if (grand)
+            const Positioned(
+              left: 32,
+              top: 22,
+              child: SafeArea(child: LogoLive(taille: 30)),
+            ),
+          LayoutBuilder(
+            builder: (context, c) {
+              final (centre, rayon) = geometrieMotif(c.biggest);
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: c.maxHeight),
+                  // Haut (titre sous le cercle) et bas (boutons) écartés ;
+                  // sur un écran trop court, la page défile.
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: centre.dy + rayon + 14,
+                          bottom: 20,
+                        ),
+                        child: const Apparition(rang: 1, child: _Titre()),
+                      ),
+                      Apparition(
+                        rang: 2,
+                        child: _Actions(
+                          onDecouvrir: () => _decouvrir(context, ref),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Titre sous le cercle de dessins.
+class _Titre extends StatelessWidget {
+  const _Titre();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: [
+          Text(
+            'Bienvenue sur Live',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: couleurMotif,
+              fontSize: 28,
+              fontWeight: FontWeight.w800,
             ),
           ),
-          SafeArea(
-            child: Column(
-              children: [
-                if (grand)
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 22, 32, 0),
-                      child: LogoLive(taille: 30),
-                    ),
-                  ),
-                SizedBox(height: grand ? 12 : 36),
-                const Apparition(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Bienvenue sur Live',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: LiveColors.bleu,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Achetez, vendez, louez et payez en toute confiance.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: LiveColors.gris,
-                            fontSize: 15.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Apparition(
-                      rang: 1,
-                      child: IllustrationLive(
-                        taille: (hauteur * 0.34).clamp(180, 300),
-                      ),
-                    ),
-                  ),
-                ),
-                Apparition(
-                  rang: 2,
-                  child: _Actions(onDecouvrir: () => _decouvrir(context, ref)),
-                ),
-              ],
-            ),
+          SizedBox(height: 8),
+          Text(
+            'Achetez, vendez, louez et payez en toute confiance.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: LiveColors.gris, fontSize: 15.5),
           ),
         ],
       ),

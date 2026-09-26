@@ -113,9 +113,6 @@ class _Halo extends StatelessWidget {
   }
 }
 
-/// Courbe d'arrivée des éléments du démarrage.
-const courbeSortie = Curves.easeOutCubic;
-
 /// Étapes de l'inscription, pour la barre de progression.
 const etapesInscription = [
   'Numéro',
@@ -125,21 +122,15 @@ const etapesInscription = [
   'Intérêts',
 ];
 
-/// En-tête d'une étape du démarrage : barre de progression en segments,
-/// grande icône sur un dégradé, titre et explication.
+/// En-tête des pages du démarrage, comme WhatsApp : titre et texte centrés.
+/// Pendant l'inscription, une petite mention « Étape 1 sur 5 » au-dessus.
 class EnTeteDemarrage extends StatelessWidget {
   const EnTeteDemarrage({
     super.key,
-    required this.icone,
-    required this.couleurs,
     required this.titre,
     required this.texte,
     this.etape,
   });
-  final IconData icone;
-
-  /// Deux couleurs du dégradé de l'icône (chaque étape a les siennes).
-  final List<Color> couleurs;
   final String titre;
   final String texte;
 
@@ -148,117 +139,43 @@ class EnTeteDemarrage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Dans la carte d'ordinateur : titre et texte centrés, rien d'autre.
-    if (DansCarte.de(context)) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 26),
-        child: Column(
-          children: [
+    return Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 26),
+      child: Column(
+        children: [
+          if (etape != null) ...[
             Text(
-              titre,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              texte,
-              textAlign: TextAlign.center,
+              'Étape ${etape! + 1} sur ${etapesInscription.length}',
               style: const TextStyle(
                 color: LiveColors.gris,
-                fontSize: 15,
-                height: 1.4,
+                fontSize: 12.5,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.3,
               ),
             ),
+            const SizedBox(height: 8),
           ],
-        ),
-      );
-    }
-    final reduit = MediaQuery.disableAnimationsOf(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (etape != null) ...[
-          Semantics(
-            label:
-                'Étape ${etape! + 1} sur ${etapesInscription.length} : '
-                '${etapesInscription[etape!]}',
-            excludeSemantics: true,
-            child: Row(
-              children: [
-                for (var i = 0; i < etapesInscription.length; i++) ...[
-                  if (i > 0) const SizedBox(width: 6),
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(3),
-                      child: TweenAnimationBuilder<double>(
-                        tween: Tween(begin: 0, end: i <= etape! ? 1 : 0),
-                        duration: reduit
-                            ? Duration.zero
-                            : Duration(milliseconds: 400 + 120 * i),
-                        curve: courbeSortie,
-                        builder: (_, v, _) => LinearProgressIndicator(
-                          value: v,
-                          minHeight: 5,
-                          color: couleurs.last,
-                          backgroundColor: const Color(0xFFE6EBF2),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          const SizedBox(height: 6),
           Text(
-            'Étape ${etape! + 1} sur ${etapesInscription.length} · '
-            '${etapesInscription[etape!]}',
-            style: const TextStyle(color: LiveColors.gris, fontSize: 12.5),
-          ),
-          const SizedBox(height: 18),
-        ],
-        TweenAnimationBuilder<double>(
-          tween: Tween(begin: reduit ? 1 : 0.6, end: 1),
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeOutBack,
-          builder: (_, e, enfant) => Transform.scale(
-            scale: e,
-            alignment: Alignment.centerLeft,
-            child: enfant,
-          ),
-          child: Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: couleurs,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: couleurs.last.withValues(alpha: 0.3),
-                  blurRadius: 16,
-                  offset: const Offset(0, 6),
-                ),
-              ],
+            titre,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: LiveColors.bleu,
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
             ),
-            child: Icon(icone, color: Colors.white, size: 32),
           ),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          titre,
-          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          texte,
-          style: const TextStyle(color: LiveColors.gris, height: 1.4),
-        ),
-        const SizedBox(height: 22),
-      ],
+          const SizedBox(height: 8),
+          Text(
+            texte,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: LiveColors.gris,
+              fontSize: 15,
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

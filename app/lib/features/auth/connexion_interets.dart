@@ -28,23 +28,17 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
 
   @override
   Widget build(BuildContext context) {
-    final (icone, couleurs, titre, texte) = switch (_etape) {
+    final (titre, texte) = switch (_etape) {
       0 => (
-        Icons.waving_hand_rounded,
-        const [LiveColors.ambre, LiveColors.orangeVif],
         'Bon retour sur Live',
         'Entrez le numéro de votre compte : nous vous envoyons un code.',
       ),
       1 => (
-        Icons.sms_rounded,
-        const [Color(0xFF38BDF8), Color(0xFF0369A1)],
         'Code reçu par SMS',
         'Envoyé au ${paysTelephone[_pays].indicatif} ${_tel.text}. '
             'Prototype : 6 chiffres au choix.',
       ),
       _ => (
-        Icons.lock_rounded,
-        const [Color(0xFF34D399), Color(0xFF15803D)],
         'Votre code secret',
         'Pour protéger votre compte sur cet appareil.',
       ),
@@ -58,8 +52,6 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
             duration: const Duration(milliseconds: 300),
             child: EnTeteDemarrage(
               key: ValueKey(_etape),
-              icone: icone,
-              couleurs: couleurs,
               titre: titre,
               texte: texte,
             ),
@@ -114,9 +106,17 @@ class _EcranConnexionState extends ConsumerState<EcranConnexion> {
           ? BarreAction(
               child: FilledButton(
                 onPressed: paysTelephone[_pays].complet(_tel.text)
-                    ? () => setState(() => _etape = 1)
+                    ? () async {
+                        if (await confirmerNumero(
+                              context,
+                              '${paysTelephone[_pays].indicatif} ${_tel.text}',
+                            ) &&
+                            mounted) {
+                          setState(() => _etape = 1);
+                        }
+                      }
                     : null,
-                child: const Text('Recevoir le code'),
+                child: const Text('Suivant'),
               ),
             )
           : null,
@@ -169,8 +169,6 @@ class _EcranInteretsState extends ConsumerState<EcranInterets> {
         children: [
           const EnTeteDemarrage(
             etape: 4,
-            icone: Icons.interests_rounded,
-            couleurs: [Color(0xFFF472B6), Color(0xFFDB2777)],
             titre: 'Qu’est-ce qui vous intéresse ?',
             texte:
                 'Choisissez-en au moins 3 : votre fil sera utile dès '

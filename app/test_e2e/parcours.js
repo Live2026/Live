@@ -85,7 +85,7 @@ async function onglet(nom) { await bouton(nom, { exact: true }); }
     await saisir(0, '06 123 45 67');
     for (const c of await p.getByRole('checkbox').all()) await c.click();
     await ecran('inscription_telephone');
-    await bouton('Recevoir le code');
+    await bouton('Suivant'); await ecran('inscription_confirmer_numero'); await bouton('OK', { exact: true });
     await ecran('code_sms_vide');
     await saisir('Code à 6 chiffres', '123456'); await p.waitForTimeout(800);
     await saisir('Prénom', 'Grâce'); await ecran('inscription_profil');

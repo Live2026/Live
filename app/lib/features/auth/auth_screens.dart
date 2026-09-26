@@ -44,12 +44,10 @@ class _EcranTelephoneState extends State<EcranTelephone> {
         children: [
           const EnTeteDemarrage(
             etape: 0,
-            icone: Icons.phone_iphone_rounded,
-            couleurs: [LiveColors.ambre, LiveColors.orangeVif],
-            titre: 'Votre numéro de téléphone',
+            titre: 'Saisissez votre numéro',
             texte:
-                'Il sert à vous connecter et à recevoir vos paiements '
-                'Mobile Money. Il n’est jamais affiché sur votre profil.',
+                'Live va vérifier votre numéro par SMS. Il sert aussi à vos '
+                'paiements Mobile Money.',
           ),
           const SizedBox(height: 8),
           ChampTelephone(
@@ -88,12 +86,15 @@ class _EcranTelephoneState extends State<EcranTelephone> {
       bottomNavigationBar: BarreAction(
         child: FilledButton(
           onPressed: valide
-              ? () => context.push(
-                  '/code',
-                  extra: ('${pays.indicatif} ${_numero.text}', operateur),
-                )
+              ? () async {
+                  final numero = '${pays.indicatif} ${_numero.text}';
+                  if (await confirmerNumero(context, numero) &&
+                      context.mounted) {
+                    context.push('/code', extra: (numero, operateur));
+                  }
+                }
               : null,
-          child: const Text('Recevoir le code'),
+          child: const Text('Suivant'),
         ),
       ),
     );
@@ -141,8 +142,6 @@ class _EcranProfilState extends State<EcranProfil> {
         children: [
           const EnTeteDemarrage(
             etape: 2,
-            icone: Icons.badge_rounded,
-            couleurs: [Color(0xFFA78BFA), Color(0xFF6D28D9)],
             titre: 'Faisons connaissance',
             texte:
                 'Votre prénom s’affiche sur vos annonces et dans vos '
@@ -297,10 +296,6 @@ class _EcranPinState extends ConsumerState<EcranPin> {
         children: [
           EnTeteDemarrage(
             etape: 3,
-            icone: confirmation
-                ? Icons.verified_user_rounded
-                : Icons.lock_rounded,
-            couleurs: const [Color(0xFF34D399), Color(0xFF15803D)],
             titre: confirmation
                 ? 'Confirmez votre code'
                 : 'Bonjour ${widget.prenom}, créez votre code secret',

@@ -5,9 +5,9 @@ import '../core/theme.dart';
 import '../data/donnees_pays.dart';
 import 'drapeau.dart';
 
-/// Champ du numéro de téléphone, façon WhatsApp : drapeau et indicatif à
-/// gauche (liste des pays qui s'ouvre sous le champ, pas en bas de l'écran),
-/// numéro mis en forme pendant la saisie, opérateur reconnu dessous.
+/// Saisie du numéro, comme WhatsApp : le pays sur sa ligne (drapeau, nom ;
+/// la liste s'ouvre juste dessous), puis le numéro précédé de l'indicatif,
+/// mis en forme pendant la frappe, avec l'opérateur reconnu dessous.
 class ChampTelephone extends StatefulWidget {
   const ChampTelephone({
     super.key,
@@ -30,6 +30,17 @@ class ChampTelephone extends StatefulWidget {
   State<ChampTelephone> createState() => _ChampTelephoneState();
 }
 
+const _bord = Color(0xFFC5CCD6);
+
+BoxDecoration _cadre({required bool actif}) => BoxDecoration(
+  color: Colors.white,
+  borderRadius: BorderRadius.circular(8),
+  border: Border.all(
+    color: actif ? LiveColors.bleu : _bord,
+    width: actif ? 2 : 1,
+  ),
+);
+
 class _ChampTelephoneState extends State<ChampTelephone> {
   final _focus = FocusNode();
 
@@ -51,117 +62,34 @@ class _ChampTelephoneState extends State<ChampTelephone> {
     final numero = widget.controleur.text;
     final operateur = pays.operateur(numero);
     final complet = pays.complet(numero);
-    final actif = _focus.hasFocus;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        _ChoixPays(
+          pays: widget.pays,
+          onPays: (i) {
+            widget.onPays(i);
+            widget.controleur.clear();
+            widget.onChanged?.call();
+          },
+        ),
+        const SizedBox(height: 12),
         AnimatedContainer(
           duration: const Duration(milliseconds: 180),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: actif ? LiveColors.bleu : const Color(0xFFD7DCE4),
-              width: actif ? 2 : 1,
-            ),
-          ),
+          decoration: _cadre(actif: _focus.hasFocus),
           child: Row(
             children: [
-              MenuAnchor(
-                alignmentOffset: const Offset(0, 6),
-                style: MenuStyle(
-                  backgroundColor: const WidgetStatePropertyAll(Colors.white),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  maximumSize: const WidgetStatePropertyAll(Size(360, 420)),
-                ),
-                menuChildren: [
-                  for (final (i, p) in paysTelephone.indexed)
-                    MenuItemButton(
-                      onPressed: () {
-                        widget.onPays(i);
-                        widget.controleur.clear();
-                        widget.onChanged?.call();
-                      },
-                      leadingIcon: Drapeau(p.code, largeur: 26),
-                      trailingIcon: i == widget.pays
-                          ? const Icon(
-                              Icons.check_rounded,
-                              color: LiveColors.bleu,
-                            )
-                          : null,
-                      child: SizedBox(
-                        width: 240,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    p.nom,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  Text(
-                                    p.operateurs.join(', '),
-                                    style: const TextStyle(
-                                      color: LiveColors.gris,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Text(
-                              p.indicatif,
-                              style: const TextStyle(
-                                color: LiveColors.gris,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                ],
-                builder: (context, menu, _) => Semantics(
-                  button: true,
-                  container: true,
-                  label: 'Pays : ${pays.nom} ${pays.indicatif}. Changer',
-                  excludeSemantics: true,
-                  onTap: () => menu.isOpen ? menu.close() : menu.open(),
-                  child: InkWell(
-                    borderRadius: const BorderRadius.horizontal(
-                      left: Radius.circular(8),
-                    ),
-                    onTap: () => menu.isOpen ? menu.close() : menu.open(),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(12, 14, 6, 14),
-                      child: Row(
-                        children: [
-                          Drapeau(pays.code),
-                          const SizedBox(width: 8),
-                          Text(
-                            pays.indicatif,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const Icon(Icons.arrow_drop_down_rounded),
-                        ],
-                      ),
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 12),
+                child: Text(
+                  pays.indicatif,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
-              Container(width: 1, height: 28, color: const Color(0xFFD7DCE4)),
+              Container(width: 1, height: 26, color: _bord),
               Expanded(
                 child: Semantics(
                   label: 'Numéro de téléphone',
@@ -187,7 +115,7 @@ class _ChampTelephoneState extends State<ChampTelephone> {
                       filled: false,
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 12,
-                        vertical: 14,
+                        vertical: 15,
                       ),
                       suffixIcon: complet
                           ? const Icon(
@@ -212,9 +140,10 @@ class _ChampTelephoneState extends State<ChampTelephone> {
           duration: const Duration(milliseconds: 220),
           child: Text(
             operateur != null
-                ? '$operateur Mobile Money reconnu · ${pays.nom}'
-                : '${pays.nom} · ${pays.chiffres} chiffres, comme ${pays.format}',
+                ? '$operateur Mobile Money reconnu'
+                : '${pays.chiffres} chiffres, comme ${pays.format}',
             key: ValueKey(operateur ?? pays.code),
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 12.5,
               fontWeight: operateur != null ? FontWeight.w700 : null,
@@ -223,6 +152,86 @@ class _ChampTelephoneState extends State<ChampTelephone> {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// Ligne du pays : drapeau, nom et flèche ; la liste des six pays s'ouvre
+/// juste dessous, à la largeur du champ.
+class _ChoixPays extends StatelessWidget {
+  const _ChoixPays({required this.pays, required this.onPays});
+  final int pays;
+  final ValueChanged<int> onPays;
+
+  @override
+  Widget build(BuildContext context) {
+    final actuel = paysTelephone[pays];
+    return LayoutBuilder(
+      builder: (context, c) => MenuAnchor(
+        alignmentOffset: const Offset(0, 6),
+        style: MenuStyle(
+          backgroundColor: const WidgetStatePropertyAll(Colors.white),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          maximumSize: const WidgetStatePropertyAll(Size(480, 420)),
+        ),
+        menuChildren: [
+          for (final (i, p) in paysTelephone.indexed)
+            MenuItemButton(
+              onPressed: () => onPays(i),
+              leadingIcon: Drapeau(p.code, largeur: 26),
+              trailingIcon: i == pays
+                  ? const Icon(Icons.check_rounded, color: LiveColors.bleu)
+                  : Text(
+                      p.indicatif,
+                      style: const TextStyle(color: LiveColors.gris),
+                    ),
+              child: SizedBox(
+                width: (c.maxWidth - 110).clamp(160, 360),
+                child: Text(
+                  p.nom,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+        ],
+        builder: (context, menu, _) => Semantics(
+          button: true,
+          container: true,
+          label: 'Pays : ${actuel.nom} ${actuel.indicatif}. Changer',
+          excludeSemantics: true,
+          onTap: () => menu.isOpen ? menu.close() : menu.open(),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(8),
+            onTap: () => menu.isOpen ? menu.close() : menu.open(),
+            child: Ink(
+              decoration: _cadre(actif: menu.isOpen),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              child: Row(
+                children: [
+                  Drapeau(actuel.code, largeur: 26),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      actuel.nom,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    menu.isOpen
+                        ? Icons.keyboard_arrow_up_rounded
+                        : Icons.keyboard_arrow_down_rounded,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -255,4 +264,42 @@ class _FormatNumero extends TextInputFormatter {
       selection: TextSelection.collapsed(offset: texte.length),
     );
   }
+}
+
+/// Avant d'envoyer le code, comme WhatsApp : on relit le numéro. Un SMS
+/// envoyé à un numéro mal saisi est perdu (et payé).
+Future<bool> confirmerNumero(BuildContext context, String numero) async {
+  final ok = await showDialog<bool>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: const Text('Vous avez saisi le numéro :'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            numero,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 0.5,
+            ),
+          ),
+          const SizedBox(height: 12),
+          const Text('Est-il correct, ou voulez-vous le modifier ?'),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, false),
+          child: const Text('Modifier'),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.pop(ctx, true),
+          child: const Text('OK'),
+        ),
+      ],
+    ),
+  );
+  return ok ?? false;
 }
