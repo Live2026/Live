@@ -79,7 +79,7 @@ class EtapesGeneration extends StatelessWidget {
                             : const Icon(
                                 Icons.radio_button_unchecked,
                                 key: ValueKey(3),
-                                color: LiveColors.brume,
+                                color: LiveColors.brumeClaire,
                               ),
                       ),
                       const SizedBox(width: 12),

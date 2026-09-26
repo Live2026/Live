@@ -139,9 +139,7 @@ class _Entree extends StatelessWidget {
     final style = TextStyle(
       fontSize: large ? 15 : 12,
       fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-      color: active || large
-          ? (active ? couleur : const Color(0xFF041936))
-          : teinte,
+      color: active || large ? (active ? couleur : LiveColors.encre) : teinte,
     );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),

@@ -38,7 +38,7 @@ class _CoachIa extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: const Color(0xFFFBCC6A)),
-          color: const Color(0xFFFFFBF2),
+          color: LiveColors.teinteCreme,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

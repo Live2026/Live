@@ -63,7 +63,7 @@ class CarteContenu extends StatelessWidget {
                       child: Etiquette(
                         'Nouveau',
                         fond: LiveColors.orangeVif,
-                        couleur: LiveColors.surface,
+                        couleur: Colors.white,
                       ),
                     ),
                   Positioned(
@@ -101,7 +101,7 @@ class CarteContenu extends StatelessWidget {
                   achete ? 'Acheté' : fcfa(c.prix),
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
-                    color: achete ? LiveColors.succes : LiveColors.nuit,
+                    color: achete ? LiveColors.succes : LiveColors.encre,
                   ),
                 ),
               ],

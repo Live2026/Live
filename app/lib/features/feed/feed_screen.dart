@@ -80,14 +80,12 @@ class _EcranFilState extends State<EcranFil> {
         const Positioned(
           top: 4,
           right: 4,
-          child: SafeArea(child: BoutonMessages(couleur: LiveColors.surface)),
+          child: SafeArea(child: BoutonMessages(couleur: Colors.white)),
         ),
         const Positioned(
           top: 4,
           left: 4,
-          child: SafeArea(
-            child: BoutonNotifications(couleur: LiveColors.surface),
-          ),
+          child: SafeArea(child: BoutonNotifications(couleur: Colors.white)),
         ),
         Positioned(
           top: 56,

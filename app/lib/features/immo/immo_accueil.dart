@@ -401,7 +401,7 @@ class _AppelPublier extends StatelessWidget {
                 Text(
                   'Publication gratuite. Les frais de visite vous sont versés '
                   'après chaque visite.',
-                  style: TextStyle(color: LiveColors.brume, fontSize: 13),
+                  style: TextStyle(color: LiveColors.brumeClaire, fontSize: 13),
                 ),
               ],
             ),

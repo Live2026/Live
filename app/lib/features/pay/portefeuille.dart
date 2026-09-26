@@ -162,10 +162,10 @@ class _CarteSolde extends StatelessWidget {
               const Expanded(
                 child: Text(
                   'Solde disponible',
-                  style: TextStyle(color: LiveColors.brume),
+                  style: TextStyle(color: LiveColors.brumeClaire),
                 ),
               ),
-              const LogoLive(taille: 22, couleur: LiveColors.surface),
+              const LogoLive(taille: 22, couleur: Colors.white),
             ],
           ),
           const SizedBox(height: 4),
@@ -215,7 +215,7 @@ class _CarteSolde extends StatelessWidget {
             etat.identiteVerifiee
                 ? 'Retrait vers votre numéro jusqu’à 2 M FCFA par mois'
                 : 'Retrait après vérification de votre identité',
-            style: const TextStyle(color: LiveColors.brume, fontSize: 12),
+            style: const TextStyle(color: LiveColors.brumeClaire, fontSize: 12),
           ),
         ],
       ),
@@ -234,7 +234,7 @@ class _Montant extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(titre, style: const TextStyle(color: LiveColors.brume)),
+        Text(titre, style: const TextStyle(color: LiveColors.brumeClaire)),
         Text(
           valeur,
           style: const TextStyle(
@@ -389,7 +389,7 @@ class _LigneMouvement extends StatelessWidget {
         backgroundColor: entree ? LiveColors.teinteVerte : LiveColors.champ,
         child: Icon(
           entree ? Icons.south_west : Icons.north_east,
-          color: entree ? LiveColors.succes : LiveColors.nuit,
+          color: entree ? LiveColors.succes : LiveColors.encre,
           size: 20,
         ),
       ),
@@ -399,7 +399,7 @@ class _LigneMouvement extends StatelessWidget {
         masque ? '•••' : '${entree ? '+' : ''}${fcfa(m.montant)}',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: entree ? LiveColors.succes : LiveColors.nuit,
+          color: entree ? LiveColors.succes : LiveColors.encre,
         ),
       ),
     );

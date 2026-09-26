@@ -105,7 +105,7 @@ class _EcranGroupeState extends State<EcranGroupe> {
       ..._envoyes,
     ];
     return Scaffold(
-      backgroundColor: const Color(0xFFEEF1F5),
+      backgroundColor: LiveColors.fondConversation,
       appBar: AppBar(
         titleSpacing: 0,
         title: Row(

@@ -116,7 +116,7 @@ class EcranTontine extends ConsumerWidget {
                         '${i + 1}',
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
-                          color: i == t.tour ? Colors.white : LiveColors.nuit,
+                          color: i == t.tour ? Colors.white : LiveColors.encre,
                         ),
                       ),
                     ),

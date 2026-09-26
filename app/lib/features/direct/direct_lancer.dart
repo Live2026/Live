@@ -67,7 +67,7 @@ class _EcranLancerDirectState extends ConsumerState<EcranLancerDirect> {
                     'Réseau bon · 720p',
                     icone: Icons.network_check_rounded,
                     fond: Colors.black45,
-                    couleur: LiveColors.surface,
+                    couleur: Colors.white,
                   ),
                 ),
               ],

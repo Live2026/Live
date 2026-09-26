@@ -133,7 +133,7 @@ class _BoutonCarte extends StatelessWidget {
     required this.icone,
     required this.libelle,
     required this.onTap,
-    this.couleur = LiveColors.nuit,
+    this.couleur = LiveColors.encre,
   });
   final IconData icone;
   final String libelle;

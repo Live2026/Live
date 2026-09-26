@@ -58,7 +58,7 @@ class EcranServices extends ConsumerWidget {
                   const Text(
                     'Décrivez-le en 30 secondes, recevez des devis de pros vérifiés. '
                     'Votre acompte est protégé par Live.',
-                    style: TextStyle(color: LiveColors.brume),
+                    style: TextStyle(color: LiveColors.brumeClaire),
                   ),
                   const SizedBox(height: 14),
                   FilledButton(

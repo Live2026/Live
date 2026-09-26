@@ -211,7 +211,7 @@ class _Case extends StatelessWidget {
         color: colore
             ? accent.withValues(alpha: 0.1)
             : rempli
-            ? const Color(0xFFFFF4E5)
+            ? LiveColors.teinteAmbre
             : LiveColors.champ,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
@@ -235,7 +235,7 @@ class _Case extends StatelessWidget {
           style: TextStyle(
             fontSize: taille * 0.5,
             fontWeight: FontWeight.w800,
-            color: colore ? accent : LiveColors.nuit,
+            color: colore ? accent : LiveColors.encre,
           ),
         ),
       ),

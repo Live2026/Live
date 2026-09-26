@@ -189,8 +189,8 @@ class Credits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Nombre en bleu nuit (lisible), symbole des crédits en orange (accent).
-    final c = couleur ?? LiveColors.nuit;
+    // Nombre dans la couleur du texte (lisible dans les deux modes), symbole des crédits en orange (accent).
+    final c = couleur ?? LiveColors.encre;
     final icone = couleurIcone ?? couleur ?? LiveColors.orange;
     return Row(
       mainAxisSize: MainAxisSize.min,

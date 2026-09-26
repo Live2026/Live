@@ -231,7 +231,7 @@ class _Etape extends StatelessWidget {
               texte,
               style: TextStyle(
                 fontSize: 16,
-                color: fait ? Colors.black : LiveColors.gris,
+                color: fait ? LiveColors.encre : LiveColors.gris,
               ),
             ),
           ),

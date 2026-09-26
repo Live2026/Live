@@ -329,7 +329,7 @@ class EcranDocument extends ConsumerWidget {
                     style: TextStyle(
                       fontSize: i == 0 ? 22 : 13,
                       fontWeight: FontWeight.bold,
-                      color: i == 0 ? Colors.black : LiveColors.bleu,
+                      color: i == 0 ? LiveColors.encre : LiveColors.bleu,
                       letterSpacing: i == 0 ? 0 : 0.8,
                     ),
                   ),

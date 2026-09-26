@@ -231,7 +231,7 @@ class _EcranPublierMediaState extends State<EcranPublierMedia>
                       'Filmez l’objet de près, en pleine lumière, 30 s suffisent',
                       icone: Icons.lightbulb_outline_rounded,
                       fond: Colors.black45,
-                      couleur: LiveColors.surface,
+                      couleur: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 10),

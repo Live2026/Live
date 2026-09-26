@@ -110,7 +110,7 @@ class EcranIa extends ConsumerWidget {
                       Credits(
                         etat.credits,
                         taille: 34,
-                        couleur: LiveColors.surface,
+                        couleur: Colors.white,
                         couleurIcone: LiveColors.orange,
                       ),
                       const SizedBox(height: 2),
@@ -469,7 +469,7 @@ class _Ligne extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(libelle)),
-          Credits(n, couleur: Colors.black87),
+          Credits(n, couleur: LiveColors.encre),
         ],
       ),
     );

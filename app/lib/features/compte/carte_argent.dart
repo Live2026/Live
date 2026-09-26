@@ -34,7 +34,7 @@ class _CarteArgent extends StatelessWidget {
                     children: [
                       const Text(
                         'Mon argent Live',
-                        style: TextStyle(color: LiveColors.brume),
+                        style: TextStyle(color: LiveColors.brumeClaire),
                       ),
                       ChiffreAnime(
                         valeur: etat.disponible,

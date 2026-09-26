@@ -85,7 +85,7 @@ class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
                     ),
                     child: DefaultTextStyle.merge(
                       style: TextStyle(
-                        color: _formule == id ? Colors.white : LiveColors.nuit,
+                        color: _formule == id ? Colors.white : LiveColors.encre,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +105,7 @@ class _EcranLivePlusState extends ConsumerState<EcranLivePlus> {
                                 const Etiquette(
                                   'Le plus complet',
                                   fond: LiveColors.orangeVif,
-                                  couleur: LiveColors.surface,
+                                  couleur: Colors.white,
                                 ),
                             ],
                           ),

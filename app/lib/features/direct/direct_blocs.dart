@@ -77,7 +77,7 @@ class _ActionDirect extends StatelessWidget {
     required this.icone,
     required this.libelle,
     required this.onTap,
-    this.couleur = LiveColors.surface,
+    this.couleur = Colors.white,
   });
   final IconData icone;
   final String libelle;

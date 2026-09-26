@@ -13,7 +13,7 @@ class BandeauProtection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF0F3F7),
+        color: LiveColors.champ,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -87,7 +87,14 @@ class CarteQr extends StatelessWidget {
           Container(
             color: LiveColors.surface,
             padding: const EdgeInsets.all(8),
-            child: QrImageView(data: donnee, size: 170),
+            // Toujours noir sur blanc : un code QR doit rester lisible par
+            // l'appareil photo, même en mode sombre.
+            child: QrImageView(
+              data: donnee,
+              size: 170,
+              backgroundColor: Colors.white,
+              padding: const EdgeInsets.all(8),
+            ),
           ),
           const SizedBox(height: 10),
           Text(

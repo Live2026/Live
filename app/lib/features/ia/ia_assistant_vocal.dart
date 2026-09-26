@@ -163,7 +163,7 @@ class _ModeVocalState extends State<_ModeVocal>
               Text(
                 statut,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: LiveColors.brume),
+                style: const TextStyle(color: LiveColors.brumeClaire),
               ),
               const SizedBox(height: 16),
               if (_entendu != null)

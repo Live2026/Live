@@ -135,7 +135,7 @@ class _CartePouvoir extends StatelessWidget {
             context.push(actif ? (p.route ?? '/moi') : p.routeDeblocage),
         child: Bloc(
           padding: 14,
-          fond: actif ? LiveColors.surface : const Color(0xFFFAFBFC),
+          fond: actif ? LiveColors.surface : LiveColors.champ,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -275,7 +275,7 @@ class EcranPro extends ConsumerWidget {
                 SizedBox(height: 6),
                 Text(
                   'Pour les vendeurs, agences et prestataires qui veulent aller plus loin.',
-                  style: TextStyle(color: LiveColors.brume),
+                  style: TextStyle(color: LiveColors.brumeClaire),
                 ),
               ],
             ),

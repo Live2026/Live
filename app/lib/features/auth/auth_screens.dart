@@ -411,7 +411,7 @@ class _EcranPinState extends ConsumerState<EcranPin> {
                 ? const Padding(
                     padding: EdgeInsets.only(bottom: 12),
                     child: Bloc(
-                      fond: Color(0xFFFDE2E2),
+                      fond: LiveColors.teinteRouge,
                       child: Text(
                         'Les deux codes sont différents. Recommencez.',
                         style: TextStyle(color: LiveColors.erreur),

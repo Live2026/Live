@@ -259,7 +259,7 @@ class _EquipeLive extends StatelessWidget {
                           size: 18,
                           color: qui.contains(i)
                               ? LiveColors.succes
-                              : LiveColors.brume,
+                              : LiveColors.brumeClaire,
                         ),
                       ),
                   ],

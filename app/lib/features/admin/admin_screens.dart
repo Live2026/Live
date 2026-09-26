@@ -155,7 +155,9 @@ class _MenuAdmin extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            color: actif ? Colors.white : LiveColors.brume,
+                            color: actif
+                                ? Colors.white
+                                : LiveColors.brumeClaire,
                             fontWeight: actif
                                 ? FontWeight.w700
                                 : FontWeight.w500,
@@ -186,7 +188,7 @@ class _MenuAdmin extends StatelessWidget {
                   child: large
                       ? const Row(
                           children: [
-                            LogoLive(taille: 30, couleur: LiveColors.surface),
+                            LogoLive(taille: 30, couleur: Colors.white),
                             SizedBox(width: 8),
                             Flexible(
                               child: Text(
@@ -289,7 +291,7 @@ class _Tableau extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            color: const Color(0xFFF8FAFC),
+            color: LiveColors.champ,
             child: Row(
               children: [
                 for (final (nom, flex) in colonnes)

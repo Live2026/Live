@@ -401,7 +401,7 @@ class _CartePouvoirs extends StatelessWidget {
                     Text(
                       '$actifs sur $total actifs · gagnez de l’argent en débloquant les autres',
                       style: const TextStyle(
-                        color: LiveColors.brume,
+                        color: LiveColors.brumeClaire,
                         fontSize: 13,
                       ),
                     ),

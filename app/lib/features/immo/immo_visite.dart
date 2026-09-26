@@ -107,7 +107,7 @@ class _EcranReserverVisiteState extends ConsumerState<EcranReserverVisite> {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w800,
-                              color: actif ? Colors.white : LiveColors.nuit,
+                              color: actif ? Colors.white : LiveColors.encre,
                             ),
                           ),
                         ],

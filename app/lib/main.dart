@@ -114,7 +114,7 @@ class _BandeauPrototype extends StatelessWidget {
                     fontSize: 10.5,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 0.4,
-                    color: LiveColors.brume,
+                    color: LiveColors.brumeClaire,
                   ),
                 ),
               ),

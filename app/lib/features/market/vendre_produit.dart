@@ -206,7 +206,7 @@ class _EcranVendreState extends ConsumerState<EcranVendre> {
         ),
         const SizedBox(height: 12),
         const Bloc(
-          fond: Color(0xFFF1ECFE),
+          fond: LiveColors.teinteViolette,
           padding: 12,
           child: Row(
             children: [

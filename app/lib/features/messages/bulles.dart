@@ -1,6 +1,6 @@
 part of 'messages_screens.dart';
 
-const _vertMoi = Color(0xFFDCEBFA);
+const _vertMoi = LiveColors.bulleMoi;
 
 /// Forme de bulle avec une petite pointe du côté de l'auteur.
 BorderRadius _forme(bool moi) => BorderRadius.only(
@@ -174,7 +174,7 @@ class _BulleLieu extends StatelessWidget {
             height: 90,
             width: 240,
             decoration: BoxDecoration(
-              color: const Color(0xFFD9E6F2),
+              color: LiveColors.bulleVoile,
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(
@@ -341,7 +341,7 @@ class _AlerteArnaque extends StatelessWidget {
 class _MotifFond extends CustomPainter {
   @override
   void paint(Canvas canvas, Size s) {
-    final p = Paint()..color = const Color(0xFFDDE3EB);
+    final p = Paint()..color = LiveColors.brume;
     for (double y = 10; y < s.height; y += 28) {
       for (double x = (y ~/ 28).isEven ? 10 : 24; x < s.width; x += 28) {
         canvas.drawCircle(Offset(x, y), 1.4, p);

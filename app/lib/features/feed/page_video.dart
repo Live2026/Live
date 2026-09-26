@@ -421,7 +421,7 @@ class _Action extends StatelessWidget {
     required this.icone,
     required this.texte,
     required this.onTap,
-    this.couleur = LiveColors.surface,
+    this.couleur = Colors.white,
     this.actif = false,
     this.miroir = false,
   });

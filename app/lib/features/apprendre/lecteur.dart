@@ -205,7 +205,7 @@ class _Page extends StatelessWidget {
                   height: 7,
                   margin: const EdgeInsets.only(bottom: 8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFDDE3EB),
+                    color: LiveColors.brume,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),

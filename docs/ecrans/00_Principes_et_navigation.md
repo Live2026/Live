@@ -321,3 +321,25 @@ Courbe de référence : démarrage vif, arrivée amortie (`cubic(0.2, 0.8, 0.2, 
 | 5 | **Inscription trop longue** pour tenir en 60 s. | Prénom, nom et ville seulement ; case « J'ai 18 ans ou plus » à la place de la date de naissance (vérifiée au KYC) ; centres d'intérêt facultatifs ; quartier et photo demandés plus tard (E-AUTH-02 à 05). |
 | 6 | **Consentement trop implicite** aux données personnelles. | Cases explicites à l'inscription (E-AUTH-02) et avant l'envoi des pièces d'identité (E-MOI-03). |
 | 7 | Les dessins en texte ne valident ni le visuel ni l'usage réel. | **Prototype cliquable Flutter** (`app/`) et test terrain avec 15 à 20 utilisateurs avant la construction complète. |
+
+## 10. Mode sombre (26/09/2026)
+
+Réglage **Paramètres › Préférences › Apparence** : « Comme le téléphone » (par défaut), « Clair », « Sombre » ; gardé sur l'appareil. En « Comme le téléphone », Live suit le réglage du système, y compris quand il change application ouverte.
+
+**Principe technique** : chaque couleur de Live est une `CouleurLive` qui porte sa valeur claire et sa valeur sombre ; le changement de mode reconstruit l'application. Les écrans n'écrivent jamais une couleur de fond en dur.
+
+| Jeton | Clair | Sombre | Usage |
+|---|---|---|---|
+| `surface` | #FFFFFF | #121A24 | pages, cartes, panneaux |
+| `champ` | #F3F5F8 | #1C2633 | champs, boutons tonals |
+| `voile` | #E6EBF2 | #243040 | puces, pistes, indicateurs |
+| `filet` / `bord` | #E4E8EE / #C3CAD4 | #2A3544 / #3A4656 | séparateurs, bordures |
+| `encre` | #041936 | #E8EDF4 | titres et textes forts |
+| `gris` | #5B6573 | #9AA6B5 | texte secondaire |
+| `bleu` | #13385C | #4180C0 | boutons, liens, navigation active |
+| teintes (vert, orange, ambre, rouge, crème, violet) | pastels | tons sombres | étiquettes, encadrés |
+
+Restent identiques dans les deux modes : l'orange et l'ambre de la marque, les fonds sombres de la marque (`nuit`, dégradés des cartes d'argent) et leur texte clair (`brumeClaire`), les couleurs des photos et des vidéos, les plans et la vue de rue (clairs, comme les cartes routières), les drapeaux, et les codes QR (toujours noirs sur blanc pour rester lisibles par l'appareil photo).
+
+Vérification : test automatique de tous les écrans en mode sombre à 360 et 1 280 px, puis revue visuelle des captures (`?apparence=sombre` dans l'adresse).
+

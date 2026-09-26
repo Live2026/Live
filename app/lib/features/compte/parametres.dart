@@ -174,9 +174,7 @@ class EcranNotifications extends StatelessWidget {
             Apparition(
               rang: i,
               child: Material(
-                color: n.nouvelle
-                    ? const Color(0xFFF1F5FA)
-                    : LiveColors.surface,
+                color: n.nouvelle ? LiveColors.champ : LiveColors.surface,
                 child: InkWell(
                   onTap: () => context.push(n.route),
                   child: Padding(

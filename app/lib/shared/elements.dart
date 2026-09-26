@@ -162,7 +162,7 @@ class BoutonSimulation extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         foregroundColor: LiveColors.gris,
         side: const BorderSide(color: LiveColors.filet),
-        backgroundColor: const Color(0xFFF7F8FA),
+        backgroundColor: LiveColors.champ,
       ),
       onPressed: onTap,
       icon: const Icon(Icons.science_outlined, size: 18),

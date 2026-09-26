@@ -118,7 +118,7 @@ class _EcranConnexionAdminState extends State<EcranConnexionAdmin> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      LogoLive(taille: 44, couleur: LiveColors.surface),
+                      LogoLive(taille: 44, couleur: Colors.white),
                       SizedBox(height: 24),
                       Text(
                         'Back-office',

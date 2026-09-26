@@ -134,7 +134,7 @@ class _EcranCarteState extends State<EcranCarte> {
                                           fontWeight: FontWeight.w700,
                                           color: (i == 0) == _immo
                                               ? Colors.white
-                                              : LiveColors.nuit,
+                                              : LiveColors.encre,
                                         ),
                                       ),
                                     ),

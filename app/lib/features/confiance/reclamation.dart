@@ -143,7 +143,7 @@ class _Bulle extends StatelessWidget {
           color: live
               ? LiveColors.voile
               : moi
-              ? const Color(0xFFDCF3E4)
+              ? LiveColors.teinteVerte
               : LiveColors.champ,
           borderRadius: BorderRadius.circular(12),
         ),

@@ -300,7 +300,9 @@ class SelecteurEtoiles extends StatelessWidget {
                   child: Icon(
                     note >= i ? Icons.star_rounded : Icons.star_outline_rounded,
                     size: 44,
-                    color: note >= i ? LiveColors.ambre : LiveColors.brume,
+                    color: note >= i
+                        ? LiveColors.ambre
+                        : LiveColors.brumeClaire,
                   ),
                 ),
               ),

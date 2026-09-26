@@ -55,6 +55,10 @@ class LiveColors {
   /// Brume : surfaces neutres, bordures, fond du bandeau « Protégé par Live ».
   static const brume = CouleurLive(0xFFD7DCE4, 0xFF2A3441);
 
+  /// Texte clair posé sur les fonds sombres de la marque (cartes d'argent,
+  /// dégradés) : le même dans les deux modes.
+  static const brumeClaire = Color(0xFFD7DCE4);
+
   // Couleurs d'état (hors marque, pour ne jamais confondre réussite et alerte).
   static const succes = CouleurLive(0xFF1E7B4F, 0xFF3DBB7E);
   static const erreur = CouleurLive(0xFFC62828, 0xFFFF6B6B);
@@ -90,6 +94,13 @@ class LiveColors {
   static const teinteAmbre = CouleurLive(0xFFFFF4E0, 0xFF3A2C16);
   static const teinteRouge = CouleurLive(0xFFFDECEC, 0xFF3A1D1D);
   static const teinteCreme = CouleurLive(0xFFFFF7EA, 0xFF35291A);
+
+  static const teinteViolette = CouleurLive(0xFFF1ECFE, 0xFF2A2140);
+
+  // Messagerie.
+  static const fondConversation = CouleurLive(0xFFEEF1F5, 0xFF0B121A);
+  static const bulleMoi = CouleurLive(0xFFDCEBFA, 0xFF1F3A5C);
+  static const bulleVoile = CouleurLive(0xFFD9E6F2, 0xFF2A3A50);
 
   // Rôles sémantiques utilisés par les écrans.
   static const fondProtection = brume;
@@ -218,11 +229,13 @@ ThemeData liveTheme({bool sombre = false}) {
       backgroundColor: LiveColors.surface,
       selectedColor: LiveColors.bleu,
       checkmarkColor: Colors.white,
-      // Texte blanc sur puce sélectionnée, quel que soit le type de puce.
-      labelStyle: WidgetStateTextStyle.resolveWith(
-        (s) => TextStyle(
-          fontWeight: FontWeight.w500,
-          color: s.contains(WidgetState.selected)
+      // Texte blanc sur puce sélectionnée, quel que soit le type de puce :
+      // une couleur conditionnelle, que la puce résout elle-même (un style
+      // conditionnel perdrait sa couleur à la fusion).
+      labelStyle: TextStyle(
+        fontWeight: FontWeight.w500,
+        color: WidgetStateColor.resolveWith(
+          (s) => s.contains(WidgetState.selected)
               ? Colors.white
               : LiveColors.encre,
         ),

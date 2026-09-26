@@ -68,7 +68,7 @@ class _EcranConversationState extends State<EcranConversation> {
   Widget build(BuildContext context) {
     final vide = _saisie.text.trim().isEmpty;
     return Scaffold(
-      backgroundColor: const Color(0xFFEEF1F5),
+      backgroundColor: LiveColors.fondConversation,
       appBar: AppBar(
         titleSpacing: 0,
         title: InkWell(

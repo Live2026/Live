@@ -194,7 +194,8 @@ class _CodeQr extends StatelessWidget {
                 QrImageView(
                   data: 'https://live.africa/connexion/$jeton',
                   size: 200,
-                  padding: EdgeInsets.zero,
+                  padding: const EdgeInsets.all(8),
+                  backgroundColor: Colors.white,
                   errorCorrectionLevel: QrErrorCorrectLevel.H,
                   eyeStyle: const QrEyeStyle(
                     eyeShape: QrEyeShape.square,
@@ -207,7 +208,7 @@ class _CodeQr extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.all(4),
-                  color: LiveColors.surface,
+                  color: Colors.white,
                   child: const LogoLive(taille: 34, nom: false),
                 ),
               ],

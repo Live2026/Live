@@ -278,7 +278,7 @@ class _TuileInteret extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          color: choisi ? Colors.white : LiveColors.nuit,
+                          color: choisi ? Colors.white : LiveColors.encre,
                         ),
                       ),
                     ],

@@ -27,7 +27,7 @@ class EcranGains extends ConsumerWidget {
               children: [
                 const Text(
                   'Disponible',
-                  style: TextStyle(color: LiveColors.brume),
+                  style: TextStyle(color: LiveColors.brumeClaire),
                 ),
                 ChiffreAnime(
                   valeur: etat.disponible,
@@ -41,7 +41,7 @@ class EcranGains extends ConsumerWidget {
                 const SizedBox(height: 4),
                 const Text(
                   'En attente : 96 000 FCFA (ventes non confirmées)',
-                  style: TextStyle(color: LiveColors.brume, fontSize: 13),
+                  style: TextStyle(color: LiveColors.brumeClaire, fontSize: 13),
                 ),
                 const SizedBox(height: 16),
                 FilledButton.icon(

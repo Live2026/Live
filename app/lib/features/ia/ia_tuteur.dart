@@ -74,7 +74,7 @@ class _EcranTuteurState extends ConsumerState<EcranTuteur>
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: Credits(credits, couleur: LiveColors.surface),
+            child: Credits(credits, couleur: Colors.white),
           ),
         ],
       ),
@@ -175,7 +175,7 @@ class _EcranTuteurState extends ConsumerState<EcranTuteur>
             _parle
                 ? 'Je vous écoute…'
                 : 'Touchez pour parler · 5 crédits / minute',
-            style: const TextStyle(color: LiveColors.brume),
+            style: const TextStyle(color: LiveColors.brumeClaire),
           ),
           const SizedBox(height: 24),
         ],

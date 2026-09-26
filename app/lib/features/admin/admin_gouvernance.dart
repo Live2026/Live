@@ -85,7 +85,7 @@ class _ValidationsState extends State<_Validations> {
                             _traitees[i]! ? 'Validée' : 'Refusée',
                             fond: _traitees[i]!
                                 ? LiveColors.teinteVerte
-                                : const Color(0xFFFDE2E2),
+                                : LiveColors.teinteRouge,
                             couleur: _traitees[i]!
                                 ? LiveColors.succes
                                 : LiveColors.erreur,

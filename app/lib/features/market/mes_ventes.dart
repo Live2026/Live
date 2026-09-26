@@ -469,7 +469,7 @@ class _OngletsVentes extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 11.5,
                                 fontWeight: FontWeight.w800,
-                                color: i == 0 ? Colors.white : LiveColors.nuit,
+                                color: i == 0 ? Colors.white : LiveColors.encre,
                               ),
                             ),
                           ),

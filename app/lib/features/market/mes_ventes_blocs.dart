@@ -259,7 +259,9 @@ void _ouvrirDetail(
                       ? Icons.check_circle_rounded
                       : Icons.radio_button_unchecked,
                   size: 20,
-                  color: i <= etape ? LiveColors.succes : LiveColors.brume,
+                  color: i <= etape
+                      ? LiveColors.succes
+                      : LiveColors.brumeClaire,
                 ),
                 const SizedBox(width: 8),
                 Expanded(
